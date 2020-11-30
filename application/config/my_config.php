@@ -21,7 +21,7 @@ $config['directory_download'] = "static/download";
 $config['directory_upload'] = "static/uploads";
 
 $config['directory_pdf'] = "static/generate_pdf";
-$config['directory_pdf'] = "/var/www/vhosts/optieyescommande.com/httpdocs/static/aa";
+$config['directory_pdf'] = "/var/www/vhosts/optieyescommande.com/httpdocs/current/static/aa";
 
 $config['regions'] = array(
 '0' => '',

@@ -71,43 +71,43 @@
 
 
 <!-- jQuery  -->
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.slimscroll.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.blockUI.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/waves.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.nicescroll.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.scrollTo.min.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/tooltipster.core.min.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/tooltipster.bundle.min.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/plugins/toastr/toastr.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.slimscroll.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.blockUI.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/waves.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.nicescroll.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.scrollTo.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/tooltipster.core.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/tooltipster.bundle.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsplugins/toastr/toastr.min.js"></script>
 
-<script src="<?php echo $pre_url;?>current/static/assets/plugins/waypoints/lib/jquery.waypoints.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/plugins/counterup/jquery.counterup.min.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.core.js"></script>
-<script src="<?php echo $pre_url;?>current/static/assets/js/jquery.app.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsplugins/waypoints/lib/jquery.waypoints.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsplugins/counterup/jquery.counterup.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsplugins/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.core.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsjs/jquery.app.js"></script>
 
-<script src="<?php echo $pre_url;?>current/static/assets/plugins/select2/dist/js/select2.min.js"></script>
+<script src="<?php echo $pre_url;?>static/assetsplugins/select2/dist/js/select2.min.js"></script>
 
 <?php
 
 if(isset($modules)) {
 
     if(array_key_exists('datepicker', $modules)) {
-        echo '<script src="/current/static/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
-        echo '<script src="/current/static/assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
+        echo '<script src="/static/assetsplugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
+        echo '<script src="/static/assetsplugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
     }
 
     if(array_key_exists('sweetalert', $modules)) {
-        echo '<script src="/current/static/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>';
+        echo '<script src="/static/assetsplugins/bootstrap-sweetalert/sweet-alert.min.js"></script>';
     }
 
     if(array_key_exists('touchspin', $modules)) {
-        echo '<script src="/current/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
+        echo '<script src="/static/assetsplugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
     }
 
     if(array_key_exists('multiselect', $modules)) {
-        echo '<script src="/current/static/assets/plugins/multiselect/js/jquery.multi-select.js"></script>';
-        echo '<script src="/current/static/assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>';
+        echo '<script src="/static/assetsplugins/multiselect/js/jquery.multi-select.js"></script>';
+        echo '<script src="/static/assetsplugins/jquery-quicksearch/jquery.quicksearch.js"></script>';
     }
 
 

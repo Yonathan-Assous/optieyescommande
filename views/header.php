@@ -1,5 +1,5 @@
 ﻿<?php
-    $pre_url ="/current/";
+    $pre_url ="/";
     $version = md5("version3");
     $maintenance = false;
 ?>
@@ -12,38 +12,38 @@
     <meta name="description" content="Optieyescommande est un site pour les opticiens qui souhaitent trouver les meilleurs verres pour leurs clients à des prix défiant toute concurrence.">
     <meta name="author" content="Proxicommerce">
 
-    <link rel="shortcut icon" href="<?php echo $pre_url;?>static/assets/images/favicon.png">
+    <link rel="shortcut icon" href="<?php echo $pre_url;?>current/static/assets/images/favicon.png">
 
     <title><?php echo $title ?></title>
 
-    <link href="<?php echo $pre_url;?>static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/elements.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/tooltipster.core.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo $pre_url;?>static/assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo $pre_url;?>static/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo $pre_url;?>static/assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/elements.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/tooltipster.core.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $pre_url;?>current/static/assets/plugins/select2/dist/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $pre_url;?>current/static/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $pre_url;?>current/static/assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
 
     <?php
         if(isset($modules)) {
 
             if(array_key_exists('datatables', $modules)) {
-                echo '<link href="/static/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="/current/static/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="/current/static/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="/current/static/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="/current/static/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="/current/static/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />';
             }
 
             if(array_key_exists('touchspin', $modules)) {
-                echo '<link href="/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />';
+                echo '<link href="/current/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />';
             }
 
 
@@ -51,10 +51,10 @@
     ?>
 
 
-    <script src="<?php echo $pre_url;?>static/assets/js/jquery.min.js"></script>
-    <script src="<?php echo $pre_url;?>static/assets/js/bootstrap.min.js"></script>
-    <script src="<?php echo $pre_url;?>static/assets/js/detect.js"></script>
-    <script src="<?php echo $pre_url;?>static/assets/js/fastclick.js"></script>
+    <script src="<?php echo $pre_url;?>current/static/assets/js/jquery.min.js"></script>
+    <script src="<?php echo $pre_url;?>current/static/assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo $pre_url;?>current/static/assets/js/detect.js"></script>
+    <script src="<?php echo $pre_url;?>current/static/assets/js/fastclick.js"></script>
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,7 +63,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <script src="<?php echo $pre_url;?>static/assets/js/modernizr.min.js"></script>
+    <script src="<?php echo $pre_url;?>current/static/assets/js/modernizr.min.js"></script>
 
 </head>
 

@@ -1802,8 +1802,8 @@ include_once('menu.php');
 	</div> <!-- content -->
 
 	<!-- Form wizard -->
-	<script src="/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
-	<script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/current/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+	<script src="/current/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
 
 	<script type="text/javascript">
 

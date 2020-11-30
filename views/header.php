@@ -1,5 +1,5 @@
 ﻿<?php
-    $pre_url ="/";
+    $pre_url ="/current/";
     $version = md5("version3");
     $maintenance = false;
 ?>

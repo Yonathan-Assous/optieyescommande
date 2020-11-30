@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2020-11-17T16:31:05+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>494898-30</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>S2UW50</commercialCode>
+               <rxData>
+                  <sphere>2.75</sphere>
+                  <cylinder>
+                      <power>0.50</power>
+                      <axis>5</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+               <centration>
+					  <monocularCentrationDistance reference="FAR">31</monocularCentrationDistance>
+					  <height reference="NEAR" referenceHeight="OVERBOX">28</height>
+               </centration>
+				   <geometry>
+			    	<thickness reference="EDGE">0.80</thickness>
+                  <thicknessReduction>true</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>S2UW50</commercialCode>
+               <rxData>
+                  <sphere>2.75</sphere>
+                  <cylinder>
+                      <power>0.75</power>
+                      <axis>170</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+               <centration>
+					  <monocularCentrationDistance reference="FAR">31</monocularCentrationDistance>
+					  <height reference="NEAR" referenceHeight="OVERBOX">28</height>
+               </centration>
+				   <geometry>
+			    	<thickness reference="EDGE">0.80</thickness>
+                  <thicknessReduction>true</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1"><material>METAL</material>
+				   <boxWidth>51</boxWidth>
+				   <boxHeight>43</boxHeight>
+				   <distanceBetweenLenses>18</distanceBetweenLenses>
+				   
+				</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

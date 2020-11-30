@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<body>
+
+<div id="body">
+
+    <div id="section_header">
+    </div>
+
+    <div id="content">
+
+        <div class="page" style="font-size: 7pt">
+            <?php
+                if(is_array($commande_journaliere)){
+
+
+                    $config = $this->lens_config;
+
+						$compteurCommande = 1;
+                        $commandeParPage = 4;
+
+                        $nombreCommande = count($commande_journaliere);
+
+                        foreach($commande_journaliere as $key => $value){
+
+                            $build = json_decode($value->information_commande, true);
+
+                            $info_commande = json_decode($value->information_commande,true);
+                            $correction_droit = $correction_gauche = $option = $prisme_droit = $prisme_gauche = "";
+
+
+                            echo'<table style="width: 100%;" class="header">
+                                    <tr>
+                                        <td><h1 style="text-align: left; display: block; width: 100%">Magasin '.$value->id_users.' CR'.$value->id_commande.'-'.$value->id_users.'</h1></td>
+                                        <td style="text-align: right;">'.(isset($value->tel_fixe) ? '<span style="font-size: 20px">Tel: '.$value->tel_fixe.'</span>' : '').'</td>
+                                    </tr>
+                                </table>
+
+                                <table style="width: 100%; border-top: 1px solid black; border-bottom: 1px solid black; font-size: 8pt;">
+                                    <tr>
+                                        <td colspan="5"><strong>'.$value->reference_client.'</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5"><strong>'.$value->id_users.'</strong></td>
+                                    </tr>';
+
+
+                               echo '<tr>
+                                        <td colspan="5"><strong>'.$value->brand_name.' '.$value->name.'</strong>';
+                                        if($value->packaging > 0)  {
+                                            echo '<br /> Boite de '.$value->packaging;
+                                        }
+                               echo '</td>
+                                    </tr>';
+
+                                        foreach($config['sides'] as $side => $v) {
+
+                                            if(!isset($build['excl'][$side])) {
+
+                                                echo '<tr>';
+
+                                                $corrections = 0;
+                                                $output = '';
+
+                                                foreach($config['attrs'] as $attr => $name) {
+                                                    if(isset($build[$attr][$side])) {
+                                                        $output .= $name.' : '.$build[$attr][$side].' ';
+                                                        ++$corrections;
+                                                    }
+                                                }
+
+                                                if($corrections > 0) {
+                                                    echo '<td><strong>Corrections '.$v.' :</strong> <br />';
+                                                    echo $output.'</td>';
+                                                }
+                                                else {
+                                                    echo '<td>'.$v.'</td>';
+                                                }
+
+
+                                                echo '
+                                                    <td>'.$build['qty'][$side].'x</td>
+                                                </tr>';
+
+
+                                                }
+
+                                            }
+
+
+                                if(!empty($value->commentaire)){
+                                    echo '<tr>
+                                            <td><strong>Commentaire : '.$value->commentaire.'</strong></td>
+                                          </tr>';
+                                }
+
+                                echo '</table>';
+
+                            if($compteurCommande!=$nombreCommande) {
+                                if($compteurCommande%$commandeParPage == 0) {
+                                    echo '<div style="page-break-before: always;"></div>';
+
+                                } else {
+                                    echo '<br><br><br>';
+                                }
+                            }
+
+									
+								$compteurCommande++;
+                        }
+                }
+                else{
+                       echo '<table style="width: 100%;" class="header">
+                                <tr>
+                                    <td><h1 style="text-align: center">Aucune nouvelle commande</h1></td>
+                                </tr>
+                             </table>';
+                }
+            ?>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

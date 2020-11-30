@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2020-11-17T10:44:05+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <remark> 1.67 HMC stock please thanks confirm me</remark>
+         
+         <referenceNo>494495-265</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="LEFT">
+               <commercialCode>100141</commercialCode>
+               <rxData>
+                  <sphere>-7.75</sphere>
+                  <cylinder>
+                      <power>2.25</power>
+                      <axis>90</axis>
+                  </cylinder></rxData>
+               <centration>
+               </centration>
+				   <geometry>
+						  <diameter>
+							 <physical>75</physical>
+							 <elliptic>false</elliptic>
+						  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+            	</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

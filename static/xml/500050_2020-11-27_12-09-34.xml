@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2020-11-27T12:09:27+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>500050-488</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>S4UW50</commercialCode>
+               <rxData>
+                  <sphere>-4.50</sphere>
+                  <cylinder>
+                      <power>0.50</power>
+                      <axis>50</axis>
+                  </cylinder><addition>3.00</addition>
+						  </rxData>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>75</physical>
+                     <optical>80</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+				</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

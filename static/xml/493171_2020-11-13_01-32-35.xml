@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2020-11-13T13:14:02+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <remark>Custom color for the right lens: Black 5 - 85%. Custom color for the left lens: Black 5 - 85%.</remark>
+         
+         <referenceNo>493171-462</referenceNo>
+         <manufacturer />
+         <secondPair>true</secondPair>
+		 <multiplePair>
+			<referenceNo>493170</referenceNo>
+		 </multiplePair>
+         <pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>201471</commercialCode>
+               <rxData>
+                  <sphere>-2.25</sphere>
+                  <cylinder>
+                      <power>+1.25</power>
+                      <axis>180</axis>
+                  </cylinder>
+                  <addition>+2.5</addition>
+                  </rxData>
+						   <coating coatingType="COLOR">
+							  <commercialCode>CUST_14</commercialCode>
+						   </coating>
+               <centration>
+                  <height reference="NEAR" referenceHeight="OVERBOX"></height>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>70</physical>
+                     <optical>75</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>201471</commercialCode>
+               <rxData>
+                  <sphere>-2.25</sphere>
+                  <cylinder>
+                      <power>+1.50</power>
+                      <axis>180</axis>
+                  </cylinder>
+                  <addition>+2.5</addition></rxData>
+						   <coating coatingType="COLOR">
+							  <commercialCode>CUST_14</commercialCode>
+						   </coating>
+               <centration>
+                  <height reference="NEAR" referenceHeight="OVERBOX"></height>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>70</physical>
+                     <optical>75</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+             </frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

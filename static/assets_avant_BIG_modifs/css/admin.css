@@ -1,0 +1,264 @@
+.toast-top-right {
+    top: 75px !important;
+}
+
+.toast-warning {
+    background-color: #fbca35 !important;
+}
+
+.ca-settings select {
+    max-width: 320px;
+}
+
+#data_ca_journalier {
+    width: 100%;
+    overflow-y: scroll;
+    margin-top: 15px;
+}
+
+#data_ca_journalier table {
+    width: 1600px;
+}
+
+#data_ca_journalier td {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+#data_ca_journalier .fc-state-highlight {
+    background: rgba(248,188,5,.15);
+    box-shadow: inset 0 0 10px rgba(248,188,5,.25);
+}
+
+#data_ca_journalier .fc-day-content {
+    font-weight: 600;
+}
+
+#data_ca_journalier .fc-day-number {
+    position: relative;
+    top: -10px;
+    left: -5px;
+}
+
+.menu-title.text-muted {
+    color: #fff !important;
+    font-size: 15px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    line-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#get-reduction .remises .row {
+    margin: 0;
+}
+
+#get-reduction .remises .row b {
+    font-size: 16px;
+}
+
+#get-reduction .remises .row > div {
+    padding: 6px 0;
+}
+
+.table-options .radio {
+    width: 20%;
+}
+
+.table-options .row {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* Modal Client */
+
+#user-modal h4 {
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#user-modal .modal-content {
+    padding: 0 0 10px 0;
+}
+
+#user-modal .modal-footer {
+    padding: 0 10px;
+    border-top: 0;
+    margin-top: 20px;
+}
+
+#user-modal .nav-tabs li:not(.active) a {
+    background: #f3f3f3;
+}
+
+#compare-commandes table th,
+#compare-commandes table td {
+    width: 50%;
+    padding: 0 15px;
+    vertical-align: top;
+}
+
+#compare-commandes table th:first-child,
+#compare-commandes table td:first-child {
+    border-right: 2px solid #ccc;
+}
+
+/* Table commande */
+
+/*.table-admin-commandes th,
+.table-admin-commandes {
+    text-align: center;
+}*/
+
+.table-admin-commandes td {
+    padding: 10px !important;
+}
+
+.bl-field {
+    max-width: 120px;
+}
+
+td.highlight-ref {
+    text-align: center;
+    background: rgba(255,0,0,0.4);
+    color: #fff;
+}
+
+td.highlight-ref.rejected {
+    background: rgba(255, 177, 0, 0.42) !important;
+}
+
+td.highlight-yellow {
+    background: rgba(248, 188, 5, 0.2) !important;
+}
+
+.certif_ico {
+    padding: 3px;
+    background: #222;
+    color: #fff;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+
+.btn.is_checked {
+    background-color: #3ec845 !important;
+    border: 1px solid #3ec845 !important;
+}
+
+.btn.is_checked:hover,
+.btn.is_checked:focus,
+.btn.is_checked:active,
+.btn.is_checked.active,
+.btn.is_checked.focus,
+.btn.is_checked:active,
+.btn.is_checked:focus,
+.btn.is_checked:hover,
+.open > .dropdown-toggle.btn.is_checked {
+    background-color: #34b83b !important;
+    border: 1px solid #34b83b !important;
+}
+
+.table-admin-commandes tr th:last-child,
+.table-admin-commandes tr td:last-child {
+    width: 90px;
+    padding-right: 0;
+}
+
+/*.table-admin-commandes .checkbox {
+    padding: 0 !important;
+}*/
+
+/* Table stock */
+
+.options-heading {
+    cursor: pointer;
+}
+
+.panel-collapse.in {
+    margin-top: 22px;
+}
+
+#correction td.active {
+    background: #66CCFF;
+}
+
+/* Table variations */
+
+#variation_factures {
+    width: 100%;
+    overflow-x: scroll !important;
+}
+
+table.variation_factures {
+    width: 1800px !important;
+}
+
+table.variation_factures td,
+table.variation_factures th {
+    padding: 10px 4px;
+}
+
+table.variation_factures tr:nth-child(even) {
+    background: #f9f9f9 !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child {
+    padding-left: 30px !important;
+}
+
+.table-verres input[type=text] {
+    max-width: 80px;
+}
+
+.only_lentilles {
+    display: none;
+}
+
+
+.dtr-data .checkbox input[type=checkbox],
+.dtr-data .radio input[type=radio] {
+    margin-left: 10px !important;
+}
+
+@media(max-width: 1200px) {
+    .radio-inline,
+    .checkbox-inline {
+        margin-bottom: 10px;
+    }
+}
+
+@media(max-width: 768px) {
+    #user-modal .nav-tabs li a {
+        margin-bottom: 0;
+    }
+
+    .buttons-box .btn {
+        margin-bottom: 10px;
+    }
+}
+
+
+@media(max-width: 600px) {
+    #date-caisse,
+    #export-caisse {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 10px 0;
+    }
+
+    #data_ca_journalier table {
+        width: 900px;
+    }
+
+    #data_ca_journalier table td {
+        padding: 10px;
+    }
+
+    .buttons-box .btn {
+        width: 100%;
+    }
+}

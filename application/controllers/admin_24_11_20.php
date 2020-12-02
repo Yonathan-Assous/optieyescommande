@@ -2920,7 +2920,7 @@ class admin extends MY_Controller {
 					$rx = ' ';
 					if($commande->status_omega == '1')
 					{
-						$rx = '<img src="/static/img/expediee.png" width="50">';
+						$rx = '<img src="static/img/expediee.png" width="50">';
 					}
 					
                     if($data_etiquette !== false && (isset($data_etiquette[$commande->id_commande]['droit']) || isset($data_etiquette[$commande->id_commande]['gauche'])))
@@ -4246,7 +4246,7 @@ class admin extends MY_Controller {
 								$detail .= '<br><br><b>Précalibrage:</b> <br>';
 								
 								if(isset($information_commande->precalibrage))
-									$detail .= '<br><img src="/static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" /><br>';
+									$detail .= '<br><img src="static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" /><br>';
 								
 								$mesure_freeform_opt = "";
 							
@@ -4350,7 +4350,7 @@ class admin extends MY_Controller {
 						$infos,
 						$detail,
 						$commande->commande,
-						'<a href="/static/xml/'.$commande->filename.'" target="_blank">'.$commande->filename.'</a><br><br>Date: <br>'.$commande->date_omega,
+						'<a href="static/xml/'.$commande->filename.'" target="_blank">'.$commande->filename.'</a><br><br>Date: <br>'.$commande->date_omega,
 					);
 						
                     $compteur++;
@@ -4602,7 +4602,7 @@ class admin extends MY_Controller {
 								$detail .= '<br><br><b>Précalibrage:</b> <br>';
 								
 								if(isset($information_commande->precalibrage))
-									$detail .= '<br><img src="/static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" /><br>';
+									$detail .= '<br><img src="static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" /><br>';
 								
 								$mesure_freeform_opt = "";
 							
@@ -5839,7 +5839,7 @@ class admin extends MY_Controller {
 								$precal = 1;
 								$p .= '<b>Précalibrage:</b>';
 								
-								$p .= '<img src="/static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
+								$p .= '<img src="static/img/calibre/' . $information_commande->precalibrage->calibre . '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
 								
 								$mesure_freeform_opt = "";
 							
@@ -7158,7 +7158,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
                     $rx = ' ';
 					if($commande->status_omega == '1')
 					{
-						$rx = '<img src="/static/img/expediee.png" width="50">';
+						$rx = '<img src="static/img/expediee.png" width="50">';
 					}
 					if($commande->id_type_generation_verre == '0')
                     {
@@ -7293,7 +7293,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 						$rx = ' ';
 					if($commande->status_omega == '1')
 					{
-						$rx = '<img src="/static/img/expediee.png" width="50">';
+						$rx = '<img src="static/img/expediee.png" width="50">';
 					}
 						
 						$ispanier_A = "";
@@ -7302,7 +7302,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 						{
 							$ispanier_A = "Panier A";
 							$certif_panierA = "<br>
-							<a href=\"/static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
+							<a href=\"static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
 							$certif_panierA .= '<a class="commande-info btn btn-icon waves-effect waves-light" data-toggle="modal" id="regenerer_certif" data-target="#regenerer_certif" rel="' . $commande->id_commande . '">Regenerer</a>';
 							
 						}
@@ -7376,7 +7376,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 						{
 							$ispanier_A = "Panier A";
 							$certif_panierA = "<br>
-							<a href=\"/static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+							<a href=\"static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 							";
 						}
 						
@@ -8617,7 +8617,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 					if($commande->id_generation_verre == '23')
 					{
 						$certif_panierA = "<br>
-						<a href=\"/static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+						<a href=\"static/aa/certificat_authenticite_".$commande->id_commande.".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 						";
 					}
 					if($commande->id_commande > '488957')
@@ -10896,7 +10896,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
                             $commande->intitule_bl,
                             $commande->reference_client,
                             $commande->generation_verre,
-                            '<a href="/admin/generer_pdf/bon_livraison/'.$commande->id_commande.'" class="tooltip" original-title="Télécharger le PDF" data-gravity="s" data-anim="true"><img src="/static/img/icons/packs/fugue/16x16/shadeless/inbox-download.png" alt="Télécharger" /></a>',
+                            '<a href="/admin/generer_pdf/bon_livraison/'.$commande->id_commande.'" class="tooltip" original-title="Télécharger le PDF" data-gravity="s" data-anim="true"><img src="static/img/icons/packs/fugue/16x16/shadeless/inbox-download.png" alt="Télécharger" /></a>',
                             $etat_commande
                         );
                 }

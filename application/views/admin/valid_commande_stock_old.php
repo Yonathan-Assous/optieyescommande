@@ -274,7 +274,7 @@ include_once('menu.php');
 					}
 				});
 
-				var loading = '<img src="/static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" /> Chargement...';
+				var loading = '<img src="static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" /> Chargement...';
 
 				$("#content").on("click","table .compare_commande",function(){
 					$.ajax({

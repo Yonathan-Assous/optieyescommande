@@ -199,7 +199,7 @@ include_once('header_bottom.php');
                             </div>
                             <div class="row">
                                 <label for="cote_a" style="text-align:center;">
-                                    <img width="90" height="50"  src="/static/img/mesure_freeform/cote_a.jpg" alt="cote_a" style="margin:20" />
+                                    <img width="90" height="50"  src="static/img/mesure_freeform/cote_a.jpg" alt="cote_a" style="margin:20" />
                                     <small style="text-align:center">Largeur boxing</small>
                                 </label>
                                 <div>
@@ -208,7 +208,7 @@ include_once('header_bottom.php');
                             </div>
                             <div class="row">
                                 <label for="cote_b" style="text-align:center;">
-                                    <img width="90" height="40"  src="/static/img/mesure_freeform/cote_b.jpg" alt="cote_b" style="margin:20" />
+                                    <img width="90" height="40"  src="static/img/mesure_freeform/cote_b.jpg" alt="cote_b" style="margin:20" />
                                     <small style="text-align:center">Hauteur boxing</small>
                                 </label>
                                 <div>
@@ -217,7 +217,7 @@ include_once('header_bottom.php');
                             </div>
                             <div class="row">
                                 <label for="cote_c" style="text-align:center;">
-                                    <img width="90" height="50"  src="/static/img/mesure_freeform/cote_c.jpg" alt="cote_c"  style="margin:20" />
+                                    <img width="90" height="50"  src="static/img/mesure_freeform/cote_c.jpg" alt="cote_c"  style="margin:20" />
                                     <small style="text-align:center">Taille du pont</small>
                                 </label>
                                 <div>
@@ -226,7 +226,7 @@ include_once('header_bottom.php');
                             </div>
                             <div class="row">
                                 <label for="code_d" style="text-align:center;">
-                                    <img width="90" height="45"  src="/static/img/mesure_freeform/cote_d.jpg" alt="cote_d" style="margin:20" />
+                                    <img width="90" height="45"  src="static/img/mesure_freeform/cote_d.jpg" alt="cote_d" style="margin:20" />
                                     <small style="text-align:center">Diagonale verre en milimettres </small>
                                 </label>
                                 <div>
@@ -621,7 +621,7 @@ include_once('header_bottom.php');
                                         Hauteur <span id="baspupille" style="display:none;"></span>
                                     </div>
                                     <div style="text-align:center;">
-                                        <img style="width:85px;height:33px;" alt="hauteur" src="/static/img/mesure_freeform/Hauteur.jpg">
+                                        <img style="width:85px;height:33px;" alt="hauteur" src="static/img/mesure_freeform/Hauteur.jpg">
                                     </div><br>
                                     <div style="text-align: center;">
                                         <div style="width:150px;float:left;">
@@ -648,7 +648,7 @@ include_once('header_bottom.php');
                                         Ecarts pupillaire <span class="topoffice" style="display: none;">VL</span>
                                     </div>
                                     <div style="text-align:center">
-                                        <img style="width:85px;height:41px;" alt="ecart pupillaire" src="/static/img/mesure_freeform/ecart_pup.jpg">
+                                        <img style="width:85px;height:41px;" alt="ecart pupillaire" src="static/img/mesure_freeform/ecart_pup.jpg">
                                     </div><br>
                                     <div style="text-align: center;">
                                         <div style="width:150px;float:left;">
@@ -950,7 +950,7 @@ include_once('header_bottom.php');
                                 <div id="preview_auth_card" >
 
                                     <span class="titre optieyes">Certificat d'authenticité</span>
-                                    <?php if(isset($logo)) echo '<img class="card_logo" src="/static/img/logo.png" />'; ?>
+                                    <?php if(isset($logo)) echo '<img class="card_logo" src="static/img/logo.png" />'; ?>
 
                                     <div class="info">
                                         <span class="ref">REF OPTIEYES</span>
@@ -997,12 +997,12 @@ include_once('header_bottom.php');
                                         <span class="tel">Tél: 0000000000</span>
                                     </div>
 
-                                    <img class="normes" src="/static/img/logo_normes.png" />
+                                    <img class="normes" src="static/img/logo_normes.png" />
 
                                 </div>
 
                                 <div id="preview_auth_img" >
-                                    <img src="/static/img/preview_auth_card.jpg" />
+                                    <img src="static/img/preview_auth_card.jpg" />
                                 </div>
 
                             </div>
@@ -1061,7 +1061,7 @@ include_once('header_bottom.php');
         <script>
             var formData = lastFormData = diff = FinCompteur = "";
             var debutCompteur = new Date();
-            var loading = '<img src="/static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" />';
+            var loading = '<img src="static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" />';
             var iledefrance = '<?php echo $region; ?>';
             var tabLivIleDeFrance = ["Mardi","Mercredi","Jeudi","Vendredi","Lundi","Mardi","Mardi"];
             var tabLivHorsIleDeFrance = ["Mercredi","Jeudi","Vendredi","Samedi","Mardi","Mardi","Mardi"];

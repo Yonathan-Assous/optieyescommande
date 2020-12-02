@@ -47,11 +47,10 @@
 
 $active_group = 'new';
 $active_record = TRUE;
-
 $db['new']['hostname'] = 'localhost';
-$db['new']['username'] = 'optieyesproxi548';
-$db['new']['password'] = 'P6O1L238z9i6wYq';
-$db['new']['database'] = 'optieyesproxi5489ytg85';
+$db['new']['username'] = 'root';
+$db['new']['password'] = '';
+$db['new']['database'] = 'optieyes';
 $db['new']['dbdriver'] = 'mysqli';
 $db['new']['dbprefix'] = '';
 $db['new']['pconnect'] = FALSE;

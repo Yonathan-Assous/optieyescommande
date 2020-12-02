@@ -98,27 +98,27 @@ include_once('menu.php');
     </div> <!-- content -->
 
 <!-- Datatables-->
-    <script src="/static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-    <script src="/static/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
-    <script src="/static/assets/plugins/datatables/jszip.min.js"></script>
-    <script src="/static/assets/plugins/datatables/pdfmake.min.js"></script>
-    <script src="/static/assets/plugins/datatables/vfs_fonts.js"></script>
-    <script src="/static/assets/plugins/datatables/buttons.html5.min.js"></script>
-    <script src="/static/assets/plugins/datatables/buttons.print.min.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-    <script src="/static/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
-    <script src="/static/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+    <script src="static/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="static/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+    <script src="static/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="static/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="static/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="static/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="static/assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="static/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+    <script src="static/assets/plugins/datatables/dataTables.scroller.min.js"></script>
 
     <!-- Modal-Effect -->
-    <script src="/static/assets/plugins/custombox/dist/custombox.min.js"></script>
-    <script src="/static/assets/plugins/custombox/dist/legacy.min.js"></script>
+    <script src="static/assets/plugins/custombox/dist/custombox.min.js"></script>
+    <script src="static/assets/plugins/custombox/dist/legacy.min.js"></script>
 
     <!-- Datatable init js -->
-    <script src="/static/assets/pages/jquery.datatables.init.js"></script>
+    <script src="static/assets/pages/jquery.datatables.init.js"></script>
 
     <script>
         $(document).ready(function() {

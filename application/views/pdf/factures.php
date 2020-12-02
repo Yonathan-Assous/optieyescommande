@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta	http-equiv="Content-Type"	content="charset=utf-8" />
-    <link rel="STYLESHEET" href="/static/css/print_static_2.css" type="text/css" />
+    <link rel="STYLESHEET" href="static/css/print_static_2.css" type="text/css" />
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 ?>
             <table style="width: 100%;height:100px">
                 <tr>
-                  <td><img src="/static/img/logo.jpg" width="227" height="72" /></td>
+                  <td><img src="static/img/logo.jpg" width="227" height="72" /></td>
                   <td>
                     <h1 style="text-align: right"><?php echo date("t",mktime( 0, 0, 0, $new_date[1], 1, $new_date[0] ))."/".$new_date[1]."/".$new_date[0]; ?></h1>
              
@@ -135,7 +135,7 @@
                               
                                echo '<table style="width: 100%;">
                                         <tr>
-                                          <td><img src="/static/img/logo.jpg" width="227" height="72" /></td>
+                                          <td><img src="static/img/logo.jpg" width="227" height="72" /></td>
                                         </tr>
                                       </table>
                                       <br><br>';

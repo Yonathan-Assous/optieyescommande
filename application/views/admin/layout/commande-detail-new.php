@@ -216,7 +216,7 @@
 				}
 				
 				if(isset($info_commande['precalibrage']['calibre'])) {
-                    $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                    $correction_droit .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 				
 				echo '<td><h4>Oeil droit : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_droit.'</td>';
@@ -279,7 +279,7 @@
 				$correction_gauche .= $info_g;
 				
 				if(isset($info_commande['precalibrage']['calibre'])) {
-                    $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                    $correction_gauche .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 				
 				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';

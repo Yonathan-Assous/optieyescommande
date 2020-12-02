@@ -7,7 +7,7 @@
         <div class="m-t-30 card-box">
             <div class="text-center">
                 <div class="login-page logo">
-                    <img src="/static/img/logo.png" />
+                    <img src="static/img/logo.png" />
                 </div>
 
             </div>
@@ -177,7 +177,7 @@
             </div>
         </div>
 
-        <img style="display: block; max-width: 200px; margin: 0 auto;" src="/static/img/seal_color.png" />
+        <img style="display: block; max-width: 200px; margin: 0 auto;" src="static/img/seal_color.png" />
 
         <div class="m-t-30 card-box">
             <div class="videoWrapper">
@@ -450,7 +450,7 @@
 
                 <div class="content">
                     <div class="form-box">
-                        <img src="/static/img/maintenance.jpg" alt="maintenance">
+                        <img src="static/img/maintenance.jpg" alt="maintenance">
                     </div>
                 </div>
             </form>

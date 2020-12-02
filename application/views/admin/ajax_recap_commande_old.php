@@ -178,7 +178,7 @@
                 }
 
                 if(isset($info_commande['precalibrage']['calibre'])) {
-                    $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                    $correction_droit .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 
                 if(isset($info_commande['verre']['polarise'])){
@@ -252,7 +252,7 @@
                 }
 
                 if(isset($info_commande['precalibrage']['calibre'])) {
-                    $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                    $correction_gauche .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 
                 echo '<tr>';

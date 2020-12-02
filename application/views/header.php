@@ -1,5 +1,5 @@
 ﻿<?php
-    $pre_url ="/";
+    $pre_url ="";
     $version = md5("version3");
     $maintenance = false;
 ?>
@@ -36,15 +36,15 @@
         if(isset($modules)) {
 
             if(array_key_exists('datatables', $modules)) {
-                echo '<link href="/static/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />';
-                echo '<link href="/static/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="static/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="static/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="static/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="static/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />';
+                echo '<link href="static/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />';
             }
 
             if(array_key_exists('touchspin', $modules)) {
-                echo '<link href="/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />';
+                echo '<link href="static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />';
             }
 
 
@@ -80,11 +80,11 @@
         <div class="topbar-left">
             <div class="text-center">
                 <a href="<?php echo $pre_url;?>index" class="desktop-logo">
-                    <img src="/static/img/logo-white-mobile.png" class="icon-c-logo" />
+                    <img src="static/img/logo-white-mobile.png" class="icon-c-logo" />
                 </a>
                 <span>
                     <a href="<?php echo $pre_url;?>index" class="logo">
-                        <img src="/static/img/logo-white.png" alt="logo" style="height: 36px;">
+                        <img src="static/img/logo-white.png" alt="logo" style="height: 36px;">
                     </a>
                 </span>
             </div>

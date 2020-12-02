@@ -320,6 +320,7 @@
  * ------------------------------------------------------
  */
 	// Is there a "remap" function? If so, we call it instead
+
 	if (method_exists($CI, '_remap'))
 	{
 		$CI->_remap($method, array_slice($URI->rsegments, 2));

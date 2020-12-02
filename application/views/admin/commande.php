@@ -154,7 +154,7 @@ include_once('menu.php');
                                   $correction_droit .= 'Base : '.$info_commande['verre']['base_droit'].' Degrès';
 
                               if(isset($info_commande['precalibrage']['calibre']))
-                                  $correction_droit .= '<br><img src="/static/img/calibre/'.$info_commande['precalibrage']['calibre'].'.jpg" width="150" heigth="70" />';
+                                  $correction_droit .= '<br><img src="static/img/calibre/'.$info_commande['precalibrage']['calibre'].'.jpg" width="150" heigth="70" />';
 
                               $option_prix = 0;
 
@@ -195,7 +195,7 @@ include_once('menu.php');
                 $correction_gauche .= 'Base : '.$info_commande['verre']['base_gauche'].' Degrès';
 							
 							if(isset($info_commande['precalibrage']['calibre']))
-								$correction_gauche .= '<br><img src="/static/img/calibre/'.$info_commande['precalibrage']['calibre'].'.jpg" width="150" heigth="70" />';
+								$correction_gauche .= '<br><img src="static/img/calibre/'.$info_commande['precalibrage']['calibre'].'.jpg" width="150" heigth="70" />';
 							
 							$correction_gauche .= (isset($info_commande['verre']['diametre_gauche']) ? 'Diametre : '.$info_commande['verre']['diametre_gauche'] : (isset($info_commande['verre']['diametre']) ? 'Diametre : '.$info_commande['verre']['diametre'] : ""));
 

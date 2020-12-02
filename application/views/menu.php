@@ -50,7 +50,7 @@
                 </li>
 
                 <li class="m-t-10 has_sub <?php echo ($page == "Certification éléctronique" ? 'active' : ''); ?>">
-                    <a href="<?php echo $pre_url;?>index/certification" class="waves-effect <?php echo ($page == "Certification éléctronique" ? 'active' : ''); ?>"><i class="zmdi zmdi-assignment-alert"></i> <span> Certification éléctronique de BL</span><br><img src="/static/img/seal_gmo.png" /></a>
+                    <a href="<?php echo $pre_url;?>index/certification" class="waves-effect <?php echo ($page == "Certification éléctronique" ? 'active' : ''); ?>"><i class="zmdi zmdi-assignment-alert"></i> <span> Certification éléctronique de BL</span><br><img src="static/img/seal_gmo.png" /></a>
                 </li>
 
             </ul>

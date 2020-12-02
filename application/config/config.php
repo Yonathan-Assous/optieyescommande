@@ -17,7 +17,7 @@ $config['opti_env'] = 'prod';
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://www.optieyescommande.com/';
+$config['base_url']	= 'localhost/optieyescommande/';
 
 /*
 |--------------------------------------------------------------------------

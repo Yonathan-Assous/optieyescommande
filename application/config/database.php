@@ -45,7 +45,6 @@
 | the active record class
 */
 
-
 $active_group = 'new';
 $active_record = TRUE;
 $db['new']['hostname'] = 'localhost';

@@ -563,7 +563,7 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
 <Files admin>
 Options -Indexes
 AuthName "Restricted Area"
-AuthUserFile /var/www/vhosts/optieyescommande.com/httpdocs/.passAccessAdmin
+AuthUserFile /var/www/vhosts/optieyescommande.com/httpdocs_dev/.passAccessAdmin
 # AuthGroupFile /dev/null
 AuthType Basic
 require valid-user

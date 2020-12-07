@@ -1,6 +1,6 @@
 "use strict";
 
-var base_url = '/';
+var base_url = '';
 
 // ### Here all page JS is initialized (plugins, popups, ...)
 (function($, mango, undefined){

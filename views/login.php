@@ -224,7 +224,7 @@
             $('#loginForm').on('submit', function(e) {
                 e.preventDefault();
                 $('p.error').text('');
-                $.post('/index/check_login', $(this).serialize(), function(data) {
+                $.post('index/check_login', $(this).serialize(), function(data) {
                     var res  = $.parseJSON(data);
                     if(res.status == 'ok'){
                         window.location.reload();

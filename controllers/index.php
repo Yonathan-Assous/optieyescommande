@@ -87,7 +87,7 @@ class index extends MY_Controller {
             }
 
             $data_commande = $this->m_commande->getCommandeByUser($dataOrder);
-            
+
             if($data_commande !== false)
                 foreach($data_commande as $key => $commande){
 
@@ -265,12 +265,9 @@ class index extends MY_Controller {
                     $data_commande['monture'] = array('type' => $data['type_monture']);
 
 				if(isset($data['epaisseur_bord_verre']) && !empty($data['epaisseur_bord_verre']))
-				{
-					if(isset($data['cotec']) && !empty($data['cotec']))
-						$data_commande['bord_verre'] = array('epaisseur' => $data['epaisseur_bord_verre']);
-				}
+					$data_commande['bord_verre'] = array('epaisseur' => $data['epaisseur_bord_verre']);
 
-}                if(isset($data['sphere_droit']) && isset($data['cylindre_droit']) && isset($data['sphere_gauche']) && isset($data['cylindre_gauche'])) {
+                if(isset($data['sphere_droit']) && isset($data['cylindre_droit']) && isset($data['sphere_gauche']) && isset($data['cylindre_gauche'])) {
                     $data_commande['verre'] = array('correction_droit' => array('sphere' => $data['sphere_droit'],
                         'cylindre' => $data['cylindre_droit']
                     ),

@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+
 ERROR - 2020-12-06 12:45:17 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('147', 1607209200, 1607255117, 1) ON DUPLICATE KEY UPDATE login_time = 1607255117, login_count = login_count +1 
 ERROR - 2020-12-06 12:46:57 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND date_commande > "2020-12-06 00:00:00" AND date_commande < "2020-12-06 2...' at line 1 - SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN() AND date_commande > "2020-12-06 00:00:00" AND date_commande < "2020-12-06 23:59:59" GROUP BY id_users ORDER BY date_commande DESC
 ERROR - 2020-12-06 12:47:17 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND date_commande > "2020-12-06 00:00:00" AND date_commande < "2020-12-06 2...' at line 1 - SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN() AND date_commande > "2020-12-06 00:00:00" AND date_commande < "2020-12-06 23:59:59" GROUP BY id_users ORDER BY date_commande DESC

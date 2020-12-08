@@ -539,7 +539,7 @@ class MY_Controller extends CI_Controller {
     }
     
     public function upload_new_document(){
-        $config['upload_path'] = "static/download/";
+        $config['upload_path'] = "/static/download/";
         $config['allowed_types'] = 'pdf';
         $config['max_size'] = '1000000';
         $config['file_name'] = time();

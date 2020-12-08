@@ -92,12 +92,12 @@
 if(isset($modules)) {
 
     if(array_key_exists('datepicker', $modules)) {
-        echo '<script src="static/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
-        echo '<script src="static/assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
     }
 
     if(array_key_exists('touchspin', $modules)) {
-        echo '<script src="static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
     }
     
 

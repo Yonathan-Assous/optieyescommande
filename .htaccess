@@ -560,10 +560,11 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
   php_value session.cookie_httponly true
 </IfModule>
 
+
 <Files admin>
 Options -Indexes
 AuthName "Restricted Area"
-AuthUserFile /var/www/vhosts/optieyescommande.com/httpdocs_dev/.passAccessAdmin
+AuthUserFile /var/www/vhosts/optieyescommande.com/httpdocs/current/.passAccessAdmin
 # AuthGroupFile /dev/null
 AuthType Basic
 require valid-user

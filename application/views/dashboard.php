@@ -749,7 +749,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																			<div class="form-group clearfix col-lg-2 col-sm-2 col-xs-12">
 																				<label class=" control-label" for="cotea">
 																					<div class="col-xs-12" style="height:77px">
-																						<img src="static/img/mesure_freeform/cote_a.jpg" alt="Largeur boxing" />
+																						<img src="/static/img/mesure_freeform/cote_a.jpg" alt="Largeur boxing" />
 																					</div>
 																					<div class="col-xs-12">
 																						<small>Largeur boxing</small>
@@ -887,7 +887,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																			<div class="form-group clearfix col-lg-2 col-sm-2 col-xs-12">
 																				<label class="control-label" for="coteb">
 																					<div class="col-xs-12" style="height:77px">
-																						<img src="static/img/mesure_freeform/cote_b.jpg" alt="Hauteur boxing" />
+																						<img src="/static/img/mesure_freeform/cote_b.jpg" alt="Hauteur boxing" />
 																					</div>
 																					<div class="col-xs-12">
 																						<small>Hauteur boxing</small>
@@ -1015,7 +1015,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																			<div class="form-group clearfix col-lg-2 col-sm-2 col-xs-12">
 																				<label class="control-label" for="cotec">
 																					<div class="col-xs-12" style="height:77px">
-																						<img src="static/img/mesure_freeform/cote_c.jpg" alt="Taille du pont" />
+																						<img src="/static/img/mesure_freeform/cote_c.jpg" alt="Taille du pont" />
 																					</div>
 																					<div class="col-xs-12">
 																						<small>Taille du pont</small>
@@ -1092,7 +1092,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 
 																			<div class="form-group clearfix col-lg-2 col-sm-2 col-xs-12 hide">
 																				<label class="control-label" for="coted">
-																					<img src="static/img/mesure_freeform/cote_d.jpg" alt="Digonale verre en mm" />
+																					<img src="/static/img/mesure_freeform/cote_d.jpg" alt="Digonale verre en mm" />
 																					<small>Digonale verre en mm</small>
 																				</label>
 																				<br>
@@ -1157,7 +1157,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																							Ecarts pupillaire <span class="topoffice" style="display: none;">VL</span>
 																						</div>
 
-																						<img alt="Ecart pupillaire" class="hep-image" src="static/img/mesure_freeform/ecart_pup.jpg" style="margin-bottom: 18px;">
+																						<img alt="Ecart pupillaire" class="hep-image" src="/static/img/mesure_freeform/ecart_pup.jpg" style="margin-bottom: 18px;">
 
 																						<div class="clearfix">
 																							<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -1345,7 +1345,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																							Hauteur de montage <span id="baspupille" style="display:none;"></span>
 																						</div>
 
-																						<img alt="Hauteur" class="hep-image" src="static/img/mesure_freeform/Hauteur.jpg" style="margin-bottom: 18px">
+																						<img alt="Hauteur" class="hep-image" src="/static/img/mesure_freeform/Hauteur.jpg" style="margin-bottom: 18px">
 
 																						<div class="clearfix">
 																							<div class="col-lg-6 col-sm-6 col-xs-6">
@@ -1683,7 +1683,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																							<div id="preview_auth_card" style="float:left" >
 
 																								<span class="titre optieyes"></span>
-																								<?php if(isset($logo)) echo '<img class="card_logo" src="static/img/logo.png" />'; ?>
+																								<?php if(isset($logo)) echo '<img class="card_logo" src="/static/img/logo.png" />'; ?>
 
 																								<div class="info">
 																									<span class="ref">REF OPTIEYES</span>
@@ -1734,7 +1734,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																							</div>
 
 																							<div id="preview_auth_img" style="float:right">
-																								<img src="static/img/auth_back.jpg" />
+																								<img src="/static/img/auth_back.jpg" />
 																							</div>
 
 																						</div>
@@ -1748,7 +1748,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																						<div id="preview_auth_card" >
 
 																							<span class="titre optieyes"></span>
-																							<?php if(isset($logo)) echo '<img class="card_logo" src="static/img/logo.png" />'; ?>
+																							<?php if(isset($logo)) echo '<img class="card_logo" src="/static/img/logo.png" />'; ?>
 
 																							<div class="info">
 																								<span class="ref">REF OPTIEYES</span>
@@ -1792,7 +1792,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																						</div>
 
 																						<div id="preview_auth_img" >
-																							<img src="static/img/auth_back.jpg" />
+																							<img src="/static/img/auth_back.jpg" />
 																						</div>
 
 																					</div>
@@ -1802,7 +1802,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																						<div id="preview_auth_card" >
 
 																							<span class="titre optieyes"></span>
-																							<?php if(isset($logo)) echo '<img class="card_logo" src="static/img/logo.png" />'; ?>
+																							<?php if(isset($logo)) echo '<img class="card_logo" src="/static/img/logo.png" />'; ?>
 
 																							<div class="info">
 																								<span class="ref">REF OPTIEYES</span>
@@ -1847,7 +1847,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																						</div>
 
 																						<div id="preview_auth_img" >
-																							<img src="static/img/auth_back.jpg" />
+																							<img src="/static/img/auth_back.jpg" />
 																						</div>
 
 																					</div>
@@ -1927,8 +1927,8 @@ function roundToNearest(numToRound, numToRoundTo) {
 	</div> <!-- content -->
 
 	<!-- Form wizard -->
-	<script src="static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
-	<script src="static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+	<script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
 
 	<script type="text/javascript">
 	$('#commande_ferme').click(function(){ 

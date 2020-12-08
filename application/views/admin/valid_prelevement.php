@@ -75,7 +75,7 @@ include_once('menu.php');
                                             <td class="center">Magasin_'.$prelevement->id_users.'</td>
                                             <td class="center">'.$prelevement->nom_societe.'</td>
                                             <td class="center">'.$prelevement->email.'</td>
-                                            <td class="center"><a href="static/uploads/rib/'.$prelevement->document_rib.'" target="_blank">Voir le RIB</a></td>
+                                            <td class="center"><a href="/static/uploads/rib/'.$prelevement->document_rib.'" target="_blank">Voir le RIB</a></td>
                                             <td class="center">
 												<div style="margin-left:28%">
 													<div style="float:left;margin-left:auto;margin-right:auto;width:100px;">

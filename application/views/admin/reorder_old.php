@@ -2,8 +2,8 @@
 include_once('header.php');
 include_once('menu.php');
 ?>
-<script src="static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
-<script src="static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+<script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
@@ -205,7 +205,7 @@ include_once('menu.php');
                                 }
 
                                 if(isset($info_commande['precalibrage']['calibre'])) {
-                                    $correction_droit .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                                    $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                                 }
 
                                 if(isset($info_commande['verre']['polarise'])){
@@ -265,7 +265,7 @@ include_once('menu.php');
                                 }
 
                                 if(isset($info_commande['precalibrage']['calibre'])) {
-                                    $correction_gauche .= '<br><img src="static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                                    $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                                 }
 
                                 echo '<tr>';

@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Catalogue Optieyes</title>
-    <script type="text/javascript" src="static/assets/js/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="static/assets/wow_book/wow_book.min.js"></script>
-    <link rel="stylesheet" href="static/assets/wow_book/wow_book.css" type="text/css" />
-    <script type="text/javascript" src="static/assets/wow_book/pdf.combined.min.js"></script>
-    <script type="text/javascript" src="static/assets/wow_book/wow_book.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="/static/assets/wow_book/wow_book.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/wow_book/wow_book.css" type="text/css" />
+    <script type="text/javascript" src="/static/assets/wow_book/pdf.combined.min.js"></script>
+    <script type="text/javascript" src="/static/assets/wow_book/wow_book.min.js"></script>
     <style>
         .wowbook-container-full {
             background: #222;
@@ -36,7 +36,7 @@
             ,thumbnails : true
             ,container: window
             ,containerPadding: "20px"
-            ,pdf: "static/optieyes-2017.pdf"
+            ,pdf: "/static/optieyes-2017.pdf"
         };
 
         $('#book').wowBook( bookOptions );

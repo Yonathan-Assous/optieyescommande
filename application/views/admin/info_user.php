@@ -17,7 +17,7 @@
                     <tr>
                         <td><label for="email">Email :</label>
                             <input type="text" name="email" value="<?php echo $info_user[0]->email; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td></td>
                     </tr>
@@ -25,19 +25,19 @@
                         <td>
                             <label for="nom_societe">Nom société :</label>
                             <input type="text" name="nom_societe" value="<?php echo $info_user[0]->nom_societe; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="nom_magasin">Nom magasin :</label>
                             <input type="text" name="nom_magasin" value="<?php echo $info_user[0]->nom_magasin; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="adresse">Adresse :</label>
                             <input type="text" name="adresse" value="<?php echo $info_user[0]->adresse; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="adresse">Région :</label>
@@ -48,48 +48,48 @@
                         <td>
                             <label for="cp">Code Postal :</label>
                             <input type="text" name="cp" value="<?php echo $info_user[0]->cp; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="ville">Ville :</label>
                             <input type="text" name="ville" value="<?php echo $info_user[0]->ville; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="tel_fixe">Téléphone Fixe :</label>
                             <input type="text" name="tel_fixe" value="<?php echo $info_user[0]->tel_fixe; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="tel_fax">Téléphone Fax :</label>
                             <input type="text" name="tel_fax" value="<?php echo $info_user[0]->tel_fax; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="numero_siret">Numéro siret :</label>
                             <input type="text" name="numero_siret" value="<?php echo $info_user[0]->numero_siret; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="tva_intracom">Numéro Tva Intracommunautaire :</label>
                             <input type="text" name="tva_intracom" value="<?php echo $info_user[0]->tva_intracom; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="num_finess">Numéro Finess :</label>
                             <input type="text" name="num_finess" value="<?php echo $info_user[0]->num_finess; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                         <td>
                             <label for="num_finess">Responsable magasin :</label>
                             <input type="text" name="nom_responsable" value="<?php echo $info_user[0]->nom_responsable; ?>" />
-                            <img src="static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
+                            <img src="/static/img/icons/packs/fugue/24x24/disk-black.png" class="icon">
                         </td>
                     </tr>
 

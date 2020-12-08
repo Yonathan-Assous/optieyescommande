@@ -16,11 +16,11 @@
     <ul class="shortcuts"> 
         <li>
             <!-- a href="#" class="tooltip" original-title="Envoi des commandes de fabrication" data-gravity="s" data-anim="true"><span class="icon i24_inbox-document" id="send_commande_journa"></span></a -->
-            <a href="#" id="send_commande_journa"><img width="40" src="static/img/Israel.png" style="margin-top:-40px"></a>
+            <a href="#" id="send_commande_journa"><img width="40" src="/static/img/Israel.png" style="margin-top:-40px"></a>
         </li>
         <li>
             <!-- a href="#" class="tooltip" original-title="Envoi des commandes de fabrication" data-gravity="s" data-anim="true"><span class="icon i24_inbox-document" id="send_commande_journa"></span></a -->
-            <a href="#" id="send_commande_journa_stock"><img width="40" src="static/img/drapeau_fr.png" style="margin-top:-40px"></a>
+            <a href="#" id="send_commande_journa_stock"><img width="40" src="/static/img/drapeau_fr.png" style="margin-top:-40px"></a>
         </li>
 		<!--li>
             <a href="#" class="tooltip" original-title="Envoi des commandes de stock" data-gravity="s" data-anim="true"><span class="icon i24_inbox-document" id="send_commande_journa_stock"></span></a>

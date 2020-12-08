@@ -94,21 +94,21 @@
 if(isset($modules)) {
 
     if(array_key_exists('datepicker', $modules)) {
-        echo '<script src="static/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
-        echo '<script src="static/assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js"></script>';
     }
 
     if(array_key_exists('sweetalert', $modules)) {
-        echo '<script src="static/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>';
     }
 
     if(array_key_exists('touchspin', $modules)) {
-        echo '<script src="static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
+        echo '<script src="/static/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>';
     }
 
     if(array_key_exists('multiselect', $modules)) {
-        echo '<script src="static/assets/plugins/multiselect/js/jquery.multi-select.js"></script>';
-        echo '<script src="static/assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>';
+        echo '<script src="/static/assets/plugins/multiselect/js/jquery.multi-select.js"></script>';
+        echo '<script src="/static/assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>';
     }
 
 
@@ -135,7 +135,7 @@ if(isset($modules)) {
 		<input type="hidden" id="type_commande_to_send" name="type_commande_to_send" value="" />
         <p><strong>Les commandes seront envoyés sur <?php echo isset($user_info->email) ? $user_info->email : ''; ?>.<br /><br />Envoyer les dernières commandes effectuées ? </strong></p>
 		<div id="loading_send_commande_journa" style="display:none;">
-			<img src="static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" alt="spinner" />
+			<img src="/static/img/elements/loading/spinner.gif" style="width: 32px;height: 32px;" alt="spinner" />
 			Envoi en cours...
 		</div>
     </div>
@@ -205,7 +205,7 @@ if(isset($modules)) {
 			<div style="text-align:center">Choisir les destinataires du mail : </div><br>
 			<div style="text-align:center" id="listUser"></div><br>
 			<div style="text-align:center">Sujet du mail : <input type="text" value="" style="width:600px" class="required" name="sujet_mail"></div><br>
-			<div style="text-align:center">Pièce jointe : <input type="file" class="ready" name="piece_jointe" id="piece_jointe"><span style="display:none;"><img src="static/img/loading.gif" alt="Chargement..." /></<span></div><br>
+			<div style="text-align:center">Pièce jointe : <input type="file" class="ready" name="piece_jointe" id="piece_jointe"><span style="display:none;"><img src="/static/img/loading.gif" alt="Chargement..." /></<span></div><br>
 			<input type="hidden" value="" name="piece_jointe_mail" id="piece_jointe_mail" />
 			
 			<textarea id="area_mail" name="area_mail"></textarea>

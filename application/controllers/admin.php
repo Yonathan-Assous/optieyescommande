@@ -7063,7 +7063,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 				$d = date("Y-m-d_h-i-s");
 				$filename = $commande->id_commande."_".$d.".xml";
 
-				if (!write_file('/var/www/vhosts/optieyescommande.com/httpdocs/static/xml/'.$filename, $commande->xml))
+				if (!write_file('/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/'.$filename, $commande->xml))
 				{
 						echo $filename.'ERROR - ';
 				}
@@ -7071,7 +7071,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 				{
 						//echo $filename.'OK - ';
 						//	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
-						if($this->uploadFTP("ftpserver.omega-optix.cz", "optieyes", "OptiEyes-2020", '/var/www/vhosts/optieyescommande.com/httpdocs/static/xml/'.$filename,"/Orders/".$filename))
+						if($this->uploadFTP("ftpserver.omega-optix.cz", "optieyes", "OptiEyes-2020", '/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/'.$filename,"/Orders/".$filename))
 						{
 							echo $filename.'OK - ';
 							$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
@@ -9162,7 +9162,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 		$msg = '';
         $montures = array();
 
-        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs/uploads/';
+        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs_new/uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 4096;
         $config['max_width']            = 1000;
@@ -9214,7 +9214,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 
                     if($query->result()) {
                         $filename = $query->result()[0]->image;
-                        unlink('/var/www/vhosts/optieyescommande.com/httpdocs/uploads/'.$filename);
+                        unlink('/var/www/vhosts/optieyescommande.com/httpdocs_new/uploads/'.$filename);
                     }
 
                     $filename = '';
@@ -9355,7 +9355,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 		$msg = '';
         $montures = array();
 
-        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs/uploads/';
+        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs_new/uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 4096;
         $config['max_width']            = 1000;
@@ -11231,7 +11231,6 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 
         $data['page'] = $data['title'] = "Grille de stock";
         $data['verres'] = $this->m_verres->getVerre($dataVerre);
-
         $this->load->view('admin/correction_stock',$data);
     }
 
@@ -12499,7 +12498,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 		$msg = '';
         $montures = array();
 
-        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs/uploads/';
+        $config['upload_path']          = '/var/www/vhosts/optieyescommande.com/httpdocs_new/uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 4096;
         $config['max_width']            = 1000;

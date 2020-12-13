@@ -36,3 +36,21 @@ ERROR - 2020-12-13 12:52:03 --> Severity: Warning  --> mysqli_connect(): (HY000/
 ERROR - 2020-12-13 12:52:03 --> Unable to connect to the database
 ERROR - 2020-12-13 12:52:23 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
 ERROR - 2020-12-13 12:52:23 --> Unable to connect to the database
+ERROR - 2020-12-13 12:52:43 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:52:43 --> Unable to connect to the database
+ERROR - 2020-12-13 12:53:03 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:53:03 --> Unable to connect to the database
+ERROR - 2020-12-13 12:53:23 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:53:23 --> Unable to connect to the database
+ERROR - 2020-12-13 12:53:43 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:53:43 --> Unable to connect to the database
+ERROR - 2020-12-13 12:54:03 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:54:03 --> Unable to connect to the database
+ERROR - 2020-12-13 12:54:23 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:54:23 --> Unable to connect to the database
+ERROR - 2020-12-13 12:54:43 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:54:43 --> Unable to connect to the database
+ERROR - 2020-12-13 12:55:03 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:55:03 --> Unable to connect to the database
+ERROR - 2020-12-13 12:55:23 --> Severity: Warning  --> mysqli_connect(): (HY000/1045): Access denied for user 'optieyesproxi548'@'localhost' (using password: YES) C:\laragon_full\www\optieyescommande\system\database\drivers\mysqli\mysqli_driver.php 76
+ERROR - 2020-12-13 12:55:23 --> Unable to connect to the database

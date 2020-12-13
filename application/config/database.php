@@ -48,6 +48,7 @@
 $active_group = 'new';
 $active_record = TRUE;
 
+
 $db['new']['hostname'] = 'localhost';
 $db['new']['username'] = 'optieyesproxi548';
 $db['new']['password'] = 'P6O1L238z9i6wYq';

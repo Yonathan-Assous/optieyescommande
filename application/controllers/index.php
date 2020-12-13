@@ -34,7 +34,7 @@ class index extends MY_Controller {
 	public function getTypeDeVerre($recovery=false){
 		if($this->session->userdata('logged_in') === true){
 		//if($this->session->userdata('logged_in') === true && $this->input->is_ajax_request()){
-		
+
 			$indice = $_POST['indiceId'];
 			$lensFocalGroup = $_POST['lensFocalGroup'];
 			$generation = $_POST['generation'];
@@ -52,9 +52,9 @@ class index extends MY_Controller {
 				$type = 1;
 	
 			$user_id = $this->data['user_info']->id_users;
-	
+
 			$res = $this->m_passer_commande_verre->getlens($indice,$lensFocalGroup,$generation,$sphereD,$cylindreD,$axeD,$additionD,$stock,$user_id,$panierA,$type);
-			echo json_encode($res);	
+			echo json_encode($res);
 		}
 		else
 			$this->redirect();

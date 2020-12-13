@@ -22,6 +22,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -38,6 +39,9 @@
       <workItem from="1607323875980" duration="19939000" />
       <workItem from="1607420829531" duration="97000" />
       <workItem from="1607420928706" duration="6478000" />
+      <workItem from="1607502077102" duration="15597000" />
+      <workItem from="1607582635221" duration="6185000" />
+      <workItem from="1607841400649" duration="2064000" />
     </task>
     <servers />
   </component>
@@ -53,6 +57,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1607420923941" />
+    <state x="184" y="8" key="SettingsEditor" timestamp="1607508376987">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1607508376987" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607331768608">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -61,10 +69,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1607347129571" />
-    <state x="383" y="0" width="586" height="728" key="find.popup" timestamp="1607423523241">
+    <state x="383" y="0" width="598" height="728" key="find.popup" timestamp="1607842174653">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="383" y="0" width="586" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1607423523241" />
+    <state x="383" y="0" width="598" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1607842174653" />
     <state x="324" y="90" width="700" height="530" key="recent.locations.popup" timestamp="1607423413601">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -73,6 +81,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1607340531922" />
+    <state x="468" y="222" key="scopes" timestamp="1607506464236">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="468" y="222" key="scopes/0.0.1366.728@0.0.1366.728" timestamp="1607506464236" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1607247908559">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

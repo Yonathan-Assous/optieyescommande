@@ -1002,11 +1002,11 @@ class m_commande extends CI_Model {
                 $date = new DateTime(date("Y-m-d H:i:s"));
                 $date_commande = new DateTime($commande->date_commande);
                 $jour = $date->diff($date_commande)->d;
-                $tab_etat_commande = array(1 => 2, 2 => 3, 3 => 4, 4 => 4, 5 => 4, 6 => 5); //Chaque clŽ correspond ˆ un jour aprs avoir passŽ commande $key 1 = 1 jour donc etat commande => 2, $key 2 = 2 jours donc etat commande => 3, etc...
+                $tab_etat_commande = array(1 => 2, 2 => 3, 3 => 4, 4 => 4, 5 => 4, 6 => 5); //Chaque clï¿½ correspond ï¿½ un jour aprï¿½s avoir passï¿½ commande $key 1 = 1 jour donc etat commande => 2, $key 2 = 2 jours donc etat commande => 3, etc...
 
                 $etat_commande = isset($tab_etat_commande[$jour]) ? $tab_etat_commande[$jour] : "";
 						
-				// en cas de soucis de cron et que le nombre de jour aprs avoir passŽ commande, dŽpasserait 6, la commande passe en avant dernire Žtat
+				// en cas de soucis de cron et que le nombre de jour aprï¿½s avoir passï¿½ commande, dï¿½passerait 6, la commande passe en avant derniï¿½re ï¿½tat
                 if($jour>6)
                     $etat_commande = 5;
 
@@ -1095,7 +1095,7 @@ class m_commande extends CI_Model {
         return 0;
 
 
-        // version corrigŽe, finalement non..
+        // version corrigï¿½e, finalement non..
         /*$annee = date('Y', time());
 
         $query = $this->db->query("SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) - COALESCE(total_reductions, 0) as total 
@@ -3036,7 +3036,7 @@ class m_commande extends CI_Model {
 			$data['tarif_express'] = 0;
 			$express = $data['express'];
 				  
-			//$data['prix_verre'] = str_replace("Û","",$data['prix_verre']);
+			//$data['prix_verre'] = str_replace("ï¿½","",$data['prix_verre']);
 
 			$data['id_miroir'] = $this->db->escape($data['id_miroir']);
 			$data['reference_client'] = $this->db->escape($data['reference_client']);
@@ -3072,7 +3072,7 @@ class m_commande extends CI_Model {
 		
 			if($type_commande_verre!=4)
 			{
-				$data['prix_verre'] = str_replace("Û","",$data['prix_verre']);
+				$data['prix_verre'] = str_replace("ï¿½","",$data['prix_verre']);
 			
 				if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
 				{
@@ -3546,13 +3546,12 @@ class m_commande extends CI_Model {
                                   
 		 $query = $this->db->query('SELECT c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.id_generation_verre, c.id_indice_verre, information_commande,reference_client,total_commande, penalty,c.id_verre,trad_fr,l.name
                                FROM commande c
-                               LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT("%", c.generation ,"%")))
                                    LEFT JOIN commande_pointage cp ON c.id_commande = cp.id_commande
-                                   WHERE (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) AND c.id_etat_commande = 5 AND cp.date_pointage IS NULL)
-                                   OR ((((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND date_commande < "'.date('Y-m-d 23:59:59', strtotime('yesterday')).'" AND date_commande > "'.date('Y-m-d 00:00:00', strtotime('first day of last month')).'" AND c.id_etat_commande != 6 AND cp.date_pointage IS NULL))
+                                   WHERE (origine_commande=1 AND c.id_etat_commande = 5 AND cp.date_pointage IS NULL)
+                                   OR (origine_commande=2 AND date_commande < "'.date('Y-m-d 23:59:59', strtotime('yesterday')).'" AND date_commande > "'.date('Y-m-d 00:00:00', strtotime('first day of last month')).'" AND c.id_etat_commande != 6 AND cp.date_pointage IS NULL)
                                    ORDER BY c.id_commande');
-                                   
+                                
         if ($query && $query->num_rows() > 0)
             return $query->result();
 

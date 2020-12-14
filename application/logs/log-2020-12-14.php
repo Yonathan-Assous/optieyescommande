@@ -1,0 +1,20 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2020-12-14 00:59:49 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND date_commande > "2020-12-14 00:00:00" AND date_commande < "2020-12-14 2...' at line 1 - SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN() AND date_commande > "2020-12-14 00:00:00" AND date_commande < "2020-12-14 23:59:59" GROUP BY id_users ORDER BY date_commande DESC
+ERROR - 2020-12-14 01:04:30 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('532', 1607900400, 1607904270, 1) ON DUPLICATE KEY UPDATE login_time = 1607904270, login_count = login_count +1 
+ERROR - 2020-12-14 01:04:38 --> You did not select a file to upload.
+ERROR - 2020-12-14 07:29:39 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') AND date_commande > "2020-12-14 00:00:00" AND date_commande < "2020-12-14 2...' at line 1 - SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN() AND date_commande > "2020-12-14 00:00:00" AND date_commande < "2020-12-14 23:59:59" GROUP BY id_users ORDER BY date_commande DESC
+ERROR - 2020-12-14 08:30:31 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('398', 1607900400, 1607931031, 1) ON DUPLICATE KEY UPDATE login_time = 1607931031, login_count = login_count +1 
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 08:31:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-14 09:12:15 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('448', 1607900400, 1607933535, 1) ON DUPLICATE KEY UPDATE login_time = 1607933535, login_count = login_count +1 

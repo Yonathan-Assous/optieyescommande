@@ -3543,15 +3543,16 @@ class m_commande extends CI_Model {
                                    OR ((((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND date_commande < "'.date('Y-m-d 23:59:59', strtotime('yesterday')).'" AND date_commande > "'.date('Y-m-d 00:00:00', strtotime('first day of last month')).'" AND c.id_etat_commande != 6 AND cp.date_pointage IS NULL))
                                    ORDER BY c.id_commande');
                                    */
-                                  
-		 $query = $this->db->query('SELECT c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.id_generation_verre, c.id_indice_verre, information_commande,reference_client,total_commande, penalty,c.id_verre,trad_fr,l.name
-                               FROM commande c
-                               LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT("%", c.generation ,"%")))
+        $sql = 'SELECT c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.id_generation_verre, c.id_indice_verre, information_commande,reference_client,total_commande, penalty,c.id_verre,trad_fr,l.name
+                                   FROM commande c
+                                   INNER JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT("%", c.generation ,"%")))
                                    LEFT JOIN commande_pointage cp ON c.id_commande = cp.id_commande
-                                   WHERE (origine_commande=1 AND c.id_etat_commande = 5 AND cp.date_pointage IS NULL)
+                                   WHERE (origine_commande = 1 AND c.id_etat_commande = 5 AND cp.date_pointage IS NULL)
                                    OR (origine_commande=2 AND date_commande < "'.date('Y-m-d 23:59:59', strtotime('yesterday')).'" AND date_commande > "'.date('Y-m-d 00:00:00', strtotime('first day of last month')).'" AND c.id_etat_commande != 6 AND cp.date_pointage IS NULL)
-                                   ORDER BY c.id_commande');
-                                
+                                   ORDER BY c.id_commande';
+        $query = $this->db->query($sql);
+        var_dump(date('Y-m-d 00:00:00', strtotime('first day of last month')));
+		 var_dump(date('Y-m-d 23:59:59', strtotime('yesterday')));die;
         if ($query && $query->num_rows() > 0)
             return $query->result();
 

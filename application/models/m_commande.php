@@ -3551,8 +3551,6 @@ class m_commande extends CI_Model {
                                    OR (origine_commande=2 AND date_commande < "'.date('Y-m-d 23:59:59', strtotime('yesterday')).'" AND date_commande > "'.date('Y-m-d 00:00:00', strtotime('first day of last month')).'" AND c.id_etat_commande != 6 AND cp.date_pointage IS NULL)
                                    ORDER BY c.id_commande';
         $query = $this->db->query($sql);
-        var_dump(date('Y-m-d 00:00:00', strtotime('first day of last month')));
-		 var_dump(date('Y-m-d 23:59:59', strtotime('yesterday')));die;
         if ($query && $query->num_rows() > 0)
             return $query->result();
 

@@ -8707,13 +8707,12 @@ $xml = '<?xml version="1.0" encoding="UTF-8" ?>
             $message = '<html><head></head><body><b>Hi Iveta,</b><br><br> Can you please tell me when I\'ll receive these orders ? (I don\'t need the status, only the ETA) <br /><br />Thanks in advance<br /><br />';
 
             $orders = array();
-
             if($commandes) {
                 foreach ($commandes as $c) {
 
                     $correction = json_decode($c->information_commande, true);
 //echo $c->name."<br>";
-                    if(strpos($c->name, "- stock") !== false || strpos($c->name, "-stock") !== false || strpos($c->name, "- Stock") !== false || strpos($c->name, " - Stock") !== false || strpos($c->name, " - stock") !== false) {
+                    if(strpos($c->name, "- stock") !== false || strpos($c->name, "-stock") !== false || strpos($c->name, "-Stock") !== false || strpos($c->name, " - Stock") !== false || strpos($c->name, " - stock") !== false) {
                         $type = 'stock';
                     }
                     else {

@@ -52,7 +52,7 @@ $(function(){
         $(document).on('click','input[type=text]',function(){ this.select(); });
         $(document).on('click','input[type=number]',function(){ this.select(); });
     });
-    
+
 var regExp = new RegExp('[a-zA-Z]'),
     inputVal = '';
 
@@ -62,7 +62,7 @@ $('#sphereD').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
@@ -73,7 +73,7 @@ $('#sphereG').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
@@ -84,7 +84,7 @@ $('#cylindreD').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
@@ -95,7 +95,7 @@ $('#cylindreG').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
@@ -106,7 +106,7 @@ $('#additionD').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
@@ -117,11 +117,11 @@ $('#additionG').on('keydown keyup', function(e) {
     if (regExp.test(value)) {
         $(this).val(inputVal)
     }
-    else{ 
+    else{
         inputVal = value
     }
 });
-    
+
     $( "input[type=number]" ).change(function() {
         var max = parseInt($(this).attr('max'));
         var min = parseInt($(this).attr('min'));
@@ -132,13 +132,13 @@ $('#additionG').on('keydown keyup', function(e) {
         else if ($(this).val() < min)
         {
             $(this).val(min);
-        } 
-    });    
-    
+        }
+    });
+
 	$("#generation_progressif").css("display", "none");
 	$("#Teledetourage").attr('disabled', true);
 	$("#div_prismes").css("display", "none");
-	
+
 	$("#Stock_1").prop("checked", true);
 
 	$('.display_fabrication').addClass('hide')
@@ -153,73 +153,73 @@ $( "#to_etape2" ).click(function() {
   $('#titre_etape1').removeClass('active');
   $('#etape1').removeClass('in');
   $('#to_etape1').removeClass('disabled');
-  
+
   $('#etape2').addClass('active');
   $('#titre_etape2').addClass('active');
   $('#etape2').addClass('in');
-  
+
  $('.pager .previous').removeClass('disabled');
-  
+
 });
 
 $( "#to_etape3" ).click(function() {
   $('#etape1').removeClass('active');
   $('#titre_etape1').removeClass('active');
   $('#etape1').removeClass('in');
-  
+
   $('#etape2').removeClass('active');
   $('#titre_etape2').removeClass('active');
   $('#etape2').removeClass('in');
-  
+
   $('#etape3').addClass('active');
   $('#titre_etape3').addClass('active');
   $('#etape3').addClass('in');
   $('.pager .previous').removeClass('disabled');
-  
+
 });
 
 $( ".pager #to_etape1" ).click(function() {
   $('#etape2').removeClass('active');
   $('.display_stock #titre_etape2').removeClass('active');
   $('#etape2').removeClass('in');
-  
+
   $('#etape3').removeClass('active');
   $('.display_stock #titre_etape3').removeClass('active');
   $('#etape3').removeClass('in');
-  
+
   $('#etape1').addClass('active');
   $('.display_stock #titre_etape1').addClass('active');
   $('#etape1').addClass('in');
 });
 
 $('#reference_client').keyup(function() {
- 
+
     var nombreCaractere = $(this).val().length;
  	nombreCaractere = 14-nombreCaractere;
     var msg = ' '+ nombreCaractere + ' Caractères restants';
     $('#compeur_caracteres').text(msg);
-    
+
     $('#caracteristique_verre').removeClass('hide');
     $('#div2_ref_client').removeClass('focus_panel');
-    
+
   })
 
-$('#commande_ferme').click(function(){ 
-  
+$('#commande_ferme').click(function(){
+
   $('#div1_ref_client').removeClass('hide');
   $('#div2_type_commande').removeClass('focus_panel');
   $('#to_etape2').addClass('disabled');
- 
+
 })
 
-$('#casse_atelier').click(function(){ 
-  
+$('#casse_atelier').click(function(){
+
   $('#div1_ref_client').addClass('hide');
   $('#div2_type_commande').addClass('focus_panel');
 })
 
-$('#erreur_ophtalmologiste').click(function(){ 
-  
+$('#erreur_ophtalmologiste').click(function(){
+
   $('#div1_ref_client').addClass('hide');
   $('#div2_type_commande').addClass('focus_panel');
 })
@@ -234,11 +234,11 @@ $('#indices').on('change', function() {
     $("#generation_progressif").css("display", "none");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-    
+
     $('#droit').prop('checked', true);
     $('#gauche').prop('checked', true);
-	
-    
+
+
 	$('#type_produit').removeClass('hide');
 	$('#indices_panel').removeClass('focus_panel')
 	$('#lensFocalGroup_panel').addClass('focus_panel');
@@ -246,8 +246,8 @@ $('#indices').on('change', function() {
 
 	$('#refraction_panel').removeClass('focus_panel')
 	$('#generation_panel').removeClass('focus_panel')
-	
-	
+
+
 	var indiceId = $(this).val();
 	var generation = $('#generation').val();
 	var lensFocalGroup = $('#lensFocalGroup').val();
@@ -262,22 +262,22 @@ $('#indices').on('change', function() {
 
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
 	if(indiceId=='1.5')
 	{
 		$("#id_indice_verre").val("1");
@@ -309,10 +309,10 @@ $('#indices').on('change', function() {
 	else if(indiceId=='mineral')
 	{
 		$("#id_indice_verre").val("9");
-	}	
+	}
 	else
 	{
-	
+
 	}
 
 	if(lensFocalGroup == '3')
@@ -340,14 +340,14 @@ $('#indices').on('change', function() {
 		$("#detailD").css("display", "block");
 		$("#detailG").css("display", "block");
 	}
-   
+
 });
 
 $('#lensFocalGroup').on('change', function() {
-	
+
 	$('#sphereD').select();
-	
-	
+
+
 });
 
 $('#generation').on('change', function() {
@@ -355,14 +355,14 @@ $('#generation').on('change', function() {
   var generation = $(this).val();
   $('#precalibrage').addClass('hide');
   $('#certif').addClass('hide');
-  
+
   $('#progressionD').prop('disabled', false);
   $('#progressionG').prop('disabled', false);
-  
+
   var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
 	if(droite)
-	{	
+	{
 		$(".display_droit").css("display", "block");
 		$("#sphereD").prop('disabled', false);
 		$("#cylindreD").prop('disabled', false);
@@ -373,20 +373,20 @@ $('#generation').on('change', function() {
 	else
 	{
 		$(".display_droit").css("display", "none");
-		
+
 		$("#sphereD").val('');
 		$("#cylindreD").val('');
 		$("#axeD").val('');
 		$("#additionD").val('');
-		
+
 		$("#sphereD").prop('disabled', true);
 		$("#cylindreD").prop('disabled', true);
 		$("#axeD").prop('disabled', true);
 		$("#additionD").prop('disabled', true);
-		
+
 		$("#VersDroit").css("display", "none");
 	}
-	
+
 	if(gauche)
 	{
 		$(".display_gauche").css("display", "block");
@@ -394,31 +394,31 @@ $('#generation').on('change', function() {
 		$("#cylindreG").prop('disabled', false);
 		$("#axeG").prop('disabled', false);
 		$("#additionG").prop('disabled', false);
-		
+
 	/*	$("#sphereG").val('+0.00');
 		$("#cylindreG").val('+0.00');
 		$("#axeG").val('0');
 		$("#additionG").val('+0.75');
-	*/	
+	*/
 		$("#VersGauche").css("display", "block");
 	}
 	else
 	{
 		$(".display_gauche").css("display", "none");
-		
+
 		$("#sphereG").val('');
 		$("#cylindreG").val('');
 		$("#axeG").val('');
 		$("#additionG").val('');
-		
+
 		$("#sphereG").prop('disabled', true);
 		$("#cylindreG").prop('disabled', true);
 		$("#axeG").prop('disabled', true);
 		$("#additionG").prop('disabled', true);
-		
+
 		$("#VersGauche").css("display", "none");
 	}
-  
+
   if(generation != "")
   {
 		$('#generation_panel').removeClass('focus_panel')
@@ -440,17 +440,17 @@ $('#generation').on('change', function() {
 
 		var stockD = $('input[name="dispoD"]:checked').val()
 		var stockG = $('input[name="dispoG"]:checked').val()
-		
+
 		if(stockG == "StockG")
 		{
 			stockG = "StockD";
 		}
-	
+
 		if(stockG == "FabricationG")
 		{
 			stockG = "FabricationD";
 		}
-	
+
 		if(stockG == "ToutG")
 		{
 			stockG = "ToutD";
@@ -481,98 +481,98 @@ $('#generation').on('change', function() {
 			$("#detailD").css("display", "block");
 			$("#detailG").css("display", "block");
 		}
-       
+
     }
-  
+
 });
 
 $("#checkbox_prismes").click(function() {
-   
+
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
-    if($(this).is(":checked")) 
+
+    if($(this).is(":checked"))
     {
         $("#select_prisme").css("display", "none");
 		$("#div_prismes").css("display", "block");
 		$("#checkbox_prismes_extend").prop('checked', true);
-		
+
 		$('#tab_refraction').removeClass('col-xs-11').addClass('col-xs-8');
 		$('#tab_prismes').removeClass('col-xs-1').addClass('col-xs-4');
-		
+
     }
 });
 
 $("#checkbox_prismes_extend").click(function() {
-   
+
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
-    if($(this).is(":checked")) 
+
+    if($(this).is(":checked"))
     {
-       
+
     }
     else
     {
     	$("#select_prisme").css("display", "block");
 		$("#div_prismes").css("display", "none");
 		$("#checkbox_prismes").prop('checked', false);
-		
+
 		$('#tab_refraction').removeClass('col-xs-8').addClass('col-xs-11');
 		$('#tab_prismes').removeClass('col-xs-4').addClass('col-xs-1');
     }
 });
 
-$('input[name=sphereD]').focus(function() { 
+$('input[name=sphereD]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=cylindreD]').focus(function() { 
+$('input[name=cylindreD]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=axeD]').focus(function() { 
+$('input[name=axeD]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=additionD]').focus(function() { 
+$('input[name=additionD]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=sphereG]').focus(function() { 
+$('input[name=sphereG]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=cylindreG]').focus(function() { 
+$('input[name=cylindreG]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=axeG]').focus(function() { 
+$('input[name=axeG]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
 });
-$('input[name=additionG]').focus(function() { 
+$('input[name=additionG]').focus(function() {
     $('#produit').addClass('hide');
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
@@ -593,31 +593,31 @@ $('input[name=sphereD]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
    // $('#produit').removeClass('hide')
-    
-    
+
+
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     if(sphereD == '')
     {
     	sphereD = '-';
@@ -631,15 +631,15 @@ $('input[name=sphereD]').change(function() {
     		sphereD = roundToNearest(sphereD,0.25);
     		$("#sphereD").val(sphereD);
     	}
-    	
+
     	if (sphereD.indexOf(".") < 0)
     	{
-    		
+
     		sphereD = sphereD+".00";
     		//alert(sphereD);
     		$("#sphereD").val(sphereD);
     	}
-    		
+
     	if (sphereD.indexOf("+") >= 0)
     	{
     		sphereD = sphereD.replace('+', '');
@@ -647,20 +647,20 @@ $('input[name=sphereD]').change(function() {
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#sphereD").val(new_sphere);
     	}
     	else if (sphereD.indexOf("-") >= 0)
     	{
     		n_sphereD = roundToNearest(sphereD,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#sphereD").val(n_sphereD);
     	}
@@ -668,24 +668,24 @@ $('input[name=sphereD]').change(function() {
     	{
     		n_sphereD = roundToNearest(sphereD,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		$("#sphereD").val(new_sphere); 
+
+    		$("#sphereD").val(new_sphere);
     		sphereD = $('#sphereD').val();
     	}
     }
-    
+
   /*  if($("#droit").prop('checked') == true && $("#gauche").prop('checked') == true && sphereG == "+0.00"){
 		$('#sphereG').val($(this).val())
 		sphereG = sphereD
 	}
-  */  	
-        
+  */
+
 });
 
 $('input[name=sphereG]').change(function() {
@@ -700,28 +700,28 @@ $('input[name=sphereG]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     $("#detailG").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-   
+
     if(sphereG == '')
     {
     	sphereG = '-';
@@ -735,15 +735,15 @@ $('input[name=sphereG]').change(function() {
     		sphereG = roundToNearest(sphereG,0.25);
     		$("#sphereG").val(sphereG);
     	}
-    	
+
     	if (sphereG.indexOf(".") < 0)
     	{
-    		
+
     		sphereG = sphereG+".00";
     		//alert(sphereD);
     		$("#sphereG").val(sphereG);
     	}
-    		
+
     	if (sphereG.indexOf("+") >= 0)
     	{
     		sphereG = sphereG.replace('+', '');
@@ -751,20 +751,20 @@ $('input[name=sphereG]').change(function() {
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#sphereG").val(new_sphere);
     	}
     	else if (sphereG.indexOf("-") >= 0)
     	{
     		n_sphereD = roundToNearest(sphereG,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#sphereG").val(n_sphereD);
     	}
@@ -772,20 +772,20 @@ $('input[name=sphereG]').change(function() {
     	{
     		n_sphereD = roundToNearest(sphereG,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		$("#sphereG").val(new_sphere); 
+
+    		$("#sphereG").val(new_sphere);
     		sphereG = $('#sphereG').val();
     	}
     }
-    
-	 
-    	
+
+
+
 });
 
 $('input[name=cylindreD]').change(function() {
@@ -800,30 +800,30 @@ $('input[name=cylindreD]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     //$('#produit').removeClass('hide')
     $("#afficherV").css("display", "inline-block");
-   
+
     $("#detailD").css("display", "none");
-    
+
     if(cylindreD == '')
     {
     	cylindreD = '-';
@@ -837,15 +837,15 @@ $('input[name=cylindreD]').change(function() {
     		cylindreD = roundToNearest(cylindreD,0.25);
     		$("#cylindreD").val(cylindreD);
     	}
-    	
+
     	if (cylindreD.indexOf(".") < 0)
     	{
-    		
+
     		cylindreD = cylindreD+".00";
     		//alert(sphereD);
     		$("#cylindreD").val(cylindreD);
     	}
-    		
+
     	if (cylindreD.indexOf("+") >= 0)
     	{
     		cylindreD = cylindreD.replace('+', '');
@@ -853,20 +853,20 @@ $('input[name=cylindreD]').change(function() {
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#cylindreD").val(new_sphere);
     	}
     	else if (cylindreD.indexOf("-") >= 0)
     	{
     		n_sphereD = roundToNearest(cylindreD,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#cylindreD").val(n_sphereD);
     	}
@@ -874,28 +874,28 @@ $('input[name=cylindreD]').change(function() {
     	{
     		n_sphereD = roundToNearest(cylindreD,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		$("#cylindreD").val(new_sphere); 
+
+    		$("#cylindreD").val(new_sphere);
     		cylindreD = $('#cylindreD').val();
     	}
-    	
-    	
+
+
     }
-    	
+
     /*	if($("#droit").prop('checked') == true && $("#gauche").prop('checked') == true && cylindreG == "+0.00"){
 			$('#cylindreG').val($(this).val())
 			cylindreG = cylindreD;
-		
+
 		}
-     */   
-    	
-    	
+     */
+
+
 });
 
 $('input[name=cylindreG]').change(function() {
@@ -910,30 +910,30 @@ $('input[name=cylindreG]').change(function() {
     var cylindreG = $(this).val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     $("#detailG").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
     //$('#produit').removeClass('hide')
-    
+
     if(lensFocalGroup == '3')
 	{
 		if($('#progressionG').val() == '')
@@ -944,13 +944,13 @@ $('input[name=cylindreG]').change(function() {
     	{
     		$("#detailG").css("display", "block");
     	}
-    
+
     }
     else
     {
     	$("#detailG").css("display", "block");
     }
-    
+
     if(cylindreG == '')
     {
     	cylindreG = '-';
@@ -964,15 +964,15 @@ $('input[name=cylindreG]').change(function() {
     		cylindreG = roundToNearest(cylindreG,0.25);
     		$("#cylindreG").val(cylindreG);
     	}
-    	
+
     	if (cylindreG.indexOf(".") < 0)
     	{
-    		
+
     		cylindreG = cylindreG+".00";
     		//alert(sphereD);
     		$("#cylindreG").val(cylindreG);
     	}
-    		
+
     	if (cylindreG.indexOf("+") >= 0)
     	{
     		cylindreG = cylindreG.replace('+', '');
@@ -980,20 +980,20 @@ $('input[name=cylindreG]').change(function() {
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#cylindreG").val(new_sphere);
     	}
     	else if (cylindreG.indexOf("-") >= 0)
     	{
     		n_sphereD = roundToNearest(cylindreG,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#cylindreG").val(n_sphereD);
     	}
@@ -1001,19 +1001,19 @@ $('input[name=cylindreG]').change(function() {
     	{
     		n_sphereD = roundToNearest(cylindreG,0.25);
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		$("#cylindreG").val(new_sphere); 
+
+    		$("#cylindreG").val(new_sphere);
     		cylindreG = $('#cylindreG').val();
     	}
     }
-    	
-        
+
+
 });
 
 $('input[name=axeD]').change(function() {
@@ -1028,28 +1028,28 @@ $('input[name=axeD]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
     $("#detailG").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
      /*if (axeD.indexOf(".") < 0 && axeD != "")
     	{
     		axeD = axeD+".00";
@@ -1060,15 +1060,15 @@ $('input[name=axeD]').change(function() {
     	axeD = '-';
     	$("#axeD").val("0");
     }
-    
-	 
+
+
   /*  if($("#droit").prop('checked') == true && $("#gauche").prop('checked') == true && axeG == "0")
     {
 		$('#axeG').val($(this).val())
 		axeG = axeD;
 	}
 	*/
-    	
+
 });
 
 $('input[name=axeG]').change(function() {
@@ -1083,34 +1083,34 @@ $('input[name=axeG]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeD = $('#axeD').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-   
+
     $("#detailG").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
     if(axeG == '')
     {
     	axeG = '-';
     	$("#axeG").val("0");
     }
-     
+
 });
 
 
@@ -1122,10 +1122,10 @@ $('#gauche').on('change', function() {
 
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
-	
+
 	var droite = $('#droit').is(':checked');
-	var gauche = $('#gauche').is(':checked');   
-   
+	var gauche = $('#gauche').is(':checked');
+
 	if(gauche)
 	{
 		$(".display_gauche").css("display", "block");
@@ -1133,94 +1133,94 @@ $('#gauche').on('change', function() {
 		$("#cylindreG").prop('disabled', false);
 		$("#axeG").prop('disabled', false);
 		$("#additionG").prop('disabled', false);
-		
+
 		$("#sphereG").val('+0.00');
 		$("#cylindreG").val('+0.00');
 		$("#axeG").val('0');
 		$("#additionG").val('+0.75');
-		
+
 		$("#VersGauche").css("display", "block");
 	}
 	else
 	{
 		$(".display_gauche").css("display", "none");
-		
+
 		$("#sphereG").val('');
 		$("#cylindreG").val('');
 		$("#axeG").val('');
 		$("#additionG").val('');
-		
+
 		$("#sphereG").prop('disabled', true);
 		$("#cylindreG").prop('disabled', true);
 		$("#axeG").prop('disabled', true);
 		$("#additionG").prop('disabled', true);
-		
+
 		$("#VersGauche").css("display", "none");
 	}
-	
-	if(droite && gauche) 
+
+	if(droite && gauche)
 	{
 		$("#VersDroit").css("display", "block");
 	}
 	else
 	{
 		$("#VersDroit").css("display", "none");
-	}  
+	}
 });
-    
+
 $('#droit').on('change', function() {
-		
+
 	$('#precalibrage').addClass('hide');
 	$('#certif').addClass('hide');
-	
+
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
-	
+
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
+
 	//alert(gauche);
-	
+
 	if(droite)
-	{	
+	{
 		$(".display_droit").css("display", "block");
 		$("#sphereD").prop('disabled', false);
 		$("#cylindreD").prop('disabled', false);
 		$("#axeD").prop('disabled', false);
 		$("#additionD").prop('disabled', false);
-		
+
 		$("#sphereD").val('+0.00');
 		$("#cylindreD").val('+0.00');
 		$("#axeD").val('0');
 		$("#additionD").val('+0.75');
-		
+
 		$("#VersDroit").css("display", "block");
 	}
 	else
 	{
 		$(".display_droit").css("display", "none");
-		
+
 		$("#sphereD").val('');
 		$("#cylindreD").val('');
 		$("#axeD").val('');
 		$("#additionD").val('');
-		
+
 		$("#sphereD").prop('disabled', true);
 		$("#cylindreD").prop('disabled', true);
 		$("#axeD").prop('disabled', true);
 		$("#additionD").prop('disabled', true);
-		
+
 		$("#VersDroit").css("display", "none");
 	}
-	
-	if(droite && gauche) 
+
+	if(droite && gauche)
 	{
 		$("#VersGauche").css("display", "block");
 	}
 	else
-	{	
+	{
 		$("#VersGauche").css("display", "none");
-	}     
+	}
 });
 
 
@@ -1228,7 +1228,7 @@ $("input[name='dispoG']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1240,64 +1240,64 @@ $("input[name='dispoG']").change(function(){
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var stockD = $('input[name="dispoD"]:checked').val();
 	var stockG = $('input[name="dispoG"]:checked').val();
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
    // $('#type_de_verreG').empty();
-  //  $('#type_de_verreG').append('<option value="">-- Choisir --</option>'); 
+  //  $('#type_de_verreG').append('<option value="">-- Choisir --</option>');
    // $('#progressionG').empty()
-  //  $('#progressionG').append('<option value="">-- Choisir --</option>'); 
+  //  $('#progressionG').append('<option value="">-- Choisir --</option>');
     $('#teinteG').empty();
-    $('#teinteG').append('<option value="">-- Choisir --</option>'); 
+    $('#teinteG').append('<option value="">-- Choisir --</option>');
     $('#traitementG').empty();
-    $('#traitementG').append('<option value="">-- Choisir --</option>'); 
+    $('#traitementG').append('<option value="">-- Choisir --</option>');
     $('#diametreG').empty();
-    $('#diametreG').append('<option value="">-- Choisir --</option>'); 
-    
+    $('#diametreG').append('<option value="">-- Choisir --</option>');
+
     $('#progressionG option[value=""]').prop('selected', true);
     $('#type_de_verreG option[value=""]').prop('selected', true);
     $('#teinteG option[value=""]').prop('selected', true);
     $('#traitementG option[value=""]').prop('selected', true);
     $('#diametreG option[value=""]').prop('selected', true);
     $('#galbeG option[value="Standard"]').prop('selected', true);
-    
-  
+
+
    // $('#type_de_verreG').trigger('change');
-   
-     
+
+
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
 	   getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierA,deuxiemepaire);
-	   
-	} 
+
+	}
 });
 
 $("input[name='dispoD']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1309,36 +1309,36 @@ $("input[name='dispoD']").change(function(){
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var stockD = $('input[name="dispoD"]:checked').val();
 	var stockG = $('input[name="dispoG"]:checked').val();
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     if(stockD == "FabricationD")
     {
     	$('.display_fabrication').removeClass('hide');
 		$('.display_stock').addClass('hide');
-		
+
 		$('#teinteD').prop('disabled', false);
 		$('#traitementD').prop('disabled', false);
 		$('#galbeD').prop('disabled', false);
@@ -1349,44 +1349,44 @@ $("input[name='dispoD']").change(function(){
     {
     	$('.display_stock').removeClass('hide');
 		$('.display_fabrication').addClass('hide');
-		
+
 		$('#teinteD').prop('disabled', true);
 		$('#traitementD').prop('disabled', true);
 		$('#galbeD').prop('disabled', true);
-		
+
 		$("#PrismeSphereD").val('');
 		$("#PrismeCylindreD").val('');
-				
+
 		$("#PrismeSphereD").prop('disabled', true);
 		$("#PrismeCylindreD").prop('disabled', true);
     }
-    
+
     $('#type_de_verreD').empty();
-    $('#type_de_verreD').append('<option value="">-- Choisir --</option>'); 
-    
+    $('#type_de_verreD').append('<option value="">-- Choisir --</option>');
+
     $('#type_de_verreG').empty();
-    $('#type_de_verreG').append('<option value="">-- Choisir --</option>'); 
+    $('#type_de_verreG').append('<option value="">-- Choisir --</option>');
     //$('#progressionD').empty()
-    //$('#progressionD').append('<option value="">-- Choisir --</option>'); 
+    //$('#progressionD').append('<option value="">-- Choisir --</option>');
     $('#teinteD').empty();
-    $('#teinteD').append('<option value="">-- Choisir --</option>'); 
+    $('#teinteD').append('<option value="">-- Choisir --</option>');
     $('#traitementD').empty();
-    $('#traitementD').append('<option value="">-- Choisir --</option>'); 
+    $('#traitementD').append('<option value="">-- Choisir --</option>');
     $('#diametreD').empty();
-    $('#diametreD').append('<option value="">-- Choisir --</option>'); 
-    
+    $('#diametreD').append('<option value="">-- Choisir --</option>');
+
     $('#progressionD option[value="Tous"]').prop('selected', true);
     $('#type_de_verreD option[value=""]').prop('selected', true);
     $('#teinteD option[value=""]').prop('selected', true);
     $('#traitementD option[value=""]').prop('selected', true);
     $('#diametreD option[value=""]').prop('selected', true);
     $('#galbeD option[value="Standard"]').prop('selected', true);
-    
-     
+
+
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
 	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierA,deuxiemepaire);
-	   
-	} 
+
+	}
 });
 
 $('#progressionD').on('change', function() {
@@ -1401,51 +1401,51 @@ $('#progressionD').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     $('#nomverreDH').val("");
-    
+
     $('#type_de_verreD').empty();
 	$('#type_de_verreD').append('<option value="">-- Choisir --</option>');
 	$('#type_de_verreD option:eq(0)').prop('selected', true);
     $('#type_de_verreD').val("");
     $('#type_de_verreD').trigger('change');
     $('#teinteD').empty();
-    $('#teinteD').append('<option value="">-- Choisir --</option>'); 
+    $('#teinteD').append('<option value="">-- Choisir --</option>');
     $('#traitementD').empty();
-    $('#traitementD').append('<option value="">-- Choisir --</option>'); 
+    $('#traitementD').append('<option value="">-- Choisir --</option>');
     $('#diametreD').empty();
-    $('#diametreD').append('<option value="">-- Choisir --</option>'); 
-    
+    $('#diametreD').append('<option value="">-- Choisir --</option>');
+
     $('#type_de_verreD option[value=""]').prop('selected', true);
     $('#teinteD option[value=""]').prop('selected', true);
     $('#traitementD option[value=""]').prop('selected', true);
     $('#diametreD option[value=""]').prop('selected', true);
     $('#galbeD option[value="Standard"]').prop('selected', true);
-    
+
     if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && ((progressionG=="Tous" || progressionD==progressionG) && progressionD!="Tous") && stockD==stockG && droite && gauche )
 	{
 		console.log("progressionD copyVersDroit");
@@ -1456,12 +1456,12 @@ $('#progressionD').on('change', function() {
 
 		},1000);*/
 	}
-     
+
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
 	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierA,deuxiemepaire);
-	   
-	} 
-	
+
+	}
+
 });
 
 $('#progressionG').on('change', function() {
@@ -1476,65 +1476,65 @@ $('#progressionG').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     $('#nomverreGH').val("");
-    
+
     $('#type_de_verreG').empty();
 	$('#type_de_verreG').append('<option value="">-- Choisir --</option>');
 	$('#type_de_verreG option:eq(0)').prop('selected', true);
     $('#type_de_verreG').val("");
     $('#type_de_verreG').trigger('change');
     $('#teinteG').empty();
-    $('#teinteG').append('<option value="">-- Choisir --</option>'); 
+    $('#teinteG').append('<option value="">-- Choisir --</option>');
     $('#traitementG').empty();
-    $('#traitementG').append('<option value="">-- Choisir --</option>'); 
+    $('#traitementG').append('<option value="">-- Choisir --</option>');
     $('#diametreG').empty();
-    $('#diametreG').append('<option value="">-- Choisir --</option>'); 
-    
+    $('#diametreG').append('<option value="">-- Choisir --</option>');
+
     $('#type_de_verreG option[value=""]').prop('selected', true);
     $('#teinteG option[value=""]').prop('selected', true);
     $('#traitementG option[value=""]').prop('selected', true);
     $('#diametreG option[value=""]').prop('selected', true);
     $('#galbeG option[value="Standard"]').prop('selected', true);
-     
+
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
 	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierA,deuxiemepaire);
-	   
-	} 
+
+	}
 });
 
 $('#type_de_verreD').on('change', function() {
 
 	$('#precalibrage').addClass('hide');
-  	
+
 	var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
     var type_de_verreD = $(this).val();
     var sphereD = String($('#sphereD').val());
     var cylindreD = String($('#cylindreD').val());
@@ -1546,79 +1546,79 @@ $('#type_de_verreD').on('change', function() {
     var additionG = String($('#additionG').val());
     var type_de_verreG = $('#type_de_verreG').val();
     var indiceId = $('#indices').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var diametreG = $('#diametreG').val();
     var selectedText = $("#type_de_verreD option:selected").html();
     var selectedTextG = $("#type_de_verreG option:selected").html();
-    
+
     $('#prixVerreD').val("0");
     $('#prixTeinteD').val("0");
     $('#prixTraitementD').val("0");
-    
+
     if(selectedText.indexOf("Panier") >= 0 || selectedTextG.indexOf("Panier") >= 0)
-	{	
+	{
 		panierA = 1;
 		//panierAm = 1;
-		
+
 		$('#text_titre_carte').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»");
 		$('input[name=carte_auth][value=1]').prop("checked",true);
-		
+
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
-			
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		panierA = 0;
-		
+
 		$('#text_titre_carte').html(" Je souhaite un certificat d'authenticité (Gratuit) ");
 		$('input[name=carte_auth][value=0]').prop("checked",true);
-		
+
 		$('#div_auth_n').css("display", "block");
 	}
-    
-    
+
+
     $('#divquantiteD').removeClass('hide');
     $('#quantiteD').val("1");
-    
+
     $('#carte_1').hide;
 	$("#carte_1").css("display", "none");
 	$('#cartesGD').hide;
 	$("#cartesGD").css("display", "none");
-	
+
 	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -1631,7 +1631,7 @@ $('#type_de_verreD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-	
+
     if(selectedTextG.indexOf("- Stock") >= 0 || type_de_verreG == "")
     {
     	if(panierA == 0)
@@ -1640,15 +1640,15 @@ $('#type_de_verreD').on('change', function() {
     	}
     	type_commande_verre = 2;
     }
-    
+
     $('#nomverreDH').val(selectedText);
-    
+
     $('#to_etape2').addClass('disabled');
-    
+
     $('#teinteD').empty();
     $('#traitementD').empty();
-    
-    
+
+
     if(type_de_verreD != "")
     {
 		var rel = "";
@@ -1659,50 +1659,50 @@ $('#type_de_verreD').on('change', function() {
 		{
 			$('#quantiteD').prop('disabled', false);
 			type_commande_verre = 2;
-		
+
 			if(selectedText.indexOf("Panier") >= 0 && selectedTextG.indexOf("Panier") == -1)
-			{	
+			{
 				/*$("#type_de_verreG option").filter(function(){
 					cur_text = $(this).text().trim();
 					return cur_text.indexOf('Panier') == -1;
 				}).remove();*/
-			
+
 				panierA = 1;
-			
-				//$('#type_de_verreG').trigger('change');	
-				
+
+				//$('#type_de_verreG').trigger('change');
+
 				$('input[name=carte_auth][value=1]').prop('checked', true);
 				$("#carte_auth_y").prop("checked", true);
-				$("#carte_auth_n").prop("checked", false);	
-				
+				$("#carte_auth_n").prop("checked", false);
+
 				$('#div_auth_n').css("display", "none");
-	
+
 			}
 			else
 			{
 				$('#div_auth_n').css("display", "block");
 			}
-		
+
 			$('#galbeD option[value="Standard"]').prop('selected', true);
-		
+
 			$('#teinteD').prop('disabled', 'disabled');
 			$('#traitementD').prop('disabled', 'disabled');
 			$('#galbeD').prop('disabled', 'disabled');
-		
+
 			$("#PrismeSphereD").val('');
 			$("#PrismeCylindreD").val('');
-		
+
 			$("#PrismeSphereD").prop('disabled', true);
 			$("#PrismeCylindreD").prop('disabled', true);
-		
-		
+
+
 			$('#teinteD').append('<option value="">----</option>');
 			$('#teinteD').append('<option value="">----</option>');
-		
-			$('#diametreD').empty();    
+
+			$('#diametreD').empty();
 			$('#diametreD').append('<option value="">choisir</option>');
 			$('#traitementD').append('<option value="">----</option>');
-		
+
 			//alert(rel);
 			if(rel == "]S26783")
 			{
@@ -1714,18 +1714,18 @@ $('#type_de_verreD').on('change', function() {
 			else
 			{
 				var info_type_de_verreD = rel.split('*');
-			
+
 				var diametre_type_de_verreD = info_type_de_verreD[1].split(',');
-				
+
 				var ref_type_de_verreD = info_type_de_verreD[0];
-				
+
 				$.ajax({
 							type: "POST",
 							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
 							data: {"lens" : ref_type_de_verreD,
 							"typedelens" : "stock"},
 							dataType: "json",
-							success: function (data) {		
+							success: function (data) {
 								$.each(data, function(key, value){
 									$('#prixVerreD').val(value.prix);
 									console.log("PrixD1")
@@ -1734,12 +1734,12 @@ $('#type_de_verreD').on('change', function() {
 								});
 							}
 					});
-				
+
 				for (i = 0; i < diametre_type_de_verreD.length-1; i++) {
 					$('#diametreD').append('<option value="'+diametre_type_de_verreD[i]+'">'+diametre_type_de_verreD[i]+'</option>');
 				}
 			}
-		
+
 			if(gauche && droite)
 			{
 				if(type_de_verreG != "" && diametreG != "")
@@ -1766,18 +1766,18 @@ $('#type_de_verreD').on('change', function() {
 							"typedelens" : "fab",
 							"generation" : generation},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 						//console.log(data);
 							$.each(data, function(key, value){
 									$('#prixVerreD').val(value.prix);
 									console.log("PrixD2")
 									$('#prixD').val(value.prix+"€");
     								$('#prixDH').val(value.prix);
-							});	
-								
+							});
+
 							}
 					});
-			
+
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
 					type_commande_verre = 2;
@@ -1786,25 +1786,25 @@ $('#type_de_verreD').on('change', function() {
 					//$('#traitementD').empty();
 					$('#traitementD').append('<option value="">----</option>');
 					$('#traitementD option:eq(0)').prop('selected', true);
-				
+
 					$('#teinteD').prop('disabled', true);
 					$('#traitementD').prop('disabled', true);
-				
+
 					$('#galbeD option[value="Standard"]').prop('selected', true);
 					$('#galbeD').prop('disabled', true);
-				
+
 					$("#PrismeSphereD").val('');
 					$("#PrismeCylindreD").val('');
-				
+
 					$("#PrismeSphereD").prop('disabled', true);
 					$("#PrismeCylindreD").prop('disabled', true);
-				
+
 					$('#quantiteD').prop('disabled', false);
 				}
 				else
 				{
 					type_commande_verre = 1;
-					
+
 					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0 || selectedText.indexOf("Transition") >= 0  || selectedText.indexOf("Xtractive") >= 0 || selectedText.indexOf("Polarisé") >= 0 || selectedText.indexOf("Drivewear") >= 0 || selectedText.indexOf("1,53") >= 0 || selectedText.indexOf("1,59") >= 0)
 					{
 						$('#teinteD').prop('disabled', true);
@@ -1813,7 +1813,7 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#teinteD').prop('disabled', false);
 					}
-					
+
 					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
 					{
 						$('#traitementD').prop('disabled', true);
@@ -1822,7 +1822,7 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#traitementD').prop('disabled', false);
 					}
-					
+
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
 						$('#galbeD').prop('disabled', true);
@@ -1831,19 +1831,19 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#galbeD').prop('disabled', false);
 					}
-					
-				
+
+
 					$("#PrismeSphereD").prop('disabled', false);
 					$("#PrismeCylindreD").prop('disabled', false);
-				
+
 					$('#quantiteD').prop('disabled', true);
-				
+
 					$.ajax({
 							type: "POST",
 							url: "/admin/getOptions",
 							data: {"lens" : type_de_verreD},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 							$('#traitementD option:eq(0)').prop('selected', true);
 							$('#traitementDH').val("Durci");
 							$.each(data, function(key, value){
@@ -1853,13 +1853,13 @@ $('#type_de_verreD').on('change', function() {
 							});
 
 						}
-			
+
 					});
-				
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
-					
+
 						$.ajax({
 							type: "POST",
 							url: "/admin/getColor",
@@ -1872,19 +1872,19 @@ $('#type_de_verreD').on('change', function() {
 									$('#teinteD').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 								});
 							}
-						});	
+						});
 					}
 				}
-				
+
 				$.ajax({
 						type: "POST",
 						url: "/admin/get_Diametre",
 						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
 						dataType: "json",
-						success: function (data) {	
+						success: function (data) {
 						$('#diametreD').empty();
 						$('#diametreD').append('<option value="">-- Choisir --</option>');
-					
+
 						$.each(data, function(key, value){
 							console.log(value.name);
 							if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
@@ -1895,17 +1895,17 @@ $('#type_de_verreD').on('change', function() {
 							{
 								$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
 							}
-						
-					
-						}); 
+
+
+						});
 						if(selectedText.indexOf(" - Stock") == -1)
 						{
 							$('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 						}
 					}
-				});	
-			
-			
+				});
+
+
 			}
 		}
   	}
@@ -1919,7 +1919,7 @@ $('#type_de_verreD').on('change', function() {
     	$('#prixD').val("");
     	$('#prixDH').val("");
     }
-    
+
     if(diametreG == 'precalibrage')
 	{
 		$('#precalibrage').removeClass('hide');
@@ -1928,8 +1928,8 @@ $('#type_de_verreD').on('change', function() {
 	{
 		$('#precalibrage').addClass('hide');
 	}
-    
-	
+
+
 	if (String(sphereD).indexOf("+") >= 0)
 	{
 		sphereD = String(sphereD).replace('+', '');
@@ -1938,7 +1938,7 @@ $('#type_de_verreD').on('change', function() {
 	{
 		sphereD = String(sphereD).replace('.00', '');
 	}
-	
+
 	if (String(sphereG).indexOf("+") >= 0)
 	{
 		sphereG = String(sphereG).replace('+', '');
@@ -1947,7 +1947,7 @@ $('#type_de_verreD').on('change', function() {
 	{
 		sphereG = String(sphereG).replace('.00', '');
 	}
-	
+
 	if (String(cylindreD).indexOf("+") >= 0)
 	{
 		cylindreD = String(cylindreD).replace('+', '');
@@ -1956,7 +1956,7 @@ $('#type_de_verreD').on('change', function() {
 	{
 		cylindreD = String(cylindreD).replace('.00', '');
 	}
-	
+
 	if (String(cylindreG).indexOf("+") >= 0)
 	{
 		cylindreG = String(cylindreG).replace('+', '');
@@ -1965,7 +1965,7 @@ $('#type_de_verreD').on('change', function() {
 	{
 		cylindreG = String(cylindreG).replace('.00', '');
 	}
-	
+
 	if (String(additionD).indexOf("+") >= 0)
 	{
 		additionD = String(additionD).replace('+', '');
@@ -1974,7 +1974,7 @@ $('#type_de_verreD').on('change', function() {
 	{
 		additionD = String(additionD).replace('.00', '');
 	}
-	
+
 	if (String(additionG).indexOf("+") >= 0)
 	{
 		additionG = String(additionG).replace('+', '');
@@ -1983,12 +1983,12 @@ $('#type_de_verreD').on('change', function() {
 	{
 		additionG = String(additionG).replace('.00', '');
 	}
-	
+
 	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche)
 	{
 		//alert("copy");
 		//copyVersDroit();
-		
+
 		/*setTimeout(function(){
 			copyVersDroit();
 
@@ -1996,7 +1996,7 @@ $('#type_de_verreD').on('change', function() {
 	}
 	console.log("type_de_verreD copyVersDroit");
 	copyVersDroit();
-	
+
 	/*var qty = $('#quantiteD').val();
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
@@ -2005,12 +2005,12 @@ $('#type_de_verreD').on('change', function() {
 		//$('#prixG').val($('#prixD').val());
 		//$('#prixGH').val($('#prixDH').val());
 	}*/
-	
+
 	if(panierA == 1)
 	{
 		$('#to_etape2').addClass('disabled');
 	}
-}); 
+});
 
 
 $('#type_de_verreG').on('change', function() {
@@ -2030,94 +2030,94 @@ $('#type_de_verreG').on('change', function() {
     var additionG = $('#additionG').val();
     var type_de_verreD = $('#type_de_verreD').val();
     var indiceId = $('#indices').val();
-    
+
     var diametreD = $('#diametreD').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     $('#prixVerreG').val("0");
     $('#prixTeinteG').val("0");
     $('#prixTraitementG').val("0");
-    
+
     var selectedText = $("#type_de_verreG option:selected").html();
     var selectedTextD = $("#type_de_verreD option:selected").html();
-    
+
     if(selectedText.indexOf("Panier") >= 0 || selectedTextD.indexOf("Panier") >= 0)
-	{	
+	{
 		panierA = 1;
-		
+
 		$('#text_titre_carte').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»");
 		$('input[name=carte_auth][value=1]').prop("checked",true);
-		
+
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-			
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
-	
+
 	}
 	else
 	{
 		panierA = 0;
-		
+
 		$('#text_titre_carte').html(" Je souhaite un certificat d'authenticité (Gratuit) ");
 		$('input[name=carte_auth][value=0]').prop("checked",true);
 		//$('#carte_auth_y').prop('checked', true);
-		
+
 		$('#div_auth_n').css("display", "block");
-	
+
 	}
-    
+
     $('#divquantiteG').removeClass('hide');
     $('#quantiteG').val("1");
-    
+
     $('#carte_1').hide;
 	$("#carte_1").css("display", "none");
 	$('#cartesGD').hide;
 	$("#cartesGD").css("display", "none");
-	
+
 	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-		
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -2130,7 +2130,7 @@ $('#type_de_verreG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
     if(selectedTextD.indexOf("- Stock") >= 0 || type_de_verreD == "")
     {
     	if(panierA == 0)
@@ -2139,61 +2139,61 @@ $('#type_de_verreG').on('change', function() {
     	}
     	type_commande_verre = 2;
     }
-    
+
     $('#nomverreGH').val(selectedText);
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
+
 	$('#to_etape2').addClass('disabled');
-    
-    
+
+
     $('#teinteG').empty();
-    $('#traitementG').empty();    
-    
+    $('#traitementG').empty();
+
     if(type_de_verreG != "")
     {
-    
+
 		 var rel = "";
 		 rel = $(this).find('option:selected').attr('rel');
-	
-	
+
+
 		if (rel.indexOf("]") >= 0)
 		{
 			$('#quantiteG').prop('disabled', false);
 			type_commande_verre = 2;
-		
+
 			if(selectedText.indexOf("Panier") >= 0 && selectedTextD.indexOf("Panier") == -1)
-			{	
-			
+			{
+
 				/*$("#type_de_verreG option").filter(function(){
 					cur_text = $(this).text().trim();
 					return cur_text.indexOf('Panier') == -1;
 				}).remove();*/
-			
+
 				panierA = 1;
-			
-				//$('#type_de_verreG').trigger('change');	
+
+				//$('#type_de_verreG').trigger('change');
 			}
-		
+
 			$('#teinteG').prop('disabled', 'disabled');
 			$('#traitementG').prop('disabled', 'disabled');
 			$('#galbeG option[value="Standard"]').prop('selected', true);
 			$('#galbeG').prop('disabled', 'disabled');
-		
+
 			$("#PrismeSphereG").val('');
 			$("#PrismeCylindreG").val('');
-		
+
 			$("#PrismeSphereG").prop('disabled', true);
 			$("#PrismeCylindreG").prop('disabled', true);
-		
+
 			$('#teinteG').append('<option value="">----</option>');
 			$('#traitementG').append('<option value="">----</option>');
-		
-			$('#diametreG').empty();    
+
+			$('#diametreG').empty();
 			$('#diametreG').append('<option value="">choisir</option>');
-		
-			
+
+
 			if(rel == "]S26783")
 			{
 				$('#diametreG').append('<option value="70">70</option>');
@@ -2204,18 +2204,18 @@ $('#type_de_verreG').on('change', function() {
 			else
 			{
 				var info_type_de_verreG = rel.split('*');
-			
+
 				var diametre_type_de_verreG = info_type_de_verreG[1].split(',');
-				
+
 				var ref_type_de_verreG = info_type_de_verreG[0];
-				
+
 				$.ajax({
 							type: "POST",
 							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
 							data: {"lens" : ref_type_de_verreG,
 							"typedelens" : "stock"},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 								$.each(data, function(key, value){
 									$('#prixVerreG').val(value.prix);
 									$('#prixG').val(value.prix+"€");
@@ -2227,7 +2227,7 @@ $('#type_de_verreG').on('change', function() {
 					$('#diametreG').append('<option value="'+diametre_type_de_verreG[i]+'">'+diametre_type_de_verreG[i]+'</option>');
 				}
 			}
-		
+
 			if(gauche && droite)
 			{
 				if(type_de_verreD != "" && diametreD != "")
@@ -2253,7 +2253,7 @@ $('#type_de_verreG').on('change', function() {
 							"typedelens" : "fab",
 							"generation" : generation},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 								$.each(data, function(key, value){
 									$('#prixVerreG').val(value.prix);
 									$('#prixG').val(value.prix+"€");
@@ -2266,23 +2266,23 @@ $('#type_de_verreG').on('change', function() {
 					type_commande_verre = 2;
 					$('#teinteG').append('<option value="">----</option>');
 					$('#teinteG option:eq(0)').prop('selected', true);
-				
+
 					$('#traitementG').append('<option value="">----</option>');
 					$('#traitementG option:eq(0)').prop('selected', true);
-				
+
 					$('#teinteG').prop('disabled', true);
 					$('#traitementG').prop('disabled', true);
 					$('#galbeG option[value="Standard"]').prop('selected', true);
 					$('#galbeG').prop('disabled', true);
-				
+
 					$("#PrismeSphereG").val('');
 					$("#PrismeCylindreG").val('');
-				
+
 					$("#PrismeSphereG").prop('disabled', true);
 					$("#PrismeCylindreG").prop('disabled', true);
-				
+
 					$('#quantiteG').prop('disabled', false);
-				
+
 				}
 				else
 				{
@@ -2294,7 +2294,7 @@ $('#type_de_verreG').on('change', function() {
 					{
 						$('#teinteG').prop('disabled', false);
 					}
-					
+
 					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
 					{
 						$('#traitementG').prop('disabled', true);
@@ -2303,7 +2303,7 @@ $('#type_de_verreG').on('change', function() {
 					{
 						$('#traitementG').prop('disabled', false);
 					}
-					
+
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
 						$('#galbeG').prop('disabled', true);
@@ -2312,21 +2312,21 @@ $('#type_de_verreG').on('change', function() {
 					{
 						$('#galbeG').prop('disabled', false);
 					}
-				
+
 					$("#PrismeSphereG").prop('disabled', false);
 					$("#PrismeCylindreG").prop('disabled', false);
 					type_commande_verre = 1;
-				
+
 					$('#quantiteG').prop('disabled', true);
-			
-			
+
+
 					var k = "";
 					$.ajax({
 							type: "POST",
 							url: "/admin/getOptions",
 							data: {"lens" : type_de_verreG},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 							$('#traitementG option:eq(0)').prop('selected', true);
 							$('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
@@ -2336,7 +2336,7 @@ $('#type_de_verreG').on('change', function() {
 							});
 						}
 					});
-				
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
@@ -2345,8 +2345,8 @@ $('#type_de_verreG').on('change', function() {
 							url: "/admin/getColor",
 							data: {"lens" : selectedText, "id_lens" : type_de_verreG},
 							dataType: "json",
-							success: function (data) {		
-							
+							success: function (data) {
+
 								$('#teinteG').append('<option value="">Aucune</option>');
 								$('#teinteG option:eq(0)').prop('selected', true);
 
@@ -2357,29 +2357,29 @@ $('#type_de_verreG').on('change', function() {
 
 								$.each(data, function(key, value){
 									$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
-						
+
 								});
-							
+
 								}
-			
-						});	
+
+						});
 					}
-				
-				
+
+
 				}
-		
+
 				$.ajax({
 						type: "POST",
 						url: "/admin/get_Diametre",
 						data: {"lens" : type_de_verreG,"sphere" : sphereG,"cylindre" : cylindreG},
 						dataType: "json",
-						success: function (data) {		
-						//alert(data);	
+						success: function (data) {
+						//alert(data);
 						console.log(data);
-				
+
 						$('#diametreG').empty();
 						$('#diametreG').append('<option value="">-- Choisir --</option>');
-					
+
 						$.each(data, function(key, value){
 							console.log(value.name);
 							if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
@@ -2388,22 +2388,22 @@ $('#type_de_verreG').on('change', function() {
 							}
 							else
 							{
-								
+
 								$('#diametreG').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
 							}
-					
-						}); 
-					
+
+						});
+
 						if(selectedText.indexOf(" - Stock") == -1)
 						{
 							$('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 						}
 					}
-				});	
-			
-		
+				});
+
+
 			}
-		}	
+		}
     }
     if(type_de_verreG != "")
     {
@@ -2415,7 +2415,7 @@ $('#type_de_verreG').on('change', function() {
     	$('#prixG').val("");
     	$('#prixGH').val("");
     }
-    
+
     if(diametreD == 'precalibrage')
 	{
 		$('#precalibrage').removeClass('hide');
@@ -2424,9 +2424,9 @@ $('#type_de_verreG').on('change', function() {
 	{
 		$('#precalibrage').addClass('hide');
 	}
-	
+
 	var qty = $('#quantiteD').val();
-	
+
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
 		$('#quantiteG').val(qty);
@@ -2434,40 +2434,40 @@ $('#type_de_verreG').on('change', function() {
 		//$('#prixD').val($('#prixG').val());
 		//$('#prixDH').val($('#prixGH').val());
 	}
-    
+
 	if(panierA == 1)
 	{
 		$('#to_etape2').addClass('disabled');
 	}
-}); 
+});
 
 $('#quantiteD').on('change', function() {
-	
+
 	/*if(type_commande_verre == 2)
 	{
 		var nomverre = $("#type_de_verreD option:selected").html();
 		var result = nomverre.match(/\((.*)\)/);
-		
+
 		var prix = parseFloat(result[1].replace('€', ''));
 	}
 	else
 	{
 		var prix = parseFloat($('#prixD').val().replace('€', ''));
 	}*/
-	
+
 	var prixverre =  parseFloat($('#prixVerreD').val());
 	var prixteinte =  parseFloat($('#prixTeinteD').val());
 	var prixtraitement =  parseFloat($('#prixTraitementD').val());
-	
+
 	var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
-	
-	
+
+
 	var qty = $('#quantiteD').val();
 	var prixf = prix*qty;
 	console.log("PrixD3")
 	$('#prixD').val(prixf.toFixed(2)+'€');
-	$('#prixDH').val(prixf.toFixed(2)+'€');	
-	
+	$('#prixDH').val(prixf.toFixed(2)+'€');
+
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
 		$('#quantiteG').val(qty);
@@ -2485,7 +2485,7 @@ $('#quantiteG').on('change', function() {
 	{
 		var nomverre = $("#type_de_verreG option:selected").html();
 		var result = nomverre.match(/\((.*)\)/);
-		
+
 		var prix = parseFloat(result[1].replace('€', ''));
 	}
 	else
@@ -2495,14 +2495,14 @@ $('#quantiteG').on('change', function() {
 	var prixverre =  parseFloat($('#prixVerreG').val());
 	var prixteinte =  parseFloat($('#prixTeinteG').val());
 	var prixtraitement =  parseFloat($('#prixTraitementG').val());
-	
+
 	var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
-	
+
 	var qty = $('#quantiteG').val();
 	var prixf = prix*qty;
 	$('#prixG').val(prixf.toFixed(2)+'€');
-	$('#prixGH').val(prixf.toFixed(2)+'€');	
-	
+	$('#prixGH').val(prixf.toFixed(2)+'€');
+
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
 		$('#quantiteG').val(qty);
@@ -2519,35 +2519,35 @@ $('#quantiteG').on('change', function() {
 $('#teinteG').on('change', function() {
 
    var teinte = $('#teinteG').val();
-   
+
    var selectedText = $("#teinteG option:selected").html();
-    
+
     $("#teinteGH").val(selectedText);
-    
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-			
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -2560,9 +2560,9 @@ $('#teinteG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-   
+
    $("#teintepersoG").val("");
-    
+
    if(teinte == 'CUST_24' || teinte == 'CUST_25')
     {
     	$("#teintepersoG").removeClass("hide");
@@ -2571,7 +2571,7 @@ $('#teinteG').on('change', function() {
     {
     	$("#teintepersoG").addClass("hide");
     }
-    
+
 });
 
 
@@ -2588,54 +2588,54 @@ $('#diametreD').on('change', function() {
     var additionG = String($('#additionG').val());
     var type_de_verreG = $('#type_de_verreG').val();
     var diametreG = $('#diametreG').val();
-    
+
     var galbeD = $('#galbeD').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var selectedTextD = $("#type_de_verreD option:selected").html();
     var selectedTextG = $("#type_de_verreG option:selected").html();
-    
+
     var optionType_de_verreD = $( "#type_de_verreD option:selected" ).text();
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
+
 	var diametreG_text = $( "#diametreG option:selected" ).text();
 	var diametreD_text = $( "#diametreD option:selected" ).text();
-	
+
 	var traitementD = $("#traitementD option:selected").text();
 	var teinteD = $("#teinteD option:selected").text();
-	
+
 	var teinteDval = $('#teinteD').val();
     var teinteGval = $('#teinteG').val();
     var traitementDval = $('#traitementD').val();
     var traitementGval = $('#traitementG').val();
-    
-    
+
+
 	if(traitementD == "Aucun" || traitementD == "----")
 	{
 		traitementD = "";
 	}
-	
+
 	if(teinteD == "Aucune")
 	{
 		teinteD = "";
@@ -2647,7 +2647,7 @@ $('#diametreD').on('change', function() {
 			teinteD = ", "+teinteD;
 		}
 	}
-	
+
 	if(diametreD_text == 'Précalibrage (Gratuit)' || diametreG_text == 'Précalibrage (Gratuit)')
 	{
 		$('#precalibrage').removeClass('hide');
@@ -2657,7 +2657,7 @@ $('#diametreD').on('change', function() {
 	{
 		$('#precalibrage').addClass('hide');
 	}
-	
+
     if($('#diametreD').val() != "")
     {
 		if(selectedTextD.indexOf(" - Stock") >= 0)
@@ -2665,7 +2665,7 @@ $('#diametreD').on('change', function() {
 			if(selectedTextG.indexOf(" - Stock") == -1 || $('#diametreG').val() == "")
 			{
 				$('#certif').addClass('hide');
-				
+
 			}
 			if(selectedTextD.indexOf("Panier") >= 0 || selectedTextG.indexOf("Panier") >= 0)
 			{
@@ -2673,7 +2673,7 @@ $('#diametreD').on('change', function() {
 				$("#carte_auth_y").prop("checked", true);
 				$('input[name=carte_auth][value=1]').prop('checked', true);
 				$("#carte_auth_n").prop("checked", false);
-	
+
 				$('#div_auth_n').css("display", "none");
 			}
 			else
@@ -2684,30 +2684,30 @@ $('#diametreD').on('change', function() {
 		else
 		{
 			$('#certif').removeClass('hide');
-			
+
 			if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
 			{
 				$('.corrections .d .eye_text').show();
 				$('.corrections .d').show();
-				
+
 				if(axeD == "0" || axeD == "")
 				{
 					axeD = "0";
 				}
-				
+
 				if(cylindreD == "0") {
 					$('.corrections .d').find('.correction').text(sphereD);
 				}
 				else {
 					$('.corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
 				}
-				
+
 				$('.corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
-				
+
 				if(additionD != "+0.00")
 				{
 					additionD = additionD.replace("+", "");
-					
+
 					if(lensFocalGroup == 3)
 					{
 						$('.corrections .d').find('.add').text("ADD "+additionD);
@@ -2717,14 +2717,14 @@ $('#diametreD').on('change', function() {
 						$('.corrections .d').find('.add').text("DEG "+additionD);
 					}
 				}
-				
+
 				$('.verres').show();
 				$('.verres .options').show();
-				
+
 				$('.verres').find('.nom_verre').text(optionType_de_verreD.split('(')[0]);
 				$('.verres').find('.diam_verre').text(" Diamètre: "+$('#diametreD').val());
 				nameD = optionType_de_verreD.split('(')[0];
-				
+
 				if((nameD.indexOf("Panier") >= 0) && traitementD.split('(')[0] == "Durci")
 				{
 					$('.verres').find('.miroir').text(teinteD.split('(')[0]);
@@ -2735,17 +2735,17 @@ $('#diametreD').on('change', function() {
 					$('.verres').find('.miroir').text(traitementD.split('(')[0]+" "+teinteD.split('(')[0]);
 					//console.log("Autres : "+traitementD.split('(')[0]+" "+teinteD.split('(')[0]);
 				}
-				
+
 				if(galbeD != "Standard")
 				{
 					$('.verres').find('.galbe').text(" Galbe:"+galbeD);
 				}
-				
+
 			}
-			
-			
+
+
 		}
-			
+
         if(gauche && droite)
 		{
 			if(type_de_verreG != "" && diametreG != "")
@@ -2760,39 +2760,39 @@ $('#diametreD').on('change', function() {
 				$('#to_etape2').removeClass('disabled');
 			}
 		}
-		
-		
+
+
     }
     else
     {
     	$('#to_etape2').addClass('disabled');
     	$('#to_etape3').addClass('disabled');
     }
-    
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-		
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -2805,7 +2805,7 @@ $('#diametreD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
     if (String(sphereD).indexOf("+") >= 0)
 	{
 		sphereD = String(sphereD).replace('+', '');
@@ -2814,7 +2814,7 @@ $('#diametreD').on('change', function() {
 	{
 		sphereD = String(sphereD).replace('.00', '');
 	}
-	
+
 	if (String(sphereG).indexOf("+") >= 0)
 	{
 		sphereG = String(sphereG).replace('+', '');
@@ -2823,7 +2823,7 @@ $('#diametreD').on('change', function() {
 	{
 		sphereG = String(sphereG).replace('.00', '');
 	}
-	
+
 	if (String(cylindreD).indexOf("+") >= 0)
 	{
 		cylindreD = String(cylindreD).replace('+', '');
@@ -2832,7 +2832,7 @@ $('#diametreD').on('change', function() {
 	{
 		cylindreD = String(cylindreD).replace('.00', '');
 	}
-	
+
 	if (String(cylindreG).indexOf("+") >= 0)
 	{
 		cylindreG = String(cylindreG).replace('+', '');
@@ -2841,7 +2841,7 @@ $('#diametreD').on('change', function() {
 	{
 		cylindreG = String(cylindreG).replace('.00', '');
 	}
-	
+
 	/*if (String(axeD).indexOf("+") >= 0)
 	{
 		axeD = String(axeD).replace('+', '');
@@ -2850,7 +2850,7 @@ $('#diametreD').on('change', function() {
 	{
 		axeD = String(axeD).replace('.00', '');
 	}
-	
+
 	if (String(axeG).indexOf("+") >= 0)
 	{
 		axeG = String(axeG).replace('+', '');
@@ -2859,7 +2859,7 @@ $('#diametreD').on('change', function() {
 	{
 		axeG = String(axeG).replace('.00', '');
 	}*/
-	
+
 	if (String(additionD).indexOf("+") >= 0)
 	{
 		additionD = String(additionD).replace('+', '');
@@ -2868,7 +2868,7 @@ $('#diametreD').on('change', function() {
 	{
 		additionD = String(additionD).replace('.00', '');
 	}
-	
+
 	if (String(additionG).indexOf("+") >= 0)
 	{
 		additionG = String(additionG).replace('+', '');
@@ -2877,17 +2877,17 @@ $('#diametreD').on('change', function() {
 	{
 		additionG = String(additionG).replace('.00', '');
 	}
-    
-    
+
+
    /* if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && (teinteGval==teinteDval) && (traitementGval==traitementDval) && (diametreG=="" || diametreD==diametreG) && diametreD!="")
 	{
-		
+
 		setTimeout(function(){
 			copyVersDroit();
 
 		},1000);
 	}*/
-	
+
 	/*if($('#traitementDH').val() != "")
 	{
 		if($('#traitementD option[value="Durci"]').length == 0)
@@ -2895,15 +2895,15 @@ $('#diametreD').on('change', function() {
 			$('#traitementDH').val('HMC');
 		}
 	}*/
-	
+
 	console.log("diametreD copyVersDroit");
 	copyVersDroit();
-	
+
 	if(diametreD=="precalibrage")
 	{
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
 });
 
 $('#diametreG').on('change', function() {
@@ -2922,27 +2922,27 @@ $('#diametreG').on('change', function() {
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
     var type_de_verreG = $('#type_de_verreG').val();
-    
+
     var galbeG = $('#galbeG').val();
-    
+
 	var optionType_de_verreG = $( "#type_de_verreG option:selected" ).text();
 	var gauche = $('#gauche').is(':checked');
 	var droite = $('#droit').is(':checked');
-	
+
 	var diametreG_text = $( "#diametreG option:selected" ).text();
 	var diametreD_text = $( "#diametreD option:selected" ).text();
-	
+
 	var traitementG = $("#traitementG option:selected").text();
 	var teinteG = $("#teinteG option:selected").text();
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
 	var nameG = $("#type_de_verreG option:selected").html();
-	
+
 	if(traitementG == "Aucun" || traitementD == "----")
 	{
 		traitementG = "";
 	}
-	
+
 	if(teinteG == "Aucune")
 	{
 		teinteG = "";
@@ -2954,7 +2954,7 @@ $('#diametreG').on('change', function() {
 			teinteG = ", "+teinteG;
 		}
 	}
-    
+
     if(diametreD_text == 'Précalibrage (Gratuit)' || diametreG_text == 'Précalibrage (Gratuit)')
 	{
 		$('#precalibrage').removeClass('hide');
@@ -2964,7 +2964,7 @@ $('#diametreG').on('change', function() {
 	{
 		$('#precalibrage').addClass('hide');
 	}
-    
+
     if($('#diametreG').val() != "")
     {
         if(selectedTextG.indexOf(" - Stock") >= 0)
@@ -2973,13 +2973,13 @@ $('#diametreG').on('change', function() {
 			{
 				$('#certif').addClass('hide');
 			}
-			
+
 			if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 			{
 				$('input[name=carte_auth][value=1]').prop('checked', true);
 				$("#carte_auth_y").prop("checked", true);
 				$("#carte_auth_n").prop("checked", false);
-					
+
 				$('#div_auth_n').css("display", "none");
 			}
 			else
@@ -2990,24 +2990,24 @@ $('#diametreG').on('change', function() {
 		else
 		{
 			$('#certif').removeClass('hide');
-			
+
 			if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
 			{
 				$('.corrections .g .eye_text').show();
 				$('.corrections .g').show();
-				
+
 				if(axeG == "0" || axeG == "")
 				{
 					axeG = "0";
 				}
-				
-				
+
+
 				$('.corrections .g').find('.correction').text(sphereG+" ("+cylindreG+") "+axeG+"°");
-				
+
 				if(additionG != "+0.00")
 				{
 					additionG = additionG.replace("+", "");
-					
+
 					if(lensFocalGroup == 3)
 					{
 						$('.corrections .g').find('.add').text("ADD "+additionG);
@@ -3017,10 +3017,10 @@ $('#diametreG').on('change', function() {
 						$('.corrections .g').find('.add').text("DEG "+additionG);
 					}
 				}
-				
+
 				$('.verres').show();
 				$('.verres .options').show();
-				
+
 				$('.verres').find('.nom_verre').text(optionType_de_verreG.split('(')[0]);
 				$('.verres').find('.diam_verre').text(" Diamètre: "+$('#diametreG').val());
 				nameG = optionType_de_verreG.split('(')[0];
@@ -3032,15 +3032,15 @@ $('#diametreG').on('change', function() {
 				{
 					$('.verres').find('.miroir').text(traitementG.split('(')[0]+" "+teinteG.split('(')[0]);
 				}
-				
+
 				if(galbeG != "Standard")
 				{
 					$('.verres').find('.galbe').text(" Galbe:"+galbeG);
 				}
 			}
 		}
-        
-        
+
+
         if(gauche && droite)
 		{
 			if(type_de_verreD != "" && diametreD != "")
@@ -3061,29 +3061,29 @@ $('#diametreG').on('change', function() {
     	$('#to_etape2').addClass('disabled');
     	$('#to_etape3').addClass('disabled');
     }
-    
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
-		
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -3096,12 +3096,12 @@ $('#diametreG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-	
+
 	if(diametreG=="precalibrage")
 	{
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
 });
 
 $('#teinteD').on('change', function() {
@@ -3112,7 +3112,7 @@ $('#teinteD').on('change', function() {
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
     var type_de_verreD = $('#type_de_verreD').val();
     var sphereD = String($('#sphereD').val());
     var cylindreD = String($('#cylindreD').val());
@@ -3124,45 +3124,45 @@ $('#teinteD').on('change', function() {
     var additionG = String($('#additionG').val());
     var type_de_verreG = $('#type_de_verreG').val();
     var indiceId = $('#indices').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var diametreG = $('#diametreG').val();
-    
+
     var prixverre = $('#prixVerreD').val();
-    
+
     var selectedText = $("#teinteD option:selected").html();
-    
+
     $('#prixTeinteD').val("0");
-    
-    
+
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
@@ -3170,7 +3170,7 @@ $('#teinteD').on('change', function() {
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
-	
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
@@ -3180,7 +3180,7 @@ $('#teinteD').on('change', function() {
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -3193,11 +3193,11 @@ $('#teinteD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
     $("#teinteDH").val(selectedText);
-   
+
    $("#teintepersoD").val("");
-    
+
     if(teinteD == 'CUST_24' || teinteD == 'CUST_25')
     {
     	$("#teintepersoD").removeClass("hide");
@@ -3206,7 +3206,7 @@ $('#teinteD').on('change', function() {
     {
     	$("#teintepersoD").addClass("hide");
     }
-    
+
     if (String(sphereD).indexOf("+") >= 0)
 	{
 		sphereD = String(sphereD).replace('+', '');
@@ -3215,7 +3215,7 @@ $('#teinteD').on('change', function() {
 	{
 		sphereD = String(sphereD).replace('.00', '');
 	}
-	
+
 	if (String(sphereG).indexOf("+") >= 0)
 	{
 		sphereG = String(sphereG).replace('+', '');
@@ -3224,7 +3224,7 @@ $('#teinteD').on('change', function() {
 	{
 		sphereG = String(sphereG).replace('.00', '');
 	}
-	
+
 	if (String(cylindreD).indexOf("+") >= 0)
 	{
 		cylindreD = String(cylindreD).replace('+', '');
@@ -3233,7 +3233,7 @@ $('#teinteD').on('change', function() {
 	{
 		cylindreD = String(cylindreD).replace('.00', '');
 	}
-	
+
 	if (String(cylindreG).indexOf("+") >= 0)
 	{
 		cylindreG = String(cylindreG).replace('+', '');
@@ -3242,7 +3242,7 @@ $('#teinteD').on('change', function() {
 	{
 		cylindreG = String(cylindreG).replace('.00', '');
 	}
-	
+
 	if (String(additionD).indexOf("+") >= 0)
 	{
 		additionD = String(additionD).replace('+', '');
@@ -3251,7 +3251,7 @@ $('#teinteD').on('change', function() {
 	{
 		additionD = String(additionD).replace('.00', '');
 	}
-	
+
 	if (String(additionG).indexOf("+") >= 0)
 	{
 		additionG = String(additionG).replace('+', '');
@@ -3260,7 +3260,7 @@ $('#teinteD').on('change', function() {
 	{
 		additionG = String(additionG).replace('.00', '');
 	}
-	
+
 	if(type_de_verreD != "")
     {
     	if(teinteD != "")
@@ -3269,7 +3269,7 @@ $('#teinteD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
 			$.ajax({
 				type: "POST",
 				url: "/admin/getColors_price",
@@ -3278,17 +3278,17 @@ $('#teinteD').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
-				
+				success: function (data) {
+
 				$.each(data, function(key, value){
 					$('#prixTeinteD').val(value.prix);
-		
+
 				});
-			
+
 				}
-		
+
 			});
-			
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				$.ajax({
@@ -3299,7 +3299,7 @@ $('#teinteD').on('change', function() {
 					"nom_du_verre" : nomverre
 					},
 					dataType: "json",
-					success: function (data) {	
+					success: function (data) {
 						setTimeout(function(){
 							var prixteinte = $('#prixTeinteD').val();
 							$.each(data, function(key, value){
@@ -3311,14 +3311,14 @@ $('#teinteD').on('change', function() {
 							});
 						},1000);
 					}
-			
+
 				});
-				
-				
+
+
 			}
 			else
 			{
-				
+
 				setTimeout(function(){
 							var prixteinte = $('#prixTeinteD').val();
 							var tot = (parseFloat(prixverre)+parseFloat(prixteinte)).toFixed(2);
@@ -3326,7 +3326,7 @@ $('#teinteD').on('change', function() {
 							$('#prixD').val(tot+"€");
 							$('#prixDH').val(tot+"€");
 						},1000);
-				
+
 			}
 		}
 		else
@@ -3334,7 +3334,7 @@ $('#teinteD').on('change', function() {
 			var nomverre = $("#type_de_verreD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				$.ajax({
@@ -3345,8 +3345,8 @@ $('#teinteD').on('change', function() {
 					"nom_du_verre" : nomverre
 					},
 					dataType: "json",
-					success: function (data) {	
-				
+					success: function (data) {
+
 					$.each(data, function(key, value){
 						$('#prixTraitementD').val(value.prix);
 						var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
@@ -3354,12 +3354,12 @@ $('#teinteD').on('change', function() {
 						$('#prixD').val(tot+"€");
 						$('#prixDH').val(tot+"€");
 					});
-			
+
 					}
-			
+
 				});
-				
-				
+
+
 			}
 			else
 			{
@@ -3376,10 +3376,10 @@ $('#teinteD').on('change', function() {
     	$('#prixD').val("");
     	$('#prixDH').val("");
     }
-    
+
     /* if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && teinteD!="" && (teinteG=="" || teinteG==teinteD) && (traitementG=="" || traitementG=="0") && diametreG=="")
 	{
-		
+
 		setTimeout(function(){
 			copyVersDroit();
 
@@ -3394,13 +3394,13 @@ $('#teinteD').on('change', function() {
 $('#teinteG').on('change', function() {
 
 	var teinteD = $('#teinteD').val();
-    
+
     var traitementD = $('#traitementD').val();
     var traitementG = $('#traitementG').val();
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
     var type_de_verreD = $('#type_de_verreD').val();
     var sphereD = String($('#sphereD').val());
     var cylindreD = String($('#cylindreD').val());
@@ -3412,20 +3412,20 @@ $('#teinteG').on('change', function() {
     var additionG = String($('#additionG').val());
     var type_de_verreG = $('#type_de_verreG').val();
     var indiceId = $('#indices').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var diametreG = $('#diametreG').val();
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var teinteG = $(this).val();
     var prixverre = $('#prixVerreG').val();
-    
+
     $('#prixTeinteG').val("0");
-    
+
     if(type_de_verreG != "")
     {
     	if(teinteG != "")
@@ -3434,7 +3434,7 @@ $('#teinteG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
 			$.ajax({
 				type: "POST",
 				url: "/admin/getColors_price",
@@ -3443,17 +3443,17 @@ $('#teinteG').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
-				
+				success: function (data) {
+
 				$.each(data, function(key, value){
 					$('#prixTeinteG').val(value.prix);
-		
+
 				});
-			
+
 				}
-		
+
 			});
-			
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				$.ajax({
@@ -3464,7 +3464,7 @@ $('#teinteG').on('change', function() {
 					"nom_du_verre" : nomverre
 					},
 					dataType: "json",
-					success: function (data) {	
+					success: function (data) {
 						setTimeout(function(){
 							var prixteinte = $('#prixTeinteG').val();
 							$.each(data, function(key, value){
@@ -3475,21 +3475,21 @@ $('#teinteG').on('change', function() {
 							});
 						},1000);
 					}
-			
+
 				});
-				
-				
+
+
 			}
 			else
 			{
-				
+
 				setTimeout(function(){
 							var prixteinte = $('#prixTeinteG').val();
 							var tot = (parseFloat(prixverre)+parseFloat(prixteinte)).toFixed(2);
 							$('#prixG').val(tot+"€");
 							$('#prixGH').val(tot+"€");
 						},1000);
-				
+
 			}
 		}
 		else
@@ -3497,7 +3497,7 @@ $('#teinteG').on('change', function() {
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				$.ajax({
@@ -3508,20 +3508,20 @@ $('#teinteG').on('change', function() {
 					"nom_du_verre" : nomverre
 					},
 					dataType: "json",
-					success: function (data) {	
-				
+					success: function (data) {
+
 					$.each(data, function(key, value){
 						$('#prixTraitementG').val(value.prix);
 						var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
 						$('#prixG').val(tot+"€");
 						$('#prixGH').val(tot+"€");
 					});
-			
+
 					}
-			
+
 				});
-				
-				
+
+
 			}
 			else
 			{
@@ -3553,66 +3553,66 @@ $('#galbeD').on('change', function() {
     var additionG = String($('#additionG').val());
     var type_de_verreG = $('#type_de_verreG').val();
     var diametreG = $('#diametreG').val();
-    
+
     var selectedTextD = $("#type_de_verreD option:selected").html();
     var selectedTextG = $("#type_de_verreG option:selected").html();
-    
+
     var optionType_de_verreD = $( "#type_de_verreD option:selected" ).text();
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
+
 	var diametreG_text = $( "#diametreG option:selected" ).text();
 	var diametreD_text = $( "#diametreD option:selected" ).text();
-	
+
 	var traitementD = $("#traitementD option:selected").text();
 	var teinteD = $("#teinteD option:selected").text();
-	
+
 	var diametreD = $("#diametreD option:selected").text();
-	
+
 	var traitementG = $("#traitementG option:selected").text();
 	var teinteG = $("#teinteG option:selected").text();
-	
+
 	var diametreG = $("#diametreG option:selected").text();
-	
+
 	var teinteDval = $('#teinteD').val();
     var teinteGval = $('#teinteG').val();
     var traitementDval = $('#traitementD').val();
     var traitementGval = $('#traitementG').val();
     var galbeG = $('#galbeG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
+		$("#carte_auth_n").prop("checked", false);
 
 		$('#div_auth_n').css("display", "none");
 	}
@@ -3620,11 +3620,11 @@ $('#galbeD').on('change', function() {
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -3637,10 +3637,10 @@ $('#galbeD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-	
+
 /*	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && traitementD==traitementG && teinteD==teinteG && diametreD==diametreG && ((galbeG=="Standard" || galbeD==galbeG) && galbeD!="Standard"))
 	{
-		
+
 		setTimeout(function(){
 			copyVersDroit();
 
@@ -3656,13 +3656,13 @@ $('#traitementD').on('change', function() {
 	var traitementD = $(this).val();
     var type_de_verreD = $('#type_de_verreD').val();
     var teinteD = $('#teinteD').val();
-    
+
     var teinteG = $('#teinteG').val();
     var traitementG = $('#traitementG').val();
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
     var sphereD = $('#sphereD').val();
     var cylindreD = $('#cylindreD').val();
     var axeD = $('#axeD').val();
@@ -3673,41 +3673,41 @@ $('#traitementD').on('change', function() {
     var additionG = $('#additionG').val();
     var type_de_verreG = $('#type_de_verreG').val();
     var indiceId = $('#indices').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-    
+
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
 	$('#prixTraitementD').val("0");
-    
+
     var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     var diametreG = $('#diametreG').val();
-    
+
     var prixverre = $('#prixVerreD').val();
-  
+
   	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
@@ -3715,18 +3715,18 @@ $('#traitementD').on('change', function() {
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
-		
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -3739,12 +3739,12 @@ $('#traitementD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
     if(traitementD == "0")
     {
     	traitementD = "";
     }
-    
+
     if(type_de_verreD != "")
     {
     	if(traitementD != "")
@@ -3753,7 +3753,7 @@ $('#traitementD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
 			$.ajax({
 				type: "POST",
 				url: "/admin/getOptions_price",
@@ -3762,12 +3762,12 @@ $('#traitementD').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
+				success: function (data) {
 					$.each(data, function(key, value){
 						$('#prixTraitementD').val(value.prix);
 					});
 				}
-		
+
 			});
 			//console.log("GGGGGGTEINTED:"+teinteD+"dddddd")
 			if(teinteD != "" && teinteD != null)
@@ -3780,7 +3780,7 @@ $('#traitementD').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
+				success: function (data) {
 					setTimeout(function(){
 							var prixtraitement = $('#prixTraitementD').val();
 							$.each(data, function(key, value){
@@ -3792,7 +3792,7 @@ $('#traitementD').on('change', function() {
 							});
 						},1000);
 					}
-		
+
 				});
 			}
 			else
@@ -3809,14 +3809,14 @@ $('#traitementD').on('change', function() {
 		}
 		else
 		{
-			
+
 			var nomverre = $("#type_de_verreD option:selected").html();
 			var nomteinte = $("#teinteD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
 			if(nomteinte != "----" && nomteinte != "Aucune")
 			{
-				
+
 				$.ajax({
 				type: "POST",
 				url: "/admin/getColors_price",
@@ -3833,11 +3833,11 @@ $('#traitementD').on('change', function() {
 						$('#prixD').val(tot+"€");
 						$('#prixDH').val(tot+"€");
 					});
-					
+
 					}
-		
+
 				});
-				
+
 			}
 			else
 			{
@@ -3854,10 +3854,10 @@ $('#traitementD').on('change', function() {
     	$('#prixD').val("");
     	$('#prixDH').val("");
     }
-    
-    var selectedText = $("#traitementD option:selected").html();  
+
+    var selectedText = $("#traitementD option:selected").html();
     $("#traitementDH").val(selectedText);
-    
+
     if (String(sphereD).indexOf("+") >= 0)
 	{
 		sphereD = String(sphereD).replace('+', '');
@@ -3866,7 +3866,7 @@ $('#traitementD').on('change', function() {
 	{
 		sphereD = String(sphereD).replace('.00', '');
 	}
-	
+
 	if (String(sphereG).indexOf("+") >= 0)
 	{
 		sphereG = String(sphereG).replace('+', '');
@@ -3875,7 +3875,7 @@ $('#traitementD').on('change', function() {
 	{
 		sphereG = String(sphereG).replace('.00', '');
 	}
-	
+
 	if (String(cylindreD).indexOf("+") >= 0)
 	{
 		cylindreD = String(cylindreD).replace('+', '');
@@ -3884,7 +3884,7 @@ $('#traitementD').on('change', function() {
 	{
 		cylindreD = String(cylindreD).replace('.00', '');
 	}
-	
+
 	if (String(cylindreG).indexOf("+") >= 0)
 	{
 		cylindreG = String(cylindreG).replace('+', '');
@@ -3893,7 +3893,7 @@ $('#traitementD').on('change', function() {
 	{
 		cylindreG = String(cylindreG).replace('.00', '');
 	}
-	
+
 	/*if (String(axeD).indexOf("+") >= 0)
 	{
 		axeD = String(axeD).replace('+', '');
@@ -3902,7 +3902,7 @@ $('#traitementD').on('change', function() {
 	{
 		axeD = String(axeD).replace('.00', '');
 	}
-	
+
 	if (String(axeG).indexOf("+") >= 0)
 	{
 		axeG = String(axeG).replace('+', '');
@@ -3911,7 +3911,7 @@ $('#traitementD').on('change', function() {
 	{
 		axeG = String(axeG).replace('.00', '');
 	}*/
-	
+
 	if (String(additionD).indexOf("+") >= 0)
 	{
 		additionD = String(additionD).replace('+', '');
@@ -3920,7 +3920,7 @@ $('#traitementD').on('change', function() {
 	{
 		additionD = String(additionD).replace('.00', '');
 	}
-	
+
 	if (String(additionG).indexOf("+") >= 0)
 	{
 		additionG = String(additionG).replace('+', '');
@@ -3929,7 +3929,7 @@ $('#traitementD').on('change', function() {
 	{
 		additionG = String(additionG).replace('.00', '');
 	}
-    
+
    /* if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && (traitementD!="" && traitementD!="0") && (teinteG=="" || teinteG==teinteD) && (traitementG=="" || traitementG=="0" || traitementG==traitementD) && diametreG=="")
 	{
 		setTimeout(function(){
@@ -3938,7 +3938,7 @@ $('#traitementD').on('change', function() {
 	}*/
 	console.log("traitementD copyVersDroit");
 	copyVersDroit();
-	
+
 });
 
 $('#traitementG').on('change', function() {
@@ -3946,15 +3946,15 @@ $('#traitementG').on('change', function() {
 	var traitementG = $(this).val();
     var type_de_verreG = $('#type_de_verreG').val();
     var teinteG = $('#teinteG').val();
-   
+
 	var traitementD = $(this).val();
     var type_de_verreD = $('#type_de_verreD').val();
     var teinteD = $('#teinteD').val();
-    
+
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
     var sphereD = $('#sphereD').val();
     var cylindreD = $('#cylindreD').val();
     var axeD = $('#axeD').val();
@@ -3963,37 +3963,37 @@ $('#traitementG').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var indiceId = $('#indices').val();
-    
+
     var prixverre = $('#prixVerreG').val();
-    
+
     $('#prixTraitementG').val("0");
-    
+
     $('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
-		$("#carte_auth_y").prop("checked", true);	
+		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
-	
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -4006,7 +4006,7 @@ $('#traitementG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
     if(type_de_verreG != "")
     {
     	if(traitementG != "")
@@ -4015,7 +4015,7 @@ $('#traitementG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
 			$.ajax({
 				type: "POST",
 				url: "/admin/getOptions_price",
@@ -4024,14 +4024,14 @@ $('#traitementG').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
+				success: function (data) {
 					$.each(data, function(key, value){
 						$('#prixTraitementG').val(value.prix);
 					});
 				}
-		
+
 			});
-			
+
 			if(teinteG != ""  && teinteG != null)
 			{
 				$.ajax({
@@ -4042,33 +4042,33 @@ $('#traitementG').on('change', function() {
 				"nom_du_verre" : nomverre
 				},
 				dataType: "json",
-				success: function (data) {	
+				success: function (data) {
 					setTimeout(function(){
 							var prixtraitement = $('#prixTraitementG').val();
 							var prixverre = $('#prixVerreG').val();
 							$.each(data, function(key, value){
 								$('#prixTeinteG').val(value.prix);
-								
+
 								console.log("prixVerreG:");
 								console.log(prixverre);
-								
+
 								console.log("prixTraitementG:");
 								console.log(prixtraitement);
-								
+
 								console.log("prixTeinteG:");
 								console.log(value.prix);
-								
+
 								var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)).toFixed(2);
-								
+
 								console.log("tot:");
 								console.log(tot);
-								
+
 								$('#prixG').val(tot+"€");
 								$('#prixGH').val(tot+"€");
 							});
 						},1000);
 					}
-		
+
 				});
 			}
 			else
@@ -4084,14 +4084,14 @@ $('#traitementG').on('change', function() {
 		}
 		else
 		{
-			
+
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomteinte = $("#teinteG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
 			if(nomteinte != "----" && nomteinte != "Aucune")
 			{
-				
+
 				$.ajax({
 				type: "POST",
 				url: "/admin/getColors_price",
@@ -4108,11 +4108,11 @@ $('#traitementG').on('change', function() {
 						$('#prixG').val(tot+"€");
 						$('#prixGH').val(tot+"€");
 					});
-					
+
 					}
-		
+
 				});
-				
+
 			}
 			else
 			{
@@ -4128,8 +4128,8 @@ $('#traitementG').on('change', function() {
     	$('#prixG').val("");
     	$('#prixGH').val("");
     }
-    
-    var selectedText = $("#traitementG option:selected").html();  
+
+    var selectedText = $("#traitementG option:selected").html();
     $("#traitementGH").val(selectedText);
 });
 
@@ -4137,33 +4137,33 @@ $('#galbeG').on('change', function() {
 var stockD = $('input[name="dispoD"]:checked').val();
 var galbeD = $('#galbeD').val();
 var galbeG = $('#galbeG').val();
-	
+
 	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-		
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	$('#galbeD').val(galbeG);
-	
+
 	if(panierA!=1)
 	{
 		$('#civilite_client').css("display", "none");
@@ -4182,7 +4182,7 @@ $('#afficherV').on('click', function() {
 
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
+
 	var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -4194,58 +4194,58 @@ $('#afficherV').on('click', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
+
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
     $('#prixVerreD').val("0");
     $('#prixTeinteD').val("0");
     $('#prixTraitementD').val("0");
-    
+
     $('#prixVerreG').val("0");
     $('#prixTeinteG').val("0");
     $('#prixTraitementG').val("0");
-    
+
     $("#teintepersoD").val("");
     $("#teintepersoD").addClass("hide");
-    
+
     $("#teintepersoG").val("");
     $("#teintepersoG").addClass("hide");
-    
-    
-   
+
+
+
 	if(generation == "Progressif de stock" || generation == "Panier A Initial")
 	{
 		$('#progressionD').prop('disabled', true);
 		$('#progressionG').prop('disabled', true);
 	}
-    
-    
-    
+
+
+
     var forceSphStep = true;
-    
+
     if (gauche && droite) {
     	var checkD = sphereD;
     	var checkG = sphereG;
-    	
+
     	if (checkD.indexOf(",") >= 0)
     	{
     		checkD = checkD.replace(',', '.');
@@ -4254,7 +4254,7 @@ $('#afficherV').on('click', function() {
     	{
     		checkD = checkD.replace('+', '');
     	}
-    	
+
     	if (checkG.indexOf(",") >= 0)
     	{
     		checkG = checkG.replace(',', '.');
@@ -4263,7 +4263,7 @@ $('#afficherV').on('click', function() {
     	{
     		checkG = checkG.replace('+', '');
     	}
-    
+
 		if( ((Number(checkD) > 0) != (Number(checkG) > 0)) && checkD != 0) {
 
 			swal({
@@ -4291,44 +4291,44 @@ $('#afficherV').on('click', function() {
 
 		}
 	}
-	
-	
+
+
 	if(forceSphStep == true)
     {
-    
-    
+
+
     $('#to_etape2').addClass('disabled');
-    
+
     $('#divquantiteD').addClass('hide');
     $('#divquantiteG').addClass('hide');
-    
+
     $('#quantiteD option:eq(0)').prop('selected', true);
     $('#quantiteG option:eq(0)').prop('selected', true);
-    
+
     $('#quantiteD').prop('disabled', true);
     $('#quantiteG').prop('disabled', true);
-    
+
     $('input[name=dispoD][value=ToutD]').prop('checked', true);
     $('input[name=dispoG][value=ToutD]').prop('checked', true);
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-    
+
    if($('#progressionG').val() == '')
     {
     	$("#detailG").css("display", "none");
@@ -4337,22 +4337,22 @@ $('#afficherV').on('click', function() {
     {
     	$("#detailG").css("display", "block");
     }
-    
+
     $('#nomverreDH').val("");
     $('#nomverreGH').val("");
-    
+
 /*    $('#type_de_verreD').empty();
 	$('#type_de_verreD').append('<option value="">-- Choisir --</option>');
 	$('#type_de_verreD option:eq(0)').prop('selected', true);
     $('#type_de_verreD').val("");
     $('#type_de_verreD').trigger('change');
-    
+
     $('#type_de_verreG').empty();
 	$('#type_de_verreG').append('<option value="">-- Choisir --</option>');
 	$('#type_de_verreG option:eq(0)').prop('selected', true);
     $('#type_de_verreG').val("");
     $('#type_de_verreG').trigger('change');
-*/    
+*/
     $('#teinteD').empty();
 	$('#teinteD').append('<option value="">----</option>');
 	$('#teinteD option:eq(0)').prop('selected', true);
@@ -4363,7 +4363,7 @@ $('#afficherV').on('click', function() {
 	$('#diametreD').append('<option value="">-- Choisir --</option>');
 	$('#diametreD option:eq(0)').prop('selected', true);
 	$('#progressionD option:eq(1)').prop('selected', true);
-    
+
     $('#teinteG').empty();
 	$('#teinteG').append('<option value="">----</option>');
 	$('#teinteG option:eq(0)').prop('selected', true);
@@ -4374,25 +4374,25 @@ $('#afficherV').on('click', function() {
 	$('#diametreG').append('<option value="">-- Choisir --</option>');
 	$('#diametreG option:eq(0)').prop('selected', true);
 	$('#progressionG option:eq(1)').prop('selected', true);
-	 
-    
-     
+
+
+
     if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
     	  // alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
     	   	getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
-    	   
-    } 
-    
-    
+
+    }
+
+
     $('#teinteD').empty();
     $('#teinteG').empty();
     $('#teinteD').append('<option value="">----</option>');
-    $('#teinteG').append('<option value="">----</option>');  
-  
-    
+    $('#teinteG').append('<option value="">----</option>');
+
+
 	$("#produit").css("display", "block");
 	$('#produit').removeClass('hide');
-	
+
 	if(droite)
 	{
 		$("#detailD").css("display", "block");
@@ -4401,66 +4401,66 @@ $('#afficherV').on('click', function() {
 	{
 		$("#detailG").css("display", "block");
 	}
-	
-	
+
+
 	$('#cotea').val('');
 	$('#coteb').val('');
 	$('#cotec').val('');
 	$('#coted').val('');
 	//$('#epaisseur_bord_verre').val('');
-	
-	
+
+
 	$('.calibre').removeClass('calibre_selected');
-	
+
 	$('#precalibrage').addClass('hide');
-	
-	
+
+
 	$("#afficherV").css("display", "none");
-	
+
 	/*setTimeout(function(){
 			sortlist_id('#type_de_verreD');
 			sortlist_id('#type_de_verreG');
-			
+
 		},1000);
-	*/	
+	*/
 	$("#traitementDH").val("");
     $("#traitementGH").val("");
     $("#teinteDH").val("");
     $("teinteGH").val("");
-    
+
     $('#carte_1').hide;
 	$("#carte_1").css("display", "none");
 	$('#cartesGD').hide;
 	$("#cartesGD").css("display", "none");
-	
+
 	$('input[name=carte_auth][value=0]').prop('checked', true);
-	
+
 	var nameD = $("#type_de_verreD option:selected").html();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
-		$("#carte_auth_n").prop("checked", false);	
-			
+		$("#carte_auth_n").prop("checked", false);
+
 		$('#div_auth_n').css("display", "none");
 	}
 	else
 	{
 		$('#div_auth_n').css("display", "block");
 	}
-	
+
 	$('#civiliteClient option:eq(0)').prop('selected', true);
 	$('#nomClient').val("");
 	$('#prenomClient').val("");
-	
+
 	$('#civilite_client').css("display", "none");
 	$('#nom_client').css("display", "none");
 	$('#prenom_client').css("display", "none");
 	$('#generer_carte').css("display", "none");
-	
+
 	}
-	
+
 });
 
 $('#VersGauche').on('click', function() {
@@ -4482,16 +4482,16 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 
 	if(indiceId == '')
     	indiceId = '-';
-    	
+
     if(generation == '')
     	generation = '-';
-    	
+
     if(lensFocalGroup == '')
     	lensFocalGroup = '-';
-    	
+
     if(lensFocalGroup != '-')
     {
-    	
+
 		if(sphereD == '')
 			sphereD = '-';
 		else
@@ -4502,15 +4502,15 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			}
 			else if (sphereD.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_sphere = "+"+sphereD
-				$("#sphereD").val(new_sphere); 
+				$("#sphereD").val(new_sphere);
 			}
 		}
-	
+
 		if(cylindreD == '')
 			cylindreD = '-';
 		else
@@ -4521,31 +4521,31 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			}
 			else if (cylindreD.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_cylindreD = "+"+cylindreD
-				$("#cylindreD").val(new_cylindreD); 
+				$("#cylindreD").val(new_cylindreD);
 			}
 		}
-		
-	
-		
+
+
+
 		if(axeD == '')
 			axeD = '-';
-		
+
 		if(additionD == '')
 			additionD = '-';
 		else
 		{
-			
+
 			if (additionD.indexOf("+") >= 0)
 			{
 				additionD = additionD.replace('+', '');
 				additionD = roundToNearest(additionD,0.25);
 				var new_additionD = "+"+additionD;
-			
+
 				$("#additionD").val(new_additionD);
 			}
 			else if (additionD.indexOf("-") >= 0)
@@ -4557,12 +4557,12 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				additionD = roundToNearest(additionD,0.25);
 				var new_additionD = "+"+additionD;
-			
-				$("#additionD").val(new_additionD); 
+
+				$("#additionD").val(new_additionD);
 				additionD = $('#additionD').val();
 			}
 		}
-		
+
 		if(sphereG == '')
 			sphereG = '-';
 		else
@@ -4573,16 +4573,16 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			}
 			else if (sphereG.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_sphere = "+"+sphereG
-				$("#sphereG").val(new_sphere); 
+				$("#sphereG").val(new_sphere);
 			}
 		}
-		
-	
+
+
 		if(cylindreG == '')
 			cylindreG = '-';
 		else
@@ -4593,20 +4593,20 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			}
 			else if (cylindreG.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_cylindreG = "+"+cylindreG
-				$("#cylindreG").val(new_cylindreG); 
+				$("#cylindreG").val(new_cylindreG);
 			}
 		}
-	
-		
+
+
 		if(axeG == '')
 			axeG = '-';
-		
-		
+
+
 		if(additionG == '')
 			additionG = '-';
 		else
@@ -4616,7 +4616,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				additionG = additionG.replace('+', '');
 				additionG = roundToNearest(additionG,0.25);
 				var new_additionG = "+"+additionG;
-			
+
 				$("#additionG").val(new_additionG);
 			}
 			else if (additionG.indexOf("-") >= 0)
@@ -4628,12 +4628,12 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				additionG = roundToNearest(additionG,0.25);
 				var new_additionG = "+"+additionG;
-			
-				$("#additionG").val(additionG); 
+
+				$("#additionG").val(additionG);
 				additionG = $('#additionG').val();
 			}
 		}
-		
+
 		if (String(sphereD).indexOf("+") >= 0)
 		{
 			sphereD = String(sphereD).replace('+', '');
@@ -4642,7 +4642,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			sphereD = String(sphereD).replace('.00', '');
 		}
-	
+
 		if (String(sphereG).indexOf("+") >= 0)
 		{
 			sphereG = String(sphereG).replace('+', '');
@@ -4651,7 +4651,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			sphereG = String(sphereG).replace('.00', '');
 		}
-	
+
 		if (String(cylindreD).indexOf("+") >= 0)
 		{
 			cylindreD = String(cylindreD).replace('+', '');
@@ -4660,7 +4660,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			cylindreD = String(cylindreD).replace('.00', '');
 		}
-	
+
 		if (String(cylindreG).indexOf("+") >= 0)
 		{
 			cylindreG = String(cylindreG).replace('+', '');
@@ -4669,7 +4669,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			cylindreG = String(cylindreG).replace('.00', '');
 		}
-	
+
 		if (String(additionD).indexOf("+") >= 0)
 		{
 			additionD = String(additionD).replace('+', '');
@@ -4678,7 +4678,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			additionD = String(additionD).replace('.00', '');
 		}
-	
+
 		if (String(additionG).indexOf("+") >= 0)
 		{
 			additionG = String(additionG).replace('+', '');
@@ -4687,10 +4687,10 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 		{
 			additionG = String(additionG).replace('.00', '');
 		}
-		
+
 		if(cylindreD != '-' && droite)
 		{
-			
+
 			$('#type_de_verreD').empty();
 			$('#type_de_verreD').append('<option value="" rel="">-- Choisir --</option>');
 			setTimeout(function(){
@@ -4705,7 +4705,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				}
 				if(generation == "Progressif de stock")
 				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionD == 'Short' || progressionD == 'Tous') && (stockD == 'StockD' || stockD == 'ToutD'))
 					{
 						$.ajax({
@@ -4713,11 +4713,11 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 							data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 							//alert(data);
 							if(data != "")
 							{
-								console.log(data);	
+								console.log(data);
 								$.each(data, function(key, value){
 								setTimeout(function(){
 									$('#type_de_verreD').append('<option value="S26783" rel="]S26783">'+ value.name + '</option>');
@@ -4739,26 +4739,26 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 						beforeSend: function () {
 							//$(".loading").show();
 						},
-						success: function (data) {	
-						console.log("Droit1:");	
-						console.log(data);	
+						success: function (data) {
+						console.log("Droit1:");
+						console.log(data);
 						if(data != "")
 						{
 							$.each(data, function(key, value){
-					
+
 							if(value.trad_fr == "")
 							{
 								value.trad_fr = value.name;
 							}
-					
+
 							if(generation == "E-Space")
 							{
-								var n_T_ONE = value.trad_fr; 
+								var n_T_ONE = value.trad_fr;
 								value.trad_fr = n_T_ONE.replace("T-One", "E-Space");
 							}
-						
+
 							//alert("Name:"+value.name+" - progressionD:"+progressionD+" - lensFocalGroup:"+lensFocalGroup+" - deuxiemepaire:"+deuxiemepaire);
-						
+
 							if((progressionD == '' || progressionD == 'Tous') && lensFocalGroup == '3')
 							{
 								if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -5010,7 +5010,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										}
 									}
 								}
-							}	
+							}
 							else
 							{
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
@@ -5066,7 +5066,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 									}
 								}
 							}
-							});	
+							});
 						}
 						//$('#type_de_verreD').trigger('change');
 						//$(".loading").hide();
@@ -5078,28 +5078,28 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stock = {};
 				var tab_verres = {};
-				
+
 			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
 				{
 					console.log("PanierA:"+panierAm+"AAAAA");
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 					$.ajax({
 						type: "POST",
 						url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm},
 						dataType: "json",
 						async: false,
-						success: function (data) {	
+						success: function (data) {
 						//alert(data);
 						console.log("Droit2:");
-						console.log(data);	
+						console.log(data);
 						if(data != "")
 						{
 							$.each(data, function(key, value){
 								if((value.name.indexOf("Panier A ") >= 0))
 								{
-							
+
 									if(((parseFloat(cylindreD)+parseFloat(sphereD)) >= -2 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -4 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -4 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -8 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
 									{
 										tab_verres_stock[value.sorting] = {};
@@ -5115,15 +5115,15 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 									tab_verres_stock[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
 									tab_verres_stock[value.sorting]['name'] = value.name + ' - Stock';
 								}
-							
+
 								//$('#type_de_verreD').append('<option value="]'+ value.id_verre +'*'+value.diametre+'">'+ value.name + ' - Stock</option>');
 							})
-						}	
+						}
 					  }
 					})
 					//return false;
 				}
-			
+
 				if(lensFocalGroup != "" && lensFocalGroup !="-")
 				{
 					//alert("progressionD:"+progressionD);
@@ -5136,20 +5136,20 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 						beforeSend: function () {
 						//	$(".loading").show();
 						},
-						success: function (data) {	
-							console.log("Droit3:");	
-							console.log(data);	
+						success: function (data) {
+							console.log("Droit3:");
+							console.log(data);
 							if(data != "0" && data != "")
 							{
 								$.each(data, function(key, value){
-						
+
 								if(value.trad_fr == "")
 								{
 									value.trad_fr = value.name;
 								}
 								if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
 								{
-								
+
 								}
 								else
 								{
@@ -5159,15 +5159,15 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										tab_verres_stock[value.sorting] = {};
 										tab_verres_stock[value.sorting]['id'] = value.code;
 										tab_verres_stock[value.sorting]['code'] = value.code;
-										tab_verres_stock[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';							
+										tab_verres_stock[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';
 									}
 									else
 									{
 										//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-									
+
 										if((value.name.indexOf("Panier A ") >= 0))
 										{
-									
+
 											if(((parseFloat(cylindreD)+parseFloat(sphereD)) >= -2 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -4 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -4 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreD)+parseFloat(sphereD)) >= -8 && (parseFloat(cylindreD)+parseFloat(sphereD)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
 											{
 												tab_verres[value.sorting] = {};
@@ -5183,43 +5183,43 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 											tab_verres[value.sorting]['code'] = value.code;
 											tab_verres[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
 										}
-										
+
 									}
 								}
-								});	
+								});
 							}
-						
+
 						//$(".loading").hide();
 						}
 					});
 					}
-					
+
 					$.each(tab_verres_stock, function(key, value){
 							//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
 							$('#type_de_verreD').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 					$.each(tab_verres, function(key, value){
 							//console.log(key+" - "+value);
 							$('#type_de_verreD').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 				}
 				setTimeout(function(){
 					console.log("getTypedeVerre Append type_de_verreD");
 					$('#type_de_verreD').trigger('change');
 				},500);
 			}
-				
+
 			if(cylindreG != '-' && gauche)
 			{
-			
+
 			$('#type_de_verreG').empty();
 			$('#type_de_verreG').append('<option value="" rel="">-- Choisir --</option>');
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
+
 			if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
@@ -5228,7 +5228,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				}
 				if(generation == "Progressif de stock")
 				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
 						$.ajax({
@@ -5236,10 +5236,10 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 							data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 							//alert(data);
 							//console.log(data);
-							//console.log("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereG+" ,cylindreD:"+cylindreG+" ,axeD:"+axeG+" ,additionD:"+additionG+" ,stockD:"+stockG+" ,panierA:"+panierAm);	
+							//console.log("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereG+" ,cylindreD:"+cylindreG+" ,axeD:"+axeG+" ,additionD:"+additionG+" ,stockD:"+stockG+" ,panierA:"+panierAm);
 							if(data != "")
 							{
 								$.each(data, function(key, value){
@@ -5267,26 +5267,26 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 						beforeSend: function () {
 						//	$(".loading").show();
 						},
-						success: function (data) {	
-						console.log("Gauche1:");	
-						console.log(data);	
+						success: function (data) {
+						console.log("Gauche1:");
+						console.log(data);
 						if(data != "")
 						{
 							$.each(data, function(key, value){
-					
+
 							if(value.trad_fr == "")
 							{
 								value.trad_fr = value.name;
 							}
-					
+
 							if(generation == "E-Space")
 							{
-								var n_T_ONE = value.trad_fr; 
+								var n_T_ONE = value.trad_fr;
 								value.trad_fr = n_T_ONE.replace("T-One", "E-Space");
 							}
-						
+
 							//alert("Name:"+value.name+" - progressionD:"+progressionD+" - lensFocalGroup:"+lensFocalGroup);
-						
+
 							if((progressionG == '' || progressionG == 'Tous') && lensFocalGroup == '3')
 							{
 								if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -5333,7 +5333,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										else
 										{
 											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}								
+										}
 								}
 							}
 							else if(progressionG == 'Regular' && lensFocalGroup == '3')
@@ -5539,7 +5539,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										}
 									}
 								}
-							}	
+							}
 							else
 							{
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
@@ -5595,9 +5595,9 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 									}
 								}
 							}
-							});	
+							});
 						//	$('#type_de_verreG').trigger('change');
-							
+
 						}
 						//$(".loading").hide();
 						}
@@ -5608,28 +5608,28 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
+
 			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 					$.ajax({
 						type: "POST",
 						url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm},
 						dataType: "json",
 						async: false,
-						success: function (data) {	
+						success: function (data) {
 						//alert(data);
 						console.log("Gauche2:");
 						console.log(data);
 						if(data != "")
-						{	
+						{
 							$.each(data, function(key, value){
-						
+
 								if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
 								{
-							
+
 								}
 								else
 								{
@@ -5650,9 +5650,9 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
 										tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
 									}
-									
+
 								}
-							
+
 								//$('#type_de_verreD').append('<option value="]'+ value.id_verre +'*'+value.diametre+'">'+ value.name + ' - Stock</option>');
 							})
 						}
@@ -5660,7 +5660,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 					})
 					//return false;
 				}
-			
+
 				if(lensFocalGroup != "3" && lensFocalGroup !="-" && lensFocalGroup !="")
 				{
 					//alert("progressionD:"+progressionD);
@@ -5673,34 +5673,34 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 						beforeSend: function () {
 							//$(".loading").show();
 						},
-						success: function (data) {	
+						success: function (data) {
 							console.log("Gauche3:");
 							console.log(data);
 							if(data != "")
 							{
-								
+
 							$.each(data, function(key, value){
-						
+
 							if(value.trad_fr == "")
 							{
 								value.trad_fr = value.name;
 							}
-							
-							
+
+
 							if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
 							{
-							
+
 							}
 							else
 							{
-							
+
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
 								{
 									//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
 									tab_verres_stockG[value.sorting] = {};
 									tab_verres_stockG[value.sorting]['id'] = value.code;
 									tab_verres_stockG[value.sorting]['code'] = value.code;
-									tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';							
+									tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';
 								}
 								else
 								{
@@ -5721,53 +5721,53 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										tab_verresG[value.sorting]['id'] = value.code;
 										tab_verresG[value.sorting]['code'] = value.code;
 										tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
-									}	
+									}
 								}
 							}
-							
-							});	
-						
+
+							});
+
 							}
 						//$(".loading").hide();
 						}
 					});
 					}
-					
+
 					$.each(tab_verres_stockG, function(key, value){
 							//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
 							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 					$.each(tab_verresG, function(key, value){
 							//console.log(key+" - "+value);
 							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 				}
 				setTimeout(function(){
 					$('#type_de_verreG').trigger('change');
 				},500);
 			}
-				
-				
+
+
         }
 }
 
 function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire)
 {
-	
+
 	if(indiceId == '')
     	indiceId = '-';
-    	
+
     if(generation == '')
     	generation = '-';
-    	
+
     if(lensFocalGroup == '')
     	lensFocalGroup = '-';
-    	
+
     if(lensFocalGroup != '-')
     {
-    	
+
 		if(sphereG == '')
 			sphereG = '-';
 		else
@@ -5778,16 +5778,16 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			}
 			else if (sphereG.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_sphere = "+"+sphereG
-				$("#sphereG").val(new_sphere); 
+				$("#sphereG").val(new_sphere);
 			}
 		}
-		
-	
+
+
 		if(cylindreG == '')
 			cylindreG = '-';
 		else
@@ -5798,16 +5798,16 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			}
 			else if (cylindreG.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_cylindreG = "+"+cylindreG
-				$("#cylindreG").val(new_cylindreG); 
+				$("#cylindreG").val(new_cylindreG);
 			}
 		}
-	
-		
+
+
 		if(axeG == '')
 			axeG = '-';
 		/*else
@@ -5818,15 +5818,15 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			}
 			else if (axeG.indexOf("-") >= 0)
 			{
-		
+
 			}
 			else
 			{
 				var new_axeG = "+"+axeG
-				$("#axeG").val(new_axeG); 
+				$("#axeG").val(new_axeG);
 			}
 		}*/
-		
+
 		if(additionG == '')
 			additionG = '-';
 		else
@@ -5836,7 +5836,7 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 				additionG = additionG.replace('+', '');
 				additionG = roundToNearest(additionG,0.25);
 				var new_additionG = "+"+additionG;
-			
+
 				$("#additionG").val(new_additionG);
 			}
 			else if (additionG.indexOf("-") >= 0)
@@ -5848,14 +5848,14 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			{
 				additionG = roundToNearest(additionG,0.25);
 				var new_additionG = "+"+additionG;
-			
-				$("#additionG").val(additionG); 
+
+				$("#additionG").val(additionG);
 				additionG = $('#additionG').val();
 			}
 		}
-		
-		
-	
+
+
+
 		if (String(sphereG).indexOf("+") >= 0)
 		{
 			sphereG = String(sphereG).replace('+', '');
@@ -5864,9 +5864,9 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 		{
 			sphereG = String(sphereG).replace('.00', '');
 		}
-	
-		
-	
+
+
+
 		if (String(cylindreG).indexOf("+") >= 0)
 		{
 			cylindreG = String(cylindreG).replace('+', '');
@@ -5875,9 +5875,9 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 		{
 			cylindreG = String(cylindreG).replace('.00', '');
 		}
-	
-	
-	
+
+
+
 		if (String(additionG).indexOf("+") >= 0)
 		{
 			additionG = String(additionG).replace('+', '');
@@ -5886,17 +5886,17 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 		{
 			additionG = String(additionG).replace('.00', '');
 		}
-		
-		
+
+
 		if(cylindreG != '-' && gauche)
 		{
-			
+
 			$('#type_de_verreG').empty();
 			$('#type_de_verreG').append('<option value="" rel="">-- Choisir --</option>');
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
+
 			if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
@@ -5905,7 +5905,7 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 				}
 				if(generation == "Progressif de stock")
 				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
 						$.ajax({
@@ -5913,16 +5913,16 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 							url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 							data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
 							//alert(data);
 							console.log("Prog !!!");
-							console.log(data);	
+							console.log(data);
 							if(data != "")
 							{
 								$.each(data, function(key, value){
-								
+
 									$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+ value.name + ' (13.00&euro;)</option>');
-									
+
 								})
 							}
 						  }
@@ -5940,9 +5940,9 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 						beforeSend: function () {
 							//$(".loading").show();
 						},
-						success: function (data) {	
-						console.log("Gauche1:");	
-						console.log(data);	
+						success: function (data) {
+						console.log("Gauche1:");
+						console.log(data);
 						if(data != "")
 						{
 							$.each(data, function(key, value){
@@ -5951,15 +5951,15 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 							{
 								value.trad_fr = value.name;
 							}
-					
+
 							if(generation == "E-Space")
 							{
-								var n_T_ONE = value.trad_fr; 
+								var n_T_ONE = value.trad_fr;
 								value.trad_fr = n_T_ONE.replace("T-One", "E-Space");
 							}
-						
+
 							//alert("Name:"+value.name+" - progressionD:"+progressionD+" - lensFocalGroup:"+lensFocalGroup);
-						
+
 							if((progressionG == '' || progressionG == 'Tous') && lensFocalGroup == '3')
 							{
 								if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -6006,7 +6006,7 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 										else
 										{
 											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}								
+										}
 								}
 							}
 							else if(progressionG == 'Regular' && lensFocalGroup == '3')
@@ -6212,7 +6212,7 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 										}
 									}
 								}
-							}	
+							}
 							else
 							{
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
@@ -6268,9 +6268,9 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 									}
 								}
 							}
-							});	
+							});
 						//	$('#type_de_verreG').trigger('change');
-							
+
 						}
 						//$(".loading").hide();
 						}
@@ -6281,28 +6281,28 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
+
 			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
+					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 					$.ajax({
 						type: "POST",
 						url: "/admin/getStockTypeDeVerre/<?php echo $user_info[0]->id_users;?>",
 						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm},
 						dataType: "json",
 						async: false,
-						success: function (data) {	
+						success: function (data) {
 						//alert(data);
 						console.log("Gauche2:");
 						console.log(data);
 						if(data != "")
-						{	
+						{
 							$.each(data, function(key, value){
-						
+
 								if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
 								{
-							
+
 								}
 								else
 								{
@@ -6323,9 +6323,9 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 										tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
 										tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
 									}
-									
+
 								}
-							
+
 								//$('#type_de_verreD').append('<option value="]'+ value.id_verre +'*'+value.diametre+'">'+ value.name + ' - Stock</option>');
 							})
 						}
@@ -6333,7 +6333,7 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 					})
 					//return false;
 				}
-			
+
 				if(lensFocalGroup != "3" && lensFocalGroup !="-" && lensFocalGroup !="")
 				{
 					//alert("progressionD:"+progressionD);
@@ -6346,34 +6346,34 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 						beforeSend: function () {
 							//$(".loading").show();
 						},
-						success: function (data) {	
+						success: function (data) {
 							console.log("Gauche3:");
 							console.log(data);
 							if(data != "")
 							{
-								
+
 							$.each(data, function(key, value){
-						
+
 							if(value.trad_fr == "")
 							{
 								value.trad_fr = value.name;
 							}
-							
-							
+
+
 							if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
 							{
-							
+
 							}
 							else
 							{
-							
+
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
 								{
 									//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
 									tab_verres_stockG[value.sorting] = {};
 									tab_verres_stockG[value.sorting]['id'] = value.code;
 									tab_verres_stockG[value.sorting]['code'] = value.code;
-									tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';							
+									tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';
 								}
 								else
 								{
@@ -6394,35 +6394,35 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 										tab_verresG[value.sorting]['id'] = value.code;
 										tab_verresG[value.sorting]['code'] = value.code;
 										tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
-									}	
+									}
 								}
 							}
-							
-							});	
-						
+
+							});
+
 							}
 							//$(".loading").hide();
 						}
 					});
 					}
-					
+
 					$.each(tab_verres_stockG, function(key, value){
 							//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
 							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 					$.each(tab_verresG, function(key, value){
 							//console.log(key+" - "+value);
 							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
-					
+
 				}
 				setTimeout(function(){
 					$('#type_de_verreG').trigger('change');
 				},500);
 			}
-				
-				
+
+
         }
 }
 
@@ -6433,7 +6433,7 @@ function copyVersDroit()
 	var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
-    
+
 	var progressionD = $('#progressionD').val();
     var type_de_verreD = $('#type_de_verreD').val();
     var teinteD = $('#teinteD').val();
@@ -6442,7 +6442,7 @@ function copyVersDroit()
     var galbeD = $('#galbeD').val();
     var quantiteD = $('#quantiteD').val();
     var teintepersoD = $("#teintepersoD").val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
 
@@ -6454,47 +6454,47 @@ function copyVersDroit()
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var selectedText = $("#type_de_verreD option:selected").html();
-    
+
     var dispoD = $('input[name="dispoD"]:checked').val();
-    
+
     if(dispoD == "StockD")
 	{
 		dispoG = "StockG";
 	}
-	
+
 	if(dispoD == "FabricationD")
 	{
 		dispoG = "FabricationG";
 	}
-	
+
 	if(dispoD == "ToutD")
 	{
 		dispoG = "ToutG";
 	}
-	
+
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
 	if(stockG == "StockG")
 	{
 		stockG = "StockD";
 	}
-	
+
 	if(stockG == "FabricationG")
 	{
 		stockG = "FabricationD";
 	}
-	
+
 	if(stockG == "ToutG")
 	{
 		stockG = "ToutD";
 	}
-	
-	
+
+
 	$('input[name=dispoG][value='+dispoG+']').prop('checked', true);
-	
+
 	$('#carte_1').hide;
 	$("#carte_1").css("display", "none");
 	$('#cartesGD').hide;
@@ -6517,38 +6517,38 @@ function copyVersDroit()
 	{
 		$("#detailG").css("display", "block");
 	}
-	
+
 	//alert("sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,gauche:"+gauche+" ,droite:"+droite);
 	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG && droite && gauche && type_de_verreD != "")
 	{
 		// $('input[name=dispoD][value=ToutD]').prop('checked', true);
-		
-	
+
+
 		$('#progressionG').empty()
 		$('#type_de_verreG').empty()
 	   // $('#teinteG').empty()
 	  //  $('#traitementG').empty()
 		$('#diametreG').empty()
-	
+
 	   // alert("DiametreD:"+diametreD);
-	
-	
+
+
 		$('#progressionD option').clone().appendTo('#progressionG');
 		$('#type_de_verreD option').clone().appendTo('#type_de_verreG');
 		$('#teinteD option').clone().appendTo('#teinteG');
 		$('#traitementD option').clone().appendTo('#traitementG');
 		$('#diametreD option').clone().appendTo('#diametreG');
 		$('#galbeD option').clone().appendTo('#galbeG');
-	
+
 		$('#progressionG').val(progressionD);
 		$('#type_de_verreG').val(type_de_verreD);
 		$('#teinteG').val(teinteD);
 		$('#traitementG').val(traitementD);
 		$('#diametreG').val(diametreD);
 		$('#galbeG').val(galbeD);
-	
+
 		$('#type_de_verreG').trigger('change');
-	
+
 		setTimeout(function(){
 				if(progressionD!="")
 					$('#progressionG option[value="'+ progressionD +'"]').prop('selected', true);
@@ -6560,7 +6560,7 @@ function copyVersDroit()
 
 		},200);
 		setTimeout(function(){
-			
+
 				if(teinteD!="")
 					$('#teinteG option[value="'+ teinteD +'"]').prop('selected', true);
 				if(traitementD!="")
@@ -6569,14 +6569,14 @@ function copyVersDroit()
 					$('#diametreG option[value="'+ diametreD +'"]').prop('selected', true);
 				if(galbeD!="")
 					$('#galbeG option[value="'+ galbeD +'"]').prop('selected', true);
-				
+
 				if(quantiteD!="")
 					$('#quantiteG option[value="'+ quantiteD +'"]').prop('selected', true);
-				
+
 				$('#prixVerreG').val($('#prixVerreD').val());
 				$('#prixTeinteG').val($('#prixTeinteD').val());
 				$('#prixTraitementG').val($('#prixTraitementD').val());
-				
+
 				/*
 				$('#prixG').val($('#prixD').val());
 				$('#prixGH').val($('#prixDH').val());
@@ -6584,15 +6584,15 @@ function copyVersDroit()
 				var prixverre = $('#prixVerreD').val();
 				console.log("prixVerreD:");
 				console.log(prixverre);
-				
+
 				var prixteinte = $('#prixTeinteD').val();
 				console.log("prixTeinteD:");
 				console.log(prixteinte);
-				
+
 				var prixtraitement = $('#prixTraitementD').val();
 				console.log("prixTraitementD:");
 				console.log(prixtraitement);
-				
+
 				if(quantiteD!="")
 				{
 					var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
@@ -6603,22 +6603,22 @@ function copyVersDroit()
 				}
 				console.log("tot:");
 				console.log(tot);
-				
+
 				$('#prixG').val(tot+"€");
 				$('#prixGH').val(tot+"€");
-				
-			
+
+
 				$('#teinteGH').val($('#teinteDH').val());
 				$('#traitementGH').val($('#traitementDH').val());
 
 		},600);
-	
-		
-		
+
+
+
 	}
 	else
 	{
-		
+
 		if(type_de_verreD != "")
 		{
 			console.log("YYY");
@@ -6626,9 +6626,9 @@ function copyVersDroit()
 			if($('#type_de_verreG option[value="'+type_de_verreD+'"]').length > 0)
 			{
 				$('#type_de_verreG option[value="'+type_de_verreD+'"]').prop('selected', true);
-				
+
 				setTimeout(function(){
-				
+
 					if(teinteD!="")
 					{
 						$('#teinteG option[value="'+ teinteD +'"]').prop('selected', true);
@@ -6638,29 +6638,29 @@ function copyVersDroit()
 						$('#traitementG option[value="'+ traitementD +'"]').prop('selected', true);
 					if(galbeD!="")
 						$('#galbeG option[value="'+ galbeD +'"]').prop('selected', true);
-				
+
 					if(quantiteD!="")
 						$('#quantiteG option[value="'+ quantiteD +'"]').prop('selected', true);
-						
+
 					if(progressionD!="")
 						$('#progressionG option[value="'+ progressionD +'"]').prop('selected', true);
-				
+
 					$('#prixVerreG').val($('#prixVerreD').val());
 					$('#prixTeinteG').val($('#prixTeinteD').val());
 					$('#prixTraitementG').val($('#prixTraitementD').val());
-				    
+
 				    var prixverre = $('#prixVerreD').val();
 					console.log("prixVerreD:");
 					console.log(prixverre);
-				
+
 					var prixteinte = $('#prixTeinteD').val();
 					console.log("prixTeinteD:");
 					console.log(prixteinte);
-				
+
 					var prixtraitement = $('#prixTraitementD').val();
 					console.log("prixTraitementD:");
 					console.log(prixtraitement);
-				
+
 					if(quantiteD!="")
 					{
 						var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
@@ -6671,17 +6671,17 @@ function copyVersDroit()
 					}
 					console.log("tot:");
 					console.log(tot);
-				
+
 					$('#prixG').val(tot+"€");
 					$('#prixGH').val(tot+"€");
-					
+
 					$('#prixG').val($('#prixD').val());
 					$('#prixGH').val($('#prixDH').val());
-			
+
 					$('#teinteGH').val($('#teinteDH').val());
 					$('#traitementGH').val($('#traitementDH').val());
-					
-					
+
+
 					if(diametreD != "")
 					{
 						console.log(diametreD)
@@ -6696,7 +6696,7 @@ function copyVersDroit()
 						$('#diametreG option[value=""]').prop('selected', true);
 					}
 				},1800);
-				
+
 			}
 			else
 			{
@@ -6712,7 +6712,7 @@ function copyVersDroit()
 	    	},800);
 		}
 	}
-	
+
 	if(diametreD != "" && type_de_verreD != "")
 	{
 		$('#to_etape2').removeClass('disabled');
@@ -6742,7 +6742,7 @@ function copyVersDroit()
 			$('#to_etape2').removeClass('disabled');
 		}
 	}
-	
+
 }
 
 function copyVersGauche()
@@ -6753,7 +6753,7 @@ function copyVersGauche()
     var traitementG = $('#traitementG').val();
     var diametreG = $('#diametreG').val();
     var galbeG = $('#galbeG').val();
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
 
@@ -6765,32 +6765,32 @@ function copyVersGauche()
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var quantiteG = $('#quantiteG').val();
-    
+
     var selectedText = $("#type_de_verreG option:selected").html();
-    
+
     var teintepersoG = $("#teintepersoG").val();
-    
+
     var dispoG = $('input[name="dispoG"]:checked').val();
-    
+
     if(dispoG == "StockG")
 	{
 		dispoG = "StockD";
 	}
-	
+
 	if(dispoG == "FabricationG")
 	{
 		dispoG = "FabricationD";
 	}
-	
+
 	if(dispoG == "ToutG")
 	{
 		dispoG = "ToutD";
 	}
-	
+
 	$('input[name=dispoG][value='+dispoG+']').prop('checked', true);
-	
+
 	$('#carte_1').hide;
 	$("#carte_1").css("display", "none");
 	$('#cartesGD').hide;
@@ -6813,39 +6813,39 @@ function copyVersGauche()
 	{
 		$("#detailD").css("display", "block");
 	}
-	
+
 	//alert("sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,gauche:"+gauche+" ,droite:"+droite);
 	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG && droite && gauche)
 	{
 		// $('input[name=dispoD][value=ToutD]').prop('checked', true);
-		
-	
+
+
 		$('#progressionD').empty()
 		$('#type_de_verreD').empty()
 	   // $('#teinteG').empty()
 	  //  $('#traitementG').empty()
 		$('#diametreD').empty()
-	
+
 	   // alert("DiametreD:"+diametreD);
-	
-	
+
+
 		$('#progressionG option').clone().appendTo('#progressionD');
 		$('#type_de_verreG option').clone().appendTo('#type_de_verreD');
 		$('#teinteG option').clone().appendTo('#teinteD');
 		$('#traitementG option').clone().appendTo('#traitementD');
 		$('#diametreG option').clone().appendTo('#diametreD');
 		$('#galbeG option').clone().appendTo('#galbeD');
-	
+
 		$('#progressionD').val(progressionG);
 		$('#type_de_verreD').val(type_de_verreG);
 		$('#teinteD').val(teinteG);
 		$('#traitementD').val(traitementG);
 		$('#diametreD').val(diametreG);
 		$('#galbeD').val(galbeG);
-	
-	
+
+
 	//	$('#type_de_verreD').trigger('change');
-	
+
 		setTimeout(function(){
 				if(progressionD!="")
 					$('#progressionD option[value="'+ progressionG +'"]').prop('selected', true);
@@ -6858,7 +6858,7 @@ function copyVersGauche()
 
 		},200);
 		setTimeout(function(){
-			
+
 				if(teinteD!="")
 					$('#teinteD option[value="'+ teinteG +'"]').prop('selected', true);
 				if(traitementD!="")
@@ -6867,60 +6867,60 @@ function copyVersGauche()
 					$('#diametreD option[value="'+ diametreG +'"]').prop('selected', true);
 				if(galbeD!="")
 					$('#galbeD option[value="'+ galbeG +'"]').prop('selected', true);
-				
+
 				if(quantiteD!="")
 					$('#quantiteD option[value="'+ quantiteG +'"]').prop('selected', true);
-					
+
 				$('#teinteD').trigger('change');
 				$('#traitementD').trigger('change');
-				
+
 			//	$('#prixVerreD').val($('#prixVerreG').val());
 			//	$('#prixTeinteD').val($('#prixTeinteG').val());
 			//	$('#prixTraitementD').val($('#prixTraitementG').val());
-    
+
 			//	$('#prixD').val($('#prixG').val());
 		//		$('#prixDH').val($('#prixGH').val());
-			
+
 				$('#teinteDH').val($('#teinteGH').val());
 				$('#traitementDH').val($('#traitementGH').val());
 
 		},600);
-	
-		
-		
+
+
+
 	}
 	else
 	{
-		
+
 		if(type_de_verreG != "")
 		{
 			console.log(type_de_verreG)
 			if($('#type_de_verreD option[value="'+type_de_verreG+'"]').length > 0)
 			{
 				$('#type_de_verreD option[value="'+type_de_verreG+'"]').prop('selected', true);
-				
+
 				setTimeout(function(){
-				
+
 					if(teinteD!="")
 					$('#teinteD option[value="'+ teinteG +'"]').prop('selected', true);
 					if(traitementD!="")
 						$('#traitementD option[value="'+ traitementG +'"]').prop('selected', true);
 					if(galbeD!="")
 						$('#galbeD option[value="'+ galbeG +'"]').prop('selected', true);
-				
+
 					if(quantiteD!="")
 						$('#quantiteD option[value="'+ quantiteG +'"]').prop('selected', true);
-						
+
 					if(progressionD!="")
 						$('#progressionD option[value="'+ progressionG +'"]').prop('selected', true);
-				
+
 					$('#prixF').val($('#prixG').val());
 					$('#prixDH').val($('#prixGH').val());
-			
+
 					$('#teinteDH').val($('#teinteGH').val());
 					$('#traitementDH').val($('#traitementGH').val());
-					
-					
+
+
 					if(diametreD != "")
 					{
 						console.log(diametreD)
@@ -6935,7 +6935,7 @@ function copyVersGauche()
 						$('#diametreD option[value=""]').prop('selected', true);
 					}
 				},500);
-				
+
 			}
 			else
 			{
@@ -6945,7 +6945,7 @@ function copyVersGauche()
 			$('#nomverreDH').val(selectedText);
 		}
 	}
-	
+
 	if(diametreG != "" && type_de_verreG != "")
 	{
 		$('#to_etape2').removeClass('disabled');
@@ -6987,42 +6987,42 @@ function copyVersGauche()
 		});
 	}
 
-$('input[name=PrismeSphereD]').change(function() {	
+$('input[name=PrismeSphereD]').change(function() {
 	if( $('#PrismeSphereD').val() != '' ) {
 		$('.corrections .d').find('.diopt').text($('#PrismeSphereD').val()+' ∆');
-	
+
 	} else {
 		$('.corrections .d').find('.diopt').text('');
 	}
 });
 
-$('input[name=PrismeSphereG]').change(function() {	
+$('input[name=PrismeSphereG]').change(function() {
 	if( $('#PrismeSphereG').val() != '') {
 		$('.corrections .g').find('.diopt').text($('#PrismeSphereG').val()+' ∆');
-	
+
 	} else {
 		$('.corrections .g').find('.diopt').text('');
 	}
 });
 
-$('input[name=PrismeCylindreD]').change(function() {	
+$('input[name=PrismeCylindreD]').change(function() {
 	if( $('#PrismeCylindreD').val() != '' ) {
 		$('.corrections .d').find('.base').text(' base ' + $('#PrismeCylindreD').val()+'°');
-	
+
 	} else {
 		$('#preview_auth_card .prisme .d .base').text('');
 	}
 });
 
-$('input[name=PrismeCylindreG]').change(function() {	
+$('input[name=PrismeCylindreG]').change(function() {
 	if( $('#PrismeCylindreG').val() != '' ) {
 		$('.corrections .g').find('.base').text(' base ' + $('#PrismeCylindreG').val()+'°');
-	
+
 	} else {
 		$('.corrections .g').find('.base').text('');
 	}
 });
-		
+
 });
 
 function sortlist_id(idselect) {
@@ -7071,12 +7071,12 @@ $(document).ready(function() {
 
 	});
 
-	
+
 
 	// ------------------------------
 	// Type de commande
 
-	
+
 
 
 	$('#ancienne_commande, #stock_ancienne_commande').on('change', function() {
@@ -7092,7 +7092,7 @@ $(document).ready(function() {
 	// ------------------------------
 	// Prix des verres - EC
 
-	
+
 
 	$('.continue_commande').on('click', function() {
 		$('input[name="type_commande"]').val(1);
@@ -7119,86 +7119,86 @@ $(document).ready(function() {
 	// ------------------------------
 	// Authenticite
 	$('select[name="civilite_client"]').on('change', function() {
-	
+
 	if(panierA == 1)
 	{
 		$('#to_etape2').removeClass('disabled');
-	
+
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
-	
+
 		var lensFocalGroup = $('#lensFocalGroup').val()
-	
+
 		var sphereD = $('#sphereD').val();
 		var cylindreD = $('#cylindreD').val();
 		var axeD = $('#axeD').val();
 		var additionD = $('#additionD').val();
-	
+
 		var sphereG = $('#sphereG').val();
 		var cylindreG = $('#cylindreG').val();
 		var axeG = $('#axeG').val();
 		var additionG = $('#additionG').val();
-	
+
 		var indiceId = $('#indices').val();
-	
+
 		var stockD = $('input[name="dispoD"]:checked').val()
 		var stockG = $('input[name="dispoG"]:checked').val()
-		
+
 		if(stockG == "StockG")
 		{
 			stockG = "StockD";
 		}
-	
+
 		if(stockG == "FabricationG")
 		{
 			stockG = "FabricationD";
 		}
-	
+
 		if(stockG == "ToutG")
 		{
 			stockG = "ToutD";
 		}
-	
+
 		var progressionD = $('#progressionD').val();
 		var progressionG = $('#progressionG').val();
-	
+
 		var progressionD = $('#progressionD').val();
 		var type_de_verreD = $('#type_de_verreD').val();
 		var teinteD = $('#teinteD').val();
 		//var traitementD = $('#traitementD').val();
 		var diametreD = $('#diametreD').val();
 		var galbeD = $('#galbeD').val();
-	
+
 		var progressionG = $('#progressionG').val();
 		var type_de_verreG = $('#type_de_verreG').val();
 		var teinteG = $('#teinteG').val();
 		//var traitementG = $('#traitementG').val();
 		var diametreG = $('#diametreG').val();
 		var galbeG = $('#galbeG').val();
-	
+
 		var options = 0;
 		var optionType_de_verreD = $( "#type_de_verreD option:selected" ).text();
 		var optionType_de_verreG = $( "#type_de_verreG option:selected" ).text();
-		
+
 		var droite = $('#droit').is(':checked');
 		var gauche = $('#gauche').is(':checked');
-		
+
 		var diametreG_text = $( "#diametreG option:selected" ).text();
 		var diametreD_text = $( "#diametreD option:selected" ).text();
-		
+
 		var traitementD = $("#traitementD option:selected").text();
 		var teinteD = $("#teinteD option:selected").text();
 		var teinteDCode = $("#teinteD").val();
-		
+
 		var traitementG = $("#traitementG option:selected").text();
 		var teinteG = $("#teinteG option:selected").text();
 		var teinteGCode = $("#teinteG").val();
-	
+
 		if(traitementD == "Aucun" || traitementD == "----")
 		{
 			traitementD = "";
 		}
-	
+
 		if(teinteD == "Aucune")
 		{
 			teinteD = "";
@@ -7210,18 +7210,18 @@ $(document).ready(function() {
 				teinteD = ", "+teinteD;
 			}
 		}
-	
+
 		if(diametreD_text == 'Précalibrage (Gratuit)')
 		{
-			
+
 			diametreD_text = "Precalibré";
 		}
-		
+
 		if(traitementG == "Aucun" || traitementG == "----")
 		{
 			traitementG = "";
 		}
-	
+
 		if(teinteG == "Aucune")
 		{
 			teinteG = "";
@@ -7233,13 +7233,13 @@ $(document).ready(function() {
 				teinteG = ", "+teinteG;
 			}
 		}
-	
+
 		if(diametreG_text == 'Précalibrage (Gratuit)')
 		{
-			
+
 			diametreG_text = "Precalibré";
 		}
-		
+
 		$('#preview_auth_card, #preview_auth_img').hide();
 
 		// Nom
@@ -7273,31 +7273,31 @@ $(document).ready(function() {
 
 							$('#preview_auth_card .nom_client .prenom').text(prenom.toLowerCase());
 							$('#preview_carte, #generer_carte, #prev_auth').fadeIn(120);
-							
+
 							if((droite==true && gauche==false) || (droite==false && gauche==true) || (droite == true && gauche == true && type_de_verreG==type_de_verreD && teinteD==teinteG && traitementD==traitementG))
 							{
 								$('#carte_1').show;
 								$("#carte_1").css("display", "block");
 								$('#cartesGD').hide;
 								$("#cartesGD").css("display", "none");
-								
+
 								if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
 								{
 									$('.corrections .g .eye_text').show();
 									$('.corrections .g').show();
-								
+
 									if(axeG == "0" || axeG == "")
 									{
 										axeG = "0";
 									}
-								
-								
+
+
 									$('.corrections .g').find('.correction').text(sphereG+" ("+cylindreG+") "+axeG+"°");
-								
+
 									if(additionG != "+0.00")
 									{
 										additionG = additionG.replace("+", "");
-									
+
 										if(lensFocalGroup == 3)
 										{
 											$('.corrections .g').find('.add').text("ADD "+additionG);
@@ -7307,42 +7307,42 @@ $(document).ready(function() {
 											$('.corrections .g').find('.add').text("DEG "+additionG);
 										}
 									}
-								
+
 									$('.verres').show();
 									$('.verres .options').show();
-									
+
 									var couleur = teinteG.split('(')[0]
 									if(teinteGCode == 'CUST_24' || teinteGCode == 'CUST_25')
 										couleur = $("#teintepersoG").val();
-		
+
 									$('.verres').find('.nom_verre').text(optionType_de_verreG.split('(')[0]);
 									//$('.verres').find('.diam_verre').text(diametreG_text);
 									$('.verres').find('.miroir').text(traitementG.split('(')[0]+" "+couleur);
-								
+
 									if(galbeG != "Standard")
 									{
 										$('.verres').find('.galbe').text(" Galbe:"+galbeG);
 									}
-							
+
 								}
-							
+
 								if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
 								{
 									$('.corrections .d .eye_text').show();
 									$('.corrections .d').show();
-								
+
 									if(axeD == "0" || axeD == "")
 									{
 										axeD = "0";
 									}
-								
-								
+
+
 									$('.corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
-								
+
 									if(additionD != "+0.00")
 									{
 										additionD = additionD.replace("+", "");
-									
+
 										if(lensFocalGroup == 3)
 										{
 											$('.corrections .d').find('.add').text("ADD "+additionD);
@@ -7352,18 +7352,18 @@ $(document).ready(function() {
 											$('.corrections .d').find('.add').text("DEG "+additionD);
 										}
 									}
-								
+
 									var couleurD = teinteD.split('(')[0]
 									if(teinteDCode == 'CUST_24' || teinteDCode == 'CUST_25')
 										couleurD = $("#teintepersoD").val();
-								
+
 									$('.verres').show();
 									$('.verres .options').show();
-		
+
 									$('.verres').find('.nom_verre').text(optionType_de_verreD.split('(')[0]);
 									//$('.verres').find('.diam_verre').text(diametreD_text);
 									$('.verres').find('.miroir').text(traitementD.split('(')[0]+" "+couleurD);
-								
+
 									if(galbeD != "Standard")
 									{
 										$('.verres').find('.galbe').text(" Galbe:"+galbeD);
@@ -7376,24 +7376,24 @@ $(document).ready(function() {
 								$("#carte_1").css("display", "none");
 								$('#cartesGD').show;
 								$("#cartesGD").css("display", "block");
-								
+
 								if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
 								{
 									$('#carteG .corrections .g .eye_text').show();
 									$('#carteG .corrections .g').show();
-								
+
 									if(axeG == "0" || axeG == "")
 									{
 										axeG = "0";
 									}
-								
-								
+
+
 									$('#carteG .corrections .g').find('.correction').text(sphereG+" ("+cylindreG+") "+axeG+"°");
-								
+
 									if(additionG != "+0.00")
 									{
 										additionG = additionG.replace("+", "");
-									
+
 										if(lensFocalGroup == 3)
 										{
 											$('#carteG .corrections .g').find('.add').text("ADD "+additionG);
@@ -7403,43 +7403,43 @@ $(document).ready(function() {
 											$('#carteG .corrections .g').find('.add').text("DEG "+additionG);
 										}
 									}
-									
+
 									var couleur = teinteG.split('(')[0]
 									if(teinteGCode == 'CUST_24' || teinteGCode == 'CUST_25')
 										couleur = $("#teintepersoG").val();
-										
+
 									$('#carteG .verres').show();
 									$('#carteG .verres .options').show();
-		
+
 									$('#carteG .verres').find('.nom_verre').text(optionType_de_verreG.split('(')[0]);
 									$('#carteG .verres').find('.diam_verre').text(diametreG_text);
 									$('#carteG .verres').find('.miroir').text(traitementG.split('(')[0]+" "+couleur);
-								
+
 									if(galbeG != "Standard")
 									{
 										$('#carteG .verres').find('.galbe').text(" Galbe:"+galbeG);
 									}
-							
+
 								}
-								
+
 								if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
 								{
-									
+
 									$('#carteD .corrections .d .eye_text').show();
 									$('#carteD .corrections .d').show();
-								
+
 									if(axeD == "0" || axeD == "")
 									{
 										axeD = "0";
 									}
-								
-								
+
+
 									$('#carteD .corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
-								
+
 									if(additionD != "+0.00")
 									{
 										additionD = additionD.replace("+", "");
-									
+
 										if(lensFocalGroup == 3)
 										{
 											$('#carteD .corrections .d').find('.add').text("ADD "+additionD);
@@ -7449,25 +7449,25 @@ $(document).ready(function() {
 											$('#carteD .corrections .d').find('.add').text("DEG "+additionD);
 										}
 									}
-								
-								
+
+
 									var couleurD = teinteD.split('(')[0]
 									if(teinteDCode == 'CUST_24' || teinteDCode == 'CUST_25')
 										couleurD = $("#teintepersoD").val();
-										
+
 									$('#carteD .verres').show();
 									$('#carteD .verres .options').show();
-		
+
 									$('#carteD .verres').find('.nom_verre').text(optionType_de_verreD.split('(')[0]);
 									$('#carteD .verres').find('.diam_verre').text(diametreD_text);
 									$('#carteD .verres').find('.miroir').text(traitementD.split('(')[0]+" "+couleurD);
-								
+
 									if(galbeD != "Standard")
 									{
 										$('#carteD .verres').find('.galbe').text(" Galbe:"+galbeD);
 									}
 								}
-								
+
 							}
 
 						}
@@ -7485,86 +7485,86 @@ $(document).ready(function() {
 		}
 	}
 	});
-	
+
 	$('#commandeForm').on('change', 'input[name="carte_auth"]', function() {
-	
+
 		$('#to_etape2').removeClass('disabled');
-	
+
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
-	
+
 		var lensFocalGroup = $('#lensFocalGroup').val()
-	
+
 		var sphereD = $('#sphereD').val();
 		var cylindreD = $('#cylindreD').val();
 		var axeD = $('#axeD').val();
 		var additionD = $('#additionD').val();
-	
+
 		var sphereG = $('#sphereG').val();
 		var cylindreG = $('#cylindreG').val();
 		var axeG = $('#axeG').val();
 		var additionG = $('#additionG').val();
-	
+
 		var indiceId = $('#indices').val();
-	
+
 		var stockD = $('input[name="dispoD"]:checked').val()
 		var stockG = $('input[name="dispoG"]:checked').val()
-		
+
 		if(stockG == "StockG")
 		{
 			stockG = "StockD";
 		}
-	
+
 		if(stockG == "FabricationG")
 		{
 			stockG = "FabricationD";
 		}
-	
+
 		if(stockG == "ToutG")
 		{
 			stockG = "ToutD";
 		}
-	
+
 		var progressionD = $('#progressionD').val();
 		var progressionG = $('#progressionG').val();
-	
+
 		var progressionD = $('#progressionD').val();
 		var type_de_verreD = $('#type_de_verreD').val();
 		var teinteD = $('#teinteD').val();
 		//var traitementD = $('#traitementD').val();
 		var diametreD = $('#diametreD').val();
 		var galbeD = $('#galbeD').val();
-	
+
 		var progressionG = $('#progressionG').val();
 		var type_de_verreG = $('#type_de_verreG').val();
 		var teinteG = $('#teinteG').val();
 		//var traitementG = $('#traitementG').val();
 		var diametreG = $('#diametreG').val();
 		var galbeG = $('#galbeG').val();
-	
+
 		var options = 0;
 		var optionType_de_verreD = $( "#type_de_verreD option:selected" ).text();
 		var optionType_de_verreG = $( "#type_de_verreG option:selected" ).text();
-		
+
 		var droite = $('#droit').is(':checked');
 		var gauche = $('#gauche').is(':checked');
-		
+
 		var diametreG_text = $( "#diametreG option:selected" ).text();
 		var diametreD_text = $( "#diametreD option:selected" ).text();
-		
+
 		var traitementD = $("#traitementD option:selected").text();
 		var teinteD = $("#teinteD option:selected").text();
 		var teinteDCode = $("#teinteD").val();
-		
+
 		var traitementG = $("#traitementG option:selected").text();
 		var teinteG = $("#teinteG option:selected").text();
 		var teinteGCode = $("#teinteG").val();
-	
+
 		if(traitementD == "Aucun" || traitementD == "----")
 		{
 			traitementD = "";
 		}
-	
+
 		if(teinteD == "Aucune")
 		{
 			teinteD = "";
@@ -7576,18 +7576,18 @@ $(document).ready(function() {
 				teinteD = ", "+teinteD;
 			}
 		}
-	
+
 		if(diametreD_text == 'Précalibrage (Gratuit)')
 		{
-			
+
 			diametreD_text = "Precalibré";
 		}
-		
+
 		if(traitementG == "Aucun" || traitementG == "----")
 		{
 			traitementG = "";
 		}
-	
+
 		if(teinteG == "Aucune")
 		{
 			teinteG = "";
@@ -7599,13 +7599,13 @@ $(document).ready(function() {
 				teinteG = ", "+teinteG;
 			}
 		}
-	
+
 		if(diametreG_text == 'Précalibrage (Gratuit)')
 		{
-			
+
 			diametreG_text = "Precalibré";
 		}
-		
+
 
 		$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 		$('.eye_text, .corrections .d, .corrections .g').hide();
@@ -7653,31 +7653,31 @@ $(document).ready(function() {
 
 									$('#preview_auth_card .nom_client .prenom').text(prenom.toLowerCase());
 									$('#preview_carte, #generer_carte, #prev_auth').fadeIn(120);
-									
+
 									if((droite==true && gauche==false) || (droite==false && gauche==true) || (droite == true && gauche == true && type_de_verreG==type_de_verreD && teinteD==teinteG && traitementD==traitementG))
 									{
 										$('#carte_1').show;
 										$("#carte_1").css("display", "block");
 										$('#cartesGD').hide;
 										$("#cartesGD").css("display", "none");
-										
+
 										if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
 										{
 											$('.corrections .g .eye_text').show();
 											$('.corrections .g').show();
-										
+
 											if(axeG == "0" || axeG == "")
 											{
 												axeG = "0";
 											}
-										
-										
+
+
 											$('.corrections .g').find('.correction').text(sphereG+" ("+cylindreG+") "+axeG+"°");
-										
+
 											if(additionG != "+0.00")
 											{
 												additionG = additionG.replace("+", "");
-											
+
 												if(lensFocalGroup == 3)
 												{
 													$('.corrections .g').find('.add').text("ADD "+additionG);
@@ -7687,42 +7687,42 @@ $(document).ready(function() {
 													$('.corrections .g').find('.add').text("DEG "+additionG);
 												}
 											}
-										
+
 											$('.verres').show();
 											$('.verres .options').show();
-											
+
 											var couleur = teinteG.split('(')[0]
 											if(teinteGCode == 'CUST_24' || teinteGCode == 'CUST_25')
 												couleur = $("#teintepersoG").val();
-				
+
 											$('.verres').find('.nom_verre').text(optionType_de_verreG.split('(')[0]);
 											//$('.verres').find('.diam_verre').text(diametreG_text);
 											$('.verres').find('.miroir').text(traitementG.split('(')[0]+" "+couleur);
-										
+
 											if(galbeG != "Standard")
 											{
 												$('.verres').find('.galbe').text(" Galbe:"+galbeG);
 											}
-									
+
 										}
-									
+
 										if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
 										{
 											$('.corrections .d .eye_text').show();
 											$('.corrections .d').show();
-										
+
 											if(axeD == "0" || axeD == "")
 											{
 												axeD = "0";
 											}
-										
-										
+
+
 											$('.corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
-										
+
 											if(additionD != "+0.00")
 											{
 												additionD = additionD.replace("+", "");
-											
+
 												if(lensFocalGroup == 3)
 												{
 													$('.corrections .d').find('.add').text("ADD "+additionD);
@@ -7732,18 +7732,18 @@ $(document).ready(function() {
 													$('.corrections .d').find('.add').text("DEG "+additionD);
 												}
 											}
-										
+
 											var couleurD = teinteD.split('(')[0]
 											if(teinteDCode == 'CUST_24' || teinteDCode == 'CUST_25')
 												couleurD = $("#teintepersoD").val();
-										
+
 											$('.verres').show();
 											$('.verres .options').show();
-				
+
 											$('.verres').find('.nom_verre').text(optionType_de_verreD.split('(')[0]);
 											//$('.verres').find('.diam_verre').text(diametreD_text);
 											$('.verres').find('.miroir').text(traitementD.split('(')[0]+" "+couleurD);
-										
+
 											if(galbeD != "Standard")
 											{
 												$('.verres').find('.galbe').text(" Galbe:"+galbeD);
@@ -7756,24 +7756,24 @@ $(document).ready(function() {
 										$("#carte_1").css("display", "none");
 										$('#cartesGD').show;
 										$("#cartesGD").css("display", "block");
-										
+
 										if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
 										{
 											$('#carteG .corrections .g .eye_text').show();
 											$('#carteG .corrections .g').show();
-										
+
 											if(axeG == "0" || axeG == "")
 											{
 												axeG = "0";
 											}
-										
-										
+
+
 											$('#carteG .corrections .g').find('.correction').text(sphereG+" ("+cylindreG+") "+axeG+"°");
-										
+
 											if(additionG != "+0.00")
 											{
 												additionG = additionG.replace("+", "");
-											
+
 												if(lensFocalGroup == 3)
 												{
 													$('#carteG .corrections .g').find('.add').text("ADD "+additionG);
@@ -7783,43 +7783,43 @@ $(document).ready(function() {
 													$('#carteG .corrections .g').find('.add').text("DEG "+additionG);
 												}
 											}
-											
+
 											var couleur = teinteG.split('(')[0]
 											if(teinteGCode == 'CUST_24' || teinteGCode == 'CUST_25')
 												couleur = $("#teintepersoG").val();
-												
+
 											$('#carteG .verres').show();
 											$('#carteG .verres .options').show();
-				
+
 											$('#carteG .verres').find('.nom_verre').text(optionType_de_verreG.split('(')[0]);
 											$('#carteG .verres').find('.diam_verre').text(diametreG_text);
 											$('#carteG .verres').find('.miroir').text(traitementG.split('(')[0]+" "+couleur);
-										
+
 											if(galbeG != "Standard")
 											{
 												$('#carteG .verres').find('.galbe').text(" Galbe:"+galbeG);
 											}
-									
+
 										}
-										
+
 										if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
 										{
-											
+
 											$('#carteD .corrections .d .eye_text').show();
 											$('#carteD .corrections .d').show();
-										
+
 											if(axeD == "0" || axeD == "")
 											{
 												axeD = "0";
 											}
-										
-										
+
+
 											$('#carteD .corrections .d').find('.correction').text(sphereD+" ("+cylindreD+") "+axeD+"°");
-										
+
 											if(additionD != "+0.00")
 											{
 												additionD = additionD.replace("+", "");
-											
+
 												if(lensFocalGroup == 3)
 												{
 													$('#carteD .corrections .d').find('.add').text("ADD "+additionD);
@@ -7829,25 +7829,25 @@ $(document).ready(function() {
 													$('#carteD .corrections .d').find('.add').text("DEG "+additionD);
 												}
 											}
-										
-										
+
+
 											var couleurD = teinteD.split('(')[0]
 											if(teinteDCode == 'CUST_24' || teinteDCode == 'CUST_25')
 												couleurD = $("#teintepersoD").val();
-												
+
 											$('#carteD .verres').show();
 											$('#carteD .verres .options').show();
-				
+
 											$('#carteD .verres').find('.nom_verre').text(optionType_de_verreD.split('(')[0]);
 											$('#carteD .verres').find('.diam_verre').text(diametreD_text);
 											$('#carteD .verres').find('.miroir').text(traitementD.split('(')[0]+" "+couleurD);
-										
+
 											if(galbeD != "Standard")
 											{
 												$('#carteD .verres').find('.galbe').text(" Galbe:"+galbeD);
 											}
 										}
-										
+
 									}
 
 								}
@@ -7875,72 +7875,72 @@ $(document).ready(function() {
 	});
 
 	$('.content').on('click', '#generer_carte', function() {
-	
+
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
-	
+
 		var lensFocalGroup = $('#lensFocalGroup').val()
-	
+
 		var sphereD = $('#sphereD').val();
 		var cylindreD = $('#cylindreD').val();
 		var axeD = $('#axeD').val();
 		var additionD = $('#additionD').val();
-	
+
 		var sphereG = $('#sphereG').val();
 		var cylindreG = $('#cylindreG').val();
 		var axeG = $('#axeG').val();
 		var additionG = $('#additionG').val();
-	
+
 		var indiceId = $('#indices').val();
-	
+
 		var stockD = $('input[name="dispoD"]:checked').val()
 		var stockG = $('input[name="dispoG"]:checked').val()
-		
+
 		if(stockG == "StockG")
 		{
 			stockG = "StockD";
 		}
-	
+
 		if(stockG == "FabricationG")
 		{
 			stockG = "FabricationD";
 		}
-	
+
 		if(stockG == "ToutG")
 		{
 			stockG = "ToutD";
 		}
-	
+
 		var progressionD = $('#progressionD').val();
 		var progressionG = $('#progressionG').val();
-	
+
 		var progressionD = $('#progressionD').val();
 		var type_de_verreD = $('#type_de_verreD').val();
 		var teinteD = $('#teinteD').val();
 		//var traitementD = $('#traitementD').val();
 		var diametreD = $('#diametreD').val();
 		var galbeD = $('#galbeD').val();
-	
+
 		var progressionG = $('#progressionG').val();
 		var type_de_verreG = $('#type_de_verreG').val();
 		var teinteG = $('#teinteG').val();
 		//var traitementG = $('#traitementG').val();
 		var diametreG = $('#diametreG').val();
 		var galbeG = $('#galbeG').val();
-	
+
 		var options = 0;
 		var optionType_de_verreD = $( "#type_de_verreD option:selected" ).text();
 		var optionType_de_verreG = $( "#type_de_verreG option:selected" ).text();
-		
+
 		var droite = $('#droit').is(':checked');
 		var gauche = $('#gauche').is(':checked');
-		
+
 		var diametreG_text = $( "#diametreG option:selected" ).text();
 		var diametreD_text = $( "#diametreD option:selected" ).text();
-		
+
 		var traitementD = $("#traitementD option:selected").text();
 		var teinteD = $("#teinteD option:selected").text();
-		
+
 		var traitementG = $("#traitementG option:selected").text();
 		var teinteG = $("#teinteG option:selected").text();
 
@@ -7998,7 +7998,7 @@ $(document).ready(function() {
 		$('img[alt='+$('#calibre_selected').val()+']').addClass('calibre_selected');
 	}
 
-	
+
 });
 </script>
 	<div class="content-page">
@@ -8008,7 +8008,7 @@ $(document).ready(function() {
 
 				<div class="row">
 					<div class="col-sm-12 m-b-10">
-						<h4 class="page-title">Passer une commande  pour le magasin  <?php echo $user_info[0]->id_users; 
+						<h4 class="page-title">Passer une commande  pour le magasin  <?php echo $user_info[0]->id_users;
 							if($panierA == 1)
 								echo " - Panier A";
 						?></h4><?php
@@ -8025,7 +8025,7 @@ $(document).ready(function() {
         <form id="commandeForm" class="form-edit-add form-commande" role="form"
               action=""
               method="POST" enctype="multipart/form-data" autocomplete="off">
-           
+
               <div class="row">
                 <div class="col-md-12">
 					<div id="stepswizard" class="pull-in">
@@ -8134,8 +8134,8 @@ $(document).ready(function() {
 																			</div>
 																	  </div>
 															  </div>
-														  </div>	
-														  
+														  </div>
+
 														  <div class="col-xs-12 col-md-3">
 															<div class="panel panel-default focus_panel" id="indices_panel">
 																  <div class="panel-heading"><h5 >Indice</h5></div>
@@ -8177,7 +8177,7 @@ $(document).ready(function() {
 																		{
 																			echo '<option value="4">Dégressif</option>';
 																		}
-																	
+
 																	}
 																	else
 																	{
@@ -8188,7 +8188,7 @@ $(document).ready(function() {
 																	<option value="6">EyeFatigue</option>
 																	<option value="2">Bifocal</option>
 																	<option value="5">Trifocal</option>
-																	
+
 																	<?php
 																	}?>
 																</select></div>
@@ -8210,14 +8210,14 @@ $(document).ready(function() {
 																		if(!is_object($pair_order)) { ?>
 																		<option value="Progressif de stock">Progressif de stock</option>
 																		<?php } ?>
-																		<?php } 
+																		<?php }
 																		if(!is_object($pair_order)) { ?>
 																		<option value="Panier A Initial" <?php if($panierA == 1) echo "selected";?>>Panier A Initial</option>
 																		<?php } ?>
 																	</select></div>
 															  </div>
 														  </div>
-														</div>	
+														</div>
 
 														<div class="form-group row hide" id="div_refraction">
 														  <div class="col-xs-12" id="tab_refraction">
@@ -8226,7 +8226,7 @@ $(document).ready(function() {
 																<div class="panel-body" style="padding-top: 15px">
 																	<div class="col-xs-12">
 																		 <div class="form-group row">
-																				
+
 																				<div class="col-xs-12 col-md-2"></div>
 																				<div class="col-xs-12 col-md-2 text-center" style="margin-right: 20px;"><strong>Sphere</strong></div>
 																				<div class="col-xs-12 col-md-2 text-center" style="margin-right: 20px;"><strong>Cylindre</strong></div>
@@ -8234,9 +8234,9 @@ $(document).ready(function() {
 																				<div class="col-xs-12 col-md-2 text-center addition" style="margin-right: 20px;"><strong>Addition</strong></div>
 																		 </div>
 																		 <div class="form-group row">
-																				
+
 																				<div class="col-xs-12 col-md-2">
-																					<input type="checkbox" class="jsswitch droit" data-color="#64bd63" id="droit" name="droit" value="droit" style="float:right" checked> <strong>Oeil Droit</strong> 
+																					<input type="checkbox" class="jsswitch droit" data-color="#64bd63" id="droit" name="droit" value="droit" style="float:right" checked> <strong>Oeil Droit</strong>
 																				</div>
 																				<div class="col-xs-12 col-md-2" style="margin-right: 20px;"><input type="text" class="form-control" name="sphereD" id="sphereD" value="+0.00"></div>
 																				<div class="col-xs-12 col-md-2" style="margin-right: 20px;"><input type="text" class="form-control" name="cylindreD" id="cylindreD" value="+0.00"></div>
@@ -8244,9 +8244,9 @@ $(document).ready(function() {
 																				<div class="col-xs-12 col-md-2"><input type="text" class="form-control" name="additionD" id="additionD" value="+0.75"></div>
 																		 </div>
 																		 <div class="form-group row">
-																				
+
 																				<div class="col-xs-12 col-md-2">
-																					<input type="checkbox" class="jsswitch gauche" data-color="#64bd63" id="gauche" name="gauche" value="gauche" style="float:right" checked> <strong>Oeil Gauche</strong> 
+																					<input type="checkbox" class="jsswitch gauche" data-color="#64bd63" id="gauche" name="gauche" value="gauche" style="float:right" checked> <strong>Oeil Gauche</strong>
 																				</div>
 																				<div class="col-xs-12 col-md-2" style="margin-right: 20px;"><input type="text" class="form-control" name="sphereG" id="sphereG" value="+0.00"></div>
 																				<div class="col-xs-12 col-md-2" style="margin-right: 20px;"><input type="text" class="form-control" name="cylindreG" id="cylindreG" value="+0.00"></div>
@@ -8260,15 +8260,15 @@ $(document).ready(function() {
 															<br>
 															<div class="btn btn-warning btn-lg waves-effect waves-light" style="margin-left: 15px;float: left;" id="afficherV">Afficher les verres</div>
 														  </div>
-													    
+
 
 														<div class="form-group row hide" id="produit">
 														  <div class="col-xs-12">
 															  <div class="panel panel-default">
 																<div class="panel-heading"><h5 >Produit</h5></div>
 																<div class="panel-body " style="padding-top: 15px">
-																	
-																	<div class="form-group row" > 
+
+																	<div class="form-group row" >
 																	  <div class="col-xs-12 col-md-6 ">
 																		  <div class="panel panel-default display_droit">
 																			<div class="panel-heading"><h5 >Droit <div class="btn btn-warning" style="float:right; cursor:hand;margin-top: -9px;max-width: 100%; white-space: normal;" id="VersGauche"><strong>Copier sur le gauche >></strong></div></h5></div>
@@ -8280,7 +8280,7 @@ $(document).ready(function() {
 																							<input type="radio" value="ToutD" id="ToutD" name="dispoD" aria-required="true" checked>
 																							<label for="ToutD"> Tout </label>
 																						</div>
-																					
+
 																						<div class="radio radio-warning radio-inline" style="margin-left: 20px;">
 																							<input type="radio" value="StockD" id="StockD" name="dispoD" aria-required="true">
 																							<label for="StockD"> Stock </label>
@@ -8505,7 +8505,7 @@ $(document).ready(function() {
 																</div>
 															</div>
 														 </div>
-													   </div>			
+													   </div>
 													    <div class="form-group row hide" id="precalibrage">
 													    	<div class="col-xs-12">
 															  <div class="panel panel-default">
@@ -8516,7 +8516,7 @@ $(document).ready(function() {
 																			<div class="form-group clearfix">
 
 																				<div class="group-title" id="click_calibre"><span>Cliquez sur le calibre qui correspond le plus à votre commande.</span></div>
-																				
+
 																				<div class="col-lg-8 col-lg-offset-2 col-sm-12" id="mini_calibres">
 
 																					<?php
@@ -8629,7 +8629,7 @@ $(document).ready(function() {
 																					<div class="validator"></div>
 																				</div>
 																			</div>
-																			
+
 																			<div class="form-group clearfix col-xs-12 hide" >
 																				<label class="col-lg-2 control-label" for="hauteur_ecart">Hauteur de montage et écarts pupillaires</label>
 																			</div>
@@ -8684,17 +8684,17 @@ $(document).ready(function() {
 																				</div>
 																			</div>
 
-																		</div>	
+																		</div>
 																</div>
 															  </div>
 															</div>
-														</div>						
+														</div>
 														<div id="certif" class="form-group row hide">
 															<div class="col-xs-12">
 															  <div class="panel panel-default">
 																<div class="panel-heading"><h5 >Certificat</h5></div>
 																<div class="panel-body " style="padding-top: 15px">
-																
+
 																		<div id="type_commande_error" class="col-lg-10">
 																			<?php if($panierA != 1)
 																			{?>
@@ -8711,7 +8711,7 @@ $(document).ready(function() {
 																			}
 																			else
 																			{
-																			?> 
+																			?>
 																			<div class="radio radio-warning">
 																				<input type="radio" id="carte_auth_y" value="1" name="carte_auth" class="required" aria-required="true">
 																				<label id="text_titre_carte" for="carte_auth_y">«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»</label>
@@ -8721,7 +8721,7 @@ $(document).ready(function() {
 																			?>
 																			<div class="validator"></div>
 																		</div>
-																		
+
 																		<label class="col-xs-12 control-label hide">Votre carte</label>
 																		<div class="col-xs-12" style="margin-top:20px">
 																		<div id="civilite_client" class="col-xs-2 form-group clearfix auth_fields">
@@ -8754,7 +8754,7 @@ $(document).ready(function() {
 																				<div class="validator"></div>
 																			</div>
 																		</div>
-																		
+
 																		<div class="col-xs-12 col-md-3">
 																			<label class=" control-label"> </label>
 																			<div class=" clearfix" style="margin-top:12px">
@@ -8762,18 +8762,18 @@ $(document).ready(function() {
 																			</div>
 																		</div>
 																	</div>
-																	
+
 																	</div>
-																	
+
 
 																	<div id="preview_carte" class="form-group clearfix auth_fields" style="display:none; margin-top:20px">
-																		
-																		
+
+
 																			<div class="col-lg-12" id="carte_1">
 																				<div class="col-lg-12">
 																					<div id="carte">
 																							<?php setlocale(LC_TIME, "fr_FR.UTF-8"); ?>
-																					
+
 																							<div id="preview_auth_card" style="float:left" >
 
 																								<span class="titre optieyes"></span>
@@ -8838,7 +8838,7 @@ $(document).ready(function() {
 																				<div class="sub-auth" id="prev_auth">
 																					<div id="carteD" style="width:100%; float:left">
 																						<?php setlocale(LC_TIME, "fr_FR.UTF-8"); ?>
-																					
+
 																						<div id="preview_auth_card" >
 
 																							<span class="titre optieyes"></span>
@@ -8892,7 +8892,7 @@ $(document).ready(function() {
 																					</div>
 																					<div id="carteG" style="width:100%; float:left">
 																						<?php setlocale(LC_TIME, "fr_FR.UTF-8"); ?>
-																					
+
 																						<div id="preview_auth_card" >
 
 																							<span class="titre optieyes"></span>
@@ -8954,7 +8954,7 @@ $(document).ready(function() {
 														</div>
 													</div>
 
-												</div>									
+												</div>
 										  </div>
 									  </div>
 								  </div>
@@ -8996,20 +8996,20 @@ $(document).ready(function() {
 						<p></p>
 					  </div>
 					</div>
-		             
+
 		        </div>
 		    </div>
 </form>
-					
+
 				</div>
-				
+
 
 				<div class="row">
 
 
 					<div class="col-sm-12">
 
-						<?php 
+						<?php
 						if($user_info[0]->valid_mandat != 1) { ?>
 
 							<div class="card-box clearfix">
@@ -9245,22 +9245,22 @@ $(document).ready(function() {
 	<script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
 
 	<script type="text/javascript">
-	
+
 	function show_pic(img)
 	{
 		$("#big_img").show();
 		$("#mini_calibres").hide();
-		
+
 		$("#back_calibre").show();
 		$("#click_calibre").hide();
-		
+
 		$("#big_img").html("<img id='theImg' src='/static/img/calibre_B/"+img+".png'/>");
-		
+
 		$('html, body').animate({
         scrollTop: $("#precalibrage").offset().top
     	}, 2000);
 	}
-	
+
 	$.extend($.validator.messages, {
 		required: "Ce champ est obligatoire",
 		number: "Veuillez indiquer un nombre",
@@ -9272,7 +9272,7 @@ $(document).ready(function() {
 		max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
 		min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}.")
 	});
-	
+
 	var iledefrance = '<?php echo $region; ?>';
 	var tabLivIleDeFrance = ["Mardi","Mercredi","Jeudi","Vendredi","Lundi","Mardi","Mardi"];
 	var tabLivHorsIleDeFrance = ["Mercredi","Jeudi","Vendredi","Samedi","Mardi","Mardi","Mardi"];
@@ -9283,8 +9283,8 @@ $(document).ready(function() {
 	var forceSphStep = false;
 
 	$(document).ready(function() {
-	
-	if($('.jsswitch').length > 0) 
+
+	if($('.jsswitch').length > 0)
 	{
 		var elems = Array.prototype.slice.call(document.querySelectorAll('.jsswitch'));
 
@@ -9297,26 +9297,26 @@ $(document).ready(function() {
 			});
 		});
 	}
-	
+
 	$('#back_calibre').on('click', function() {
 		$("#big_img").hide();
 		$("#mini_calibres").show();
-		
+
 		$("#back_calibre").hide();
 		$("#click_calibre").show();
 	});
-	
+
 	$('#lensFocalGroup').on('change', function() {
 
 	$('#div_refraction').addClass('hide');
 	$('#progression_D').addClass('hide');
   	$('#progression_G').addClass('hide');
-  	
+
   	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  		
+
 	$('#generation').val("").change();
-	
+
 	<?php
 	if(is_object($pair_order)) {
 		?>
@@ -9341,23 +9341,23 @@ $(document).ready(function() {
 		{
 			$('#sphereD').val(<?php echo $pair_order_correction['verre']['correction_droit']['sphere'];?>);
 			$('#sphereG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['sphere'];?>);
-					
+
 		}
-		
+
 		$('#cylindreD').val(<?php echo $pair_order_correction['verre']['correction_droit']['cylindre'];?>);
 		$('#cylindreG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['cylindre'];?>);
-			
+
 		$('#axeD').val(<?php echo $pair_order_correction['verre']['correction_droit']['axe'];?>);
 		$('#axeG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['axe'];?>);
-		
+
 		$('#sphereD').prop('readOnly', true);
 		$('#sphereG').prop('readOnly', true);
 		$('#cylindreD').prop('readOnly', true);
 		$('#cylindreG').prop('readOnly', true);
 		$('#axeD').prop('readOnly', true);
 		$('#axeG').prop('readOnly', true);
-		
-		
+
+
 		//alert($("#lensFocalGroup").val());
 		if($("#lensFocalGroup").val() == '4')
 		{
@@ -9366,13 +9366,13 @@ $(document).ready(function() {
 		}
 		else
 		{
-			
-			$('#additionD').val(<?php 
+
+			$('#additionD').val(<?php
 			if(floatval($pair_order_correction['verre']['correction_droit']['addition']) >= 0)
 				echo "+".$pair_order_correction['verre']['correction_droit']['addition'];
 			else
 				echo $pair_order_correction['verre']['correction_droit']['addition'];?>);
-			$('#additionG').val(<?php 
+			$('#additionG').val(<?php
 			if(floatval($pair_order_correction['verre']['correction_gauche']['addition']) >= 0)
 				echo "+".$pair_order_correction['verre']['correction_gauche']['addition'];
 			else
@@ -9380,8 +9380,8 @@ $(document).ready(function() {
 			$('#additionD').prop('readOnly', true);
 			$('#additionG').prop('readOnly', true);
 		}
-		
-		<?php	
+
+		<?php
 	}
 	else
 	{
@@ -9392,7 +9392,7 @@ $(document).ready(function() {
 	$('#cylindreG').prop('readOnly', false);
 	$('#axeD').prop('readOnly', false);
 	$('#axeG').prop('readOnly', false);
-	
+
     $('#sphereD').val("+0.00");
     $('#cylindreD').val("+0.00");
     $('#axeD').val("0");
@@ -9401,44 +9401,44 @@ $(document).ready(function() {
     $('#cylindreG').val("+0.00");
     $('#axeG').val("0");
     $('#additionG').val("+0.00");
-    
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
-	
-	
-	
+
+
+
 	if(droite)
-	{	
+	{
 		$(".display_droit").css("display", "block");
 		$("#sphereD").prop('disabled', false);
 		$("#cylindreD").prop('disabled', false);
 		$("#axeD").prop('disabled', false);
 		$("#additionD").prop('disabled', false);
-		
+
 		$("#sphereD").val('+0.00');
 		$("#cylindreD").val('+0.00');
 		$("#axeD").val('0');
 		$("#additionD").val('+0.75');
-		
+
 		$("#VersDroit").css("display", "block");
 	}
 	else
 	{
 		$(".display_droit").css("display", "none");
-		
+
 		$("#sphereD").val('');
 		$("#cylindreD").val('');
 		$("#axeD").val('');
 		$("#additionD").val('');
-		
+
 		$("#sphereD").prop('disabled', true);
 		$("#cylindreD").prop('disabled', true);
 		$("#axeD").prop('disabled', true);
 		$("#additionD").prop('disabled', true);
-		
+
 		$("#VersDroit").css("display", "none");
 	}
-	
+
 	if(gauche)
 	{
 		$(".display_gauche").css("display", "block");
@@ -9446,37 +9446,37 @@ $(document).ready(function() {
 		$("#cylindreG").prop('disabled', false);
 		$("#axeG").prop('disabled', false);
 		$("#additionG").prop('disabled', false);
-		
+
 		$("#sphereG").val('+0.00');
 		$("#cylindreG").val('+0.00');
 		$("#axeG").val('0');
 		$("#additionG").val('+0.75');
-		
+
 		$("#VersGauche").css("display", "block");
 	}
 	else
 	{
-		
+
 		$("#sphereG").val('');
 		$("#cylindreG").val('');
 		$("#axeG").val('');
 		$("#additionG").val('');
-		
+
 		$("#sphereG").prop('disabled', true);
 		$("#cylindreG").prop('disabled', true);
 		$("#axeG").prop('disabled', true);
 		$("#additionG").prop('disabled', true);
-		
+
 		$("#VersGauche").css("display", "none");
 	}
  	<?php
  	}
  	?>
-    
+
     var lensFocalGroup = $(this).val();
-    var id_generation_verre = Number(lensFocalGroup) + 30; 
+    var id_generation_verre = Number(lensFocalGroup) + 30;
     $("#id_generation_verre").val(id_generation_verre);
-    
+
     if(lensFocalGroup != "")
     {
 		  if(this.value == '4' )
@@ -9487,16 +9487,16 @@ $(document).ready(function() {
 		  {
 		  	$(".addition").html("<b>Addition</b>");
 		  }
-		  
-		  
-		  
+
+
+
 		  if(this.value == '3' )
 		  {
 			$("#generation_progressif").css("display", "block");
 			$('#lensFocalGroup_panel').removeClass('focus_panel')
 			$('#generation_panel').addClass('focus_panel');
 			$('#generation').focus();
-	
+
 			if($('#progressionD').val() == '')
 			{
 				$("#detailD").css("display", "none");
@@ -9522,17 +9522,17 @@ $(document).ready(function() {
 			$('#lensFocalGroup_panel').removeClass('focus_panel')
 			$('#refraction_panel').addClass('focus_panel');
 			$('#sphereD').focus();
-	
+
 			$("#detailD").css("display", "block");
 			$("#detailG").css("display", "block");
 		  }
-  
+
 		  if(this.value == '' || this.value == '1' || this.value == '6')
 		  {
 			$("#additionD").css("display", "none");
 			$("#additionG").css("display", "none");
 			$(".addition").css("display", "none");
-	
+
 		  }
 		  else
 		  {
@@ -9540,7 +9540,7 @@ $(document).ready(function() {
 			$("#additionG").css("display", "block");
 			$(".addition").css("display", "block");
 		  }
-  
+
 			if(lensFocalGroup!="3")
 			{
 				$('#div_refraction').removeClass('hide')
@@ -9554,13 +9554,13 @@ $(document).ready(function() {
 				$('#progression_D').removeClass('hide')
 				$('#progression_G').removeClass('hide')
 			}
-			
+
 	}
-   
+
     $('#produit').addClass('hide');
     $("#afficherV").css("display", "block");
 });
-	
+
 	$('input[name=additionD]').change(function() {
      var indiceId = $('#indices').val();
     var generation = $('#generation').val();
@@ -9573,14 +9573,14 @@ $(document).ready(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-    
-    
+
+
     $("#detailD").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
     if(additionD == '')
     {
     	additionD = '-';
@@ -9601,7 +9601,7 @@ $(document).ready(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
@@ -9610,20 +9610,20 @@ $(document).ready(function() {
 			<?php } ?>
     		$("#additionD").val(additionD);
     	}
-    	
+
     	if (additionD.indexOf(".") < 0)
     	{
-    		
+
     		additionD = additionD+".00";
     		//alert(sphereD);
     		$("#additionD").val(additionD);
     	}
-    		
+
     	if (additionD.indexOf("+") >= 0)
     	{
     		additionD = additionD.replace('+', '');
     		n_sphereD = roundToNearest(additionD,0.25);
-    		
+
     		<?php
 			if(is_object($pair_order)) {
 			?>
@@ -9633,27 +9633,27 @@ $(document).ready(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
 					}
 				}
 			<?php } ?>
-			
+
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#additionD").val(new_sphere);
     	}
     	else if (additionD.indexOf("-") >= 0)
     	{
     		n_sphereD = roundToNearest(additionD,0.25);
-    		
+
     		<?php
 			if(is_object($pair_order)) {
 			?>
@@ -9663,26 +9663,26 @@ $(document).ready(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
 					}
 				}
 			<?php } ?>
-			
+
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#additionD").val(n_sphereD);
     	}
     	else
     	{
     		n_sphereD = roundToNearest(additionD,0.25);
-    		
+
     		<?php
 			if(is_object($pair_order)) {
 			?>
@@ -9692,29 +9692,29 @@ $(document).ready(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
 					}
 				}
 			<?php } ?>
-    		
+
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		
-    		
-    		$("#additionD").val(new_sphere); 
+
+
+
+    		$("#additionD").val(new_sphere);
     		additionD = $('#additionD').val();
     	}
     }
-    
+
     <?php
 	if(is_object($pair_order)) {
 		if($pair_order->id_generation_verre == '34')
@@ -9734,13 +9734,13 @@ $(document).ready(function() {
 		}
 	}
 	?>
-    	
-       
+
+
     if($("#droit").prop('checked') == true && $("#gauche").prop('checked') == true && additionG == "+0.75"){
 		$('#additionG').val($(this).val())
 	}
-	
-	
+
+
 });
 
 $('input[name=additionG]').change(function() {
@@ -9755,13 +9755,13 @@ $('input[name=additionG]').change(function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $(this).val();
-    
+
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
-	
+
     $("#detailG").css("display", "none");
     $("#afficherV").css("display", "inline-block");
-    
+
     if(additionG == '')
     {
     	additionG = '-';
@@ -9782,7 +9782,7 @@ $('input[name=additionG]').change(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
@@ -9791,15 +9791,15 @@ $('input[name=additionG]').change(function() {
 			<?php } ?>
     		$("#additionG").val(additionG);
     	}
-    	
+
     	if (additionG.indexOf(".") < 0)
     	{
-    		
+
     		additionG = additionG+".00";
     		//alert(sphereD);
     		$("#additionG").val(additionG);
     	}
-    		
+
     	if (additionG.indexOf("+") >= 0)
     	{
     		additionG = additionG.replace('+', '');
@@ -9813,7 +9813,7 @@ $('input[name=additionG]').change(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
@@ -9823,10 +9823,10 @@ $('input[name=additionG]').change(function() {
     		n_sphereD = n_sphereD.toString();
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
+
     		$("#additionG").val(new_sphere);
     	}
     	else if (additionG.indexOf("-") >= 0)
@@ -9841,7 +9841,7 @@ $('input[name=additionG]').change(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
@@ -9849,10 +9849,10 @@ $('input[name=additionG]').change(function() {
 				}
 			<?php } ?>
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
-				n_sphereD = n_sphereD+".00";	
+				n_sphereD = n_sphereD+".00";
 			}
     		$("#additionG").val(n_sphereD);
     	}
@@ -9868,7 +9868,7 @@ $('input[name=additionG]').change(function() {
 					{
 						n_sphereD = 2;
 					}
-					
+
 					if(n_sphereD<0.75)
 					{
 						n_sphereD = 0.75;
@@ -9876,18 +9876,18 @@ $('input[name=additionG]').change(function() {
 				}
 			<?php } ?>
     		n_sphereD = n_sphereD.toString();
-    		
+
     		if (n_sphereD.indexOf(".") < 0)
 			{
 				n_sphereD = n_sphereD+".00";
 			}
     		var new_sphere = "+"+n_sphereD;
-    		
-    		$("#additionG").val(new_sphere); 
+
+    		$("#additionG").val(new_sphere);
     		additionG = $('#additionG').val();
     	}
     }
-    
+
     <?php
 	if(is_object($pair_order)) {
 		if($pair_order->id_generation_verre == '34')
@@ -9907,10 +9907,10 @@ $('input[name=additionG]').change(function() {
 		}
 	}
 	?>
-	 
+
 });
-	
-	
+
+
 	function validFields() {
 		$('.form-commande input[type=radio], .form-commande select').each(function (e) {
 			$(this).rules("add", {
@@ -9934,12 +9934,12 @@ $('input[name=additionG]').change(function() {
 	});
 
 	validFields();
-			
+
 	<?php if(!is_object($pair_order)) : ?>
             $('.next .btn').addClass('disabled');
     <?php endif; ?>
-    $( "#to_etape2" ).click(function() {			
-	
+    $( "#to_etape2" ).click(function() {
+
 		validFields();
 
 		var $valid = $("#commandeForm").valid();
@@ -9947,10 +9947,10 @@ $('input[name=additionG]').change(function() {
 			$validator.focusInvalid();
 			return false;
 		}
-					
+
 		var formData = $('#commandeForm').serialize();
 		console.log(formData);
-		
+
 		$.ajax({
 			type: "POST",
 			url: "/admin/setOrderRecapNew/<?php echo $user_info[0]->id_users; ?>",
@@ -9968,12 +9968,12 @@ $('input[name=additionG]').change(function() {
 				}
 				else{
 					$("#recap_commande").empty().append(data);
-					
+
 					$("#wiz .finish").show();
 					$('#wiz .next .btn').hide();
 					$("#recap_commande").empty().append(data);
-					
-					if($('.js-switch').length > 0) 
+
+					if($('.js-switch').length > 0)
 					{
 						var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
@@ -10045,12 +10045,12 @@ $('input[name=additionG]').change(function() {
 				$("#recap_commande").empty().append('<div style="height:400px"><div style="width:550px;margin-left:auto;margin-right:auto;padding-top:10%;color:red;font-size:18px">Une erreur s\'est produite, veuillez recommencer. Si le problème persiste, envoyez un mail à </div></div>');
 			}
 		});
-		
+
 	});
     $('.finish').on('click', function() {
 
 		orderOk = false;
-		
+
 		//alert("type_commande_verre:"+type_commande_verre);
 
 		var date = new Date();
@@ -10061,10 +10061,10 @@ $('input[name=additionG]').change(function() {
 		}
 
 		var jourLivraison = iledefrance == '1' ? tabLivIleDeFrance[date.getDay()] : tabLivHorsIleDeFrance[date.getDay()];
-		
+
 		var nom_verreD = $("#type_de_verreD option:selected").html();
         var nom_verreG = $("#type_de_verreG option:selected").html();
-        
+
 		if(nom_verreD.indexOf(" - Stock déporté") >= 0 || nom_verreG.indexOf(" - Stock déporté") >= 0) {
 			swal({
 				title: "Livraison",
@@ -10086,13 +10086,13 @@ $('input[name=additionG]').change(function() {
 			orderOk = true;
 			placeOrder();
 		}
-		
-		function placeOrder() 
+
+		function placeOrder()
 		{
 			var is_express = 0;
 			var is_express_pair = 0;
-			
-			var commentaire = $('#commentaire').val(); 
+
+			var commentaire = $('#commentaire').val();
 
 			if(type_commande_verre == 1 && $('#express').is(':checked')) {
 				is_express = 1;
@@ -10223,9 +10223,9 @@ $('input[name=additionG]').change(function() {
 
 		}
 
-	}); 
-	
-	$('#commande_ferme').click(function(){ 
+	});
+
+	$('#commande_ferme').click(function(){
 	$('#type_commande').val('1');
 	var currentForm = $(this).closest('form');
 		currentForm.find('.ancienne_commande_ref').hide();
@@ -10233,7 +10233,7 @@ $('input[name=additionG]').change(function() {
 		$('.ec_commande_status').fadeOut(60);
 	})
 
-	$('#casse_atelier').click(function(){ 
+	$('#casse_atelier').click(function(){
 	$('#type_commande').val('2');
 	var currentForm = $(this).closest('form');
   		$('.next .btn').addClass('disabled');
@@ -10270,7 +10270,7 @@ $('input[name=additionG]').change(function() {
 			$('.ec_commande_status').fadeIn(60);
 	})
 
-	$('#erreur_ophtalmologiste').click(function(){ 
+	$('#erreur_ophtalmologiste').click(function(){
 	$('#type_commande').val('3');
 	var currentForm = $(this).closest('form');
   		$('.next .btn').addClass('disabled');
@@ -10306,7 +10306,7 @@ $('input[name=additionG]').change(function() {
 
 			$('.ec_commande_status').fadeIn(60);
 	})
-	
+
 	$('#commandeForm').on('change', 'input[name="miroir"], select[name="id_verre"], input[name="only_gauche"], input[name="only_droit"]', function() {
 
 		var option_price = 0;
@@ -10392,9 +10392,9 @@ $('input[name=additionG]').change(function() {
 		}
 
 	});
-	
-	
-});  
+
+
+});
 	</script>
 
 <?php include_once('footer.php'); ?>

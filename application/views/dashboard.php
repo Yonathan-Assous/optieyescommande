@@ -227,7 +227,7 @@ function roundToNearest(numToRound, numToRoundTo) {
 																<div class="panel-body" style="padding-top: 15px">
 																	<div class="col-lg-10 card-tabs">
 																			<ul class="nav nav-pills type_commande_verre">
-																				<li <?php if(is_object($pair_order) || $panierA==1)  echo 'class="active"';?> id="li_commande_ferme"><a href="#" data-toggle="tab" aria-expanded="true" id="commande_ferme"><b style="color: red">Commande ferme</b></a>
+																				<li <?php if(is_object($pair_order) || $panierA==1)  echo 'class="active"';?> id="li_commande_ferme"><a href="#" data-toggle="tab" aria-expanded="true" id="commande_ferme"><b>Commande ferme</b></a>
 																				</li>
 																				<?php
 																			if($panierA!=1)

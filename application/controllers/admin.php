@@ -3520,7 +3520,7 @@ class admin extends MY_Controller {
                     }
                     $xml .='</rxData>';
 
-                    if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && (($information_commande->verre->correction_droit->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
+                    if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && ($information_commande->verre->correction_droit->traitement != '700100')) || $paA == "1")
                     {
 
                         if($paA == "1")
@@ -3659,7 +3659,7 @@ class admin extends MY_Controller {
 
                     $xml .='</rxData>';
 
-                    if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && (($information_commande->verre->correction_gauche->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
+                    if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && ($information_commande->verre->correction_gauche->traitement != '700100')) || $paA == "1")
                     {
 
                         if($paA == "1")
@@ -4318,7 +4318,7 @@ class admin extends MY_Controller {
                             break;
                     }
 
-                    $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;OptieyesCCC: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
+                    $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;Optieyes: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
                     if($commande->tarif_express != '0')
                         $infos .= "<br><b>EXPRESS</b><br>";
 
@@ -4480,7 +4480,7 @@ class admin extends MY_Controller {
 
                         if(isset($information_commande->verre->correction_droit->galbe))
                             $textarea .=" Galbe: ".$information_commande->verre->correction_droit->galbe." ";
-                        if(isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && (($information_commande->verre->correction_droit->traitement == '700100') && (strpos($commande->lensname, '1.5') === false)))
+                        if(isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && $information_commande->verre->correction_droit->traitement != '700100')
                         {
                             if($traitementD != "")
                                 $textarea .="<br>Coating code: ".$information_commande->verre->correction_droit->traitement."(".$this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement).")";
@@ -4573,7 +4573,7 @@ class admin extends MY_Controller {
 
                         if(isset($information_commande->verre->correction_gauche->galbe))
                             $textarea .=" Galbe: ".$information_commande->verre->correction_gauche->galbe." ";
-                        if(isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && (($information_commande->verre->correction_gauche->traitement == '700100') && (strpos($commande->lensname, '1.5') === false)))
+                        if(isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && $information_commande->verre->correction_gauche->traitement != '700100')
                         {
                             $textarea .="<br>Coating code: ".$information_commande->verre->correction_gauche->traitement."(".$this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement).")";
                         }
@@ -5070,7 +5070,7 @@ class admin extends MY_Controller {
                         }
                         $xml .='</rxData>';
 
-                        if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && (($information_commande->verre->correction_droit->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
+                        if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && ($information_commande->verre->correction_droit->traitement != '700100')) || $paA == "1")
                         {
 
                             if($paA == "1")
@@ -5210,7 +5210,7 @@ class admin extends MY_Controller {
 
                         $xml .='</rxData>';
 
-                        if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && (($information_commande->verre->correction_gauche->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
+                        if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && ($information_commande->verre->correction_gauche->traitement != '700100')) || $paA == "1")
                         {
 
                             if($paA == "1")
@@ -5638,7 +5638,7 @@ class admin extends MY_Controller {
                             break;
                     }
 
-                    $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;OptieyesAAA: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
+                    $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;Optieyes: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
 
                     if($commande->tarif_express != '0')
                         $infos .= "<br><b>EXPRESS</b><br>";
@@ -5911,7 +5911,7 @@ class admin extends MY_Controller {
                         break;
                 }
 
-                $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;OptieyesBBB: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
+                $infos = "Date: <b>".date('d/m/Y H:i', strtotime($commande->date_commande))."</b><br>Ref.&nbsp;Optieyes: <b>".$ref_optieyes."</b><br>Ref. client: <b>".$commande->reference_client."</b><br>Tarif HT: <b>".$prix_commande."</b>";
                 if($commande->tarif_express != '0')
                     $infos .= "<br><b>EXPRESS</b>";
 
@@ -6024,7 +6024,7 @@ class admin extends MY_Controller {
 
                 $textarea .=" Galbe: ".$data['galbeD'];
 
-                if(isset($data["traitementD"]) && !empty($data["traitementD"]) && (($data["traitementD"] == '700100') && (strpos($data['nomverreDH'], '1.5') === false)))
+                if(isset($data["traitementD"]) && !empty($data["traitementD"]) && $data["traitementD"] != '700100')
                 {
 
                     $textarea .="<br>Coating code: ".$data['traitementD']."(".$this->m_commande->getTraitementNameByCode($data['traitementD']).")";
@@ -6070,7 +6070,7 @@ class admin extends MY_Controller {
 
                 $textarea .=" Galbe: ".$data['galbeG'];
 
-                if(isset($data["traitementG"]) && !empty($data["traitementG"]) && (($data["traitementG"] == '700100') && (strpos($data['nomverreGH'], '1.5') === false)))
+                if(isset($data["traitementG"]) && !empty($data["traitementG"]) && $data["traitementG"] != '700100')
                 {
 
                     $textarea .="<br>Coating code: ".$data['traitementG']."(".$this->m_commande->getTraitementNameByCode($data['traitementG']).")";
@@ -6526,7 +6526,7 @@ class admin extends MY_Controller {
                 }
                 $xml .='</rxData>';
 
-                if((isset($data["traitementD"]) && !empty($data["traitementD"]) && (($data["traitementD"] == '700100') && (strpos($data['nomverreDH'], '1.5') === false))) || $paA == "1")
+                if((isset($data["traitementD"]) && !empty($data["traitementD"]) && ($data["traitementD"] != '700100')) || $paA == "1")
                 {
 
                     if($paA == "1")
@@ -6657,7 +6657,7 @@ class admin extends MY_Controller {
 
                 $xml .='</rxData>';
 
-                if((isset($data["traitementG"]) && !empty($data["traitementG"]) && (($data["traitementG"] == '700100') && (strpos($data['nomverreGH'], '1.5') === false))) || $paA == "1")
+                if((isset($data["traitementG"]) && !empty($data["traitementG"]) && ($data["traitementG"] != '700100')) || $paA == "1")
                 {
 
                     if($paA == "1")

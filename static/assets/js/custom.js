@@ -1407,7 +1407,7 @@ $("input[name='dispoD']").change(function(){
     }
     
     $('#type_de_verreD').empty();
-    $('#type_de_verreD').append('<option value="">-- Choisir --</option>'); 
+    $('#type_de_verreD').append('<option value="">-- Choisir1111 --</option>');
     
     $('#type_de_verreG').empty();
     $('#type_de_verreG').append('<option value="">-- Choisir --</option>'); 
@@ -1474,7 +1474,7 @@ $('#progressionD').on('change', function() {
     $('#nomverreDH').val("");
     
     $('#type_de_verreD').empty();
-	$('#type_de_verreD').append('<option value="">-- Choisir --</option>');
+	$('#type_de_verreD').append('<option value="">-- Choisir22222 --</option>');
 	$('#type_de_verreD option:eq(0)').prop('selected', true);
     $('#type_de_verreD').val("");
     $('#type_de_verreD').trigger('change');

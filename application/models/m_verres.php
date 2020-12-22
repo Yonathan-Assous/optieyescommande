@@ -304,4 +304,8 @@ class m_verres extends CI_Model {
            
         }*/
     }
+
+    public function insertPrixTraitement() {
+        echo 'ggdpjdp';
+    }
 }

@@ -4770,8 +4770,7 @@ class index extends MY_Controller {
 		$sum = $flip = 0;
 		for ($i = strlen($number) - 1; $i >= 0; $i--) {
 			$sum += $sumTable[$flip++ & 0x1][$number[$i]];
-		}
-		
+        }
 		if($sum % 10 === 0) return true; else return false;
     }
 

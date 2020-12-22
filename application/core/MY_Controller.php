@@ -33,6 +33,7 @@ class MY_Controller extends CI_Controller {
 		
         $this->load->model('m_users');
         $this->load->model('m_verres');
+        $this->load->model('m_traitements');
         $this->load->model('m_lens');
 		$this->load->model('m_montures');
         $this->load->model('m_commande');

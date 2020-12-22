@@ -1667,10 +1667,8 @@ class index extends MY_Controller {
             }
 
         //    $data_commande = $this->m_commande->getCommandeByUser($dataOrder);
-        $data_commande = $this->m_commande->getCommandeByUserLight($dataOrder);
-        
-            
-           // var_dump($data_commande);
+
+            $data_commande = $this->m_commande->getCommandeByUserLight($dataOrder);
 
             if($data_commande !== false)
                 foreach($data_commande as $key => $commande){
@@ -1680,7 +1678,7 @@ class index extends MY_Controller {
                         case 1:
                             $prix_commande = $commande->total_commande.' €';
                             break;
-                        
+
                         case 2:
                             $prix_commande = '<del>'.$commande->total_commande.'</del> '.($commande->tarif_express > 0 ? $commande->tarif_express : '0').' €<br />Casse atelier';
                             break;
@@ -1702,7 +1700,7 @@ class index extends MY_Controller {
 						$etat_commande = $commande->libelle_etat_commande.($commande->id_etat_commande == 6 ? ' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)) : '').' ('.$commande->id_etat_commande.'/6)';
 					else
 						$etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
-					
+
 					//$commande->commentaire = "";
 
                     if($type == 'ec') {
@@ -1717,8 +1715,12 @@ class index extends MY_Controller {
                                 $commande->reference_client,
                                 $commande->generation_verre,
                                 $etat_commande,
-                                '<a class="commande-info btn btn-icon waves-effect waves-light '.(!empty($commande->commentaire) ? 'btn-warning tooltipster' : 'btn-inverse').'" data-toggle="modal" data-target="#detail-commande" rel="' . $commande->id_commande . '" ' . (!empty($commande->commentaire) ? 'original-title="' . htmlentities($commande->commentaire) . '" title="'.htmlentities($commande->commentaire).'"' : '') . ' ><i class="zmdi zmdi-'.(!empty($commande->commentaire) ? 'comment' : 'search').'"></i> Voir</a>'.$certif_panierA
-                                
+                                '<a class="commande-info btn btn-icon waves-effect waves-light '.(!empty($commande->commentaire)
+                                    ? 'btn-warning tooltipster' : 'btn-inverse') .'" data-toggle="modal" data-target="#detail-commande" rel="'
+                                    . $commande->id_commande . '" ' . (!empty($commande->commentaire) ? 'original-title="'
+                                    . htmlentities($commande->commentaire) . '" title="'.htmlentities($commande->commentaire).'"' : '') . ' >
+                                    <i class="zmdi zmdi-'.(!empty($commande->commentaire) ? 'comment' : 'search').'"></i> Voir</a>'
+
                             );
                     }
                     else {
@@ -1757,9 +1759,9 @@ class index extends MY_Controller {
 
                     }
                 }
-				
+
 				die(json_encode($data));       
-        }else
+        } else
             $this->redirect();
     }
 	

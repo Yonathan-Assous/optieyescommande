@@ -693,7 +693,7 @@ class admin extends MY_Controller {
 
 
 
-//var_dump($t);
+        //var_dump($t);
         echo json_encode($t);
 
     }
@@ -2354,7 +2354,7 @@ class admin extends MY_Controller {
             $data = array();
 
             $month = array('01' => 'Janvier','02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin',
-                '07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+                           '07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
 
 
             foreach($facture_client as $key => $facture_cli){
@@ -3520,7 +3520,7 @@ class admin extends MY_Controller {
                     }
                     $xml .='</rxData>';
 
-                    if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && ($information_commande->verre->correction_droit->traitement != '700100')) || $paA == "1")
+                    if((isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && (($information_commande->verre->correction_droit->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
                     {
 
                         if($paA == "1")
@@ -3659,7 +3659,7 @@ class admin extends MY_Controller {
 
                     $xml .='</rxData>';
 
-                    if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && ($information_commande->verre->correction_gauche->traitement != '700100')) || $paA == "1")
+                    if((isset($information_commande->verre->correction_gauche->traitement) && !empty($information_commande->verre->correction_gauche->traitement) && (($information_commande->verre->correction_gauche->traitement == '700100') && (strpos($commande->lensname, '1.5') === false))) || $paA == "1")
                     {
 
                         if($paA == "1")
@@ -4480,7 +4480,7 @@ class admin extends MY_Controller {
 
                         if(isset($information_commande->verre->correction_droit->galbe))
                             $textarea .=" Galbe: ".$information_commande->verre->correction_droit->galbe." ";
-                        if(isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && $information_commande->verre->correction_droit->traitement != '700100')
+                        if(isset($information_commande->verre->correction_droit->traitement) && !empty($information_commande->verre->correction_droit->traitement) && (($information_commande->verre->correction_droit->traitement == '700100') && (strpos($commande->lensname, '1.5') === false)))
                         {
                             if($traitementD != "")
                                 $textarea .="<br>Coating code: ".$information_commande->verre->correction_droit->traitement."(".$this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement).")";
@@ -8711,7 +8711,7 @@ class admin extends MY_Controller {
                 foreach ($commandes as $c) {
 
                     $correction = json_decode($c->information_commande, true);
-//echo $c->name."<br>";
+                    //echo $c->name."<br>";
                     if(strpos($c->name, "- stock") !== false || strpos($c->name, "-stock") !== false || strpos($c->name, "-Stock") !== false || strpos($c->name, " - Stock") !== false || strpos($c->name, " - stock") !== false) {
                         $type = 'stock';
                     }
@@ -8722,7 +8722,7 @@ class admin extends MY_Controller {
                     $orders[$type][] = $c->id_commande . '-' . $c->id_users.' from '.date('Y-m-d', strtotime($c->date_commande));
                 }
             }
-//var_dump($orders);
+            //var_dump($orders);
             if(isset($orders['fabric'])) {
                 $message .= '<b>RX Lenses :</b><br />'.PHP_EOL;
                 foreach($orders['fabric'] as $f) {
@@ -10310,11 +10310,11 @@ class admin extends MY_Controller {
 
             if(isset($data['sphere_droit']) && isset($data['cylindre_droit']) && isset($data['sphere_gauche']) && isset($data['cylindre_gauche'])) {
                 $data_commande['verre'] = array('correction_droit' => array('sphere' => $data['sphere_droit'],
-                    'cylindre' => $data['cylindre_droit']
+                                                                            'cylindre' => $data['cylindre_droit']
                 ),
-                    'correction_gauche' => array('sphere' => $data['sphere_gauche'],
-                        'cylindre' => $data['cylindre_gauche']
-                    )
+                                                'correction_gauche' => array('sphere' => $data['sphere_gauche'],
+                                                                             'cylindre' => $data['cylindre_gauche']
+                                                )
                 );
             }
             elseif(isset($data['sphere_droit']) && isset($data['addition_droit']) && isset($data['sphere_gauche']) && isset($data['addition_gauche'])) {
@@ -11243,7 +11243,7 @@ class admin extends MY_Controller {
                 $data = array();
 
                 $month = array('01' => 'Janvier','02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin',
-                    '07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+                               '07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
 
 
                 foreach($facture_client as $key => $facture_cli){

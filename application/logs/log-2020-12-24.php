@@ -3189,3 +3189,1821 @@ ERROR - 2020-12-24 10:17:33 --> Severity: Notice  --> Undefined index: diametre 
 ERROR - 2020-12-24 10:17:33 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
 ERROR - 2020-12-24 10:17:33 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
 ERROR - 2020-12-24 10:17:37 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('220', 1608764400, 1608801457, 1) ON DUPLICATE KEY UPDATE login_time = 1608801457, login_count = login_count +1 
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:18:00 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:18:06 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('552', 1608764400, 1608801486, 1) ON DUPLICATE KEY UPDATE login_time = 1608801486, login_count = login_count +1 
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:18:12 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:20 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('46', 1608764400, 1608801500, 1) ON DUPLICATE KEY UPDATE login_time = 1608801500, login_count = login_count +1 
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:21 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4983
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4983
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4965
+ERROR - 2020-12-24 10:18:33 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4983
+ERROR - 2020-12-24 10:18:33 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4983
+ERROR - 2020-12-24 10:18:51 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('458', 1608764400, 1608801531, 1) ON DUPLICATE KEY UPDATE login_time = 1608801531, login_count = login_count +1 
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:18:52 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:19:17 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('292', 1608764400, 1608801557, 1) ON DUPLICATE KEY UPDATE login_time = 1608801557, login_count = login_count +1 
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:26 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:30 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:34 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:35 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:36 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:19:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:20 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('398', 1608764400, 1608801620, 1) ON DUPLICATE KEY UPDATE login_time = 1608801620, login_count = login_count +1 
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:23 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:20:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:12 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:38 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:21:43 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:21:55 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('206', 1608764400, 1608801715, 1) ON DUPLICATE KEY UPDATE login_time = 1608801715, login_count = login_count +1 
+ERROR - 2020-12-24 10:22:55 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('364', 1608764400, 1608801775, 1) ON DUPLICATE KEY UPDATE login_time = 1608801775, login_count = login_count +1 
+ERROR - 2020-12-24 10:23:50 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:23:51 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:23:51 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:24:11 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('234', 1608764400, 1608801851, 1) ON DUPLICATE KEY UPDATE login_time = 1608801851, login_count = login_count +1 
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:43 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:51 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:24:51 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:16 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('337', 1608764400, 1608801916, 1) ON DUPLICATE KEY UPDATE login_time = 1608801916, login_count = login_count +1 
+ERROR - 2020-12-24 10:25:31 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('27', 1608764400, 1608801931, 1) ON DUPLICATE KEY UPDATE login_time = 1608801931, login_count = login_count +1 
+ERROR - 2020-12-24 10:25:37 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:39 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:39 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:47 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:48 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:48 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:48 --> Severity: Warning  --> Invalid argument supplied for foreach() /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 735
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:25:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:06 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:09 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:24 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:25 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:26:29 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('201', 1608764400, 1608801989, 1) ON DUPLICATE KEY UPDATE login_time = 1608801989, login_count = login_count +1 
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:27:11 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:27:14 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('136', 1608764400, 1608802034, 1) ON DUPLICATE KEY UPDATE login_time = 1608802034, login_count = login_count +1 
+ERROR - 2020-12-24 10:27:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:46 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:27:50 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:15 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:16 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:17 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:18 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:20 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:22 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:28:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:58 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:29:59 --> Severity: Notice  --> Undefined variable: resultat /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 448
+ERROR - 2020-12-24 10:30:01 --> Severity: Notice  --> Undefined variable: resultat /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 448
+ERROR - 2020-12-24 10:30:02 --> Severity: Notice  --> Undefined variable: resultat /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 448
+ERROR - 2020-12-24 10:30:11 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('145', 1608764400, 1608802211, 1) ON DUPLICATE KEY UPDATE login_time = 1608802211, login_count = login_count +1 
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:44 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:45 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:47 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:30:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:52 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:53 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:55 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:31:56 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:10 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:11 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:13 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:14 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:32:33 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:32:36 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('83', 1608764400, 1608802356, 1) ON DUPLICATE KEY UPDATE login_time = 1608802356, login_count = login_count +1 
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:04 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:05 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:07 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:08 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:33:56 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:33:59 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:00 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:01 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:01 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:02 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:02 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:03 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:03 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:03 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:03 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:03 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:04 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:04 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:04 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:04 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:05 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:05 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:06 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:06 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:07 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:09 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:12 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:12 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:12 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:14 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:15 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:15 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:15 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:15 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:15 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:16 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:16 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:16 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:16 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:17 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:17 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:17 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:17 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:21 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:21 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:22 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:23 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:23 --> Unable to load the requested class: my_session
+ERROR - 2020-12-24 10:34:29 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('188', 1608764400, 1608802469, 1) ON DUPLICATE KEY UPDATE login_time = 1608802469, login_count = login_count +1 
+ERROR - 2020-12-24 10:34:32 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('46', 1608764400, 1608802472, 1) ON DUPLICATE KEY UPDATE login_time = 1608802472, login_count = login_count +1 
+ERROR - 2020-12-24 10:34:32 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('491', 1608764400, 1608802472, 1) ON DUPLICATE KEY UPDATE login_time = 1608802472, login_count = login_count +1 
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:39 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:40 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:41 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:42 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:34:49 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('46', 1608764400, 1608802489, 1) ON DUPLICATE KEY UPDATE login_time = 1608802489, login_count = login_count +1 
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:34:56 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:28 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:29 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:31 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:35:32 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 441
+ERROR - 2020-12-24 10:36:04 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('130', 1608764400, 1608802564, 1) ON DUPLICATE KEY UPDATE login_time = 1608802564, login_count = login_count +1 
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:36:31 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:36:33 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('83', 1608764400, 1608802593, 1) ON DUPLICATE KEY UPDATE login_time = 1608802593, login_count = login_count +1 
+ERROR - 2020-12-24 10:37:58 --> Query error: Field 'has_order' doesn't have a default value - INSERT INTO user_sessions (user_id, day, login_time, login_count) VALUES ('522', 1608764400, 1608802678, 1) ON DUPLICATE KEY UPDATE login_time = 1608802678, login_count = login_count +1 
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3831
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 46
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 65
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 108
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 124
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 132
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 1964
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2025
+ERROR - 2020-12-24 10:38:01 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 2123
+ERROR - 2020-12-24 10:38:05 --> Severity: Warning  --> mysqli_query(): (21000/1242): Subquery returns more than 1 row /var/www/vhosts/optieyescommande.com/httpdocs_new/system/database/drivers/mysqli/mysqli_driver.php 179
+ERROR - 2020-12-24 10:38:05 --> Query error: Subquery returns more than 1 row - SELECT c.id_users, 
+        (SELECT IFNULL(COUNT(1),0) AS exp
+            FROM commande cc
+            WHERE DATE_FORMAT(date_update_commande, '%m-%Y') = '11-2020'
+            AND id_etat_commande = 6
+            AND id_users = '522'
+            AND DATE_FORMAT(date_commande, '%m-%Y') = '11-2020' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
+            GROUP BY id_users,date(date_update_commande)
+        ) AS exp_matin,
+        (SELECT IFNULL(COUNT(1),0) AS exp
+            FROM commande cc
+            WHERE DATE_FORMAT(date_update_commande, '%m-%Y') = '11-2020'
+            AND id_etat_commande = 6
+            AND id_users = '522'
+            AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%m-%Y') = '11-2020' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
+            GROUP BY id_users,date(date_update_commande)
+        ) AS exp_soir
+        FROM commande c
+        WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '11-2020'
+        AND DATE_FORMAT(c.date_update_commande, '%m-%Y') = '11-2020'
+        AND id_etat_commande = 6
+        AND id_users = '522'
+        GROUP BY c.id_users,date(date_update_commande)
+        ORDER BY c.id_users ASC

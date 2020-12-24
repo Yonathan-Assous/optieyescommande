@@ -6433,21 +6433,7 @@ class admin
                         }
                         if (isset($information_commande->verre->correction_droit->traitement) &&
                             !empty($information_commande->verre->correction_droit->traitement) &&
-                            (($information_commande->verre->correction_droit->traitement ==
-                                    '700100') &&
-                                ((strpos($commande->lensname,
-                                         '1.5') ===
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.53') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.56') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.59') !==
-                                        false)) ||
-                                $information_commande->verre->correction_droit->traitement !=
+                            ($information_commande->verre->correction_droit->traitement !=
                                 '700100')) {
                             if ($traitementD !=
                                 "") {
@@ -6620,19 +6606,7 @@ class admin
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement) &&
                             ($information_commande->verre->correction_gauche->traitement !=
-                                '700100' ||
-                                (($information_commande->verre->correction_droit->traitement ==
-                                        '700100') &&
-                                    ((strpos($commande->lensname,
-                                             '1.5') === false) ||
-                                        (strpos($commande->lensname,
-                                                '1.53') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.56') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.59') !== false)) ||
-                                    $information_commande->verre->correction_droit->traitement !=
-                                    '700100'))) {
+                                '700100')) {
                             $textarea .= "<br>Coating code: " .
                                 $information_commande->verre->correction_gauche->traitement .
                                 "(" .

@@ -116,7 +116,7 @@
 			
 			if(isset($info_commande['verre']['correction_droit']['galbe']) && $info_commande['verre']['correction_droit']['galbe']!="")
 			{
-				$correction_droit  .= '<b>cxxzccxzxzcGalbe :</b>'.$info_commande['verre']['correction_droit']['galbe']."<br>";
+				$correction_droit  .= '<b>Galbe :</b>'.$info_commande['verre']['correction_droit']['galbe']."<br>";
 			}
 			
 			if(isset($info_commande['verre']['correction_gauche']['galbe']) && $info_commande['verre']['correction_gauche']['galbe']!="")

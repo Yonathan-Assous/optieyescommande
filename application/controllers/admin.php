@@ -397,10 +397,10 @@ class admin
         }
         if ((strpos($nom_du_verre,
                     'Freestyle') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Panier A Unifocal RX') !==
-                false) &&
+             false ||
+             strpos($nom_du_verre,
+                    'Panier A Unifocal RX') !==
+             false) &&
             strpos($nom_du_verre,
                    '1,5') !==
             false) {
@@ -426,10 +426,10 @@ class admin
         }
         if ((strpos($nom_du_verre,
                     'Freestyle') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Panier A Unifocal RX') !==
-                false) &&
+             false ||
+             strpos($nom_du_verre,
+                    'Panier A Unifocal RX') !==
+             false) &&
             strpos($nom_du_verre,
                    '1,5') ===
             false) {
@@ -532,63 +532,63 @@ class admin
 
             } elseif (strpos($name,
                              'Miroir') !==
-                false) {
+                      false) {
                 $res['prix'] =
                     14.00;
 
             } elseif ($name ==
-                'Satin') {
+                      'Satin') {
                 $res['prix'] =
                     8.00;
 
             } elseif ($name ==
-                'Achromatique') {
+                      'Achromatique') {
                 $res['prix'] =
                     16.00;
 
             } elseif ($name ==
-                'Satin Max') {
+                      'Satin Max') {
                 $res['prix'] =
                     18.00;
 
             } elseif ($name ==
-                'Satin UV') {
+                      'Satin UV') {
                 $res['prix'] =
                     11.00;
 
             } elseif ($name ==
-                'BlueCoat') {
+                      'BlueCoat') {
                 $res['prix'] =
                     16.00;
 
             } elseif ($name ==
-                'Satin Face Interne') {
+                      'Satin Face Interne') {
                 $res['prix'] =
                     8.00;
 
             } elseif ($name ==
-                'Satin Max Face Interne') {
+                      'Satin Max Face Interne') {
                 $res['prix'] =
                     18.00;
 
             } elseif ($name ==
-                'Achromatique Face Interne') {
+                      'Achromatique Face Interne') {
                 $res['prix'] =
                     16.00;
 
             } elseif ($name ==
-                'Satin UV Face Interne') {
+                      'Satin UV Face Interne') {
                 $res['prix'] =
                     11.00;
 
             } elseif ($name ==
-                'Satin Drive Or') {
+                      'Satin Drive Or') {
                 $res['prix'] =
                     18.00;
 
             } elseif (strpos($name,
                              'HMC') !==
-                false) {
+                      false) {
                 $res['prix'] =
                     4.00;
 
@@ -623,63 +623,63 @@ class admin
 
                 } elseif (strpos($name,
                                  'Miroir') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'Satin') {
+                          'Satin') {
                     $res['prix'] =
                         8.00;
 
                 } elseif ($name ==
-                    'Achromatique') {
+                          'Achromatique') {
                     $res['prix'] =
                         16.00;
 
                 } elseif ($name ==
-                    'Satin Max') {
+                          'Satin Max') {
                     $res['prix'] =
                         18.00;
 
                 } elseif ($name ==
-                    'Satin UV') {
+                          'Satin UV') {
                     $res['prix'] =
                         11.00;
 
                 } elseif ($name ==
-                    'BlueCoat') {
+                          'BlueCoat') {
                     $res['prix'] =
                         16.00;
 
                 } elseif ($name ==
-                    'Satin Face Interne') {
+                          'Satin Face Interne') {
                     $res['prix'] =
                         8.00;
 
                 } elseif ($name ==
-                    'Satin Max Face Interne') {
+                          'Satin Max Face Interne') {
                     $res['prix'] =
                         18.00;
 
                 } elseif ($name ==
-                    'Achromatique Face Interne') {
+                          'Achromatique Face Interne') {
                     $res['prix'] =
                         16.00;
 
                 } elseif ($name ==
-                    'Satin UV Face Interne') {
+                          'Satin UV Face Interne') {
                     $res['prix'] =
                         11.00;
 
                 } elseif ($name ==
-                    'Satin Drive Or') {
+                          'Satin Drive Or') {
                     $res['prix'] =
                         18.00;
 
                 } elseif (strpos($name,
                                  'HMC') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         4.00;
 
@@ -694,63 +694,63 @@ class admin
 
                 } elseif (strpos($name,
                                  'Miroir') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'Satin') {
+                          'Satin') {
                     $res['prix'] =
                         12.00;
 
                 } elseif ($name ==
-                    'Achromatique') {
+                          'Achromatique') {
                     $res['prix'] =
                         20.00;
 
                 } elseif ($name ==
-                    'Satin Max') {
+                          'Satin Max') {
                     $res['prix'] =
                         22.00;
 
                 } elseif ($name ==
-                    'Satin UV') {
+                          'Satin UV') {
                     $res['prix'] =
                         15.00;
 
                 } elseif ($name ==
-                    'BlueCoat') {
+                          'BlueCoat') {
                     $res['prix'] =
                         20.00;
 
                 } elseif ($name ==
-                    'Satin Face Interne') {
+                          'Satin Face Interne') {
                     $res['prix'] =
                         12.00;
 
                 } elseif ($name ==
-                    'Satin Max Face Interne') {
+                          'Satin Max Face Interne') {
                     $res['prix'] =
                         22.00;
 
                 } elseif ($name ==
-                    'Achromatique Face Interne') {
+                          'Achromatique Face Interne') {
                     $res['prix'] =
                         20.00;
 
                 } elseif ($name ==
-                    'Satin UV Face Interne') {
+                          'Satin UV Face Interne') {
                     $res['prix'] =
                         15.00;
 
                 } elseif ($name ==
-                    'Satin Drive Or') {
+                          'Satin Drive Or') {
                     $res['prix'] =
                         22.00;
 
                 } elseif (strpos($name,
                                  'HMC') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         7.00;
 
@@ -783,63 +783,63 @@ class admin
 
                 } elseif (strpos($name,
                                  'Miroir') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'Satin') {
+                          'Satin') {
                     $res['prix'] =
                         7.00;
 
                 } elseif ($name ==
-                    'Achromatique') {
+                          'Achromatique') {
                     $res['prix'] =
                         15.00;
 
                 } elseif ($name ==
-                    'Satin Max') {
+                          'Satin Max') {
                     $res['prix'] =
                         17.00;
 
                 } elseif ($name ==
-                    'Satin UV') {
+                          'Satin UV') {
                     $res['prix'] =
                         10.00;
 
                 } elseif ($name ==
-                    'BlueCoat') {
+                          'BlueCoat') {
                     $res['prix'] =
                         15.00;
 
                 } elseif ($name ==
-                    'Satin Face Interne') {
+                          'Satin Face Interne') {
                     $res['prix'] =
                         7.00;
 
                 } elseif ($name ==
-                    'Satin Max Face Interne') {
+                          'Satin Max Face Interne') {
                     $res['prix'] =
                         17.00;
 
                 } elseif ($name ==
-                    'Achromatique Face Interne') {
+                          'Achromatique Face Interne') {
                     $res['prix'] =
                         15.00;
 
                 } elseif ($name ==
-                    'Satin UV Face Interne') {
+                          'Satin UV Face Interne') {
                     $res['prix'] =
                         10.00;
 
                 } elseif ($name ==
-                    'Satin Drive Or') {
+                          'Satin Drive Or') {
                     $res['prix'] =
                         17.00;
 
                 } elseif (strpos($name,
                                  'HMC') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         3.00;
 
@@ -854,63 +854,63 @@ class admin
 
                 } elseif (strpos($name,
                                  'Miroir') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'Satin') {
+                          'Satin') {
                     $res['prix'] =
                         11.00;
 
                 } elseif ($name ==
-                    'Achromatique') {
+                          'Achromatique') {
                     $res['prix'] =
                         19.00;
 
                 } elseif ($name ==
-                    'Satin Max') {
+                          'Satin Max') {
                     $res['prix'] =
                         21.00;
 
                 } elseif ($name ==
-                    'Satin UV') {
+                          'Satin UV') {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'BlueCoat') {
+                          'BlueCoat') {
                     $res['prix'] =
                         19.00;
 
                 } elseif ($name ==
-                    'Satin Face Interne') {
+                          'Satin Face Interne') {
                     $res['prix'] =
                         11.00;
 
                 } elseif ($name ==
-                    'Satin Max Face Interne') {
+                          'Satin Max Face Interne') {
                     $res['prix'] =
                         21.00;
 
                 } elseif ($name ==
-                    'Achromatique Face Interne') {
+                          'Achromatique Face Interne') {
                     $res['prix'] =
                         19.00;
 
                 } elseif ($name ==
-                    'Satin UV Face Interne') {
+                          'Satin UV Face Interne') {
                     $res['prix'] =
                         14.00;
 
                 } elseif ($name ==
-                    'Satin Drive Or') {
+                          'Satin Drive Or') {
                     $res['prix'] =
                         21.00;
 
                 } elseif (strpos($name,
                                  'HMC') !==
-                    false) {
+                          false) {
                     $res['prix'] =
                         7.00;
 
@@ -935,63 +935,63 @@ class admin
 
             } elseif (strpos($name,
                              'Miroir') !==
-                false) {
+                      false) {
                 $res['prix'] =
                     14.00;
 
             } elseif ($name ==
-                'Satin') {
+                      'Satin') {
                 $res['prix'] =
                     7.00;
 
             } elseif ($name ==
-                'Achromatique') {
+                      'Achromatique') {
                 $res['prix'] =
                     15.00;
 
             } elseif ($name ==
-                'Satin Max') {
+                      'Satin Max') {
                 $res['prix'] =
                     17.00;
 
             } elseif ($name ==
-                'Satin UV') {
+                      'Satin UV') {
                 $res['prix'] =
                     10.00;
 
             } elseif ($name ==
-                'BlueCoat') {
+                      'BlueCoat') {
                 $res['prix'] =
                     15.00;
 
             } elseif ($name ==
-                'Satin Face Interne') {
+                      'Satin Face Interne') {
                 $res['prix'] =
                     7.00;
 
             } elseif ($name ==
-                'Satin Max Face Interne') {
+                      'Satin Max Face Interne') {
                 $res['prix'] =
                     17.00;
 
             } elseif ($name ==
-                'Achromatique Face Interne') {
+                      'Achromatique Face Interne') {
                 $res['prix'] =
                     15.00;
 
             } elseif ($name ==
-                'Satin UV Face Interne') {
+                      'Satin UV Face Interne') {
                 $res['prix'] =
                     10.00;
 
             } elseif ($name ==
-                'Satin Drive Or') {
+                      'Satin Drive Or') {
                 $res['prix'] =
                     17.00;
 
             } elseif (strpos($name,
                              'HMC') !==
-                false) {
+                      false) {
                 $res['prix'] =
                     3.00;
 
@@ -1891,7 +1891,7 @@ class admin
                 $data['prix_verre'] =
                     $data['prixUnitaireD'];
             } elseif ($unVerreG ==
-                1) {
+                      1) {
                 $data['prix_verre'] =
                     $data['prixUnitaireG'];
             } else {
@@ -2876,7 +2876,7 @@ class admin
 
 
             echo $nom_verre->result()[0]->generation_verre .
-                '<br /><br />';
+                 '<br /><br />';
 
             // Tableau des verres en base
             foreach ($query->result()
@@ -3013,7 +3013,7 @@ class admin
             $loop = 0;
 
             while ($loop <
-                100) {
+                   100) {
 
                 foreach (array_keys($defender_verres)
                          as
@@ -3049,10 +3049,10 @@ class admin
                             $v);
 
                 echo $indice_verres[$verre[0]] .
-                    ' ' .
-                    $verre[1] .
-                    ' / Position ' .
-                    $position;
+                     ' ' .
+                     $verre[1] .
+                     ' / Position ' .
+                     $position;
                 echo '<br/>';
 
                 $this->db->where('id_verre',
@@ -3654,7 +3654,7 @@ class admin
                     <body><b>Bonjour</b>!
                     <br><br> 
                     Votre mot de passe a été modifié. Voici votre nouveau mot de passe : <b>" .
-                    $password . "</b>, il vous permet de vous connecter au site, converservez le précieusement.
+                            $password . "</b>, il vous permet de vous connecter au site, converservez le précieusement.
                     </body>
                 </html>";
 
@@ -3873,7 +3873,7 @@ class admin
                 $this->input->post();
             $data['nouveau_taux_tva'] =
                 ($data['taux_tva'] /
-                    100) + 1;
+                 100) + 1;
 
             unset($data['taux_tva']);
 
@@ -3967,19 +3967,19 @@ class admin
                                 "80c3cb";
                         } //bleu
                         elseif ($diff->d ==
-                            4) {
+                                4) {
                             $color =
                                 "019e59";
                         } //vert
                         elseif ($diff->d ==
-                            3 ||
-                            $diff->d ==
-                            2) {
+                                3 ||
+                                $diff->d ==
+                                2) {
                             $color =
                                 "ffcc01";
                         } //jaune
                         elseif ($diff->d ==
-                            1) {
+                                1) {
                             $color =
                                 "ff7638";
                         } //orange
@@ -4011,7 +4011,7 @@ class admin
                     if ($data_etiquette !==
                         false &&
                         (isset($data_etiquette[$commande->id_commande]['droit']) ||
-                            isset($data_etiquette[$commande->id_commande]['gauche']))) {
+                         isset($data_etiquette[$commande->id_commande]['gauche']))) {
                         $cl =
                             ' is_checked';
                     }
@@ -4031,7 +4031,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -4043,7 +4043,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -4059,18 +4059,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                $commande->ancienne_commande .
-                                '-' .
-                                $commande->id_users .
-                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                $commande->id_commande .
-                                '">Comparer</a>';
+                                                  $commande->ancienne_commande .
+                                                  '-' .
+                                                  $commande->id_users .
+                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                                  $commande->id_commande .
+                                                  '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                $commande->id_commande .
-                                '">Rejeter</a>';
+                                                  $commande->id_commande .
+                                                  '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -4099,7 +4099,7 @@ class admin
                             array(
                                 '<a ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4193,7 +4193,7 @@ class admin
                                     '<span class="certif_ico">C</span>' :
                                     '') .
                                 ($commande->date_annule !==
-                                null ?
+                                 null ?
                                     '<span class="highlight-yellow">' .
                                     date('d/m/Y',
                                          strtotime($commande->date_annule)) .
@@ -4201,7 +4201,7 @@ class admin
                                     ''),
                                 $commande->type_commande,
                                 ($commande->date_annule !==
-                                null ?
+                                 null ?
                                     1 :
                                     0)
                             );
@@ -4210,7 +4210,7 @@ class admin
                             array(
                                 '<a ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4304,7 +4304,7 @@ class admin
                                     '<span class="certif_ico">C</span>' :
                                     '') .
                                 ($commande->date_annule !==
-                                null ?
+                                 null ?
                                     '<span class="highlight-yellow">' .
                                     date('d/m/Y',
                                          strtotime($commande->date_annule)) .
@@ -4312,7 +4312,7 @@ class admin
                                     ''),
                                 $commande->type_commande,
                                 ($commande->date_annule !==
-                                null ?
+                                 null ?
                                     1 :
                                     0)
                             );
@@ -4483,7 +4483,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                    date("Y-m-d\TH:i:sO") . '</dateTime> 
+                       date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -4509,16 +4509,16 @@ class admin
                         $teinteD ==
                         "") {
                         $remark .= 'Right tint: ' .
-                            $information_commande->verre->correction_droit->teinte .
-                            '.';
+                                   $information_commande->verre->correction_droit->teinte .
+                                   '.';
                     }
                     if (strpos($information_commande->verre->correction_droit->teinte,
                                'CUST_') !==
                         false) {
 
                         $remark .= 'Right tint: ' .
-                            $teinteD .
-                            '.';
+                                   $teinteD .
+                                   '.';
                     }
                 }
                 if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -4527,15 +4527,15 @@ class admin
                         $teinteG ==
                         "") {
                         $remark .= ' Left tint: ' .
-                            $information_commande->verre->correction_gauche->teinte .
-                            '.';
+                                   $information_commande->verre->correction_gauche->teinte .
+                                   '.';
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                                'CUST_') !==
                         false) {
                         $remark .= ' Left tint: ' .
-                            $teinteG .
-                            '.';
+                                   $teinteG .
+                                   '.';
                     }
                 }
 
@@ -4546,10 +4546,10 @@ class admin
                     if ($typechange ==
                         "commentaire_omega") {
                         $remark .= " " .
-                            $change;
+                                   $change;
                     } else {
                         $remark .= " " .
-                            $commande->commentaire_omega;
+                                   $commande->commentaire_omega;
                     }
                 }
 
@@ -4655,9 +4655,9 @@ class admin
 
                 $xml .= '
          <referenceNo>' .
-                    $commande->id_commande .
-                    '-' .
-                    $commande->id_users . '</referenceNo>
+                        $commande->id_commande .
+                        '-' .
+                        $commande->id_users . '</referenceNo>
          <manufacturer />';
 
                 if ($commande->premiere_commande !=
@@ -4676,14 +4676,14 @@ class admin
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                $change . '</referenceNo>
+                                    $change . '</referenceNo>
 			 </multiplePair>';
                         } else {
                             $xml .= '
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                $commande->seconde_omega . '</referenceNo>
+                                    $commande->seconde_omega . '</referenceNo>
 			 </multiplePair>';
                         }
                     } else {
@@ -4691,7 +4691,7 @@ class admin
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                            $commande->premiere_commande . '</referenceNo>
+                                $commande->premiere_commande . '</referenceNo>
 			 </multiplePair>';
                     }
                 }
@@ -4968,47 +4968,46 @@ class admin
 
                     $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                        $lenses_code . '</commercialCode>
+                            $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                        $information_commande->verre->correction_droit->sphere . '</sphere>
+                            $information_commande->verre->correction_droit->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                        $information_commande->verre->correction_droit->cylindre . '</power>
+                            $information_commande->verre->correction_droit->cylindre . '</power>
                       <axis>' .
-                        $information_commande->verre->correction_droit->axe . '</axis>
+                            $information_commande->verre->correction_droit->axe . '</axis>
                   </cylinder>';
                     if (isset($information_commande->verre->correction_droit->addition)) {
                         $xml .= '<addition>' .
-                            $information_commande->verre->correction_droit->addition . '</addition>
+                                $information_commande->verre->correction_droit->addition . '</addition>
 						  ';
                     }
                     if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                         !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                         $xml .= '<prism>
 						 <power>' .
-                            $information_commande->verre->correction_droit->PrismeSphere . '</power>
+                                $information_commande->verre->correction_droit->PrismeSphere . '</power>
 						 <base>' .
-                            $information_commande->verre->correction_droit->PrismeCylindre . '</base>
+                                $information_commande->verre->correction_droit->PrismeCylindre . '</base>
 					  </prism>';
                     }
                     $xml .= '</rxData>';
                     if ((isset($information_commande->verre->correction_droit->traitement) &&
-                            !empty($information_commande->verre->correction_droit->traitement) &&
-                            (($information_commande->verre->correction_droit->traitement ==
-                                    '700100') &&
-                                ((strpos($commande->lensname,
-                                         '1.5') ===
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.53') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.56') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.59') !==
-                                        false)))) ||
+                         !empty($information_commande->verre->correction_droit->traitement) &&
+                         ($information_commande->verre->correction_droit->traitement !=
+                          '700100' ||
+                          (($information_commande->verre->correction_droit->traitement ==
+                            '700100') &&
+                           ((strpos($commande->lensname,
+                                    '1.5') === false) ||
+                            (strpos($commande->lensname,
+                                    '1.53') !== false) ||
+                            (strpos($commande->lensname,
+                                    '1.56') !== false) ||
+                            (strpos($commande->lensname,
+                                    '1.59') !== false))
+                          ))) ||
                         $paA ==
                         "1") {
 
@@ -5021,7 +5020,7 @@ class admin
                         $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
 
                     }
@@ -5037,7 +5036,7 @@ class admin
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5076,16 +5075,16 @@ class admin
                         !empty($information_commande->verre->ecart_puppillaire->droit)) {
                         $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                            $information_commande->verre->ecart_puppillaire->droit .
-                            '</monocularCentrationDistance>';
+                                $information_commande->verre->ecart_puppillaire->droit .
+                                '</monocularCentrationDistance>';
                     }
 
                     if (isset($information_commande->verre->hauteur) &&
                         !empty($information_commande->verre->hauteur)) {
                         $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                            $hauteurD .
-                            '</height>';
+                                $hauteurD .
+                                '</height>';
                     }
 
                     $xml .= '
@@ -5101,9 +5100,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                            $d1[0] . '</physical>
+                                $d1[0] . '</physical>
                      <optical>' .
-                            $d1[1] . '</optical>
+                                $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                     } else {
@@ -5114,7 +5113,7 @@ class admin
                             $xml .= '
 						  <diameter>
 							 <physical>' .
-                                $information_commande->verre->correction_droit->diametre . '</physical>
+                                    $information_commande->verre->correction_droit->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                         }
@@ -5124,8 +5123,8 @@ class admin
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $xml .= '
 			    	<thickness reference="EDGE">' .
-                            $information_commande->bord_verre->epaisseur .
-                            '</thickness>';
+                                $information_commande->bord_verre->epaisseur .
+                                '</thickness>';
                     }
 
                     if (isset($information_commande->verre->ecart_puppillaire->droit) &&
@@ -5145,19 +5144,19 @@ class admin
                 if (isset($information_commande->verre->correction_gauche)) {
                     $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                        $lenses_code . '</commercialCode>
+                            $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                        $information_commande->verre->correction_gauche->sphere . '</sphere>
+                            $information_commande->verre->correction_gauche->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                        $information_commande->verre->correction_gauche->cylindre . '</power>
+                            $information_commande->verre->correction_gauche->cylindre . '</power>
                       <axis>' .
-                        $information_commande->verre->correction_gauche->axe . '</axis>
+                            $information_commande->verre->correction_gauche->axe . '</axis>
                   </cylinder>';
                     if (isset($information_commande->verre->correction_gauche->addition)) {
                         $xml .= '<addition>' .
-                            $information_commande->verre->correction_gauche->addition . '</addition>
+                                $information_commande->verre->correction_gauche->addition . '</addition>
 						  ';
                     }
 
@@ -5165,30 +5164,29 @@ class admin
                         !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                         $xml .= '<prism>
 						 <power>' .
-                            $information_commande->verre->correction_gauche->PrismeSphere . '</power>
+                                $information_commande->verre->correction_gauche->PrismeSphere . '</power>
 						 <base>' .
-                            $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
+                                $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
 					  </prism>';
                     }
 
                     $xml .= '</rxData>';
 
                     if ((isset($information_commande->verre->correction_gauche->traitement) &&
-                            !empty($information_commande->verre->correction_gauche->traitement) &&
-                            (($information_commande->verre->correction_gauche->traitement ==
-                                    '700100') &&
-                                ((strpos($commande->lensname,
-                                         '1.5') ===
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.53') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.56') !==
-                                        false) ||
-                                    (strpos($commande->lensname,
-                                            '1.59') !==
-                                        false)))) ||
+                         !empty($information_commande->verre->correction_gauche->traitement) &&
+                         ($information_commande->verre->correction_gauche->traitement !=
+                          '700100' ||
+                          (($information_commande->verre->correction_gauche->traitement ==
+                            '700100') &&
+                           ((strpos($commande->lensname,
+                                    '1.5') === false) ||
+                            (strpos($commande->lensname,
+                                    '1.53') !== false) ||
+                            (strpos($commande->lensname,
+                                    '1.56') !== false) ||
+                            (strpos($commande->lensname,
+                                    '1.59') !== false))
+                          ))) ||
                         $paA ==
                         "1") {
 
@@ -5200,7 +5198,7 @@ class admin
                         $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
 
                     }
@@ -5216,7 +5214,7 @@ class admin
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5244,16 +5242,16 @@ class admin
                         !empty($information_commande->verre->ecart_puppillaire->gauche)) {
                         $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                            $information_commande->verre->ecart_puppillaire->gauche .
-                            '</monocularCentrationDistance>';
+                                $information_commande->verre->ecart_puppillaire->gauche .
+                                '</monocularCentrationDistance>';
                     }
 
                     if (isset($information_commande->verre->hauteur_gauche) &&
                         !empty($information_commande->verre->hauteur_gauche)) {
                         $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                            $hauteurG .
-                            '</height>';
+                                $hauteurG .
+                                '</height>';
                     }
 
                     $xml .= '
@@ -5269,9 +5267,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                            $d1[0] . '</physical>
+                                $d1[0] . '</physical>
                      <optical>' .
-                            $d1[1] . '</optical>
+                                $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                     } else {
@@ -5282,7 +5280,7 @@ class admin
                             $xml .= '
 						  <diameter>
 							 <physical>' .
-                                $information_commande->verre->correction_gauche->diametre . '</physical>
+                                    $information_commande->verre->correction_gauche->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                         }
@@ -5292,8 +5290,8 @@ class admin
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $xml .= '
 			    	<thickness reference="EDGE">' .
-                            $information_commande->bord_verre->epaisseur .
-                            '</thickness>';
+                                $information_commande->bord_verre->epaisseur .
+                                '</thickness>';
                     }
 
                     if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
@@ -5315,23 +5313,23 @@ class admin
             	<frame quantity="1">';
 
                 if ((isset($information_commande->verre->correction_droit->galbe) &&
-                        $information_commande->verre->correction_droit->galbe !=
-                        "Standard") ||
+                     $information_commande->verre->correction_droit->galbe !=
+                     "Standard") ||
                     (isset($information_commande->verre->correction_gauche->galbe) &&
-                        $information_commande->verre->correction_gauche->galbe !=
-                        "Standard")) {
+                     $information_commande->verre->correction_gauche->galbe !=
+                     "Standard")) {
                     if (isset($information_commande->verre->correction_droit->galbe) &&
                         $information_commande->verre->correction_droit->galbe !=
                         "Standard") {
                         $xml .= '
 <frameBowAngle>' .
-                            $information_commande->verre->correction_droit->galbe .
-                            '</frameBowAngle>';
+                                $information_commande->verre->correction_droit->galbe .
+                                '</frameBowAngle>';
                     } else {
                         $xml .= '
 <frameBowAngle>' .
-                            $information_commande->verre->correction_gauche->galbe .
-                            '</frameBowAngle>';
+                                $information_commande->verre->correction_gauche->galbe .
+                                '</frameBowAngle>';
                     }
                 }
 
@@ -5667,15 +5665,15 @@ class admin
                     }
 
                     $xml .= '<material>' .
-                        $monture_type . '</material>
+                            $monture_type . '</material>
 				   <boxWidth>' .
-                        $boxWidth . '</boxWidth>
+                            $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                        $boxHeight . '</boxHeight>
+                            $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                        $DBL . '</distanceBetweenLenses>
+                            $DBL . '</distanceBetweenLenses>
 				   ' .
-                        $calibre;
+                            $calibre;
                 }
                 $xml .= '
             	</frame>';
@@ -5784,11 +5782,11 @@ class admin
                     }
 
                     $detail .= "<br>Nom du verre: <b>" .
-                        $commande->trad_fr .
-                        "</b>";
+                               $commande->trad_fr .
+                               "</b>";
                     $detail .= "<br>Indice: " .
-                        $commande->indice_verre .
-                        '';
+                               $commande->indice_verre .
+                               '';
 
                     $information_commande =
                         json_decode($commande->information_commande);
@@ -5796,16 +5794,16 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $detail .= "<br><br><b>OD:</b>";
                         $detail .= " " .
-                            $information_commande->verre->correction_droit->sphere .
-                            "";
+                                   $information_commande->verre->correction_droit->sphere .
+                                   "";
                         $detail .= " (" .
-                            $information_commande->verre->correction_droit->cylindre .
-                            ")";
+                                   $information_commande->verre->correction_droit->cylindre .
+                                   ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $detail .= " " .
-                                $information_commande->verre->correction_droit->axe .
-                                "°";
+                                       $information_commande->verre->correction_droit->axe .
+                                       "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -5814,8 +5812,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
+                                       $information_commande->verre->correction_droit->addition .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -5824,8 +5822,8 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
+                                       $information_commande->verre->correction_droit->addition .
+                                       "";
                         }
 
 
@@ -5836,30 +5834,30 @@ class admin
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $detail .= " " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                                       $information_commande->verre->correction_droit->PrismeSphere .
+                                       "Δ";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                             $detail .= " base " .
-                                $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
+                                       $information_commande->verre->correction_droit->PrismeCylindre .
+                                       "°";
 
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $detail .= " Galbe: " .
-                                $information_commande->verre->correction_droit->galbe .
-                                " ";
+                                       $information_commande->verre->correction_droit->galbe .
+                                       " ";
                         }
                         if (isset($information_commande->verre->correction_droit->traitement) &&
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                             $detail .= "<br>Traitement: " .
-                                $traitementD .
-                                "";
+                                       $traitementD .
+                                       "";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -5867,22 +5865,22 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                    $teinteD .
-                                    "</b>";
+                                           $teinteD .
+                                           "</b>";
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_droit->teinte .
-                                        "</b>";
+                                               $information_commande->verre->correction_droit->teinte .
+                                               "</b>";
                                 }
                             }
                         }
                         if (isset($information_commande->verre->correction_droit->diametre) &&
                             !empty($information_commande->verre->correction_droit->diametre)) {
                             $detail .= "<br>Diametre: " .
-                                $information_commande->verre->correction_droit->diametre .
-                                "";
+                                       $information_commande->verre->correction_droit->diametre .
+                                       "";
 
                         }
 
@@ -5891,17 +5889,17 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $detail .= "<br><br><b>OG:</b>";
                         $detail .= " " .
-                            $information_commande->verre->correction_gauche->sphere .
-                            "";
+                                   $information_commande->verre->correction_gauche->sphere .
+                                   "";
                         $detail .= " (" .
-                            $information_commande->verre->correction_gauche->cylindre .
-                            ")";
+                                   $information_commande->verre->correction_gauche->cylindre .
+                                   ")";
 
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $detail .= " " .
-                                $information_commande->verre->correction_gauche->axe .
-                                "°";
+                                       $information_commande->verre->correction_gauche->axe .
+                                       "°";
                         }
                         /*if(isset($information_commande->verre->correction_gauche->addition) && $information_commande->verre->correction_gauche->addition != "0.00")
                 			$detail .=" ".$information_commande->verre->correction_gauche->addition."</b>";*/
@@ -5912,8 +5910,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
+                                       $information_commande->verre->correction_gauche->addition .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -5922,28 +5920,28 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
+                                       $information_commande->verre->correction_gauche->addition .
+                                       "";
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $detail .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                                       $information_commande->verre->correction_gauche->PrismeSphere .
+                                       "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $detail .= " base  " .
-                                $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°";
+                                       $information_commande->verre->correction_gauche->PrismeCylindre .
+                                       "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $detail .= " Galbe: " .
-                                $information_commande->verre->correction_gauche->galbe .
-                                " ";
+                                       $information_commande->verre->correction_gauche->galbe .
+                                       " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -5951,8 +5949,8 @@ class admin
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                             $detail .= "<br>Traitement: " .
-                                $traitementG .
-                                "";
+                                       $traitementG .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -5961,20 +5959,20 @@ class admin
                             if ($teinteG !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                    $teinteG .
-                                    "</b>";
+                                           $teinteG .
+                                           "</b>";
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_gauche->teinte .
-                                        "</b>";
+                                               $information_commande->verre->correction_gauche->teinte .
+                                               "</b>";
                                 }
                             }
                         }
                         $detail .= "<br>Diametre: " .
-                            $information_commande->verre->correction_gauche->diametre .
-                            "";
+                                   $information_commande->verre->correction_gauche->diametre .
+                                   "";
 
                     }
 
@@ -5982,19 +5980,19 @@ class admin
                         0;
 
                     if ((isset($information_commande->verre->correction_droit) &&
-                            $information_commande->verre->correction_droit->diametre ==
-                            'precalibrage') ||
+                         $information_commande->verre->correction_droit->diametre ==
+                         'precalibrage') ||
                         (isset($information_commande->verre->correction_gauche) &&
-                            $information_commande->verre->correction_gauche->diametre ==
-                            'precalibrage')) {
+                         $information_commande->verre->correction_gauche->diametre ==
+                         'precalibrage')) {
                         $precal =
                             1;
                         $detail .= '<br><br><b>Précalibrage:</b> <br>';
 
                         if (isset($information_commande->precalibrage)) {
                             $detail .= '<br><img src="/static/img/calibre/' .
-                                $information_commande->precalibrage->calibre .
-                                '.jpg" width="150" heigth="70" /><br>';
+                                       $information_commande->precalibrage->calibre .
+                                       '.jpg" width="150" heigth="70" /><br>';
                         }
 
                         $mesure_freeform_opt =
@@ -6028,43 +6026,43 @@ class admin
 
                         if (isset($information_commande->monture->type)) {
                             $detail .= 'Type monture: ' .
-                                $information_commande->monture->type .
-                                '<br>';
+                                       $information_commande->monture->type .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $detail .= 'EP au bord minimum: ' .
-                                $information_commande->bord_verre->epaisseur .
-                                '<br>';
+                                       $information_commande->bord_verre->epaisseur .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $detail .= 'Ecart puppillaire droit: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                                '<br>';
+                                       $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $detail .= 'Ecart puppillaire gauche: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                                '<br>';
+                                       $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $detail .= 'Hauteur de montage droit: ' .
-                                $information_commande->mesure_freeform->hauteur .
-                                '<br>';
+                                       $information_commande->mesure_freeform->hauteur .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $detail .= 'Hauteur de montage gauche: ' .
-                                $information_commande->mesure_freeform->hauteur_gauche .
-                                '<br>';
+                                       $information_commande->mesure_freeform->hauteur_gauche .
+                                       '<br>';
                         }
 
                     }
@@ -6078,18 +6076,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                $commande->ancienne_commande .
-                                '-' .
-                                $commande->id_users .
-                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                $commande->id_commande .
-                                '">Comparer</a>';
+                                                  $commande->ancienne_commande .
+                                                  '-' .
+                                                  $commande->id_users .
+                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                                  $commande->id_commande .
+                                                  '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                $commande->id_commande .
-                                '">Rejeter</a>';
+                                                  $commande->id_commande .
+                                                  '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -6117,7 +6115,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -6129,7 +6127,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -6155,45 +6153,45 @@ class admin
                     if ($commande->commentaire !=
                         "") {
                         $infos .= "<br><br>Commentaires client: <b><br>" .
-                            $commande->commentaire .
-                            "</b>";
+                                  $commande->commentaire .
+                                  "</b>";
                     }
 
                     if ($commande->commentaire_omega !=
                         "") {
                         $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                            $commande->commentaire_omega .
-                            '</b>';
+                                  $commande->commentaire_omega .
+                                  '</b>';
                     }
 
                     $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                        $commande->id_commande .
-                        '_' .
-                        $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                              $commande->id_commande .
+                              '_' .
+                              $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                     if ($commande->seconde_omega !=
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                            $commande->seconde_omega .
-                            "</b>";
+                                  $commande->seconde_omega .
+                                  "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                            $commande->id_commande .
-                            '_' .
-                            $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                  $commande->id_commande .
+                                  '_' .
+                                  $commande->id_users .
+                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     } else {
                         if ($commande->premiere_commande !=
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                $commande->premiere_commande .
-                                "</b>";
+                                      $commande->premiere_commande .
+                                      "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                $commande->id_commande .
-                                '_' .
-                                $commande->id_users .
-                                '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                      $commande->id_commande .
+                                      '_' .
+                                      $commande->id_users .
+                                      '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                         }
 
                     }
@@ -6256,17 +6254,17 @@ class admin
                     }
 
                     $detail .= "<br>Nom du verre: <b>" .
-                        $commande->trad_fr .
-                        "</b>";
+                               $commande->trad_fr .
+                               "</b>";
                     $detail .= "<br>Indice: " .
-                        $commande->indice_verre .
-                        '';
+                               $commande->indice_verre .
+                               '';
 
                     if ($commande->premiere_commande !=
                         '0') {
                         $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
-                            $commande->premiere_commande .
-                            "<br>";
+                                     $commande->premiere_commande .
+                                     "<br>";
                     }
 
                     if ($commande->tarif_express !=
@@ -6275,16 +6273,16 @@ class admin
                     }
 
                     $textarea .= "Optieyes reference: " .
-                        $commande->id_commande .
-                        "-" .
-                        $commande->id_users;
+                                 $commande->id_commande .
+                                 "-" .
+                                 $commande->id_users;
                     $textarea .= "<br><br>Lens Code: " .
-                        $commande->lenscode;
+                                 $commande->lenscode;
                     $textarea .= "<br>Lens Name: " .
-                        $commande->lensname;
+                                 $commande->lensname;
 
                     $textarea .= "<br><br>Optical Index: " .
-                        $commande->indice_verre;
+                                 $commande->indice_verre;
 
 
                     $information_commande =
@@ -6293,16 +6291,16 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $detail .= "<br><br><b>OD :</b>";
                         $detail .= " " .
-                            $information_commande->verre->correction_droit->sphere .
-                            " ";
+                                   $information_commande->verre->correction_droit->sphere .
+                                   " ";
                         $detail .= "(" .
-                            $information_commande->verre->correction_droit->cylindre .
-                            ")";
+                                   $information_commande->verre->correction_droit->cylindre .
+                                   ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $detail .= " " .
-                                $information_commande->verre->correction_droit->axe .
-                                "°";
+                                       $information_commande->verre->correction_droit->axe .
+                                       "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6311,8 +6309,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
+                                       $information_commande->verre->correction_droit->addition .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6321,29 +6319,29 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
+                                       $information_commande->verre->correction_droit->addition .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $detail .= " " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                                       $information_commande->verre->correction_droit->PrismeSphere .
+                                       "Δ";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                             $detail .= " base " .
-                                $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
+                                       $information_commande->verre->correction_droit->PrismeCylindre .
+                                       "°";
 
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $detail .= " Galbe: " .
-                                $information_commande->verre->correction_droit->galbe .
-                                " ";
+                                       $information_commande->verre->correction_droit->galbe .
+                                       " ";
                         }
 
                         if (isset($information_commande->verre->correction_droit->traitement) &&
@@ -6351,8 +6349,8 @@ class admin
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                             $detail .= "<br>Traitement: " .
-                                $traitementD .
-                                "";
+                                       $traitementD .
+                                       "";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6360,36 +6358,36 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                    $teinteD .
-                                    "</b>";
+                                           $teinteD .
+                                           "</b>";
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_droit->teinte .
-                                        "</b>";
+                                               $information_commande->verre->correction_droit->teinte .
+                                               "</b>";
                                 }
                             }
                         }
                         if (isset($information_commande->verre->correction_droit->diametre) &&
                             !empty($information_commande->verre->correction_droit->diametre)) {
                             $detail .= "<br>Diametre: " .
-                                $information_commande->verre->correction_droit->diametre .
-                                "";
+                                       $information_commande->verre->correction_droit->diametre .
+                                       "";
 
                         }
 
                         $textarea .= "<br><br>OD :";
                         $textarea .= "  " .
-                            $information_commande->verre->correction_droit->sphere;
+                                     $information_commande->verre->correction_droit->sphere;
                         $textarea .= " ( " .
-                            $information_commande->verre->correction_droit->cylindre .
-                            ")";
+                                     $information_commande->verre->correction_droit->cylindre .
+                                     ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $textarea .= "  " .
-                                $information_commande->verre->correction_droit->axe .
-                                "°";
+                                         $information_commande->verre->correction_droit->axe .
+                                         "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6398,7 +6396,7 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $textarea .= " ADD  " .
-                                $information_commande->verre->correction_droit->addition;
+                                         $information_commande->verre->correction_droit->addition;
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6407,7 +6405,7 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $textarea .= " DEG  " .
-                                $information_commande->verre->correction_droit->addition;
+                                         $information_commande->verre->correction_droit->addition;
                         }
 
 
@@ -6415,33 +6413,44 @@ class admin
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
 
                             $textarea .= "  " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                                         $information_commande->verre->correction_droit->PrismeSphere .
+                                         "Δ";
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
 
                             $textarea .= " base " .
-                                $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
+                                         $information_commande->verre->correction_droit->PrismeCylindre .
+                                         "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $textarea .= " Galbe: " .
-                                $information_commande->verre->correction_droit->galbe .
-                                " ";
+                                         $information_commande->verre->correction_droit->galbe .
+                                         " ";
                         }
                         if (isset($information_commande->verre->correction_droit->traitement) &&
                             !empty($information_commande->verre->correction_droit->traitement) &&
                             ($information_commande->verre->correction_droit->traitement !=
-                                '700100')) {
+                             '700100' ||
+                             (($information_commande->verre->correction_droit->traitement ==
+                               '700100') &&
+                              ((strpos($commande->lensname,
+                                       '1.5') === false) ||
+                               (strpos($commande->lensname,
+                                       '1.53') !== false) ||
+                               (strpos($commande->lensname,
+                                       '1.56') !== false) ||
+                               (strpos($commande->lensname,
+                                       '1.59') !== false))
+                             ))) {
                             if ($traitementD !=
                                 "") {
                                 $textarea .= "<br>Coating code: " .
-                                    $information_commande->verre->correction_droit->traitement .
-                                    "(" .
-                                    $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
-                                    ")";
+                                             $information_commande->verre->correction_droit->traitement .
+                                             "(" .
+                                             $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
+                                             ")";
                             }
                         }
 
@@ -6449,12 +6458,12 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $textarea .= "<br>Tint: " .
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                             $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $textarea .= "<br>Custom Tint: " .
-                                        $information_commande->verre->correction_droit->teinte;
+                                                 $information_commande->verre->correction_droit->teinte;
                                 }
                             }
                         }
@@ -6464,7 +6473,7 @@ class admin
                             $information_commande->verre->correction_droit->diametre !=
                             "precalibrage") {
                             $textarea .= "<br>Diameter physical: " .
-                                $information_commande->verre->correction_droit->diametre;
+                                         $information_commande->verre->correction_droit->diametre;
                         }
 
 
@@ -6473,16 +6482,16 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $detail .= "<br><br><b>OG :</b>";
                         $detail .= " " .
-                            $information_commande->verre->correction_gauche->sphere .
-                            "";
+                                   $information_commande->verre->correction_gauche->sphere .
+                                   "";
                         $detail .= " (" .
-                            $information_commande->verre->correction_gauche->cylindre .
-                            ")";
+                                   $information_commande->verre->correction_gauche->cylindre .
+                                   ")";
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $detail .= "  " .
-                                $information_commande->verre->correction_gauche->axe .
-                                "°";
+                                       $information_commande->verre->correction_gauche->axe .
+                                       "°";
                         }
                         if (isset($information_commande->verre->correction_gauche->addition) &&
                             $information_commande->verre->correction_gauche->addition !=
@@ -6490,8 +6499,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD  " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
+                                       $information_commande->verre->correction_gauche->addition .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -6500,28 +6509,28 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG  " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
+                                       $information_commande->verre->correction_gauche->addition .
+                                       "";
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $detail .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                                       $information_commande->verre->correction_gauche->PrismeSphere .
+                                       "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $detail .= " base  " .
-                                $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°";
+                                       $information_commande->verre->correction_gauche->PrismeCylindre .
+                                       "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $detail .= " Galbe: " .
-                                $information_commande->verre->correction_gauche->galbe .
-                                " ";
+                                       $information_commande->verre->correction_gauche->galbe .
+                                       " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -6529,8 +6538,8 @@ class admin
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                             $detail .= "<br>Traitement: " .
-                                $traitementG .
-                                "";
+                                       $traitementG .
+                                       "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -6539,32 +6548,32 @@ class admin
                             if ($teinteG !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                    $teinteG .
-                                    "</b>";
+                                           $teinteG .
+                                           "</b>";
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_gauche->teinte .
-                                        "</b>";
+                                               $information_commande->verre->correction_gauche->teinte .
+                                               "</b>";
                                 }
                             }
                         }
                         $detail .= "<br>Diametre: " .
-                            $information_commande->verre->correction_gauche->diametre .
-                            "";
+                                   $information_commande->verre->correction_gauche->diametre .
+                                   "";
 
                         $textarea .= "<br><br>OG:";
                         $textarea .= "  " .
-                            $information_commande->verre->correction_gauche->sphere;
+                                     $information_commande->verre->correction_gauche->sphere;
                         $textarea .= " (" .
-                            $information_commande->verre->correction_gauche->cylindre .
-                            ")";
+                                     $information_commande->verre->correction_gauche->cylindre .
+                                     ")";
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $textarea .= "  " .
-                                $information_commande->verre->correction_gauche->axe .
-                                "°";
+                                         $information_commande->verre->correction_gauche->axe .
+                                         "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -6573,7 +6582,7 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $textarea .= " ADD  " .
-                                $information_commande->verre->correction_gauche->addition;
+                                         $information_commande->verre->correction_gauche->addition;
                         }
                         if (isset($information_commande->verre->correction_gauche->addition) &&
                             $information_commande->verre->correction_gauche->addition !=
@@ -6581,48 +6590,59 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $textarea .= " DEG  " .
-                                $information_commande->verre->correction_gauche->addition;
+                                         $information_commande->verre->correction_gauche->addition;
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $textarea .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                                         $information_commande->verre->correction_gauche->PrismeSphere .
+                                         "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $textarea .= " base  " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "°";
+                                         $information_commande->verre->correction_gauche->PrismeSphere .
+                                         "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $textarea .= " Galbe: " .
-                                $information_commande->verre->correction_gauche->galbe .
-                                " ";
+                                         $information_commande->verre->correction_gauche->galbe .
+                                         " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement) &&
                             ($information_commande->verre->correction_gauche->traitement !=
-                                '700100')) {
+                             '700100' ||
+                             (($information_commande->verre->correction_gauche->traitement ==
+                               '700100') &&
+                              ((strpos($commande->lensname,
+                                       '1.5') === false) ||
+                               (strpos($commande->lensname,
+                                       '1.53') !== false) ||
+                               (strpos($commande->lensname,
+                                       '1.56') !== false) ||
+                               (strpos($commande->lensname,
+                                       '1.59') !== false))
+                             ))) {
                             $textarea .= "<br>Coating code: " .
-                                $information_commande->verre->correction_gauche->traitement .
-                                "(" .
-                                $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
-                                ")";
+                                         $information_commande->verre->correction_gauche->traitement .
+                                         "(" .
+                                         $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
+                                         ")";
                         }
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
                                 "") {
                                 $textarea .= "<br>Tint: " .
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                             $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $textarea .= "<br>Custom Tint: " .
-                                        $information_commande->verre->correction_gauche->teinte;
+                                                 $information_commande->verre->correction_gauche->teinte;
                                 }
                             }
                         }
@@ -6632,7 +6652,7 @@ class admin
                             $information_commande->verre->correction_gauche->diametre !=
                             "precalibrage") {
                             $textarea .= "<br>Diameter physical: " .
-                                $information_commande->verre->correction_gauche->diametre;
+                                         $information_commande->verre->correction_gauche->diametre;
                         }
 
                     }
@@ -6641,19 +6661,19 @@ class admin
                         0;
 
                     if ((isset($information_commande->verre->correction_droit) &&
-                            $information_commande->verre->correction_droit->diametre ==
-                            'precalibrage') ||
+                         $information_commande->verre->correction_droit->diametre ==
+                         'precalibrage') ||
                         (isset($information_commande->verre->correction_gauche) &&
-                            $information_commande->verre->correction_gauche->diametre ==
-                            'precalibrage')) {
+                         $information_commande->verre->correction_gauche->diametre ==
+                         'precalibrage')) {
                         $precal =
                             1;
                         $detail .= '<br><br><b>Précalibrage:</b> <br>';
 
                         if (isset($information_commande->precalibrage)) {
                             $detail .= '<br><img src="/static/img/calibre/' .
-                                $information_commande->precalibrage->calibre .
-                                '.jpg" width="150" heigth="70" /><br>';
+                                       $information_commande->precalibrage->calibre .
+                                       '.jpg" width="150" heigth="70" /><br>';
                         }
 
                         $mesure_freeform_opt =
@@ -6687,43 +6707,43 @@ class admin
 
                         if (isset($information_commande->monture->type)) {
                             $detail .= 'Type monture: ' .
-                                $information_commande->monture->type .
-                                '<br>';
+                                       $information_commande->monture->type .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $detail .= 'EP au bord minimum: ' .
-                                $information_commande->bord_verre->epaisseur .
-                                '<br>';
+                                       $information_commande->bord_verre->epaisseur .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $detail .= 'Ecart puppillaire droit: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                                '<br>';
+                                       $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $detail .= 'Ecart puppillaire gauche: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                                '<br>';
+                                       $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $detail .= 'Hauteur de montage droit: ' .
-                                $information_commande->mesure_freeform->hauteur .
-                                '<br>';
+                                       $information_commande->mesure_freeform->hauteur .
+                                       '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $detail .= 'Hauteur de montage gauche: ' .
-                                $information_commande->mesure_freeform->hauteur_gauche .
-                                '<br>';
+                                       $information_commande->mesure_freeform->hauteur_gauche .
+                                       '<br>';
                         }
 
 
@@ -6732,66 +6752,66 @@ class admin
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $textarea .= "<br>PD right: " .
-                                $information_commande->mesure_freeform->ecart_puppillaire_droit;
+                                         $information_commande->mesure_freeform->ecart_puppillaire_droit;
                         }
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $textarea .= "<br>Height right: " .
-                                $information_commande->mesure_freeform->hauteur;
+                                         $information_commande->mesure_freeform->hauteur;
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $textarea .= "<br>PD left: " .
-                                $information_commande->mesure_freeform->ecart_puppillaire_gauche;
+                                         $information_commande->mesure_freeform->ecart_puppillaire_gauche;
                         }
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $textarea .= "<br>Height left: " .
-                                $information_commande->mesure_freeform->hauteur_gauche;
+                                         $information_commande->mesure_freeform->hauteur_gauche;
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $textarea .= "<br>Minimal edge thickn.: " .
-                                $information_commande->bord_verre->epaisseur;
+                                         $information_commande->bord_verre->epaisseur;
                         }
 
                         if (isset($information_commande->mesure_freeform->taille_du_pont) &&
                             !empty($information_commande->mesure_freeform->taille_du_pont)) {
                             $textarea .= "<br>DBL: " .
-                                $information_commande->mesure_freeform->taille_du_pont;
+                                         $information_commande->mesure_freeform->taille_du_pont;
                         }
 
                         if (isset($information_commande->mesure_freeform->largeur_boxing) &&
                             !empty($information_commande->mesure_freeform->largeur_boxing)) {
                             $textarea .= "<br>Boxing width: " .
-                                $information_commande->mesure_freeform->largeur_boxing;
+                                         $information_commande->mesure_freeform->largeur_boxing;
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
                             !empty($information_commande->mesure_freeform->hauteur_boxing)) {
                             $textarea .= "<br>Boxing height: " .
-                                $information_commande->mesure_freeform->hauteur_boxing;
+                                         $information_commande->mesure_freeform->hauteur_boxing;
                         }
 
                         if (isset($information_commande->mesure_freeform->diametre_utile) &&
                             !empty($information_commande->mesure_freeform->diametre_utile)) {
                             $textarea .= "<br>Diameter: " .
-                                $information_commande->mesure_freeform->diametre_utile;
+                                         $information_commande->mesure_freeform->diametre_utile;
                         }
 
                         if (isset($information_commande->monture->type) &&
                             !empty($information_commande->monture->type)) {
                             $textarea .= "<br>Frame Type: " .
-                                $information_commande->monture->type;
+                                         $information_commande->monture->type;
                         }
 
                         if (isset($information_commande->precalibrage->calibre) &&
                             !empty($information_commande->precalibrage->calibre)) {
                             $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
-                                $information_commande->precalibrage->calibre .
-                                ".jpg' width='150' heigth='70' /><br>";
+                                         $information_commande->precalibrage->calibre .
+                                         ".jpg' width='150' heigth='70' /><br>";
                         }
 
 
@@ -6804,7 +6824,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                        date("Y-m-d\TH:i:sO") . '</dateTime> 
+                           date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -6830,16 +6850,16 @@ class admin
                         if ($teinteD ==
                             "") {
                             $remark .= 'Right tint: ' .
-                                $information_commande->verre->correction_droit->teinte .
-                                '.';
+                                       $information_commande->verre->correction_droit->teinte .
+                                       '.';
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                    'CUST_') !==
                             false) {
 
                             $remark .= 'Right tint: ' .
-                                $teinteD .
-                                '.';
+                                       $teinteD .
+                                       '.';
                         }
                     }
                     if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -6847,15 +6867,15 @@ class admin
                         if ($teinteG ==
                             "") {
                             $remark .= ' Left tint: ' .
-                                $information_commande->verre->correction_gauche->teinte .
-                                '.';
+                                       $information_commande->verre->correction_gauche->teinte .
+                                       '.';
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                    'CUST_') !==
                             false) {
                             $remark .= ' Left tint: ' .
-                                $teinteG .
-                                '.';
+                                       $teinteG .
+                                       '.';
                         }
                     }
 
@@ -6960,9 +6980,9 @@ class admin
 
                     $xml .= '
          <referenceNo>' .
-                        $commande->id_commande .
-                        '-' .
-                        $commande->id_users . '</referenceNo>
+                            $commande->id_commande .
+                            '-' .
+                            $commande->id_users . '</referenceNo>
          <manufacturer />';
 
                     if ($commande->premiere_commande !=
@@ -6971,7 +6991,7 @@ class admin
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                            $commande->premiere_commande . '</referenceNo>
+                                $commande->premiere_commande . '</referenceNo>
 		 </multiplePair>';
                     }
 
@@ -7245,36 +7265,36 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                                $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_droit->sphere . '</sphere>
+                                $information_commande->verre->correction_droit->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_droit->cylindre . '</power>
+                                $information_commande->verre->correction_droit->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_droit->axe . '</axis>
+                                $information_commande->verre->correction_droit->axe . '</axis>
                   </cylinder>';
                         if (isset($information_commande->verre->correction_droit->addition)) {
                             $xml .= '<addition>' .
-                                $information_commande->verre->correction_droit->addition . '</addition>
+                                    $information_commande->verre->correction_droit->addition . '</addition>
 						  ';
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $xml .= '<prism>
 						 <power>' .
-                                $information_commande->verre->correction_droit->PrismeSphere . '</power>
+                                    $information_commande->verre->correction_droit->PrismeSphere . '</power>
 						 <base>' .
-                                $information_commande->verre->correction_droit->PrismeCylindre . '</base>
+                                    $information_commande->verre->correction_droit->PrismeCylindre . '</base>
 					  </prism>';
                         }
                         $xml .= '</rxData>';
 
                         if ((isset($information_commande->verre->correction_droit->traitement) &&
-                                !empty($information_commande->verre->correction_droit->traitement) &&
-                                ($information_commande->verre->correction_droit->traitement !=
-                                    '700100')) ||
+                             !empty($information_commande->verre->correction_droit->traitement) &&
+                             ($information_commande->verre->correction_droit->traitement !=
+                              '700100')) ||
                             $paA ==
                             "1") {
 
@@ -7287,7 +7307,7 @@ class admin
                             $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                    $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
 
                         }
@@ -7302,7 +7322,7 @@ class admin
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                        $information_commande->verre->correction_droit->teinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7341,16 +7361,16 @@ class admin
                             !empty($information_commande->verre->ecart_puppillaire->droit)) {
                             $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->droit .
-                                '</monocularCentrationDistance>';
+                                    $information_commande->verre->ecart_puppillaire->droit .
+                                    '</monocularCentrationDistance>';
                         }
 
                         if (isset($information_commande->verre->hauteur) &&
                             !empty($information_commande->verre->hauteur)) {
                             $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $information_commande->verre->hauteur .
-                                '</height>';
+                                    $information_commande->verre->hauteur .
+                                    '</height>';
                         }
 
                         $xml .= '
@@ -7367,9 +7387,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                                    $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                                    $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                         } else {
@@ -7380,7 +7400,7 @@ class admin
                                 $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_droit->diametre . '</physical>
+                                        $information_commande->verre->correction_droit->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                             }
@@ -7390,8 +7410,8 @@ class admin
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
+                                    $information_commande->bord_verre->epaisseur .
+                                    '</thickness>';
                         }
 
                         if (isset($information_commande->verre->ecart_puppillaire->droit) &&
@@ -7411,19 +7431,19 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                                $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_gauche->sphere . '</sphere>
+                                $information_commande->verre->correction_gauche->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_gauche->cylindre . '</power>
+                                $information_commande->verre->correction_gauche->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_gauche->axe . '</axis>
+                                $information_commande->verre->correction_gauche->axe . '</axis>
                   </cylinder>';
                         if (isset($information_commande->verre->correction_gauche->addition)) {
                             $xml .= '<addition>' .
-                                $information_commande->verre->correction_gauche->addition . '</addition>
+                                    $information_commande->verre->correction_gauche->addition . '</addition>
 						  ';
                         }
 
@@ -7431,18 +7451,18 @@ class admin
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $xml .= '<prism>
 						 <power>' .
-                                $information_commande->verre->correction_gauche->PrismeSphere . '</power>
+                                    $information_commande->verre->correction_gauche->PrismeSphere . '</power>
 						 <base>' .
-                                $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
+                                    $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
 					  </prism>';
                         }
 
                         $xml .= '</rxData>';
 
                         if ((isset($information_commande->verre->correction_gauche->traitement) &&
-                                !empty($information_commande->verre->correction_gauche->traitement) &&
-                                ($information_commande->verre->correction_gauche->traitement !=
-                                    '700100')) ||
+                             !empty($information_commande->verre->correction_gauche->traitement) &&
+                             ($information_commande->verre->correction_gauche->traitement !=
+                              '700100')) ||
                             $paA ==
                             "1") {
 
@@ -7454,7 +7474,7 @@ class admin
                             $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                    $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
 
                         }
@@ -7469,7 +7489,7 @@ class admin
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                        $information_commande->verre->correction_gauche->teinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7497,16 +7517,16 @@ class admin
                             !empty($information_commande->verre->ecart_puppillaire->gauche)) {
                             $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->gauche .
-                                '</monocularCentrationDistance>';
+                                    $information_commande->verre->ecart_puppillaire->gauche .
+                                    '</monocularCentrationDistance>';
                         }
 
                         if (isset($information_commande->verre->hauteur_gauche) &&
                             !empty($information_commande->verre->hauteur_gauche)) {
                             $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $information_commande->verre->hauteur_gauche .
-                                '</height>';
+                                    $information_commande->verre->hauteur_gauche .
+                                    '</height>';
                         }
 
                         $xml .= '
@@ -7523,9 +7543,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                                    $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                                    $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                         } else {
@@ -7536,7 +7556,7 @@ class admin
                                 $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_gauche->diametre . '</physical>
+                                        $information_commande->verre->correction_gauche->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                             }
@@ -7546,8 +7566,8 @@ class admin
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
+                                    $information_commande->bord_verre->epaisseur .
+                                    '</thickness>';
                         }
 
                         if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
@@ -7567,23 +7587,23 @@ class admin
                     $xml .= '
             	<frame quantity="1">';
                     if ((isset($information_commande->verre->correction_droit->galbe) &&
-                            $information_commande->verre->correction_droit->galbe !=
-                            "Standard") ||
+                         $information_commande->verre->correction_droit->galbe !=
+                         "Standard") ||
                         (isset($information_commande->verre->correction_gauche->galbe) &&
-                            $information_commande->verre->correction_gauche->galbe !=
-                            "Standard")) {
+                         $information_commande->verre->correction_gauche->galbe !=
+                         "Standard")) {
                         if (isset($information_commande->verre->correction_droit->galbe) &&
                             $information_commande->verre->correction_droit->galbe !=
                             "Standard") {
                             $xml .= '
 <frameBowAngle>' .
-                                $information_commande->verre->correction_droit->galbe .
-                                '</frameBowAngle>';
+                                    $information_commande->verre->correction_droit->galbe .
+                                    '</frameBowAngle>';
                         } else {
                             $xml .= '
 <frameBowAngle>' .
-                                $information_commande->verre->correction_gauche->galbe .
-                                '</frameBowAngle>';
+                                    $information_commande->verre->correction_gauche->galbe .
+                                    '</frameBowAngle>';
                         }
                     }
 
@@ -7919,15 +7939,15 @@ class admin
                         }
 
                         $xml .= '<material>' .
-                            $monture_type . '</material>
+                                $monture_type . '</material>
 				   <boxWidth>' .
-                            $boxWidth . '</boxWidth>
+                                $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                            $boxHeight . '</boxHeight>
+                                $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                            $DBL . '</distanceBetweenLenses>
+                                $DBL . '</distanceBetweenLenses>
 				   ' .
-                            $calibre;
+                                $calibre;
                     }
                     $xml .= '
 				</frame>';
@@ -7947,18 +7967,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                $commande->ancienne_commande .
-                                '-' .
-                                $commande->id_users .
-                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                $commande->id_commande .
-                                '">Comparer</a>';
+                                                  $commande->ancienne_commande .
+                                                  '-' .
+                                                  $commande->id_users .
+                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                                  $commande->id_commande .
+                                                  '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                $commande->id_commande .
-                                '">Rejeter</a>';
+                                                  $commande->id_commande .
+                                                  '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -7986,7 +8006,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -7998,7 +8018,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -8025,45 +8045,45 @@ class admin
                     if ($commande->commentaire !=
                         "") {
                         $infos .= "<br><br><div style='border:2px solid red; padding:5px 10px'><b style='color:red'>Commentaires client:  <br>" .
-                            $commande->commentaire .
-                            "</b></div>";
+                                  $commande->commentaire .
+                                  "</b></div>";
                     }
 
                     if ($commande->commentaire_omega !=
                         "") {
                         $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                            $commande->commentaire_omega .
-                            '</b>';
+                                  $commande->commentaire_omega .
+                                  '</b>';
                     }
 
                     $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                        $commande->id_commande .
-                        '_' .
-                        $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                              $commande->id_commande .
+                              '_' .
+                              $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                     if ($commande->seconde_omega !=
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                            $commande->seconde_omega .
-                            "</b>";
+                                  $commande->seconde_omega .
+                                  "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                            $commande->id_commande .
-                            '_' .
-                            $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                  $commande->id_commande .
+                                  '_' .
+                                  $commande->id_users .
+                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     } else {
                         if ($commande->premiere_commande !=
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                $commande->premiere_commande .
-                                "</b>";
+                                      $commande->premiere_commande .
+                                      "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                $commande->id_commande .
-                                '_' .
-                                $commande->id_users .
-                                '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                      $commande->id_commande .
+                                      '_' .
+                                      $commande->id_users .
+                                      '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                         }
 
                     }
@@ -8097,7 +8117,7 @@ class admin
                             $commande->id_commande .
                             '" ' .
                             ($CommandeOmega[0]->status ==
-                            '1' ?
+                             '1' ?
                                 'checked' :
                                 '') .
                             '/><label for="edi_' .
@@ -8188,65 +8208,65 @@ class admin
                 if (isset($information_commande->verre->correction_droit)) {
                     $detail .= "<b>OD:</b>";
                     $detail .= "<span style='font-size:20px'> " .
-                        $information_commande->verre->correction_droit->sphere .
-                        "";
+                               $information_commande->verre->correction_droit->sphere .
+                               "";
                     $detail .= " (" .
-                        $information_commande->verre->correction_droit->cylindre .
-                        ")</span>";
+                               $information_commande->verre->correction_droit->cylindre .
+                               ")</span>";
                     if ($information_commande->verre->correction_droit->axe !=
                         "0.00") {
                         $detail .= " " .
-                            $information_commande->verre->correction_droit->axe .
-                            "°";
+                                   $information_commande->verre->correction_droit->axe .
+                                   "°";
                     }
 
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre !=
-                            34)) {
+                         "0.00" &&
+                         $commande->id_generation_verre !=
+                         34)) {
                         $detail .= " ADD   " .
-                            $information_commande->verre->correction_droit->addition .
-                            "";
+                                   $information_commande->verre->correction_droit->addition .
+                                   "";
                     }
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre ==
-                            34)) {
+                         "0.00" &&
+                         $commande->id_generation_verre ==
+                         34)) {
                         $detail .= " DEG   " .
-                            $information_commande->verre->correction_droit->addition .
-                            "";
+                                   $information_commande->verre->correction_droit->addition .
+                                   "";
                     }
 
 
                     if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                         !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                         $detail .= " " .
-                            $information_commande->verre->correction_droit->PrismeSphere .
-                            "Δ";
+                                   $information_commande->verre->correction_droit->PrismeSphere .
+                                   "Δ";
 
                     }
                     if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                         $detail .= " base " .
-                            $information_commande->verre->correction_droit->PrismeCylindre .
-                            "°";
+                                   $information_commande->verre->correction_droit->PrismeCylindre .
+                                   "°";
 
                     }
 
                     if (isset($information_commande->verre->correction_droit->galbe)) {
                         $detail .= " Galbe: " .
-                            $information_commande->verre->correction_droit->galbe .
-                            " ";
+                                   $information_commande->verre->correction_droit->galbe .
+                                   " ";
                     }
                     if (isset($information_commande->verre->correction_droit->traitement) &&
                         !empty($information_commande->verre->correction_droit->traitement)) {
                         $traitementD =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                         $detail .= "<br>Traitement: " .
-                            $traitementD .
-                            "";
+                                   $traitementD .
+                                   "";
                     }
                     if (isset($information_commande->verre->correction_droit->teinte)) {
                         $teinteD =
@@ -8254,22 +8274,22 @@ class admin
                         if ($teinteD !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
-                                $teinteD .
-                                "</b>";
+                                       $teinteD .
+                                       "</b>";
                         } else {
                             if ($information_commande->verre->correction_droit->teinte !=
                                 "") {
                                 $detail .= "<br>Teinte personnalisée: <b>" .
-                                    $information_commande->verre->correction_droit->teinte .
-                                    "</b>";
+                                           $information_commande->verre->correction_droit->teinte .
+                                           "</b>";
                             }
                         }
                     }
                     if (isset($information_commande->verre->correction_droit->diametre) &&
                         !empty($information_commande->verre->correction_droit->diametre)) {
                         $detail .= "<br>Diametre: " .
-                            $information_commande->verre->correction_droit->diametre .
-                            "";
+                                   $information_commande->verre->correction_droit->diametre .
+                                   "";
 
                     }
 
@@ -8278,16 +8298,16 @@ class admin
                 if (isset($information_commande->verre->correction_gauche)) {
                     $detail .= "<br><br><b>OG</b>";
                     $detail .= "<span style='font-size:20px'> " .
-                        $information_commande->verre->correction_gauche->sphere .
-                        "";
+                               $information_commande->verre->correction_gauche->sphere .
+                               "";
                     $detail .= "(" .
-                        $information_commande->verre->correction_gauche->cylindre .
-                        ")</span>";
+                               $information_commande->verre->correction_gauche->cylindre .
+                               ")</span>";
                     if ($information_commande->verre->correction_gauche->axe !=
                         "0.00") {
                         $detail .= " " .
-                            $information_commande->verre->correction_gauche->axe .
-                            "°";
+                                   $information_commande->verre->correction_gauche->axe .
+                                   "°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -8296,8 +8316,8 @@ class admin
                         $commande->id_generation_verre !=
                         34) {
                         $detail .= " ADD  " .
-                            $information_commande->verre->correction_gauche->addition .
-                            "";
+                                   $information_commande->verre->correction_gauche->addition .
+                                   "";
                     }
                     if (isset($information_commande->verre->correction_gauche->addition) &&
                         $information_commande->verre->correction_gauche->addition !=
@@ -8305,28 +8325,28 @@ class admin
                         $commande->id_generation_verre ==
                         34) {
                         $detail .= " DEG  " .
-                            $information_commande->verre->correction_gauche->addition .
-                            "";
+                                   $information_commande->verre->correction_gauche->addition .
+                                   "";
                     }
 
 
                     if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                         !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                         $detail .= " " .
-                            $information_commande->verre->correction_gauche->PrismeSphere .
-                            "Δ";
+                                   $information_commande->verre->correction_gauche->PrismeSphere .
+                                   "Δ";
                     }
                     if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                         $detail .= " Base " .
-                            $information_commande->verre->correction_gauche->PrismeCylindre .
-                            "°";
+                                   $information_commande->verre->correction_gauche->PrismeCylindre .
+                                   "°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->galbe)) {
                         $detail .= " Galbe: " .
-                            $information_commande->verre->correction_gauche->galbe .
-                            " ";
+                                   $information_commande->verre->correction_gauche->galbe .
+                                   " ";
                     }
                     if (isset($information_commande->verre->correction_gauche->traitement) &&
                         !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -8334,8 +8354,8 @@ class admin
                         $traitementG =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                         $detail .= "<br>Traitement: " .
-                            $traitementG .
-                            "";
+                                   $traitementG .
+                                   "";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -8344,38 +8364,38 @@ class admin
                         if ($teinteG !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
-                                $teinteG .
-                                "</b>";
+                                       $teinteG .
+                                       "</b>";
                         } else {
                             if ($information_commande->verre->correction_gauche->teinte !=
                                 "") {
                                 $detail .= "<br>Teinte personnalisée: <b>" .
-                                    $information_commande->verre->correction_gauche->teinte .
-                                    "</b>";
+                                           $information_commande->verre->correction_gauche->teinte .
+                                           "</b>";
                             }
                         }
                     }
                     $detail .= "<br>Diametre: " .
-                        $information_commande->verre->correction_gauche->diametre .
-                        "";
+                               $information_commande->verre->correction_gauche->diametre .
+                               "";
 
                 }
 
                 $precal = 0;
 
                 if ((isset($information_commande->verre->correction_droit) &&
-                        $information_commande->verre->correction_droit->diametre ==
-                        'precalibrage') ||
+                     $information_commande->verre->correction_droit->diametre ==
+                     'precalibrage') ||
                     (isset($information_commande->verre->correction_gauche) &&
-                        $information_commande->verre->correction_gauche->diametre ==
-                        'precalibrage')) {
+                     $information_commande->verre->correction_gauche->diametre ==
+                     'precalibrage')) {
                     $precal =
                         1;
                     $p .= '<b>Précalibrage:</b>';
 
                     $p .= '<img src="/static/img/calibre/' .
-                        $information_commande->precalibrage->calibre .
-                        '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
+                          $information_commande->precalibrage->calibre .
+                          '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
 
                     $mesure_freeform_opt =
                         "";
@@ -8408,43 +8428,43 @@ class admin
 
                     if (isset($information_commande->monture->type)) {
                         $p .= 'Type monture: ' .
-                            $information_commande->monture->type .
-                            '<br>';
+                              $information_commande->monture->type .
+                              '<br>';
                     }
 
                     if (isset($information_commande->bord_verre->epaisseur) &&
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $p .= 'EP au bord minimum: ' .
-                            $information_commande->bord_verre->epaisseur .
-                            '<br>';
+                              $information_commande->bord_verre->epaisseur .
+                              '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                         !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                         $p .= 'Ecart puppillaire droit: ' .
-                            $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                            '<br>';
+                              $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                              '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                         !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                         $p .= 'Ecart puppillaire gauche: ' .
-                            $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                            '<br>';
+                              $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                              '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->hauteur) &&
                         !empty($information_commande->mesure_freeform->hauteur)) {
                         $p .= 'Hauteur de montage droit: ' .
-                            $information_commande->mesure_freeform->hauteur .
-                            '<br>';
+                              $information_commande->mesure_freeform->hauteur .
+                              '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                         !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                         $p .= 'Hauteur de montage gauche: ' .
-                            $information_commande->mesure_freeform->hauteur_gauche .
-                            '<br>';
+                              $information_commande->mesure_freeform->hauteur_gauche .
+                              '<br>';
                     }
 
                 }
@@ -8458,18 +8478,18 @@ class admin
                     if ($commande->ancienne_commande >
                         0) {
                         $ancienne_commande .= '<br />(CR' .
-                            $commande->ancienne_commande .
-                            '-' .
-                            $commande->id_users .
-                            ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                            $commande->id_commande .
-                            '">Comparer</a>';
+                                              $commande->ancienne_commande .
+                                              '-' .
+                                              $commande->id_users .
+                                              ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                              $commande->id_commande .
+                                              '">Comparer</a>';
                     }
                     if ($commande->penalty !=
                         1) {
                         $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                            $commande->id_commande .
-                            '">Rejeter</a>';
+                                              $commande->id_commande .
+                                              '">Rejeter</a>';
                     }
                 } else {
                     $ancienne_commande =
@@ -8497,7 +8517,7 @@ class admin
                             $commande->total_commande .
                             '</del> ' .
                             ($commande->tarif_express >
-                            0 ?
+                             0 ?
                                 $commande->tarif_express :
                                 '0') .
                             ' €<br />Casse atelier';
@@ -8509,7 +8529,7 @@ class admin
                             $commande->total_commande .
                             '</del> ' .
                             ($commande->tarif_express >
-                            0 ?
+                             0 ?
                                 $commande->tarif_express :
                                 '0') .
                             ' €<br />Erreur ophta';
@@ -8535,45 +8555,45 @@ class admin
                 if ($commande->commentaire !=
                     "") {
                     $infos .= "<br><br>Commentaires client: <b><br>" .
-                        $commande->commentaire .
-                        "</b>";
+                              $commande->commentaire .
+                              "</b>";
                 }
 
                 if ($commande->commentaire_omega !=
                     "") {
                     $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                        $commande->commentaire_omega .
-                        '</b>';
+                              $commande->commentaire_omega .
+                              '</b>';
                 }
 
                 $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                    $commande->id_commande .
-                    '_' .
-                    $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                          $commande->id_commande .
+                          '_' .
+                          $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                 if ($commande->seconde_omega !=
                     "") {
                     $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                        $commande->seconde_omega .
-                        "</b>";
+                              $commande->seconde_omega .
+                              "</b>";
                     $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                        $commande->id_commande .
-                        '_' .
-                        $commande->id_users .
-                        '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                              $commande->id_commande .
+                              '_' .
+                              $commande->id_users .
+                              '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                 } else {
                     if ($commande->premiere_commande !=
                         0) {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                            $commande->premiere_commande .
-                            "</b>";
+                                  $commande->premiere_commande .
+                                  "</b>";
                     } else {
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                            $commande->id_commande .
-                            '_' .
-                            $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                  $commande->id_commande .
+                                  '_' .
+                                  $commande->id_users .
+                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     }
 
                 }
@@ -8592,11 +8612,11 @@ class admin
                 }
 
                 $infos .= "<br>Nom du verre: <b>" .
-                    $commande->trad_fr .
-                    "</b>";
+                          $commande->trad_fr .
+                          "</b>";
                 $infos .= "<br>Indice: " .
-                    $commande->indice_verre .
-                    '';
+                          $commande->indice_verre .
+                          '';
             }
         }
 
@@ -8629,14 +8649,14 @@ class admin
             if ($commande_origine->premiere_commande !=
                 '0') {
                 $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
-                    $commande_origine->premiere_commande .
-                    "<br>";
+                             $commande_origine->premiere_commande .
+                             "<br>";
             }
 
             $textarea .= "Optieyes reference: " .
-                $commande_origine->id_commande .
-                "-" .
-                $commande_origine->id_users;
+                         $commande_origine->id_commande .
+                         "-" .
+                         $commande_origine->id_users;
 
             if (isset($data['type_de_verreD']) &&
                 !empty($data['type_de_verreD'])) {
@@ -8654,12 +8674,12 @@ class admin
             }
 
             $textarea .= "<br><br>Lens Code: " .
-                $lens_code;
+                         $lens_code;
             $textarea .= "<br>Lens Name: " .
-                $lens_name;
+                         $lens_name;
 
             $textarea .= "<br><br>Optical Index: " .
-                $data['indices'];
+                         $data['indices'];
 
             if ($commande_origine->tarif_express !=
                 '0') {
@@ -8671,16 +8691,16 @@ class admin
                     'droit') {
                 $textarea .= "<br>OD:";
                 $textarea .= " " .
-                    $data["sphereD"];
+                             $data["sphereD"];
                 $textarea .= " (" .
-                    $data["cylindreD"] .
-                    ")";
+                             $data["cylindreD"] .
+                             ")";
 
                 if ($data['axeD'] !=
                     "0.00") {
                     $textarea .= " " .
-                        $data['axeD'] .
-                        "°";
+                                 $data['axeD'] .
+                                 "°";
                 }
 
                 if ($data['additionD'] !=
@@ -8688,7 +8708,7 @@ class admin
                     $commande_origine->id_generation_verre !=
                     34) {
                     $textarea .= " ADD " .
-                        $data['additionD'];
+                                 $data['additionD'];
                 }
 
                 if ($data['additionD'] !=
@@ -8696,25 +8716,25 @@ class admin
                     $commande_origine->id_generation_verre ==
                     34) {
                     $textarea .= " DEG " .
-                        $data['additionD'];
+                                 $data['additionD'];
                 }
 
 
                 if (isset($data["PrismeSphereD"]) &&
                     !empty($data["PrismeSphereD"])) {
                     $textarea .= " " .
-                        $data['PrismeSphereD'] .
-                        "Δ";
+                                 $data['PrismeSphereD'] .
+                                 "Δ";
                 }
                 if (isset($data["PrismeCylindreD"]) &&
                     !empty($data["PrismeCylindreD"])) {
                     $textarea .= " base " .
-                        $data['PrismeCylindreD'] .
-                        "°";
+                                 $data['PrismeCylindreD'] .
+                                 "°";
                 }
 
                 $textarea .= " Galbe: " .
-                    $data['galbeD'];
+                             $data['galbeD'];
 
                 if (isset($data["traitementD"]) &&
                     !empty($data["traitementD"]) &&
@@ -8722,10 +8742,10 @@ class admin
                     '700100') {
 
                     $textarea .= "<br>Coating code: " .
-                        $data['traitementD'] .
-                        "(" .
-                        $this->m_commande->getTraitementNameByCode($data['traitementD']) .
-                        ")";
+                                 $data['traitementD'] .
+                                 "(" .
+                                 $this->m_commande->getTraitementNameByCode($data['traitementD']) .
+                                 ")";
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -8733,13 +8753,13 @@ class admin
                     $teinteD =
                         $this->m_commande->getTeinteEnById($data['teinteD']);
                     $textarea .= "<br>Tint: " .
-                        $this->m_commande->getTeinteEnById($data['teinteD']);
+                                 $this->m_commande->getTeinteEnById($data['teinteD']);
 
                 }
                 if (isset($data["teintepersoD"]) &&
                     !empty($data["teintepersoD"])) {
                     $textarea .= "<br>Custom Tint: " .
-                        $data['teintepersoD'];
+                                 $data['teintepersoD'];
                 }
 
                 if (isset($data['diametreD']) &&
@@ -8747,7 +8767,7 @@ class admin
                     $data['diametreD'] !=
                     "precalibrage") {
                     $textarea .= "<br>Diameter physical: " .
-                        $data['diametreD'];
+                                 $data['diametreD'];
                 }
 
 
@@ -8758,15 +8778,15 @@ class admin
                     'gauche') {
                 $textarea .= "<br>OG:";
                 $textarea .= " " .
-                    $data["sphereG"];
+                             $data["sphereG"];
                 $textarea .= "(" .
-                    $data["cylindreG"] .
-                    ")";
+                             $data["cylindreG"] .
+                             ")";
                 if ($data['axeG'] !=
                     "0.00") {
                     $textarea .= " " .
-                        $data['axeG'] .
-                        "°";
+                                 $data['axeG'] .
+                                 "°";
                 }
 
                 if ($data['additionG'] !=
@@ -8774,32 +8794,32 @@ class admin
                     $commande_origine->id_generation_verre !=
                     34) {
                     $textarea .= " ADD " .
-                        $data['additionG'];
+                                 $data['additionG'];
                 }
                 if ($data['additionG'] !=
                     "0.00" &&
                     $commande_origine->id_generation_verre ==
                     34) {
                     $textarea .= " DEG " .
-                        $data['additionG'];
+                                 $data['additionG'];
                 }
 
 
                 if (isset($data["PrismeSphereG"]) &&
                     !empty($data["PrismeSphereG"])) {
                     $textarea .= " " .
-                        $data['PrismeSphereG'] .
-                        "Δ";
+                                 $data['PrismeSphereG'] .
+                                 "Δ";
                 }
                 if (isset($data["PrismeCylindreG"]) &&
                     !empty($data["PrismeCylindreG"])) {
                     $textarea .= " base " .
-                        $data['PrismeCylindreG'] .
-                        "°";
+                                 $data['PrismeCylindreG'] .
+                                 "°";
                 }
 
                 $textarea .= " Galbe: " .
-                    $data['galbeG'];
+                             $data['galbeG'];
 
                 if (isset($data["traitementG"]) &&
                     !empty($data["traitementG"]) &&
@@ -8807,10 +8827,10 @@ class admin
                     '700100') {
 
                     $textarea .= "<br>Coating code: " .
-                        $data['traitementG'] .
-                        "(" .
-                        $this->m_commande->getTraitementNameByCode($data['traitementG']) .
-                        ")";
+                                 $data['traitementG'] .
+                                 "(" .
+                                 $this->m_commande->getTraitementNameByCode($data['traitementG']) .
+                                 ")";
                 }
 
                 if (isset($data["teinteG"]) &&
@@ -8818,13 +8838,13 @@ class admin
                     $teinteG =
                         $this->m_commande->getTeinteEnById($data['teinteG']);
                     $textarea .= "<br>Tint: " .
-                        $this->m_commande->getTeinteEnById($data['teinteG']);
+                                 $this->m_commande->getTeinteEnById($data['teinteG']);
 
                 }
                 if (isset($data["teintepersoG"]) &&
                     !empty($data["teintepersoG"])) {
                     $textarea .= "<br>Custom Tint: " .
-                        $data['teintepersoG'];
+                                 $data['teintepersoG'];
                 }
 
                 if (isset($data['diametreG']) &&
@@ -8832,7 +8852,7 @@ class admin
                     $data['diametreG'] !=
                     "precalibrage") {
                     $textarea .= "<br>Diameter physical: " .
-                        $data['diametreG'];
+                                 $data['diametreG'];
                 }
             }
 
@@ -8870,66 +8890,66 @@ class admin
                 if (isset($data["ecart_puppillaire_droit"]) &&
                     !empty($data["ecart_puppillaire_droit"])) {
                     $textarea .= "<br>PD right: " .
-                        $data["ecart_puppillaire_droit"];
+                                 $data["ecart_puppillaire_droit"];
                 }
                 if (isset($data["hauteur"]) &&
                     !empty($data["hauteur"])) {
                     $textarea .= "<br>Height right: " .
-                        $data["hauteur"];
+                                 $data["hauteur"];
                 }
 
                 if (isset($data["ecart_puppillaire_gauche"]) &&
                     !empty($data["ecart_puppillaire_gauche"])) {
                     $textarea .= "<br>PD left: " .
-                        $data["ecart_puppillaire_gauche"];
+                                 $data["ecart_puppillaire_gauche"];
                 }
                 if (isset($data["hauteur_gauche"]) &&
                     !empty($data["hauteur_gauche"])) {
                     $textarea .= "<br>Height left: " .
-                        $data["hauteur_gauche"];
+                                 $data["hauteur_gauche"];
                 }
 
                 if (isset($data['epaisseur_bord_verre']) &&
                     !empty($data['epaisseur_bord_verre'])) {
                     $textarea .= "<br>Minimal edge thickn.: " .
-                        $data['epaisseur_bord_verre'];
+                                 $data['epaisseur_bord_verre'];
                 }
 
                 if (isset($data['cotec']) &&
                     !empty($data['cotec'])) {
                     $textarea .= "<br>DBL: " .
-                        $data['cotec'];
+                                 $data['cotec'];
                 }
 
                 if (isset($data['cotea']) &&
                     !empty($data['cotea'])) {
                     $textarea .= "<br>Boxing width: " .
-                        $data['cotea'];
+                                 $data['cotea'];
                 }
 
                 if (isset($data['coteb']) &&
                     !empty($data['coteb'])) {
                     $textarea .= "<br>Boxing height: " .
-                        $data['coteb'];
+                                 $data['coteb'];
                 }
 
                 if (isset($data['coted']) &&
                     !empty($data['coted'])) {
                     $textarea .= "<br>Diameter: " .
-                        $data['coted'];
+                                 $data['coted'];
                 }
 
                 if (isset($data['type_monture']) &&
                     !empty($data['type_monture'])) {
                     $textarea .= "<br>Frame Type: " .
-                        $data['type_monture'];
+                                 $data['type_monture'];
                 }
 
                 if (isset($data['calibre']) &&
                     !empty($data['calibre'])) {
                     $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
-                        $data['calibre'] .
-                        ".jpg' width='150' heigth='70' /><br>";
+                                 $data['calibre'] .
+                                 ".jpg' width='150' heigth='70' /><br>";
                 }
 
             }
@@ -8941,7 +8961,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                date("Y-m-d\TH:i:sO") . '</dateTime> 
+                   date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -8966,15 +8986,15 @@ class admin
                 if ($teinteD ==
                     "") {
                     $remark .= 'Right tint: ' .
-                        $data["teinteD"] .
-                        '.';
+                               $data["teinteD"] .
+                               '.';
                 }
                 if (strpos($data["teinteD"],
                            'CUST_') !==
                     false) {
                     $remark .= 'Right tint: ' .
-                        $teinteD .
-                        '.';
+                               $teinteD .
+                               '.';
                 }
             }
             if (isset($data["teinteG"]) &&
@@ -8982,15 +9002,15 @@ class admin
                 if ($teinteG ==
                     "") {
                     $remark .= ' Left tint: ' .
-                        $data["teinteG"] .
-                        '.';
+                               $data["teinteG"] .
+                               '.';
                 }
                 if (strpos($data["teinteG"],
                            'CUST_') !==
                     false) {
                     $remark .= ' Left tint: ' .
-                        $teinteG .
-                        '.';
+                               $teinteG .
+                               '.';
                 }
             }
 
@@ -9095,9 +9115,9 @@ class admin
 
             $xml .= '
          <referenceNo>' .
-                $commande_origine->id_commande .
-                '-' .
-                $commande_origine->id_users . '</referenceNo>
+                    $commande_origine->id_commande .
+                    '-' .
+                    $commande_origine->id_users . '</referenceNo>
          <manufacturer />';
 
             if ($commande_origine->premiere_commande !=
@@ -9106,7 +9126,7 @@ class admin
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                    $commande_origine->premiere_commande . '</referenceNo>
+                        $commande_origine->premiere_commande . '</referenceNo>
 		 </multiplePair>';
             }
 
@@ -9347,35 +9367,35 @@ class admin
                     'droit') {
                 $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                    $lenses_code . '</commercialCode>
+                        $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                    $data["sphereD"] . '</sphere>
+                        $data["sphereD"] . '</sphere>
                   <cylinder>
                       <power>' .
-                    $data["cylindreD"] . '</power>
+                        $data["cylindreD"] . '</power>
                       <axis>' .
-                    $data["axeD"] . '</axis>
+                        $data["axeD"] . '</axis>
                   </cylinder>
                   <addition>' .
-                    $data["additionD"] . '</addition>
+                        $data["additionD"] . '</addition>
                   ';
 
                 if (isset($data["PrismeSphereD"]) &&
                     !empty($data["PrismeSphereD"])) {
                     $xml .= '<prism>
 						 <power>' .
-                        $data["PrismeSphereD"] . '</power>
+                            $data["PrismeSphereD"] . '</power>
 						 <base>' .
-                        $data["PrismeCylindreD"] . '</base>
+                            $data["PrismeCylindreD"] . '</base>
 					  </prism>';
                 }
                 $xml .= '</rxData>';
 
                 if ((isset($data["traitementD"]) &&
-                        !empty($data["traitementD"]) &&
-                        ($data["traitementD"] !=
-                            '700100')) ||
+                     !empty($data["traitementD"]) &&
+                     ($data["traitementD"] !=
+                      '700100')) ||
                     $paA ==
                     "1") {
 
@@ -9387,7 +9407,7 @@ class admin
                     $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementD"] . '</commercialCode>
+                            $data["traitementD"] . '</commercialCode>
 					   </coating>';
 
                 }
@@ -9403,7 +9423,7 @@ class admin
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteD"] . '</commercialCode>
+                                $data["teinteD"] . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -9440,13 +9460,13 @@ class admin
                     !empty($data["ecart_puppillaire_droit"])) {
                     $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                        $data["ecart_puppillaire_droit"] .
-                        '</monocularCentrationDistance>';
+                            $data["ecart_puppillaire_droit"] .
+                            '</monocularCentrationDistance>';
                 }
 
                 $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                    $hauteurD . '</height>
+                        $hauteurD . '</height>
                </centration>';
 
 
@@ -9460,9 +9480,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                        $d1[0] . '</physical>
+                            $d1[0] . '</physical>
                      <optical>' .
-                        $d1[1] . '</optical>
+                            $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                 } else {
@@ -9474,7 +9494,7 @@ class admin
                         $xml .= '
 						  <diameter>
 							 <physical>' .
-                            $data["diametreD"] . '</physical>
+                                $data["diametreD"] . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                     }
@@ -9485,8 +9505,8 @@ class admin
                     !empty($data['epaisseur_bord_verre'])) {
                     $xml .= '
 			    	<thickness reference="EDGE">' .
-                        $data['epaisseur_bord_verre'] .
-                        '</thickness>';
+                            $data['epaisseur_bord_verre'] .
+                            '</thickness>';
                 }
 
                 if (isset($data["ecart_puppillaire_droit"]) &&
@@ -9508,35 +9528,35 @@ class admin
                     'gauche') {
                 $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                    $lenses_code . '</commercialCode>
+                        $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                    $data["sphereG"] . '</sphere>
+                        $data["sphereG"] . '</sphere>
                   <cylinder>
                       <power>' .
-                    $data["cylindreG"] . '</power>
+                        $data["cylindreG"] . '</power>
                       <axis>' .
-                    $data["axeG"] . '</axis>
+                        $data["axeG"] . '</axis>
                   </cylinder>
                   <addition>' .
-                    $data["additionG"] .
-                    '</addition>';
+                        $data["additionG"] .
+                        '</addition>';
                 if (isset($data["PrismeSphereG"]) &&
                     !empty($data["PrismeSphereG"])) {
                     $xml .= '<prism>
 						 <power>' .
-                        $data["PrismeSphereG"] . '</power>
+                            $data["PrismeSphereG"] . '</power>
 						 <base>' .
-                        $data["PrismeCylindreG"] . '</base>
+                            $data["PrismeCylindreG"] . '</base>
 					  </prism>';
                 }
 
                 $xml .= '</rxData>';
 
                 if ((isset($data["traitementG"]) &&
-                        !empty($data["traitementG"]) &&
-                        ($data["traitementG"] !=
-                            '700100')) ||
+                     !empty($data["traitementG"]) &&
+                     ($data["traitementG"] !=
+                      '700100')) ||
                     $paA ==
                     "1") {
 
@@ -9548,7 +9568,7 @@ class admin
                     $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementG"] . '</commercialCode>
+                            $data["traitementG"] . '</commercialCode>
 					   </coating>';
 
                 }
@@ -9564,7 +9584,7 @@ class admin
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteG"] . '</commercialCode>
+                                $data["teinteG"] . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -9589,13 +9609,13 @@ class admin
                     !empty($data["ecart_puppillaire_gauche"])) {
                     $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                        $data["ecart_puppillaire_gauche"] .
-                        '</monocularCentrationDistance>';
+                            $data["ecart_puppillaire_gauche"] .
+                            '</monocularCentrationDistance>';
                 }
 
                 $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                    $hauteurG . '</height>
+                        $hauteurG . '</height>
                </centration>';
 
                 if (strpos($data["diametreG"],
@@ -9608,9 +9628,9 @@ class admin
                <geometry>
                   <diameter>
                      <physical>' .
-                        $d1[0] . '</physical>
+                            $d1[0] . '</physical>
                      <optical>' .
-                        $d1[1] . '</optical>
+                            $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                 } else {
@@ -9621,7 +9641,7 @@ class admin
                         $xml .= '
 						  <diameter>
 							 <physical>' .
-                            $data["diametreG"] . '</physical>
+                                $data["diametreG"] . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                     }
@@ -9631,8 +9651,8 @@ class admin
                     !empty($data['epaisseur_bord_verre'])) {
                     $xml .= '
 			    	<thickness reference="EDGE">' .
-                        $data['epaisseur_bord_verre'] .
-                        '</thickness>';
+                            $data['epaisseur_bord_verre'] .
+                            '</thickness>';
                 }
                 if (isset($data["ecart_puppillaire_gauche"]) &&
                     !empty($data["ecart_puppillaire_gauche"])) {
@@ -9651,23 +9671,23 @@ class admin
             $xml .= '
             	<frame quantity="1">';
             if ((isset($data["galbeD"]) &&
-                    $data["galbeD"] !=
-                    "Standard") ||
+                 $data["galbeD"] !=
+                 "Standard") ||
                 (isset($data["galbeG"]) &&
-                    $data["galbeG"] !=
-                    "Standard")) {
+                 $data["galbeG"] !=
+                 "Standard")) {
                 if ((isset($data["galbeD"])) &&
                     $data["galbeD"] !=
                     "Standard") {
                     $xml .= '
 <frameBowAngle>' .
-                        $data["galbeD"] .
-                        '</frameBowAngle>';
+                            $data["galbeD"] .
+                            '</frameBowAngle>';
                 } else {
                     $xml .= '
 <frameBowAngle>' .
-                        $data["galbeG"] .
-                        '</frameBowAngle>';
+                            $data["galbeG"] .
+                            '</frameBowAngle>';
                 }
             }
 
@@ -10001,15 +10021,15 @@ class admin
                 }
 
                 $xml .= '<material>' .
-                    $monture_type . '</material>
+                        $monture_type . '</material>
 				   <boxWidth>' .
-                    $boxWidth . '</boxWidth>
+                        $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                    $boxHeight . '</boxHeight>
+                        $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                    $DBL . '</distanceBetweenLenses>
+                        $DBL . '</distanceBetweenLenses>
 				   ' .
-                    $calibre;
+                        $calibre;
             }
             $xml .= '
              </frame>';
@@ -10058,7 +10078,7 @@ class admin
                                 $filename,
                                 $commande->xml)) {
                     echo $filename .
-                        'ERROR - ';
+                         'ERROR - ';
                 } else {
                     //echo $filename.'OK - ';
                     //	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
@@ -10070,14 +10090,14 @@ class admin
                                          "/Orders/" .
                                          $filename)) {
                         echo $filename .
-                            'OK - ';
+                             'OK - ';
                         $s =
                             $this->m_commande->updateEdiStatus($commande->id_commande,
                                                                "2",
                                                                $filename);
                     } else {
                         echo $filename .
-                            'ERROR - ';
+                             'ERROR - ';
                     }
                 }
             }
@@ -10245,9 +10265,9 @@ class admin
                                 "Non Photocromique") {
                                 continue;
                             } elseif ($_GET['photochromie'] !=
-                                "Non Photocromique" &&
-                                $_GET['photochromie'] !=
-                                $photochromie) {
+                                      "Non Photocromique" &&
+                                      $_GET['photochromie'] !=
+                                      $photochromie) {
                                 continue;
                             }
                         }
@@ -10259,14 +10279,14 @@ class admin
                             $teinte) {
                             continue;
                         } elseif (isset($_GET['teinte']) &&
-                            $_GET['teinte'] ==
-                            "Non Teinté" &&
-                            ($teinte ==
-                                "G15 C" ||
-                                $teinte ==
-                                "Gris C" ||
-                                $teinte ==
-                                "Brun C")) {
+                                  $_GET['teinte'] ==
+                                  "Non Teinté" &&
+                                  ($teinte ==
+                                   "G15 C" ||
+                                   $teinte ==
+                                   "Gris C" ||
+                                   $teinte ==
+                                   "Brun C")) {
                             continue;
                         }
 
@@ -10281,10 +10301,10 @@ class admin
 
                         if (isset($correction['verre']['correction_droit'])) {
                             $data_correction .= "OD : " .
-                                $correction['verre']['correction_droit']['sphere'] .
-                                "(" .
-                                $correction['verre']['correction_droit']['cylindre'] .
-                                ")<br>";
+                                                $correction['verre']['correction_droit']['sphere'] .
+                                                "(" .
+                                                $correction['verre']['correction_droit']['cylindre'] .
+                                                ")<br>";
 
                             if (isset($_GET['sphere']) &&
                                 $_GET['sphere'] !=
@@ -10303,10 +10323,10 @@ class admin
 
                         if (isset($correction['verre']['correction_gauche'])) {
                             $data_correction .= "OG : " .
-                                $correction['verre']['correction_gauche']['sphere'] .
-                                "(" .
-                                $correction['verre']['correction_gauche']['cylindre'] .
-                                ")<br>";
+                                                $correction['verre']['correction_gauche']['sphere'] .
+                                                "(" .
+                                                $correction['verre']['correction_gauche']['cylindre'] .
+                                                ")<br>";
 
                             if (isset($_GET['sphere']) &&
                                 $_GET['sphere'] !=
@@ -10324,11 +10344,11 @@ class admin
                         }
 
                         if (($noFoundRight &&
-                                $noFoundLeft) ||
+                             $noFoundLeft) ||
                             ($noFoundLeft &&
-                                !isset($correction['verre']['correction_droit'])) ||
+                             !isset($correction['verre']['correction_droit'])) ||
                             ($noFoundRight &&
-                                !isset($correction['verre']['correction_gauche']))) {
+                             !isset($correction['verre']['correction_gauche']))) {
                             continue;
                         }
 
@@ -10384,7 +10404,7 @@ class admin
                         if ($data_etiquette !==
                             false &&
                             (isset($data_etiquette[$commande->id_commande]['droit']) ||
-                                isset($data_etiquette[$commande->id_commande]['gauche']))) {
+                             isset($data_etiquette[$commande->id_commande]['gauche']))) {
                             $cl =
                                 ' is_checked';
                         }
@@ -10428,8 +10448,8 @@ class admin
                                     $commande->id_commande .
                                     '" ' .
                                     ($data_etiquette !==
-                                    false &&
-                                    isset($data_etiquette[$commande->id_commande]['droit']) ?
+                                     false &&
+                                     isset($data_etiquette[$commande->id_commande]['droit']) ?
                                         'checked' :
                                         '') .
                                     ' /> <label for="verre_droit_' .
@@ -10443,8 +10463,8 @@ class admin
                                     $commande->id_commande .
                                     '" ' .
                                     ($data_etiquette !==
-                                    false &&
-                                    isset($data_etiquette[$commande->id_commande]['gauche']) ?
+                                     false &&
+                                     isset($data_etiquette[$commande->id_commande]['gauche']) ?
                                         'checked' :
                                         '') .
                                     ' /> <label for="verre_gauche_' .
@@ -10490,18 +10510,18 @@ class admin
                             if ($commande->ancienne_commande >
                                 0) {
                                 $ancienne_commande .= '<br />(CR' .
-                                    $commande->ancienne_commande .
-                                    '-' .
-                                    $commande->id_users .
-                                    ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                    $commande->id_commande .
-                                    '">Comparer</a>';
+                                                      $commande->ancienne_commande .
+                                                      '-' .
+                                                      $commande->id_users .
+                                                      ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                                      $commande->id_commande .
+                                                      '">Comparer</a>';
                             }
                             if ($commande->penalty !=
                                 1) {
                                 $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                    $commande->id_commande .
-                                    '">Rejeter</a>';
+                                                      $commande->id_commande .
+                                                      '">Rejeter</a>';
                             }
                         } else {
                             $ancienne_commande =
@@ -10530,11 +10550,11 @@ class admin
                                 "Panier A";
                             $certif_panierA = "<br>
 							<a href=\"/static/aa/certificat_authenticite_" .
-                                $commande->id_commande .
-                                ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
+                                              $commande->id_commande .
+                                              ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
                             $certif_panierA .= '<a class="commande-info btn btn-icon waves-effect waves-light" data-toggle="modal" id="regenerer_certif" data-target="#regenerer_certif" rel="' .
-                                $commande->id_commande .
-                                '">Regenerer</a>';
+                                               $commande->id_commande .
+                                               '">Regenerer</a>';
 
                         }
 
@@ -10603,14 +10623,14 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         date('d/m/Y',
                                              strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     //( ($commande->id_generation_verre == 19 || $commande->indice_verre == '1.76 (délais : 10 jours ouvrés)' || $commande->indice_verre == '1.74'/* || $correction['verre']['traitement'] == "BlueCoat" || $correction['verre']['traitement'] == "BlueCoat Defender" || isset($correction['verre']['polarise'])*/ ) ? '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="'.(!empty($commande->date_pointage) ? 1 : 0 ).'" id="pointage_'.$commande->id_commande.'" name="pointage_'.$commande->id_commande.'" '.(!empty($commande->date_pointage) ? 'checked' : '').'/><label for="pointage_'.$commande->id_commande.'" id="pointage_date_'.$commande->id_commande.'">'.(!empty($commande->date_pointage) ? date("d-m-Y",strtotime($commande->date_pointage)) : "") : '').'</label></div>',
                                     (($stockDeporte ==
-                                        '1') ?
+                                      '1') ?
                                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
                                         (!empty($commande->date_pointage) ?
                                             1 :
@@ -10637,7 +10657,7 @@ class admin
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         1 :
                                         0)
                                 );
@@ -10705,14 +10725,14 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         date('d/m/Y',
                                              strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     //( ($commande->id_generation_verre == 19 || $commande->indice_verre == '1.76 (délais : 10 jours ouvrés)' || $commande->indice_verre == '1.74' /* || $correction['verre']['traitement'] == "BlueCoat" || $correction['verre']['traitement'] == "BlueCoat Defender" || isset($correction['verre']['polarise'])*/ ) ? '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="'.(!empty($commande->date_pointage) ? 1 : 0 ).'" id="pointage_'.$commande->id_commande.'" name="pointage_'.$commande->id_commande.'" '.(!empty($commande->date_pointage) ? 'checked' : '').'/><label for="pointage_'.$commande->id_commande.'" id="pointage_date_'.$commande->id_commande.'">'.(!empty($commande->date_pointage) ? date("d-m-Y",strtotime($commande->date_pointage)) : "") : '').'</label></div>',
                                     (($stockDeporte ==
-                                        '1') ?
+                                      '1') ?
                                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
                                         (!empty($commande->date_pointage) ?
                                             1 :
@@ -10739,7 +10759,7 @@ class admin
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         1 :
                                         0)
                                 );
@@ -10756,18 +10776,18 @@ class admin
                             if ($commande->ancienne_commande >
                                 0) {
                                 $ancienne_commande .= '<br />(CR' .
-                                    $commande->ancienne_commande .
-                                    '-' .
-                                    $commande->id_users .
-                                    ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                    $commande->id_commande .
-                                    '">Comparer</a>';
+                                                      $commande->ancienne_commande .
+                                                      '-' .
+                                                      $commande->id_users .
+                                                      ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                                      $commande->id_commande .
+                                                      '">Comparer</a>';
                             }
                             if ($commande->penalty !=
                                 1) {
                                 $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                    $commande->id_commande .
-                                    '">Rejeter</a>';
+                                                      $commande->id_commande .
+                                                      '">Rejeter</a>';
                             }
                         } else {
                             $ancienne_commande =
@@ -10785,7 +10805,7 @@ class admin
                                 "Panier A";
                             $certif_panierA = "<br>
 							<a href=\"/static/aa/certificat_authenticite_" .
-                                $commande->id_commande . ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+                                              $commande->id_commande . ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 							";
                         }
 
@@ -10798,8 +10818,8 @@ class admin
                                 $commande->id_commande .
                                 '" ' .
                                 ($data_etiquette !==
-                                false &&
-                                isset($data_etiquette[$commande->id_commande]['droit']) ?
+                                 false &&
+                                 isset($data_etiquette[$commande->id_commande]['droit']) ?
                                     'checked' :
                                     '') .
                                 ' /> <label for="verre_droit_' .
@@ -10813,8 +10833,8 @@ class admin
                                 $commande->id_commande .
                                 '" ' .
                                 ($data_etiquette !==
-                                false &&
-                                isset($data_etiquette[$commande->id_commande]['gauche']) ?
+                                 false &&
+                                 isset($data_etiquette[$commande->id_commande]['gauche']) ?
                                     'checked' :
                                     '') .
                                 ' /> <label for="verre_gauche_' .
@@ -10910,7 +10930,7 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         date('d/m/Y',
                                              strtotime($commande->date_annule)) :
                                         '') .
@@ -10940,7 +10960,7 @@ class admin
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         1 :
                                         0)
                                 );
@@ -11009,7 +11029,7 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         date('d/m/Y',
                                              strtotime($commande->date_annule)) :
                                         '') .
@@ -11039,7 +11059,7 @@ class admin
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                    null ?
+                                     null ?
                                         1 :
                                         0)
                                 );
@@ -11091,19 +11111,19 @@ class admin
             //$this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, $id_commande, false, 'paysage', $customsize = array(0,0,243,153));
             $docs = array(
                 'certificat' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf('certificat_authenticite',
-                               $data,
-                               $id_commande,
-                               false,
-                               'paysage',
-                               $customsize =
-                                   array(
-                                       0,
-                                       0,
-                                       243,
-                                       153
-                                   ))
+                                '/' .
+                                $this->pdf('certificat_authenticite',
+                                           $data,
+                                           $id_commande,
+                                           false,
+                                           'paysage',
+                                           $customsize =
+                                               array(
+                                                   0,
+                                                   0,
+                                                   243,
+                                                   153
+                                               ))
             );
 
             //$file_pdf = 'certificat_authenticite_'.$id_commande;
@@ -11257,7 +11277,7 @@ class admin
                     if (!isset($build['excl'][$side])) {
 
                         $corrections .= $v .
-                            ' : ';
+                                        ' : ';
 
                         foreach ($config['attrs']
                                  as
@@ -11267,9 +11287,9 @@ class admin
                         {
                             if (isset($build[$attr][$side])) {
                                 $corrections .= $name .
-                                    ' : ' .
-                                    $build[$attr][$side] .
-                                    ', ';
+                                                ' : ' .
+                                                $build[$attr][$side] .
+                                                ', ';
                             }
                         }
 
@@ -11337,7 +11357,7 @@ class admin
                         $order->id_users .
                         '" ' .
                         ($order->check_date !=
-                        null ?
+                         null ?
                             'checked' :
                             '') .
                         ' /> <label for="check_' .
@@ -11350,7 +11370,7 @@ class admin
                         $order->id_users .
                         '">' .
                         ($order->date_annule !==
-                        null ?
+                         null ?
                             date('d/m/Y',
                                  strtotime($order->date_annule)) :
                             '') .
@@ -11399,24 +11419,24 @@ class admin
                     if ($monture['id'] !=
                         null) {
                         $details .= '<strong>' .
-                            $monture['collection'] .
-                            ' ' .
-                            $monture['modele'] .
-                            ':</strong> ' .
-                            $monture['size'] .
-                            ' ' .
-                            $monture['type'] .
-                            ' ' .
-                            $monture['couleur'] .
-                            ' x' .
-                            $monture['qty'] .
-                            ', ';
+                                    $monture['collection'] .
+                                    ' ' .
+                                    $monture['modele'] .
+                                    ':</strong> ' .
+                                    $monture['size'] .
+                                    ' ' .
+                                    $monture['type'] .
+                                    ' ' .
+                                    $monture['couleur'] .
+                                    ' x' .
+                                    $monture['qty'] .
+                                    ', ';
                     } else {
                         $details .= '<strong>Pack ' .
-                            $monture['pack'] .
-                            '</strong> x' .
-                            $monture['qty'] .
-                            ', ';
+                                    $monture['pack'] .
+                                    '</strong> x' .
+                                    $monture['qty'] .
+                                    ', ';
                     }
 
 
@@ -11479,7 +11499,7 @@ class admin
                         $order->id_users .
                         '" ' .
                         ($order->check_date !=
-                        null ?
+                         null ?
                             'checked' :
                             '') .
                         ' /> <label for="check_' .
@@ -11492,7 +11512,7 @@ class admin
                         $order->id_users .
                         '">' .
                         ($order->date_annule !==
-                        null ?
+                         null ?
                             date('d/m/Y',
                                  strtotime($order->date_annule)) :
                             '') .
@@ -11568,7 +11588,7 @@ class admin
                                 $max);
                 } while ($this->m_commande->checkIntituleBl($intitule,
                                                             $rand)[0]->IntituleBL !=
-                0);
+                         0);
 
                 $data['intitule_bl'] =
                     $intitule .
@@ -11593,8 +11613,8 @@ class admin
                 $file_pdf =
                     'bon_livraison_lentille';
             } elseif (isset($data['is_montures']) &&
-                $data['is_montures'] ==
-                1) {
+                      $data['is_montures'] ==
+                      1) {
                 $file_pdf =
                     'bon_livraison_montures';
             } else {
@@ -11702,7 +11722,7 @@ class admin
                 unset($data['libelle_quantite_lentille_droit']);
                 unset($data['libelle_quantite_lentille_gauche']);
             } elseif (isset($data['libelle_quantite_montures_droit']) &&
-                isset($data['libelle_quantite_montures_gauche'])) {
+                      isset($data['libelle_quantite_montures_gauche'])) {
                 $data['quantite_type_optique'] =
                     json_encode(array(
                                     'quantite_droit' => $data['libelle_quantite_montures_droit'],
@@ -12013,11 +12033,11 @@ class admin
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette",
-                           $data,
-                           "",
-                           false),
+                            '/' .
+                            $this->pdf("etiquette",
+                                       $data,
+                                       "",
+                                       false),
         );
 
         $commandes = array();
@@ -12063,16 +12083,16 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
+                        count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
+                        $c['etiquettes'] .
+                        '">' .
+                        ($gen['etiquettes'] !=
+                         '' ?
+                            $gen['etiquettes'] :
+                            0) .
+                        ' / ' .
+                        $total['etiquettes'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -12252,27 +12272,27 @@ class admin
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette_fabrication",
-                           $data,
-                           '' .
-                           date('d_m_H-i-s'),
-                           false),
+                            '/' .
+                            $this->pdf("etiquette_fabrication",
+                                       $data,
+                                       '' .
+                                       date('d_m_H-i-s'),
+                                       false),
             'certificat' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf('certificat_authenticite',
-                           $data,
-                           '' .
-                           date('d_m_H-i-s'),
-                           false,
-                           'paysage',
-                           $customsize =
-                               array(
-                                   0,
-                                   0,
-                                   243,
-                                   153
-                               ))
+                            '/' .
+                            $this->pdf('certificat_authenticite',
+                                       $data,
+                                       '' .
+                                       date('d_m_H-i-s'),
+                                       false,
+                                       'paysage',
+                                       $customsize =
+                                           array(
+                                               0,
+                                               0,
+                                               243,
+                                               153
+                                           ))
         );
 
         $commandes = array();
@@ -12318,25 +12338,25 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
+                        count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
+                        $c['etiquettes'] .
+                        '">' .
+                        ($gen['etiquettes'] !=
+                         '' ?
+                            $gen['etiquettes'] :
+                            0) .
+                        ' / ' .
+                        $total['etiquettes'] . '</b><br />
             - Nombre de certificats générées : <b style="color: ' .
-                $c['certificat'] .
-                '">' .
-                ($gen['certificat'] !=
-                '' ?
-                    $gen['certificat'] :
-                    0) .
-                ' / ' .
-                $total['certificat'] . '</b><br />
+                        $c['certificat'] .
+                        '">' .
+                        ($gen['certificat'] !=
+                         '' ?
+                            $gen['certificat'] :
+                            0) .
+                        ' / ' .
+                        $total['certificat'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -12363,11 +12383,11 @@ class admin
         }
 
         return $this->config->item('directory_pdf') .
-            '/' .
-            $this->pdf("etiquette_fabrication",
-                       $data,
-                       "",
-                       true);
+               '/' .
+               $this->pdf("etiquette_fabrication",
+                          $data,
+                          "",
+                          true);
 
     }
 
@@ -12467,27 +12487,27 @@ class admin
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false),
+                                '/' .
+                                $this->pdf("etiquette_fabrication",
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false),
                 'certificat' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf('certificat_authenticite',
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false,
-                               'paysage',
-                               $customsize =
-                                   array(
-                                       0,
-                                       0,
-                                       243,
-                                       153
-                                   ))
+                                '/' .
+                                $this->pdf('certificat_authenticite',
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false,
+                                           'paysage',
+                                           $customsize =
+                                               array(
+                                                   0,
+                                                   0,
+                                                   243,
+                                                   153
+                                               ))
             );
 
             $data['etiquette'] =
@@ -12496,12 +12516,12 @@ class admin
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false)
+                                '/' .
+                                $this->pdf("etiquette_fabrication",
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false)
             );
 
             $data['etiquette'] =
@@ -12510,12 +12530,12 @@ class admin
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false)
+                                '/' .
+                                $this->pdf("etiquette_fabrication",
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false)
             );
 
             if (count($etiquettes) >
@@ -12526,12 +12546,12 @@ class admin
                 // Génération des PDF
                 $docs = array(
                     'etiquettes' => $this->config->item('directory_pdf') .
-                        '/' .
-                        $this->pdf("etiquette_fabrication",
-                                   $data,
-                                   '' .
-                                   date('d_m_H-i-s'),
-                                   false)
+                                    '/' .
+                                    $this->pdf("etiquette_fabrication",
+                                               $data,
+                                               '' .
+                                               date('d_m_H-i-s'),
+                                               false)
                 );
 
                 if (count($etiquettes) >
@@ -12543,12 +12563,12 @@ class admin
                     $docs =
                         array(
                             'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                           $data,
-                                           '' .
-                                           date('d_m_H-i-s'),
-                                           false)
+                                            '/' .
+                                            $this->pdf("etiquette_fabrication",
+                                                       $data,
+                                                       '' .
+                                                       date('d_m_H-i-s'),
+                                                       false)
                         );
                     if (count($etiquettes) >
                         500) {
@@ -12559,12 +12579,12 @@ class admin
                         $docs =
                             array(
                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                    '/' .
-                                    $this->pdf("etiquette_fabrication",
-                                               $data,
-                                               '' .
-                                               date('d_m_H-i-s'),
-                                               false)
+                                                '/' .
+                                                $this->pdf("etiquette_fabrication",
+                                                           $data,
+                                                           '' .
+                                                           date('d_m_H-i-s'),
+                                                           false)
                             );
                         if (count($etiquettes) >
                             600) {
@@ -12575,12 +12595,12 @@ class admin
                             $docs =
                                 array(
                                     'etiquettes' => $this->config->item('directory_pdf') .
-                                        '/' .
-                                        $this->pdf("etiquette_fabrication",
-                                                   $data,
-                                                   '' .
-                                                   date('d_m_H-i-s'),
-                                                   false)
+                                                    '/' .
+                                                    $this->pdf("etiquette_fabrication",
+                                                               $data,
+                                                               '' .
+                                                               date('d_m_H-i-s'),
+                                                               false)
                                 );
                             if (count($etiquettes) >
                                 700) {
@@ -12591,12 +12611,12 @@ class admin
                                 $docs =
                                     array(
                                         'etiquettes' => $this->config->item('directory_pdf') .
-                                            '/' .
-                                            $this->pdf("etiquette_fabrication",
-                                                       $data,
-                                                       '' .
-                                                       date('d_m_H-i-s'),
-                                                       false)
+                                                        '/' .
+                                                        $this->pdf("etiquette_fabrication",
+                                                                   $data,
+                                                                   '' .
+                                                                   date('d_m_H-i-s'),
+                                                                   false)
                                     );
                                 if (count($etiquettes) >
                                     800) {
@@ -12607,12 +12627,12 @@ class admin
                                     $docs =
                                         array(
                                             'etiquettes' => $this->config->item('directory_pdf') .
-                                                '/' .
-                                                $this->pdf("etiquette_fabrication",
-                                                           $data,
-                                                           '' .
-                                                           date('d_m_H-i-s'),
-                                                           false)
+                                                            '/' .
+                                                            $this->pdf("etiquette_fabrication",
+                                                                       $data,
+                                                                       '' .
+                                                                       date('d_m_H-i-s'),
+                                                                       false)
                                         );
                                     if (count($etiquettes) >
                                         900) {
@@ -12623,12 +12643,12 @@ class admin
                                         $docs =
                                             array(
                                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                                    '/' .
-                                                    $this->pdf("etiquette_fabrication",
-                                                               $data,
-                                                               '' .
-                                                               date('d_m_H-i-s'),
-                                                               false)
+                                                                '/' .
+                                                                $this->pdf("etiquette_fabrication",
+                                                                           $data,
+                                                                           '' .
+                                                                           date('d_m_H-i-s'),
+                                                                           false)
                                             );
 
                                     }
@@ -12644,12 +12664,12 @@ class admin
                                         $docs =
                                             array(
                                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                                    '/' .
-                                                    $this->pdf("etiquette_fabrication",
-                                                               $data,
-                                                               '' .
-                                                               date('d_m_H-i-s'),
-                                                               false)
+                                                                '/' .
+                                                                $this->pdf("etiquette_fabrication",
+                                                                           $data,
+                                                                           '' .
+                                                                           date('d_m_H-i-s'),
+                                                                           false)
                                             );
 
                                     }
@@ -12673,27 +12693,27 @@ class admin
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false),
+                                '/' .
+                                $this->pdf("etiquette_fabrication",
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false),
                 'certificat' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf('certificat_authenticite',
-                               $data,
-                               '' .
-                               date('d_m_H-i-s'),
-                               false,
-                               'paysage',
-                               $customsize =
-                                   array(
-                                       0,
-                                       0,
-                                       243,
-                                       153
-                                   ))
+                                '/' .
+                                $this->pdf('certificat_authenticite',
+                                           $data,
+                                           '' .
+                                           date('d_m_H-i-s'),
+                                           false,
+                                           'paysage',
+                                           $customsize =
+                                               array(
+                                                   0,
+                                                   0,
+                                                   243,
+                                                   153
+                                               ))
             );
         }
 
@@ -12741,25 +12761,25 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
+                        count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
+                        $c['etiquettes'] .
+                        '">' .
+                        ($gen['etiquettes'] !=
+                         '' ?
+                            $gen['etiquettes'] :
+                            0) .
+                        ' / ' .
+                        $total['etiquettes'] . '</b><br />
             - Nombre de certificats générées : <b style="color: ' .
-                $c['certificat'] .
-                '">' .
-                ($gen['certificat'] !=
-                '' ?
-                    $gen['certificat'] :
-                    0) .
-                ' / ' .
-                $total['certificat'] . '</b><br />
+                        $c['certificat'] .
+                        '">' .
+                        ($gen['certificat'] !=
+                         '' ?
+                            $gen['certificat'] :
+                            0) .
+                        ' / ' .
+                        $total['certificat'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -12786,11 +12806,11 @@ class admin
         }
 
         return $this->config->item('directory_pdf') .
-            '/' .
-            $this->pdf("etiquette_fabrication",
-                       $data,
-                       "",
-                       true);
+               '/' .
+               $this->pdf("etiquette_fabrication",
+                          $data,
+                          "",
+                          true);
 
     }
 
@@ -12886,25 +12906,25 @@ class admin
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette_fabrication",
-                           $data,
-                           "",
-                           false),
+                            '/' .
+                            $this->pdf("etiquette_fabrication",
+                                       $data,
+                                       "",
+                                       false),
             'certificat' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf('certificat_authenticite',
-                           $data,
-                           '',
-                           false,
-                           'paysage',
-                           $customsize =
-                               array(
-                                   0,
-                                   0,
-                                   243,
-                                   153
-                               ))
+                            '/' .
+                            $this->pdf('certificat_authenticite',
+                                       $data,
+                                       '',
+                                       false,
+                                       'paysage',
+                                       $customsize =
+                                           array(
+                                               0,
+                                               0,
+                                               243,
+                                               153
+                                           ))
         );
 
         $commandes = array();
@@ -12918,11 +12938,11 @@ class admin
             }
 
             return $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette_fabrication",
-                           $data,
-                           "",
-                           true);
+                   '/' .
+                   $this->pdf("etiquette_fabrication",
+                              $data,
+                              "",
+                              true);
 
         }
 
@@ -13005,13 +13025,13 @@ class admin
                     fgetcsv($file_data,
                             1000,
                             ";")) !==
-                FALSE) {
+                   FALSE) {
                 $num =
                     count($data);
 
                 if ($i > 0) {
                     echo $data[1] .
-                        "\n";
+                         "\n";
                     $ref =
                         explode("-",
                                 $data[1]);
@@ -13106,8 +13126,8 @@ class admin
                          as
                          $c) {
                     $message .= 'Magasin ' .
-                        $c->user_id .
-                        '<br />';
+                                $c->user_id .
+                                '<br />';
                     $this->db->delete('expedition',
                                       array('user_id' => $c->user_id));
                 }
@@ -13188,12 +13208,12 @@ class admin
             //var_dump($orders);
             if (isset($orders['fabric'])) {
                 $message .= '<b>RX Lenses :</b><br />' .
-                    PHP_EOL;
+                            PHP_EOL;
                 foreach ($orders['fabric']
                          as
                          $f) {
                     $message .= $f .
-                        '<br />';
+                                '<br />';
                 }
 
                 $message .= '<br />';
@@ -13201,12 +13221,12 @@ class admin
 
             if (isset($orders['stock'])) {
                 $message .= '<b>Stock Lenses :</b><br />' .
-                    PHP_EOL;
+                            PHP_EOL;
                 foreach ($orders['stock']
                          as
                          $s) {
                     $message .= $s .
-                        '<br />';
+                                '<br />';
                 }
             }
 
@@ -13355,12 +13375,12 @@ class admin
                     if ($commande->ancienne_commande >
                         0) {
                         $ref_commande .= '<br />(CR' .
-                            $commande->ancienne_commande .
-                            '-' .
-                            $commande->id_users .
-                            ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                            $commande->id_commande .
-                            '">Comparer</a>';
+                                         $commande->ancienne_commande .
+                                         '-' .
+                                         $commande->id_users .
+                                         ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                         $commande->id_commande .
+                                         '">Comparer</a>';
                     }
 
                     if ($commande->penalty ==
@@ -13383,7 +13403,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -13395,7 +13415,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                0 ?
+                                 0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -13423,7 +13443,7 @@ class admin
                         '23') {
                         $certif_panierA = "<br>
 						<a href=\"/static/aa/certificat_authenticite_" .
-                            $commande->id_commande . ".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+                                          $commande->id_commande . ".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 						";
                     }
                     if ($commande->id_commande >
@@ -14170,13 +14190,13 @@ class admin
         //$montures = array();
 
         if ((isset($_POST) &&
-            !empty($_POST))) {
+             !empty($_POST))) {
             $checkboxes =
                 $this->input->post('monturesPack');
             $this->m_montures->clearPackMonture($id_pack);
             $prix = 0;
             for ($i = 0; $i <
-            count($checkboxes);
+                         count($checkboxes);
                  $i++) {
 
                 $id_to_db =
@@ -14783,7 +14803,7 @@ class admin
                             '</span> €',
                             '<span>' .
                             number_format(($facture_cli->total_fabrique +
-                                $facture_cli->total_express),
+                                           $facture_cli->total_express),
                                 2,
                                 '.',
                                 ' ') .
@@ -14809,7 +14829,7 @@ class admin
                             $facture_cli->id_users .
                             '" ' .
                             ($facture_cli->reduction ==
-                            "0.00" ?
+                             "0.00" ?
                                 'style="display:none;"' :
                                 '') .
                             '><i class="zmdi zmdi-search"></i></a>',
@@ -14819,7 +14839,7 @@ class admin
 
                     $total_ht += $facture_cli->total;
                     $total_ht_liv += ($facture_cli->total -
-                        $facture_cli->tarif_liv);
+                                      $facture_cli->tarif_liv);
 
 
                     /*if($facture_cli->total_express > 0) {
@@ -15005,15 +15025,15 @@ class admin
                         $prix_livraison += 0.5)
                     {
                         $optionTarif .= '<option value="' .
-                            $prix_livraison .
-                            '" ' .
-                            ($prix_livraison ==
-                            $user->tarif_livraison ?
-                                'selected' :
-                                '') .
-                            '>' .
-                            $prix_livraison .
-                            '</option>';
+                                        $prix_livraison .
+                                        '" ' .
+                                        ($prix_livraison ==
+                                         $user->tarif_livraison ?
+                                            'selected' :
+                                            '') .
+                                        '>' .
+                                        $prix_livraison .
+                                        '</option>';
                     }
 
                     $dep =
@@ -15023,7 +15043,7 @@ class admin
 
                     $sp =
                         ($user->valid_mandat ==
-                        1 ?
+                         1 ?
                             'sp' :
                             'sp no_sp');
                     $commander =
@@ -15031,21 +15051,21 @@ class admin
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                        0 ?
+                         0 ?
                             'disabled' :
                             '') .
                         '>Verres</a> <a href="/admin/commande_lentilles/' .
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                        0 ?
+                         0 ?
                             'disabled' :
                             '') .
                         '>Lentilles</a> <a href="/admin/commande_montures/' .
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                        0 ?
+                         0 ?
                             'disabled' :
                             '') .
                         '>Montures</a>';
@@ -15146,19 +15166,19 @@ class admin
 
                 $data['DataCom'] = '<div class="form-check form-check-inline">
 				  <input id="Samuel" name="Samuel" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                    $Samuel . '>
+                                   $Samuel . '>
 				  <label for="Samuel" class="form-check-label">Samuel&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Daniel" name="Daniel" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                    $Daniel . '>
+                                   $Daniel . '>
 				  <label for="Daniel" class="form-check-label">Daniel&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Gregory" name="Gregory" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                    $Gregory . '>
+                                   $Gregory . '>
 				  <label for="Gregory" class="form-check-label">Gregory&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Optical_Service" name="Optical_Service" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                    $Optical_Service . '>
+                                   $Optical_Service . '>
 				  <label for="Optical_Service" class="form-check-label">Optical Service</label>
 				</div>';
 
@@ -15249,7 +15269,7 @@ class admin
         $this->data['ec']['useable'] =
             number_format($total_commandes[0]->total *
                           ($taux[0]->taux_erreur /
-                              100),
+                           100),
                           2,
                           '.',
                           '');
@@ -15260,8 +15280,8 @@ class admin
                           '');
         $this->data['ec']['rest'] =
             number_format(($total_commandes[0]->total *
-                              ($taux[0]->taux_erreur /
-                                  100)) -
+                           ($taux[0]->taux_erreur /
+                            100)) -
                           $total_commandes_ec[0]->total,
                           2,
                           '.',
@@ -15311,7 +15331,7 @@ class admin
             $this->data['ec']['useable'] =
                 number_format($total_commandes[0]->total *
                               ($taux[0]->taux_erreur /
-                                  100),
+                               100),
                               2,
                               '.',
                               '');
@@ -15322,8 +15342,8 @@ class admin
                               '');
             $this->data['ec']['rest'] =
                 number_format(($total_commandes[0]->total *
-                                  ($taux[0]->taux_erreur /
-                                      100)) -
+                               ($taux[0]->taux_erreur /
+                                100)) -
                               $total_commandes_ec[0]->total,
                               2,
                               '.',
@@ -15348,7 +15368,7 @@ class admin
                     '<strong>' .
                     number_format($total_commandes[0]->total *
                                   ($taux[0]->taux_erreur /
-                                      100),
+                                   100),
                                   2,
                                   '.',
                                   ' ') .
@@ -15373,8 +15393,8 @@ class admin
                              time()),
                     '<strong>' .
                     number_format(($total_commandes[0]->total *
-                                      ($taux[0]->taux_erreur /
-                                          100)) -
+                                   ($taux[0]->taux_erreur /
+                                    100)) -
                                   $total_commandes_ec[0]->total,
                                   2,
                                   '.',
@@ -15463,7 +15483,7 @@ class admin
                        0, -3);
             $this->data['region'] =
                 ($regions[$dep] ==
-                "Ile-de-France" ?
+                 "Ile-de-France" ?
                     1 : 0);
         } else {
             $this->data['region'] =
@@ -15936,9 +15956,9 @@ class admin
                         )
                     );
             } elseif (isset($data['sphere_droit']) &&
-                isset($data['addition_droit']) &&
-                isset($data['sphere_gauche']) &&
-                isset($data['addition_gauche'])) {
+                      isset($data['addition_droit']) &&
+                      isset($data['sphere_gauche']) &&
+                      isset($data['addition_gauche'])) {
                 $data_commande['verre'] =
                     array(
                         'correction_droit' => array(
@@ -16324,7 +16344,7 @@ class admin
                          '0');
         return (ceil($number *
                      $fig) /
-            $fig);
+                $fig);
     }
 
     // FUCK THIS SHIT
@@ -16387,7 +16407,7 @@ class admin
             $errors = 0;
 
             for ($i = 1; $i <=
-            $data['nb_multi_commande'];
+                         $data['nb_multi_commande'];
                  $i++) {
 
                 if (isset($data['discount'])) {
@@ -16431,8 +16451,8 @@ class admin
                         'order') {
                         $data['total_remise_paire'] =
                             (($data['prix_verre'] /
-                                    100) *
-                                $data['discount']['amount']);
+                              100) *
+                             $data['discount']['amount']);
                         $data['prix_verre'] =
                             $data['prix_verre'] -
                             $data['total_remise_paire'];
@@ -16443,8 +16463,8 @@ class admin
                     } else {
                         $pair_order_data->total_remise_paire =
                             (($pair_order_data->prix_verre /
-                                    100) *
-                                $data['discount']['amount']);
+                              100) *
+                             $data['discount']['amount']);
                         $pair_order_data->prix_verre =
                             $pair_order_data->prix_verre -
                             $pair_order_data->total_remise_paire;
@@ -16571,19 +16591,19 @@ class admin
                     $docs =
                         array(
                             'certificat' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf('certificat_authenticite',
-                                           $data,
-                                           $order['id'],
-                                           false,
-                                           'paysage',
-                                           $customsize =
-                                               array(
-                                                   0,
-                                                   0,
-                                                   243,
-                                                   153
-                                               ))
+                                            '/' .
+                                            $this->pdf('certificat_authenticite',
+                                                       $data,
+                                                       $order['id'],
+                                                       false,
+                                                       'paysage',
+                                                       $customsize =
+                                                           array(
+                                                               0,
+                                                               0,
+                                                               243,
+                                                               153
+                                                           ))
                         );
 
                 }
@@ -16893,7 +16913,7 @@ class admin
                 $verres =
                     $this->m_verres->getVerreASM($data);
             } elseif ($panierA ==
-                $user_id) {
+                      $user_id) {
                 $verres =
                     $this->m_verres->getVerreA($data);
             } else {
@@ -17044,13 +17064,13 @@ class admin
                                 if (!$isPhotocromie &&
                                     (strpos($verre->libelle_verre,
                                             "G15 C") !==
-                                        false ||
-                                        strpos($verre->libelle_verre,
-                                               "Brun C") !==
-                                        false ||
-                                        strpos($verre->libelle_verre,
-                                               "Gris C") !==
-                                        false)) {
+                                     false ||
+                                     strpos($verre->libelle_verre,
+                                            "Brun C") !==
+                                     false ||
+                                     strpos($verre->libelle_verre,
+                                            "Gris C") !==
+                                     false)) {
                                     continue;
                                 }
                             }
@@ -17094,11 +17114,11 @@ class admin
                                                               $user_id);
                             echo json_encode(array(
                                                  'intutile' => $v['intitule'] .
-                                                     " diamètre " .
-                                                     $data['diametre'] .
-                                                     " (" .
-                                                     ($prix_verre[0]->prix_verre) .
-                                                     " €)",
+                                                               " diamètre " .
+                                                               $data['diametre'] .
+                                                               " (" .
+                                                               ($prix_verre[0]->prix_verre) .
+                                                               " €)",
                                                  'id_verre' => $id_verre
                                              ));
                             exit;
@@ -17120,11 +17140,11 @@ class admin
                                                       $user_id);
                     echo json_encode(array(
                                          'intutile' => $v['intitule'] .
-                                             " diamètre " .
-                                             $data['diametre'] .
-                                             " (" .
-                                             ($prix_verre[0]->prix_verre) .
-                                             " €)",
+                                                       " diamètre " .
+                                                       $data['diametre'] .
+                                                       " (" .
+                                                       ($prix_verre[0]->prix_verre) .
+                                                       " €)",
                                          'id_verre' => $id_verre
                                      ));
                 }
@@ -17156,8 +17176,8 @@ class admin
 
             $credit =
                 number_format(($total_commandes[0]->total *
-                                  ($taux[0]->taux_erreur /
-                                      100)) -
+                               ($taux[0]->taux_erreur /
+                                100)) -
                               $total_commandes_ec[0]->total,
                               2,
                               '.',
@@ -17188,18 +17208,18 @@ class admin
                 $date =
                     strtotime($c->date_commande);
                 $select .= '<option value="' .
-                    $c->id_commande .
-                    '">' .
-                    $c->id_commande .
-                    ' - ' .
-                    $c->reference_client .
-                    ' - ' .
-                    $c->libelle_verre .
-                    ' - Commandé le ' .
-                    date('d/m/Y',
-                         $date) .
-                    '</option>' .
-                    "\n";
+                           $c->id_commande .
+                           '">' .
+                           $c->id_commande .
+                           ' - ' .
+                           $c->reference_client .
+                           ' - ' .
+                           $c->libelle_verre .
+                           ' - Commandé le ' .
+                           date('d/m/Y',
+                                $date) .
+                           '</option>' .
+                           "\n";
             }
         }
 
@@ -17273,7 +17293,7 @@ class admin
                         $etat_commande =
                             $commande->libelle_etat_commande .
                             ($commande->id_etat_commande ==
-                            6 ?
+                             6 ?
                                 ' le ' .
                                 date('d/m/Y H:i',
                                      strtotime($commande->date_update_commande)) :
@@ -17408,10 +17428,10 @@ class admin
                      $key =>
                      $value) {
                 $data .= '<option value="' .
-                    $value->email .
-                    '">Magasin ' .
-                    $value->id_users .
-                    '</option>';
+                         $value->email .
+                         '">Magasin ' .
+                         $value->id_users .
+                         '</option>';
             }
         }
 
@@ -17605,7 +17625,7 @@ class admin
                             }
 
                             return (float)$a <
-                            (float)$b ?
+                                   (float)$b ?
                                 1 :
                                 -1;
                         });
@@ -17620,13 +17640,13 @@ class admin
                             }
 
                             return (float)$a >
-                            (float)$b ?
+                                   (float)$b ?
                                 1 :
                                 -1;
                         });
 
                 } elseif ($post['statut'] ==
-                    "supprimer") {
+                          "supprimer") {
                     if (isset($grille[$post['sphere']]) &&
                         (
                         $key =
@@ -17899,12 +17919,12 @@ class admin
         for ($i = 1; $i <= 12;
              $i++) {
             $table .= "<th>" .
-                ($i < 10 ?
-                    '0' :
-                    '') . $i .
-                "/" .
-                $tab['annee'] .
-                "</th>";
+                      ($i < 10 ?
+                          '0' :
+                          '') . $i .
+                      "/" .
+                      $tab['annee'] .
+                      "</th>";
         }
 
         $table .= "</tr></thead><tbody>";
@@ -17929,19 +17949,19 @@ class admin
 
 
                         $table .= '<tr' .
-                            $cl .
-                            '>';
+                                  $cl .
+                                  '>';
 
                         if (!$this->input->post('client_set')) {
                             $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
-                                $current_user .
-                                '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
-                                $current_user .
-                                '</td><td>' .
-                                $current_nom_soc .
-                                '</td><td>' .
-                                $current_nom_mag .
-                                '</td>';
+                                      $current_user .
+                                      '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                                      $current_user .
+                                      '</td><td>' .
+                                      $current_nom_soc .
+                                      '</td><td>' .
+                                      $current_nom_mag .
+                                      '</td>';
                         }
 
                         $val_precedent =
@@ -17967,19 +17987,19 @@ class admin
                                 }
                             }
                             $table .= '<td ' .
-                                ($color !=
-                                "" ?
-                                    'style="color:' .
-                                    $color .
-                                    '"' :
-                                    '') .
-                                '>' .
-                                $l .
-                                ($l !=
-                                0 ?
-                                    ' HT' :
-                                    '') .
-                                '</td>';
+                                      ($color !=
+                                       "" ?
+                                          'style="color:' .
+                                          $color .
+                                          '"' :
+                                          '') .
+                                      '>' .
+                                      $l .
+                                      ($l !=
+                                       0 ?
+                                          ' HT' :
+                                          '') .
+                                      '</td>';
 
                             $val_precedent =
                                 $l;
@@ -18002,19 +18022,19 @@ class admin
                     $users->total .
                     ' HT</b><br />(' .
                     (($users->total_stock +
-                        $users->total_fabrique) >
-                    0 ?
+                      $users->total_fabrique) >
+                     0 ?
                         ($users->total_stock +
-                            $users->total_fabrique) :
+                         $users->total_fabrique) :
                         '0.00') .
                     ' Verres)<br />(' .
                     ($users->total_lentilles >
-                    0 ?
+                     0 ?
                         $users->total_lentilles :
                         '0.00') .
                     ' Lentilles)<br />(' .
                     ($users->total_montures >
-                    0 ?
+                     0 ?
                         $users->total_montures :
                         '0.00') .
                     ' Montures)';
@@ -18033,18 +18053,18 @@ class admin
                 "") {
 
                 $table .= '<tr' .
-                    $cl . '>';
+                          $cl . '>';
 
                 if (!$this->input->post('client_set')) {
                     $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
-                        $current_user .
-                        '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
-                        $current_user .
-                        '</td><td>' .
-                        $current_nom_soc .
-                        '</td><td>' .
-                        $current_nom_mag .
-                        '</td>';
+                              $current_user .
+                              '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                              $current_user .
+                              '</td><td>' .
+                              $current_nom_soc .
+                              '</td><td>' .
+                              $current_nom_mag .
+                              '</td>';
                 }
 
                 $val_precedent =
@@ -18069,15 +18089,15 @@ class admin
                         }
                     }
                     $table .= '<td ' .
-                        ($color !=
-                        "" ?
-                            'style="color:' .
-                            $color .
-                            '"' :
-                            '') .
-                        '>' .
-                        $l .
-                        '</td>';
+                              ($color !=
+                               "" ?
+                                  'style="color:' .
+                                  $color .
+                                  '"' :
+                                  '') .
+                              '>' .
+                              $l .
+                              '</td>';
 
                     $val_precedent =
                         $l;
@@ -18367,9 +18387,9 @@ class admin
                          as $k
                 => $v) {
                     echo $val .
-                        " | " .
-                        $v .
-                        "<br>";
+                         " | " .
+                         $v .
+                         "<br>";
                     $ok =
                         true;
                     if (stripos($v,
@@ -18450,9 +18470,9 @@ class admin
                         => $v)
                         {
                             echo $val .
-                                " | " .
-                                $v .
-                                "<br>";
+                                 " | " .
+                                 $v .
+                                 "<br>";
                             $ok =
                                 true;
                             if (stripos($v,
@@ -19058,11 +19078,11 @@ class admin
                          $brand)
                 {
                     echo '<option value="' .
-                        $brand->id .
-                        '">' .
-                        $brand->name .
-                        '</option>' .
-                        "\n";
+                         $brand->id .
+                         '">' .
+                         $brand->name .
+                         '</option>' .
+                         "\n";
                 }
                 echo '</select>';
             } else {
@@ -19096,24 +19116,24 @@ class admin
                 {
                     echo '<div class="item">';
                     echo '<div class="thumb"><img src="' .
-                        site_url('uploads/' .
-                                 $lens->image) .
-                        '" /></div>';
+                         site_url('uploads/' .
+                                  $lens->image) .
+                         '" /></div>';
                     echo '<b>' .
-                        $lens->name .
-                        '</b><br />';
+                         $lens->name .
+                         '</b><br />';
                     echo 'Boite de ' .
-                        $lens->packaging .
-                        '<br />';
+                         $lens->packaging .
+                         '<br />';
                     echo '<span class="price">' .
-                        number_format($lens->price,
-                                      2,
-                                      ',',
-                                      '') .
-                        '€</span><br />';
+                         number_format($lens->price,
+                                       2,
+                                       ',',
+                                       '') .
+                         '€</span><br />';
                     echo '<a class="btn btn-warning product-select" rel="' .
-                        $lens->id .
-                        '">Choisir</a>';
+                         $lens->id .
+                         '">Choisir</a>';
                     echo '</div>';
                 }
 
@@ -19159,8 +19179,8 @@ class admin
                 echo '<div class="product-config">';
 
                 echo '<input type="hidden" name="lens_id" value="' .
-                    $lens_id .
-                    '">';
+                     $lens_id .
+                     '">';
 
 
                 foreach ($config['sides']
@@ -19168,13 +19188,13 @@ class admin
                 => $v) {
 
                     echo '<div class="side" data-side="' .
-                        $k .
-                        '">';
+                         $k .
+                         '">';
 
                     echo '<div class="mask"></div>';
 
                     echo '<h4>Corrections Oeil ' .
-                        $v . '</h4>
+                         $v . '</h4>
                             <div class="form-horizontal">';
 
                     foreach ($build_data
@@ -19193,21 +19213,21 @@ class admin
 
                             echo '<div class="form-group">
                                         <label class="col-sm-3 text-center" for="' .
-                                $attr .
-                                '[' .
-                                $k .
-                                ']">' .
-                                $config['attrs'][$attr] . '</label>
+                                 $attr .
+                                 '[' .
+                                 $k .
+                                 ']">' .
+                                 $config['attrs'][$attr] . '</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="' .
-                                $attr .
-                                '[' .
-                                $k .
-                                ']" name="build[' .
-                                $attr .
-                                '][' .
-                                $k .
-                                ']">';
+                                 $attr .
+                                 '[' .
+                                 $k .
+                                 ']" name="build[' .
+                                 $attr .
+                                 '][' .
+                                 $k .
+                                 ']">';
 
                             switch ($props->type) {
 
@@ -19264,10 +19284,10 @@ class admin
 
 
                                                 echo '<option value="' .
-                                                    $value .
-                                                    '">' .
-                                                    $show .
-                                                    '</option>';
+                                                     $value .
+                                                     '">' .
+                                                     $show .
+                                                     '</option>';
                                             }
 
                                         }
@@ -19304,10 +19324,10 @@ class admin
                                                 }
 
                                                 echo '<option value="' .
-                                                    $value .
-                                                    '">' .
-                                                    $show .
-                                                    '</option>';
+                                                     $value .
+                                                     '">' .
+                                                     $show .
+                                                     '</option>';
                                             }
                                         }
 
@@ -19331,10 +19351,10 @@ class admin
                                              $step)
                                     {
                                         echo '<option value="' .
-                                            $step .
-                                            '">' .
-                                            $step .
-                                            '</option>';
+                                             $step .
+                                             '">' .
+                                             $step .
+                                             '</option>';
                                     }
 
                                     break;
@@ -19351,13 +19371,13 @@ class admin
 
                     echo '<div class="form-group">
                                 <label class="col-sm-3 text-center" for="qty[' .
-                        $k . ']">Quantité</label>
+                         $k . ']">Quantité</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="qty[' .
-                        $k .
-                        ']" name="build[qty][' .
-                        $k .
-                        ']">';
+                         $k .
+                         ']" name="build[qty][' .
+                         $k .
+                         ']">';
                     for ($i =
                              1;
                          $i <=
@@ -19365,10 +19385,10 @@ class admin
                          ++$i)
                     {
                         echo '<option value="' .
-                            $i .
-                            '">' .
-                            $i .
-                            '</option>';
+                             $i .
+                             '">' .
+                             $i .
+                             '</option>';
                     }
                     echo '</select>
                                 </div>
@@ -19383,14 +19403,14 @@ class admin
                     }
 
                     echo '<div class="col-sm-9 col-sm-offset-3"><input type="checkbox" value="1" class="excl" name="build[excl][' .
-                        $excl .
-                        ']" id="build[excl][' .
-                        $excl .
-                        ']" /> <label class="control-label" for="excl[' .
-                        $excl .
-                        ']"> Commander uniquement oeil ' .
-                        $v .
-                        '</label></div>';
+                         $excl .
+                         ']" id="build[excl][' .
+                         $excl .
+                         ']" /> <label class="control-label" for="excl[' .
+                         $excl .
+                         ']"> Commander uniquement oeil ' .
+                         $v .
+                         '</label></div>';
 
                     echo '</div>
                         </div>';
@@ -19538,7 +19558,7 @@ class admin
                        0, -3);
             $region =
                 ($regions[$dep] ==
-                "Ile-de-France" ?
+                 "Ile-de-France" ?
                     1 : 0);
         } else {
             $region = 0;
@@ -19704,11 +19724,11 @@ class admin
                          $brand)
                 {
                     echo '<option value="' .
-                        $brand->id .
-                        '">' .
-                        $brand->name .
-                        '</option>' .
-                        "\n";
+                         $brand->id .
+                         '">' .
+                         $brand->name .
+                         '</option>' .
+                         "\n";
                 }
                 echo '</select>';
             } else {
@@ -19761,24 +19781,24 @@ class admin
                 {
                     echo '<div class="item">';
                     echo '<div class="thumb"><img src="' .
-                        site_url('uploads/' .
-                                 $monture->image) .
-                        '"  style="max-width: 312px;" /></div>';
+                         site_url('uploads/' .
+                                  $monture->image) .
+                         '"  style="max-width: 312px;" /></div>';
                     echo '<b>' .
-                        $monture->modele .
-                        '</b><br />';
+                         $monture->modele .
+                         '</b><br />';
                     echo 'Type: ' .
-                        $monture->type .
-                        '<br />';
+                         $monture->type .
+                         '<br />';
                     echo 'Taille: ' .
-                        $monture->size .
-                        '<br />';
+                         $monture->size .
+                         '<br />';
                     echo 'Couleur: ' .
-                        $monture->couleur .
-                        '<br />';
+                         $monture->couleur .
+                         '<br />';
                     echo 'Prix: ' .
-                        $monture->prix_vente .
-                        '<br />';
+                         $monture->prix_vente .
+                         '<br />';
                     echo '</div>';
                 }
 
@@ -19816,25 +19836,25 @@ class admin
                             0) {
                             echo '<div class="item"><br><br>';
                             echo '<div class="thumb"><img src="' .
-                                site_url('uploads/' .
-                                         $pack->image) .
-                                '" style="max-width: 312px;" /></div>';
+                                 site_url('uploads/' .
+                                          $pack->image) .
+                                 '" style="max-width: 312px;" /></div>';
                             echo '<b>' .
-                                $pack->name .
-                                '</b><br />';
+                                 $pack->name .
+                                 '</b><br />';
                             if ($pack->id !=
                                 1) {
                                 echo '<a class="btn btn-warning product-select" rel="voir_pack_' .
-                                    $pack->id .
-                                    '">Voir les montures</a>';
+                                     $pack->id .
+                                     '">Voir les montures</a>';
                             } else {
                                 echo "Prix: " .
-                                    $pack->prix .
-                                    "&#8364;<br><br>";
+                                     $pack->prix .
+                                     "&#8364;<br><br>";
                             }
                             echo '<a class="btn btn-warning product-select" rel="add_pack_' .
-                                $pack->id .
-                                '">Ajouter à mon panier</a>&nbsp;&nbsp;';
+                                 $pack->id .
+                                 '">Ajouter à mon panier</a>&nbsp;&nbsp;';
                             echo '</div>';
                         }
                     }
@@ -19860,30 +19880,30 @@ class admin
                             $s_temp >
                             0) {
                             echo '<div class="item ' .
-                                $monture->modele .
-                                '">';
+                                 $monture->modele .
+                                 '">';
                             echo '<div class="thumb"><img src="' .
-                                site_url('uploads/' .
-                                         $monture->image) .
-                                '"  style="max-width: 312px;" /></div>';
+                                 site_url('uploads/' .
+                                          $monture->image) .
+                                 '"  style="max-width: 312px;" /></div>';
                             echo '<b>' .
-                                $monture->modele .
-                                '</b><br />';
+                                 $monture->modele .
+                                 '</b><br />';
                             echo 'Type: ' .
-                                $monture->type .
-                                '<br />';
+                                 $monture->type .
+                                 '<br />';
                             echo 'Taille: ' .
-                                $monture->size .
-                                '<br />';
+                                 $monture->size .
+                                 '<br />';
                             echo 'Couleur: ' .
-                                $monture->couleur .
-                                '<br />';
+                                 $monture->couleur .
+                                 '<br />';
                             echo 'Prix: ' .
-                                $monture->prix_vente .
-                                '&#8364;<br />';
+                                 $monture->prix_vente .
+                                 '&#8364;<br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
-                                $monture->id .
-                                '">Ajouter à mon panier</a>';
+                                 $monture->id .
+                                 '">Ajouter à mon panier</a>';
                             echo '</div>';
                         }
                     }
@@ -19929,8 +19949,8 @@ class admin
                 echo '<div class="product-config">';
 
                 echo '<input type="hidden" name="montures_id" value="' .
-                    $montures_id .
-                    '">';
+                     $montures_id .
+                     '">';
 
 
                 foreach ($config['sides']
@@ -19938,13 +19958,13 @@ class admin
                 => $v) {
 
                     echo '<div class="side" data-side="' .
-                        $k .
-                        '">';
+                         $k .
+                         '">';
 
                     echo '<div class="mask"></div>';
 
                     echo '<h4>Corrections Oeil ' .
-                        $v . '</h4>
+                         $v . '</h4>
                             <div class="form-horizontal">';
 
                     foreach ($build_data
@@ -19963,21 +19983,21 @@ class admin
 
                             echo '<div class="form-group">
                                         <label class="col-sm-3 text-center" for="' .
-                                $attr .
-                                '[' .
-                                $k .
-                                ']">' .
-                                $config['attrs'][$attr] . '</label>
+                                 $attr .
+                                 '[' .
+                                 $k .
+                                 ']">' .
+                                 $config['attrs'][$attr] . '</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="' .
-                                $attr .
-                                '[' .
-                                $k .
-                                ']" name="build[' .
-                                $attr .
-                                '][' .
-                                $k .
-                                ']">';
+                                 $attr .
+                                 '[' .
+                                 $k .
+                                 ']" name="build[' .
+                                 $attr .
+                                 '][' .
+                                 $k .
+                                 ']">';
 
                             switch ($props->type) {
 
@@ -20034,10 +20054,10 @@ class admin
 
 
                                                 echo '<option value="' .
-                                                    $value .
-                                                    '">' .
-                                                    $show .
-                                                    '</option>';
+                                                     $value .
+                                                     '">' .
+                                                     $show .
+                                                     '</option>';
                                             }
 
                                         }
@@ -20074,10 +20094,10 @@ class admin
                                                 }
 
                                                 echo '<option value="' .
-                                                    $value .
-                                                    '">' .
-                                                    $show .
-                                                    '</option>';
+                                                     $value .
+                                                     '">' .
+                                                     $show .
+                                                     '</option>';
                                             }
                                         }
 
@@ -20101,10 +20121,10 @@ class admin
                                              $step)
                                     {
                                         echo '<option value="' .
-                                            $step .
-                                            '">' .
-                                            $step .
-                                            '</option>';
+                                             $step .
+                                             '">' .
+                                             $step .
+                                             '</option>';
                                     }
 
                                     break;
@@ -20121,13 +20141,13 @@ class admin
 
                     echo '<div class="form-group">
                                 <label class="col-sm-3 text-center" for="qty[' .
-                        $k . ']">Quantité</label>
+                         $k . ']">Quantité</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="qty[' .
-                        $k .
-                        ']" name="build[qty][' .
-                        $k .
-                        ']">';
+                         $k .
+                         ']" name="build[qty][' .
+                         $k .
+                         ']">';
                     for ($i =
                              1;
                          $i <=
@@ -20135,10 +20155,10 @@ class admin
                          ++$i)
                     {
                         echo '<option value="' .
-                            $i .
-                            '">' .
-                            $i .
-                            '</option>';
+                             $i .
+                             '">' .
+                             $i .
+                             '</option>';
                     }
                     echo '</select>
                                 </div>
@@ -20153,14 +20173,14 @@ class admin
                     }
 
                     echo '<div class="col-sm-9 col-sm-offset-3"><input type="checkbox" value="1" class="excl" name="build[excl][' .
-                        $excl .
-                        ']" id="build[excl][' .
-                        $excl .
-                        ']" /> <label class="control-label" for="excl[' .
-                        $excl .
-                        ']"> Commander uniquement oeil ' .
-                        $v .
-                        '</label></div>';
+                         $excl .
+                         ']" id="build[excl][' .
+                         $excl .
+                         ']" /> <label class="control-label" for="excl[' .
+                         $excl .
+                         ']"> Commander uniquement oeil ' .
+                         $v .
+                         '</label></div>';
 
                     echo '</div>
                         </div>';
@@ -20245,18 +20265,18 @@ class admin
                 0) {
                 echo '<div class="item">';
                 echo '<div class="thumb"><img src="' .
-                    site_url('uploads/' .
-                             $pack->image) .
-                    '" style="max-width: 312px;" /></div>';
+                     site_url('uploads/' .
+                              $pack->image) .
+                     '" style="max-width: 312px;" /></div>';
                 echo '<b>' .
-                    $pack->name .
-                    '</b><br />';
+                     $pack->name .
+                     '</b><br />';
                 echo '<a class="btn btn-warning product-select" rel="add_pack_' .
-                    $pack->id .
-                    '">Choisir</a>&nbsp;&nbsp;';
+                     $pack->id .
+                     '">Choisir</a>&nbsp;&nbsp;';
                 echo '<a class="btn btn-warning product-select" rel="voir_pack_' .
-                    $pack->id .
-                    '">Voir les montures</a>';
+                     $pack->id .
+                     '">Voir les montures</a>';
                 echo '</div>';
             }
         }
@@ -20281,15 +20301,15 @@ class admin
         {
             echo '<div class="item">';
             echo '<div class="thumb"><img src="' .
-                site_url('uploads/' .
-                         $collection->image) .
-                '"  style="max-width: 312px;" /></div>';
+                 site_url('uploads/' .
+                          $collection->image) .
+                 '"  style="max-width: 312px;" /></div>';
             echo '<b>' .
-                $collection->name .
-                '</b><br />';
+                 $collection->name .
+                 '</b><br />';
             echo '<a class="btn btn-warning product-select" rel="' .
-                $collection->id .
-                '">Voir collection</a>';
+                 $collection->id .
+                 '">Voir collection</a>';
             echo '</div>';
         }
 
@@ -20328,7 +20348,7 @@ class admin
             $this->db->update('commande_montures_temp',
                               array(
                                   'qty' => $id_temp->qty +
-                                      1
+                                           1
                               ));
         } else {
             //$data = array('id_client' => $user_id, 'id_monture' => $monture_id, 'qty' => 1, 'date' => date('Y-m-d H:i:s'), 'status' => 0);
@@ -20406,7 +20426,7 @@ class admin
             $this->db->update('commande_montures_temp',
                               array(
                                   'qty' => $id_temp->qty +
-                                      1
+                                           1
                               ));
         } else {
             $data = array(
@@ -20532,7 +20552,7 @@ class admin
                 if ($monture->pack ==
                     null) {
                     $total_order += $monture->prix_vente *
-                        $monture->qty;
+                                    $monture->qty;
                     $stock_avant =
                         $monture->stock;
                     $this->db->where('id',
@@ -20554,13 +20574,13 @@ class admin
                         <head></head>
                         <body>
                         Collection : " .
-                            $monture->collection .
-                            ' ,Modele : ' .
-                            $monture->modele .
-                            ',Couleur : ' .
-                            $monture->couleur .
-                            " ,Stock : " .
-                            $stock_apres . "
+                                    $monture->collection .
+                                    ' ,Modele : ' .
+                                    $monture->modele .
+                                    ',Couleur : ' .
+                                    $monture->couleur .
+                                    " ,Stock : " .
+                                    $stock_apres . "
                         </body>
                       </html>";
                         $subjet_txt =
@@ -20574,7 +20594,7 @@ class admin
                     }
                 } else {
                     $total_order += $monture->prixpack *
-                        $monture->qty;
+                                    $monture->qty;
 
                     $montures_du_pack =
                         $this->m_montures->getAllMonturesDuPack($monture->pack_id);
@@ -20601,13 +20621,13 @@ class admin
 							<head></head>
 							<body>
 							Pack : " .
-                                $monture->pack .
-                                ' ,Modele : ' .
-                                $monture_du_pack->modele .
-                                ',Couleur : ' .
-                                $monture_du_pack->couleur .
-                                " ,Stock : " .
-                                $stock_apres . "
+                                        $monture->pack .
+                                        ' ,Modele : ' .
+                                        $monture_du_pack->modele .
+                                        ',Couleur : ' .
+                                        $monture_du_pack->couleur .
+                                        " ,Stock : " .
+                                        $stock_apres . "
 							</body>
 						  </html>";
                             $subjet_txt =
@@ -20684,7 +20704,7 @@ class admin
                        0, -3);
             $region =
                 ($regions[$dep] ==
-                "Ile-de-France" ?
+                 "Ile-de-France" ?
                     1 : 0);
         } else {
             $region = 0;
@@ -20831,11 +20851,11 @@ class admin
         // Génération des PDF
         $docs = array(
             'bl' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("bons_livraison_montures",
-                           $data,
-                           "bons_livraison_montures.pdf",
-                           false),
+                    '/' .
+                    $this->pdf("bons_livraison_montures",
+                               $data,
+                               "bons_livraison_montures.pdf",
+                               false),
         );
 
 
@@ -20881,11 +20901,11 @@ class admin
         // Génération des PDF
         $docs = array(
             'bl' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("bons_livraison_lentille",
-                           $data,
-                           "bons_livraison_lentille.pdf",
-                           false),
+                    '/' .
+                    $this->pdf("bons_livraison_lentille",
+                               $data,
+                               "bons_livraison_lentille.pdf",
+                               false),
         );
 
 

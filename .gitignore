@@ -2,5 +2,6 @@
 /static/my_config.php
 /application/config/config.php
 /application/config/database.php
+/application/config/database_old.php
 /application/config/config_old.php
 .htaccess

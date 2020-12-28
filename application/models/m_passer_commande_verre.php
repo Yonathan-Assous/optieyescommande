@@ -1950,11 +1950,10 @@ class m_passer_commande_verre extends CI_Model {
 		*/
 		$res = $this->db->query("SELECT * FROM ".$this->table_lenses." WHERE code = '".$lens."'");
 		//echo "SELECT * FROM ".$this->table_lenses." WHERE code = '".$lens."'";
-		$r = $res->result()[0]->ranges;
+        $r = $res->result()[0]->ranges;
 		
 		$data = json_decode($r);
 		$combinationTreeId = json_encode($data[0]->combinationTreeId);
-		
 		$t = explode(":",$combinationTreeId);
 		$p = explode(",",$t[1]);
 		$p[0] = str_replace('"', "", $p[0]);
@@ -1975,7 +1974,7 @@ class m_passer_commande_verre extends CI_Model {
 			{
 				$optionCode = $tree->result()[0]->optionCode;
 			}
-
+            var_dump($optionCode);die;
 			$code1 = array();
 			$code2 = array();
 			$code3 = array();

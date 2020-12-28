@@ -4,4 +4,6 @@
 /application/config/database.php
 /application/config/database_old.php
 /application/config/config_old.php
+static/aa/
+static/xml/
 .htaccess

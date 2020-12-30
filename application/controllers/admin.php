@@ -4556,94 +4556,94 @@ class admin
                 $lenses_code =
                     $commande->lenscode;
 
-                if ($lenses_code ==
-                    'PAI-1515') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1615') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1715') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1815') {
-                    $remark .= " Change to product INITIAL ";
-                }
+//                if ($lenses_code ==
+//                    'PAI-1515') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1615') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1715') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1815') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
 
 
-                if ($lenses_code ==
-                    'PAI-15159') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-16159') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-17159') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-18159') {
-                    $remark .= " Change to product INITIAL ";
-                }
+//                if ($lenses_code ==
+//                    'PAI-15159') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16159') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17159') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18159') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
 
 
-                if ($lenses_code ==
-                    'PAI-1516') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1616') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1716') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-1816') {
-                    $remark .= " Change to product INITIAL ";
-                }
+//                if ($lenses_code ==
+//                    'PAI-1516') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1616') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1716') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1816') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
 
 
-                if ($lenses_code ==
-                    'PAI-15167') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-16167') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-17167') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-18167') {
-                    $remark .= " Change to product INITIAL ";
-                }
+//                if ($lenses_code ==
+//                    'PAI-15167') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16167') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17167') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18167') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
 
 
-                if ($lenses_code ==
-                    'PAI-15174') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-16174') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-17174') {
-                    $remark .= " Change to product INITIAL ";
-                }
-                if ($lenses_code ==
-                    'PAI-18174') {
-                    $remark .= " Change to product INITIAL ";
-                }
+//                if ($lenses_code ==
+//                    'PAI-15174') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16174') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17174') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18174') {
+//                    $remark .= " Change to product INITIAL ";
+//                }
 
 
                 if ($remark !=
@@ -4700,264 +4700,264 @@ class admin
                     $commande->lenscode;
 
                 $paA = "";
-
-                if ($lenses_code ==
-                    'PAU-15') {
-                    $lenses_code =
-                        '200010';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAU-159') {
-                    $lenses_code =
-                        '200051';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAU-16') {
-                    $lenses_code =
-                        '200005';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAU-167') {
-                    $lenses_code =
-                        '200003';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAU-174') {
-                    $lenses_code =
-                        '200464';
-                    $paA =
-                        "1";
-                }
-
-                if ($lenses_code ==
-                    'PAD-15') {
-                    $lenses_code =
-                        '200076';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAD-159') {
-                    $lenses_code =
-                        '200086';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAD-16') {
-                    $lenses_code =
-                        '200078';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAD-167') {
-                    $lenses_code =
-                        '200913';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAD-174') {
-                    $lenses_code =
-                        '200853';
-                    $paA =
-                        "1";
-                }
-
-
-                if ($lenses_code ==
-                    'PAO-15') {
-                    $lenses_code =
-                        '202954';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAO-159') {
-                    $lenses_code =
-                        '202980';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAO-16') {
-                    $lenses_code =
-                        '202955';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAO-167') {
-                    $lenses_code =
-                        '202956';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAO-174') {
-                    $lenses_code =
-                        '202981';
-                    $paA =
-                        "1";
-                }
-
-                if ($lenses_code ==
-                    'PAI-1515') {
-                    $lenses_code =
-                        'S4UW50';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1615') {
-                    $lenses_code =
-                        'S3UW50';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1715') {
-                    $lenses_code =
-                        'S2UW50';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1815') {
-                    $lenses_code =
-                        'S1UW50';
-                    $paA =
-                        "1";
-                }
-
-
-                if ($lenses_code ==
-                    'PAI-15159') {
-                    $lenses_code =
-                        'S4UY59';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-16159') {
-                    $lenses_code =
-                        'S3UY59';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-17159') {
-                    $lenses_code =
-                        'S2UY59';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-18159') {
-                    $lenses_code =
-                        'S1UY59';
-                    $paA =
-                        "1";
-                }
-
-
-                if ($lenses_code ==
-                    'PAI-1516') {
-                    $lenses_code =
-                        'S4UH60';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1616') {
-                    $lenses_code =
-                        'S3UH60';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1716') {
-                    $lenses_code =
-                        'S2UH60';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-1816') {
-                    $lenses_code =
-                        'S1UH60';
-                    $paA =
-                        "1";
-                }
-
-
-                if ($lenses_code ==
-                    'PAI-15167') {
-                    $lenses_code =
-                        'S4UH67';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-16167') {
-                    $lenses_code =
-                        'S3UH67';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-17167') {
-                    $lenses_code =
-                        'S2UH67';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-18167') {
-                    $lenses_code =
-                        'S1UH67';
-                    $paA =
-                        "1";
-                }
-
-
-                if ($lenses_code ==
-                    'PAI-15174') {
-                    $lenses_code =
-                        'S4UH74';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-16174') {
-                    $lenses_code =
-                        'S3UH74';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-17174') {
-                    $lenses_code =
-                        'S2UH74';
-                    $paA =
-                        "1";
-                }
-                if ($lenses_code ==
-                    'PAI-18174') {
-                    $lenses_code =
-                        'S1UH74';
-                    $paA =
-                        "1";
-                }
+//
+//                if ($lenses_code ==
+//                    'PAU-15') {
+//                    $lenses_code =
+//                        '200010';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAU-159') {
+//                    $lenses_code =
+//                        '200051';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAU-16') {
+//                    $lenses_code =
+//                        '200005';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAU-167') {
+//                    $lenses_code =
+//                        '200003';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAU-174') {
+//                    $lenses_code =
+//                        '200464';
+//                    $paA =
+//                        "1";
+//                }
+//
+//                if ($lenses_code ==
+//                    'PAD-15') {
+//                    $lenses_code =
+//                        '200076';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAD-159') {
+//                    $lenses_code =
+//                        '200086';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAD-16') {
+//                    $lenses_code =
+//                        '200078';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAD-167') {
+//                    $lenses_code =
+//                        '200913';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAD-174') {
+//                    $lenses_code =
+//                        '200853';
+//                    $paA =
+//                        "1";
+//                }
+//
+//
+//                if ($lenses_code ==
+//                    'PAO-15') {
+//                    $lenses_code =
+//                        '202954';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAO-159') {
+//                    $lenses_code =
+//                        '202980';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAO-16') {
+//                    $lenses_code =
+//                        '202955';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAO-167') {
+//                    $lenses_code =
+//                        '202956';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAO-174') {
+//                    $lenses_code =
+//                        '202981';
+//                    $paA =
+//                        "1";
+//                }
+//
+//                if ($lenses_code ==
+//                    'PAI-1515') {
+//                    $lenses_code =
+//                        'S4UW50';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1615') {
+//                    $lenses_code =
+//                        'S3UW50';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1715') {
+//                    $lenses_code =
+//                        'S2UW50';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1815') {
+//                    $lenses_code =
+//                        'S1UW50';
+//                    $paA =
+//                        "1";
+//                }
+//
+//
+//                if ($lenses_code ==
+//                    'PAI-15159') {
+//                    $lenses_code =
+//                        'S4UY59';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16159') {
+//                    $lenses_code =
+//                        'S3UY59';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17159') {
+//                    $lenses_code =
+//                        'S2UY59';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18159') {
+//                    $lenses_code =
+//                        'S1UY59';
+//                    $paA =
+//                        "1";
+//                }
+//
+//
+//                if ($lenses_code ==
+//                    'PAI-1516') {
+//                    $lenses_code =
+//                        'S4UH60';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1616') {
+//                    $lenses_code =
+//                        'S3UH60';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1716') {
+//                    $lenses_code =
+//                        'S2UH60';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-1816') {
+//                    $lenses_code =
+//                        'S1UH60';
+//                    $paA =
+//                        "1";
+//                }
+//
+//
+//                if ($lenses_code ==
+//                    'PAI-15167') {
+//                    $lenses_code =
+//                        'S4UH67';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16167') {
+//                    $lenses_code =
+//                        'S3UH67';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17167') {
+//                    $lenses_code =
+//                        'S2UH67';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18167') {
+//                    $lenses_code =
+//                        'S1UH67';
+//                    $paA =
+//                        "1";
+//                }
+//
+//
+//                if ($lenses_code ==
+//                    'PAI-15174') {
+//                    $lenses_code =
+//                        'S4UH74';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-16174') {
+//                    $lenses_code =
+//                        'S3UH74';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-17174') {
+//                    $lenses_code =
+//                        'S2UH74';
+//                    $paA =
+//                        "1";
+//                }
+//                if ($lenses_code ==
+//                    'PAI-18174') {
+//                    $lenses_code =
+//                        'S1UH74';
+//                    $paA =
+//                        "1";
+//                }
 
                 $xml .= '
       	<pair>
@@ -6882,94 +6882,94 @@ class admin
                     $lenses_code =
                         $commande->lenscode;
 
-                    if ($lenses_code ==
-                        'PAI-1515') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1615') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1715') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1815') {
-                        $remark .= " Change to product INITIAL ";
-                    }
+//                    if ($lenses_code ==
+//                        'PAI-1515') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1615') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1715') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1815') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
 
 
-                    if ($lenses_code ==
-                        'PAI-15159') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16159') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17159') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18159') {
-                        $remark .= " Change to product INITIAL ";
-                    }
+//                    if ($lenses_code ==
+//                        'PAI-15159') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-16159') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-17159') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-18159') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
 
 
-                    if ($lenses_code ==
-                        'PAI-1516') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1616') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1716') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1816') {
-                        $remark .= " Change to product INITIAL ";
-                    }
+//                    if ($lenses_code ==
+//                        'PAI-1516') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1616') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1716') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-1816') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
 
 
-                    if ($lenses_code ==
-                        'PAI-15167') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16167') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17167') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18167') {
-                        $remark .= " Change to product INITIAL ";
-                    }
+//                    if ($lenses_code ==
+//                        'PAI-15167') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-16167') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-17167') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-18167') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
 
 
-                    if ($lenses_code ==
-                        'PAI-15174') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16174') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17174') {
-                        $remark .= " Change to product INITIAL ";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18174') {
-                        $remark .= " Change to product INITIAL ";
-                    }
+//                    if ($lenses_code ==
+//                        'PAI-15174') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-16174') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-17174') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
+//                    if ($lenses_code ==
+//                        'PAI-18174') {
+//                        $remark .= " Change to product INITIAL ";
+//                    }
 
                     if ($remark !=
                         '') {
@@ -9058,94 +9058,94 @@ class admin
             $lenses_code =
                 $lens_code;
 
-            if ($lenses_code ==
-                'PAI-1515') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1615') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1715') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1815') {
-                $remark .= " Change to product INITIAL ";
-            }
-
-
-            if ($lenses_code ==
-                'PAI-15159') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-16159') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-17159') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-18159') {
-                $remark .= " Change to product INITIAL ";
-            }
-
-
-            if ($lenses_code ==
-                'PAI-1516') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1616') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1716') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-1816') {
-                $remark .= " Change to product INITIAL ";
-            }
-
-
-            if ($lenses_code ==
-                'PAI-15167') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-16167') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-17167') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-18167') {
-                $remark .= " Change to product INITIAL ";
-            }
-
-
-            if ($lenses_code ==
-                'PAI-15174') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-16174') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-17174') {
-                $remark .= " Change to product INITIAL ";
-            }
-            if ($lenses_code ==
-                'PAI-18174') {
-                $remark .= " Change to product INITIAL ";
-            }
+//            if ($lenses_code ==
+//                'PAI-1515') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1615') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1715') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1815') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//
+//
+//            if ($lenses_code ==
+//                'PAI-15159') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-16159') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-17159') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-18159') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//
+//
+//            if ($lenses_code ==
+//                'PAI-1516') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1616') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1716') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-1816') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//
+//
+//            if ($lenses_code ==
+//                'PAI-15167') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-16167') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-17167') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-18167') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//
+//
+//            if ($lenses_code ==
+//                'PAI-15174') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-16174') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-17174') {
+//                $remark .= " Change to product INITIAL ";
+//            }
+//            if ($lenses_code ==
+//                'PAI-18174') {
+//                $remark .= " Change to product INITIAL ";
+//            }
 
             if ($remark !=
                 '') {

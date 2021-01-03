@@ -262,3 +262,39 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dt
         width: 100%;
     }
 }
+
+.card-box-commercial>div>h2 {
+    font-size: 16px;
+}
+
+.card-box-commercial{
+    background-color: #ffe071;
+}
+
+.card-box-commercial>div>h2 {
+    color: #FFF !important;
+}
+
+
+@media(min-width: 1200px) {
+    .col-box-commercial {
+        width: 20%;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .card-box-commercial {
+        padding: 0px 0px;
+        text-align: center;
+    }
+
+    .card-box-commercial>div>h2 {
+        font-size: 15px;
+    }
+
+    .widget-user {
+        min-height: 100px;
+    }
+}
+
+

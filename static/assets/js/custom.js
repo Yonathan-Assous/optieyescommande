@@ -1859,7 +1859,7 @@ $('#type_de_verreD').on('change', function() {
 						$('#teinteD').prop('disabled', false);
 					}
 					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
+					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
 					{
 						$('#traitementD').prop('disabled', true);
 					}
@@ -1882,21 +1882,25 @@ $('#type_de_verreD').on('change', function() {
 					$("#PrismeCylindreD").prop('disabled', false);
 				
 					$('#quantiteD').prop('disabled', true);
-				
+
+
 					$.ajax({
 							type: "POST",
 							url: "/index/getOptions",
 							data: {"lens" : type_de_verreD},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
+
 							$('#traitementD option:eq(0)').prop('selected', true);
-							$('#traitementDH').val("Durci");
+
+							// $('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
-								if(value.name != "Express 24" && value.name != "Second pair")
+								if(value.name != "Express 24" && value.name != "Second pair") {
 									$('#traitementD').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
-
+								}
 							});
-
+							var selectedText = $("#traitementD option:selected").html();
+							$('#traitementDH').val(selectedText);
 						}
 			
 					});
@@ -2340,7 +2344,7 @@ $('#type_de_verreG').on('change', function() {
 						$('#teinteG').prop('disabled', false);
 					}
 					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
+					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
 					{
 						$('#traitementG').prop('disabled', true);
 					}
@@ -2371,14 +2375,17 @@ $('#type_de_verreG').on('change', function() {
 							url: "/index/getOptions",
 							data: {"lens" : type_de_verreG},
 							dataType: "json",
-							success: function (data) {	
+							success: function (data) {
+								//console.log('OPTIOOOOOOOOOOOOOOOOOOOOON');
 							$('#traitementG option:eq(0)').prop('selected', true);
-							$('#traitementGH').val("Durci");
+							// $('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
 
 							});
+							var selectedText = $("#traitementG option:selected").html();
+							$('#traitementGH').val(selectedText);
 						}
 					});
 				

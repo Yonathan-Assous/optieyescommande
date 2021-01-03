@@ -208,7 +208,7 @@
             	<div id="divNouveauVerres" class="hide"><br><br>
             	</div>
             	<div id="divlisteVerres" class="form-group row hide"><br>
-            		<h5>Selectionnez un verre :</h3>
+            		<h5>Selectionnez un verre :</h5>
             		<select class="form-control select-search"  id="listeVerres">
 						<option value="">-- Choisir --</option>
 					</select><br>
@@ -265,6 +265,7 @@
 					$(function(){ $('#Samuel').bootstrapToggle() });
 					$(function(){ $('#Daniel').bootstrapToggle() });
 					$(function(){ $('#Gregory').bootstrapToggle() });
+                    $(function(){ $('#Glenn').bootstrapToggle() });
 					$(function(){ $('#Optical_Service').bootstrapToggle() });
 					
 					$( "#passok" ).append( "<input type='hidden' name='withPass' value='1'>" );
@@ -305,6 +306,7 @@
 					$(function(){ $('#Samuel').bootstrapToggle() });
 					$(function(){ $('#Daniel').bootstrapToggle() });
 					$(function(){ $('#Gregory').bootstrapToggle() });
+                    $(function(){ $('#Glenn').bootstrapToggle() });
 					$(function(){ $('#Optical_Service').bootstrapToggle() });
 					
 					$( "#passok" ).append( "<input type='hidden' name='withPass' value='1'>" );

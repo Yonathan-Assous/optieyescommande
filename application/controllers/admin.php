@@ -3219,6 +3219,9 @@ class admin
         $data['CAmonth_Gregory'] =
             $this->m_commande->getCAmonth_Gregory(date("m-Y")) -
             $this->m_commande->getCAmonthSupplement_Gregory(date("m-Y"));
+        $data['CAmonth_Glenn'] =
+            $this->m_commande->getCAmonth_Glenn(date("m-Y")) -
+            $this->m_commande->getCAmonthSupplement_Glenn(date("m-Y"));
         $data['CAmonth_Optical_Service'] =
             $this->m_commande->getCAmonth_Optical_Service(date("m-Y")) -
             $this->m_commande->getCAmonthSupplement_Optical_Service(date("m-Y"));
@@ -3232,6 +3235,9 @@ class admin
         $data['CAday_Gregory'] =
             $this->m_commande->getCAday_Gregory() -
             $this->m_commande->getCAdaySupplement_Gregory();
+        $data['CAday_Glenn'] =
+            $this->m_commande->getCAday_Glenn() -
+            $this->m_commande->getCAdaySupplement_Glenn();
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
@@ -3526,6 +3532,15 @@ class admin
                         100.00;
                 }
 
+                if ($this->input->post('Glenn') ==
+                    "") {
+                    $data['Glenn'] =
+                        0.00;
+                } else {
+                    $data['Glenn'] =
+                        100.00;
+                }
+
                 if ($this->input->post('Optical_Service') ==
                     "") {
                     $data['Optical_Service'] =
@@ -3554,6 +3569,13 @@ class admin
                                  $user);
                 $this->db->set('Gregory',
                                $data['Gregory'],
+                               FALSE);
+                $this->db->update('users');
+
+                $this->db->where('id_users',
+                                 $user);
+                $this->db->set('Glenn',
+                               $data['Glenn'],
                                FALSE);
                 $this->db->update('users');
 
@@ -15215,6 +15237,13 @@ class admin
                         "checked";
                 }
 
+                $Glenn = "";
+                if ($user[0]->Glenn ==
+                    100.00) {
+                    $Glenn =
+                        "checked";
+                }
+
                 $Optical_Service =
                     "";
                 if ($user[0]->Optical_Service ==
@@ -15236,6 +15265,10 @@ class admin
                                    $Gregory . '>
 				  <label for="Gregory" class="form-check-label">Gregory&nbsp;&nbsp;&nbsp;</label>
 				
+				  <input id="Glenn" name="Glenn" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
+                                   $Glenn . '>
+				  <label for="Glenn" class="form-check-label">Glenn&nbsp;&nbsp;&nbsp;</label>
+				  
 				  <input id="Optical_Service" name="Optical_Service" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
                                    $Optical_Service . '>
 				  <label for="Optical_Service" class="form-check-label">Optical Service</label>

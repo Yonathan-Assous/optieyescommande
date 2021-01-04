@@ -119,7 +119,8 @@
                 closeOnConfirm: true
             },
             function(){
-                window.location.href ='http://www.optieyescommande.com/Catalogue_electronique_10_2020.zip';
+                window.location.href ='http://www.optieyescommande' +
+                    '.com/Catalogue_electronique_01_2021.zip';
             });
     });
 </script>

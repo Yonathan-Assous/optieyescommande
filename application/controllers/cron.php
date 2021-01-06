@@ -546,7 +546,7 @@ class cron extends MY_Controller {
 
             // A STOCKER
             
-            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('etiquette',$data_etiquette, ''.date('d_m_H-i-s'));
+            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('etiquette',$data_etiquette, ''.date('Y_m_d_H-i-s'));
 
             //$this->pdf('etiquette',$data_etiquette, ''.date('d-m-H\hi'));
 
@@ -584,7 +584,7 @@ class cron extends MY_Controller {
       }
 
         if($magasin == 1){
-          $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_journaliere',$data_file, ''.date('d_m_H-i-s'));
+          $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_journaliere',$data_file, ''.date('Y_m_d_H-i-s'));
           $mess_txt = "Ci joints les commandes pour la journée du ".date("d/m/Y");
           $subjet_txt = "Commande de fabrication journalière";
           $html = false;
@@ -592,7 +592,7 @@ class cron extends MY_Controller {
 
         } else if($magasin == 2 && $envoi_chine == 0 ){
            //  A STOCKER
-          $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_stock_journaliere',$data_file, ''.date('d_m_H-i-s'));
+          $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_stock_journaliere',$data_file, ''.date('Y_m_d_H-i-s'));
           //$this->pdf('commande_stock_journaliere',$data_file, ''.date('d-m-H\hi'));
           $mess_txt = "Ci joints les commandes stock ";
           $subjet_txt = "Commande de stock journalière";
@@ -602,7 +602,7 @@ class cron extends MY_Controller {
         } else if($magasin == 3 && $envoi_chine == 0 ){
 
 
-            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_lentilles_journaliere',$data_file, ''.date('d_m_H-i-s'));
+            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_lentilles_journaliere',$data_file, ''.date('Y_m_d_H-i-s'));
             $mess_txt = "Ci joints les commandes lentilles ";
             $subjet_txt = "Commande de lentilles journalière";
             $html = false;
@@ -611,7 +611,7 @@ class cron extends MY_Controller {
         } else if($magasin == 4 && $envoi_chine == 0 ){
 
 
-            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_montures_journaliere',$data_file, ''.date('d_m_H-i-s'));
+            $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_montures_journaliere',$data_file, ''.date('Y_m_d_H-i-s'));
             $mess_txt = "Ci joints les commandes montures ";
             $subjet_txt = "Commande de montures journalière";
             $html = false;
@@ -621,7 +621,7 @@ class cron extends MY_Controller {
 		  else if($magasin == 2 && $envoi_chine == 1){
 
 
-         $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_stock_journaliere',$data_file, ''.date('d_m_H-i-s'));
+         $piece_jointe = $this->config->item('directory_pdf')."/".$this->pdf('commande_stock_journaliere',$data_file, ''.date('Y_m_d_H-i-s'));
          
           $mess_txt = "<html>
                         <head></head>

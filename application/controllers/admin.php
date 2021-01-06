@@ -3301,15 +3301,25 @@ class admin
                     filemtime($this->config->item('directory_pdf') .
                               '/' .
                               $f);
+//                $docs[$f] = $f;
             }
         }
-
+//        echo '<pre>';
+//        print_r($docs);
+//        echo '</pre>';
+//        die;
         arsort($docs);
-
+//        echo '<pre>';
+//        print_r($docs);
+//        echo '</pre>';
+//        die;
         $data['files'] =
             $docs;
 
-
+//        echo '<pre>';
+//        print_r($data);
+//        echo '</pre>';
+//        die;
         $this->load->view('admin/documents',
                           $data);
 

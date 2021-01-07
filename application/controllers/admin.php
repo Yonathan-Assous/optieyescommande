@@ -3292,17 +3292,24 @@ class admin
 
         $docs = array();
 
+
         foreach ($files as $f)
         {
             if (preg_match("(_([0-9]{2})_([0-9]{2})_([0-9]{2})-([0-9]{2})-([0-9]{2}))",
                            $f,
                            $matches)) {
-                $docs[$f] =
-                    filemtime($this->config->item('directory_pdf') .
-                              '/' .
-                              $f);
+                preg_match_all('#[0-9]+#',$f,$extract);
+                $year = $extract[0][0];
+                $month = $extract[0][1];
+                $day = $extract[0][2];
+                $hour = $extract[0][3];
+                $minutes = $extract[0][4];
+                $seconds = $extract[0][5];
+                $date = new DateTime("$year-$month-$day $hour:$minutes:$seconds");
+                $docs[$f] = $date->format('Y-m-d H:i:s');
             }
         }
+
 
         arsort($docs);
 

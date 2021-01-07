@@ -19709,3 +19709,48 @@ ERROR - 2021-01-07 13:54:49 --> Severity: Warning  --> in_array() expects parame
 ERROR - 2021-01-07 13:54:49 --> Severity: Notice  --> Undefined property: stdClass::$excl /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4995
 ERROR - 2021-01-07 13:54:49 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 4995
 ERROR - 2021-01-07 13:54:53 --> Severity: Notice  --> Undefined offset: 5 /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/admin.php 3307
+ERROR - 2021-01-07 13:55:27 --> Severity: Notice  --> Undefined offset: 5 /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/admin.php 3307
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined index: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3843
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/index.php 3843
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: title /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 17
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/header.php 76
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 7
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 9
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 10
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 12
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 13
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 15
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 16
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 22
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 24
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 25
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 27
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 28
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 30
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 31
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 36
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 37
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 40
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 41
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 52
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: page /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 53
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/menu.php 67
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 52
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 59
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 59
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 76
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 76
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 128
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 128
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 147
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 147
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: user_info /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 157
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Trying to get property of non-object /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 157
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 4292
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: type_commande /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 4352
+ERROR - 2021-01-07 13:55:44 --> Severity: Notice  --> Undefined variable: region /var/www/vhosts/optieyescommande.com/httpdocs_new/application/views/dashboard.php 4448
+ERROR - 2021-01-07 13:56:47 --> Severity: Notice  --> Undefined offset: 5 /var/www/vhosts/optieyescommande.com/httpdocs_new/application/controllers/admin.php 3307

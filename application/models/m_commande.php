@@ -2538,15 +2538,20 @@ class m_commande extends CI_Model {
         $date = $time->format('Y-m');
 
                                       
-        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
+        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier
+                                   FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
+                                   AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00)
                                    +
-                                  (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
+                                  (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
+                                   FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
+                                   AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00)
                                    +
-                                   (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
+                                   (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
+                                   FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
                                    AND type_commande > 1 AND penalty != 1 AND Gregory = 100.00) 
@@ -2565,7 +2570,64 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
+    public function getCAmonthSupplement_Glenn($date){
+
+        $supplement = 0;
+
+        $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement 
+                                   FROM commande
+		                           JOIN users ON commande.id_users = users.id_users
+		                           WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
+		                           AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" 
+		                           AND Glenn = 100.00');
+
+        if ($query && $query->num_rows() > 0) {
+            $supplement += $query->result()[0]->total_supplement;
+        }
+
+        return $supplement;
+    }
+
+    public function getCAmonth_Glenn($date){
+
+        $time = DateTime::createFromFormat('m-Y', $date);
+        $date = $time->format('Y-m');
+
+
+        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier
+                                   FROM commande
+								   JOIN users ON commande.id_users = users.id_users
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
+                                   AND type_commande = 1 AND penalty != 1 AND Glenn = 100.00)
+                                   +
+                                  (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
+                                   FROM commande
+								   JOIN users ON commande.id_users = users.id_users
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
+                                   AND type_commande > 1 AND penalty = 1 AND Glenn = 100.00)
+                                   +
+                                   (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
+                                   FROM commande
+								   JOIN users ON commande.id_users = users.id_users
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
+                                   AND type_commande > 1 AND penalty != 1 AND Glenn = 100.00) 
+                                   -
+								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
+								  JOIN users ON fr.id_users = users.id_users
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Glenn = 100.00) as ca");
+
+        $total = 0;
+
+        if ($query && $query->num_rows() > 0) {
+            foreach($query->result() as $result) {
+                $total += $result->ca;
+            }
+        }
+
+        return $total;
+    }
+
 	public function getCAmonthSupplement_Optical_Service($date){
 		
 		$supplement = 0;
@@ -2766,7 +2828,79 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
+    public function getCAdaySupplement_Glenn(){
+
+        $supplement = 0;
+        $date = date('Y-m-d H:i:s', mktime(0,0,0));
+        $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
+
+        $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement 
+                                   FROM commande
+		                           JOIN users ON commande.id_users = users.id_users
+		                           WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
+		                           AND (commande.date_commande > "'.$date.'" 
+		                           AND commande.date_commande < "'.$date_end.'") 
+		                           AND Glenn = 100.00');
+
+        if ($query && $query->num_rows() > 0) {
+            $supplement += $query->result()[0]->total_supplement;
+        }
+
+        return $supplement;
+    }
+
+    public function getCAday_Glenn(){
+
+        $date = date('Y-m-d H:i:s', mktime(0,0,0));
+        $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
+
+
+        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier 
+                                   FROM commande
+								   JOIN users ON commande.id_users = users.id_users
+                                   WHERE (commande.date_commande > '".$date."' 
+                                   AND commande.date_commande < '".$date_end."') 
+                                   AND type_commande = 1 
+                                   AND penalty != 1 
+                                   AND Glenn = 100.00)
+                                   +
+                                  (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
+                                   FROM commande
+								   JOIN users ON commande.id_users = users.id_users
+                                   WHERE (commande.date_commande > '".$date."' 
+                                   AND commande.date_commande < '".$date_end."') 
+                                   AND type_commande > 1 
+                                   AND penalty = 1 
+                                   AND Glenn = 100.00)
+                                   +
+                                   (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
+                                    FROM commande
+								    JOIN users ON commande.id_users = users.id_users
+                                    WHERE (commande.date_commande > '".$date."' 
+                                    AND commande.date_commande < '".$date_end."')
+                                    AND type_commande > 1 
+                                    AND penalty != 1 
+                                    AND Glenn = 100.00) 
+                                   -
+								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction 
+								   FROM facture_reduction fr
+								   JOIN users ON fr.id_users = users.id_users
+								   WHERE (date_remise > '".$date."' 
+								   AND date_remise < '".$date_end."') 
+								   AND Glenn = 100.00) as ca");
+
+        $total = 0;
+
+        if ($query && $query->num_rows() > 0) {
+            foreach($query->result() as $result) {
+                $total += $result->ca;
+            }
+        }
+
+        return $total;
+    }
+
 	public function getCAdaySupplement_Optical_Service(){
 		
 		$supplement = 0;

@@ -93,34 +93,44 @@ else
 						</div>
 					</div>
 					 
-					 <div class="col-lg-3 col-md-3 col-xs-3">
-						<div class="card-box widget-user" style="background-color:lightblue;">
+					 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+						<div class="card-box card-box-commercial widget-user">
 							<div>
-								<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAmonth_Samuel,2,'.',''); ?></span>  €</h2>
+								<h2 class="text-warning" style="color: #FFF
+								!important"><span ><?php echo number_format($CAmonth_Samuel,2,'.',''); ?></span>  €</h2>
 								<h5 style="font-size: 12px;">Samuel<br />Mensuel</h5>
 							</div>
 						</div>
 					</div>
-					 <div class="col-lg-3 col-md-3 col-xs-3">
-						<div class="card-box widget-user" style="background-color:lightblue;">
+					 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+						<div class="card-box card-box-commercial widget-user"
+                             >
 							<div>
-								<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAmonth_Daniel,2,'.',''); ?></span>  €</h2>
+								<h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Daniel,2,'.',''); ?></span>  €</h2>
 								<h5 style="font-size: 12px;">Daniel<br />Mensuel</h5>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-xs-3">
-						<div class="card-box widget-user" style="background-color:lightblue;">
+					<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+						<div class="card-box card-box-commercial widget-user">
 							<div>
-								<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAmonth_Gregory,2,'.',''); ?></span>  €</h2>
+								<h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Gregory,2,'.',''); ?></span>  €</h2>
 								<h5 style="font-size: 12px;">Gregory<br />Mensuel</h5>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-xs-3">
-						<div class="card-box widget-user" style="background-color:lightblue;">
+                    <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+                        <div class="card-box card-box-commercial widget-user">
+                            <div>
+                                <h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Glenn,2,'.',''); ?></span>  €</h2>
+                                <h5 style="font-size: 12px;">Glenn<br />Mensuel</h5>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+						<div class="card-box card-box-commercial widget-user">
 							<div>
-								<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAmonth_Optical_Service,2,'.',''); ?></span>  €</h2>
+								<h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Optical_Service,2,'.',''); ?></span>  €</h2>
 								<h5 style="font-size: 12px;"> Optical Service<br />Mensuel</h5>
 							</div>
 						</div>
@@ -183,32 +193,40 @@ else
 								</div>
 							</div>			
 						
-					 		<div class="col-lg-3 col-md-3 col-xs-3" >
-								<div class="card-box widget-user" style="background-color:lightblue;">
+					 		<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+								<div class="card-box card-box-commercial widget-user">
 									<div>
-										<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAday_Samuel,2,'.',''); ?></span>  €</h2>
+										<h2 class="text-warning"><span ><?php echo number_format($CAday_Samuel,2,'.',''); ?></span>  €</h2>
 										<h5 style="font-size: 12px;">Samuel<br />Journalier</h5>
 									</div>
 								</div>
 							</div>
-							 <div class="col-lg-3 col-md-3 col-xs-3" >
-								<div class="card-box widget-user" style="background-color:lightblue;">
+							 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+								<div class="card-box card-box-commercial widget-user">
 									<div>
-										<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAday_Daniel,2,'.',''); ?></span>  €</h2>
+										<h2 class="text-warning"><span ><?php echo number_format($CAday_Daniel,2,'.',''); ?></span>  €</h2>
 										<h5 style="font-size: 12px;">Daniel<br />Journalier</h5>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-3 col-xs-3" >
-								<div class="card-box widget-user" style="background-color:lightblue;">
+							<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+								<div class="card-box card-box-commercial widget-user">
 									<div>
-										<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAday_Gregory,2,'.',''); ?></span>  €</h2>
+										<h2 class="text-warning"><span ><?php echo number_format($CAday_Gregory,2,'.',''); ?></span>  €</h2>
 										<h5 style="font-size: 12px;">Gregory<br />Journalier</h5>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-3 col-xs-3">
-								<div class="card-box widget-user" style="background-color:lightblue;">
+                            <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+                                <div class="card-box card-box-commercial widget-user">
+                                    <div>
+                                        <h2 class="text-warning"><span ><?php echo number_format($CAday_Glenn,2,'.',''); ?></span>  €</h2>
+                                        <h5 style="font-size: 12px;">Glenn<br />Journalier</h5>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+								<div class="card-box card-box-commercial widget-user">
 									<div>
 										<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAday_Optical_Service,2,'.',''); ?></span>  €</h2>
 										<h5 style="font-size: 12px;"> Optical Service<br />Journalier</h5>

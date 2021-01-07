@@ -26,23 +26,40 @@ include_once('menu.php');
                         ];
 
                             foreach($files as $name => $t) {
-
+//                                echo '<pre>';
+//                                print_r($files);
+//                                echo '</pre>';
+//                                die;
 
                                 $fname = $name;
                                 $class = 'stock';
 
                                 preg_match("(_([0-9]{2})_([0-9]{2})_([0-9]{2})-([0-9]{2})-([0-9]{2}))", $name,$matches);
+                                //var_dump($t);
+                                preg_match_all('#[0-9]+#',$name,$extract);
+                                //var_dump($matches);
+                                //var_dump($extract);
+                                $year = $extract[0][0];
+                                $month = $extract[0][1];
+                                $day = $extract[0][2];
+                                $hour = $extract[0][3];
+                                $minutes = $extract[0][4];
+                                $seconds = $extract[0][5];
+                                $date = new DateTime("$year-$month-$day $hour:$minutes:$seconds");
+                                //var_dump($date);
+                                //$date = new DateTime();
+                                //$date->setDate(date('Y', $t), $matches[2], $matches[1]);
+                                //$date->setTime($matches[3], $matches[4], $matches[5]);
 
-                                $date = new DateTime();
-                                $date->setDate(date('Y', $t), $matches[2], $matches[1]);
-                                $date->setTime($matches[3], $matches[4], $matches[5]);
-
-                                $name = str_replace($matches[0].'.pdf', '', $name);
+                                $name = str_replace('_' . $year . $matches[0].'.pdf', '', $name);
                                 $type = $name;
+//                                var_dump($type);
+//                                var_dump($name);die;
 
                                 $name = str_replace('_', ' ', $name);
                                 $name = ucfirst($name);
 
+                                //var_dump($name);die;
                                 if('commande_journaliere' == $type) {
                                     $class = 'fab';
                                     $name = 'Fabrication';
@@ -72,7 +89,7 @@ include_once('menu.php');
                                 }
 
                                 if(($date->format('G') != 0 && 'commande_montures_journaliere' != $type)) {
-                                    $list[$class][] = '<li>- <a target="_blank" href="http://www.optieyescommande.com/static/aa/'.$fname.'">'.$name.' du '.$date->format('d/m à H:i:s').'</a></li>';
+                                    $list[$class][] = '<li>- <a target="_blank" href="http://www.optieyescommande.com/static/aa/'.$fname.'">'.$name.' du '.$date->format('d/m/Y à H:i:s').'</a></li>';
                                 }
                                 else {
 									

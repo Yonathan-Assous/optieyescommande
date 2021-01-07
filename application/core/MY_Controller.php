@@ -72,7 +72,7 @@ class MY_Controller extends CI_Controller {
 		
 		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures')
 		{
-			$file_output .= "_".date("d_m_H-i-s");
+			$file_output .= "_".date("Y_m_d_H-i-s");
 		}
 		else if($file_pdf == 'commande_journaliere' || $file_pdf == 'commande_stock_journaliere' || $file_pdf == 'etiquette' || $file_pdf == 'certificat_authenticite' || $file_pdf =='etiquette_fabrication')
 		{

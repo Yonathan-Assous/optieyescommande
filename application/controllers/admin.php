@@ -12237,7 +12237,7 @@ class admin
 
         // Génération des PDF
         /*  $docs = array(
-            'etiquettes' => $this->config->item('directory_pdf').'/'.$this->pdf('etiquette_montures', $data, ''.date('d_m_H-i-s'), false, 'paysage', $customsize = array(0,0,243,153))
+            'etiquettes' => $this->config->item('directory_pdf').'/'.$this->pdf('etiquette_montures', $data, ''.date('Y_m_d_H-i-s'), false, 'paysage', $customsize = array(0,0,243,153))
         );
 */
         $commandes = array();
@@ -12364,14 +12364,14 @@ class admin
                             $this->pdf("etiquette_fabrication",
                                        $data,
                                        '' .
-                                       date('d_m_H-i-s'),
+                                       date('Y_m_d_H-i-s'),
                                        false),
             'certificat' => $this->config->item('directory_pdf') .
                             '/' .
                             $this->pdf('certificat_authenticite',
                                        $data,
                                        '' .
-                                       date('d_m_H-i-s'),
+                                       date('Y_m_d_H-i-s'),
                                        false,
                                        'paysage',
                                        $customsize =
@@ -12579,14 +12579,14 @@ class admin
                                 $this->pdf("etiquette_fabrication",
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false),
                 'certificat' => $this->config->item('directory_pdf') .
                                 '/' .
                                 $this->pdf('certificat_authenticite',
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false,
                                            'paysage',
                                            $customsize =
@@ -12608,7 +12608,7 @@ class admin
                                 $this->pdf("etiquette_fabrication",
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false)
             );
 
@@ -12622,7 +12622,7 @@ class admin
                                 $this->pdf("etiquette_fabrication",
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false)
             );
 
@@ -12638,7 +12638,7 @@ class admin
                                     $this->pdf("etiquette_fabrication",
                                                $data,
                                                '' .
-                                               date('d_m_H-i-s'),
+                                               date('Y_m_d_H-i-s'),
                                                false)
                 );
 
@@ -12655,7 +12655,7 @@ class admin
                                             $this->pdf("etiquette_fabrication",
                                                        $data,
                                                        '' .
-                                                       date('d_m_H-i-s'),
+                                                       date('Y_m_d_H-i-s'),
                                                        false)
                         );
                     if (count($etiquettes) >
@@ -12671,7 +12671,7 @@ class admin
                                                 $this->pdf("etiquette_fabrication",
                                                            $data,
                                                            '' .
-                                                           date('d_m_H-i-s'),
+                                                           date('Y_m_d_H-i-s'),
                                                            false)
                             );
                         if (count($etiquettes) >
@@ -12687,7 +12687,7 @@ class admin
                                                     $this->pdf("etiquette_fabrication",
                                                                $data,
                                                                '' .
-                                                               date('d_m_H-i-s'),
+                                                               date('Y_m_d_H-i-s'),
                                                                false)
                                 );
                             if (count($etiquettes) >
@@ -12703,7 +12703,7 @@ class admin
                                                         $this->pdf("etiquette_fabrication",
                                                                    $data,
                                                                    '' .
-                                                                   date('d_m_H-i-s'),
+                                                                   date('Y_m_d_H-i-s'),
                                                                    false)
                                     );
                                 if (count($etiquettes) >
@@ -12719,7 +12719,7 @@ class admin
                                                             $this->pdf("etiquette_fabrication",
                                                                        $data,
                                                                        '' .
-                                                                       date('d_m_H-i-s'),
+                                                                       date('Y_m_d_H-i-s'),
                                                                        false)
                                         );
                                     if (count($etiquettes) >
@@ -12735,7 +12735,7 @@ class admin
                                                                 $this->pdf("etiquette_fabrication",
                                                                            $data,
                                                                            '' .
-                                                                           date('d_m_H-i-s'),
+                                                                           date('Y_m_d_H-i-s'),
                                                                            false)
                                             );
 
@@ -12756,7 +12756,7 @@ class admin
                                                                 $this->pdf("etiquette_fabrication",
                                                                            $data,
                                                                            '' .
-                                                                           date('d_m_H-i-s'),
+                                                                           date('Y_m_d_H-i-s'),
                                                                            false)
                                             );
 
@@ -12774,7 +12774,7 @@ class admin
 			$data['etiquette'] = $this->m_commande->getEtiquetteFabricationNew(300,$etiquettes.count);
         	// Génération des PDF
 			$docs = array(
-				'etiquettes' => $this->config->item('directory_pdf').'/'.$this->pdf("etiquette_fabrication",$data,''.date('d_m_H-i-s'),false)
+				'etiquettes' => $this->config->item('directory_pdf').'/'.$this->pdf("etiquette_fabrication",$data,''.date('Y_m_d_H-i-s'),false)
 			);*/
 
         } else {
@@ -12785,14 +12785,14 @@ class admin
                                 $this->pdf("etiquette_fabrication",
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false),
                 'certificat' => $this->config->item('directory_pdf') .
                                 '/' .
                                 $this->pdf('certificat_authenticite',
                                            $data,
                                            '' .
-                                           date('d_m_H-i-s'),
+                                           date('Y_m_d_H-i-s'),
                                            false,
                                            'paysage',
                                            $customsize =

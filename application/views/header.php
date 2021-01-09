@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Optieyescommande est un site pour les opticiens qui souhaitent trouver les meilleurs verres pour leurs clients à des prix défiant toute concurrence.">
     <meta name="author" content="Proxicommerce">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
 
     <link rel="shortcut icon" href="<?php echo $pre_url;?>static/assets/images/favicon.png">
 

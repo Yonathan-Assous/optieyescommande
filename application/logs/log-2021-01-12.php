@@ -17813,3 +17813,15 @@ ERROR - 2021-01-12 13:46:48 --> Severity: Notice  --> Undefined index: diametre 
 ERROR - 2021-01-12 13:46:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
 ERROR - 2021-01-12 13:46:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
 ERROR - 2021-01-12 13:46:48 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454
+ERROR - 2021-01-12 13:46:49 --> Severity: Notice  --> Undefined index: diametre /var/www/vhosts/optieyescommande.com/httpdocs_new/application/models/m_passer_commande_verre.php 454

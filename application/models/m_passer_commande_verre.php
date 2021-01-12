@@ -428,8 +428,12 @@ class m_passer_commande_verre extends CI_Model
 
             $stock_query = $stock_res->result();
             //$i = 0;
+//            var_dump($sphereD);
+//            var_dump((float)$sphereD);
 
-            $sphereD = strval($sphereD);
+            $sphereD = strval((float)$sphereD);
+//            var_dump($sphereD);die;
+
             //            var_dump($sphereD);
             //            $sphereD = rtrim($sphereD, "0");
             //            var_dump($sphereD);
@@ -437,7 +441,7 @@ class m_passer_commande_verre extends CI_Model
                 $sphereD = "0";
             }
 
-            $cylindreD = strval($cylindreD);
+            $cylindreD = strval((float)$cylindreD);
             //            $cylindreD = rtrim($cylindreD, "0");
             if ($cylindreD == "") {
                 $cylindreD = "0";

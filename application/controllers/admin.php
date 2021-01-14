@@ -4414,17 +4414,14 @@ class admin
     public
     function update_commentaire_omega()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
                 $this->input->post();
 
-            // var_dump($data);
             $this->regenerate_xml_omega("commentaire_omega",
                                         $data['commentaire_omega'],
                                         $data['id_commande_commentaire_omega']);
-
             // $user = $this->m_users->getUserById($data['id_users']);
             // $data['email'] = $user[0]->email;
 
@@ -4447,7 +4444,6 @@ class admin
                                   $change,
                                   $id_commande)
     {
-
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
@@ -4455,7 +4451,7 @@ class admin
 
             $data_commande =
                 $this->m_commande->getCommandeEdiOmegaById($id_commande);
-            //var_dump($data_commande);
+
             if ($data_commande !==
                 false) {
                 //foreach($data_commande as $key => $g){
@@ -4469,7 +4465,7 @@ class admin
 
                 $information_commande =
                     json_decode($commande->information_commande);
-                //var_dump($information_commande);
+//                var_dump($information_commande);die;
 
                 $precal = 0;
 
@@ -4531,7 +4527,7 @@ class admin
       <item>';
 
                 $remark = '';
-
+                //var_dump($teinteD);die;
                 if (isset($information_commande->verre->correction_droit->teinte) &&
                     !empty($information_commande->verre->correction_droit->teinte)) {
                     if (isset($teinteD) &&
@@ -4544,10 +4540,12 @@ class admin
                     if (strpos($information_commande->verre->correction_droit->teinte,
                                'CUST_') !==
                         false) {
-
-                        $remark .= 'Right tint: ' .
-                                   $teinteD .
-                                   '.';
+                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            $remark .= 'Right tint: Sample color send by mail.';
+                        }
+                        else if (isset($teinteD)) {
+                            $remark .= 'Right tint: ' . $teinteD . '.';
+                        }
                     }
                 }
                 if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -4562,9 +4560,12 @@ class admin
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                                'CUST_') !==
                         false) {
-                        $remark .= ' Left tint: ' .
-                                   $teinteG .
-                                   '.';
+                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            $remark .= ' Left tint: Sample color send by mail.';
+                        }
+                        else  if (isset($teinteG)) {
+                            $remark .= ' Left tint: ' . $teinteG . '.';
+                        }
                     }
                 }
 
@@ -4584,7 +4585,6 @@ class admin
 
                 $lenses_code =
                     $commande->lenscode;
-
 //                if ($lenses_code ==
 //                    'PAI-1515') {
 //                    $remark .= " Change to product INITIAL ";
@@ -5022,6 +5022,7 @@ class admin
 					  </prism>';
                     }
                     $xml .= '</rxData>';
+                    //var_dump($information_commande);
                     if ((isset($information_commande->verre->correction_droit->traitement) &&
                          !empty($information_commande->verre->correction_droit->traitement) &&
                          ($information_commande->verre->correction_droit->traitement !=
@@ -5200,7 +5201,6 @@ class admin
                     }
 
                     $xml .= '</rxData>';
-
                     if ((isset($information_commande->verre->correction_gauche->traitement) &&
                          !empty($information_commande->verre->correction_gauche->traitement) &&
                          ($information_commande->verre->correction_gauche->traitement !=
@@ -6885,10 +6885,12 @@ class admin
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                    'CUST_') !==
                             false) {
-
-                            $remark .= 'Right tint: ' .
-                                       $teinteD .
-                                       '.';
+                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                                $remark .= 'Right tint: Sample color send by mail.';
+                            }
+                            else  if (isset($teinteD)) {
+                                $remark .= 'Right tint: ' . $teinteD . '.';
+                            }
                         }
                     }
                     if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -6902,9 +6904,12 @@ class admin
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                    'CUST_') !==
                             false) {
-                            $remark .= ' Left tint: ' .
-                                       $teinteG .
-                                       '.';
+                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                                $remark .= ' Left tint: Sample color send by mail.';
+                            }
+                            else  if (isset($teinteG)) {
+                                $remark .= ' Left tint: ' . $teinteG . '.';
+                            }
                         }
                     }
 
@@ -8685,6 +8690,7 @@ class admin
     function remplaceVerreOmega($id_commande_omega,
                                 $ref)
     {
+        //var_dump($ref);die;
         if ($this->input->is_ajax_request()) {
 
             $data =
@@ -8692,7 +8698,7 @@ class admin
 
             $commande_origine =
                 $this->m_commande->getCommandeEdiOmegaById($ref);
-            // var_dump($commande_origine);
+//             var_dump($commande_origine);die;
 
             //  var_dump($data);
             $textarea = "";
@@ -9062,9 +9068,12 @@ class admin
                 if (strpos($data["teinteD"],
                            'CUST_') !==
                     false) {
-                    $remark .= 'Right tint: ' .
-                               $teinteD .
-                               '.';
+                    if ($data["teinteD"] == 'CUST_24') {
+                        $remark .= 'Right tint: Sample color send by mail.';
+                    }
+                    else  if (isset($teinteD)) {
+                        $remark .= 'Right tint: ' . $teinteD . '.';
+                    }
                 }
             }
             if (isset($data["teinteG"]) &&
@@ -9078,9 +9087,14 @@ class admin
                 if (strpos($data["teinteG"],
                            'CUST_') !==
                     false) {
-                    $remark .= ' Left tint: ' .
-                               $teinteG .
-                               '.';
+                    if ($data["teinteG"] == 'CUST_24') {
+                        $remark .= ' Left tint: Sample color send by mail.';
+                    }
+                    else  if (isset($teinteG)) {
+                        $remark .= ' Left tint: ' .
+                                   $teinteG .
+                                   '.';
+                    }
                 }
             }
 
@@ -9175,7 +9189,10 @@ class admin
 //                'PAI-18174') {
 //                $remark .= " Change to product INITIAL ";
 //            }
-
+//            var_dump($commande_origine);die;
+            if ($commande_origine->commentaire_omega) {
+                $remark = $commande_origine->commentaire_omega;
+            }
             if ($remark !=
                 '') {
                 $xml .= '
@@ -9497,8 +9514,8 @@ class admin
                     if ($teinteD !=
                         "" &&
                         strpos($data["teinteD"],
-                               'CUST_') !==
-                        true) {
+                               'CUST_') ===
+                        false) {
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
@@ -9542,11 +9559,14 @@ class admin
                             $data["ecart_puppillaire_droit"] .
                             '</monocularCentrationDistance>';
                 }
-
-                $xml .= '
+                if (!isset($hauteurD)) {
+                    $hauteurD = "";
+                }
+                    $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                        $hauteurD . '</height>
-               </centration>';
+                            $hauteurD . '</height>
+                  </centration>';
+
 
 
                 if (strpos($data["diametreD"],
@@ -9667,8 +9687,8 @@ class admin
                     if ($teinteG !=
                         "" &&
                         strpos($data["teinteG"],
-                               'CUST_') !==
-                        true) {
+                               'CUST_') ===
+                        false) {
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
@@ -9700,11 +9720,14 @@ class admin
                             $data["ecart_puppillaire_gauche"] .
                             '</monocularCentrationDistance>';
                 }
-
-                $xml .= '
+                if (!isset($hauteurG)) {
+                    $hauteurG = "";
+                }
+                    $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                        $hauteurG . '</height>
-               </centration>';
+                            $hauteurG . '</height>
+                  </centration>';
+
 
                 if (strpos($data["diametreG"],
                            "/") !==

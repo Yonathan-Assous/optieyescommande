@@ -6203,6 +6203,8 @@ class admin
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                   $commande->seconde_omega .
+                                  "-" .
+                                  $commande->id_users .
                                   "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                                   $commande->id_commande .
@@ -6214,6 +6216,8 @@ class admin
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                       $commande->premiere_commande .
+                                      "-" .
+                                      $commande->id_users .
                                       "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
@@ -6293,6 +6297,8 @@ class admin
                         '0') {
                         $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
                                      $commande->premiere_commande .
+                                     "-" .
+                                     $commande->id_users .
                                      "<br>";
                     }
 
@@ -8122,6 +8128,8 @@ class admin
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                   $commande->seconde_omega .
+                                  "-" .
+                                  $commande->id_users .
                                   "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                                   $commande->id_commande .
@@ -8133,6 +8141,8 @@ class admin
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                       $commande->premiere_commande .
+                                      "-" .
+                                      $commande->id_users .
                                       "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
@@ -8632,6 +8642,8 @@ class admin
                     "") {
                     $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                               $commande->seconde_omega .
+                              "-" .
+                              $commande->id_users .
                               "</b>";
                     $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                               $commande->id_commande .
@@ -8643,6 +8655,8 @@ class admin
                         0) {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                   $commande->premiere_commande .
+                                  "-" .
+                                  $commande->id_users .
                                   "</b>";
                     } else {
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
@@ -8702,11 +8716,12 @@ class admin
 
             //  var_dump($data);
             $textarea = "";
-
             if ($commande_origine->premiere_commande !=
                 '0') {
                 $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
                              $commande_origine->premiere_commande .
+                             "-" .
+                             $commande_origine->id_users .
                              "<br>";
             }
 

@@ -4414,7 +4414,6 @@ class admin
     public
     function update_commentaire_omega()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
@@ -4445,7 +4444,6 @@ class admin
                                   $change,
                                   $id_commande)
     {
-
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
@@ -5024,6 +5022,7 @@ class admin
 					  </prism>';
                     }
                     $xml .= '</rxData>';
+                    //var_dump($information_commande);
                     if ((isset($information_commande->verre->correction_droit->traitement) &&
                          !empty($information_commande->verre->correction_droit->traitement) &&
                          ($information_commande->verre->correction_droit->traitement !=
@@ -5202,7 +5201,6 @@ class admin
                     }
 
                     $xml .= '</rxData>';
-
                     if ((isset($information_commande->verre->correction_gauche->traitement) &&
                          !empty($information_commande->verre->correction_gauche->traitement) &&
                          ($information_commande->verre->correction_gauche->traitement !=
@@ -8692,6 +8690,7 @@ class admin
     function remplaceVerreOmega($id_commande_omega,
                                 $ref)
     {
+        //var_dump($ref);die;
         if ($this->input->is_ajax_request()) {
 
             $data =
@@ -8699,7 +8698,7 @@ class admin
 
             $commande_origine =
                 $this->m_commande->getCommandeEdiOmegaById($ref);
-            // var_dump($commande_origine);
+//             var_dump($commande_origine);die;
 
             //  var_dump($data);
             $textarea = "";
@@ -9190,7 +9189,10 @@ class admin
 //                'PAI-18174') {
 //                $remark .= " Change to product INITIAL ";
 //            }
-
+//            var_dump($commande_origine);die;
+            if ($commande_origine->commentaire_omega) {
+                $remark = $commande_origine->commentaire_omega;
+            }
             if ($remark !=
                 '') {
                 $xml .= '
@@ -9557,11 +9559,13 @@ class admin
                             $data["ecart_puppillaire_droit"] .
                             '</monocularCentrationDistance>';
                 }
-
-                $xml .= '
+                if (isset($hauteurD)) {
+                    $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                        $hauteurD . '</height>
-               </centration>';
+                            $hauteurD . '</height>
+                  </centration>';
+                }
+
 
 
                 if (strpos($data["diametreD"],
@@ -9715,11 +9719,13 @@ class admin
                             $data["ecart_puppillaire_gauche"] .
                             '</monocularCentrationDistance>';
                 }
-
-                $xml .= '
+                if (isset($hauteurG)) {
+                    $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                        $hauteurG . '</height>
-               </centration>';
+                            $hauteurG . '</height>
+                  </centration>';
+                }
+
 
                 if (strpos($data["diametreG"],
                            "/") !==

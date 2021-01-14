@@ -9559,12 +9559,13 @@ class admin
                             $data["ecart_puppillaire_droit"] .
                             '</monocularCentrationDistance>';
                 }
-                if (isset($hauteurD)) {
+                if (!isset($hauteurD)) {
+                    $hauteurD = "";
+                }
                     $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
                             $hauteurD . '</height>
                   </centration>';
-                }
 
 
 
@@ -9719,12 +9720,13 @@ class admin
                             $data["ecart_puppillaire_gauche"] .
                             '</monocularCentrationDistance>';
                 }
-                if (isset($hauteurG)) {
+                if (!isset($hauteurG)) {
+                    $hauteurG = "";
+                }
                     $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
                             $hauteurG . '</height>
                   </centration>';
-                }
 
 
                 if (strpos($data["diametreG"],

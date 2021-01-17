@@ -4540,7 +4540,7 @@ class admin
                     if (strpos($information_commande->verre->correction_droit->teinte,
                                'CUST_') !==
                         false) {
-                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                        if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Right tint: Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
@@ -6203,8 +6203,6 @@ class admin
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                   $commande->seconde_omega .
-                                  "-" .
-                                  $commande->id_users .
                                   "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                                   $commande->id_commande .
@@ -6891,7 +6889,7 @@ class admin
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                    'CUST_') !==
                             false) {
-                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                 $remark .= 'Right tint: Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
@@ -8128,8 +8126,6 @@ class admin
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                                   $commande->seconde_omega .
-                                  "-" .
-                                  $commande->id_users .
                                   "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                                   $commande->id_commande .

@@ -8638,8 +8638,6 @@ class admin
                     "") {
                     $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
                               $commande->seconde_omega .
-                              "-" .
-                              $commande->id_users .
                               "</b>";
                     $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                               $commande->id_commande .

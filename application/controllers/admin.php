@@ -6885,7 +6885,7 @@ class admin
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                    'CUST_') !==
                             false) {
-                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                 $remark .= 'Right tint: Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {

@@ -2984,7 +2984,8 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
-      if(is_array($data)){
+
+        if(is_array($data)){
 		
 		//var_dump($data);
 		
@@ -3054,8 +3055,10 @@ class m_commande extends CI_Model {
 			// PLZ RTFM
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
-
-			if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")")){
+//            var_dump($data);die;
+            $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
+                   .implode(",", $data).")";
+            if($this->db->query($sql)){
 
 			  $commande_id = $this->db->insert_id();
 

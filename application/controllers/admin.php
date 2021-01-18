@@ -4720,7 +4720,8 @@ class admin
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                $commande->premiere_commande . '</referenceNo>
+                                $commande->premiere_commande . "-" .
+                                $commande->id_users . '</referenceNo>
 			 </multiplePair>';
                     }
                 }
@@ -7029,7 +7030,8 @@ class admin
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                                $commande->premiere_commande . '</referenceNo>
+                                $commande->premiere_commande . "-" .
+                                                             $commande->id_users . '</referenceNo>
 		 </multiplePair>';
                     }
 

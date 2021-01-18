@@ -419,22 +419,30 @@ class m_passer_commande_verre extends CI_Model
                 $P_A .= " AND libelle_verre NOT LIKE '%Panier A%'";
             }
 
-            $stock_res = $this->db->query("SELECT * FROM verres_stock 
+            $sql = "SELECT * FROM verres_stock 
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' " . $P_A . "
-									   ORDER BY libelle_verre ASC");
+									   ORDER BY libelle_verre ASC";
+            //            var_dump($sql);die;
+            $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
-            $i = 0;
+            //$i = 0;
+//            var_dump($sphereD);
+//            var_dump((float)$sphereD);
 
-            $sphereD = strval($sphereD);
-            $sphereD = rtrim($sphereD, "0");
+            $sphereD = strval((float)$sphereD);
+//            var_dump($sphereD);die;
+
+            //            var_dump($sphereD);
+            //            $sphereD = rtrim($sphereD, "0");
+            //            var_dump($sphereD);
             if ($sphereD == "") {
                 $sphereD = "0";
             }
 
-            $cylindreD = strval($cylindreD);
-            $cylindreD = rtrim($cylindreD, "0");
+            $cylindreD = strval((float)$cylindreD);
+            //            $cylindreD = rtrim($cylindreD, "0");
             if ($cylindreD == "") {
                 $cylindreD = "0";
             }
@@ -444,7 +452,6 @@ class m_passer_commande_verre extends CI_Model
 
             foreach ($stock_query as $stock) {
                 $grille_stock = json_decode($stock->grille_stock, true);
-
                 if (array_key_exists($sphereD, $grille_stock)) {
                     if (in_array($cylindreD, $grille_stock[$sphereD])) {
 
@@ -457,7 +464,6 @@ class m_passer_commande_verre extends CI_Model
                     }
                 }
             }
-
             return $resultat;
 
         }
@@ -1840,7 +1846,7 @@ class m_passer_commande_verre extends CI_Model
             } else {
                 $optionCode = $tree->result()[0]->optionCode;
             }
-//            var_dump($tree->result()[0]);die;
+            //            var_dump($tree->result()[0]);die;
             $code1 = array();
             $code2 = array();
             $code3 = array();
@@ -1903,7 +1909,7 @@ class m_passer_commande_verre extends CI_Model
             //       ->whereIn('code', $codef)
             //        ->orderBy('name', 'ASC')->get(['id','name','color']);
 
-//            var_dump($optionList->result());die;
+            //            var_dump($optionList->result());die;
             //dd($optionList);
             return ($optionList->result());
         } else {

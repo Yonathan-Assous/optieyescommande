@@ -5299,7 +5299,8 @@ if (is_object($pair_order)) {
 
                                             if ($(this).attr('id') === 'finish_pair') {
                                                 if ($(this).is(':checked')) {
-                                                    $('.finish').find('.btn').text('Valider ma première commande');
+                                                    $('.finish').find('.btn').text('Valider ma ' +
+                                                        'première commandeffff');
                                                 } else {
                                                     $('.finish').find('.btn').text('Valider la commande');
                                                 }
@@ -5436,7 +5437,9 @@ if (is_object($pair_order)) {
 
                                                         if ($(this).attr('id') === 'finish_pair') {
                                                             if ($(this).is(':checked')) {
-                                                                $('.finish').find('.btn').text('Valider ma première commande');
+                                                                $('.finish').find('.btn').text
+                                                                ('Valider ma première ' +
+                                                                    'commandesssss');
                                                             } else {
                                                                 $('.finish').find('.btn').text('Valider la commande');
                                                             }
@@ -5582,8 +5585,7 @@ if (is_object($pair_order)) {
 
 
                                         if (data.pair == true && data.order_id > 0) {
-                                            window.location.href = '<?php echo 'http://' . $_SERVER['HTTP_HOST']
-                                                                               . $_SERVER['REQUEST_URI']; ?>/' + data.order_id;
+                                            window.location.href = '..<?php echo $_SERVER['REQUEST_URI']; ?>/' + data.order_id;
                                         } else {
                                             window.location.reload();
                                         }

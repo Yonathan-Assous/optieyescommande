@@ -665,15 +665,17 @@ class m_commande extends CI_Model {
 	
 	public function getCommandeEdiOmegaById($id_commande){
         
-        
-		$query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    INNER JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                                   WHERE c.id_commande=".$id_commande."");
+                                   WHERE c.id_commande=".$id_commande;
+//        var_dump($sql);die;
+		$query = $this->db->query($sql);
+		//var_dump($sql);
                         
                                    
         if ($query && $query->num_rows() > 0)
@@ -2982,7 +2984,8 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
-      if(is_array($data)){
+
+        if(is_array($data)){
 		
 		//var_dump($data);
 		
@@ -3052,8 +3055,10 @@ class m_commande extends CI_Model {
 			// PLZ RTFM
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
-
-			if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")")){
+//            var_dump($data);die;
+            $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
+                   .implode(",", $data).")";
+            if($this->db->query($sql)){
 
 			  $commande_id = $this->db->insert_id();
 

@@ -141,7 +141,9 @@
                 $info_d .= $mesure_freeform_opt;
             }
             
-            if(!empty($mesure_freeform_opt)  && $info_commande['verre']['correction_gauche']['diametre']=='precalibrage'){
+            if(!empty($mesure_freeform_opt)  &&
+               isset($info_commande['verre']['correction_gauche']) &&
+                    $info_commande['verre']['correction_gauche']['diametre']=='precalibrage'){
                 $info_g .= '<b>Mesure freeform :</b> <br> - ';
                 $info_g .= $mesure_freeform_opt;
             }

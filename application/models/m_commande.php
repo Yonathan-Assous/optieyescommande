@@ -64,7 +64,7 @@ class m_commande extends CI_Model {
 
     }
 	public function getCommandeByUserAvecMontures($data){
-	
+
         $add = "";
 
         if(isset($data['tri'])) {
@@ -86,7 +86,7 @@ class m_commande extends CI_Model {
         if(isset($data['type_commande']) && $data['type_commande'] == 1) {
             $add .= 'AND c.type_commande > 1';
         }
-			
+
         $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,commande_monture,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison
                                    FROM ".$this->table." c
@@ -130,14 +130,14 @@ class m_commande extends CI_Model {
                                    )
                                    WHERE id_users=".$data['id_users']." ".$add."
                                    ORDER BY date_commande DESC");
-		
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
     public function getCommandeByUser($data){
-	
+
         $add = "";
 
         if(isset($data['tri'])) {
@@ -159,8 +159,7 @@ class m_commande extends CI_Model {
         if(isset($data['type_commande']) && $data['type_commande'] == 1) {
             $add .= 'AND c.type_commande > 1';
         }
-			
-        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
+        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison, trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -202,20 +201,24 @@ class m_commande extends CI_Model {
                                    ON (
                                       c.id_commande = idCommande2
                                    )
-                                   WHERE id_users=".$data['id_users']." ".$add."
-                                   ORDER BY date_commande DESC");
-                                   
-        
-                                   
+                                   WHERE id_users=".$data['id_users']." ".$add." 
+                                   AND (trad_fr LIKE CONCAT('%', generation, '%')
+                                   OR trad_fr is NULL)
+                                   ORDER BY date_commande DESC";
+
+        $query = $this->db->query($sql);
+
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     public function getCommandeByUserLight($data)
     {
-    
+
      $add = "";
 
         if(isset($data['tri'])) {
@@ -237,7 +240,7 @@ class m_commande extends CI_Model {
         if(isset($data['type_commande']) && $data['type_commande'] == 1) {
             $add .= 'AND c.type_commande > 1';
         }
-			
+
         $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
                                    type_generation_verre,c.prix_verre,intitule_bl,c.id_generation_verre, c.origine_commande,commentaire
                                    FROM ".$this->table." c
@@ -247,17 +250,17 @@ class m_commande extends CI_Model {
                                    LEFT JOIN type_generation_verre tgv ON tgv.id_type_generation_verre = c.id_type_generation_verre
                                    WHERE id_users=".$data['id_users']." ".$add."
                                    GROUP BY id_commande ORDER BY date_commande DESC LIMIT 2000");
-                                   
-       
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
-    
+
+
     public function getCommandeByUserNew($data){
-	
+
         $add = "";
 
         if(isset($data['tri'])) {
@@ -279,7 +282,7 @@ class m_commande extends CI_Model {
         if(isset($data['type_commande']) && $data['type_commande'] == 1) {
             $add .= 'AND c.type_commande > 1';
         }
-			
+
         $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison,c.id_generation_verre,v.gtin as gtin_stock, l.gtin as gtin, c.origine_commande
                                    FROM ".$this->table." c
@@ -324,8 +327,8 @@ class m_commande extends CI_Model {
                                    )
                                    WHERE id_users=".$data['id_users']." ".$add."
                                    GROUP BY id_commande ORDER BY date_commande DESC");
-                                   
-       
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
@@ -348,7 +351,7 @@ class m_commande extends CI_Model {
             LEFT JOIN lenses AS l ON c.id_verre = l.code
             LEFT JOIN verres AS v ON c.id_verre = v.id_verre 
             WHERE id_users = '.$id_users.$dateQuery.' GROUP BY id_commande ORDER BY date_commande DESC');
-           
+
 
             if ($query && $query->num_rows() > 0) {
                 return $query->result();
@@ -393,11 +396,11 @@ class m_commande extends CI_Model {
         }
 
     }
-    
+
     function getDiscountByOrderIdNew($order_id, $pair = false) {
 
         if($order = $this->getCommandeByIdNew($order_id, false, $pair)) {
-			
+
 			if($order[0]->id_generation_verre == 34 || $order[0]->id_generation_verre == 35 || $order[0]->id_generation_verre == 36 || $order[0]->id_generation_verre == 31)
 			{
 				return 30;
@@ -424,12 +427,12 @@ class m_commande extends CI_Model {
 				{
 					return 0;
 				}
-				
-			
+
+
 			}
 		}
 	}
-	
+
 	function getTraitementNameByCode($traitement_paire)
 	{
 		$query = $this->db->query("SELECT name FROM `lensOptions` WHERE `code` = '".$traitement_paire."'");
@@ -438,7 +441,7 @@ class m_commande extends CI_Model {
 
         return false;
 	}
-	
+
 	function getTraitementByCode($traitement_paire)
 	{
 		$query = $this->db->query("SELECT * FROM `lensOptions` WHERE `code` = '".$traitement_paire."'");
@@ -447,7 +450,7 @@ class m_commande extends CI_Model {
 
         return false;
 	}
-	
+
 	function getTeinteById($teinte_paire)
 	{
 		$query = $this->db->query("SELECT * FROM `lensOptions` WHERE `code` = '".$teinte_paire."'");
@@ -456,7 +459,7 @@ class m_commande extends CI_Model {
 
         return false;
 	}
-	
+
 	function getTeinteEnById($teinte_paire)
 	{
 		$query = $this->db->query("SELECT * FROM `lensOptions` WHERE `code` = '".$teinte_paire."'");
@@ -465,7 +468,7 @@ class m_commande extends CI_Model {
 
         return false;
 	}
-			
+
 
     function getOrderByPairId($pair_id) {
 
@@ -484,7 +487,7 @@ class m_commande extends CI_Model {
 
   /*  function getCommandeById($id_commande, $id_users = false, $pair = false){
         $sql_add = "";
-        
+
         if($id_users !== false)
           $sql_add .= "AND c.id_users =".$id_users;
 
@@ -497,7 +500,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-          
+
         $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,type_generation_verre,libelle_verre,commentaire,libelle_verre_personnalise,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin
                                    FROM ".$table_commande." c
@@ -520,7 +523,7 @@ class m_commande extends CI_Model {
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC");
 
-		
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
@@ -528,7 +531,7 @@ class m_commande extends CI_Model {
     }*/
     function getCommandeById($id_commande, $id_users = false, $pair = false){
         $sql_add = "";
-        
+
         if($id_users !== false)
           $sql_add .= "AND c.id_users =".$id_users;
 
@@ -541,7 +544,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-          
+
         $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                    generation_verre,type_generation_verre,libelle_verre,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin,vnew.trad_fr,c.id_type_generation_verre,v.gtin as gtin_stock, vnew.gtin as gtin
                                    FROM ".$table_commande." c
@@ -556,17 +559,17 @@ class m_commande extends CI_Model {
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC");
-       
-		
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     function getCommandeByIdNew($id_commande, $id_users = false, $pair = false){
         $sql_add = "";
-        
+
         if($id_users !== false)
           $sql_add .= "AND c.id_users =".$id_users;
 
@@ -579,7 +582,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-          
+
         $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,v_stock.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
@@ -593,7 +596,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC");
-                
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
@@ -605,7 +608,7 @@ class m_commande extends CI_Model {
     {
         $query = $this->db->query('UPDATE commande SET penalty = 1 WHERE id_commande = '. (int) $id);
     }
-	
+
 	public function getAllCommandeEdiOmega()
 	{
 		$sql_add = "WHERE (c.id_verre IN (SELECT code FROM lenses) AND c.id_etat_commande < 6)";
@@ -625,23 +628,23 @@ class m_commande extends CI_Model {
 
         return false;
 	}
-	
+
 	public function getAllMagCommandeEdiOmega()
 	{
-		
+
 		$query = $this->db->query("SELECT id_users
                                    FROM ".$this->table." c
                                    INNER JOIN lenses ON c.id_verre = lenses.code
                                    WHERE (c.id_etat_commande < 6) AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) AND status_omega=0 GROUP BY id_users");
-                                   
-                                   
-		
+
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
 	}
-	
+
 	public function getAllCommandeEdiOmegaExpediee()
 	{
 		$sql_add = "WHERE (c.id_etat_commande < 6)";
@@ -654,17 +657,17 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
                                    WHERE status_omega!=0 AND status = 2 ORDER BY date_omega DESC,id_commande DESC");
-                                   
-                                   
-		
+
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
 	}
-	
+
 	public function getCommandeEdiOmegaById($id_commande){
-        
+
         $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
@@ -676,16 +679,16 @@ class m_commande extends CI_Model {
 //        var_dump($sql);die;
 		$query = $this->db->query($sql);
 		//var_dump($sql);
-                        
-                                   
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result()[0];
 
         return false;
     }
     public function getCommandeEdiOmegaByIdD($id_commande){
-        
-        
+
+
 		$query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
@@ -694,23 +697,23 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    INNER JOIN lenses l ON l.code = c.id_verre
                                    WHERE c.id_commande=".$id_commande."");
-                        
-                                   
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     public function updateCommandeOmega($id_commande,$textarea,$axml)
     {
     	if($this->db->query("UPDATE commande_omega SET xml = '".addslashes($axml)."',commande = '".addslashes($textarea)."'  WHERE id = '".$id_commande."'")) {
             return 1;
         }
-        
+
         return 0;
     }
-    
+
     public function updateEdiStatus($id_commande,$status,$filename = "")
     {
     	if($this->db->query("UPDATE commande_omega SET status = '".$status."', filename = '".$filename."' WHERE id_commande = '".$id_commande."'")) {
@@ -720,27 +723,27 @@ class m_commande extends CI_Model {
         }
         return 0;
     }
-    
+
     public function getAllCommandesCheckedOmega()
     {
     	$query = $this->db->query("SELECT * FROM commande_omega WHERE status='1'");
-                                     
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
-    
+
+
 	public function getTextCommandeOmega($id_commande,$textarea,$axml)
 	{
 		$query = $this->db->query("SELECT * FROM commande_omega WHERE id_commande='".$id_commande."'");
         if ($query && $query->num_rows() == 0)
         {
         	$this->db->query("INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')");
-        	//echo "INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')";	
+        	//echo "INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')";
         }
-        
+
         $query_o = $this->db->query("SELECT * FROM commande_omega WHERE id_commande='".$id_commande."'");
         if ($query_o && $query_o->num_rows() > 0)
         {
@@ -748,7 +751,7 @@ class m_commande extends CI_Model {
         }
 
 	}
-	
+
 	public function updateXMLCommandeOmega($id_commande,$typechange,$change,$axml)
 	{
 		if($typechange != "")
@@ -761,25 +764,25 @@ class m_commande extends CI_Model {
 		}
 		else
 			return 0;
-		
-		
+
+
 	}
-	
+
     public function getAllCommande($id_etat_commande=false,$id_magasin=false){
 
 		$sql_add = $sql_order = "";
-		
+
         if($id_etat_commande)
             $sql_add = "WHERE c.id_etat_commande < 5
 						AND HOUR( TIMEDIFF( NOW() , date_update_commande ) ) >= 24";
 		else
 			$sql_add = "WHERE c.id_etat_commande < 6";
-			
+
 		if($id_magasin !== false)
 			$sql_add .=" AND id_magasin = ".$id_magasin;
 		else
 			$sql_add .=" AND id_magasin = 1";
-		
+
 		if($id_magasin !== false)
 			$sql_order = "ORDER BY c.id_commande DESC";
 		else
@@ -794,29 +797,29 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN commande_pointage cp ON cp.id_commande = c.id_commande
                                    ".$sql_add." ".$sql_order);
-					
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     public function getAllCommandeNew($id_etat_commande=false,$origine_commande=false){
 
 		$sql_add = $sql_order = "";
-		
+
         if($id_etat_commande)
             $sql_add = "WHERE c.id_etat_commande < 5
 						AND HOUR( TIMEDIFF( NOW() , date_update_commande ) ) >= 24";
 		else
 			$sql_add = "WHERE c.id_etat_commande < 6";
-			
+
 		if($origine_commande !== false)
 			$sql_add .=" AND origine_commande = ".$origine_commande;
 		else
 			$sql_add .=" AND origine_commande = 1";
-			
-		
+
+
 		if($origine_commande !== false)
 			$sql_order = "ORDER BY c.id_commande DESC";
 		else
@@ -830,30 +833,30 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN commande_pointage cp ON cp.id_commande = c.id_commande
                                    ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) ".$sql_order);
-		
-                                   
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     public function getAllCommandeNewWithVerre($id_etat_commande=false,$origine_commande=false){
 
 		$sql_add = $sql_order = "";
-		
+
         if($id_etat_commande)
             $sql_add = "WHERE c.id_etat_commande < 5
 						AND HOUR( TIMEDIFF( NOW() , date_update_commande ) ) >= 24";
 		else
 			$sql_add = "WHERE c.id_etat_commande < 6";
-			
+
 		if($origine_commande !== false)
 			$sql_add .=" AND origine_commande = ".$origine_commande;
 		else
 			$sql_add .=" AND origine_commande = 1";
-			
-		
+
+
 		if($origine_commande !== false)
 			$sql_order = "ORDER BY c.id_commande DESC";
 		else
@@ -869,19 +872,19 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN commande_pointage cp ON cp.id_commande = c.id_commande
                                    ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) ".$sql_order);
-		
-                                   
+
+
         if ($query && $query->num_rows() > 0)
             return $query->result();
 
         return false;
     }
-    
+
     public function checkStockDeporte($id_verre)
     {
     	$query = $this->db->query("SELECT * FROM `lenses` WHERE `code` LIKE '".$id_verre."'");
-		
-                                   
+
+
         if ($query && $query->num_rows() > 0)
             return '1';
 
@@ -1007,7 +1010,7 @@ class m_commande extends CI_Model {
                 $tab_etat_commande = array(1 => 2, 2 => 3, 3 => 4, 4 => 4, 5 => 4, 6 => 5); //Chaque cl� correspond � un jour apr�s avoir pass� commande $key 1 = 1 jour donc etat commande => 2, $key 2 = 2 jours donc etat commande => 3, etc...
 
                 $etat_commande = isset($tab_etat_commande[$jour]) ? $tab_etat_commande[$jour] : "";
-						
+
 				// en cas de soucis de cron et que le nombre de jour apr�s avoir pass� commande, d�passerait 6, la commande passe en avant derni�re �tat
                 if($jour>6)
                     $etat_commande = 5;
@@ -1020,13 +1023,13 @@ class m_commande extends CI_Model {
 					$this->db->where('id_type_generation_verre<>', 5 ,false);
 					$this->db->where('id_type_generation_verre<>', 23 ,false);
                     $this->update($data);
-					
+
 
                     if($this->db->_error_message()!="")
                         return $data['error'] = $this->db->_error_message();
                 }
             }
-			
+
 			return $commandes;
         }
 
@@ -1088,7 +1091,9 @@ class m_commande extends CI_Model {
         $year = date('Y', time());
 
         // Excluded lenses
-        $query = $this->db->query("SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users." AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND id_verre IS NOT null AND date_commande > '2016-01-01 00:00:00'");
+        $query = $this->db->query("SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users." 
+        AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
+        AND id_verre IS NOT null AND date_commande > '".$year."-01-01 00:00:00'");
 
         if ($query && $query->num_rows() > 0) {
             return $query->result();
@@ -1100,7 +1105,7 @@ class m_commande extends CI_Model {
         // version corrig�e, finalement non..
         /*$annee = date('Y', time());
 
-        $query = $this->db->query("SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) - COALESCE(total_reductions, 0) as total 
+        $query = $this->db->query("SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) - COALESCE(total_reductions, 0) as total
                                    FROM commande c
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
@@ -1111,32 +1116,32 @@ class m_commande extends CI_Model {
                                         date_remise
                                     FROM
                                         facture_reduction
-                                   
+
                                     GROUP BY id_users,DATE_FORMAT(date_remise, '%m-%Y')) AS reductions
                                    ON (
                                     c.id_users = idusers AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(date_remise, '%Y-%m')
                                    )
-                                   LEFT JOIN 
-                                  (SELECT 
+                                   LEFT JOIN
+                                  (SELECT
                                     SUM(total_commande) as total_stock,id_users as idusersstock,date_commande
                                     FROM commande c
-                                    WHERE id_type_generation_verre = 5 
-                                    
+                                    WHERE id_type_generation_verre = 5
+
                                     GROUP BY idusersstock,DATE_FORMAT(date_commande, '%m-%Y')) as commande_stock
                                   ON (
                                       c.id_users = idusersstock AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_stock.date_commande, '%Y-%m')
                                   )
-                                  LEFT JOIN 
-                                  (SELECT 
+                                  LEFT JOIN
+                                  (SELECT
                                     SUM(total_commande) as total_fabrique,id_users as idusersfabrique,date_commande
                                     FROM commande c
-                                    WHERE id_type_generation_verre <> 5 
-                                    
+                                    WHERE id_type_generation_verre <> 5
+
                                     GROUP BY idusersfabrique,DATE_FORMAT(date_commande, '%m-%Y')) as commande_fabrique
                                   ON (
                                       c.id_users = idusersfabrique AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_fabrique.date_commande, '%Y-%m')
                                   )
-                                  
+
                                   WHERE c.id_users = ".$id_users."
                                   GROUP BY c.id_users,DATE_FORMAT(c.date_commande, '%m-%Y')
                                   ORDER BY c.id_users");
@@ -1170,10 +1175,10 @@ class m_commande extends CI_Model {
     }
 
     public function getAllCommandeByMonth($data){
-    
-         $tarif_appoint = 0;  
-         $TabHoraireTarifLiv = array(); 
-		 
+
+         $tarif_appoint = 0;
+         $TabHoraireTarifLiv = array();
+
 			$query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, c.tarif_express, date_update_commande, type_commande
 									   FROM ".$this->table." c
 									   LEFT JOIN 
@@ -1211,17 +1216,17 @@ class m_commande extends CI_Model {
 									  AND c.id_users=".$data['id_users']."
 									  AND id_etat_commande = 6
 									  GROUP BY c.id_users,date(date_update_commande)");
-									  
+
 			if ($query && $query->num_rows() > 0){
 				foreach($query->result() as $result){
-					
+
 					array_push($TabHoraireTarifLiv,$result->date_update_commande);
-				
+
 					$tarif_appoint += $result->tarif_liv;
-				}	
+				}
             }
-			
-                                  
+
+
         $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, c.id_users,c.tarif_express, date_update_commande, type_commande
          FROM ".$this->table." c
          LEFT JOIN 
@@ -1260,22 +1265,22 @@ class m_commande extends CI_Model {
            AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($data['date']  . '-01 -1 month'))."'
            GROUP BY id_users,date(date_update_commande)
          ORDER BY c.id_users");
-                                  
+
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             $add = true;
-				
+
               if(count($TabHoraireTarifLiv) > 0){
                 foreach($TabHoraireTarifLiv as $dateHoraire){
                   $date1 = explode(" ",$dateHoraire);
                   $date2 = explode(" ",$result->date_update_commande);
-                  
+
                   if($date1[0] == $date2[0]){
                     if(($date1[1] >= '09:00:00' && $date1[1] < '16:00:00') && ($date2[1] >= '09:00:00' && $date2[1] < '16:00:00')) {
                       $add = false;
                       break;
-                    } 
-                    
+                    }
+
                     if(($date1[1] < '09:00:00' || $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' || $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
@@ -1283,12 +1288,12 @@ class m_commande extends CI_Model {
                   }
                 }
               }
-				
+
               if($add)
                   $tarif_appoint += $result->tarif_liv;
           }
         }
-    
+
             $query = $this->db->query("SELECT l.name as lens_name, c.id_commande,c.id_users, c.type_commande, c.penalty, date_commande,c.tarif_express,reference_client,total_commande,generation_verre,taux_tva,libelle_verre_personnalise, 0 as TarifLivraison,intitule_bl, c.id_users, date_update_commande, tarif_packaging, c.commande_monture, v.libelle_verre, trad_fr
                                        FROM ".$this->table." c
                                        LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -1307,16 +1312,16 @@ class m_commande extends CI_Model {
                                        AND DATE_FORMAT(date_commande, '%Y-%m') = '".$data['date']."'
                                        GROUP BY c.id_commande
                                        ORDER BY date_commande DESC");
-              
+
             if ($query && $query->num_rows() > 0){
               $data = $query->result();
                 if($tarif_appoint != 0){
                   $data[0]->TarifLivraison += $tarif_appoint;
                 }
-                
+
               return $data;
-            }   
-          
+            }
+
 		$query2 = $this->db->query("SELECT 0 as total_commande,0 as total_stock,0 as total_fabrique,c.id_users, '".$data['date']."-01' as date_commande,cp,nom_magasin c.penalty, ,id_grille_tarifaire,nom_societe,' ' as intitule_bl, COALESCE(SUM(TarifLivraison1), 0) + COALESCE(SUM(TarifLivraison2), 0) as TarifLivraison
 										FROM ".$this->table." c
 										INNER JOIN users u ON c.id_users = u.id_users
@@ -1350,19 +1355,19 @@ class m_commande extends CI_Model {
 										AND DATE_FORMAT(c.date_update_commande, '%Y-%m') = '".$data['date']."' 
 										AND id_etat_commande = 6
 										AND c.id_users =".$data['id_users']);
-															  
-														
-		
-		if ($query2 && $query2->num_rows() > 0){	
+
+
+
+		if ($query2 && $query2->num_rows() > 0){
 			return $query2->result();
 		}
-			
+
         return false;
     }
-    
+
     public function getAllCommandeByMonthForAllbill($data){
-          $TabHoraireTarifLiv = array(); 
-          
+          $TabHoraireTarifLiv = array();
+
         $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, c.penalty, date_update_commande
                                    FROM ".$this->table." c
                                    LEFT JOIN 
@@ -1395,22 +1400,22 @@ class m_commande extends CI_Model {
                                   GROUP BY c.id_users
                                   ORDER BY c.id_users");
 
-        $tarif_appoint = array();                          
+        $tarif_appoint = array();
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             if(!isset($TabHoraireTarifLiv[$result->id_users]))
               $TabHoraireTarifLiv[$result->id_users] = array();
-               
+
             array_push($TabHoraireTarifLiv[$result->id_users],$result->date_update_commande);
-               
+
             if(isset($tarif_appoint[$result->id_users])){
               $tarif_appoint[$result->id_users] += $result->tarif_liv;
             } else {
               $tarif_appoint[$result->id_users] = $result->tarif_liv;
             }
           }
-        }      
-                 
+        }
+
         $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, c.id_users, date_update_commande
                                    FROM ".$this->table." c
                                    LEFT JOIN 
@@ -1446,22 +1451,22 @@ class m_commande extends CI_Model {
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($data['date']  . '-01 -1 month'))."'
                                      GROUP BY id_users,date(date_update_commande)
                                    ORDER BY c.id_users");
-                        
+
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
               $add = true;
-				
+
               if(isset($TabHoraireTarifLiv[$result->id_users])){
                 foreach($TabHoraireTarifLiv[$result->id_users] as $dateHoraire){
                   $date1 = explode(" ",$dateHoraire);
                   $date2 = explode(" ",$result->date_update_commande);
-                  
+
                   if($date1[0] == $date2[0]){
                     if(($date1[1] >= '09:00:00' && $date1[1] < '16:00:00') && ($date2[1] >= '09:00:00' && $date2[1] < '16:00:00')) {
                       $add = false;
                       break;
-                    } 
-                    
+                    }
+
                     if(($date1[1] < '09:00:00' || $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' || $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
@@ -1469,7 +1474,7 @@ class m_commande extends CI_Model {
                   }
                 }
               }
-				
+
               if($add)
                if(isset($tarif_appoint[$result->id_users])){
                 $tarif_appoint[$result->id_users] += $result->tarif_liv;
@@ -1477,7 +1482,7 @@ class m_commande extends CI_Model {
                 $tarif_appoint[$result->id_users] = $result->tarif_liv;
               }
           }
-        }      
+        }
 
         $query = $this->db->query("SELECT c.id_commande,date_commande,reference_client,total_commande,generation_verre,intitule_bl, taux_tva,libelle_verre_personnalise,c.id_users,numero_siret,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,num_finess,email,COALESCE(total_reductions, 0) as reduction, 0 as TarifLivraison, commande_monture
                                    FROM ".$this->table." c
@@ -1506,16 +1511,16 @@ class m_commande extends CI_Model {
                                    
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$data['date']."' 
                                    ORDER BY c.id_users DESC");
-         
+
          if($query && $query->num_rows() > 0){
             $tab = $query->result();
             if(count($tarif_appoint) > 0){
               foreach($tab as $key => $d){
 				  if(isset($tarif_appoint[$d->id_users]))
-					$tab[$key]->TarifLivraison = $tarif_appoint[$d->id_users]; 
+					$tab[$key]->TarifLivraison = $tarif_appoint[$d->id_users];
               }
             }
-            
+
             $query2 = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as total,c.id_commande, 0 as total_commande,0 as total_stock,0 as total_fabrique, 0 as reduction, c.id_users, '' as reference_client, '' as generation_verre, '".$data['date']."-01' as date_commande,numero_siret,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,num_finess,email,id_grille_tarifaire,nom_societe,'' as intitule_bl, COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as TarifLivraison
                             FROM ".$this->table." c
                             INNER JOIN users u ON c.id_users = u.id_users
@@ -1552,12 +1557,12 @@ class m_commande extends CI_Model {
                                                   WHERE DATE_FORMAT(c2.date_commande, '%Y-%m') = '".$data['date']."')
                             GROUP BY c.id_users
                             ORDER BY c.id_users");
-			
+
 			foreach($query2->result() as $data2){
         if($data2->total > 0)
           array_push($tab,$data2);
       }
-			
+
             return $tab;
 		}
 
@@ -1594,7 +1599,7 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             return $query->result()[0];
         }
-        
+
         return false;
 
     }
@@ -1668,8 +1673,8 @@ class m_commande extends CI_Model {
         $this->db->query('UPDATE commande SET tarif_packaging = '.$price.' WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.date('m-Y').'" AND id_users = '.$user);
 
     }
-    
-    
+
+
     public function getPackagingByDay($date = null, $user = null) {
 
         $add = '';
@@ -1764,9 +1769,9 @@ class m_commande extends CI_Model {
         if($user) {
             $user = 'AND c.id_users = '.(int) $user;
         }
-    
-         $TabHoraireTarifLiv = array(); 
-     
+
+         $TabHoraireTarifLiv = array();
+
          $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, date_update_commande, COUNT(1) AS expeditions
             FROM ".$this->table." c
             LEFT JOIN 
@@ -1803,14 +1808,14 @@ class m_commande extends CI_Model {
             ORDER BY c.id_users ASC");
 
 
-        $tarif_appoint = array();                          
+        $tarif_appoint = array();
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             if(!isset($TabHoraireTarifLiv[$result->id_users]))
                   $TabHoraireTarifLiv[$result->id_users] = array();
-               
+
                array_push($TabHoraireTarifLiv[$result->id_users],$result->date_update_commande);
-               
+
             if(isset($tarif_appoint[$result->id_users])){
               $tarif_appoint[$result->id_users] += floatval($result->tarif_liv);
             } else {
@@ -1819,7 +1824,7 @@ class m_commande extends CI_Model {
           }
         }
 
-                  
+
           $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, id_users, date_update_commande
              FROM ".$this->table." c
              LEFT JOIN 
@@ -1858,22 +1863,22 @@ class m_commande extends CI_Model {
              GROUP BY id_users,date(date_update_commande)
              ORDER BY c.id_users");
 
-									 
+
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             $add = true;
-				
+
               if(isset($TabHoraireTarifLiv[$result->id_users])){
                 foreach($TabHoraireTarifLiv[$result->id_users] as $dateHoraire){
                   $date1 = explode(" ",$dateHoraire);
                   $date2 = explode(" ",$result->date_update_commande);
-                  
+
                   if($date1[0] == $date2[0]){
                     if(($date1[1] >= '09:00:00' && $date1[1] < '16:00:00') && ($date2[1] >= '09:00:00' && $date2[1] < '16:00:00')) {
                       $add = false;
                       break;
-                    } 
-                    
+                    }
+
                     if(($date1[1] < '09:00:00' || $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' || $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
@@ -1881,7 +1886,7 @@ class m_commande extends CI_Model {
                   }
                 }
               }
-				
+
               if($add)
                 if(isset($tarif_appoint[$result->id_users]))
                   $tarif_appoint[$result->id_users] += $result->tarif_liv;
@@ -1890,7 +1895,7 @@ class m_commande extends CI_Model {
           }
         }
 
-		
+
         $query = $this->db->query("SELECT COALESCE(total_stock, 0)  + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, total_express, c.type_commande, c.tarif_express, c.penalty, c.date_commande,c.id_users, COALESCE(total_reductions, 0) as reduction,cp,nom_magasin,id_grille_tarifaire,nom_societe,intitule_bl, 0 as tarif_liv, COALESCE(exp_stock) AS expeditions_stock, COALESCE(exp_fabric) AS expeditions_fabric
            FROM ".$this->table." c
            LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -1971,10 +1976,10 @@ class m_commande extends CI_Model {
           ".$user."
           GROUP BY c.id_users
           ORDER BY c.id_users");
-								  
+
         if ($query && $query->num_rows() > 0){
             $data = $query->result();
-                
+
             if(count($tarif_appoint) > 0){
               foreach($data as $key => $d){
                 if(isset($tarif_appoint[$d->id_users])){
@@ -2023,7 +2028,7 @@ class m_commande extends CI_Model {
             
                 GROUP BY id_users
                 ORDER BY c.id_users");
-			
+
 			foreach($query2->result() as $data2){
          if($data2->total > 0)
           array_push($data,$data2);
@@ -2033,7 +2038,7 @@ class m_commande extends CI_Model {
 
         return false;
     }
-    
+
     public function lastMonthOrderExpeditions($date) {
 
         $current_month = DateTime::createFromFormat('m-Y', $date);
@@ -2271,8 +2276,8 @@ class m_commande extends CI_Model {
 
 
         $TarifLivraison = $tarifliv = 0;
-        $TabHoraireTarifLiv = array(); 
-         
+        $TabHoraireTarifLiv = array();
+
         if($tarif_Livraison){
           $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date_update_commande,DATE_FORMAT(date_update_commande, '%e') as day
                                      FROM ".$this->table."
@@ -2281,7 +2286,7 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND ( DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
                                      GROUP BY id_users,date(date_update_commande)");
-  
+
 
           if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
@@ -2295,8 +2300,8 @@ class m_commande extends CI_Model {
                 $tarifliv += $value->TarifLivraison;
                 }
             }
-              
-              
+
+
          $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date_update_commande,DATE_FORMAT(date_update_commande, '%e') as day
                                      FROM ".$this->table."
                                      WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
@@ -2318,7 +2323,7 @@ class m_commande extends CI_Model {
 
                   }
             }
-        
+
           $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison,id_users,date_update_commande, DATE_FORMAT(date_update_commande, '%e') as day
                                      FROM ".$this->table." c
 									 LEFT JOIN 
@@ -2352,28 +2357,28 @@ class m_commande extends CI_Model {
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($date.' -1 month'))."'
                                      GROUP BY id_users,date(date_update_commande)");
 
- 
+
           if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
             $add = true;
-				
+
               if(isset($TabHoraireTarifLiv[$value->id_users])){
                 foreach($TabHoraireTarifLiv[$value->id_users] as $dateHoraire){
                   $date1 = explode(" ",$dateHoraire);
                   $date2 = explode(" ",$value->date_update_commande);
-                    
+
                   if($date1[0] == $date2[0]){
                     if(($date1[1] >= '09:00:00' && $date1[1] < '16:00:00') && ($date2[1] >= '09:00:00' && $date2[1] < '16:00:00')) {
                       $add = false;
                       break;
-                    } 
-                    
+                    }
+
                     if(($date1[1] < '09:00:00' && $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' && $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
                     }
-                    
-                    
+
+
                     if(($date1[1] < '09:00:00' || $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' || $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
@@ -2390,10 +2395,10 @@ class m_commande extends CI_Model {
                     $tarifliv += $value->TarifLivraison;
                   }
               }
-            
+
             }
         }
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1)
                                    +
@@ -2422,9 +2427,9 @@ class m_commande extends CI_Model {
     }
 
 	public function getCAmonthSupplement_Samuel($date){
-		
+
 		$supplement = 0;
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00');
@@ -2432,16 +2437,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAmonth_Samuel($date){
-		
+
 		$time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1 AND penalty != 1) AND Samuel = 100.00)
@@ -2469,11 +2474,11 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
 	public function getCAmonthSupplement_Daniel($date){
-		
+
 		$supplement = 0;
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND  DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Daniel = 100.00');
@@ -2481,16 +2486,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAmonth_Daniel($date){
-		
+
 		$time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00)
@@ -2518,11 +2523,11 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
 	public function getCAmonthSupplement_Gregory($date){
-		
+
 		$supplement = 0;
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Gregory = 100.00');
@@ -2530,16 +2535,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAmonth_Gregory($date){
-		
+
 		$time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
@@ -2631,9 +2636,9 @@ class m_commande extends CI_Model {
     }
 
 	public function getCAmonthSupplement_Optical_Service($date){
-		
+
 		$supplement = 0;
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Optical_Service = 100.00');
@@ -2641,16 +2646,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAmonth_Optical_Service($date){
-		
+
 		$time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00)
@@ -2678,13 +2683,13 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
 	public function getCAdaySupplement_Samuel(){
-		
+
 		$supplement = 0;
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Samuel = 100.00');
@@ -2692,16 +2697,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAday_Samuel(){
-		
+
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1  AND Samuel = 100.00)
@@ -2729,13 +2734,13 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
 	public function getCAdaySupplement_Daniel(){
-		
+
 		$supplement = 0;
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Daniel = 100.00');
@@ -2743,15 +2748,15 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAday_Daniel(){
-		
+
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00)
@@ -2779,13 +2784,13 @@ class m_commande extends CI_Model {
 
            return $total;
 	}
-	
+
 	public function getCAdaySupplement_Gregory(){
-		
+
 		$supplement = 0;
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Gregory = 100.00');
@@ -2793,16 +2798,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAday_Gregory(){
-		
+
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00)
@@ -2904,11 +2909,11 @@ class m_commande extends CI_Model {
     }
 
 	public function getCAdaySupplement_Optical_Service(){
-		
+
 		$supplement = 0;
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
-		
+
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Optical_Service = 100.00');
@@ -2916,16 +2921,16 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
         }
-		
+
 		return $supplement;
 	}
-	
+
 	public function getCAday_Optical_Service(){
-		
+
 		$date = date('Y-m-d H:i:s', mktime(0,0,0));
         $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
 
-                                      
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00)
@@ -2964,11 +2969,11 @@ class m_commande extends CI_Model {
 
         return $data;
     }
-   
+
     public function updateCommandeSend($last_date_commande,$magasin=0){
 		if($last_date_commande!="")
 			$this->db->where("date_commande<","'".$last_date_commande."'",false);
-			
+
 		if($magasin != 0)
 			if($magasin == 1)
 				$this->db->where("(( origine_commande=1))");
@@ -2976,23 +2981,23 @@ class m_commande extends CI_Model {
 				$this->db->where("(((origine_commande=2) AND id_verre IN (SELECT id_verre FROM verres_traduction)) OR origine_commande=2)");
 			elseif($magasin == 4)
 				$this->db->where("commande_monture = 1");
-				
+
 		$this->db->where("email_send", 0);
 		$this->db->set("email_send",1);
-		
+
         $this->db->update($this->table);
     }
 
     public function addOrder($data){
 
         if(is_array($data)){
-		
+
 		//var_dump($data);
-		
+
         $pair = $data['pair'];
 
         unset($data['discount']);
-        
+
         if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
         {
 			$ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3002,15 +3007,15 @@ class m_commande extends CI_Model {
 
 			if(!empty($data['commentaire']))
 			  $commentaire = $data['commentaire'];
-		  
+
 			$numero = (int)$this->getNbDayOrder();
 			$numero++;
-		
+
 			if($numero < 10)
 			  $numero = '00'.$numero;
 			elseif($numero < 100)
 			  $numero = '0'.$numero;
-		
+
 			$data['intitule_bl'] = date("ymd").$numero;
 
 			  $data['tarif_express'] = 0;
@@ -3031,7 +3036,7 @@ class m_commande extends CI_Model {
 
 			if(isset($data['id_miroir']))
 				$data['id_miroir'] = $this->db->escape($data['id_miroir']);
-				
+
 			$data['reference_client'] = $this->db->escape($data['reference_client']);
 			$data['information_commande'] = $this->db->escape($data['information_commande']);
 			$data['origine_commande'] = (int) $data['origine_commande'];
@@ -3066,7 +3071,7 @@ class m_commande extends CI_Model {
 				$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 				$this->db->insert($table_commentaire, $data);
 			  }
-			
+
 			  $this->setNbDayOrder();
 
 			  if(true === $pair) {
@@ -3077,10 +3082,10 @@ class m_commande extends CI_Model {
 			  }
 
 			}
-		
+
 			return false;
         }
-       
+
         else
         {
 
@@ -3091,44 +3096,44 @@ class m_commande extends CI_Model {
 
 			if(!empty($data['commentaire']))
 			  $commentaire = $data['commentaire'];
-		  
+
 			$numero = (int)$this->getNbDayOrder();
 			$numero++;
-		
+
 			if($numero < 10)
 			  $numero = '00'.$numero;
 			elseif($numero < 100)
 			  $numero = '0'.$numero;
-		
+
 			$data['intitule_bl'] = date("ymd").$numero;
-		
+
 		   $id_verreD = $data['id_verreD'];
 		   $id_verreG = $data['id_verreG'];
 		   $nb_multi_commande = $data['nb_multi_commande'];
-	   
+
 		   $quantiteD = $data['quantiteD'];
 		   $quantiteG = $data['quantiteG'];
-	   
+
 		   $type_de_verreD = $data['type_de_verreD'];
 		   $type_de_verreG = $data['type_de_verreG'];
-	   
+
 		//   $type_commandeD = $data['type_commandeD'];
 		if(isset($data['type_commande_verreD']))
 		   $type_commande_verreD = $data['type_commande_verreD'];
-		   
+
 		if(isset($data['origine_commandeD']))
 		   $origine_commandeD = $data['origine_commandeD'];
-		   
+
 		   $information_commandeD = $data['information_commandeD'];
-	   
+
 		//   $type_commandeG = $data['type_commandeG'];
 		   $type_commande_verreG = $data['type_commande_verreG'];
 		   $origine_commandeG = $data['origine_commandeG'];
 		   $information_commandeG = $data['information_commandeG'];
 		   $data['id_type_generation_verre']=0;
-	   
+
 		   $type_commande_verre = $data['type_commande_verre'];
-	   	   
+
 	   	   if(isset($data['prixDiscountD']))
 	   	   {
 	   	   		$prixDH=$data['prixDiscountD'];
@@ -3143,30 +3148,30 @@ class m_commande extends CI_Model {
 		   		$prixUnitaireD = $data['prixUnitaireD'];
 		   		$prixUnitaireG = $data['prixUnitaireG'];
 	   	   }
-	   	   
+
 	   	   $panierA = $data['panierA'];
 	   	   $panierA_D = 0;
 	   	   $panierA_G = 0;
-	   	   
+
 	   	   if(isset($data['panierA_D']))
 	   	   {
 	   	   		$panierA_D = $data['panierA_D'];
 	   	   }
-	   	   
+
 	   	   if(isset($data['panierA_G']))
 	   	   {
 	   	   		$panierA_G = $data['panierA_G'];
 	   	   }
-	   	   
-		   
+
+
 		   $unVerreD = 0;
 		   $unVerreG = 0;
-	   
+
 		   if($data['type_de_verreD']!="" && $data['type_de_verreG']==""  && !isset($data['gauche']))
 			{
 				$unVerreD = 1;
 			}
-		
+
 			if($data['type_de_verreG']!="" && $data['type_de_verreD']=="" && !isset($data['droit']))
 			{
 				$unVerreG = 1;
@@ -3174,21 +3179,21 @@ class m_commande extends CI_Model {
 
 			$data['tarif_express'] = 0;
 			$express = $data['express'];
-				  
+
 			//$data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
 			$data['id_miroir'] = $this->db->escape($data['id_miroir']);
 			$data['reference_client'] = $this->db->escape($data['reference_client']);
-		
+
 			$data['origine_commande'] = (int) $data['origine_commande'];
 
 			$data['information_certificat'] = $this->db->escape($data['information_certificat']);
 			$data['taux_tva'] = $this->db->escape($data['taux_tva']);
 			$data['date_commande'] = $this->db->escape($data['date_commande']);
 			$data['date_update_commande'] = $this->db->escape($data['date_update_commande']);
-		
+
 			$data['generation'] = "'".$data['generation']."'";
-		
+
 			if(true == $pair) {
 				$table_commande = $this->table_temp;
 				$table_commentaire = $this->table_commentaire_temp;
@@ -3197,9 +3202,9 @@ class m_commande extends CI_Model {
 				$table_commande = $this->table;
 				$table_commentaire = $this->table_commentaire;
 			}
-		
+
 			$expressD = 0;
-		
+
 			$data = array_intersect_key($data, $this->fields);
 
 			unset($data['date_annule']);
@@ -3208,18 +3213,18 @@ class m_commande extends CI_Model {
 			  $update_fields[] = $num."='".$data[$num]."'";
 			  $data_key[] = $num;
 			}
-		
+
 			if($type_commande_verre!=4)
 			{
 				$data['prix_verre'] = str_replace("�","",$data['prix_verre']);
-			
+
 				if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
 				{
 					$data['prix_verre'] = $prixUnitaireD;
 					$data['total_commande']=$prixUnitaireD*2;
-					
+
 				}
-			
+
 				if($quantiteD==$quantiteG && $type_commande_verre == 1 && $type_de_verreD==$type_de_verreG)
 				{
 					if($prixUnitaireD != $prixUnitaireG)
@@ -3232,30 +3237,30 @@ class m_commande extends CI_Model {
 					}
 					$data['total_commande']=$prixUnitaireD+$prixUnitaireG;
 				}
-			
-			
-				if($express == 1) 
+
+
+				if($express == 1)
 				{
 				  $data['tarif_express'] = 25;
 				  $data['total_commande'] += 25;
 				}
-			
+
 				$data['information_commande'] = str_replace("+","",$data['information_commande']);
 				$data['information_commande'] = $this->db->escape($data['information_commande']);
-		
+
 				if(strpos($data['id_verre'], "]") !== false)
 				{
 					$data['id_verre'] = str_replace("]","",$data['id_verre']);
 					$v = explode("*",$data['id_verre']);
 					$data['id_verre'] = $v[0];
 				}
-		
+
 				$data['id_verre'] = "'".$data['id_verre']."'";
-			
+
 				//echo "Verre != 4 <br>";
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
-			
-		
+
+
 				if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
 				{
 
@@ -3265,7 +3270,7 @@ class m_commande extends CI_Model {
 					$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 					$this->db->insert($table_commentaire, $data);
 				  }
-			
+
 				  $this->setNbDayOrder();
 
 				  if(true === $pair) {
@@ -3285,7 +3290,7 @@ class m_commande extends CI_Model {
 					//$data['type_commande'] = $type_commandeD;
 					$type_commande_verre = $type_commande_verreD;
 					$data['origine_commande'] = $origine_commandeD;
-				
+
 					if($unVerreD==0)
 					{
 						$data['prix_verre'] = $prixDH;
@@ -3295,12 +3300,12 @@ class m_commande extends CI_Model {
 					{
 						$data['total_commande'] = $data['prix_verre'];
 					}
-				
+
 					$data['information_commande'] = str_replace("+","",$information_commandeD);
 					$data['information_commande'] = $this->db->escape($data['information_commande']);
-					
+
 					$data['id_verre'] = $id_verreD;
-					
+
 					if($panierA_D != 0 && $panierA_D != "")
 					{
 						$data['panierA']=$panierA_D;
@@ -3310,7 +3315,7 @@ class m_commande extends CI_Model {
 						if($data['panierA']!=2)
 							$data['panierA']=0;
 					}
-					
+
 					if(strpos($id_verreD, "]") !== false)
 					{
 						$data['id_verre'] = str_replace("]","",$id_verreD);
@@ -3322,18 +3327,18 @@ class m_commande extends CI_Model {
 					{
 						$data['id_verre'] = "'".$data['id_verre']."'";
 					}
-				
+
 					$data['id_verre']=str_replace("''","'",$data['id_verre']);
-				
-				
-				
-					if($express == 1 && $type_commande_verreD=="1") 
+
+
+
+					if($express == 1 && $type_commande_verreD=="1")
 					{
 						  $data['tarif_express'] = 25;
 						  $data['total_commande'] += 25;
 						  $expressD = 1;
 					}
-				
+
 				/*	echo "Droit = 4<br>";
 					echo "nb_multi_commande = ".$nb_multi_commande."<br>";
 					echo "quantiteD = ".$quantiteD."<br>";
@@ -3341,15 +3346,15 @@ class m_commande extends CI_Model {
 					echo "id_verreD = ".$id_verreD."<br>";
 					echo "id_verreG = ".$id_verreG."<br>";
 					var_dump($data);
-					
+
 					echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 				*/
 					if($nb_multi_commande == 1 && $quantiteD>1 && $unVerreD==0 && $id_verreD!=$id_verreG)
 					{
 						$data['prix_verre'] = $prixUnitaireD;
 						$data['total_commande'] = $prixUnitaireD;
-					
-					
+
+
 						for($i=0;$i<$quantiteD;$i++)
 						{
 							if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
@@ -3357,14 +3362,14 @@ class m_commande extends CI_Model {
 
 							  $commande_id = $this->db->insert_id();
 
-				  
+
 							  if(!empty($commentaire)){
 								$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 								$this->db->insert($table_commentaire, $data);
 							  }
-				  
+
 							  $this->setNbDayOrder();
-				  
+
 							  $ok = 1;
 
 							}
@@ -3372,20 +3377,20 @@ class m_commande extends CI_Model {
 					}
 					else
 					{
-					
+
 						if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
 						{
 
 						  $commande_id = $this->db->insert_id();
 
-				  
+
 						  if(!empty($commentaire)){
 							$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 							$this->db->insert($table_commentaire, $data);
 						  }
-				  
+
 						  $this->setNbDayOrder();
-				  
+
 						  $ok = 1;
 
 						}
@@ -3393,11 +3398,11 @@ class m_commande extends CI_Model {
 				}
 				if($id_verreG!="")
 				{
-					
+
 					//$data['type_commande'] = $type_commandeG;
 					$type_commande_verre = $type_commande_verreG;
 					$data['origine_commande'] = $origine_commandeG;
-				
+
 					if($unVerreG==0)
 					{
 						$data['prix_verre'] = $prixGH;
@@ -3407,12 +3412,12 @@ class m_commande extends CI_Model {
 					{
 						$data['total_commande'] = $data['prix_verre'];
 					}
-				
+
 					$data['information_commande'] = str_replace("+","",$information_commandeG);
 					$data['information_commande'] = $this->db->escape($data['information_commande']);
-					
+
 					$data['id_verre'] = $id_verreG;
-					
+
 					if($panierA_G != 0 && $panierA_G != "")
 					{
 						$data['panierA']=$panierA_G;
@@ -3422,7 +3427,7 @@ class m_commande extends CI_Model {
 						if($data['panierA']!=2)
 							$data['panierA']=0;
 					}
-					
+
 					if(strpos($id_verreG, "]") !== false)
 					{
 						$data['id_verre'] = str_replace("]","",$id_verreG);
@@ -3434,20 +3439,20 @@ class m_commande extends CI_Model {
 					{
 						$data['id_verre'] = "'".$data['id_verre']."'";
 					}
-				
+
 					$data['id_verre']=str_replace("''","'",$data['id_verre']);
-				
-				
-				
+
+
+
 					if($type_commande_verre=="1" && $expressD==0)
 					{
-						if($express == 1) 
+						if($express == 1)
 						{
 							  $data['tarif_express'] = 25;
 							  $data['total_commande'] += 25;
 						}
-					}			
-				
+					}
+
 				/*	echo "Gauche = 4<br>";
 					echo "nb_multi_commande = ".$nb_multi_commande."<br>";
 					echo "quantiteG = ".$quantiteG."<br>";
@@ -3455,16 +3460,16 @@ class m_commande extends CI_Model {
 					echo "id_verreD = ".$id_verreD."<br>";
 					echo "id_verreG = ".$id_verreG."<br>";
 					var_dump($data);
-					
+
 					echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
-				*/	
-					
-				
+				*/
+
+
 					if($nb_multi_commande == '1' && $quantiteG>1 && $unVerreG==0 && $id_verreD!=$id_verreG)
 					{
 						$data['prix_verre'] = $prixUnitaireG;
 						$data['total_commande'] = $prixUnitaireG;
-					
+
 						for($i=0;$i<$quantiteG;$i++)
 						{
 							if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
@@ -3472,14 +3477,14 @@ class m_commande extends CI_Model {
 
 							  $commande_id = $this->db->insert_id();
 
-				  
+
 							  if(!empty($commentaire)){
 								$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 								$this->db->insert($table_commentaire, $data);
 							  }
-				  
+
 							  $this->setNbDayOrder();
-				  
+
 							  $ok = 1;
 
 							}
@@ -3492,20 +3497,20 @@ class m_commande extends CI_Model {
 
 						  $commande_id = $this->db->insert_id();
 
-				  
+
 						  if(!empty($commentaire)){
 							$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);
 							$this->db->insert($table_commentaire, $data);
 						  }
-				  
+
 						  $this->setNbDayOrder();
-				  
+
 						  $ok = 1;
 
 						}
 					}
 				}
-			
+
 				if($ok == 1)
 				  {
 					  if(true === $pair) {
@@ -3515,23 +3520,23 @@ class m_commande extends CI_Model {
 						  return array('id' => $commande_id, 'pair' => false);
 					  }
 				  }
-		
-			}
-		
 
-		
+			}
+
+
+
 
 			// PLZ RTFM
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 
-		
-		
+
+
 			return false;
 		}
       }
     }
-	
+
 	public function getCommandeJournalierePDF($date="", $magasin = 1, $envoi_chine = 0){
 
         $sql_add = "AND c.id_verre IN (SELECT code FROM lenses)";
@@ -3563,7 +3568,7 @@ class m_commande extends CI_Model {
         //var_dump($sql);die;
 
         $query = $this->db->query($sql);
-		
+
 		/*echo "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -3631,7 +3636,7 @@ class m_commande extends CI_Model {
 
         return false;
     }
-    
+
     public function getCommandeJournalierekacia($date="", $magasin = 1, $envoi_chine = 0){
 
         $sql_add = "AND c.id_verre IN (SELECT code FROM lenses)";
@@ -3661,7 +3666,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN verres_traduction vt ON vt.id_verre = c.id_verre
                                    WHERE ".$date_add." ".$sql_add." ".$email_send." AND (libelle_verre IS NOT NULL OR generation = 'Progressif de stock')
                                    ORDER BY ".$order_by);
-		
+
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -3699,12 +3704,12 @@ class m_commande extends CI_Model {
     }
 
     public function getCaJournalier($tarif_Livraison = true) {
-    
+
         $TarifLivraison = 0;
         $TabHoraireTarifLiv = array();
 
 		//date_default_timezone_set('Asia/Jerusalem');
-              
+
         if($tarif_Livraison){
 
           $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date_update_commande
@@ -3715,14 +3720,14 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND ( DATE_FORMAT(date_commande, '%Y-%m')='".date('Y-m')."' AND ((date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
                                      GROUP BY date(date_update_commande),id_users");
-          
+
           if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
               $TabHoraireTarifLiv[$value->id_users] = array();
               array_push($TabHoraireTarifLiv[$value->id_users],$value->date_update_commande);
               $TarifLivraison += $value->TarifLivraison;
             }
-              
+
           $query2 = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date_update_commande
                                       FROM ".$this->table."
                                       WHERE date_update_commande>='".date("Y-m-d 00:00:00")."'
@@ -3731,16 +3736,16 @@ class m_commande extends CI_Model {
                                       AND id_etat_commande = 6
                                       AND ((date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%Y-%m')='".date('Y-m')."') AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
                                       GROUP BY date(date_update_commande),id_users");
-          
+
           if($query2 && $query2->num_rows() > 0)
             foreach($query2->result() as $value){
               if(!isset($TabHoraireTarifLiv[$value->id_users]))
                 $TabHoraireTarifLiv[$value->id_users] = array();
-				
+
                 array_push($TabHoraireTarifLiv[$value->id_users],$value->date_update_commande);
                 $TarifLivraison += $value->TarifLivraison;
             }
-              
+
           $query = $this->db->query("SELECT COALESCE(TarifLivraison,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
@@ -3776,38 +3781,38 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime(date('Y-m').'-01 -1 month'))."'
                                      GROUP BY id_users");
-                                     
-                                
-          
+
+
+
           if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
               $add = true;
-				
+
               if(isset($TabHoraireTarifLiv[$value->id_users])){
                 foreach($TabHoraireTarifLiv[$value->id_users] as $dateHoraire){
-               
-                  
+
+
                   if(($dateHoraire >= date('Y-m-d 09:00:00') && $dateHoraire < date('Y-m-d 16:00:00')) && ($value->date_update_commande >= date('Y-m-d 09:00:00') && $value->date_update_commande < date('Y-m-d 16:00:00'))) {
                    $add = false;
                     break;
                   }
-                  
+
                   if(($dateHoraire < date('Y-m-d 09:00:00') || $dateHoraire >= date('Y-m-d 16:00:00')) && ($value->date_update_commande < date('Y-m-d 09:00:00') || $value->date_update_commande >= date('Y-m-d 16:00:00'))) {
                     $add = false;
                     break;
                   }
                 }
               }
-				
+
               if($add){
                 $TarifLivraison += $value->TarifLivraison;
-                
+
               }
             }
 
         }
-        
-            
+
+
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
@@ -3836,11 +3841,11 @@ class m_commande extends CI_Model {
         return false;
     }
 
-	
+
     public function getCaByDayOfMonth($date){
-    
+
 	 $TabHoraireTarifLiv = array();
-		
+
     $tarif = 0;
      $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date_update_commande
                                    FROM ".$this->table."
@@ -3849,28 +3854,28 @@ class m_commande extends CI_Model {
                                    AND id_etat_commande = 6
                                    AND ( DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND ((date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
                                    GROUP BY id_users,date(date_update_commande)");
-        
+
         $TarifLivraisonTab = array();
-        
+
         if($query && $query->num_rows() > 0)
           foreach($query->result() as $value){
-            if(!isset($TabHoraireTarifLiv[$value->id_users]))  
+            if(!isset($TabHoraireTarifLiv[$value->id_users]))
               $TabHoraireTarifLiv[$value->id_users] = array();
-			
+
               $TabHoraireTarifLiv[$value->id_users][$value->day]= array();
-			
+
               array_push($TabHoraireTarifLiv[$value->id_users][$value->day],$value->date_update_commande);
-      
+
             if(isset($TarifLivraisonTab[$value->day]))
               $TarifLivraisonTab[$value->day] += $value->TarifLivraison;
             else
               $TarifLivraisonTab[$value->day] = $value->TarifLivraison;
-              
-              
+
+
               $tarif += $value->TarifLivraison;
           }
-          
-          
+
+
         $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date_update_commande
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
@@ -3878,27 +3883,27 @@ class m_commande extends CI_Model {
                                    AND id_etat_commande = 6
                                    AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
                                    GROUP BY id_users,date(date_update_commande)");
-        
+
         if($query && $query->num_rows() > 0)
            foreach($query->result() as $value){
               if(!isset($TabHoraireTarifLiv[$value->id_users])){
                 $TabHoraireTarifLiv[$value->id_users] = array();
               }
-			  
+
               if(!isset($TabHoraireTarifLiv[$value->id_users][$value->day])){
                 $TabHoraireTarifLiv[$value->id_users][$value->day]= array();
               }
-              
+
               array_push($TabHoraireTarifLiv[$value->id_users][$value->day],$value->date_update_commande);
-			  
+
             if(isset($TarifLivraisonTab[$value->day]))
               $TarifLivraisonTab[$value->day] += $value->TarifLivraison;
             else
               $TarifLivraisonTab[$value->day] = $value->TarifLivraison;
-              
+
               $tarif += $value->TarifLivraison;
-          } 
-          
+          }
+
            $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date_update_commande as date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
@@ -3933,33 +3938,33 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($date.'-01 -1 month'))."'
                                      GROUP BY id_users,date(date_update_commande)");
-          
+
           if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
               $add = true;
-              
+
               if(isset($TabHoraireTarifLiv[$value->id_users][$value->day])){
                 foreach($TabHoraireTarifLiv[$value->id_users][$value->day] as $dateHoraire){
                   if(($dateHoraire >= $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 09:00:00' && $dateHoraire < $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 16:00:00') && ($value->date_update_commande >= $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 09:00:00' && $value->date_update_commande < $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 16:00:00')) {
                     $add = false;
                     break;
                   }
-                  
+
                   if(($dateHoraire < $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 09:00:00' || $dateHoraire >= $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 16:00:00') && ($value->date_update_commande < $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 09:00:00' || $value->date_update_commande >= $date.'-'.($value->day< 10 ? '0' : '').$value->day.' 16:00:00')) {
                     $add = false;
                     break;
                   }
                 }
               }
-              
+
              if($add)	{
                if(isset($TarifLivraisonTab[$value->day]))
                   $TarifLivraisonTab[$value->day] += $value->TarifLivraison;
                 else
                   $TarifLivraisonTab[$value->day] = $value->TarifLivraison;
-                  
+
                   $tarif += $value->TarifLivraison;
-                  
+
                   }
             }
 
@@ -3993,7 +3998,7 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ttc'] = round($data[$day]['total_ht'] * 1.2 ,2);
                 }
         }
-           
+
         $query = $this->db->query("SELECT
                                       SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
                                       taux_tva,
@@ -4039,23 +4044,23 @@ class m_commande extends CI_Model {
 
 				  unset($TarifLivraisonTab[$value->day]);
 				}
-			
+
 				$data[$value->day]['total_ttc'] += round($data[$value->day]['total_ht'] * $value->taux_tva,2);
 			}
-			
+
 			if(count($TarifLivraisonTab) > 0)
 				foreach($TarifLivraisonTab as $day => $tarif){
 					$data[$day]['total_ht'] += $tarif;
 					$data[$day]['total_ttc'] += round($data[$day]['total_ht'] * 1.2 ,2);
 				}
-   
+
 			return $data;
 		}
 
 
         return false;
     }
-	
+
 	public function delete($data, $pair = false){
 
         if(false === $pair) {
@@ -4070,14 +4075,14 @@ class m_commande extends CI_Model {
 		$query = $this->db->query('SELECT * FROM commande WHERE id_commande = "'.$data['id_commande'].'" AND commande_monture = 1 ');
 		$montures = $query->result();
 		if ($query && $query->num_rows() > 0){
-		
+
 			if($montures[0]->commande_monture == 1)
 			{
 				$todelete = json_decode($montures[0]->information_commande);
 				foreach ($todelete as $monture_add_stock)
 				{
 					if($monture_add_stock->id!=null)
-					{	
+					{
 						$this->db->where('id', $monture_add_stock->id);
 						$this->db->set('stock', 'stock+'.$monture_add_stock->qty, FALSE);
 						$this->db->update('montures');
@@ -4087,14 +4092,14 @@ class m_commande extends CI_Model {
 						$idpack = ','.$monture_add_stock->pack_id.',';
 						$query_p = $this->db->query('SELECT * FROM montures WHERE pack LIKE "%'.$idpack.'%" ');
 						$montures_p = $query_p->result();
-					
+
 						foreach ($montures_p as $monture_p)
 						{
 							$this->db->where('id', $monture_p->id);
 							$this->db->set('stock', 'stock+'.$monture_add_stock->qty, FALSE);
 							$this->db->update('montures');
 						}
-					
+
 					}
 				}
 			}
@@ -4107,11 +4112,11 @@ class m_commande extends CI_Model {
 
 		$this->db->where('id_commande', $data['id_commande']);
         $this->db->delete("etiquette");
-        
+
         $this->db->where('id_commande', $data['id_commande']);
         $this->db->delete("commande_omega");
 	}
-	
+
 	public function delete_edi($data, $pair = false){
 
         echo "ID COMMANDE:".$data['id_commande'];
@@ -4120,31 +4125,31 @@ class m_commande extends CI_Model {
 		$this->db->delete('commande_omega');
 
 	}
-	
+
 	public function checkNewOrder(){
-  
+
     $query_last_date_commande = $this->db->query("SELECT date_commande
-                                                  FROM last_check_order");   
-                               
+                                                  FROM last_check_order");
+
     $return = false;
-    
+
     if($query_last_date_commande && $query_last_date_commande->num_rows() > 0){
         $query = $this->db->query("SELECT MAX(date_commande) as last_order, commentaire,c.id_type_generation_verre
                                    FROM ".$this->table." c
                                    LEFT JOIN ".$this->table_commentaire." cc ON c.id_commande = cc.id_commande
-                                   WHERE date_commande > '".$query_last_date_commande->row()->date_commande."'");                     
-                                     
+                                   WHERE date_commande > '".$query_last_date_commande->row()->date_commande."'");
+
         if ($query && $query->num_rows() > 0 && $query->row()->last_order !== NULL){
-			
+
           if($query->row()->id_type_generation_verre == 5 || $query->row()->id_type_generation_verre == 23)
             $return = 2;
-           
+
           if($query->row()->id_type_generation_verre <> 5 && $query->row()->id_type_generation_verre <> 23)
             $return = 3;
-		
+
 		  if($query->row()->commentaire !== null)
             $return = 1;
-            
+
           $this->db->set("date_commande", $query->row()->last_order);
           $this->db->update("last_check_order");
         }
@@ -4152,7 +4157,7 @@ class m_commande extends CI_Model {
 
     return $return;
 	}
-	
+
 	public function getCommandeEmargement(){
 		$this->db->select("commande.id_users,nom_magasin,COUNT(id_commande) as nombre_commande,adresse,cp,ville,tel_fixe");
 		$this->db->from($this->table);
@@ -4162,77 +4167,77 @@ class m_commande extends CI_Model {
 		$this->db->group_by('id_users');
 		$this->db->order_by('cp');
 		$query = $this->db->get();
-		
+
 		if ($query && $query->num_rows() > 0)
 			return  $query->result();
-		
+
         return false;
 	}
-	
+
 	public function addPointage($id_commande){
-		$this->db->insert($this->table_pointage, array('id_commande' => $id_commande, 'date_pointage' => date("Y-m-d"))); 
+		$this->db->insert($this->table_pointage, array('id_commande' => $id_commande, 'date_pointage' => date("Y-m-d")));
 	}
-	
+
 	public function deletePointage($id_commande){
 		$this->db->where('id_commande', $id_commande);
         $this->db->delete($this->table_pointage);
 	}
-	
+
 	public function getNbDayOrder(){
 		$this->db->select("nb_commande");
 		$this->db->from($this->table_journaliere);
-		
+
 		$query = $this->db->get();
 		$res = 0;
 		if ($query && $query->num_rows() > 0){
 			$data = $query->result();
 			$res = $data[0]->nb_commande;
 		}
-		
+
 		return $res;
 	}
-	
+
 	public function setNbDayOrder(){
 		$this->db->set("nb_commande", "nb_commande+1" ,false);
 		$this->db->update($this->table_journaliere);
 	}
-	
+
 	public function resetNbDayOrder(){
 		$this->db->set("nb_commande", 0);
 		$this->db->update($this->table_journaliere);
 	}
-	
+
 	public function ajouter_etiquetteNEW($data){
 
         if(isset($data['delete']) && $data['delete'] == 1)
         {
-        
-			if(isset($data['id_commande'])) 
+
+			if(isset($data['id_commande']))
 				$this->db->query("DELETE FROM etiquette WHERE id_commande=".$data['id_commande']);
-        
+
         }
         else{
 			$query = $this->db->query("SELECT MAX(ordre) as max FROM etiquette WHERE date_click='".date("Y-m-d")."'");
 			$ordre = 1;
-			
+
 			if ($query && $query->num_rows() > 0){
 				  $row = $query->row();
 				  $ordre = $row->max + 1;
 			}
-			
-			if(isset($data['cote']) && $data['cote']=='d')	
+
+			if(isset($data['cote']) && $data['cote']=='d')
 				$this->db->query("INSERT INTO etiquette (id_commande,cote,ordre,date_click) VALUES (".$data['id_commande'].", 'droit',".$ordre.",'".date("Y-m-d")."')");
-				
-			if(isset($data['cote']) && $data['cote']=='g')	
+
+			if(isset($data['cote']) && $data['cote']=='g')
 				$this->db->query("INSERT INTO etiquette (id_commande,cote,ordre,date_click) VALUES (".$data['id_commande'].", 'gauche',".$ordre.",'".date("Y-m-d")."')");
-				
+
 			if(isset($data['cote']) && $data['cote']=='dg')
 			{
 				$this->db->query("INSERT INTO etiquette (id_commande,cote,ordre,date_click) VALUES (".$data['id_commande'].", 'droit',".$ordre.",'".date("Y-m-d")."')");
-				
+
 				$query = $this->db->query("SELECT MAX(ordre) as max FROM etiquette WHERE date_click='".date("Y-m-d")."'");
 				$ordre = 1;
-			
+
 				if ($query && $query->num_rows() > 0){
 					  $row = $query->row();
 					  $ordre = $row->max + 1;
@@ -4243,26 +4248,26 @@ class m_commande extends CI_Model {
         }
 
 	}
-	
+
 	public function ajouter_etiquette($data){
 
         if(isset($data['delete']) && $data['delete'] == 1){
       if(isset($data['id_commande']))
         $this->db->where('id_commande', $data['id_commande']);
-        
-      if(isset($data['cote']))  
+
+      if(isset($data['cote']))
         $this->db->where('cote', $data['cote']);
 			//$this->db->where('date_click', date('Y-m-d'));
 			$this->db->delete("etiquette");
 		}else{
 			$query = $this->db->query("SELECT MAX(ordre) as max FROM etiquette WHERE date_click='".date("Y-m-d")."'");
 			$ordre = 1;
-			
+
 			if ($query && $query->num_rows() > 0){
 				  $row = $query->row();
 				  $ordre = $row->max + 1;
 			}
-				
+
 			$this->db->query("INSERT INTO etiquette (id_commande,cote,ordre,date_click) VALUES (".$data['id_commande'].", '".$data['cote']."',".$ordre.",'".date("Y-m-d")."')");
 
         }
@@ -4307,7 +4312,7 @@ class m_commande extends CI_Model {
 
         return false;
     }
-  
+
   public function getEtiquetteFabrication(){
 		$query = $this->db->query("SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
@@ -4318,14 +4323,14 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
                                ORDER BY date_click, ordre ");
-		
+
 		if ($query && $query->num_rows() > 0){
 			return $query->result();
 		}
 
         return false;
 	}
-  
+
    public function getEtiquetteFabricationNew($from = 0, $to = 0){
 		$query = $this->db->query("SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
@@ -4336,7 +4341,7 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
                                ORDER BY date_click, ordre LIMIT ".$from.",".$to);
-		
+
 		if ($query && $query->num_rows() > 0){
 			return $query->result();
 		}
@@ -4357,14 +4362,14 @@ class m_commande extends CI_Model {
                                AND c.id_verre IN (SELECT code FROM lenses)
                                GROUP BY c.id_commande
                                ORDER BY date_click, ordre DESC");
-		
+
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }
 
         return false;
     }
-	
+
 	public function getCertificatStock($id_commande){
 		$query = $this->db->query("SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
                                FROM commande c
@@ -4423,7 +4428,7 @@ class m_commande extends CI_Model {
                                GROUP BY c.id_commande
                                ORDER BY ordre");
         }
-                               
+
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }
@@ -4442,7 +4447,7 @@ class m_commande extends CI_Model {
         return false;
     }
 
-	
+
 	public function resetEtiquette(){
 		$this->db->query("DELETE FROM etiquette 
 						  WHERE id_commande IN 
@@ -4457,21 +4462,21 @@ class m_commande extends CI_Model {
 									) as tmp
 							)");
 	}
-	
+
 	public function getEtiquetteAlreadySet(){
 		$query = $this->db->query("SELECT id_commande,cote FROM etiquette");
-		
+
 		if ($query && $query->num_rows() > 0){
 			$data = array();
 			foreach($query->result() as $value)
 				$data[$value->id_commande][$value->cote] = 1;
-			
+
 			return $data;
 		}
 
         return false;
 	}
-  
+
   public function getCommandeStockJournalier(){
     $query = $this->db->query("SELECT information_commande,libelle_verre, count(id_commande) as nb_commande, trad_fr,c.id_type_generation_verre
                                FROM ".$this->table." c
@@ -4483,14 +4488,14 @@ class m_commande extends CI_Model {
                                AND c.date_commande >='".date("2015-05-01 00:00:00")."'
                                AND date_commande<='".date("2015-05-01 23:59:59")."'
                                GROUP BY libelle_verre,information_commande");
-                               
+
     if ($query && $query->num_rows() > 0){
       return $query->result();
     }
 
     return false;
   }
-  
+
   public function nouvelle_date_bl($data){
     $this->db->query("INSERT INTO intitule_bl (id_commande,date_bl,intitule_bl) VALUES (".$data['id_commande'].", '".$data['date_bl']."','".$data['intitule_bl']."') ON DUPLICATE KEY UPDATE date_bl='".$data['date_bl']."', intitule_bl='".$data['intitule_bl']."'");
   }
@@ -4521,23 +4526,23 @@ class m_commande extends CI_Model {
 
         return false;
     }
-  
-  public function getNbIntituleBl($intitule_bl){   
+
+  public function getNbIntituleBl($intitule_bl){
 
     $query = $this->db->query("SELECT MAX(intitule_bl) as IntituleBL
                                FROM intitule_bl
                                WHERE intitule_bl like '".$intitule_bl."%'");
-                               
+
 	$query2 = $this->db->query("SELECT MAX(intitule_bl) as IntituleBL
 								FROM ".$this->table." c
 								WHERE intitule_bl like '".$intitule_bl."%'");
-                               
+
     if ($query2 && $query2->num_rows() > 0){
 	  $data2 = $query2->result();
     } else {
 	  $data2 = false;
 	}
-	
+
     if ($query && $query->num_rows() > 0){
       $data = $query->result();
       if($data[0]->IntituleBL !== NULL && ($data2 === false || $data[0]->IntituleBL > $data2[0]->IntituleBL))
@@ -4553,15 +4558,15 @@ class m_commande extends CI_Model {
     public function getAllCommandeByYearAndUser($data){
 
         /* $TabHoraireTarifLiv = array();
-     
+
          $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, date_update_commande
                                    FROM ".$this->table." c
-                                   LEFT JOIN 
-                                      ( 
+                                   LEFT JOIN
+                                      (
                                         SELECT tarif_livraison as TarifLivraison, id_commande as idCommande
-                                        FROM commande cc 
-                                        WHERE DATE_FORMAT(date_update_commande, '%Y') = '".$date."' 
-                                        AND tarif_livraison > 0 
+                                        FROM commande cc
+                                        WHERE DATE_FORMAT(date_update_commande, '%Y') = '".$date."'
+                                        AND tarif_livraison > 0
                                         AND id_etat_commande = 6
                                         AND DATE_FORMAT(date_commande, '%Y') = '".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
                                         GROUP BY id_users,date(date_update_commande)
@@ -4581,19 +4586,19 @@ class m_commande extends CI_Model {
                                    ON (
                                       c.id_commande = idCommande2
                                    )
-                                  WHERE DATE_FORMAT(c.date_commande, '%Y') = '".$date."' 
+                                  WHERE DATE_FORMAT(c.date_commande, '%Y') = '".$date."'
                                   AND DATE_FORMAT(c.date_update_commande, '%Y') = '".$date."'
                                   AND id_etat_commande = 6
                                   GROUP BY c.id_users,date(date_update_commande)
                                   ORDER BY c.id_users");
-        $tarif_appoint = array();                          
+        $tarif_appoint = array();
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             if(!isset($TabHoraireTarifLiv[$result->id_users]))
                   $TabHoraireTarifLiv[$result->id_users] = array();
-               
+
                array_push($TabHoraireTarifLiv[$result->id_users],$result->date_update_commande);
-               
+
             if(isset($tarif_appoint[$result->id_users])){
               $tarif_appoint[$result->id_users] += $result->tarif_liv;
             } else {
@@ -4601,17 +4606,17 @@ class m_commande extends CI_Model {
             }
           }
         }
-		
-                  
+
+
 								  $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, id_users, date_update_commande
                                      FROM ".$this->table." c
-									 LEFT JOIN 
-									  ( 
+									 LEFT JOIN
+									  (
 										SELECT tarif_livraison as TarifLivraison, id_commande as idCommande
-										FROM commande cc 
+										FROM commande cc
 										WHERE DATE_FORMAT(date_update_commande, '%m-%Y')='".$date."'
 										AND DATE_FORMAT(date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."'
-										AND tarif_livraison > 0 
+										AND tarif_livraison > 0
 										AND id_etat_commande = 6
 										AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
 										GROUP BY id_users,date(date_update_commande)
@@ -4638,22 +4643,22 @@ class m_commande extends CI_Model {
                                      AND DATE_FORMAT(date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."'
                                      GROUP BY id_users,date(date_update_commande)
 									 ORDER BY c.id_users");
-									 
+
         if ($query && $query->num_rows() > 0){
           foreach($query->result() as $result){
             $add = true;
-				
+
               if(isset($TabHoraireTarifLiv[$result->id_users])){
                 foreach($TabHoraireTarifLiv[$result->id_users] as $dateHoraire){
                   $date1 = explode(" ",$dateHoraire);
                   $date2 = explode(" ",$result->date_update_commande);
-                  
+
                   if($date1[0] == $date2[0]){
                     if(($date1[1] >= '09:00:00' && $date1[1] < '16:00:00') && ($date2[1] >= '09:00:00' && $date2[1] < '16:00:00')) {
                       $add = false;
                       break;
-                    } 
-                    
+                    }
+
                     if(($date1[1] < '09:00:00' && $date1[1] >= '16:00:00') && ($date2[1] < '09:00:00' && $date2[1] >= '16:00:00')) {
                       $add = false;
                       break;
@@ -4661,7 +4666,7 @@ class m_commande extends CI_Model {
                   }
                 }
               }
-				
+
               if($add)
                 if(isset($tarif_appoint[$result->id_users]))
                   $tarif_appoint[$result->id_users] += $result->tarif_liv;
@@ -4803,7 +4808,7 @@ class m_commande extends CI_Model {
 
         /*if ($query && $query->num_rows() > 0){
             $data = $query->result();
-                
+
             if(count($tarif_appoint) > 0){
               foreach($data as $key => $d){
                 if(isset($tarif_appoint[$d->id_users])){
@@ -4816,12 +4821,12 @@ class m_commande extends CI_Model {
 			$query2 = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as total,0 as total_stock,0 as total_fabrique, 0 as reduction, c.id_users, '01-".$date."' as date_commande,cp,nom_magasin,id_grille_tarifaire,nom_societe,intitule_bl, COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv
 										FROM ".$this->table." c
 										INNER JOIN users u ON c.id_users = u.id_users
-										LEFT JOIN 
-                                      ( 
+										LEFT JOIN
+                                      (
                                         SELECT tarif_livraison as TarifLivraison, id_commande as idCommande
-                                        FROM commande cc 
-                                        WHERE DATE_FORMAT(date_update_commande, '%m-%Y') = '".$date."' 
-                                        AND tarif_livraison > 0 
+                                        FROM commande cc
+                                        WHERE DATE_FORMAT(date_update_commande, '%m-%Y') = '".$date."'
+                                        AND tarif_livraison > 0
                                         AND id_etat_commande = 6
                                         AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
                                         GROUP BY id_users,date(date_update_commande)
@@ -4841,16 +4846,16 @@ class m_commande extends CI_Model {
 									   ON (
 										  c.id_commande = idCommande2
 									   )
-										WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."' 
-										AND DATE_FORMAT(c.date_update_commande, '%m-%Y') = '".$date."' 
+										WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."'
+										AND DATE_FORMAT(c.date_update_commande, '%m-%Y') = '".$date."'
 										AND id_etat_commande = 6
-										AND c.id_users NOT IN(SELECT id_users as iduser2 
-															  FROM commande c2 
+										AND c.id_users NOT IN(SELECT id_users as iduser2
+															  FROM commande c2
 															  WHERE DATE_FORMAT(c2.date_commande, '%m-%Y') = '".$date."')
-									
+
 									    GROUP BY id_users,DATE_FORMAT(c.date_commande, '%Y-%m')
 										ORDER BY c.id_users");
-			
+
 			foreach($query2->result() as $data2){
          if($data2->total > 0)
           array_push($data,$data2);

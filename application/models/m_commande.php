@@ -1093,7 +1093,7 @@ class m_commande extends CI_Model {
         // Excluded lenses
         $query = $this->db->query("SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users." 
         AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
-        AND id_verre IS NOT null AND date_commande > '".'2016'."-01-01 00:00:00'");
+        AND id_verre IS NOT null AND date_commande > '".$year."-01-01 00:00:00'");
 
         if ($query && $query->num_rows() > 0) {
             return $query->result();

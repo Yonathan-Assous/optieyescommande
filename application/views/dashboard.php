@@ -450,7 +450,8 @@ if (is_object($pair_order)) {
                                                                              id="type_produit">
                                                                             <div class="panel panel-default"
                                                                                  id="lensFocalGroup_panel">
-                                                                                <div class="panel-heading"><h5>Type de
+                                                                                <div
+                                                                                        class="panel-heading"><h5>Type de
                                                                                         produit</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px"><select
@@ -462,7 +463,8 @@ if (is_object($pair_order)) {
                                                                                         <?php
                                                                                         if (is_object($pair_order)) {
                                                                                             if ($pair_order->id_generation_verre
-                                                                                                == 31) {
+                                                                                                == 31 || $pair_order->id_generation_verre
+                                                                                                         == 36) {
                                                                                                 echo '<option value="1">Unifocal</option>
 																				  <option value="6">EyeFatigue</option>';
                                                                                             } elseif ($pair_order->id_generation_verre
@@ -5376,7 +5378,7 @@ if (is_object($pair_order)) {
                                             if ($(this).attr('id') === 'finish_pair') {
                                                 if ($(this).is(':checked')) {
                                                     $('.finish').find('.btn').text('Valider ma ' +
-                                                        'première commandeffff');
+                                                        'première commande');
                                                 } else {
                                                     $('.finish').find('.btn').text('Valider la commande');
                                                 }

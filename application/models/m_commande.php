@@ -1164,7 +1164,7 @@ class m_commande extends CI_Model {
     }
 
     public function getTotalECCommandeByYear($id_users){
-        $date = date('Y-m-d H:i:s',strtotime("- 18 months"));
+        $date = date('Y-m-d H:i:s',strtotime("- 12 months"));
 //        $year = date('Y', time());
 //        $sql = "SELECT COALESCE(SUM(totalCommande),0) + COALESCE(SUM(totalExpress),0) AS total FROM commande c
 //        LEFT JOIN (SELECT SUM(total_commande) AS totalCommande, id_commande AS idcom FROM commande ct WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express = 0 AND date_commande > '".$year."-01-01 00:00:00') AS total_com ON c.id_commande = idcom

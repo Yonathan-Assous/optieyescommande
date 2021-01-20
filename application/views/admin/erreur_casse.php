@@ -40,7 +40,7 @@ setlocale(LC_TIME, 'fr_FR.utf8','fra');
                     <div class="card-box widget-user">
                         <div>
                             <h2 class="text-warning"><span data-plugin="counterup"><?php echo $ec['rest'] ?></span> €</h2>
-                            <h5>Utilisable au <?php echo strftime('%e %B %Y à %Hh%M', time()) ?></h5>
+                            <h5>Utilisable au <?php echo strftime('%e %B %Y à %Hh%M', time()); ?></h5>
                         </div>
                     </div>
                 </div>

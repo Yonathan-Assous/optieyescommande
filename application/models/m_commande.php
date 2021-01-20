@@ -1089,11 +1089,14 @@ class m_commande extends CI_Model {
     public function getTotalCommandeByYear($id_users){
 
         $year = date('Y', time());
-
-        // Excluded lenses
-        $query = $this->db->query("SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users." 
+//        $sql = "SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users."
+//        AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+//        AND id_verre IS NOT null AND date_commande > '".$year."-01-01 00:00:00'";
+        $sql = "SELECT SUM(total_commande+tarif_livraison) AS total FROM commande WHERE id_users = ".$id_users." 
         AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
-        AND id_verre IS NOT null AND date_commande > '".$year."-01-01 00:00:00'");
+        AND id_verre IS NOT null";
+        // Excluded lenses
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
             return $query->result();
@@ -1161,12 +1164,17 @@ class m_commande extends CI_Model {
     }
 
     public function getTotalECCommandeByYear($id_users){
-
-        $year = date('Y', time());
-        $query = $this->db->query("SELECT COALESCE(SUM(totalCommande),0) + COALESCE(SUM(totalExpress),0) AS total FROM commande c
-        LEFT JOIN (SELECT SUM(total_commande) AS totalCommande, id_commande AS idcom FROM commande ct WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express = 0 AND date_commande > '".$year."-01-01 00:00:00') AS total_com ON c.id_commande = idcom
-        LEFT JOIN (SELECT SUM(total_commande-tarif_express) AS totalExpress, id_commande AS idexp FROM commande ce WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express > 0 AND date_commande > '".$year."-01-01 00:00:00') AS total_exp ON c.id_commande = idexp
-        WHERE id_users = ".$id_users." AND type_commande > 1 AND date_commande > '".$year."-01-01 00:00:00'");
+        $date = date('Y-m-d H:i:s',strtotime("- 24 month"));
+//        $year = date('Y', time());
+//        $sql = "SELECT COALESCE(SUM(totalCommande),0) + COALESCE(SUM(totalExpress),0) AS total FROM commande c
+//        LEFT JOIN (SELECT SUM(total_commande) AS totalCommande, id_commande AS idcom FROM commande ct WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express = 0 AND date_commande > '".$year."-01-01 00:00:00') AS total_com ON c.id_commande = idcom
+//        LEFT JOIN (SELECT SUM(total_commande-tarif_express) AS totalExpress, id_commande AS idexp FROM commande ce WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express > 0 AND date_commande > '".$year."-01-01 00:00:00') AS total_exp ON c.id_commande = idexp
+//        WHERE id_users = ".$id_users." AND type_commande > 1 AND date_commande > '".$year."-01-01 00:00:00'";
+        $sql = "SELECT COALESCE(SUM(totalCommande),0) + COALESCE(SUM(totalExpress),0) AS total FROM commande c
+                LEFT JOIN (SELECT SUM(total_commande) AS totalCommande, id_commande AS idcom FROM commande ct WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express = 0 AND date_commande > '".$date."') AS total_com ON c.id_commande = idcom
+                LEFT JOIN (SELECT SUM(total_commande-tarif_express) AS totalExpress, id_commande AS idexp FROM commande ce WHERE id_users = ".$id_users." AND type_commande > 1 AND tarif_express > 0 AND date_commande > '".$date."') AS total_exp ON c.id_commande = idexp
+                WHERE id_users = ".$id_users." AND type_commande > 1 AND date_commande > '".$date."'";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();

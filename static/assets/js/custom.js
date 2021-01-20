@@ -119,79 +119,79 @@ $('#cotec').on('change', function() {
 	$('#to_etape2').removeClass('disabled');
 });
 
-$( "#to_etape2" ).click(function() {
-  var g = 0;
-	var gauche = $('#gauche').is(':checked');
-	var diametreG = $('#diametreG').val();
-	var dCheck = $('#droit').is(':checked');
-	var diametreD = $('#diametreD').val();
-	
-	var nameD = $("#type_de_verreD option:selected").html();
-	var nameG = $("#type_de_verreG option:selected").html();
-	
-	var traitementD = $("#traitementD option:selected").text();
-	var traitementG = $("#traitementG option:selected").text();
-
-	if(gauche && diametreG == "")
-	{
-		g = 1;
-		
-
-	}
-	if($('#calibre_selected').val() == "" && (diametreD == "precalibrage" || diametreG == "precalibrage"))
-	{
-		g = 1;
-		
-	}
-	
-	if(gauche && diametreG == "precalibrage" && ($("#cotea").val() == '' || $("#coteb").val() == '' || $("#cotec").val() == '' || $("#ecart_puppillaire_gauche").val() == ''  || $("#hauteur_gauche").val() == '' ))
-	{
-		g = 1;
-		
-	}
-	
-	if(dCheck && diametreD == "precalibrage" && ($("#cotea").val() == '' || $("#coteb").val() == '' || $("#cotec").val() == '' || $("#ecart_puppillaire_droit").val() == ''  || $("#hauteur").val() == '' ))
-	{
-		g = 1;
-		
-	}
-	
-	if(dCheck && diametreD == "")
-	{
-		g = 1;
-		
-
-	}
-	
-	if(gauche && traitementG == "" && nameG.indexOf("Panier") == 0 && nameG.indexOf("Stock") == 0)
-	{
-		g = 1;
-		
-
-	}
-	
-	if(dCheck && traitementD == "" && nameD.indexOf("Panier") == 0 && nameD.indexOf("Stock") == 0)
-	{
-		g = 1;
-		
-
-	}
-
-  if(g == 0)
- {
-  $('#etape1').removeClass('active');
-  $('#titre_etape1').removeClass('active');
-  $('#etape1').removeClass('in');
-  $('#to_etape1').removeClass('disabled');
-  
-  $('#etape2').addClass('active');
-  $('#titre_etape2').addClass('active');
-  $('#etape2').addClass('in');
-  
- $('.pager .previous').removeClass('disabled');
- }
-  
-});
+// $( "#to_etape2" ).click(function() {
+//   var g = 0;
+// 	var gauche = $('#gauche').is(':checked');
+// 	var diametreG = $('#diametreG').val();
+// 	var dCheck = $('#droit').is(':checked');
+// 	var diametreD = $('#diametreD').val();
+//
+// 	var nameD = $("#type_de_verreD option:selected").html();
+// 	var nameG = $("#type_de_verreG option:selected").html();
+//
+// 	var traitementD = $("#traitementD option:selected").text();
+// 	var traitementG = $("#traitementG option:selected").text();
+//
+// 	if(gauche && diametreG == "")
+// 	{
+// 		g = 1;
+//
+//
+// 	}
+// 	if($('#calibre_selected').val() == "" && (diametreD == "precalibrage" || diametreG == "precalibrage"))
+// 	{
+// 		g = 1;
+//
+// 	}
+//
+// 	if(gauche && diametreG == "precalibrage" && ($("#cotea").val() == '' || $("#coteb").val() == '' || $("#cotec").val() == '' || $("#ecart_puppillaire_gauche").val() == ''  || $("#hauteur_gauche").val() == '' ))
+// 	{
+// 		g = 1;
+//
+// 	}
+//
+// 	if(dCheck && diametreD == "precalibrage" && ($("#cotea").val() == '' || $("#coteb").val() == '' || $("#cotec").val() == '' || $("#ecart_puppillaire_droit").val() == ''  || $("#hauteur").val() == '' ))
+// 	{
+// 		g = 1;
+//
+// 	}
+//
+// 	if(dCheck && diametreD == "")
+// 	{
+// 		g = 1;
+//
+//
+// 	}
+//
+// 	if(gauche && traitementG == "" && nameG.indexOf("Panier") == 0 && nameG.indexOf("Stock") == 0)
+// 	{
+// 		g = 1;
+//
+//
+// 	}
+//
+// 	if(dCheck && traitementD == "" && nameD.indexOf("Panier") == 0 && nameD.indexOf("Stock") == 0)
+// 	{
+// 		g = 1;
+//
+//
+// 	}
+//
+//   if(g == 0)
+//  {
+//   $('#etape1').removeClass('active');
+//   $('#titre_etape1').removeClass('active');
+//   $('#etape1').removeClass('in');
+//   $('#to_etape1').removeClass('disabled');
+//
+//   $('#etape2').addClass('active');
+//   $('#titre_etape2').addClass('active');
+//   $('#etape2').addClass('in');
+//
+//  $('.pager .previous').removeClass('disabled');
+//  }
+//
+// });
 
 $( "#to_etape3" ).click(function() {
   $('#etape1').removeClass('active');

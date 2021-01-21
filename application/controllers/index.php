@@ -1973,7 +1973,6 @@ class index extends MY_Controller {
             $data['express_pair'] = isset($add['express_pair']) ? $add['express_pair'] : 0;
             $data['pair'] = (bool) isset($add['pair']) ? $add['pair'] : false;
 
-
             if (!isset($data['nb_multi_commande']) || $data['nb_multi_commande'] == "") {
                 $data['nb_multi_commande'] = 1;
             }
@@ -2050,7 +2049,6 @@ class index extends MY_Controller {
                         $pair_order_data['express'] = true;
                     }
 
-
                     if ($pair_order_id = $this->m_commande->addOrder($pair_order_data)) {
 						//echo " - here 1 !";
                         if(!isset($pair_order_id['id'])) {
@@ -2086,7 +2084,6 @@ class index extends MY_Controller {
                     ++$errors;
                 }
             }
-
             if($errors == 0) {
 
 

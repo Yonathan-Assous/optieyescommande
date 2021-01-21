@@ -2997,15 +2997,11 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
-
         if(is_array($data)){
 
-		//var_dump($data);
 
         $pair = $data['pair'];
-
         unset($data['discount']);
-
         if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
         {
 			$ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3068,7 +3064,7 @@ class m_commande extends CI_Model {
 			// PLZ RTFM
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
-//            var_dump($data);die;
+//            var_dump($data);
             $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                    .implode(",", $data).")";
             if($this->db->query($sql)){
@@ -3081,7 +3077,6 @@ class m_commande extends CI_Model {
 			  }
 
 			  $this->setNbDayOrder();
-
 			  if(true === $pair) {
 				  return array('id' => $commande_id, 'pair' => true);
 			  }
@@ -3096,7 +3091,6 @@ class m_commande extends CI_Model {
 
         else
         {
-
 			$ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 			$data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3216,7 +3210,6 @@ class m_commande extends CI_Model {
 			$data = array_intersect_key($data, $this->fields);
 
 			unset($data['date_annule']);
-
 			foreach($data as $num => $key){
 			  $update_fields[] = $num."='".$data[$num]."'";
 			  $data_key[] = $num;
@@ -3264,15 +3257,36 @@ class m_commande extends CI_Model {
 				}
 
 				$data['id_verre'] = "'".$data['id_verre']."'";
+				if (isset($data['premiere_commande'])) {
+                    $premiereCommande = $data['premiere_commande'];
+                    $data['premiere_commande'] = 0;
+                }
 
 				//echo "Verre != 4 <br>";
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+                $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
+                       .implode(",", $data).")";
 
-
-				if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+				if($this->db->query($sql));
 				{
 
-				  $commande_id = $this->db->insert_id();
+                    $commande_id = $this->db->insert_id();
+				  if (isset($premiereCommande)) {
+                      $sqlPaireOne = "SELECT * FROM commande 
+                                  WHERE `id_commande` = '" . $premiereCommande . "'";
+                      $query = $this->db->query($sqlPaireOne);
+                      $paireOne = $query->result();
+                      if ($paireOne[0]->prix_verre >= $data['prix_verre'])  {
+                          $sql2 = "UPDATE `commande` SET `premiere_commande` = '" . $commande_id
+                                  . "' WHERE `id_commande` = '" . $premiereCommande . "'";
+                      }
+                      else {
+                          $sql2 = "UPDATE `commande` SET `premiere_commande` = '" . $premiereCommande
+                                  . "' WHERE `id_commande` = '" . $commande_id . "'";
+                      }
+
+                      $this->db->query($sql2);
+                  }
 
 				  if(!empty($commentaire)){
 					$data = array('id_commande' => $commande_id, 'commentaire' => $commentaire);

@@ -3269,16 +3269,22 @@ class m_commande extends CI_Model {
 
 				if($this->db->query($sql));
 				{
+
                     $commande_id = $this->db->insert_id();
 				  if (isset($premiereCommande)) {
                       $sqlPaireOne = "SELECT * FROM commande 
                                   WHERE `id_commande` = '" . $premiereCommande . "'";
                       $query = $this->db->query($sqlPaireOne);
                       $paireOne = $query->result();
-                                        var_dump($paireOne[0]->prix_verre);
-                                        var_dump($data['prix_verre']);die;
-                      $sql2 = "UPDATE `commande` SET `premiere_commande` = '" . $commande_id
-                              . "' WHERE `id_commande` = '" . $premiereCommande . "'";
+                      if ($paireOne[0]->prix_verre >= $data['prix_verre'])  {
+                          $sql2 = "UPDATE `commande` SET `premiere_commande` = '" . $commande_id
+                                  . "' WHERE `id_commande` = '" . $premiereCommande . "'";
+                      }
+                      else {
+                          $sql2 = "UPDATE `commande` SET `premiere_commande` = '" . $premiereCommande
+                                  . "' WHERE `id_commande` = '" . $commande_id . "'";
+                      }
+
                       $this->db->query($sql2);
                   }
 

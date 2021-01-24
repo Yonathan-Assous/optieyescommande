@@ -4217,7 +4217,6 @@ $('#traitementG').on('change', function() {
 
 $('#galbeG').on('change', function() {
 
-calculPriceG();
 var stockD = $('input[name="dispoD"]:checked').val();
 var galbeD = $('#galbeD').val();
 var galbeG = $('#galbeG').val();
@@ -4260,6 +4259,8 @@ var galbeG = $('#galbeG').val();
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
+	calculPrice();
+
 });
 
 $('#afficherV').on('click', function() {

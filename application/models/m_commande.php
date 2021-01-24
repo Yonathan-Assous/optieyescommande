@@ -2999,12 +2999,12 @@ class m_commande extends CI_Model {
     public function addOrder($data){
         if(is_array($data)){
 
-
         $pair = $data['pair'];
         unset($data['discount']);
         if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
         {
-			$ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
+
+            $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 			$data['ancienne_commande'] = (int) $ancienne_commande;
 
 			$commentaire = "";
@@ -3065,6 +3065,7 @@ class m_commande extends CI_Model {
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 //            var_dump($data);
+
             $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                    .implode(",", $data).")";
             if($this->db->query($sql)){
@@ -3091,7 +3092,8 @@ class m_commande extends CI_Model {
 
         else
         {
-			$ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
+
+            $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 			$data['ancienne_commande'] = (int) $ancienne_commande;
 
 			$commentaire = "";
@@ -3136,7 +3138,7 @@ class m_commande extends CI_Model {
 
 		   $type_commande_verre = $data['type_commande_verre'];
 
-	   	   if(isset($data['prixDiscountD']))
+            if(isset($data['prixDiscountD']))
 	   	   {
 	   	   		$prixDH=$data['prixDiscountD'];
 		   		$prixGH=$data['prixDiscountG'];
@@ -3208,7 +3210,6 @@ class m_commande extends CI_Model {
 			$expressD = 0;
 
 			$data = array_intersect_key($data, $this->fields);
-
 			unset($data['date_annule']);
 			foreach($data as $num => $key){
 			  $update_fields[] = $num."='".$data[$num]."'";
@@ -3217,7 +3218,8 @@ class m_commande extends CI_Model {
 
 			if($type_commande_verre!=4)
 			{
-				$data['prix_verre'] = str_replace("�","",$data['prix_verre']);
+
+                $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
 				if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
 				{
@@ -3228,14 +3230,14 @@ class m_commande extends CI_Model {
 
 				if($quantiteD==$quantiteG && $type_commande_verre == 1 && $type_de_verreD==$type_de_verreG)
 				{
-					if($prixUnitaireD != $prixUnitaireG)
-					{
-						$data['prix_verre'] = $prixUnitaireD + $prixUnitaireG;
-					}
-					else
-					{
+//					if($prixUnitaireD != $prixUnitaireG)
+//					{
+//						$data['prix_verre'] = $prixUnitaireD + $prixUnitaireG;
+//					}
+//					else
+//					{
 						$data['prix_verre'] = $prixUnitaireD;
-					}
+//					}
 					$data['total_commande']=$prixUnitaireD+$prixUnitaireG;
 				}
 
@@ -3261,7 +3263,6 @@ class m_commande extends CI_Model {
                     $premiereCommande = $data['premiere_commande'];
                     $data['premiere_commande'] = 0;
                 }
-
 				//echo "Verre != 4 <br>";
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("

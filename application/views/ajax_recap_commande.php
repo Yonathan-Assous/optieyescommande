@@ -495,27 +495,32 @@ $panierA = get_cookie("panierA");
                 		$correction_gauche .= '<b>Diamètre :</b> ' . $info_commande['verre']['correction_gauche']['diametre'];
                 		
                 	$correction_gauche .= $info_g;
-                	
-                	echo '<td><h4>Oeil gauche : '.$recap_commande['trad_fr'].'</h4>'.$correction_gauche.'</td>';
+                	//gauchehhhhh
+                	echo '<td><h4>Oeil gauche : '.$recap_commande['trad_fr'].'</h4>'
+                         .$correction_gauche.'</td>';
                 	echo '<td class="center">1</td>';
                 	
                 	echo '<td class="center">';
+//                	    echo '<pre>';
+//                	    print_r($recap_commande);
+//                	    echo '</pre>';
+                    $prixVerreG = $recap_commande['total_commande'] - $recap_commande['prix_verre'];
                     	if(isset($discount) && $discount['on'] == $k) {
 							if($discount['amount'] > 0) {
-								$recap_commande['prix_discount'] = ($recap_commande['prix_verre']) - ( ( ($recap_commande['prix_verre']) / 100 ) * $discount['amount'] ).' €';
-								echo '<del>'.(($recap_commande['prix_verre'])).' €</del> ';
+								$recap_commande['prix_discount'] = ($prixVerreG) - ( ( ($prixVerreG) / 100 ) * $discount['amount'] ).' €';
+								echo '<del>'.((number_format($prixVerreG, 2))).' €</del> ';
 								echo '-'.$discount['amount'].'% ';
 								echo ($recap_commande['prix_discount']);
 								$total_commande += round(floatval($recap_commande['prix_discount']), 2);
 							}
 							else {
-								echo (($recap_commande['prix_verre'])).' €';
-								$total_commande += round(floatval($recap_commande['prix_verre']), 2);
+								echo number_format($prixVerreG, 2).' €';
+								$total_commande += round(floatval($prixVerreG), 2);
 							}
 						}
 						else {
-								echo (($recap_commande['prix_verre'])).' €';
-								$total_commande += round(floatval($recap_commande['prix_verre']), 2);
+								echo number_format($prixVerreG, 2).' €';
+								$total_commande += round(floatval($prixVerreG), 2);
 							}
                 }
                 else

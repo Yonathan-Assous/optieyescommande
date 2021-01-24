@@ -3720,8 +3720,8 @@ $('#galbeD').on('change', function() {
 	}
 	*/
 	console.log("galbeD copyVersDroit");
-	calculPrice();
 	copyVersDroit();
+	// calculPrice();
 });
 
 $('#PrismeSphereD').on('change keyup paste click', function() {
@@ -6765,34 +6765,34 @@ function copyVersDroit()
 					$('#prixTeinteG').val($('#prixTeinteD').val());
 					$('#prixTraitementG').val($('#prixTraitementD').val());
 				    
-				    var prixverre = $('#prixVerreD').val();
-					console.log("prixVerreD:");
-					console.log(prixverre);
-				
-					var prixteinte = $('#prixTeinteD').val();
-					console.log("prixTeinteD:");
-					console.log(prixteinte);
-				
-					var prixtraitement = $('#prixTraitementD').val();
-					console.log("prixTraitementD:");
-					console.log(prixtraitement);
-				
-					if(quantiteD!="")
-					{
-						var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
-					}
-					else
-					{
-						var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)).toFixed(2);
-					}
+				    // var prixverre = $('#prixVerreD').val();
+					// console.log("prixVerreD:");
+					// console.log(prixverre);
+					//
+					// var prixteinte = $('#prixTeinteD').val();
+					// console.log("prixTeinteD:");
+					// console.log(prixteinte);
+					//
+					// var prixtraitement = $('#prixTraitementD').val();
+					// console.log("prixTraitementD:");
+					// console.log(prixtraitement);
+					//
+					// if(quantiteD!="")
+					// {
+					// 	var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
+					// }
+					// else
+					// {
+					// 	var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)).toFixed(2);
+					// }
 					console.log("tot:");
-					console.log(tot);
-				
-					$('#prixG').val(tot+"€");
-					$('#prixGH').val(tot+"€");
+					// console.log(tot);
+					calculPrice();
+					// $('#prixG').val(tot+"€");
+					$('#prixGH').val($('#prixG').val());
 					
-					$('#prixG').val($('#prixD').val());
-					$('#prixGH').val($('#prixDH').val());
+					// $('#prixG').val($('#prixD').val());
+					$('#prixDH').val($('#prixD').val());
 			
 					$('#teinteGH').val($('#teinteDH').val());
 					$('#traitementGH').val($('#traitementDH').val());
@@ -6863,7 +6863,7 @@ function copyVersDroit()
 			$('#to_etape2').removeClass('disabled');
 		}
 	}
-	
+	calculPrice();
 }
 
 function copyVersGauche()

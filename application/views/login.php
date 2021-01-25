@@ -47,24 +47,13 @@
 
                     <p class="error error-login"></p>
 
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="text" name="login[email]" required="" placeholder="Adresse email">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="password" name="login[pass]" required="" placeholder="Mot de passe">
-                            <p class="error recover-error"></p>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group text-center m-t-30">
-                        <div class="col-xs-12">
-                            <button class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="submit" name="login_btn">Connexion</button>
-                        </div>
-                    </div>
+                    <h3 style = 'text-align: justify; font-size: 23px'>Le site est en maintenance
+                        pour le
+                        moment,
+                        vous
+                        pourrez
+                        l'utiliser dans
+                        quelques heures</h3>
 
                     <div class="form-group m-t-30 m-b-0">
                         <div class="col-sm-12">

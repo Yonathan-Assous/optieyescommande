@@ -450,7 +450,8 @@ if (is_object($pair_order)) {
                                                                              id="type_produit">
                                                                             <div class="panel panel-default"
                                                                                  id="lensFocalGroup_panel">
-                                                                                <div class="panel-heading"><h5>Type de
+                                                                                <div
+                                                                                        class="panel-heading"><h5>Type de
                                                                                         produit</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px"><select
@@ -462,7 +463,8 @@ if (is_object($pair_order)) {
                                                                                         <?php
                                                                                         if (is_object($pair_order)) {
                                                                                             if ($pair_order->id_generation_verre
-                                                                                                == 31) {
+                                                                                                == 31 || $pair_order->id_generation_verre
+                                                                                                         == 36) {
                                                                                                 echo '<option value="1">Unifocal</option>
 																				  <option value="6">EyeFatigue</option>';
                                                                                             } elseif ($pair_order->id_generation_verre
@@ -4181,7 +4183,7 @@ if (is_object($pair_order)) {
                                                     </div>
                                                 </div>
                                                 <ul class="pager m-b-0 wizard display_next">
-                                                    <li class="next1" style="float: right;"><a href="#"
+                                                    <li class="next1" style="float: right;"><a
                                                                                                class="btn btn-warning btn-lg waves-effect waves-light disabled"
                                                                                                id="to_etape2">Suivant</a>
                                                     </li>
@@ -5076,6 +5078,71 @@ if (is_object($pair_order)) {
 
                 var teinteD = $("#teinteD option:selected").text();
                 var teinteG = $("#teinteG option:selected").text();
+
+                var PrismeSphereD = $('#PrismeSphereD').val();
+                var PrismeCylindreD = $('#PrismeCylindreD').val();
+
+                var PrismeSphereG = $('#PrismeSphereG').val();
+                var PrismeCylindreG = $('#PrismeCylindreG').val();
+                console.log(PrismeCylindreD);
+                console.log(PrismeSphereD);
+                var isPrisme = true;
+                var textPrisme = "";
+                var prismeId;
+                if (PrismeSphereG && !PrismeCylindreG) {
+                    textPrisme = "Veuillez remplir la base du prisme pour le verre gauche";
+                    isPrisme = false;
+                    prismeId = "#PrismeCylindreG";
+                }
+                else if (PrismeCylindreG && !PrismeSphereG) {
+                    textPrisme = "Veuillez remplir la valeur de la dioptrie du prisme pour le " +
+                        "verre gauche";
+                    isPrisme = false;
+                    prismeId = "#PrismeSphereG";
+                }
+                else if (PrismeSphereD && !PrismeCylindreD) {
+                    textPrisme = "Veuillez remplir la base du prisme pour le verre droit";
+                    isPrisme = false;
+                    prismeId = "#PrismeCylindreD";
+
+                }
+                else if (PrismeCylindreD && !PrismeSphereD) {
+                    textPrisme = "Veuillez remplir la valeur de la dioptrie du prisme pour le verre droit";
+                    isPrisme = false;
+                    prismeId = "#PrismeSphereD";
+                }
+                if (!isPrisme) {
+                    g = 1;
+                    swal({
+                        title: "Erreur",
+                        text: textPrisme,
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                    $('html,body').animate({scrollTop: $("#traitementD").offset().top}, 'slow');
+                    var flashInterval = setInterval(function () {
+                        $(prismeId).toggleClass('border-red');
+                    }, 1000);
+                    $(prismeId).click(function() {
+                        clearInterval(flashInterval);
+                        $(prismeId).removeClass('border-red');
+                    });
+                }
+
+                // if (gauche && diametreG == "") {
+                //     g = 1;
+                //     swal({
+                //         title: "Erreur",
+                //         text: "Veuillez spécifier un diamètre pour le verre gauche",
+                //         type: "warning",
+                //         showCancelButton: false,
+                //         confirmButtonText: "OK",
+                //         closeOnConfirm: true
+                //     });
+                //
+                // }
                 /*
         if(nameD == nameG && traitementD == traitementG && teinteD == teinteG && prixDHF != prixGHF && type == 1)
         {
@@ -5211,6 +5278,17 @@ if (is_object($pair_order)) {
 
                     }
 
+                    $('#etape1').removeClass('active');
+                    $('#titre_etape1').removeClass('active');
+                    $('#etape1').removeClass('in');
+                    $('#to_etape1').removeClass('disabled');
+
+                    $('#etape2').addClass('active');
+                    $('#titre_etape2').addClass('active');
+                    $('#etape2').addClass('in');
+
+                    $('.pager .previous').removeClass('disabled');
+
 
                     tcredit = parseFloat(credit);
                     console.log("type: " + type);
@@ -5300,7 +5378,7 @@ if (is_object($pair_order)) {
                                             if ($(this).attr('id') === 'finish_pair') {
                                                 if ($(this).is(':checked')) {
                                                     $('.finish').find('.btn').text('Valider ma ' +
-                                                        'première commandeffff');
+                                                        'première commande');
                                                 } else {
                                                     $('.finish').find('.btn').text('Valider la commande');
                                                 }

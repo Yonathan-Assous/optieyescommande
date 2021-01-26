@@ -51,7 +51,8 @@ class m_users extends CI_Model {
     }
 
 	public function check($data){
-        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($data['email'].'&&'.$data['pass'])."' AND active = 1 AND deleted = 0");
+        $mail = trim($data['email']);
+        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0");
 
         if ($query->num_rows() > 0)
             return $query->result();

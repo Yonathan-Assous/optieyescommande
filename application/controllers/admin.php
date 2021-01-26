@@ -3657,7 +3657,6 @@ class admin
     public
     function send_new_password()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $user_id =
@@ -3668,10 +3667,11 @@ class admin
             $user =
                 $this->m_users->getUserById($user_id);
 
+            $mail = trim($user[0]->email);
 
             if ($this->m_users->updateUser(array(
                                                'id_users' => $user[0]->id_users,
-                                               'pass' => md5($user[0]->email .
+                                               'pass' => md5($mail .
                                                              '&&' .
                                                              $password)
                                            ))) {

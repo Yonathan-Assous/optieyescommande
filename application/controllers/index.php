@@ -4284,12 +4284,12 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()){
            $data = $this->input->post('login');
 		   if(isset($data['email']) && isset($data['pass'])){
-//		    $data['email'] = trim($data['email']);
+		    $data['email'] = trim($data['email']);
 //		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
-				   if(($data_user = $this->m_users->check($data)) !== false){
+                   if(($data_user = $this->m_users->check($data)) !== false){
 
-					   $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
+                       $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
 					   $data_user['user_info'] = $data_user[0];
 					   unset($data_user[0]);
@@ -4353,15 +4353,15 @@ class index extends MY_Controller {
             $old_password = $this->input->post('old_password');
             $password = $this->input->post('password');
             $password_confirm = $this->input->post('password_confirm');
-
-            if(md5($user[0]->email.'&&'.$old_password) == $user[0]->pass) {
+            $mail = trim($user[0]->email);
+            if(md5($mail.'&&'.$old_password) == $user[0]->pass) {
 
 
                 if($password == $password_confirm) {
 
                     if($password != '') {
 
-                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($user[0]->email.'&&'.$password)))){
+                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($mail.'&&'.$password)))){
                             echo json_encode(array('status' => 'ok'));
                         }
                         else {

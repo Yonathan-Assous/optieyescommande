@@ -4284,8 +4284,8 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()){
            $data = $this->input->post('login');
 		   if(isset($data['email']) && isset($data['pass'])){
-		    $data['email'] = trim($data['email']);
-		    $data['pass'] = trim($data['pass']);
+//		    $data['email'] = trim($data['email']);
+//		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
 				   if(($data_user = $this->m_users->check($data)) !== false){
 

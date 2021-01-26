@@ -2005,18 +2005,22 @@ class index extends MY_Controller {
 
                     $data['total_remise_paire'] = 0;
                     $pair_order_data->total_remise_paire = 0;
-
                     if ($data['discount']['on'] == 'order') {
+                        $data['pourcent_remise'] = $data['discount']['amount'];
+//                        $data['pourcent_remise'] = 10;
+
                         $data['total_remise_paire'] = (($data['prix_verre'] / 100) * $data['discount']['amount']);
-                        $data['prix_verre'] = $data['prix_verre'] - $data['total_remise_paire'];
+                        $data['prix_verre'] = $data['prixDH'] * (100 - $data['pourcent_remise']) /
+                                                                      100;
                         $data['prix_verre'] = round($data['prix_verre'], 2, PHP_ROUND_HALF_UP);
-                        $data['total_commande'] = $data['prix_verre']*$verres;
+                        $data['total_commande'] = round(($data['prixDH'] + $data['prixGH']) *
+                                                        (100 - $data['pourcent_remise']) / 100, 2,
+                        PHP_ROUND_HALF_UP);
 
-                        $data['prixDH'] = $data['prix_verre'];
-		   				$data['prixGH'] = $data['prix_verre'];
+//                        $data['prixDH'] = $data['prix_verre'];
+//		   				$data['prixGH'] = $data['prix_verre'];
 		   		        $data['prixUnitaireD']= $data['prix_verre'];
-		   		        $data['prixUnitaireG']= $data['prix_verre'];
-
+		   		        $data['prixUnitaireG']= $data['total_commande'] - $data['prix_verre'];
 
                      //   echo "Remise on ORDER - Total remise paire: ".$data['total_remise_paire']." - Prix verre: ".$data['prix_verre'];
                      //   echo " - Data total commande: ".$data['total_commande'];
@@ -2029,6 +2033,7 @@ class index extends MY_Controller {
                      //   echo "Remise on PAIR - Total remise paire: ".$pair_order_data->total_remise_paire." - Prix verre: ".$pair_order_data->prix_verre;
                      //   echo " - Pair_order_data total commande: ".$pair_order_data->total_commande;
                     }
+//                    var_dump('test');die;
 
                     $pair_order_data = (array) $pair_order_data;
                     $pair_order_temp_id = $pair_order_data['id_commande'];
@@ -2180,7 +2185,6 @@ class index extends MY_Controller {
             else {
                 echo json_encode(array('status' => 'error'));
             }
-
             $this->session->unset_userdata('order');
         }
     }

@@ -74,15 +74,14 @@ class m_users extends CI_Model {
 
         if ($query->num_rows() > 0)
             return "exists";
-		
-		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
-		
-		if ($query->num_rows() > 0)
-            return "DUPLICATE";
-        else{
+//		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
+//
+//		if ($query->num_rows() > 0)
+//            return "DUPLICATE";
+//        else{
      //   var_dump($data);
 			$this->db->insert($this->table, $data);
-		}
+//		}
     }
 
     public function updateUser($data){

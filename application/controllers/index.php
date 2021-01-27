@@ -4799,23 +4799,28 @@ class index extends MY_Controller {
     public function sendMailresetPass(){
         if($this->input->is_ajax_request()){
             $data = $this->input->post();
-			$data['numero_finess'] = trim($data['numero_finess']);
-            if(!empty($data['numero_finess'])){
-                if(($data = $this->m_users->getUserByNumeroFiness($data['numero_finess'])) !== false){
-                    $data['email'] = $data[0]->email;
+			$data['email'] = trim($data['email']);
+//			var_dump($data['email']);die;
+            if(!empty($data['email'])){
+                if(($data = $this->m_users->getUserByMail($data['email'])) !== false){
+                    //$data['email'] = $data[0]->email;
                     $lien = '<a href="'.$this->config->item('base_url').'index/recovery/'.$data[0]->pass.'">'.$this->config->item('base_url')."index/recovery/".$data[0]->pass.'</a>';
-                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br><br> cet email fait suite à une demande de réinitialisation de mot de passe. Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br><br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
+                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br>
+                        <br> cet email fait suite à une demande de réinitialisation de mot de passe. 
+                        Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br>
+                        <br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
 
                     $subjet_txt = "Réinitialisation de votre mot de passe";
 
                     $this->mail($data,$mess_txt,true,$subjet_txt);
                 }
                 else{
-                    echo "numero_siret_does_not_exist";
+//                    echo "numero_siret_does_not_exist";
+                    echo "cette adresse email n'existe pas";
                 }
             }
             else
-                echo "empty_numero_siret";
+                echo "empty_mail";
         }
         else
             $this->redirect();

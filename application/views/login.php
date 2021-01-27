@@ -197,11 +197,13 @@
                         </div>
 
                         <div class="modal-body">
-                            <p>Afin de réinitialiser votre mot de passe, veuillez indiquer votre numéro Finess.</p>
+                            <p>Afin de réinitialiser votre mot de passe, veuillez indiquer votre
+                                adresse email.</p>
 
                             <div class="form-group">
-                                <label for="numero_finess">Numéro Finess</label>
-                                <input type="text" name="numero_finess" id="numero_finess" pattern="^\d{1,14}$" class="form-control" />
+                                <label for="numero_finess">Adresse Email</label>
+                                <input type="email" name="email" id="email"
+                                       class="form-control" />
                                 <p class="error reset-error"></p>
                             </div>
                         </div>

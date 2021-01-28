@@ -4811,12 +4811,11 @@ class index extends MY_Controller {
                         <br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
 
                     $subjet_txt = "Réinitialisation de votre mot de passe";
-
                     $this->mail($data,$mess_txt,true,$subjet_txt);
                 }
                 else{
 //                    echo "numero_siret_does_not_exist";
-                    echo "cette adresse email n'existe pas";
+                    echo "email_not_good";
                 }
             }
             else

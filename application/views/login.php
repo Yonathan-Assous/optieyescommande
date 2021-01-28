@@ -201,7 +201,7 @@
                                 adresse email.</p>
 
                             <div class="form-group">
-                                <label for="numero_finess">Adresse Email</label>
+                                <label for="email">Adresse Email</label>
                                 <input type="email" name="email" id="email"
                                        class="form-control" />
                                 <p class="error reset-error"></p>
@@ -250,8 +250,11 @@
                             if(data == "numero_siret_does_not_exist"){
                                 $('.reset-error').fadeIn(100).text('Aucun compte trouvé pour ce numéro.');
                             }
-                            else if(data == "empty_numero_siret"){
-                                $('.reset-error').fadeIn(100).text('Veuillez renseigner votre numéro Finess');
+                            else if(data == "email_not_good"){
+                                $('p.reset-error').fadeIn(100).html("Cette adresse e-mail " +
+                                    "n’existe pas " +
+                                    "dans notre base client. Contactez nous à <a " +
+                                    "href=\"mailto:optieyescommande@gmail.com\">optieyescommande@gmail.com </a>si besoin");
                             }
                         }else{
                             $('#password-reset').modal('hide');

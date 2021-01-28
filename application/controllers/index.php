@@ -4815,7 +4815,7 @@ class index extends MY_Controller {
                 }
                 else{
 //                    echo "numero_siret_does_not_exist";
-                    echo "cette adresse email n'existe pas";
+                    echo "email_not_good";
                 }
             }
             else

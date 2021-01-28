@@ -266,7 +266,7 @@
                         window.location.reload();
                     }
                     if(res.status == 'error_log') {
-                        $('p.error-login').text('Le mot de passe que vous avez saisi est incorrecte.');
+                        $('p.error-login').text('Le mot de passe que vous avez saisi est incorrect.');
                     }
                 });
             });

@@ -4803,7 +4803,7 @@ class index extends MY_Controller {
 //			var_dump($data['email']);die;
             if(!empty($data['email'])){
                 if(($data = $this->m_users->getUserByMail($data['email'])) !== false){
-                    //$data['email'] = $data[0]->email;
+                    $data['email'] = $data[0]->email;
                     $lien = '<a href="'.$this->config->item('base_url').'index/recovery/'.$data[0]->pass.'">'.$this->config->item('base_url')."index/recovery/".$data[0]->pass.'</a>';
                     $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br>
                         <br> cet email fait suite à une demande de réinitialisation de mot de passe. 

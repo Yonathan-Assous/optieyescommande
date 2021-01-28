@@ -177,6 +177,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12 text-center" style="margin-top:-20px; margin-bottom: 20px;">
+                <p class="text-muted"><span class="client-status">Pas encore client ?</span> <a href="#register" id="register_link" class="text-warning m-l-5" rel="register"><b>Inscrivez-vous</b></a></p>
+            </div>
+        </div>
+
         <img style="display: block; max-width: 200px; margin: 0 auto;" src="/static/img/seal_color.png" />
 
         <div class="m-t-30 card-box">
@@ -348,11 +354,7 @@
         </script>
 
 
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <p class="text-muted"><span class="client-status">Pas encore client ?</span> <a href="#register" id="register_link" class="text-warning m-l-5" rel="register"><b>Inscrivez-vous</b></a></p>
-            </div>
-        </div>
+
 
     </div>
 

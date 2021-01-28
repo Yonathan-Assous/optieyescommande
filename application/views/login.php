@@ -225,6 +225,34 @@
             </div>
         </div>
 
+        <div id="password_exist" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="password_exist_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Email existant</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_password_exist"></p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-default waves-effect waves-light"
+                                    data-dismiss="modal">Non</button>
+                            <button id="submit_change_mdp" class="btn btn-warning waves-effect
+                            waves-light" data-dismiss="modal">Oui</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
 
         <script>
 
@@ -243,7 +271,10 @@
                 });
             });
 
-            
+            $('#submit_change_mdp').on('click', function(e) {
+                $('#password-reset').modal('show');
+            });
+
             $('#password_reset').on('submit', function(e) {
                 e.preventDefault();
                 $('.reset-error').hide();
@@ -322,6 +353,13 @@
                         var res = $.parseJSON(data);
                         if(res.status == 'ok') {
                             $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
+                        }
+                        else if(res.status == 'exists') {
+                            $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
+                                ' adresse mail le ' + res.date +
+                                '. <br>Voulez vous régénérer un ' +
+                                'nouveau mot de passe ?');
+                            $('#password_exist').modal('show');
                         }
                         else if(res.status == 'error') {
                             if(res.error !== undefined) {

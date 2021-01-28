@@ -4679,7 +4679,9 @@ class index extends MY_Controller {
                     $data['date_inscription'] = date("Y-m-d H:i:s");
 
                     if(($return = $this->m_users->addUser($data))!=""){
-                        echo json_encode(array('status'=> $return));
+                        setlocale(LC_TIME, "fr_FR");
+                        $date = strftime("%A %d %B %Y", strtotime($return->date_inscription));
+                        echo json_encode(array('status'=> 'exists', 'date' => $date));
                     }
                     else{
                         echo json_encode(array('status'=> 'ok'));

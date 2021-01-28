@@ -70,10 +70,12 @@ class m_users extends CI_Model {
   }
 
     public function addUser($data){
-        $query = $this->db->query("SELECT email FROM ".$this->table." WHERE email=".$this->db->escape($data['email']));
+        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email=".$this->db->escape
+                                  ($data['email']));
 
-        if ($query->num_rows() > 0)
-            return "exists";
+        if ($query->num_rows() > 0) {
+            return $query->result()[0];
+        }
 //		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
 //
 //		if ($query->num_rows() > 0)

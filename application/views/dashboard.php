@@ -4254,6 +4254,59 @@ if (is_object($pair_order)) {
                 </form>
             </div>
         </div> <!-- container -->
+        <div id="cylindre_negative" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="cylindre_negative_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Cylindre négatif</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_cylindre_negative">Merci de bien vouloir saisir vos corrections en cylindre positif</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-warning waves-effect waves-light"
+                                    data-dismiss="modal">Ok</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div id="axe_between_0_180" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="axe_between_0_180_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Cylindre négatif</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_axe_between_0_180">Merci de bien vouloir saisir un axe compris entre 0 et 180 degrés</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-warning waves-effect waves-light"
+                                    data-dismiss="modal">Ok</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
     </div> <!-- content -->
 
     <!-- Form wizard -->
@@ -6015,6 +6068,48 @@ if (is_object($pair_order)) {
 
 
             });
+        });
+
+        $('#cylindreD').on('change', function(event)
+        {
+            var str = $('#cylindreD').val()
+            var index = str.indexOf("-");
+            if(index !== -1){
+                $('#cylindre_negative').modal('show');
+                $('#cylindreD').val('+0.00');
+                $('#sphereD').val('+0.00');
+            }
+        });
+
+        $('#cylindreG').on('change', function(event)
+        {
+            var str = $('#cylindreG').val()
+            var index = str.indexOf("-");
+            if(index !== -1){
+                $('#cylindre_negative').modal('show');
+                $('#cylindreG').val('+0.00');
+                $('#sphereG').val('+0.00');
+            }
+        });
+
+        $('#cylindreD').on('change', function(event)
+        {
+            var str = $('#cylindreD').val()
+            var index = str.indexOf("-");
+            if(index !== -1){
+                $('#cylindre_negative').modal('show');
+                $('#cylindreD').val('+0.00');
+                $('#sphereD').val('+0.00');
+            }
+        });
+
+        $('#axeD').on('change', function(event)
+        {
+            var axe = $('#axeD').val()
+            if(axe < 0 || axe > 180){
+                $('#axe_between_0_180').modal('show');
+                $('#axeD').val('');
+            }
         });
     </script>
 

@@ -221,15 +221,21 @@
                     $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 				
-				echo '<td><h4>Oeil droit : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_droit.'</td>';
+				echo '<td><h4>Oeil droit : '.$recap_commande[0]->trad_fr
+                     .$recap_commande[0]->libelle_verre.'</h4>'.$correction_droit.'</td>';
 				echo '<td class="center">1</td>';
 				
 				echo '<td class="center">';
 				
 				if($recap_commande[0]->total_remise_paire > 0) {
-					echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
+
+					echo '<del>'.number_format($recap_commande[0]->prix_verre+$option_prix
+                                        +$recap_commande[0
+                    ]->total_remise_paire, 2, ',', '').' €</del> ';
 				}
-				echo ($recap_commande[0]->prix_verre+$option_prix).' €';
+				echo number_format($recap_commande[0]->prix_verre +
+                                   $option_prix, 2, ',', '')
+                     .' €';;
 				
 				echo '</tr>';
 
@@ -284,15 +290,24 @@
                     $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
 				
-				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';
+				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr
+                     .$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';
 				echo '<td class="center">1</td>';
 				
 				echo '<td class="center">';
 				
-				if($recap_commande[0]->total_remise_paire > 0) {
-					echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
+				if($recap_commande[0]->total_remise_paire >     0) {
+
+                    echo '<del>'.number_format($recap_commande[0]->total_commande -
+                                               $recap_commande[0]->prix_verre -
+                                               $recap_commande[0]->tarif_express
+                                  + $option_prix + $recap_commande[0]->total_remise_paire, 2, ',
+                                  ', '').' €</del> ';
 				}
-				echo ($recap_commande[0]->prix_verre+$option_prix).' €';
+				echo number_format($recap_commande[0]->total_commande -
+                                   $recap_commande[0]->prix_verre - $recap_commande[0]->tarif_express +
+                                   $option_prix, 2, ',', '')
+                     .' €';
 				
 				echo '</tr>';
 

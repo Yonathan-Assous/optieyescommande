@@ -2005,18 +2005,22 @@ class index extends MY_Controller {
 
                     $data['total_remise_paire'] = 0;
                     $pair_order_data->total_remise_paire = 0;
-
                     if ($data['discount']['on'] == 'order') {
+                        $data['pourcent_remise'] = $data['discount']['amount'];
+//                        $data['pourcent_remise'] = 10;
+
                         $data['total_remise_paire'] = (($data['prix_verre'] / 100) * $data['discount']['amount']);
-                        $data['prix_verre'] = $data['prix_verre'] - $data['total_remise_paire'];
+                        $data['prix_verre'] = $data['prixDH'] * (100 - $data['pourcent_remise']) /
+                                                                      100;
                         $data['prix_verre'] = round($data['prix_verre'], 2, PHP_ROUND_HALF_UP);
-                        $data['total_commande'] = $data['prix_verre']*$verres;
+                        $data['total_commande'] = round(($data['prixDH'] + $data['prixGH']) *
+                                                        (100 - $data['pourcent_remise']) / 100, 2,
+                        PHP_ROUND_HALF_UP);
 
-                        $data['prixDH'] = $data['prix_verre'];
-		   				$data['prixGH'] = $data['prix_verre'];
+//                        $data['prixDH'] = $data['prix_verre'];
+//		   				$data['prixGH'] = $data['prix_verre'];
 		   		        $data['prixUnitaireD']= $data['prix_verre'];
-		   		        $data['prixUnitaireG']= $data['prix_verre'];
-
+		   		        $data['prixUnitaireG']= $data['total_commande'] - $data['prix_verre'];
 
                      //   echo "Remise on ORDER - Total remise paire: ".$data['total_remise_paire']." - Prix verre: ".$data['prix_verre'];
                      //   echo " - Data total commande: ".$data['total_commande'];
@@ -2029,6 +2033,7 @@ class index extends MY_Controller {
                      //   echo "Remise on PAIR - Total remise paire: ".$pair_order_data->total_remise_paire." - Prix verre: ".$pair_order_data->prix_verre;
                      //   echo " - Pair_order_data total commande: ".$pair_order_data->total_commande;
                     }
+//                    var_dump('test');die;
 
                     $pair_order_data = (array) $pair_order_data;
                     $pair_order_temp_id = $pair_order_data['id_commande'];
@@ -2180,7 +2185,6 @@ class index extends MY_Controller {
             else {
                 echo json_encode(array('status' => 'error'));
             }
-
             $this->session->unset_userdata('order');
         }
     }
@@ -4281,11 +4285,11 @@ class index extends MY_Controller {
            $data = $this->input->post('login');
 		   if(isset($data['email']) && isset($data['pass'])){
 		    $data['email'] = trim($data['email']);
-		    $data['pass'] = trim($data['pass']);
+//		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
-				   if(($data_user = $this->m_users->check($data)) !== false){
+                   if(($data_user = $this->m_users->check($data)) !== false){
 
-					   $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
+                       $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
 					   $data_user['user_info'] = $data_user[0];
 					   unset($data_user[0]);
@@ -4349,15 +4353,15 @@ class index extends MY_Controller {
             $old_password = $this->input->post('old_password');
             $password = $this->input->post('password');
             $password_confirm = $this->input->post('password_confirm');
-
-            if(md5($user[0]->email.'&&'.$old_password) == $user[0]->pass) {
+            $mail = trim($user[0]->email);
+            if(md5($mail.'&&'.$old_password) == $user[0]->pass) {
 
 
                 if($password == $password_confirm) {
 
                     if($password != '') {
 
-                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($user[0]->email.'&&'.$password)))){
+                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($mail.'&&'.$password)))){
                             echo json_encode(array('status' => 'ok'));
                         }
                         else {
@@ -4675,7 +4679,9 @@ class index extends MY_Controller {
                     $data['date_inscription'] = date("Y-m-d H:i:s");
 
                     if(($return = $this->m_users->addUser($data))!=""){
-                        echo json_encode(array('status'=> $return));
+                        setlocale(LC_TIME, "fr_FR");
+                        $date = strftime("%A %d %B %Y", strtotime($return->date_inscription));
+                        echo json_encode(array('status'=> 'exists', 'date' => $date));
                     }
                     else{
                         echo json_encode(array('status'=> 'ok'));
@@ -4795,23 +4801,27 @@ class index extends MY_Controller {
     public function sendMailresetPass(){
         if($this->input->is_ajax_request()){
             $data = $this->input->post();
-			$data['numero_finess'] = trim($data['numero_finess']);
-            if(!empty($data['numero_finess'])){
-                if(($data = $this->m_users->getUserByNumeroFiness($data['numero_finess'])) !== false){
+			$data['email'] = trim($data['email']);
+//			var_dump($data['email']);die;
+            if(!empty($data['email'])){
+                if(($data = $this->m_users->getUserByMail($data['email'])) !== false){
                     $data['email'] = $data[0]->email;
                     $lien = '<a href="'.$this->config->item('base_url').'index/recovery/'.$data[0]->pass.'">'.$this->config->item('base_url')."index/recovery/".$data[0]->pass.'</a>';
-                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br><br> cet email fait suite à une demande de réinitialisation de mot de passe. Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br><br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
+                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br>
+                        <br> cet email fait suite à une demande de réinitialisation de mot de passe. 
+                        Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br>
+                        <br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
 
                     $subjet_txt = "Réinitialisation de votre mot de passe";
-
                     $this->mail($data,$mess_txt,true,$subjet_txt);
                 }
                 else{
-                    echo "numero_siret_does_not_exist";
+//                    echo "numero_siret_does_not_exist";
+                    echo "email_not_good";
                 }
             }
             else
-                echo "empty_numero_siret";
+                echo "empty_mail";
         }
         else
             $this->redirect();

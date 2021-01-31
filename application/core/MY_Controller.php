@@ -134,7 +134,6 @@ class MY_Controller extends CI_Controller {
       if(isset($data['email_from'])) {
           $this->email->from($data['email_from'], 'Crystal Commande');
       }
-
         switch($this->config->item('opti_env')) {
 
             case 'prod':
@@ -152,10 +151,12 @@ class MY_Controller extends CI_Controller {
             break;
 
             case 'dev':
+                $this->email->to('yonathan.optieyes@gmail.com');
+                //$this->email->cc('testproxicom@gmail.com');
+                break;
             default:
-
-            $this->email->to('optieyescommande@gmail.com');
-            $this->email->cc('testproxicom@gmail.com');
+                $this->email->to('optieyescommande@gmail.com');
+                $this->email->cc('testproxicom@gmail.com');
 
 
         }
@@ -182,7 +183,6 @@ class MY_Controller extends CI_Controller {
           else
           $this->email->attach($piece_jointe);
       }
-
 
             if($this->email->send()) {
                 return true;

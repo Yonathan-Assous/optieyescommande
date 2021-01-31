@@ -51,7 +51,8 @@ class m_users extends CI_Model {
     }
 
 	public function check($data){
-        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($data['email'].'&&'.$data['pass'])."' AND active = 1 AND deleted = 0");
+        $mail = trim($data['email']);
+        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0");
 
         if ($query->num_rows() > 0)
             return $query->result();
@@ -69,19 +70,20 @@ class m_users extends CI_Model {
   }
 
     public function addUser($data){
-        $query = $this->db->query("SELECT email FROM ".$this->table." WHERE email=".$this->db->escape($data['email']));
+        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email=".$this->db->escape
+                                  ($data['email']));
 
-        if ($query->num_rows() > 0)
-            return "exists";
-		
-		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
-		
-		if ($query->num_rows() > 0)
-            return "DUPLICATE";
-        else{
+        if ($query->num_rows() > 0) {
+            return $query->result()[0];
+        }
+//		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
+//
+//		if ($query->num_rows() > 0)
+//            return "DUPLICATE";
+//        else{
      //   var_dump($data);
 			$this->db->insert($this->table, $data);
-		}
+//		}
     }
 
     public function updateUser($data){

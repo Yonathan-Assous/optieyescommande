@@ -177,6 +177,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12 text-center" style="margin-top:-20px; margin-bottom: 20px;">
+                <p class="text-muted"><span class="client-status">Pas encore client ?</span> <a href="#register" id="register_link" class="text-warning m-l-5" rel="register"><b>Inscrivez-vous</b></a></p>
+            </div>
+        </div>
+
         <img style="display: block; max-width: 200px; margin: 0 auto;" src="/static/img/seal_color.png" />
 
         <div class="m-t-30 card-box">
@@ -197,11 +203,13 @@
                         </div>
 
                         <div class="modal-body">
-                            <p>Afin de réinitialiser votre mot de passe, veuillez indiquer votre numéro Finess.</p>
+                            <p>Afin de réinitialiser votre mot de passe, veuillez indiquer votre
+                                adresse email.</p>
 
                             <div class="form-group">
-                                <label for="numero_finess">Numéro Finess</label>
-                                <input type="text" name="numero_finess" id="numero_finess" pattern="^\d{1,14}$" class="form-control" />
+                                <label for="email">Adresse Email</label>
+                                <input type="email" name="email" id="email"
+                                       class="form-control" />
                                 <p class="error reset-error"></p>
                             </div>
                         </div>
@@ -217,6 +225,34 @@
             </div>
         </div>
 
+        <div id="password_exist" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="password_exist_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Email existant</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_password_exist"></p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-default waves-effect waves-light"
+                                    data-dismiss="modal">Non</button>
+                            <button id="submit_change_mdp" class="btn btn-warning waves-effect
+                            waves-light" data-dismiss="modal">Oui</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
 
         <script>
 
@@ -230,12 +266,15 @@
                         window.location.reload();
                     }
                     if(res.status == 'error_log') {
-                        $('p.error-login').text('Le mot de passe que vous avez saisi est incorrecte.');
+                        $('p.error-login').text('Le mot de passe que vous avez saisi est incorrect.');
                     }
                 });
             });
 
-            
+            $('#submit_change_mdp').on('click', function(e) {
+                $('#password-reset').modal('show');
+            });
+
             $('#password_reset').on('submit', function(e) {
                 e.preventDefault();
                 $('.reset-error').hide();
@@ -248,8 +287,11 @@
                             if(data == "numero_siret_does_not_exist"){
                                 $('.reset-error').fadeIn(100).text('Aucun compte trouvé pour ce numéro.');
                             }
-                            else if(data == "empty_numero_siret"){
-                                $('.reset-error').fadeIn(100).text('Veuillez renseigner votre numéro Finess');
+                            else if(data == "email_not_good"){
+                                $('p.reset-error').fadeIn(100).html("Cette adresse e-mail " +
+                                    "n’existe pas " +
+                                    "dans notre base client. Contactez nous à <a " +
+                                    "href=\"mailto:optieyescommande@gmail.com\">optieyescommande@gmail.com </a>si besoin");
                             }
                         }else{
                             $('#password-reset').modal('hide');
@@ -312,6 +354,13 @@
                         if(res.status == 'ok') {
                             $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
                         }
+                        else if(res.status == 'exists') {
+                            $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
+                                ' adresse mail le ' + res.date +
+                                '. <br>Voulez vous régénérer un ' +
+                                'nouveau mot de passe ?');
+                            $('#password_exist').modal('show');
+                        }
                         else if(res.status == 'error') {
                             if(res.error !== undefined) {
                                 $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
@@ -343,11 +392,7 @@
         </script>
 
 
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <p class="text-muted"><span class="client-status">Pas encore client ?</span> <a href="#register" id="register_link" class="text-warning m-l-5" rel="register"><b>Inscrivez-vous</b></a></p>
-            </div>
-        </div>
+
 
     </div>
 

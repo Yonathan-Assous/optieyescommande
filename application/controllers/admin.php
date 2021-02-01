@@ -5796,6 +5796,7 @@ class admin
                          $key
                 => $commande)
                 {
+                    var_dump('sas');die;
                     $detail =
                         "";
 

@@ -3359,12 +3359,16 @@ $('#teinteD').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementD,
 					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3405,12 +3409,16 @@ $('#teinteD').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementD,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3524,12 +3532,16 @@ $('#teinteG').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementG,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3570,12 +3582,16 @@ $('#teinteG').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementG,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3834,13 +3850,17 @@ $('#traitementD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$.ajax({
 				type: "POST",
 				url: "/index/getOptions_price",
 				data: {"code" : traitementD,
-				"name" : nomtraitement,
-				"nom_du_verre" : nomverre
+					"name" : nomtraitement,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -4096,13 +4116,17 @@ $('#traitementG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$.ajax({
 				type: "POST",
 				url: "/index/getOptions_price",
 				data: {"code" : traitementG,
-				"name" : nomtraitement,
-				"nom_du_verre" : nomverre
+					"name" : nomtraitement,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	

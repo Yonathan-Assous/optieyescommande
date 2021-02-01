@@ -45,7 +45,10 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_grille_stock');
         $this->load->model('m_config');
 		$this->load->model('m_passer_commande_verre');
-		
+        $this->load->model('m_traitements');
+        $this->load->model('m_type_verre_solaire');
+        $this->load->model('m_lenses');
+
 		
 		if($this->session->userdata('taux_tva') === false){
 			$taux_tva = $this->m_taux_tva->get_tva();

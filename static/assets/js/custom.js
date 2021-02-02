@@ -8258,6 +8258,10 @@ function calculPrice() {
 	calculPriceG();
 }
 function calculPriceD() {
+	var droit = $('#droit').is(':checked');
+	if (!droit) {
+		$('#prixVerreD').val(0)
+	}
 	var quantiteD = $('#quantiteD').val();
 	var prixverre = $('#prixVerreD').val();
 	console.log("prixVerreD:");
@@ -8293,6 +8297,10 @@ function calculPriceD() {
 }
 
 function calculPriceG() {
+	var gauche = $('#gauche').is(':checked');
+	if (!gauche) {
+		$('#prixVerreG').val(0)
+	}
 	var quantiteG = $('#quantiteG').val();
 	var prixverre = $('#prixVerreG').val();
 	console.log("prixVerreG:");

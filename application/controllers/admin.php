@@ -15130,7 +15130,6 @@ class admin
                          as
                          $key
                 => $user) {
-
                     //$total_commandes = $this->m_commande->getTotalCommandeByYear($user->id_users);
                     //$total_commandes_ec = $this->m_commande->getTotalECCommandeByYear($user->id_users);
 
@@ -15194,11 +15193,19 @@ class admin
                         '>Montures</a>';
 
                     // .number_format(($total_commandes[0]->total*($taux[0]->taux_erreur/100))-$total_commandes_ec[0]->total, 2,'.',' ').' €'
-
+                    if ($user->Samuel > 0) {
+                        $classColor = "samuel";
+                    }
+                    else if ($user->Gregory > 0) {
+                        $classColor = "gregory";
+                    }
+                    else if ($user->Glenn > 0) {
+                        $classColor = "glenn";
+                    }
                     $data['aaData'][$key] =
                         array(
                             $user->nom_magasin,
-                            '<span>' .
+                            '<span class="' . $classColor . '">' .
                             $user->id_users .
                             '</span>',
                             $user->nom_societe,
@@ -15221,6 +15228,7 @@ class admin
                         );
                 }
             }
+
             die(json_encode($data));
         } else {
             $this->redirect();
@@ -18100,6 +18108,7 @@ class admin
 
                         $val_precedent =
                             "";
+                        //var_dump($lignZero);die;
                         foreach ($lignZero
                                  as
                                  $key
@@ -18238,10 +18247,68 @@ class admin
                 }
                 $table .= "</tr>";
             }
+            else {
+                $table .= '<tr' .
+                          $cl .
+                          '>';
+
+                if (!$this->input->post('client_set')) {
+                    $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
+                              $current_user .
+                              '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                              $current_user .
+                              '</td><td>' .
+                              $current_nom_soc .
+                              '</td><td>' .
+                              $current_nom_mag .
+                              '</td>';
+                }
+                $val_precedent =
+                    "";
+                //var_dump($lignZero);die;
+                foreach ($lignZero
+                         as
+                         $key
+                => $l)
+                {
+                    $color =
+                        "";
+                    if ($val_precedent !=
+                        "" &&
+                        $l !=
+                        0) {
+                        if ($l >
+                            $val_precedent) {
+                            $color =
+                                "#e96154";
+                        } else {
+                            $color =
+                                "#64b5f6";
+                        }
+                    }
+                    $table .= '<td ' .
+                              ($color !=
+                               "" ?
+                                  'style="color:' .
+                                  $color .
+                                  '"' :
+                                  '') .
+                              '>' .
+                              $l .
+                              ($l !=
+                               0 ?
+                                  ' HT' :
+                                  '') .
+                              '</td>';
+
+                    $val_precedent =
+                        $l;
+                }
+                $table .= "</tr>";
+            }
         }
 
         $table .= "</tbody>";
-
         echo $table;
     }
 

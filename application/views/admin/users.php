@@ -187,6 +187,12 @@ include_once('menu.php');
                 });
                 return false;
             });
+            setTimeout(function(){ $( ".samuel" ).parentsUntil('tbody').css( "background-color", "#0092ff54" );
+                $( ".glenn" ).parentsUntil('tbody').css( "background-color", "#00ff0b69" );
+                $( ".gregory" ).parentsUntil('tbody').css( "background-color", "#f8ff0069" ); },
+                600);
+
+            console.log('dasdssda');
 
         });
 

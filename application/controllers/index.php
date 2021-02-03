@@ -1954,8 +1954,6 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
-
-
             $add = $this->input->post();
 
             $data['commentaire'] = "";
@@ -2686,7 +2684,6 @@ class index extends MY_Controller {
                         }
 
                     }
-
 					$this->session->set_userdata('order', $data);
 
 					$data['recap_commande'] = $data;
@@ -2732,6 +2729,7 @@ class index extends MY_Controller {
     public function setOrderRecapNew(){
 
 		if($this->input->is_ajax_request()){
+
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
@@ -3180,7 +3178,6 @@ class index extends MY_Controller {
 						$data_commandeD['verre']['correction_droit']['teinte']= $data['teinteD'];
 					}
 				}
-
 				if($data['teintepersoG']!="")
 				{
 					$data_commande['verre']['correction_gauche']['teinte']= $data['teintepersoG'];
@@ -3218,22 +3215,31 @@ class index extends MY_Controller {
 				{
 					$data_commande['verre']['correction_droit']['PrismeSphere'] = $data['PrismeSphereD'];
 					$data_commande['verre']['dioptrie_droit'] = $data['PrismeSphereD'];
-				}
+                    $data_commandeD['verre']['correction_droit']['PrismeSphere'] = $data['PrismeSphereD'];
+                    $data_commandeD['verre']['dioptrie_droit'] = $data['PrismeSphereD'];
+
+                }
 				if(isset($data['PrismeCylindreD']))
 				{
 					$data_commande['verre']['correction_droit']['PrismeCylindre'] = $data['PrismeCylindreD'];
 					$data_commande['verre']['base_droit'] = $data['PrismeCylindreD'];
+					$data_commandeD['verre']['correction_droit']['PrismeCylindre'] = $data['PrismeCylindreD'];
+					$data_commandeD['verre']['base_droit'] = $data['PrismeCylindreD'];
 				}
 
 				if(isset($data['PrismeSphereG']))
 				{
 					$data_commande['verre']['correction_gauche']['PrismeSphere'] = $data['PrismeSphereG'];
 					$data_commande['verre']['dioptrie_gauche'] = $data['PrismeSphereG'];
+					$data_commandeG['verre']['correction_gauche']['PrismeSphere'] = $data['PrismeSphereG'];
+					$data_commandeG['verre']['dioptrie_gauche'] = $data['PrismeSphereG'];
 				}
 				if(isset($data['PrismeCylindreG']))
 				{
 					$data_commande['verre']['correction_gauche']['PrismeCylindre'] = $data['PrismeCylindreG'];
 					$data_commande['verre']['base_gauche'] = $data['PrismeCylindreG'];
+					$data_commandeG['verre']['correction_gauche']['PrismeCylindre'] = $data['PrismeCylindreG'];
+					$data_commandeG['verre']['base_gauche'] = $data['PrismeCylindreG'];
 				}
 
 				if(isset($data['diametreD']))
@@ -3497,7 +3503,7 @@ class index extends MY_Controller {
 					}
 
 				}
-				$this->session->set_userdata('order', $data);
+                $this->session->set_userdata('order', $data);
 
 				$data['recap_commande'] = $data;
 

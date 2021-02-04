@@ -212,20 +212,62 @@
             		<select class="form-control select-search"  id="listeVerres">
 						<option value="">-- Choisir --</option>
 					</select><br>
-					
-					Nouveau prix : <input type="text" value="" id="nouveau_prix" name="nouveau_prix" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro; <a href="#" style="margin-left:20px" id="btn_submit_prix" class="btn btn-warning waves-effect waves-light">OK</a>
-            	</div><br><br>
-            		<h5>Table des Prix modifiés</h5>
-            		<table id="tableCustomPrix" class="table table-striped dt-responsive nowrap">
-                     <thead>
-            			<tr>
-            				<th>Ref.</th>
-							<th>Nom</th>
-							<th>Prix</th>
-							<th></th>
-						</tr>
-					 </thead>
-					</table>
+                </div>
+                <div id="choice_change_price" class="form-group row hide">
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                        <li class="active">
+                            <a href="#modal-prix-verres" data-toggle="tab" aria-expanded="false">
+                                <span>Prix verres</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#modal-prix-traitements" data-toggle="tab" aria-expanded="false">
+                                <span>Prix traitements</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="modal-prix-verres">
+                            <div>
+                                Nouveau prix Verre: <input type="text" value="" id="nouveau_prix"
+                                                           name="nouveau_prix" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                <a href="#" style="margin-left:20px"
+                                   id="
+"
+                                   class="btn btn-warning waves-effect waves-light">OK</a>
+                            </div>
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrix"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Ref.</th>
+                                    <th>Nom</th>
+                                    <th>Prix</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-prix-traitements">
+                            <div id="divlisteTraitements" class="form-group row hide"><br>
+                                <h5>Selectionnez un traitement :</h5>
+                                <select class="form-control select-search"  id="listeTraitements">
+                                    <option value="">-- Choisir --</option>
+                                </select><br>
+                            </div>
+                            <div>
+                                Nouveau prix Traitement : <input type="text" value=""
+                                                                 id="nouveau_prix_traitement"
+                                                                 name="nouveau_prix_traitement" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                <a href="#" style="margin-left:20px"
+                                   id="btn_submit_prix_traitement"
+                                   class="btn btn-warning waves-effect waves-light">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -352,9 +394,39 @@
 
     });
 
-$(document).ready(function(){    
+$(document).ready(function(){
 
-	
+    $.ajax({
+        type: "POST",
+        url: "/admin/getAllTraitements",
+        data: {
+            'user_id' : <?php echo $info_user[0]->id_users ?>,
+            'requete' : $('#recherche_verre').val()
+        },
+        dataType: "json",
+        success: function(data){
+            console.log(data)
+            //alert("HHHH");
+            if(data[0])
+            {
+                $('#listeVerres').empty();
+                $('#listeVerres').append('<option value="">-- Choisir --</option>');
+                $('#divlisteVerres').removeClass('hide');
+
+                //console.log(data);
+
+                $.each(data, function(key, value){
+                    $('#listeVerres').append('<option value="'+ value.code +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
+                });
+
+            }
+            else
+            {
+                $('#divlisteVerres').addClass('hide');
+            }
+        }
+
+    });
 	$.ajax({
             type: "POST",
             url: "/admin/getListeClients",
@@ -667,4 +739,70 @@ $(document).ready(function(){
 
     });
 
+    $('body').on('click', '#btn_submit_prix_traitement', function(event){
+
+        if($('#nouveau_prix_traitement').val() != "" && $('#listeVerres').val() != "")
+        {
+            var name_verre = $("#listeVerres option:selected").text();
+            console.log(name_verre);
+            $.ajax({
+                type: "POST",
+                url: "/admin/setPriceVerre",
+                data: {
+                    'user_id' : <?php echo $info_user[0]->id_users ?>,
+                    'new_price' : $('#nouveau_prix').val(),
+                    'code_verre' : $('#listeVerres').val(),
+                    'name_verre' : name_verre
+                },
+                dataType: "html",
+                success: function(data){
+
+                    if(data=="OK")
+                    {
+                        $('#nouveau_prix').val('');
+                        $('#listeVerres').empty();
+                        $('#listeVerres').append('<option value="">-- Choisir --</option>');
+
+                        $('#divlisteVerres').addClass('hide');
+
+                        $('#tableCustomPrix').DataTable().clear();
+                        $.ajax({
+                            type: "POST",
+                            url: "/admin/getCustomPriceList",
+                            data: {
+                                'user_id' : <?php echo $info_user[0]->id_users ?>
+                            },
+                            dataType: "json",
+                        }).done( function(data) {
+                            $('#tableCustomPrix').DataTable( {
+                                "destroy": true,
+                                "aaData": data,
+                                "columns": [
+                                    { "data": "code" },
+                                    { "data": "libelle" },
+                                    { "data": "prix" },
+                                    { "data": "action" }
+                                ]
+                            })
+
+                        })
+
+                    }
+
+                }
+
+            });
+        }
+
+    });
+
+
+    $("#listeVerres").change(function() {
+        var verre = $('#listeVerres').val();
+        if (verre == "") {
+            $('#choice_change_price').addClass('hide');
+        } else {
+            $('#choice_change_price').removeClass('hide');
+        }
+    });
 </script>

@@ -21228,6 +21228,16 @@ class admin
         echo json_encode($tab);
     }
 
+    function getAllTraitements()
+    {
+        $tab =
+            $this->m_traitement->getAllTraitements();
+
+        //var_dump($tab);
+
+        echo json_encode($tab);
+    }
+
     public
     function getCustomPriceList()
     {

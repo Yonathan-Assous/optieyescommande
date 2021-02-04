@@ -192,9 +192,6 @@ include_once('menu.php');
                 $( ".glenn" ).parentsUntil('tbody').css( "background-color", "#f8ff0069" );
                 $( ".gregory" ).parentsUntil('tbody').css( "background-color", "#00ff0b69" ); },
                 100);
-
-            console.log('dasdssda');
-
         });
 
         TableManageButtons.init();

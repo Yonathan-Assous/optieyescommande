@@ -9,10 +9,23 @@ class m_type_verre_solaire extends CI_Model
         parent::__construct();
     }
 
-    public function getAllTypeVerreSolaire() {
+    public function getTypeVerreSolaires() {
         $sql = "SELECT * FROM `$this->table`";
         $query = $this->db->query($sql);
         return $query->result();
+    }
+
+    public function getAllTypeVerreSolaire() {
+        $sql = "SELECT * FROM $this->table ORDER BY id ASC";
+        $query = $this->db->query($sql);
+        $typeVerreSolaireArray = [];
+        $typeVerreSolaires =  $query->result();
+        //$i = 0;
+        foreach ($typeVerreSolaires as $key => $typeVerreSolaire) {
+            foreach($typeVerreSolaire as $keyTypeVerreSolaire => $value)
+                $typeVerreSolaireArray[$key][$keyTypeVerreSolaire] = $value;
+        }
+        return $typeVerreSolaireArray;
     }
 
     public function getIdByName($name) {

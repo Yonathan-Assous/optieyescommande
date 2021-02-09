@@ -1707,15 +1707,14 @@ class m_commande extends CI_Model {
         /* Get first orders of the day by clients to add on the daily sales */
 
         if($jour > 1) {
-            $get_last_orders = $this->db->query('SELECT c.* FROM commande c WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $mois . '" AND c.date_commande < "' . $date . '" ' . $add . ' GROUP BY id_users');
+            $sql = 'SELECT c.id_users FROM commande c WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $mois . '" AND c.date_commande < "' . $date . '" ' . $add . ' GROUP BY id_users';
+            $get_last_orders = $this->db->query($sql);
         }
-
-        $get_day_orders = $this->db->query('SELECT c.* FROM commande c WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$mois.'" AND c.date_commande > "'.$date.'" AND c.date_commande < "'.$date_end.'" '.$add.' GROUP BY id_users');
+        $get_day_orders = $this->db->query('SELECT c.id_users FROM commande c WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$mois.'" AND c.date_commande > "'.$date.'" AND c.date_commande < "'.$date_end.'" '.$add.' GROUP BY id_users');
 
 
         $day_orders = array();
         $last_orders = array();
-
         if($jour > 1) {
             foreach ($get_last_orders->result() as $order) {
                 if (!in_array($order->id_users, $last_orders)) {

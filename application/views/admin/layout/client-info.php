@@ -232,8 +232,7 @@
                                 Nouveau prix Verre: <input type="text" value="" id="nouveau_prix"
                                                            name="nouveau_prix" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
                                 <a href="#" style="margin-left:20px"
-                                   id="
-"
+                                   id="btn_submit_prix"
                                    class="btn btn-warning waves-effect waves-light">OK</a>
                             </div>
                             <h5>Table des Prix modifiés</h5>
@@ -255,14 +254,26 @@
                                 <select class="form-control select-search"  id="listeTraitements">
                                     <option value="">-- Choisir --</option>
                                 </select><br>
-                            </div>
-                            <div>
-                                Nouveau prix Traitement : <input type="text" value=""
-                                                                 id="nouveau_prix_traitement"
-                                                                 name="nouveau_prix_traitement" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
-                                <a href="#" style="margin-left:20px"
-                                   id="btn_submit_prix_traitement"
-                                   class="btn btn-warning waves-effect waves-light">OK</a>
+                                <div id="div_nouveau_prix_traitement" class="hide">
+                                    Nouveau prix Traitement : <input type="text" value=""
+                                                                     id="nouveau_prix_traitement"
+                                                                     name="nouveau_prix_traitement" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                    <a href="#" style="margin-left:20px"
+                                       id="btn_submit_prix_traitement"
+                                       class="btn btn-warning waves-effect waves-light">OK</a>
+                                </div>
+                                <h5>Table des Prix modifiés</h5>
+                                <table id="tableCustomPrixTraitements"
+                                       class="table table-striped dt-responsive nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Ref.</th>
+                                        <th>Nom</th>
+                                        <th>Prix</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -396,37 +407,6 @@
 
 $(document).ready(function(){
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/getAllTraitements",
-        data: {
-            'user_id' : <?php echo $info_user[0]->id_users ?>,
-            'requete' : $('#recherche_verre').val()
-        },
-        dataType: "json",
-        success: function(data){
-            console.log(data)
-            //alert("HHHH");
-            if(data[0])
-            {
-                $('#listeVerres').empty();
-                $('#listeVerres').append('<option value="">-- Choisir --</option>');
-                $('#divlisteVerres').removeClass('hide');
-
-                //console.log(data);
-
-                $.each(data, function(key, value){
-                    $('#listeVerres').append('<option value="'+ value.code +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
-                });
-
-            }
-            else
-            {
-                $('#divlisteVerres').addClass('hide');
-            }
-        }
-
-    });
 	$.ajax({
             type: "POST",
             url: "/admin/getListeClients",
@@ -512,28 +492,67 @@ $(document).ready(function(){
                     }
                 }
             });
-    
+    var table = $('#tableCustomPrixTraitements').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, 200, -1],
+            [10, 25, 50, 100, 200, "Tout"]
+        ],
+        deferRender: true,
+        order: [1, 'desc'],
+        language: {
+            "lengthMenu": "Afficher _MENU_ traitements par page",
+            "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+            "infoFiltered": "(Filtrat de _MAX_ entrées)",
+            "search": "Recherche",
+            "paginate": {
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            }
+        }
+    });
+
     $.ajax({
 		type: "POST",
-		url: "/admin/getCustomPriceList",
+		url: "/traitement/getCustomPriceList",
 		data: {
 			'user_id' : <?php echo $info_user[0]->id_users ?>
 		},
 		dataType: "json",
 	}).done( function(data) {
-		$('#tableCustomPrix').dataTable( {
+		$('#tableCustomPrixTraitements').dataTable( {
 			"destroy": true,
 			"aaData": data,
 			"columns": [
 				{ "data": "code" },
-				{ "data": "libelle" },
+				{ "data": "verre" },
 				{ "data": "prix" },
+				{ "data": "traitement" },
 				{ "data": "action" }
 			]
 			})
 		})
-	        
 
+        $.ajax({
+            type: "POST",
+            url: "/admin/getCustomPriceList",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#tableCustomPrix').dataTable( {
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "code" },
+                    { "data": "libelle" },
+                    { "data": "prix" },
+                    { "data": "action" }
+                ]
+            })
+        })
 	$('#btn_recherche_verre').on('click', function() {
 	
         $.ajax({
@@ -747,34 +766,35 @@ $(document).ready(function(){
             console.log(name_verre);
             $.ajax({
                 type: "POST",
-                url: "/admin/setPriceVerre",
+                url: "/traitement/setPriceTraitement",
                 data: {
                     'user_id' : <?php echo $info_user[0]->id_users ?>,
-                    'new_price' : $('#nouveau_prix').val(),
+                    'new_price' : $('#nouveau_prix_traitement').val(),
                     'code_verre' : $('#listeVerres').val(),
-                    'name_verre' : name_verre
+                    'name_verre' : name_verre,
+                    'traitement_id': $('#listeTraitements').val()
                 },
                 dataType: "html",
                 success: function(data){
 
                     if(data=="OK")
                     {
-                        $('#nouveau_prix').val('');
+                        $('#nouveau_prix_traitement').val('');
                         $('#listeVerres').empty();
                         $('#listeVerres').append('<option value="">-- Choisir --</option>');
 
                         $('#divlisteVerres').addClass('hide');
 
-                        $('#tableCustomPrix').DataTable().clear();
+                        $('#tableCustomPrixTraitements').DataTable().clear();
                         $.ajax({
                             type: "POST",
-                            url: "/admin/getCustomPriceList",
+                            url: "/traitement/getCustomPriceList",
                             data: {
                                 'user_id' : <?php echo $info_user[0]->id_users ?>
                             },
                             dataType: "json",
                         }).done( function(data) {
-                            $('#tableCustomPrix').DataTable( {
+                            $('#tableCustomPrixTraitements').DataTable( {
                                 "destroy": true,
                                 "aaData": data,
                                 "columns": [
@@ -803,6 +823,47 @@ $(document).ready(function(){
             $('#choice_change_price').addClass('hide');
         } else {
             $('#choice_change_price').removeClass('hide');
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/getAllTraitementsWithPrice",
+            data: {
+                'idLenses' : $('#listeVerres').val()
+            },
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+                if(data[0])
+                {
+                    $('#listeTraitements').empty();
+                    $('#listeTraitements').append('<option value="">-- Choisir --</option>');
+                    $('#divlisteTraitements').removeClass('hide');
+
+                    //console.log(data);
+
+                    $.each(data, function(key, value){
+                        $('#listeTraitements').append('<option value="'+ value.id +'">'+ value.name +
+                            ' (' + value.code +') Prix: ' + value.price + '</option>');
+                    });
+
+                }
+                else
+                {
+                    $('#divlisteTraitements').addClass('hide');
+                }
+            }
+
+        });
+
+    });
+
+    $("#listeTraitements").change(function() {
+        if ($('#listeTraitements').val() != "") {
+            $('#div_nouveau_prix_traitement').removeClass('hide');
+        }
+        else {
+            $('#div_nouveau_prix_traitement').addClass('hide');
         }
     });
 </script>

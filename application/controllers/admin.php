@@ -485,7 +485,7 @@ class admin
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
-        $price = $this->m_traitements->calculPrice($nom_du_verre, $code, $userId);
+        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
 
 
         //        if (strpos($nom_du_verre,
@@ -21237,6 +21237,30 @@ class admin
 
         echo json_encode($tab);
     }
+
+    function getAllTraitementsWithPrice()
+    {
+        $data =
+            $this->input->post();
+        $tab =
+            $this->m_traitement->getAllTraitementsWithPrice($data['idLenses']);
+
+        //var_dump($tab);
+
+        echo json_encode($tab);
+    }
+
+    function getAllTypeVerreSolaire()
+    {
+        $tab =
+            $this->m_type_verre_solaire->getAllTypeVerreSolaire();
+
+        //var_dump($tab);
+
+        echo json_encode($tab);
+    }
+
+
 
     public
     function getCustomPriceList()

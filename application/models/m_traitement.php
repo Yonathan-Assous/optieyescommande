@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class m_traitements extends CI_Model
+class m_traitement extends CI_Model
 {
     var $table = 'traitements';
 
@@ -243,7 +243,7 @@ class m_traitements extends CI_Model
     public function calculPrice($nom_du_verre, $code, $userId) {
         $lens = $this->m_lenses->getLensesByTradFr($nom_du_verre);
         $traitement = $this->getTraitementByCode($code);
-        $typeVerreSolaires = $this->m_type_verre_solaire->getAllTypeVerreSolaire();
+        $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();
         $myTypeVerreSolaire = NULL;
         foreach ($typeVerreSolaires as $typeVerreSolaire) {
             if(strpos($_POST['nom_du_verre'], $typeVerreSolaire->name) !== false){
@@ -263,6 +263,7 @@ class m_traitements extends CI_Model
                 WHERE `id_traitement` = '$traitementId'
                 AND `id_lenses` = '$lensId'
                 AND `id_type_verre_solaire` = '$typeVerreSolaireId'
+                AND `is_active` = 1
                 ORDER BY `id_user` DESC;
                 ";
         }
@@ -271,10 +272,100 @@ class m_traitements extends CI_Model
                 WHERE `id_traitement` = '$traitementId'
                 AND `id_lenses` = '$lensId'
                 AND `id_type_verre_solaire` is NULL
+                AND `is_active` = 1
                 ORDER BY `id_user` DESC";
         }
         $query = $this->db->query($sql);
         $traitement =  $query->result();
         return $traitement[0]->price;
+    }
+
+    public function getAllTraitements() {
+        $sql = "SELECT * FROM $this->table ORDER BY id ASC";
+        $query = $this->db->query($sql);
+        $traitementsArray = [];
+        $traitements =  $query->result();
+        //$i = 0;
+        foreach ($traitements as $key => $traitement) {
+            foreach($traitement as $keyTraitement => $value)
+            $traitementsArray[$key][$keyTraitement] = $value;
+        }
+        return $traitementsArray;
+    }
+
+    public function getAllTraitementsWithPrice($lensCode) {
+        $lens = $this->m_lenses->getLensesByCode($lensCode);
+        if (!$lens) {
+            return false;
+        }
+        $sql = "SELECT traitements.*, traitement_prix.price 
+                FROM `traitements` 
+                INNER JOIN traitement_prix 
+                WHERE traitement_prix.id_traitement = traitements.id 
+                AND traitement_prix.id_lenses = $lens->id
+                AND traitement_prix.is_active = 1";
+
+        $query = $this->db->query($sql);
+        $traitementsArray = [];
+        $traitements =  $query->result();
+        //$i = 0;
+        foreach ($traitements as $key => $traitement) {
+            foreach($traitement as $keyTraitement => $value)
+            $traitementsArray[$key][$keyTraitement] = $value;
+        }
+        return $traitementsArray;
+    }
+
+    public
+    function getCustomPriceList($user_id)
+    {
+        $tab = array();
+
+        if ($user_id != "") {
+            $i = 0;
+            $sql = "SELECT lenses.trad_fr, traitements.name, traitements.code, traitement_prix.price FROM `traitement_prix` 
+                    INNER JOIN lenses ON id_lenses = lenses.id
+                    INNER JOIN traitements ON id_traitement = traitements.id
+                    WHERE traitement_prix.id_user = 46
+                    AND traitement_prix.is_active = 1
+                    ORDER BY created_at, traitement_prix.id DESC";
+
+            $res = $this->db->query($sql);
+//            $res = $this->db->query("SELECT ppc.id,ppc.code,ppc.id_client,ppc.prix,l.trad_fr, v.libelle_verre
+//									   FROM prix_par_client ppc
+//									   LEFT JOIN lenses l ON (ppc.code = l.code)
+//									   LEFT JOIN verres_stock v ON ppc.code = v.id_verre
+//									   WHERE id_client = '" . $user_id . "' AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
+//									   ORDER BY l.trad_fr,v.id_verre ASC");
+
+
+            $traitements = $res->result();
+
+            foreach ($traitements as $traitement) {
+                $tab[$i]['code'] = $traitement->code;
+                $tab[$i]['verre'] = $traitement->trad_fr;
+                $tab[$i]['prix'] = $traitement->price;
+                $tab[$i]['traitement'] = $traitement->name;
+                $tab[$i]['action'] =
+                    '<a class="modifier_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
+                    . $traitement->code . '*' . $traitement->id . '*' . $traitement->price
+                    . '" original-title="Modifier" title="Modifier" >Modifier</a> <a class="supprimer_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
+                    . $traitement->code . '*' . $traitement->id . '" original-title="Supprimer" title="Supprimer" >Supprimer</a>';
+
+                $i++;
+            }
+
+        }
+
+        return $tab;
+
+    }
+
+    public function setPriceTraitement($newPrice, $codeVerre, $nameVerre, $traitementId, $userId = NULL) {
+        var_dump($newPrice);
+        var_dump($codeVerre);
+        var_dump($nameVerre);
+        var_dump($traitementId);
+        var_dump($userId);die;
     }
 }

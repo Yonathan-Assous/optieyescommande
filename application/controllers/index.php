@@ -419,7 +419,7 @@ class index extends MY_Controller {
       $userId = $this->data['user_info']->id_users;
         $code = $_POST['code'];
         $nom_du_verre = $_POST['nom_du_verre'];
-	        $price = $this->m_traitements->calculPrice($nom_du_verre, $code, $userId);
+	        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
             $res['prix'] = $price;
 //            var_dump($myTypeVerreSolaire);die;
 //			if(strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false || strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)

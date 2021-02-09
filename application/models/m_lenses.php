@@ -17,4 +17,15 @@ class m_lenses extends CI_Model
         $lenses =  $query->result();
         return $lenses[0];
     }
+
+    public function getLensesByCode($code) {
+        $sql = "SELECT * FROM `lenses` 
+                WHERE `code` = '$code'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $lenses =  $query->result();
+            return $lenses[0];
+        }
+        return false;
+    }
 }

@@ -262,15 +262,24 @@
                                        id="btn_submit_prix_traitement"
                                        class="btn btn-warning waves-effect waves-light">OK</a>
                                 </div>
+                                <div style="text-align: center">
+                                    Actifs / Tous
+                                </div>
+                                <div class="material-switch pull-right">
+                                    <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
+                                    <label for="checkboxActive" class="label-warning"></label>
+                                </div>
                                 <h5>Table des Prix modifiés</h5>
                                 <table id="tableCustomPrixTraitements"
                                        class="table table-striped dt-responsive nowrap">
                                     <thead>
                                     <tr>
-                                        <th>Ref.</th>
-                                        <th>Nom</th>
-                                        <th>Prix</th>
-                                        <th></th>
+                                        <th>Code Verre / Traitement</th>
+                                        <th>Verre</th>
+                                        <th>Traitement</th>
+                                        <th>Prix (Prix initial)</th>
+                                        <th>Date</th>
+                                        <th>Désactivation</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -293,7 +302,7 @@
 
 <script>
 	$(document).ready(function(){
-	
+
 	<?php 
 	$noPass = get_cookie("noPass");
 	if($noPass=='1')
@@ -513,26 +522,7 @@ $(document).ready(function(){
         }
     });
 
-    $.ajax({
-		type: "POST",
-		url: "/traitement/getCustomPriceList",
-		data: {
-			'user_id' : <?php echo $info_user[0]->id_users ?>
-		},
-		dataType: "json",
-	}).done( function(data) {
-		$('#tableCustomPrixTraitements').dataTable( {
-			"destroy": true,
-			"aaData": data,
-			"columns": [
-				{ "data": "code" },
-				{ "data": "verre" },
-				{ "data": "prix" },
-				{ "data": "traitement" },
-				{ "data": "action" }
-			]
-			})
-		})
+    getTraitementPriceList()
 
         $.ajax({
             type: "POST",
@@ -553,6 +543,7 @@ $(document).ready(function(){
                 ]
             })
         })
+
 	$('#btn_recherche_verre').on('click', function() {
 	
         $.ajax({
@@ -758,6 +749,75 @@ $(document).ready(function(){
 
     });
 
+    function getTraitementPriceList() {
+        $.ajax({
+            type: "POST",
+            url: "/traitement/getTraitementPriceList",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#tableCustomPrixTraitements').dataTable( {
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "code" },
+                    { "data": "verre" },
+                    { "data": "traitement" },
+                    { "data": "prix" },
+                    { "data": "date" },
+                    { "data": "action" }
+                ],
+                "createdRow": function (row, data, index) {
+                    console.log(data['active']);
+                    console.log('active');
+                    if (data['active'] == false) {
+                        $(row).addClass('prix_traitement_inactive');
+                    }
+                    else {
+                        $(row).addClass('prix_traitement_active');
+                    }
+                }
+            })
+            traitementActiveInactive();
+        });
+        setTimeout(function() {
+            $('.desactive_prix_traitement').click(function () {
+                var traitement = $(this).attr('rel').split('*');
+                var lens_code = traitement[0];
+                var traitement_id = traitement[1];
+                desactiveTraitementPrice(lens_code, traitement_id);
+            });
+        }, 3000);
+    }
+
+    function desactiveTraitementPrice (lens_code, traitement_id) {
+        $.ajax({
+            type: "POST",
+            url: "/traitement/desactivePriceTraitement",
+            data: {
+                'user_id': <?php echo $info_user[0]->id_users ?>,
+                'lens_code': lens_code,
+                'traitement_id': traitement_id
+            },
+            dataType: "html",
+            success: function(data){
+                    $('#tableCustomPrixTraitements').DataTable().clear();
+                    getTraitementPriceList();
+            }
+        });
+
+        // setTimeout(function() {
+        //     $('.desactive_prix_traitement').click(function () {
+        //         var traitement = $(this).attr('rel').split('*');
+        //         var lens_code = traitement[0];
+        //         var traitement_id = traitement[1];
+        //         desactiveTraitementPrice(lens_code, traitement_id);
+        //     });
+        // }
+        // , 1000);
+    }
     $('body').on('click', '#btn_submit_prix_traitement', function(event){
 
         if($('#nouveau_prix_traitement').val() != "" && $('#listeVerres').val() != "")
@@ -776,37 +836,10 @@ $(document).ready(function(){
                 },
                 dataType: "html",
                 success: function(data){
-
                     if(data=="OK")
                     {
-                        $('#nouveau_prix_traitement').val('');
-                        $('#listeVerres').empty();
-                        $('#listeVerres').append('<option value="">-- Choisir --</option>');
-
-                        $('#divlisteVerres').addClass('hide');
-
                         $('#tableCustomPrixTraitements').DataTable().clear();
-                        $.ajax({
-                            type: "POST",
-                            url: "/traitement/getCustomPriceList",
-                            data: {
-                                'user_id' : <?php echo $info_user[0]->id_users ?>
-                            },
-                            dataType: "json",
-                        }).done( function(data) {
-                            $('#tableCustomPrixTraitements').DataTable( {
-                                "destroy": true,
-                                "aaData": data,
-                                "columns": [
-                                    { "data": "code" },
-                                    { "data": "libelle" },
-                                    { "data": "prix" },
-                                    { "data": "action" }
-                                ]
-                            })
-
-                        })
-
+                        getTraitementPriceList();
                     }
 
                 }
@@ -866,4 +899,17 @@ $(document).ready(function(){
             $('#div_nouveau_prix_traitement').addClass('hide');
         }
     });
+
+    $('#checkboxActive').click(function(){
+        traitementActiveInactive();
+    });
+
+    function traitementActiveInactive() {
+        if ($('#checkboxActive').is(":checked") == false) {
+            $('.prix_traitement_inactive').addClass('hide');
+        }
+        else {
+            $('.prix_traitement_inactive').removeClass('hide');
+        }
+    }
 </script>

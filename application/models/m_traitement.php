@@ -40,7 +40,7 @@ class m_traitement extends CI_Model
         }
         $count = 0;
         $null = false;
-        $indices = ['1,53' => 2, '1,56' => 3, '1,5' => 1,  '1,67' => 5, '1,6' => 4, '1,74' => 6, '1,591' => 8];
+        $indices = ['1,53' => 2, '1,56' => 3, '1,59' => 8, '1,5' => 1,  '1,67' => 5, '1,6' => 4, '1,74' => 6];
         foreach ($lenses as $lens) {
             foreach ($indices as $indice => $indice_id) {
                 if (stripos($lens->trad_fr, $indice) !== FALSE) {
@@ -229,7 +229,10 @@ class m_traitement extends CI_Model
                 $this->db->query($sql);
             }
         }
-        $this->db->query("UPDATE `verres` SET `prix_traitement` = 0 WHERE `libelle_verre` LIKE '%Durci%' AND `libelle_verre` NOT LIKE '%freestyle%' AND `libelle_verre` NOT LIKE '%EyeFatigue%'");
+//        $this->db->query("UPDATE `verres` SET `prix_traitement` = 0
+//                          WHERE `libelle_verre` LIKE '%Durci%'
+//                          AND `libelle_verre` NOT LIKE '%freestyle%'
+//                          AND `libelle_verre` NOT LIKE '%EyeFatigue%'");
     }
 
     public function getTraitementByCode($code) {
@@ -317,55 +320,144 @@ class m_traitement extends CI_Model
     }
 
     public
-    function getCustomPriceList($user_id)
+    function getTraitementPriceList($user_id)
     {
         $tab = array();
 
         if ($user_id != "") {
             $i = 0;
-            $sql = "SELECT lenses.trad_fr, traitements.name, traitements.code, traitement_prix.price FROM `traitement_prix` 
+
+            $sql = "SELECT traitements.id, prix.id_lenses, lenses.code as lens_code, lenses.trad_fr, traitements.name, traitements.code, prix.price, ref.price as price_initial, prix.is_active, prix.created_at, prix.desactived_at  FROM `traitement_prix` as prix
                     INNER JOIN lenses ON id_lenses = lenses.id
                     INNER JOIN traitements ON id_traitement = traitements.id
-                    WHERE traitement_prix.id_user = 46
-                    AND traitement_prix.is_active = 1
-                    ORDER BY created_at, traitement_prix.id DESC";
-
+                    LEFT JOIN `traitement_prix` AS ref ON ref.`id_user` is NULL and prix.`id_traitement`=ref.`id_traitement` and prix.`id_lenses` = ref.`id_lenses`
+                    WHERE prix.id_user = 566
+                    ORDER BY created_at DESC, prix.id DESC";
             $res = $this->db->query($sql);
-//            $res = $this->db->query("SELECT ppc.id,ppc.code,ppc.id_client,ppc.prix,l.trad_fr, v.libelle_verre
-//									   FROM prix_par_client ppc
-//									   LEFT JOIN lenses l ON (ppc.code = l.code)
-//									   LEFT JOIN verres_stock v ON ppc.code = v.id_verre
-//									   WHERE id_client = '" . $user_id . "' AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
-//									   ORDER BY l.trad_fr,v.id_verre ASC");
-
 
             $traitements = $res->result();
-
             foreach ($traitements as $traitement) {
-                $tab[$i]['code'] = $traitement->code;
+                $tab[$i]['code'] = $traitement->lens_code . " / " . $traitement->code;
                 $tab[$i]['verre'] = $traitement->trad_fr;
-                $tab[$i]['prix'] = $traitement->price;
+                $tab[$i]['prix'] = $traitement->price . ' (' . $traitement->price_initial . ')';
                 $tab[$i]['traitement'] = $traitement->name;
-                $tab[$i]['action'] =
-                    '<a class="modifier_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
-                    . $traitement->code . '*' . $traitement->id . '*' . $traitement->price
-                    . '" original-title="Modifier" title="Modifier" >Modifier</a> <a class="supprimer_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
-                    . $traitement->code . '*' . $traitement->id . '" original-title="Supprimer" title="Supprimer" >Supprimer</a>';
+                $tab[$i]['date'] = $traitement->created_at;
+                if ($traitement->is_active) {
+                    $tab[$i]['action'] =
+                        '<a class="desactive_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
+                        . $traitement->lens_code . '*' . $traitement->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
+                }
+                else {
+                    $tab[$i]['action'] = $traitement->desactived_at;
+                }
+                $tab[$i]['active'] = $traitement->is_active;
 
                 $i++;
             }
 
         }
-
         return $tab;
 
     }
 
     public function setPriceTraitement($newPrice, $codeVerre, $nameVerre, $traitementId, $userId = NULL) {
-        var_dump($newPrice);
-        var_dump($codeVerre);
-        var_dump($nameVerre);
-        var_dump($traitementId);
-        var_dump($userId);die;
+
+        if ($traitementId != ""
+            && $newPrice != ""
+            && $codeVerre != "") {
+            $sql = "SELECT * FROM `indice_verre` WHERE active = 1";
+            $res = $this->db->query($sql);
+            $indices = $res->result();
+            $sql = "SELECT * FROM `type_verre_solaire`";
+            $res = $this->db->query($sql);
+            $typeVerreSolaires = $res->result();
+            $sql = "SELECT * FROM `lenses` WHERE code = $codeVerre";
+            $res = $this->db->query($sql);
+            $lens = $res->result()[0];
+            $nameVerre = preg_replace("/\([^)]+\)/","",$nameVerre);
+            $nameVerreVirgule = str_replace(',', '.', $nameVerre);
+            foreach ($indices as $indice) {
+                //var_dump($indice);die;
+                $indiceNum = abs($indice->indice_verre);
+                if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
+                    $indiceId = $indice->id_indice_verre;
+                    break;
+                }
+            }
+            $typeVerreSolaireId = NULL;
+            foreach ($typeVerreSolaires as $typeVerreSolaire) {
+                if (stripos($nameVerre, $typeVerreSolaire->name) !== FALSE) {
+                    $typeVerreSolaireId = $typeVerreSolaire->id;
+                    break;
+                }
+            }
+            $insert = true;
+            if (!empty($userId)) {
+                $userIdRequest = "id_user = $userId";
+            }
+            else {
+                $userIdRequest = "id_user IS NULL";
+            }
+            $sql = "SELECT * FROM `traitement_prix` 
+                WHERE id_traitement = $traitementId
+                AND id_lenses = $lens->id
+                AND is_active = 1
+                AND $userIdRequest";
+            $query = $this->db->query($sql);
+            if ($query->num_rows() > 0) {
+                $traitementPrix = $query->result()[0];
+                if ($traitementPrix->price == $newPrice) {
+                    $insert = false;
+                }
+                else {
+                    $sql = "UPDATE `traitement_prix` SET `is_active` = 0
+                                  WHERE id_traitement = $traitementId
+                                  AND id_lenses = $lens->id
+                                  AND is_active = 1
+                                  AND $userIdRequest";
+                    $this->db->query($sql);
+                }
+            }
+            if (empty($typeVerreSolaireId)) {
+                $typeVerreSolaireId = 'NULL';
+            }
+            else {
+                $typeVerreSolaireId = "'" . $typeVerreSolaireId . "'";
+            }
+            if (empty($userId)) {
+                $userId = 'NULL';
+            }
+            else {
+                $userId = "'" . $userId . "'";
+            }
+            if ($insert) {
+                $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price) 
+                VALUES ('".$traitementId."','".$lens->id."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."')";
+                $this->db->query($sql);
+            }
+            echo "OK";
+        }
+        else {
+            echo "NOT";
+        }
+
+    }
+
+    public function desactivePriceTraitement($lensCode, $traitementId, $userId = NULL) {
+        $lens = $this->m_lenses->getLensesByCode($lensCode);
+//        var_dump($lensCode);die;
+        if (!empty($userId)) {
+            $userIdRequest = "id_user = $userId";
+        }
+        else {
+            $userIdRequest = "id_user IS NULL";
+        }
+        $sql = "UPDATE `traitement_prix` SET `is_active` = 0
+                                  WHERE id_traitement = $traitementId
+                                  AND id_lenses = $lens->id
+                                  AND is_active = 1
+                                  AND $userIdRequest";
+        $this->db->query($sql);
+        echo "OK";
     }
 }

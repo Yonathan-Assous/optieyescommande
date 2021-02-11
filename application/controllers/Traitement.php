@@ -12,14 +12,13 @@ class Traitement extends MY_Controller
         $this->m_traitement->insertPrixTraitement();
     }
 
-    public function getCustomPriceList()
+    public function getTraitementPriceList()
     {
         $data =
             $this->input->post();
 
         $tab =
-            $this->m_traitement->getCustomPriceList($data['user_id']);
-        var_dump($tab);die;
+            $this->m_traitement->getTraitementPriceList($data['user_id']);
         echo json_encode($tab);
     }
 
@@ -36,6 +35,16 @@ class Traitement extends MY_Controller
                 $data['user_id']
             );
 
+        echo $result;
+    }
+
+    public function desactivePriceTraitement() {
+        $data = $this->input->post();
+        $result = $this->m_traitement->desactivePriceTraitement(
+            $data['lens_code'],
+            $data['traitement_id'],
+            $data['user_id']
+        );
         echo $result;
     }
 }

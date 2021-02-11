@@ -15222,11 +15222,11 @@ class admin
                             '" class="btn btn-warning"><i class="zmdi zmdi-search"></i></a>&nbsp;&nbsp; ',
                             '<a class="btn btn-inverse get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
                             $user->id_users .
-                            '"><i class="zmdi zmdi-search"></i> Voir</a>'
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            $classColor
                         );
                 }
             }
-
             die(json_encode($data));
         } else {
             $this->redirect();
@@ -21270,7 +21270,6 @@ class admin
 
         $tab =
             $this->m_passer_commande_verre->getCustomPriceList($data['user_id']);
-
         echo json_encode($tab);
     }
 

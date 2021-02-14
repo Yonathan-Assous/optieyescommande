@@ -331,7 +331,7 @@ class m_traitement extends CI_Model
                     INNER JOIN lenses ON id_lenses = lenses.id
                     INNER JOIN traitements ON id_traitement = traitements.id
                     LEFT JOIN `traitement_prix` AS ref ON ref.`id_user` is NULL and prix.`id_traitement`=ref.`id_traitement` and prix.`id_lenses` = ref.`id_lenses`
-                    WHERE prix.id_user = 566
+                    WHERE prix.id_user = $user_id
                     ORDER BY created_at DESC, prix.id DESC";
             $res = $this->db->query($sql);
 

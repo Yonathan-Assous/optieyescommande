@@ -1,7 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class test extends MY_Controller {
-
+class Traitements extends MY_Controller
+{
     public function index()
     {
         var_dump('Hello World!');
@@ -47,5 +47,4 @@ class test extends MY_Controller {
         );
         echo $result;
     }
-
 }

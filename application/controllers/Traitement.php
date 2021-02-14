@@ -7,7 +7,7 @@ class traitement extends MY_Controller {
     }
 
     public function index(){
-        var_dump('dsadsadsa');
+        $this->load->view('catalogue');
     }
 
 }

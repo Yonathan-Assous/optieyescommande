@@ -45,7 +45,7 @@ class traitement extends MY_Controller {
     public function desactivePriceTraitement() {
         $data = $this->input->post();
         $result = $this->m_traitement->desactivePriceTraitement(
-            $data['lens_code'],
+            $data['lens_id'],
             $data['traitement_id'],
             $data['user_id']
         );

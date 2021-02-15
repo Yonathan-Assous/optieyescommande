@@ -215,12 +215,12 @@
                 </div>
                 <div id="choice_change_price" class="form-group row hide">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
-                        <li class="active">
+                        <li id="nav-prix-verre" class="active">
                             <a href="#modal-prix-verres" data-toggle="tab" aria-expanded="false">
                                 <span>Prix verres</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li id="nav-prix-traitement" >
                             <a href="#modal-prix-traitements" data-toggle="tab" aria-expanded="false">
                                 <span>Prix traitements</span>
                             </a>
@@ -250,25 +250,18 @@
                                        id="btn_submit_prix_traitement"
                                        class="btn btn-warning waves-effect waves-light">OK</a>
                                 </div>
-                                <div style="text-align: center">
-                                    Actifs / Tous
-                                </div>
-                                <div class="material-switch pull-right">
-                                    <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
-                                    <label for="checkboxActive" class="label-warning"></label>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="history_price" class="form-group row">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
-                        <li class="active">
+                        <li id="nav-history-verres" class="active">
                             <a href="#modal-history-verres" data-toggle="tab" aria-expanded="false">
                                 <span>Historique verres</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li id="nav-history-traitements">
                             <a href="#modal-history-traitements" data-toggle="tab" aria-expanded="false">
                                 <span>Historique traitements</span>
                             </a>
@@ -290,6 +283,13 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="modal-history-traitements">
+                            <div style="text-align: center">
+                                Actifs / Tous
+                            </div>
+                            <div class="material-switch pull-right">
+                                <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
+                                <label for="checkboxActive" class="label-warning"></label>
+                            </div>
                             <h5>Table des Prix modifiés</h5>
                             <table id="tableCustomPrixTraitements"
                                    class="table table-striped dt-responsive nowrap">
@@ -807,20 +807,20 @@ $(document).ready(function(){
         setTimeout(function() {
             $('.desactive_prix_traitement').click(function () {
                 var traitement = $(this).attr('rel').split('*');
-                var lens_code = traitement[0];
+                var lens_id = traitement[0];
                 var traitement_id = traitement[1];
-                desactiveTraitementPrice(lens_code, traitement_id);
+                desactiveTraitementPrice(lens_id, traitement_id);
             });
         }, 3000);
     }
 
-    function desactiveTraitementPrice (lens_code, traitement_id) {
+    function desactiveTraitementPrice (lens_id, traitement_id) {
         $.ajax({
             type: "POST",
             url: "/traitement/desactivePriceTraitement",
             data: {
                 'user_id': <?php echo $info_user[0]->id_users ?>,
-                'lens_code': lens_code,
+                'lens_id': lens_id,
                 'traitement_id': traitement_id
             },
             dataType: "html",
@@ -926,6 +926,19 @@ $(document).ready(function(){
         traitementActiveInactive();
     });
 
+    $('#nav-prix-verre').click(function(){
+        $('#nav-history-verres').addClass('active');
+        $('#modal-history-verres').addClass('active');
+        $('#nav-history-traitements').removeClass('active');
+        $('#modal-history-traitements').removeClass('active');
+    });
+
+    $('#nav-prix-traitement').click(function(){
+        $('#nav-history-verres').removeClass('active');
+        $('#modal-history-verres').removeClass('active');
+        $('#nav-history-traitements').addClass('active');
+        $('#modal-history-traitements').addClass('active');
+    });
     function traitementActiveInactive() {
         if ($('#checkboxActive').is(":checked") == false) {
             $('.prix_traitement_inactive').addClass('hide');

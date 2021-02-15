@@ -345,7 +345,7 @@ class m_traitement extends CI_Model
                 if ($traitement->is_active) {
                     $tab[$i]['action'] =
                         '<a class="desactive_prix_traitement btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
-                        . $traitement->lens_code . '*' . $traitement->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
+                        . $traitement->id_lenses . '*' . $traitement->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
                 }
                 else {
                     $tab[$i]['action'] = $traitement->desactived_at;
@@ -443,8 +443,7 @@ class m_traitement extends CI_Model
 
     }
 
-    public function desactivePriceTraitement($lensCode, $traitementId, $userId = NULL) {
-        $lens = $this->m_lenses->getLensesByCode($lensCode);
+    public function desactivePriceTraitement($lensId, $traitementId, $userId = NULL) {
 //        var_dump($lensCode);die;
         if (!empty($userId)) {
             $userIdRequest = "id_user = $userId";
@@ -454,7 +453,7 @@ class m_traitement extends CI_Model
         }
         $sql = "UPDATE `traitement_prix` SET `is_active` = 0
                                   WHERE id_traitement = $traitementId
-                                  AND id_lenses = $lens->id
+                                  AND id_lenses = $lensId
                                   AND is_active = 1
                                   AND $userIdRequest";
         $this->db->query($sql);

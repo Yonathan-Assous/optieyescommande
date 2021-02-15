@@ -296,8 +296,8 @@ class m_traitement extends CI_Model
         return $traitementsArray;
     }
 
-    public function getAllTraitementsWithPrice($lensCode) {
-        $lens = $this->m_lenses->getLensesByCode($lensCode);
+    public function getAllTraitementsWithPrice($lensId) {
+        $lens = $this->m_lenses->getLensesById($lensId);
         if (!$lens) {
             return false;
         }
@@ -305,7 +305,7 @@ class m_traitement extends CI_Model
                 FROM `traitements` 
                 INNER JOIN traitement_prix 
                 WHERE traitement_prix.id_traitement = traitements.id 
-                AND traitement_prix.id_lenses = $lens->id
+                AND traitement_prix.id_lenses = $lensId
                 AND traitement_prix.is_active = 1";
 
         $query = $this->db->query($sql);
@@ -355,29 +355,29 @@ class m_traitement extends CI_Model
                 $i++;
             }
 
+
         }
         return $tab;
 
     }
 
-    public function setPriceTraitement($newPrice, $codeVerre, $nameVerre, $traitementId, $userId = NULL) {
+    public function setPriceTraitement($newPrice, $lensId, $nameVerre, $traitementId, $userId = NULL) {
 
         if ($traitementId != ""
             && $newPrice != ""
-            && $codeVerre != "") {
+            && $lensId != "") {
             $sql = "SELECT * FROM `indice_verre` WHERE active = 1";
             $res = $this->db->query($sql);
             $indices = $res->result();
             $sql = "SELECT * FROM `type_verre_solaire`";
             $res = $this->db->query($sql);
             $typeVerreSolaires = $res->result();
-            $sql = "SELECT * FROM `lenses` WHERE code = $codeVerre";
-            $res = $this->db->query($sql);
-            $lens = $res->result()[0];
+//            $sql = "SELECT * FROM `lenses` WHERE code = '$codeVerre'";
+//            $res = $this->db->query($sql);
+//            $lens = $res->result()[0];
             $nameVerre = preg_replace("/\([^)]+\)/","",$nameVerre);
             $nameVerreVirgule = str_replace(',', '.', $nameVerre);
             foreach ($indices as $indice) {
-                //var_dump($indice);die;
                 $indiceNum = abs($indice->indice_verre);
                 if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
                     $indiceId = $indice->id_indice_verre;
@@ -400,7 +400,7 @@ class m_traitement extends CI_Model
             }
             $sql = "SELECT * FROM `traitement_prix` 
                 WHERE id_traitement = $traitementId
-                AND id_lenses = $lens->id
+                AND id_lenses = $lensId
                 AND is_active = 1
                 AND $userIdRequest";
             $query = $this->db->query($sql);
@@ -412,7 +412,7 @@ class m_traitement extends CI_Model
                 else {
                     $sql = "UPDATE `traitement_prix` SET `is_active` = 0
                                   WHERE id_traitement = $traitementId
-                                  AND id_lenses = $lens->id
+                                  AND id_lenses = $lensId
                                   AND is_active = 1
                                   AND $userIdRequest";
                     $this->db->query($sql);
@@ -432,7 +432,7 @@ class m_traitement extends CI_Model
             }
             if ($insert) {
                 $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price) 
-                VALUES ('".$traitementId."','".$lens->id."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."')";
+                VALUES ('".$traitementId."','".$lensId."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."')";
                 $this->db->query($sql);
             }
             echo "OK";

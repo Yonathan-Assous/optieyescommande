@@ -235,18 +235,6 @@
                                    id="btn_submit_prix"
                                    class="btn btn-warning waves-effect waves-light">OK</a>
                             </div>
-                            <h5>Table des Prix modifiés</h5>
-                            <table id="tableCustomPrix"
-                                   class="table table-striped dt-responsive nowrap">
-                                <thead>
-                                <tr>
-                                    <th>Ref.</th>
-                                    <th>Nom</th>
-                                    <th>Prix</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                            </table>
                         </div>
                         <div class="tab-pane" id="modal-prix-traitements">
                             <div id="divlisteTraitements" class="form-group row hide"><br>
@@ -269,25 +257,56 @@
                                     <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
                                     <label for="checkboxActive" class="label-warning"></label>
                                 </div>
-                                <h5>Table des Prix modifiés</h5>
-                                <table id="tableCustomPrixTraitements"
-                                       class="table table-striped dt-responsive nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>Code Verre / Traitement</th>
-                                        <th>Verre</th>
-                                        <th>Traitement</th>
-                                        <th>Prix (Prix initial)</th>
-                                        <th>Date</th>
-                                        <th>Désactivation</th>
-                                    </tr>
-                                    </thead>
-                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div id="history_price" class="form-group row">
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                        <li class="active">
+                            <a href="#modal-history-verres" data-toggle="tab" aria-expanded="false">
+                                <span>Historique verres</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#modal-history-traitements" data-toggle="tab" aria-expanded="false">
+                                <span>Historique traitements</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="modal-history-verres">
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrix"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Ref.</th>
+                                    <th>Nom</th>
+                                    <th>Prix</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-history-traitements">
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrixTraitements"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Code Verre / Traitement</th>
+                                    <th>Verre</th>
+                                    <th>Traitement</th>
+                                    <th>Prix (Prix initial)</th>
+                                    <th>Date</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -566,7 +585,7 @@ $(document).ready(function(){
 					//console.log(data);
 					
 					$.each(data, function(key, value){
-						$('#listeVerres').append('<option value="'+ value.code +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
+						$('#listeVerres').append('<option value="'+ value.lens_id +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
 					});
 				
 				}
@@ -595,7 +614,7 @@ $(document).ready(function(){
 				data: {
 					'user_id' : <?php echo $info_user[0]->id_users ?>,
 					'new_price' : $('#nouveau_prix').val(),
-					'code_verre' : $('#listeVerres').val(),
+					'lens_id' : $('#listeVerres').val(),
 					'name_verre' : name_verre
 				},
 				dataType: "html",
@@ -772,13 +791,16 @@ $(document).ready(function(){
                 "createdRow": function (row, data, index) {
                     console.log(data['active']);
                     console.log('active');
+                    console.log(data);
+                    console.log(row);
                     if (data['active'] == false) {
                         $(row).addClass('prix_traitement_inactive');
                     }
                     else {
                         $(row).addClass('prix_traitement_active');
                     }
-                }
+                },
+                "order": [[ 4, "desc" ]]
             })
             traitementActiveInactive();
         });
@@ -830,7 +852,7 @@ $(document).ready(function(){
                 data: {
                     'user_id' : <?php echo $info_user[0]->id_users ?>,
                     'new_price' : $('#nouveau_prix_traitement').val(),
-                    'code_verre' : $('#listeVerres').val(),
+                    'lens_id' : $('#listeVerres').val(),
                     'name_verre' : name_verre,
                     'traitement_id': $('#listeTraitements').val()
                 },
@@ -860,7 +882,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "/admin/getAllTraitementsWithPrice",
+            url: "/traitement/getAllTraitementsWithPrice",
             data: {
                 'idLenses' : $('#listeVerres').val()
             },

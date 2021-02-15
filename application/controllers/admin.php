@@ -21238,18 +21238,6 @@ class admin
         echo json_encode($tab);
     }
 
-    function getAllTraitementsWithPrice()
-    {
-        $data =
-            $this->input->post();
-        $tab =
-            $this->m_traitement->getAllTraitementsWithPrice($data['idLenses']);
-
-        //var_dump($tab);
-
-        echo json_encode($tab);
-    }
-
     function getAllTypeVerreSolaire()
     {
         $tab =
@@ -21307,7 +21295,7 @@ class admin
         $result =
             $this->m_passer_commande_verre->setPriceVerre($data['user_id'],
                                                           $data['new_price'],
-                                                          $data['code_verre'],
+                                                          $data['lens_id'],
                                                           $data['name_verre']);
 
         echo $result;

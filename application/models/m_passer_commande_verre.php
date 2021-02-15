@@ -112,12 +112,18 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function setPriceVerre($user_id, $new_price, $code_verre, $name_verre)
+    function setPriceVerre($user_id, $new_price, $lens_id, $name_verre)
     {
 
         if ($user_id != ""
             && $new_price != ""
-            && $code_verre != "") {
+            && $lens_id != "") {
+            $sql = "SELECT code
+                    FROM lenses
+                    WHERE id = $lens_id";
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            $code_verre = $result[0]->code;
             $generation = "";
             if (strpos($name_verre, 'E-Space') !== false) {
                 $generation = "E-Space";
@@ -220,6 +226,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
+                $tab[$i]['lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
@@ -256,6 +263,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
+                $tab[$i]['lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;

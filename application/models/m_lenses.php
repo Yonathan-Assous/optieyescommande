@@ -28,4 +28,15 @@ class m_lenses extends CI_Model
         }
         return false;
     }
+
+    public function getLensesById($id) {
+        $sql = "SELECT * FROM `lenses` 
+                WHERE `id` = '$id'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $lenses =  $query->result();
+            return $lenses[0];
+        }
+        return false;
+    }
 }

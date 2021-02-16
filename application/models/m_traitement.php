@@ -287,7 +287,6 @@ class m_traitement extends CI_Model
                 ORDER BY `id_user` DESC";
         }
 
-        var_dump($sql);die;
         $query = $this->db->query($sql);
         $traitement =  $query->result();
         return $traitement[0]->price;

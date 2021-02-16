@@ -1152,7 +1152,7 @@ table.focus-on tbody tr.focused td {
 }
 /* Data tables */
 #datatable td {
-  font-weight: normal;
+  font-weight: bold;
 }
 .paginate_button {
   display: inline-block !important;

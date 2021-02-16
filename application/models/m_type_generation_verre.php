@@ -41,4 +41,5 @@ class m_type_generation_verre extends CI_Model {
 
         return false;
     }
+
 }

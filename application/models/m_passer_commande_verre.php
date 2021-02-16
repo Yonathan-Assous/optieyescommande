@@ -1808,8 +1808,6 @@ class m_passer_commande_verre extends CI_Model
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
             $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
                 . "  GROUP BY diameter_physical ORDER BY diameter_physical";
-            var_dump("SELECT * FROM lensRanges WHERE " . $rangesids
-                . "  GROUP BY diameter_physical ORDER BY diameter_physical");die;
 
             $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";

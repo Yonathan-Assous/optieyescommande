@@ -1688,7 +1688,6 @@ class m_passer_commande_verre extends CI_Model
                     $from = $ref100->cylinderPart_from;
                     $to = $ref100->cylinderPart_to;
 
-
                     if ($from == '100'
                         && $to == '0') {
 
@@ -1807,9 +1806,9 @@ class m_passer_commande_verre extends CI_Model
 						 ->orderBy('diameter_physical', 'ASC')->groupBy('diameter_physical')->get();
 						 */
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
-
-            $resultats = $this->db->query("SELECT * FROM lensRanges WHERE " . $rangesids
-                                          . "  GROUP BY diameter_physical ORDER BY diameter_physical");
+            $sql = "SELECT * FROM lensRanges WHERE " . $rangesids
+                . "  GROUP BY diameter_physical ORDER BY diameter_physical";
+            $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";
             $rangesFDiameters = $resultats->result();
         }

@@ -459,4 +459,112 @@ class m_traitement extends CI_Model
         $this->db->query($sql);
         echo "OK";
     }
+
+    public function duplicateTraitementPrix458() {
+        $userId = 458;
+            $listUsers = [459,461,462,463,473,483];
+            $this->duplicateTraitementPrix($userId, $listUsers);
+    }
+
+    public function duplicateTraitementPrix563() {
+        $userId = 563;
+        $listUsers = [560,
+            552,
+            533,
+            532,
+            531,
+            505,
+            504,
+            489,
+            488,
+            487,
+            484,
+            474,
+            456,
+            455,
+            453,
+            449,
+            448,
+            446,
+            442,
+            440,
+            437,
+            423,
+            407,
+            386,
+            378,
+            374,
+            373,
+            362,
+            358,
+            354,
+            348,
+            345,
+            343,
+            342,
+            335,
+            314,
+            305,
+            298,
+            296,
+            282,
+            278,
+            269,
+            255,
+            253,
+            250,
+            248,
+            244,
+            239,
+            220,
+            218,
+            208,
+            207,
+            206,
+            201,
+            191,
+            158,
+            157,
+            154,
+            153,
+            152,
+            151,
+            149,
+            147,
+            146,
+            144,
+            142,
+            137,
+            136,
+            130,
+            124,
+            113,
+            102,
+            83,
+            60,
+            29];
+        $this->duplicateTraitementPrix($userId, $listUsers);
+    }
+
+    private function duplicateTraitementPrix($userId, $listUsers) {
+        $sql = "SELECT * FROM traitement_prix WHERE id_user = $userId";
+        $query = $this->db->query($sql);
+        $results =  $query->result();
+        foreach ($listUsers as $listUser) {
+            foreach ($results as $result) {
+                if (!empty($result->id_type_verre_solaire)) {
+                    $userTypeVerreSolaireRequest = "'" . $result->id_type_verre_solaire . "'";
+                }
+                else {
+                    $userTypeVerreSolaireRequest = 'NULL';
+                }
+//                    var_dump($result);
+                $sql2 = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price) 
+                             VALUES ('" . $result->id_traitement . "','" . $result->id_lenses . "','" . $result->id_indice_verre . "'," . $userTypeVerreSolaireRequest . ",'" .  $listUser . "','" .  $result->price . "')";
+                $this->db->query($sql2);
+            }
+
+
+        }
+    }
 }

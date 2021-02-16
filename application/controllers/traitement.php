@@ -52,7 +52,7 @@ class traitement extends MY_Controller {
         echo $result;
     }
 
-    function getAllTraitementsWithPrice()
+    public function getAllTraitementsWithPrice()
     {
         $data =
             $this->input->post();
@@ -64,4 +64,11 @@ class traitement extends MY_Controller {
         echo json_encode($tab);
     }
 
+    public function duplicateTraitementPrix563() {
+        $this->m_traitement->duplicateTraitementPrix563();
+    }
+
+    public function duplicateTraitementPrix458() {
+        $this->m_traitement->duplicateTraitementPrix458();
+    }
 }

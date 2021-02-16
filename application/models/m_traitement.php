@@ -273,8 +273,8 @@ class m_traitement extends CI_Model
                 AND `id_lenses` = '$lensId'
                 AND `id_type_verre_solaire` = '$typeVerreSolaireId'
                 AND `is_active` = 1
-                AND $userIdRequest
-                ORDER BY `id_user` DESC;
+                AND id_user = $userId
+                ORDER BY `id_user` DESC
                 ";
         }
         else {
@@ -283,11 +283,34 @@ class m_traitement extends CI_Model
                 AND `id_lenses` = '$lensId'
                 AND `id_type_verre_solaire` is NULL
                 AND `is_active` = 1
-                AND $userIdRequest
+                AND id_user = $userId
                 ORDER BY `id_user` DESC";
         }
 
         $query = $this->db->query($sql);
+        //var_dump($query->num_rows());die;
+        if ($query->num_rows() == 0) {
+            if (!empty($typeVerreSolaireId)) {
+                $sql = "SELECT * FROM `traitement_prix` 
+                WHERE `id_traitement` = '$traitementId'
+                AND `id_lenses` = '$lensId'
+                AND `id_type_verre_solaire` = '$typeVerreSolaireId'
+                AND `is_active` = 1
+                AND id_user IS NULL
+                ORDER BY `id_user` DESC
+                ";
+            }
+            else {
+                $sql = "SELECT * FROM `traitement_prix` 
+                WHERE `id_traitement` = '$traitementId'
+                AND `id_lenses` = '$lensId'
+                AND `id_type_verre_solaire` is NULL
+                AND `is_active` = 1
+                AND id_user IS NULL
+                ORDER BY `id_user` DESC";
+            }
+            $query = $this->db->query($sql);
+        }
         $traitement =  $query->result();
         return $traitement[0]->price;
     }

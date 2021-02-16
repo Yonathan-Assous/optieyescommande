@@ -1806,8 +1806,11 @@ class m_passer_commande_verre extends CI_Model
 						 ->orderBy('diameter_physical', 'ASC')->groupBy('diameter_physical')->get();
 						 */
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
-            $sql = "SELECT * FROM lensRanges WHERE " . $rangesids
+            $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
                 . "  GROUP BY diameter_physical ORDER BY diameter_physical";
+            var_dump("SELECT * FROM lensRanges WHERE " . $rangesids
+                . "  GROUP BY diameter_physical ORDER BY diameter_physical");die;
+
             $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";
             $rangesFDiameters = $resultats->result();
@@ -1908,8 +1911,9 @@ class m_passer_commande_verre extends CI_Model
             //return json_encode($codef)
 
             //return "SELECT * FROM lensOptions WHERE code IN ('".$codes."') ORDER BY id,name,color ";
-            $optionList = $this->db->query("SELECT * FROM lensOptions WHERE code IN ('" . $codes
-                                           . "') AND display='X' AND color!='COLOR' GROUP BY trad_fr ORDER BY sorting ");
+
+            $optionList = $this->db->query("SELECT trad_fr, sorting, code, name FROM lensOptions WHERE code IN ('" . $codes
+                . "') AND display='X' AND color!='COLOR' GROUP BY trad_fr, sorting, code, name ORDER BY sorting");
 
             //echo "SELECT * FROM lensOptions WHERE code IN ('".$codes."') GROUP BY trad_fr ORDER BY sorting ";
             //$optionList = DB::table('lensOptions')

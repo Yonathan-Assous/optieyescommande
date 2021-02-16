@@ -165,7 +165,7 @@ class m_users extends CI_Model {
         $sql_rib = "AND valid_mandat = 1";
     }
      
-		$query = $this->db->query("SELECT id_users,nom_societe,email,date_inscription,document_rib,valid_mandat,id_grille_tarifaire,commande_suspendue,pass,grille_telechargeable,nom_magasin,tarif_livraison,cp,ville,show_commentaire
+		$query = $this->db->query("SELECT id_users,nom_societe,email,date_inscription,document_rib,valid_mandat,id_grille_tarifaire,commande_suspendue,pass,grille_telechargeable,nom_magasin,tarif_livraison,cp,ville,show_commentaire,Samuel,Daniel,Gregory,Glenn
                                    FROM ".$this->table." 
                                    WHERE  ".$sql_add."
                                    AND deleted = ".$deleted."

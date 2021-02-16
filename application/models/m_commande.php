@@ -624,6 +624,7 @@ class m_commande extends CI_Model {
 
 
         if ($query && $query->num_rows() > 0)
+
             return $query->result();
 
         return false;

@@ -48,6 +48,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_traitement');
         $this->load->model('m_type_verre_solaire');
         $this->load->model('m_lenses');
+        $this->load->model('m_lens_option');
 
 		
 		if($this->session->userdata('taux_tva') === false){

@@ -1927,7 +1927,6 @@ class index extends MY_Controller {
                     $order_data['total_remise_paire'] = 0;
 
                     if ($order = $this->m_commande->addOrder($order_data)) {
-
                         $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                         $this->db->where(array('user_id' => $order_data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
 

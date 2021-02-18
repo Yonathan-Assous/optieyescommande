@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class m_lens_option extends CI_Model
 {
-    var $table = 'lensoptions';
+    var $table = 'lensOptions';
 
     public
     function __construct()

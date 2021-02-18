@@ -71,4 +71,8 @@ class traitement extends MY_Controller {
     public function duplicateTraitementPrix458() {
         $this->m_traitement->duplicateTraitementPrix458();
     }
+
+    public function duplicateTraitementPrix370() {
+        $this->m_traitement->duplicateTraitementPrix370();
+    }
 }

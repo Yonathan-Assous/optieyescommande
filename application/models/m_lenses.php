@@ -12,7 +12,8 @@ class m_lenses extends CI_Model
 
     public function getLensesByTradFr($tradFr) {
         $sql = "SELECT * FROM `lenses` 
-                WHERE `trad_fr` = '$tradFr'";
+                WHERE `trad_fr` = '$tradFr'
+                AND display = 'X'";
         $query = $this->db->query($sql);
         $lenses =  $query->result();
         return $lenses[0];
@@ -20,7 +21,8 @@ class m_lenses extends CI_Model
 
     public function getLensesByCode($code) {
         $sql = "SELECT * FROM `lenses` 
-                WHERE `code` = '$code'";
+                WHERE `code` = '$code' 
+                AND display = 'X'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $lenses =  $query->result();

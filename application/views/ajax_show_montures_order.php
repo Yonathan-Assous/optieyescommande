@@ -121,7 +121,7 @@
     echo '</div>';
 	if($is_monture == 1)
 	{
-		echo '<div class="text-center"><a class="btn btn-warning btn-lg createOrder hide" id="terminer">Valider mon panier sans commande de verres</a></div>';
+		echo '<div class="text-center"><a class="btn btn-warning btn-lg createOrder hide" id="terminer">Valider mon panier</a></div>';
 	}
 	else
 	{

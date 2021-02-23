@@ -183,7 +183,9 @@ include_once('menu.php');
 			$.ajax({
                 type: "POST",
                 url: "/index/add_montures_to_order",
-                data: { 'id': el.attr('rel') }
+                data: { 'id': el.attr('rel'),
+                        'qty': $('#qty_monture').val()
+                }
             }).done(function (data) {
 				swal({
                         title: "Votre Monture a bien été ajouté au panier",

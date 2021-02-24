@@ -3814,7 +3814,6 @@ $(document).ready(function() {
     if (document.getElementById("spanAxeG")) {
         axeG = document.getElementById('spanAxeG').innerText;
     }
-    let
     let additionG = "+0.75";
     if (document.getElementById("spanAdditionG")) {
         additionG = document.getElementById('spanAdditionG').innerText;

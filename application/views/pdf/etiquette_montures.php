@@ -116,7 +116,7 @@
 					    if (isset($monture['qty'])) {
                             $qty = $monture['qty'];
                         }
-					    for ($i = 0; $i <= $qty; $i++) {
+					    for ($i = 1; $i <= $qty; $i++) {
                             if(isset($monture['pack_id'])  && isset($monture['pack']))
                             {
                                 if($monture['pack']!=null)

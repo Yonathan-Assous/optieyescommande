@@ -20111,6 +20111,7 @@ class admin
                             echo 'Prix: ' .
                                  $monture->prix_vente .
                                  '&#8364;<br />';
+                            echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
                                  $monture->id .
                                  '">Ajouter à mon panier</a>';
@@ -20536,6 +20537,7 @@ class admin
             $this->m_users->getUserById($user_id)[0];
         $data['data_admin']['admin_info'] =
             $this->m_users->getUserById(1)[0];
+        $qty = $this->input->post('qty');
 
         $monture_id =
             (int)$this->input->post('id');
@@ -20563,13 +20565,14 @@ class admin
         } else {
             //$data = array('id_client' => $user_id, 'id_monture' => $monture_id, 'qty' => 1, 'date' => date('Y-m-d H:i:s'), 'status' => 0);
             //$this->db->insert('commande_montures_temp', $data);
-            $this->db->query("INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '" .
-                             $user_id .
-                             "', '" .
-                             $monture_id .
-                             "', '1', '" .
-                             date('Y-m-d H:i:s') .
-                             "', '0', '0', '0', '');");
+            $sql = "INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '" .
+                $user_id .
+                "', '" .
+                $monture_id .
+                "', '". $qty."', '" .
+                date('Y-m-d H:i:s') .
+                "', '0', '0', '0', '');";
+            $this->db->query($sql);
         }
     }
 

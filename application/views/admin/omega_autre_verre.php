@@ -3792,8 +3792,11 @@ $(document).ready(function() {
 	let cylindreD = document.getElementById('spanCylindreD').innerText;
         cylindreD = addPlus(cylindreD);
     let axeD = document.getElementById('spanAxeD').innerText;
-    let additionD = document.getElementById('spanAdditionD').innerText;
+    let additionD = "+0.75";
+    if (document.getElementById("spanAdditionD")) {
+        additionD = document.getElementById('spanAdditionD').innerText;
         additionD = addPlus(additionD);
+    }
 
         $('#sphereD').val(sphereD);
     $('#cylindreD').val(cylindreD);
@@ -3805,8 +3808,12 @@ $(document).ready(function() {
     let cylindreG = document.getElementById('spanCylindreG').innerText;
         cylindreG = addPlus(cylindreG);
     let axeG = document.getElementById('spanAxeG').innerText;
-    let additionG = document.getElementById('spanAdditionG').innerText;
+    let additionG = "+0.75";
+    if (document.getElementById("spanAdditionG")) {
+        additionG = document.getElementById('spanAdditionG').innerText;
         additionG = addPlus(additionG);
+    }
+
     $('#sphereG').val(sphereG);
     $('#cylindreG').val(cylindreG);
     $('#axeG').val(axeG);

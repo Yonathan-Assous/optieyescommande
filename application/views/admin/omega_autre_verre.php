@@ -3780,15 +3780,37 @@ $(document).ready(function() {
 	$('#cylindreG').prop('readOnly', false);
 	$('#axeD').prop('readOnly', false);
 	$('#axeG').prop('readOnly', false);
-	
-    $('#sphereD').val("+0.00");
-    $('#cylindreD').val("+0.00");
-    $('#axeD').val("0");
-    $('#additionD').val("+0.00");
-    $('#sphereG').val("+0.00");
-    $('#cylindreG').val("+0.00");
-    $('#axeG').val("0");
-    $('#additionG').val("+0.00");
+
+	function addPlus(number) {
+        if (!number.includes("-")) {
+            number = "+" + number;
+        }
+        return number;
+    }
+	let sphereD = document.getElementById('spanSphereD').innerText;
+        sphereD = addPlus(sphereD)
+	let cylindreD = document.getElementById('spanCylindreD').innerText;
+        cylindreD = addPlus(cylindreD);
+    let axeD = document.getElementById('spanAxeD').innerText;
+    let additionD = document.getElementById('spanAdditionD').innerText;
+        additionD = addPlus(additionD);
+
+        $('#sphereD').val(sphereD);
+    $('#cylindreD').val(cylindreD);
+    $('#axeD').val(axeD);
+    $('#additionD').val(additionD);
+
+    let sphereG = document.getElementById('spanSphereG').innerText;
+        sphereG = addPlus(sphereG)
+    let cylindreG = document.getElementById('spanCylindreG').innerText;
+        cylindreG = addPlus(cylindreG);
+    let axeG = document.getElementById('spanAxeG').innerText;
+    let additionG = document.getElementById('spanAdditionG').innerText;
+        additionG = addPlus(additionG);
+    $('#sphereG').val(sphereG);
+    $('#cylindreG').val(cylindreG);
+    $('#axeG').val(axeG);
+    $('#additionG').val(additionG);
  	
     
     var lensFocalGroup = $(this).val();
@@ -3820,9 +3842,13 @@ $(document).ready(function() {
 			{
 				$("#detailG").css("display", "block");
 			}
-			$('#additionD').val("+0.75");
-			$('#additionG').val("+0.75");
-		  }
+			if ($('#additionD').val == 0 || $('#additionD').val == "+0.00") {
+                $('#additionD').val("+0.75");
+            }
+            if ($('#additionG').val == 0 || $('#additionD').val == "+0.00") {
+                $('#additionG').val("+0.75");
+            }
+          }
 		  else
 		  {
 			$("#generation_progressif").css("display", "none");

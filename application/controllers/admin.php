@@ -8277,17 +8277,17 @@ class admin
                 //var_dump($information_commande);
                 if (isset($information_commande->verre->correction_droit)) {
                     $detail .= "<b>OD:</b>";
-                    $detail .= "<span style='font-size:20px'> " .
+                    $detail .= "<span id='spanSphereD' style='font-size:20px'>" .
                                $information_commande->verre->correction_droit->sphere .
-                               "";
-                    $detail .= " (" .
+                               "</span>";
+                    $detail .= " (<span id='spanCylindreD' style='font-size:20px'>" .
                                $information_commande->verre->correction_droit->cylindre .
-                               ")</span>";
+                               "</span>)";
                     if ($information_commande->verre->correction_droit->axe !=
                         "0.00") {
-                        $detail .= " " .
+                        $detail .= " <span id='spanAxeD'>" .
                                    $information_commande->verre->correction_droit->axe .
-                                   "°";
+                                   "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_droit->addition) &&
@@ -8295,9 +8295,9 @@ class admin
                          "0.00" &&
                          $commande->id_generation_verre !=
                          34)) {
-                        $detail .= " ADD   " .
+                        $detail .= " ADD <span id='spanAdditionD'>" .
                                    $information_commande->verre->correction_droit->addition .
-                                   "";
+                                   "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
@@ -8367,17 +8367,17 @@ class admin
 
                 if (isset($information_commande->verre->correction_gauche)) {
                     $detail .= "<br><br><b>OG</b>";
-                    $detail .= "<span style='font-size:20px'> " .
+                    $detail .= "<span id='spanSphereG' style='font-size:20px'>" .
                                $information_commande->verre->correction_gauche->sphere .
-                               "";
-                    $detail .= "(" .
+                               "</span>";
+                    $detail .= "(<span id='spanCylindreG' style='font-size:20px'>" .
                                $information_commande->verre->correction_gauche->cylindre .
                                ")</span>";
                     if ($information_commande->verre->correction_gauche->axe !=
                         "0.00") {
-                        $detail .= " " .
+                        $detail .= " <span id='spanAxeG'>" .
                                    $information_commande->verre->correction_gauche->axe .
-                                   "°";
+                                   "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -8385,9 +8385,9 @@ class admin
                         "0.00" &&
                         $commande->id_generation_verre !=
                         34) {
-                        $detail .= " ADD  " .
+                        $detail .= " ADD <span id='spanAdditionG'>" .
                                    $information_commande->verre->correction_gauche->addition .
-                                   "";
+                                   "</span>";
                     }
                     if (isset($information_commande->verre->correction_gauche->addition) &&
                         $information_commande->verre->correction_gauche->addition !=

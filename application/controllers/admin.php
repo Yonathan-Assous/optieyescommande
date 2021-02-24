@@ -8372,7 +8372,7 @@ class admin
                                "</span>";
                     $detail .= "(<span id='spanCylindreG' style='font-size:20px'>" .
                                $information_commande->verre->correction_gauche->cylindre .
-                               ")</span>";
+                               "</span>)";
                     if ($information_commande->verre->correction_gauche->axe !=
                         "0.00") {
                         $detail .= " <span id='spanAxeG'>" .

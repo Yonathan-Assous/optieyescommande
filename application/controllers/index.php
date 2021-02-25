@@ -183,114 +183,117 @@ class index extends MY_Controller {
 
     public function getColors_price($recovery=false){
 		if($this->session->userdata('logged_in') === true){
-		$name = $_POST['name'];
-		$code = $_POST['code'];
-		$nom_du_verre = $_POST['nom_du_verre'];
+            $userId = $this->data['user_info']->id_users;
+            $name = $_POST['name'];
+            $code = $_POST['code'];
+            $nom_du_verre = $_POST['nom_du_verre'];
+            $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId);
+            $res['fr'] = $name;
+            $res['id'] = $code;
+
+//            if(strpos($nom_du_verre, 'E-Space') !== false || strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 6.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if(strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 4.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 5.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false) && strpos($nom_du_verre, '1,5') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 2.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false ) && strpos($nom_du_verre, '1,5') === false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 5.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//
+//            if(strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
+//            {
+//
+//                        $res['prix'] = 7.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//            }
+
+            //var_dump($res);
+            $t[]=$res;
 
 
-		if(strpos($nom_du_verre, 'E-Space') !== false || strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 6.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if(strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 4.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 5.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false) && strpos($nom_du_verre, '1,5') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 2.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false ) && strpos($nom_du_verre, '1,5') === false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 5.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-
-		if(strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
-		{
-
-					$res['prix'] = 7.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-		}
-
-		//var_dump($res);
-		$t[]=$res;
-
-
-		echo json_encode($t);
-		}
-		else
-			$this->redirect();
+            echo json_encode($t);
+        }
+        else
+            $this->redirect();
 	}
 
     public function getColors_priceOLD($recovery=false){

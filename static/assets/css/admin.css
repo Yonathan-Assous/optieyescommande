@@ -297,11 +297,11 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dt
     }
 }
 
-.prix_traitement_inactive {
+.prix_traitement_inactive, .prix_teinte_inactive {
     background-color: #de9595a3 !important;
 }
 
-.prix_traitement_active {
+.prix_traitement_active, .prix_teinte_active {
     background-color: #95de97a3 !important;
 }
 

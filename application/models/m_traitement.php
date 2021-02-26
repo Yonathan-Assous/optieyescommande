@@ -255,18 +255,11 @@ class m_traitement extends CI_Model
             }
         }
         $typeVerreSolaireId = $this->m_type_verre_solaire->getIdByName($myTypeVerreSolaire);
-        $price = $this->getPrice($traitement->id, $lens->id,
+        return $this->getPrice($traitement->id, $lens->id,
                                                 $typeVerreSolaireId, $userId);
-        return $price;
     }
 
     public function getPrice($traitementId, $lensId, $typeVerreSolaireId, $userId) {
-        if (!empty($userId)) {
-            $userIdRequest = "id_user = $userId";
-        }
-        else {
-            $userIdRequest = "id_user IS NULL";
-        }
         if (!empty($typeVerreSolaireId)) {
             $sql = "SELECT * FROM `traitement_prix` 
                 WHERE `id_traitement` = '$traitementId'

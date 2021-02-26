@@ -225,6 +225,11 @@
                                 <span>Prix traitements</span>
                             </a>
                         </li>
+                        <li id="nav-prix-teinte" >
+                            <a href="#modal-prix-teintes" data-toggle="tab" aria-expanded="false">
+                                <span>Prix teintes</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="modal-prix-verres">
@@ -252,6 +257,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane" id="modal-prix-teintes">
+                            <div id="divlisteTeintes" class="form-group row hide"><br>
+                                <h5>Selectionnez une teinte :</h5>
+                                <select class="form-control select-search"  id="listeTeintes">
+                                    <option value="">-- Choisir --</option>
+                                </select><br>
+                                <div id="div_nouveau_prix_teinte" class="hide">
+                                    Nouveau prix Teinte : <input type="text" value=""
+                                                                     id="nouveau_prix_teinte"
+                                                                     name="nouveau_prix_teinte" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                    <a href="#" style="margin-left:20px"
+                                       id="btn_submit_prix_teinte"
+                                       class="btn btn-warning waves-effect waves-light">OK</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="history_price" class="form-group row">
@@ -264,6 +285,11 @@
                         <li id="nav-history-traitements">
                             <a href="#modal-history-traitements" data-toggle="tab" aria-expanded="false">
                                 <span>Historique traitements</span>
+                            </a>
+                        </li>
+                        <li id="nav-history-teintes">
+                            <a href="#modal-history-teintes" data-toggle="tab" aria-expanded="false">
+                                <span>Historique teintes</span>
                             </a>
                         </li>
                     </ul>
@@ -298,6 +324,29 @@
                                     <th>Code Verre / Traitement</th>
                                     <th>Verre</th>
                                     <th>Traitement</th>
+                                    <th>Prix (Prix initial)</th>
+                                    <th>Date</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-history-teintes">
+                            <div style="text-align: center">
+                                Actifs / Tous
+                            </div>
+                            <div class="material-switch pull-right">
+                                <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
+                                <label for="checkboxActive" class="label-warning"></label>
+                            </div>
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrixTeintes"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Code Verre / Teinte</th>
+                                    <th>Verre</th>
+                                    <th>Teinte</th>
                                     <th>Prix (Prix initial)</th>
                                     <th>Date</th>
                                     <th>Désactivation</th>
@@ -541,8 +590,29 @@ $(document).ready(function(){
         }
     });
 
-    getTraitementPriceList()
+    var tableTeintes = $('#tableCustomPrixTeintes').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, 200, -1],
+            [10, 25, 50, 100, 200, "Tout"]
+        ],
+        deferRender: true,
+        order: [1, 'desc'],
+        language: {
+            "lengthMenu": "Afficher _MENU_ traitements par page",
+            "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+            "infoFiltered": "(Filtrat de _MAX_ entrées)",
+            "search": "Recherche",
+            "paginate": {
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            }
+        }
+    });
 
+    getTraitementPriceList()
+    getTeintePriceList()
         $.ajax({
             type: "POST",
             url: "/admin/getCustomPriceList",
@@ -802,7 +872,7 @@ $(document).ready(function(){
                 },
                 "order": [[ 4, "desc" ]]
             })
-            traitementActiveInactive();
+            traitementTeinteActiveInactive();
         });
         setTimeout(function() {
             $('.desactive_prix_traitement').click(function () {
@@ -829,16 +899,69 @@ $(document).ready(function(){
                     getTraitementPriceList();
             }
         });
+    }
 
-        // setTimeout(function() {
-        //     $('.desactive_prix_traitement').click(function () {
-        //         var traitement = $(this).attr('rel').split('*');
-        //         var lens_code = traitement[0];
-        //         var traitement_id = traitement[1];
-        //         desactiveTraitementPrice(lens_code, traitement_id);
-        //     });
-        // }
-        // , 1000);
+    function getTeintePriceList() {
+        $.ajax({
+            type: "POST",
+            url: "/teinte/getTeintePriceList",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#tableCustomPrixTeintes').dataTable( {
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "code" },
+                    { "data": "verre" },
+                    { "data": "teinte" },
+                    { "data": "prix" },
+                    { "data": "date" },
+                    { "data": "action" }
+                ],
+                "createdRow": function (row, data, index) {
+                    console.log(data['active']);
+                    console.log('active');
+                    console.log(data);
+                    console.log(row);
+                    if (data['active'] == false) {
+                        $(row).addClass('prix_teinte_inactive');
+                    }
+                    else {
+                        $(row).addClass('prix_teinte_active');
+                    }
+                },
+                "order": [[ 4, "desc" ]]
+            })
+            traitementTeinteActiveInactive();
+        });
+        setTimeout(function() {
+            $('.desactive_prix_teinte').click(function () {
+                var teinte = $(this).attr('rel').split('*');
+                var lens_id = teinte[0];
+                var teinte_id = teinte[1];
+                desactiveTeintePrice(lens_id, teinte_id);
+            });
+        }, 3000);
+    }
+
+    function desactiveTeintePrice (lens_id, teinte_id) {
+        $.ajax({
+            type: "POST",
+            url: "/teinte/desactivePriceTeinte",
+            data: {
+                'user_id': <?php echo $info_user[0]->id_users ?>,
+                'lens_id': lens_id,
+                'teinte_id': teinte_id
+            },
+            dataType: "html",
+            success: function(data){
+                $('#tableCustomPrixTeintes').DataTable().clear();
+                getTeintePriceList();
+            }
+        });
     }
     $('body').on('click', '#btn_submit_prix_traitement', function(event){
 
@@ -871,7 +994,36 @@ $(document).ready(function(){
 
     });
 
+    $('body').on('click', '#btn_submit_prix_teinte', function(event){
 
+        if($('#nouveau_prix_teinte').val() != "" && $('#listeVerres').val() != "")
+        {
+            var name_verre = $("#listeVerres option:selected").text();
+            console.log(name_verre);
+            $.ajax({
+                type: "POST",
+                url: "/teinte/setPriceTeinte",
+                data: {
+                    'user_id' : <?php echo $info_user[0]->id_users ?>,
+                    'new_price' : $('#nouveau_prix_teinte').val(),
+                    'lens_id' : $('#listeVerres').val(),
+                    'name_verre' : name_verre,
+                    'teinte_id': $('#listeTeintes').val()
+                },
+                dataType: "html",
+                success: function(data){
+                    if(data=="OK")
+                    {
+                        $('#tableCustomPrixTeintes').DataTable().clear();
+                        getTeintePriceList();
+                    }
+
+                }
+
+            });
+        }
+
+    });
     $("#listeVerres").change(function() {
         var verre = $('#listeVerres').val();
         if (verre == "") {
@@ -911,6 +1063,37 @@ $(document).ready(function(){
 
         });
 
+        $.ajax({
+            type: "POST",
+            url: "/teinte/getAllTeintesWithPrice",
+            data: {
+                'idLenses' : $('#listeVerres').val()
+            },
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+                if(data[0])
+                {
+                    $('#listeTeintes').empty();
+                    $('#listeTeintes').append('<option value="">-- Choisir --</option>');
+                    $('#divlisteTeintes').removeClass('hide');
+
+                    //console.log(data);
+
+                    $.each(data, function(key, value){
+                        $('#listeTeintes').append('<option value="'+ value.id +'">'+ value.name +
+                            ' (' + value.code +') Prix: ' + value.price + '</option>');
+                    });
+
+                }
+                else
+                {
+                    $('#divlisteTeintes').addClass('hide');
+                }
+            }
+
+        });
+
     });
 
     $("#listeTraitements").change(function() {
@@ -922,8 +1105,17 @@ $(document).ready(function(){
         }
     });
 
+    $("#listeTeintes").change(function() {
+        if ($('#listeTeintes').val() != "") {
+            $('#div_nouveau_prix_teinte').removeClass('hide');
+        }
+        else {
+            $('#div_nouveau_prix_teinte').addClass('hide');
+        }
+    });
+
     $('#checkboxActive').click(function(){
-        traitementActiveInactive();
+        traitementTeinteActiveInactive();
     });
 
     $('#nav-prix-verre').click(function(){
@@ -931,20 +1123,36 @@ $(document).ready(function(){
         $('#modal-history-verres').addClass('active');
         $('#nav-history-traitements').removeClass('active');
         $('#modal-history-traitements').removeClass('active');
+        $('#nav-history-teintes').removeClass('active');
+        $('#modal-history-teintes').removeClass('active');
     });
 
     $('#nav-prix-traitement').click(function(){
         $('#nav-history-verres').removeClass('active');
         $('#modal-history-verres').removeClass('active');
+        $('#nav-history-teintes').removeClass('active');
+        $('#modal-history-teintes').removeClass('active');
         $('#nav-history-traitements').addClass('active');
         $('#modal-history-traitements').addClass('active');
     });
-    function traitementActiveInactive() {
+
+    $('#nav-prix-teinte').click(function(){
+        $('#nav-history-verres').removeClass('active');
+        $('#modal-history-verres').removeClass('active');
+        $('#nav-history-traitements').removeClass('active');
+        $('#modal-history-traitements').removeClass('active');
+        $('#nav-history-teintes').addClass('active');
+        $('#modal-history-teintes').addClass('active');
+    });
+
+    function traitementTeinteActiveInactive() {
         if ($('#checkboxActive').is(":checked") == false) {
             $('.prix_traitement_inactive').addClass('hide');
+            $('.prix_teinte_inactive').addClass('hide');
         }
         else {
             $('.prix_traitement_inactive').removeClass('hide');
+            $('.prix_teinte_inactive').removeClass('hide');
         }
     }
 </script>

@@ -435,7 +435,7 @@ class m_traitement extends CI_Model
                     $insert = false;
                 }
                 else {
-                    $sql = "UPDATE `traitement_prix` SET `is_active` = 0
+                    $sql = "UPDATE `traitement_prix` SET `is_active` = 0, desactived_at = NOW()
                                   WHERE id_traitement = $traitementId
                                   AND id_lenses = $lensId
                                   AND is_active = 1
@@ -476,11 +476,12 @@ class m_traitement extends CI_Model
         else {
             $userIdRequest = "id_user IS NULL";
         }
-        $sql = "UPDATE `traitement_prix` SET `is_active` = 0
+        $sql = "UPDATE `traitement_prix` SET `is_active` = 0, `desactived_at` = NOW() 
                                   WHERE id_traitement = $traitementId
                                   AND id_lenses = $lensId
                                   AND is_active = 1
                                   AND $userIdRequest";
+
         $this->db->query($sql);
         echo "OK";
     }

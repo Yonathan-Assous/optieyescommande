@@ -120,7 +120,7 @@
             },
             function(){
                 window.location.href ='http://www.optieyescommande' +
-                    '.com/Catalogue_electronique_01_2021.zip';
+                    '.com/Catalogue_electronique_02_2021.zip';
             });
     });
 </script>

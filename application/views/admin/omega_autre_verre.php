@@ -3321,7 +3321,7 @@ $(document).ready(function() {
 																				<div class="col-xs-2"><input type="text" class="form-control" name="sphereD" id="sphereD" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="text" class="form-control" name="cylindreD" id="cylindreD" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="number" class="form-control" name="axeD" id="axeD" value='0' min='0' max="360"></div>
-																				<div class="col-xs-2"><input type="text" class="form-control" name="additionD" id="additionD" value="+0.75"></div>
+																				<div class="col-xs-2"><input type="text" class="form-control" name="additionD" id="additionD" value="+0.00"></div>
 																		 </div>
 																		 <div class="form-group row">
 																				<div class="col-xs-1"></div>
@@ -3331,7 +3331,7 @@ $(document).ready(function() {
 																				<div class="col-xs-2"><input type="text" class="form-control" name="sphereG" id="sphereG" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="text" class="form-control" name="cylindreG" id="cylindreG" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="number" class="form-control" name="axeG" id="axeG" value='0' min='0' max="360"></div>
-																				<div class="col-xs-2"><input type="text" class="form-control" name="additionG" id="additionG" value="+0.75"></div>
+																				<div class="col-xs-2"><input type="text" class="form-control" name="additionG" id="additionG" value="+0.00"></div>
 																		 </div>
 																	</div>
 																  </div>
@@ -3792,7 +3792,7 @@ $(document).ready(function() {
 	let cylindreD = document.getElementById('spanCylindreD').innerText;
         cylindreD = addPlus(cylindreD);
     let axeD = 0;
-    if (document.getElementById("spanAxeG")) {
+    if (document.getElementById("spanAxeD")) {
         axeD = document.getElementById('spanAxeD').innerText;
     }
     let additionD = "+0.75";
@@ -3878,8 +3878,11 @@ $(document).ready(function() {
 			$("#additionD").css("display", "none");
 			$("#additionG").css("display", "none");
 			$(".addition").css("display", "none");
-	
-		  }
+			console.log($('#additionD').val());
+              $('#additionD').val("+0.00");
+              $('#additionG').val("+0.00");
+
+          }
 		  else
 		  {
 			$("#additionD").css("display", "block");

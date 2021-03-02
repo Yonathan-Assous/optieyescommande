@@ -839,6 +839,7 @@ $(document).ready(function(){
     });
 
     function getTraitementPriceList() {
+        let displayStart = $('#tableCustomPrixTraitements').DataTable().page.info().page * 10;
         $.ajax({
             type: "POST",
             url: "/traitement/getTraitementPriceList",
@@ -859,6 +860,7 @@ $(document).ready(function(){
                     { "data": "date" },
                     { "data": "action" }
                 ],
+                "displayStart" : displayStart,
                 "createdRow": function (row, data, index) {
                     // console.log(data['active']);
                     // console.log('active');
@@ -904,7 +906,7 @@ $(document).ready(function(){
             },
             dataType: "html",
             success: function(data){
-                    $('#tableCustomPrixTraitements').DataTable().clear();
+                    //$('#tableCustomPrixTraitements').DataTable().clear();
                     getTraitementPriceList();
             }
         });
@@ -992,7 +994,7 @@ $(document).ready(function(){
                 success: function(data){
                     if(data=="OK")
                     {
-                        $('#tableCustomPrixTraitements').DataTable().clear();
+                        //$('#tableCustomPrixTraitements').DataTable().clear();
                         getTraitementPriceList();
                     }
 

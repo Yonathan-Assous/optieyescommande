@@ -294,6 +294,13 @@
                         </li>
                     </ul>
                     <div class="tab-content">
+                        <div style="text-align: center">
+                            Actifs / Tous
+                        </div>
+                        <div class="material-switch pull-right">
+                            <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
+                            <label for="checkboxActive" class="label-warning"></label>
+                        </div>
                         <div class="tab-pane active" id="modal-history-verres">
                             <h5>Table des Prix modifiés</h5>
                             <table id="tableCustomPrix"
@@ -309,13 +316,7 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="modal-history-traitements">
-                            <div style="text-align: center">
-                                Actifs / Tous
-                            </div>
-                            <div class="material-switch pull-right">
-                                <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
-                                <label for="checkboxActive" class="label-warning"></label>
-                            </div>
+
                             <h5>Table des Prix modifiés</h5>
                             <table id="tableCustomPrixTraitements"
                                    class="table table-striped dt-responsive nowrap">
@@ -332,13 +333,6 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="modal-history-teintes">
-                            <div style="text-align: center">
-                                Actifs / Tous
-                            </div>
-                            <div class="material-switch pull-right">
-                                <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
-                                <label for="checkboxActive" class="label-warning"></label>
-                            </div>
                             <h5>Table des Prix modifiés</h5>
                             <table id="tableCustomPrixTeintes"
                                    class="table table-striped dt-responsive nowrap">
@@ -870,8 +864,6 @@ $(document).ready(function(){
                         $(row).addClass('prix_traitement_inactive');
                     }
                     else {
-                        console.log('row');
-                        console.log(row);
                         $(row).addClass('prix_traitement_active');
                     }
                 },
@@ -895,6 +887,16 @@ $(document).ready(function(){
             desactiveTraitementPrice(lens_id, traitement_id);
         });
     }
+
+    function addClickEventDesactivePrixTeinte() {
+        $('.desactive_prix_teinte').click(function () {
+            var teinte = $(this).attr('rel').split('*');
+            var lens_id = teinte[0];
+            var teinte_id = teinte[1];
+            desactiveTeintePrice(lens_id, teinte_id);
+        });
+    }
+
     function desactiveTraitementPrice (lens_id, traitement_id) {
         $.ajax({
             type: "POST",
@@ -913,6 +915,7 @@ $(document).ready(function(){
     }
 
     function getTeintePriceList() {
+        let displayStart = $('#tableCustomPrixTeintes').DataTable().page.info().page * 10;
         $.ajax({
             type: "POST",
             url: "/teinte/getTeintePriceList",
@@ -932,6 +935,7 @@ $(document).ready(function(){
                     { "data": "date" },
                     { "data": "action" }
                 ],
+                "displayStart" : displayStart,
                 "createdRow": function (row, data, index) {
                     console.log(data['active']);
                     console.log('active');
@@ -946,15 +950,13 @@ $(document).ready(function(){
                 },
                 "order": [[ 4, "desc" ]]
             })
+            $('#tableCustomPrixTeintes').on( 'draw.dt', function () {
+                addClickEventDesactivePrixTeinte();
+            } );
             traitementTeinteActiveInactive();
         });
         setTimeout(function() {
-            $('.desactive_prix_teinte').click(function () {
-                var teinte = $(this).attr('rel').split('*');
-                var lens_id = teinte[0];
-                var teinte_id = teinte[1];
-                desactiveTeintePrice(lens_id, teinte_id);
-            });
+            addClickEventDesactivePrixTeinte();
         }, 3000);
     }
 

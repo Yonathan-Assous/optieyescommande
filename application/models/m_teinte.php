@@ -283,7 +283,6 @@ class m_teinte extends CI_Model
                                   AND id_lenses = $lensId
                                   AND is_active = 1
                                   AND $userIdRequest";
-                    var_dump($sql);die;
                     $this->db->query($sql);
                 }
             }

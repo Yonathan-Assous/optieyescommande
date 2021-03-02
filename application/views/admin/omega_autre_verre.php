@@ -1214,7 +1214,7 @@ $('#type_de_verreD').on('change', function() {
 							});*/
 
 							$.each(data, function(key, value){
-								$('#teinteD').append('<option value="'+ value.code +'">' + value.name + '</option>');
+								$('#teinteD').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 						
 							});
 							
@@ -1532,7 +1532,7 @@ $('#type_de_verreG').on('change', function() {
 						});*/
 
 						$.each(data, function(key, value){
-							$('#teinteG').append('<option value="'+ value.code +'">' + value.name + '</option>');
+							$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 					
 						});
 						

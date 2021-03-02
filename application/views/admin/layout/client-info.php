@@ -839,6 +839,7 @@ $(document).ready(function(){
     });
 
     function getTraitementPriceList() {
+        let displayStart = $('#tableCustomPrixTraitements').DataTable().page.info().page * 10;
         $.ajax({
             type: "POST",
             url: "/traitement/getTraitementPriceList",
@@ -847,6 +848,7 @@ $(document).ready(function(){
             },
             dataType: "json",
         }).done( function(data) {
+            console.log(data);
             $('#tableCustomPrixTraitements').dataTable( {
                 "destroy": true,
                 "aaData": data,
@@ -858,32 +860,41 @@ $(document).ready(function(){
                     { "data": "date" },
                     { "data": "action" }
                 ],
+                "displayStart" : displayStart,
                 "createdRow": function (row, data, index) {
-                    console.log(data['active']);
-                    console.log('active');
-                    console.log(data);
-                    console.log(row);
+                    // console.log(data['active']);
+                    // console.log('active');
+                    // console.log(data);
+                    // console.log(row);
                     if (data['active'] == false) {
                         $(row).addClass('prix_traitement_inactive');
                     }
                     else {
+                        console.log('row');
+                        console.log(row);
                         $(row).addClass('prix_traitement_active');
                     }
                 },
                 "order": [[ 4, "desc" ]]
-            })
+            });
+            $('#tableCustomPrixTraitements').on( 'draw.dt', function () {
+                addClickEventDesactivePrixTraitement();
+            } );
             traitementTeinteActiveInactive();
         });
         setTimeout(function() {
-            $('.desactive_prix_traitement').click(function () {
-                var traitement = $(this).attr('rel').split('*');
-                var lens_id = traitement[0];
-                var traitement_id = traitement[1];
-                desactiveTraitementPrice(lens_id, traitement_id);
-            });
+            addClickEventDesactivePrixTraitement();
         }, 3000);
     }
 
+    function addClickEventDesactivePrixTraitement() {
+        $('.desactive_prix_traitement').click(function () {
+            var traitement = $(this).attr('rel').split('*');
+            var lens_id = traitement[0];
+            var traitement_id = traitement[1];
+            desactiveTraitementPrice(lens_id, traitement_id);
+        });
+    }
     function desactiveTraitementPrice (lens_id, traitement_id) {
         $.ajax({
             type: "POST",
@@ -895,7 +906,7 @@ $(document).ready(function(){
             },
             dataType: "html",
             success: function(data){
-                    $('#tableCustomPrixTraitements').DataTable().clear();
+                    //$('#tableCustomPrixTraitements').DataTable().clear();
                     getTraitementPriceList();
             }
         });
@@ -983,7 +994,7 @@ $(document).ready(function(){
                 success: function(data){
                     if(data=="OK")
                     {
-                        $('#tableCustomPrixTraitements').DataTable().clear();
+                        //$('#tableCustomPrixTraitements').DataTable().clear();
                         getTraitementPriceList();
                     }
 

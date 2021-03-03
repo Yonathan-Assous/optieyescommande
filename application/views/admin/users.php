@@ -72,7 +72,7 @@ include_once('menu.php');
 
                         <h4 class="header-title m-t-0 m-b-30">Liste des clients</h4>
 
-                        <table id="datatable" class="table table-striped dt-responsive nowrap">
+                        <table id="datatable" class="table table-striped dt-responsive nowrap datatable_bold">
                             <thead>
                             <tr>
                                 <th>Magasin</th>

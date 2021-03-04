@@ -842,7 +842,6 @@ $(document).ready(function(){
             },
             dataType: "json",
         }).done( function(data) {
-            console.log(data);
             $('#tableCustomPrixTraitements').dataTable( {
                 "destroy": true,
                 "aaData": data,
@@ -869,17 +868,19 @@ $(document).ready(function(){
                 },
                 "order": [[ 4, "desc" ]]
             });
-            $('#tableCustomPrixTraitements').on( 'draw.dt', function () {
-                addClickEventDesactivePrixTraitement();
-            } );
             traitementTeinteActiveInactive();
         });
-        setTimeout(function() {
-            addClickEventDesactivePrixTraitement();
-        }, 3000);
     }
 
+    $('#tableCustomPrixTraitements').on( 'draw.dt', function () {
+        addClickEventDesactivePrixTraitement();
+    } );
+
     function addClickEventDesactivePrixTraitement() {
+        $('.desactive_prix_traitement').click(function(e) {
+            // e.stopPropagation();
+            e.preventDefault() ;
+        }) ;
         $('.desactive_prix_traitement').click(function () {
             var traitement = $(this).attr('rel').split('*');
             var lens_id = traitement[0];
@@ -889,6 +890,10 @@ $(document).ready(function(){
     }
 
     function addClickEventDesactivePrixTeinte() {
+        $('.desactive_prix_teinte').click(function(e) {
+            // e.stopPropagation();
+            e.preventDefault() ;
+        }) ;
         $('.desactive_prix_teinte').click(function () {
             var teinte = $(this).attr('rel').split('*');
             var lens_id = teinte[0];
@@ -937,10 +942,6 @@ $(document).ready(function(){
                 ],
                 "displayStart" : displayStart,
                 "createdRow": function (row, data, index) {
-                    console.log(data['active']);
-                    console.log('active');
-                    console.log(data);
-                    console.log(row);
                     if (data['active'] == false) {
                         $(row).addClass('prix_teinte_inactive');
                     }
@@ -950,15 +951,13 @@ $(document).ready(function(){
                 },
                 "order": [[ 4, "desc" ]]
             })
-            $('#tableCustomPrixTeintes').on( 'draw.dt', function () {
-                addClickEventDesactivePrixTeinte();
-            } );
+
             traitementTeinteActiveInactive();
         });
-        setTimeout(function() {
-            addClickEventDesactivePrixTeinte();
-        }, 3000);
     }
+    $('#tableCustomPrixTeintes').on( 'draw.dt', function () {
+        addClickEventDesactivePrixTeinte();
+    } );
 
     function desactiveTeintePrice (lens_id, teinte_id) {
         $.ajax({
@@ -1053,7 +1052,6 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data){
-                console.log(data);
                 if(data[0])
                 {
                     $('#listeTraitements').empty();
@@ -1094,8 +1092,13 @@ $(document).ready(function(){
                     //console.log(data);
 
                     $.each(data, function(key, value){
-                        $('#listeTeintes').append('<option value="'+ value.id +'">'+ value.name +
-                            ' (' + value.code +') Prix: ' + value.price + '</option>');
+                        if (key <= 1) {
+                            $('#listeTeintes').append('<option value="'+ value.name +'">'+ value.name + '</option>');
+                        }
+                        else {
+                            $('#listeTeintes').append('<option value="'+ value.id +'">'+ value.name +
+                                ' (' + value.code +') Prix: ' + value.price + '</option>');
+                        }
                     });
 
                 }

@@ -10,6 +10,17 @@ class teinte extends MY_Controller {
         $this->m_teinte->insertPrixTeinte();
     }
 
+    public function getTeintePriceListTest() {
+        $columns = array(
+            array( 'db' => 'first_name', 'dt' => 0 ),
+            array( 'db' => 'last_name',  'dt' => 1 ),
+            array( 'db' => 'position',   'dt' => 2 ),
+            array( 'db' => 'office',     'dt' => 3 ),
+        );
+
+        echo json_encode($columns);
+    }
+
     public function getTeintePriceList()
     {
         $data =

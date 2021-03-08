@@ -292,6 +292,11 @@
                                 <span>Historique teintes</span>
                             </a>
                         </li>
+                        <li id="nav-history-teintes">
+                            <a href="#modal-history-teintes-test" data-toggle="tab" aria-expanded="false">
+                                <span>Historique teintes test</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div style="text-align: center">
@@ -335,6 +340,22 @@
                         <div class="tab-pane" id="modal-history-teintes">
                             <h5>Table des Prix modifiés</h5>
                             <table id="tableCustomPrixTeintes"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Code Verre / Teinte</th>
+                                    <th>Verre</th>
+                                    <th>Teinte</th>
+                                    <th>Prix (Prix initial)</th>
+                                    <th>Date</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-history-teintes-test">
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrixTeintesTest"
                                    class="table table-striped dt-responsive nowrap">
                                 <thead>
                                 <tr>
@@ -584,6 +605,12 @@ $(document).ready(function(){
         }
     });
 
+    $('#tableCustomPrixTeintesTest').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/teinte/getTeintePriceListTest"
+    } );
+
     var tableTeintes = $('#tableCustomPrixTeintes').DataTable({
         aLengthMenu: [
             [10, 25, 50, 100, 200, -1],
@@ -591,6 +618,8 @@ $(document).ready(function(){
         ],
         deferRender: true,
         order: [1, 'desc'],
+        bPaginate: true,
+        bProcessing:true,
         language: {
             "lengthMenu": "Afficher _MENU_ traitements par page",
             "info": "Affichage de la page page _PAGE_ sur _PAGES_",

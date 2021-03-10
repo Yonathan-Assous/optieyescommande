@@ -11,14 +11,34 @@ class teinte extends MY_Controller {
     }
 
     public function getTeintePriceListTest() {
-        $columns = array(
-            array( 'db' => 'first_name', 'dt' => 0 ),
-            array( 'db' => 'last_name',  'dt' => 1 ),
-            array( 'db' => 'position',   'dt' => 2 ),
-            array( 'db' => 'office',     'dt' => 3 ),
-        );
+//        var_dump($this->input->post());die();
 
-        echo json_encode($columns);
+        $data =
+            $this->input->post();
+        $draw = intval($data["draw"]);
+        $rowStart = intval($data["start"]);
+        $rowLength = intval($data["length"]);
+        $search = $data['search']['value'];
+
+        $totalRow = $this->m_teinte->getCountTeintePriceList($data['user_id']);
+        $tab =
+            $this->m_teinte->getTeintePriceList($data['user_id'], $rowStart, $rowLength, $search);
+//        var_dump($tab);
+//        $x[] = [1,2,3,4,5,6];
+//        $x[] = [2,5,3,6,5,0];
+//        var_dump($x);die;
+        $output = array(
+            "draw" => $draw,
+            "start" => $rowStart,
+            "length" => $rowLength,
+            "recordsTotal" => $totalRow,
+            "recordsFiltered" => $totalRow,
+            "data" => $tab
+        );
+        echo json_encode($output);
+//        exit();
+
+//        echo json_encode($columns);
     }
 
     public function getTeintePriceList()

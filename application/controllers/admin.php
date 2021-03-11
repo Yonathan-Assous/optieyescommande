@@ -21334,12 +21334,20 @@ class admin
     {
         $data =
             $this->input->post();
+        $resultTraitements = $this->m_traitement->duplicateTraitements($data['user_id'],
+            $data['from_user_id']);
 
-        $result =
-            $this->m_passer_commande_verre->duplicatePriceTab($data['user_id'],
-                                                              $data['from_user_id']);
+        $resultTeintes = $this->m_teinte->duplicateTeintes($data['user_id'],
+            $data['from_user_id']);
 
-        echo $result;
+        $resultVerres = $this->m_passer_commande_verre->duplicatePriceTab($data['user_id'], $data['from_user_id']);
+
+        if (!empty($resultVerres) && !empty($resultTraitements) && !empty($resultTeintes)) {
+            echo "OK";
+        }
+        else {
+            echo "";
+
     }
 
 

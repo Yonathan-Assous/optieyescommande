@@ -410,4 +410,29 @@ class m_teinte extends CI_Model
         $this->db->query($sql);
         echo "OK";
     }
+
+    public function duplicateTeintes($userId, $fromUserId) {
+        if ($userId != ""
+            && $fromUserId != "") {
+            $sql = "UPDATE `teinte_prix` SET `is_active` = 0 WHERE id_user = '" . $userId . "'";
+            $this->db->query($sql);
+            $fromRes = $this->db->query("SELECT * FROM teinte_prix WHERE id_user = '" . $fromUserId . "' AND is_active = 1");
+            $fromTeintes = $fromRes->result();
+            foreach ($fromTeintes as $fromTeinte) {
+                if (empty($fromTeinte->id_type_verre_solaire)) {
+                    $typeVerreSolaireId = 'NULL';
+                }
+                else {
+                    $typeVerreSolaireId = "'" . $fromTeinte->id_type_verre_solaire . "'";
+                }
+                $sql = "INSERT INTO `teinte_prix` (`id_teinte`, `id_lenses`, `id_indice_verre`, `id_type_verre_solaire`, `id_user`, `price`, `initial_price`)
+                        VALUES ('" . $fromTeinte->id_teinte . "', '" . $fromTeinte->id_lenses . "', '" . $fromTeinte->id_indice_verre . "', " . $typeVerreSolaireId . ", '" . $userId . "', '" . $fromTeinte->price . "', '" . $fromTeinte->initial_price . "')";
+                $this->db->query($sql);
+            }
+            return "OK";
+        }
+        else {
+            return false;
+        }
+    }
 }

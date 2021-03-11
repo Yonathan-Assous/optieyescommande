@@ -555,7 +555,9 @@ $(document).ready(function(){
 									]
 									})
 									
-								})
+								});
+                            recreateDatatableTeinte();
+                            getTraitementPriceList();
 								
 						}
 						
@@ -1044,7 +1046,7 @@ $(document).ready(function(){
     }
     function recreateDatatableTeinte() {
         // let displayStart = $('#tableCustomPrixTeintesTest').DataTable().page.info().page * 10;
-        $('#tableCustomPrixTeintes').DataTable().clear();
+        // $('#tableCustomPrixTeintes').DataTable().clear();
         // $('#tableCustomPrixTeintesTest').DataTable().clear();
         // $('#tableCustomPrixTeintesTest').DataTable().destroy();
         getTeintePriceList();

@@ -183,114 +183,117 @@ class index extends MY_Controller {
 
     public function getColors_price($recovery=false){
 		if($this->session->userdata('logged_in') === true){
-		$name = $_POST['name'];
-		$code = $_POST['code'];
-		$nom_du_verre = $_POST['nom_du_verre'];
+            $userId = $this->data['user_info']->id_users;
+            $name = $_POST['name'];
+            $code = $_POST['code'];
+            $nom_du_verre = $_POST['nom_du_verre'];
+            $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId);
+            $res['fr'] = $name;
+            $res['id'] = $code;
+
+//            if(strpos($nom_du_verre, 'E-Space') !== false || strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 6.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if(strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 4.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 5.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false) && strpos($nom_du_verre, '1,5') !== false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 2.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//            if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false ) && strpos($nom_du_verre, '1,5') === false)
+//            {
+//
+//                    if(strpos($name, 'Nm') !== false)
+//                    {
+//                        $res['prix'] = 10.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//                    }
+//                    else
+//                    {
+//                        $res['prix'] = 5.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//                    }
+//            }
+//
+//            if(strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
+//            {
+//
+//                        $res['prix'] = 7.00;
+//                        $res['fr'] = $name;
+//                        $res['id'] = $code;
+//
+//            }
+
+            //var_dump($res);
+            $t[]=$res;
 
 
-		if(strpos($nom_du_verre, 'E-Space') !== false || strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 6.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if(strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 4.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 5.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false) && strpos($nom_du_verre, '1,5') !== false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 2.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-		if((strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false ) && strpos($nom_du_verre, '1,5') === false)
-		{
-
-				if(strpos($name, 'Nm') !== false)
-				{
-					$res['prix'] = 10.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-				}
-				else
-				{
-					$res['prix'] = 5.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-				}
-		}
-
-		if(strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
-		{
-
-					$res['prix'] = 7.00;
-					$res['fr'] = $name;
-					$res['id'] = $code;
-
-		}
-
-		//var_dump($res);
-		$t[]=$res;
-
-
-		echo json_encode($t);
-		}
-		else
-			$this->redirect();
+            echo json_encode($t);
+        }
+        else
+            $this->redirect();
 	}
 
     public function getColors_priceOLD($recovery=false){
@@ -416,442 +419,435 @@ class index extends MY_Controller {
 	}
 
 	public function getOptions_price($recovery=false){
-
-	//var_dump($_POST['tab_options']);
-	$name = $_POST['name'];
-	$code = $_POST['code'];
-	$nom_du_verre = $_POST['nom_du_verre'];
-
-
-			if(strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false || strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
-			{
-
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 8.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 8.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 4.00;
-
-					}
-
-			}
-			if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
-			{
-
-				if(strpos($nom_du_verre, 'Transition') !== false || strpos($nom_du_verre, 'Xtractive') !== false || strpos($nom_du_verre, 'Polarisé') !== false || strpos($nom_du_verre, 'Drivewear') !== false){
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 8.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 8.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 16.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 18.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 4.00;
-
-					}
-				}
-				else
-				{
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 12.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 20.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 22.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 20.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 12.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 22.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 20.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 22.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 7.00;
-
-					}
-				}
-
-			}
-			if(strpos($nom_du_verre, 'E-Space') !== false)
-			{
-
-				if(strpos($nom_du_verre, 'Transition') !== false || strpos($nom_du_verre, 'Xtractive') !== false || strpos($nom_du_verre, 'Polarisé') !== false || strpos($nom_du_verre, 'Drivewear') !== false){
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 7.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 10.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 7.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 10.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 3.00;
-
-					}
-				}
-				else
-				{
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 19.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 21.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 19.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 11.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 21.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 19.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 21.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 7.00;
-
-					}
-				}
-
-			}
-			if(strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false)
-			{
-					if($name == 'Durci' || $name == '')
-					{
-						$res['prix'] = 0.00;
-
-					}
-					elseif(strpos($name, 'Miroir') !== false)
-					{
-						$res['prix'] = 14.00;
-
-					}
-					elseif($name == 'Satin')
-					{
-						$res['prix'] = 7.00;
-
-					}
-					elseif($name == 'Achromatique')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin Max')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif($name == 'Satin UV')
-					{
-						$res['prix'] = 10.00;
-
-					}
-					elseif($name == 'BlueCoat')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin Face Interne')
-					{
-						$res['prix'] = 7.00;
-
-					}
-					elseif($name == 'Satin Max Face Interne')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif($name == 'Achromatique Face Interne')
-					{
-						$res['prix'] = 15.00;
-
-					}
-					elseif($name == 'Satin UV Face Interne')
-					{
-						$res['prix'] = 10.00;
-
-					}
-					elseif($name == 'Satin Drive Or')
-					{
-						$res['prix'] = 17.00;
-
-					}
-					elseif(strpos($name, 'HMC') !== false)
-					{
-						$res['prix'] = 3.00;
-
-					}
-				}
-
+      $userId = $this->data['user_info']->id_users;
+        $code = $_POST['code'];
+        $nom_du_verre = $_POST['nom_du_verre'];
+	        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+            $res['prix'] = $price;
+//            var_dump($myTypeVerreSolaire);die;
+//			if(strpos($nom_du_verre, 'Omega') !== false || strpos($nom_du_verre, 'Platinium') !== false || strpos($nom_du_verre, 'Elysium') !== false  || strpos($nom_du_verre, 'Top Office') !== false  || strpos($nom_du_verre, 'Bifocal') !== false   || strpos($nom_du_verre, 'Bfocal') !== false  || strpos($nom_du_verre, 'Trifocal') !== false || strpos($nom_du_verre, 'Panier A Office') !== false || strpos($nom_du_verre, 'Panier A Double Foyer') !== false || strpos($nom_du_verre, 'Mineral') !== false || strpos($nom_du_verre, 'Minéral') !== false)
+//			{
+//
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 8.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 8.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 4.00;
+//
+//					}
+//
+//			}
+//			if(strpos($nom_du_verre, 'T-One') !== false || strpos($nom_du_verre, 'Panier A Initial') !== false)
+//			{
+//
+//				if(strpos($nom_du_verre, 'Transition') !== false || strpos($nom_du_verre, 'Xtractive') !== false || strpos($nom_du_verre, 'Polarisé') !== false || strpos($nom_du_verre, 'Drivewear') !== false){
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 8.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 8.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 16.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 18.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 4.00;
+//
+//					}
+//				}
+//				else
+//				{
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 12.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 20.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 22.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 20.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 12.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 22.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 20.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 22.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//				}
+//
+//			}
+//			if(strpos($nom_du_verre, 'E-Space') !== false)
+//			{
+//
+//				if(strpos($nom_du_verre, 'Transition') !== false || strpos($nom_du_verre, 'Xtractive') !== false || strpos($nom_du_verre, 'Polarisé') !== false || strpos($nom_du_verre, 'Drivewear') !== false){
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 10.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 10.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 3.00;
+//
+//					}
+//				}
+//				else
+//				{
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 19.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 21.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 19.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 11.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 21.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 19.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 21.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//				}
+//
+//			}
+//			if(strpos($nom_du_verre, 'Eyefatigue') !== false || strpos($nom_du_verre, 'Freestyle') !== false || strpos($nom_du_verre, 'Panier A Unifocal RX') !== false)
+//			{
+//					if($name == 'Durci' || $name == '')
+//					{
+//						$res['prix'] = 0.00;
+//
+//					}
+//					elseif(strpos($name, 'Miroir') !== false)
+//					{
+//						$res['prix'] = 14.00;
+//
+//					}
+//					elseif($name == 'Satin')
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//					elseif($name == 'Achromatique')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin Max')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif($name == 'Satin UV')
+//					{
+//						$res['prix'] = 10.00;
+//
+//					}
+//					elseif($name == 'BlueCoat')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin Face Interne')
+//					{
+//						$res['prix'] = 7.00;
+//
+//					}
+//					elseif($name == 'Satin Max Face Interne')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif($name == 'Achromatique Face Interne')
+//					{
+//						$res['prix'] = 15.00;
+//
+//					}
+//					elseif($name == 'Satin UV Face Interne')
+//					{
+//						$res['prix'] = 10.00;
+//
+//					}
+//					elseif($name == 'Satin Drive Or')
+//					{
+//						$res['prix'] = 17.00;
+//
+//					}
+//					elseif(strpos($name, 'HMC') !== false)
+//					{
+//						$res['prix'] = 3.00;
+//
+//					}
+//				}
 			if(isset($res))
 			{
 				$t[]=$res;
 			}
-
-
-
-//var_dump($t);
-	echo json_encode($t);
-
+		echo json_encode($t);
     }
 
     public function getOptions_priceOLD($recovery=false){
@@ -1934,7 +1930,6 @@ class index extends MY_Controller {
                     $order_data['total_remise_paire'] = 0;
 
                     if ($order = $this->m_commande->addOrder($order_data)) {
-
                         $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                         $this->db->where(array('user_id' => $order_data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
 
@@ -1961,8 +1956,6 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
-
-
             $add = $this->input->post();
 
             $data['commentaire'] = "";
@@ -2005,18 +1998,22 @@ class index extends MY_Controller {
 
                     $data['total_remise_paire'] = 0;
                     $pair_order_data->total_remise_paire = 0;
-
                     if ($data['discount']['on'] == 'order') {
+                        $data['pourcent_remise'] = $data['discount']['amount'];
+//                        $data['pourcent_remise'] = 10;
+
                         $data['total_remise_paire'] = (($data['prix_verre'] / 100) * $data['discount']['amount']);
-                        $data['prix_verre'] = $data['prix_verre'] - $data['total_remise_paire'];
+                        $data['prix_verre'] = $data['prixDH'] * (100 - $data['pourcent_remise']) /
+                                                                      100;
                         $data['prix_verre'] = round($data['prix_verre'], 2, PHP_ROUND_HALF_UP);
-                        $data['total_commande'] = $data['prix_verre']*$verres;
+                        $data['total_commande'] = round(($data['prixDH'] + $data['prixGH']) *
+                                                        (100 - $data['pourcent_remise']) / 100, 2,
+                        PHP_ROUND_HALF_UP);
 
-                        $data['prixDH'] = $data['prix_verre'];
-		   				$data['prixGH'] = $data['prix_verre'];
+//                        $data['prixDH'] = $data['prix_verre'];
+//		   				$data['prixGH'] = $data['prix_verre'];
 		   		        $data['prixUnitaireD']= $data['prix_verre'];
-		   		        $data['prixUnitaireG']= $data['prix_verre'];
-
+		   		        $data['prixUnitaireG']= $data['total_commande'] - $data['prix_verre'];
 
                      //   echo "Remise on ORDER - Total remise paire: ".$data['total_remise_paire']." - Prix verre: ".$data['prix_verre'];
                      //   echo " - Data total commande: ".$data['total_commande'];
@@ -2029,6 +2026,7 @@ class index extends MY_Controller {
                      //   echo "Remise on PAIR - Total remise paire: ".$pair_order_data->total_remise_paire." - Prix verre: ".$pair_order_data->prix_verre;
                      //   echo " - Pair_order_data total commande: ".$pair_order_data->total_commande;
                     }
+//                    var_dump('test');die;
 
                     $pair_order_data = (array) $pair_order_data;
                     $pair_order_temp_id = $pair_order_data['id_commande'];
@@ -2180,7 +2178,6 @@ class index extends MY_Controller {
             else {
                 echo json_encode(array('status' => 'error'));
             }
-
             $this->session->unset_userdata('order');
         }
     }
@@ -2689,7 +2686,6 @@ class index extends MY_Controller {
                         }
 
                     }
-
 					$this->session->set_userdata('order', $data);
 
 					$data['recap_commande'] = $data;
@@ -2735,6 +2731,7 @@ class index extends MY_Controller {
     public function setOrderRecapNew(){
 
 		if($this->input->is_ajax_request()){
+
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
@@ -3183,7 +3180,6 @@ class index extends MY_Controller {
 						$data_commandeD['verre']['correction_droit']['teinte']= $data['teinteD'];
 					}
 				}
-
 				if($data['teintepersoG']!="")
 				{
 					$data_commande['verre']['correction_gauche']['teinte']= $data['teintepersoG'];
@@ -3221,22 +3217,31 @@ class index extends MY_Controller {
 				{
 					$data_commande['verre']['correction_droit']['PrismeSphere'] = $data['PrismeSphereD'];
 					$data_commande['verre']['dioptrie_droit'] = $data['PrismeSphereD'];
-				}
+                    $data_commandeD['verre']['correction_droit']['PrismeSphere'] = $data['PrismeSphereD'];
+                    $data_commandeD['verre']['dioptrie_droit'] = $data['PrismeSphereD'];
+
+                }
 				if(isset($data['PrismeCylindreD']))
 				{
 					$data_commande['verre']['correction_droit']['PrismeCylindre'] = $data['PrismeCylindreD'];
 					$data_commande['verre']['base_droit'] = $data['PrismeCylindreD'];
+					$data_commandeD['verre']['correction_droit']['PrismeCylindre'] = $data['PrismeCylindreD'];
+					$data_commandeD['verre']['base_droit'] = $data['PrismeCylindreD'];
 				}
 
 				if(isset($data['PrismeSphereG']))
 				{
 					$data_commande['verre']['correction_gauche']['PrismeSphere'] = $data['PrismeSphereG'];
 					$data_commande['verre']['dioptrie_gauche'] = $data['PrismeSphereG'];
+					$data_commandeG['verre']['correction_gauche']['PrismeSphere'] = $data['PrismeSphereG'];
+					$data_commandeG['verre']['dioptrie_gauche'] = $data['PrismeSphereG'];
 				}
 				if(isset($data['PrismeCylindreG']))
 				{
 					$data_commande['verre']['correction_gauche']['PrismeCylindre'] = $data['PrismeCylindreG'];
 					$data_commande['verre']['base_gauche'] = $data['PrismeCylindreG'];
+					$data_commandeG['verre']['correction_gauche']['PrismeCylindre'] = $data['PrismeCylindreG'];
+					$data_commandeG['verre']['base_gauche'] = $data['PrismeCylindreG'];
 				}
 
 				if(isset($data['diametreD']))
@@ -3500,7 +3505,7 @@ class index extends MY_Controller {
 					}
 
 				}
-				$this->session->set_userdata('order', $data);
+                $this->session->set_userdata('order', $data);
 
 				$data['recap_commande'] = $data;
 
@@ -4281,11 +4286,11 @@ class index extends MY_Controller {
            $data = $this->input->post('login');
 		   if(isset($data['email']) && isset($data['pass'])){
 		    $data['email'] = trim($data['email']);
-		    $data['pass'] = trim($data['pass']);
+//		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
-				   if(($data_user = $this->m_users->check($data)) !== false){
+                   if(($data_user = $this->m_users->check($data)) !== false){
 
-					   $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
+                       $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
 					   $data_user['user_info'] = $data_user[0];
 					   unset($data_user[0]);
@@ -4349,15 +4354,15 @@ class index extends MY_Controller {
             $old_password = $this->input->post('old_password');
             $password = $this->input->post('password');
             $password_confirm = $this->input->post('password_confirm');
-
-            if(md5($user[0]->email.'&&'.$old_password) == $user[0]->pass) {
+            $mail = trim($user[0]->email);
+            if(md5($mail.'&&'.$old_password) == $user[0]->pass) {
 
 
                 if($password == $password_confirm) {
 
                     if($password != '') {
 
-                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($user[0]->email.'&&'.$password)))){
+                        if($this->m_users->updateUser(array('id_users' => $user[0]->id_users, 'pass' => md5($mail.'&&'.$password)))){
                             echo json_encode(array('status' => 'ok'));
                         }
                         else {
@@ -4675,7 +4680,9 @@ class index extends MY_Controller {
                     $data['date_inscription'] = date("Y-m-d H:i:s");
 
                     if(($return = $this->m_users->addUser($data))!=""){
-                        echo json_encode(array('status'=> $return));
+                        setlocale(LC_TIME, "fr_FR");
+                        $date = strftime("%A %d %B %Y", strtotime($return->date_inscription));
+                        echo json_encode(array('status'=> 'exists', 'date' => $date));
                     }
                     else{
                         echo json_encode(array('status'=> 'ok'));
@@ -4795,23 +4802,27 @@ class index extends MY_Controller {
     public function sendMailresetPass(){
         if($this->input->is_ajax_request()){
             $data = $this->input->post();
-			$data['numero_finess'] = trim($data['numero_finess']);
-            if(!empty($data['numero_finess'])){
-                if(($data = $this->m_users->getUserByNumeroFiness($data['numero_finess'])) !== false){
+			$data['email'] = trim($data['email']);
+//			var_dump($data['email']);die;
+            if(!empty($data['email'])){
+                if(($data = $this->m_users->getUserByMail($data['email'])) !== false){
                     $data['email'] = $data[0]->email;
                     $lien = '<a href="'.$this->config->item('base_url').'index/recovery/'.$data[0]->pass.'">'.$this->config->item('base_url')."index/recovery/".$data[0]->pass.'</a>';
-                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br><br> cet email fait suite à une demande de réinitialisation de mot de passe. Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br><br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
+                    $mess_txt = "<html><head></head><body><b>Bonjour</b>!<br>
+                        <br> cet email fait suite à une demande de réinitialisation de mot de passe. 
+                        Cliquer sur le lien suivant pour accèder à la page de changement de mot de passe : <br>
+                        <br>".$lien." <br><br> Si cette demande ne provient pas de vous, veuillez ne pas tenir compte de cet email.<br><br> A bientôt sur Optieyes !</body></html>";
 
                     $subjet_txt = "Réinitialisation de votre mot de passe";
-
                     $this->mail($data,$mess_txt,true,$subjet_txt);
                 }
                 else{
-                    echo "numero_siret_does_not_exist";
+//                    echo "numero_siret_does_not_exist";
+                    echo "email_not_good";
                 }
             }
             else
-                echo "empty_numero_siret";
+                echo "empty_mail";
         }
         else
             $this->redirect();
@@ -5127,7 +5138,7 @@ class index extends MY_Controller {
 			$user_id = $this->data['user_info']->id_users;
 
             $data = $this->session->userdata('order');
-
+            //var_dump($data['montures']);die;
 			$total_order = 0;
 
 			//echo json_encode($data['montures']);
@@ -5199,7 +5210,7 @@ class index extends MY_Controller {
 			//$data['client_ref'] = " ";
 			$userdata = $this->m_users->getUserById($user_id)[0];
 
-			$data['commentaire'] = $data['commentaire'];
+			$data['commentaire'] = isset($data['commentaire']) ? $data['commentaire'] : "";
 			$data['client_ref'] = $this->input->post('ref_client');
 
 
@@ -5217,7 +5228,7 @@ class index extends MY_Controller {
             );
 
 			$this->db->query('DELETE FROM commande_montures_temp WHERE id_client = "'.$user_id.'" AND status=0');
-
+//            var_dump($args);die;
             if($this->m_montures->addMonturesOrder($args)) {
                 echo 'ok';
             }
@@ -5575,6 +5586,7 @@ class index extends MY_Controller {
 						echo 'Taille: '.$monture->size.'<br />';
 						echo 'Couleur: '.$monture->couleur.'<br />';
 						echo 'Prix: '.$monture->prix_vente.'&#8364;<br />';
+						echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
 						echo '<a class="btn btn-warning monture-select" rel="'.$monture->id.'">Ajouter à mon panier</a>';
 						echo '</div>';
 					}
@@ -5588,9 +5600,8 @@ class index extends MY_Controller {
 
 		$data['user_info'] = $this->data['user_info'];
 		$data['client_ref'] = $this->input->post('ref_client');
-
 		$monture_id = (int) $this->input->post('id');
-
+        $qty = $this->input->post('qty');
 
 		$this->db->from('commande_montures_temp');
         $this->db->select('*');
@@ -5598,6 +5609,7 @@ class index extends MY_Controller {
 		$this->db->where('id_monture', $monture_id);
 		$this->db->where('status', 0);
 		$query = $this->db->get();
+
 
 		//echo "query->num_rows:".$query->num_rows();
 
@@ -5612,7 +5624,7 @@ class index extends MY_Controller {
 		{
 			//$data_r = array('id_client' => $data['user_info']->id_users, 'id_monture' => $monture_id, 'qty' => 1, 'date' => date('Y-m-d H:i:s'), 'status' => 0);
             //$this->db->insert('commande_montures_temp', $data_r);
-            $this->db->query("INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '".$data['user_info']->id_users."', '".$monture_id."', '1', '".date('Y-m-d H:i:s')."', '0', '0', '0', '');");
+            $this->db->query("INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '".$data['user_info']->id_users."', '".$monture_id ."', '". $qty."', '". date('Y-m-d H:i:s')."', '0', '0', '0', '');");
 
 		}
 	}
@@ -5640,7 +5652,6 @@ class index extends MY_Controller {
 	}
 
 	public function add_pack_to_order() {
-
 		//$data['user_info'] = $this->data['user_info'];
 		$id_user = $this->data['user_info']->id_users;
 		$data['client_ref'] = $this->input->post('ref_client');
@@ -5699,7 +5710,7 @@ class index extends MY_Controller {
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
                 $data['tarif_packaging'] = $userdata->tarif_packaging;
 				$this->session->set_userdata('order', $data);
-				echo $this->load->view('ajax_show_montures_order',$data);
+                echo $this->load->view('ajax_show_montures_order',$data);
 			}
 			else
 			{
@@ -5742,7 +5753,7 @@ class index extends MY_Controller {
 
 
             $this->load->view('montures_order', array(
-                'modules' => array(
+                    'modules' => array(
                     'sweetalert' => true,
                     'touchspin' => true,
                 ),

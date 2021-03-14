@@ -112,7 +112,7 @@ $('#additionG').on('keydown keyup', function(e) {
 	
 	$("#Stock_1").prop("checked", true);
 
-	$('.display_fabrication').addClass('hide')
+	$('.display_fabrication').addClass('hide');
 	$('.pager .previous').removeClass('disabled');
 
 $('#cotec').on('change', function() {
@@ -2267,7 +2267,8 @@ $('#type_de_verreG').on('change', function() {
 							success: function (data) {	
 								$.each(data, function(key, value){
 									$('#prixVerreG').val(value.prix);
-									$('#prixG').val(value.prix+"€");
+									calculPriceG();
+									// $('#prixG').val(value.prix+"€");
     								$('#prixGH').val(value.prix);
 								});
 							}
@@ -2305,7 +2306,8 @@ $('#type_de_verreG').on('change', function() {
 							success: function (data) {	
 								$.each(data, function(key, value){
 									$('#prixVerreG').val(value.prix);
-									$('#prixG').val(value.prix+"€");
+									calculPriceG();
+									// $('#prixG').val(value.prix+"€");
     								$('#prixGH').val(value.prix);
 								});
 							}
@@ -2464,7 +2466,8 @@ $('#type_de_verreG').on('change', function() {
     else
     {
     	$('#divprixG').addClass('hide');
-    	$('#prixG').val("");
+		calculPriceG();
+		// $('#prixG').val("");
     	$('#prixGH').val("");
     }
     
@@ -2507,24 +2510,25 @@ $('#quantiteD').on('change', function() {
 		var prix = parseFloat($('#prixD').val().replace('€', ''));
 	}*/
 	
-	var prixverre =  parseFloat($('#prixVerreD').val());
-	var prixteinte =  parseFloat($('#prixTeinteD').val());
-	var prixtraitement =  parseFloat($('#prixTraitementD').val());
+	// var prixverre =  parseFloat($('#prixVerreD').val());
+	// var prixteinte =  parseFloat($('#prixTeinteD').val());
+	// var prixtraitement =  parseFloat($('#prixTraitementD').val());
 	
-	var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
+	calculPriceD();
 	
 	
-	var qty = $('#quantiteD').val();
-	var prixf = prix*qty;
-	console.log("PrixD3")
-	$('#prixD').val(prixf.toFixed(2)+'€');
-	$('#prixDH').val(prixf.toFixed(2)+'€');	
+	//var qty = $('#quantiteD').val();
+	//var prixf = prix*qty;
+	//console.log("PrixD3")
+	//$('#prixD').val(prixf.toFixed(2)+'€');
+	//$('#prixDH').val(prixf.toFixed(2)+'€');
 	
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
 		$('#quantiteG').val(qty);
 		$('#quantiteG option[value="'+ qty +'"]').prop('selected', true);
-		$('#prixG').val($('#prixD').val());
+		calculPriceG();
+		//$('#prixG').val($('#prixD').val());
 		$('#prixGH').val($('#prixDH').val());
 	}
 	console.log("quantiteD copyVersDroit");
@@ -2544,15 +2548,16 @@ $('#quantiteG').on('change', function() {
 	{
 		var prix = parseFloat($('#prixG').val().replace('€', ''));
 	}*/
-	var prixverre =  parseFloat($('#prixVerreG').val());
-	var prixteinte =  parseFloat($('#prixTeinteG').val());
-	var prixtraitement =  parseFloat($('#prixTraitementG').val());
-	
-	var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
-	
-	var qty = $('#quantiteG').val();
-	var prixf = prix*qty;
-	$('#prixG').val(prixf.toFixed(2)+'€');
+	// var prixverre =  parseFloat($('#prixVerreG').val());
+	// var prixteinte =  parseFloat($('#prixTeinteG').val());
+	// var prixtraitement =  parseFloat($('#prixTraitementG').val());
+	//
+	// var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
+	//
+	// var qty = $('#quantiteG').val();
+	// var prixf = prix*qty;
+	// $('#prixG').val(prixf.toFixed(2)+'€');
+	calculPriceG();
 	$('#prixGH').val(prixf.toFixed(2)+'€');	
 	
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
@@ -2560,7 +2565,8 @@ $('#quantiteG').on('change', function() {
 		$('#quantiteG').val(qty);
 		$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 		console.log("PrixD4")
-		$('#prixD').val($('#prixG').val());
+		calculPriceG();
+		//$('#prixD').val($('#prixG').val());
 		$('#prixDH').val($('#prixGH').val());
 	}
 });
@@ -3331,13 +3337,16 @@ $('#teinteD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					   "name" : nomteinte,
+					   "nom_du_verre" : nomverre,
+					   "indice": indice,
+					   "generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -3353,12 +3362,16 @@ $('#teinteD').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementD,
 					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3366,7 +3379,7 @@ $('#teinteD').on('change', function() {
 							var prixteinte = $('#prixTeinteD').val();
 							$.each(data, function(key, value){
 								$('#prixTraitementD').val(value.prix);
-								var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)).toFixed(2);
+								var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
 								console.log("PrixD5")
 								$('#prixD').val(tot+"€");
 								$('#prixDH').val(tot+"€");
@@ -3383,7 +3396,7 @@ $('#teinteD').on('change', function() {
 				
 				setTimeout(function(){
 							var prixteinte = $('#prixTeinteD').val();
-							var tot = (parseFloat(prixverre)+parseFloat(prixteinte)).toFixed(2);
+							var tot = (parseFloat(prixverre)+parseFloat(prixteinte)+addPrismeGalbeDroit()).toFixed(2);
 							console.log("PrixD6")
 							$('#prixD').val(tot+"€");
 							$('#prixDH').val(tot+"€");
@@ -3399,19 +3412,23 @@ $('#teinteD').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementD,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
 				
 					$.each(data, function(key, value){
 						$('#prixTraitementD').val(value.prix);
-						var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
+						var tot = (parseFloat(prixverre)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
 						console.log("PrixD7")
 						$('#prixD').val(tot+"€");
 						$('#prixDH').val(tot+"€");
@@ -3425,7 +3442,7 @@ $('#teinteD').on('change', function() {
 			}
 			else
 			{
-				var tot = parseFloat(prixverre).toFixed(2);
+				var tot = (parseFloat(prixverre)+addPrismeGalbeDroit()).toFixed(2);
 				console.log("PrixD8")
 				$('#prixD').val(tot+"€");
 				$('#prixDH').val(tot+"€");
@@ -3495,14 +3512,18 @@ $('#teinteG').on('change', function() {
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$('#divprixG').removeClass('hide');
 			
 			$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					"name" : nomteinte,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -3518,12 +3539,16 @@ $('#teinteG').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementG,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
@@ -3531,9 +3556,10 @@ $('#teinteG').on('change', function() {
 							var prixteinte = $('#prixTeinteG').val();
 							$.each(data, function(key, value){
 								$('#prixTraitementG').val(value.prix);
-								var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)).toFixed(2);
-								$('#prixG').val(tot+"€");
-								$('#prixGH').val(tot+"€");
+								calculPriceG();
+								// var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)).toFixed(2);
+								// $('#prixG').val(tot+"€");
+								$('#prixGH').val($('#prixG').val());
 							});
 						},1000);
 					}
@@ -3546,10 +3572,11 @@ $('#teinteG').on('change', function() {
 			{
 				
 				setTimeout(function(){
-							var prixteinte = $('#prixTeinteG').val();
-							var tot = (parseFloat(prixverre)+parseFloat(prixteinte)).toFixed(2);
-							$('#prixG').val(tot+"€");
-							$('#prixGH').val(tot+"€");
+							// var prixteinte = $('#prixTeinteG').val();
+							// var tot = (parseFloat(prixverre)+parseFloat(prixteinte)).toFixed(2);
+							// $('#prixG').val(tot+"€");
+							calculPriceG();
+							$('#prixGH').val($('#prixG').val());
 						},1000);
 				
 			}
@@ -3562,21 +3589,26 @@ $('#teinteG').on('change', function() {
 			
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 					type: "POST",
 					url: "/index/getOptions_price",
 					data: {"code" : traitementG,
-					"name" : nomtraitement,
-					"nom_du_verre" : nomverre
+						"name" : nomtraitement,
+						"nom_du_verre" : nomverre,
+						"indice": indice,
+						"generation": generation
 					},
 					dataType: "json",
 					success: function (data) {	
 				
 					$.each(data, function(key, value){
 						$('#prixTraitementG').val(value.prix);
-						var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
-						$('#prixG').val(tot+"€");
-						$('#prixGH').val(tot+"€");
+						// var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
+						// $('#prixG').val(tot+"€");
+						calculPriceG();
+						$('#prixGH').val($('#prixG').val());
 					});
 			
 					}
@@ -3587,9 +3619,10 @@ $('#teinteG').on('change', function() {
 			}
 			else
 			{
-				var tot = parseFloat(prixverre).toFixed(2);
-				$('#prixG').val(tot+"€");
-				$('#prixGH').val(tot+"€");
+				// var tot = parseFloat(prixverre).toFixed(2);
+				// $('#prixG').val(tot+"€");
+				calculPriceG();
+				$('#prixGH').val($('#prixG').val());
 			}
 		}
     }
@@ -3711,6 +3744,15 @@ $('#galbeD').on('change', function() {
 	*/
 	console.log("galbeD copyVersDroit");
 	copyVersDroit();
+	// calculPrice();
+});
+
+$('#PrismeSphereD').on('change keyup paste click', function() {
+	calculPrice();
+});
+
+$('#PrismeSphereG').on('change keyup paste click', function() {
+	calculPrice();
 });
 
 $('#traitementD').on('change', function() {
@@ -3815,13 +3857,17 @@ $('#traitementD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$.ajax({
 				type: "POST",
 				url: "/index/getOptions_price",
 				data: {"code" : traitementD,
-				"name" : nomtraitement,
-				"nom_du_verre" : nomverre
+					"name" : nomtraitement,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -3834,12 +3880,16 @@ $('#traitementD').on('change', function() {
 			//console.log("GGGGGGTEINTED:"+teinteD+"dddddd")
 			if(teinteD != "" && teinteD != null)
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					"name" : nomteinte,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -3847,7 +3897,7 @@ $('#traitementD').on('change', function() {
 							var prixtraitement = $('#prixTraitementD').val();
 							$.each(data, function(key, value){
 								$('#prixTeinteD').val(value.prix);
-								var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)).toFixed(2);
+								var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
 								console.log("PrixD9")
 								$('#prixD').val(tot+"€");
 								$('#prixDH').val(tot+"€");
@@ -3861,7 +3911,7 @@ $('#traitementD').on('change', function() {
 			{
 				setTimeout(function(){
 					var prixtraitement = $('#prixTraitementD').val();
-					var tot = (parseFloat(prixverre)+parseFloat(prixtraitement)).toFixed(2);
+					var tot = (parseFloat(prixverre)+parseFloat(prixtraitement)+addPrismeGalbeDroit()).toFixed(2);
 					//console.log("prixtraitementD:"+prixtraitement+" - tot:"+tot);
 					console.log("PrixD10")
 					$('#prixD').val(tot+"€");
@@ -3878,19 +3928,22 @@ $('#traitementD').on('change', function() {
 			
 			if(nomteinte != "----" && nomteinte != "Aucune")
 			{
-				
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					"name" : nomteinte,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {
 					$.each(data, function(key, value){
 						$('#prixTeinteD').val(value.prix);
-						var tot = (parseFloat(prixverre)+parseFloat(value.prix)).toFixed(2);
+						var tot = (parseFloat(prixverre)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
 						console.log("PrixD11")
 						$('#prixD').val(tot+"€");
 						$('#prixDH').val(tot+"€");
@@ -3903,7 +3956,7 @@ $('#traitementD').on('change', function() {
 			}
 			else
 			{
-				var tot = parseFloat(prixverre).toFixed(2);
+				var tot = (parseFloat(prixverre)+addPrismeGalbeDroit()).toFixed(2);
 				console.log("PrixD12")
 				$('#prixD').val(tot+"€");
 				$('#prixDH').val(tot+"€");
@@ -4077,13 +4130,17 @@ $('#traitementG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+
+			var indice = $('#indices').val();
+			var generation = $('#generation').val();
 			$.ajax({
 				type: "POST",
 				url: "/index/getOptions_price",
 				data: {"code" : traitementG,
-				"name" : nomtraitement,
-				"nom_du_verre" : nomverre
+					"name" : nomtraitement,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
@@ -4096,37 +4153,41 @@ $('#traitementG').on('change', function() {
 			
 			if(teinteG != ""  && teinteG != null)
 			{
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					"name" : nomteinte,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {	
 					setTimeout(function(){
-							var prixtraitement = $('#prixTraitementG').val();
-							var prixverre = $('#prixVerreG').val();
+							// var prixtraitement = $('#prixTraitementG').val();
+							// var prixverre = $('#prixVerreG').val();
 							$.each(data, function(key, value){
 								$('#prixTeinteG').val(value.prix);
 								
-								console.log("prixVerreG:");
-								console.log(prixverre);
-								
-								console.log("prixTraitementG:");
-								console.log(prixtraitement);
-								
-								console.log("prixTeinteG:");
-								console.log(value.prix);
-								
-								var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)).toFixed(2);
-								
-								console.log("tot:");
-								console.log(tot);
-								
-								$('#prixG').val(tot+"€");
-								$('#prixGH').val(tot+"€");
+								// console.log("prixVerreG:");
+								// console.log(prixverre);
+								//
+								// console.log("prixTraitementG:");
+								// console.log(prixtraitement);
+								//
+								// console.log("prixTeinteG:");
+								// console.log(value.prix);
+								//
+								// var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)).toFixed(2);
+								//
+								// console.log("tot:");
+								// console.log(tot);
+								calculPriceG();
+								// $('#prixG').val(tot+"€");
+								$('#prixGH').val($('#prixG').val());
 							});
 						},1000);
 					}
@@ -4136,11 +4197,12 @@ $('#traitementG').on('change', function() {
 			else
 			{
 				setTimeout(function(){
-					var prixtraitement = $('#prixTraitementG').val();
-					var prixverre = $('#prixVerreG').val();
-					var tot = (parseFloat(prixverre)+parseFloat(prixtraitement)).toFixed(2);
-					$('#prixG').val(tot+"€");
-					$('#prixGH').val(tot+"€");
+					// var prixtraitement = $('#prixTraitementG').val();
+					// var prixverre = $('#prixVerreG').val();
+					// var tot = (parseFloat(prixverre)+parseFloat(prixtraitement)).toFixed(2);
+					// $('#prixG').val(tot+"€");
+					calculPriceG();
+					$('#prixGH').val($('#prixG').val());
 				},1000);
 			}
 		}
@@ -4153,13 +4215,16 @@ $('#traitementG').on('change', function() {
 			
 			if(nomteinte != "----" && nomteinte != "Aucune")
 			{
-				
+				var indice = $('#indices').val();
+				var generation = $('#generation').val();
 				$.ajax({
 				type: "POST",
 				url: "/index/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+					"name" : nomteinte,
+					"nom_du_verre" : nomverre,
+					"indice": indice,
+					"generation": generation
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4196,6 +4261,7 @@ $('#traitementG').on('change', function() {
 });
 
 $('#galbeG').on('change', function() {
+
 var stockD = $('input[name="dispoD"]:checked').val();
 var galbeD = $('#galbeD').val();
 var galbeG = $('#galbeG').val();
@@ -4238,6 +4304,8 @@ var galbeG = $('#galbeG').val();
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
+	calculPrice();
+
 });
 
 $('#afficherV').on('click', function() {
@@ -6665,15 +6733,34 @@ function copyVersDroit()
 				
 				var prixtraitement = $('#prixTraitementD').val();
 				console.log("prixTraitementD:");
-				console.log(prixtraitement);
-				
+				console.log(prixtraitement)
+
+				var prixPrismeG = 0;
+				var prixGalbeG = 0;
+				if ($('#PrismeSphereG').val()) {
+					prixPrismeG = 3.9;
+				}
+				if ($('#galbeG').val() != 'Standard') {
+					prixGalbeG = 3.9;
+				}
+				console.log("prixPrismeG:");
+				console.log(prixPrismeG);
+				console.log("prixGalbeG:");
+				console.log(prixGalbeG)
+
 				if(quantiteD!="")
 				{
-					var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
+					var tot = ( ((parseFloat(prixverre)
+						+parseFloat(prixtraitement)
+						+parseFloat(prixteinte)
+						+parseFloat(prixPrismeG)
+						+parseFloat(prixGalbeG)
+						))*parseFloat(quantiteD)).toFixed(2);
 				}
 				else
 				{
-					var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)).toFixed(2);
+					var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+parseFloat(prixPrismeG)
+						+parseFloat(prixGalbeG)).toFixed(2);
 				}
 				console.log("tot:");
 				console.log(tot);
@@ -6723,34 +6810,34 @@ function copyVersDroit()
 					$('#prixTeinteG').val($('#prixTeinteD').val());
 					$('#prixTraitementG').val($('#prixTraitementD').val());
 				    
-				    var prixverre = $('#prixVerreD').val();
-					console.log("prixVerreD:");
-					console.log(prixverre);
-				
-					var prixteinte = $('#prixTeinteD').val();
-					console.log("prixTeinteD:");
-					console.log(prixteinte);
-				
-					var prixtraitement = $('#prixTraitementD').val();
-					console.log("prixTraitementD:");
-					console.log(prixtraitement);
-				
-					if(quantiteD!="")
-					{
-						var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
-					}
-					else
-					{
-						var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)).toFixed(2);
-					}
+				    // var prixverre = $('#prixVerreD').val();
+					// console.log("prixVerreD:");
+					// console.log(prixverre);
+					//
+					// var prixteinte = $('#prixTeinteD').val();
+					// console.log("prixTeinteD:");
+					// console.log(prixteinte);
+					//
+					// var prixtraitement = $('#prixTraitementD').val();
+					// console.log("prixTraitementD:");
+					// console.log(prixtraitement);
+					//
+					// if(quantiteD!="")
+					// {
+					// 	var tot = ( ((parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)))*parseFloat(quantiteD)).toFixed(2);
+					// }
+					// else
+					// {
+					// 	var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)).toFixed(2);
+					// }
 					console.log("tot:");
-					console.log(tot);
-				
-					$('#prixG').val(tot+"€");
-					$('#prixGH').val(tot+"€");
+					// console.log(tot);
+					calculPrice();
+					// $('#prixG').val(tot+"€");
+					$('#prixGH').val($('#prixG').val());
 					
-					$('#prixG').val($('#prixD').val());
-					$('#prixGH').val($('#prixDH').val());
+					// $('#prixG').val($('#prixD').val());
+					$('#prixDH').val($('#prixD').val());
 			
 					$('#teinteGH').val($('#teinteDH').val());
 					$('#traitementGH').val($('#traitementDH').val());
@@ -6821,7 +6908,7 @@ function copyVersDroit()
 			$('#to_etape2').removeClass('disabled');
 		}
 	}
-	
+	calculPrice();
 }
 
 function copyVersGauche()
@@ -8173,3 +8260,122 @@ $(document).ready(function() {
 
 	
 });
+
+
+function addPrismeGalbeGauche() {
+	var prixPrisme = 0;
+	var prixGalbe = 0;
+	if ($('#PrismeSphereG').val()) {
+		prixPrisme = 3.9;
+	}
+	if ($('#galbeG').val() != 'Standard') {
+		prixGalbe = 3.9;
+	}
+	return parseFloat(prixPrisme) + parseFloat(prixGalbe);
+}
+
+function addPrismeGalbeDroit() {
+	var prixPrisme = 0;
+	var prixGalbe = 0;
+	if ($('#PrismeSphereD').val()) {
+		prixPrisme = 3.9;
+	}
+	if ($('#galbeD').val() != 'Standard') {
+		prixGalbe = 3.9;
+	}
+	return parseFloat(prixPrisme) + parseFloat(prixGalbe);
+}
+
+function addPrismeGalbeGauche() {
+	var prixPrisme = 0;
+	var prixGalbe = 0;
+	if ($('#PrismeSphereG').val()) {
+		prixPrisme = 3.9;
+	}
+	if ($('#galbeG').val() != 'Standard') {
+		prixGalbe = 3.9;
+	}
+	return parseFloat(prixPrisme) + parseFloat(prixGalbe);
+}
+
+function calculPrice() {
+	calculPriceD();
+	calculPriceG();
+}
+function calculPriceD() {
+	var droit = $('#droit').is(':checked');
+	if (!droit) {
+		$('#prixVerreD').val(0)
+	}
+	var quantiteD = $('#quantiteD').val();
+	var prixverre = $('#prixVerreD').val();
+	console.log("prixVerreD:");
+	console.log(prixverre);
+
+	var prixteinte = $('#prixTeinteD').val();
+	console.log("prixTeinteD:");
+	console.log(prixteinte);
+
+	var prixtraitement = $('#prixTraitementD').val();
+	console.log("prixTraitementD:");
+	console.log(prixtraitement);
+
+	var tot;
+	if(quantiteD != "")
+	{
+		tot = ( ((parseFloat(prixverre)
+			+parseFloat(prixtraitement)
+			+parseFloat(prixteinte)
+			+addPrismeGalbeDroit()
+		))*parseFloat(quantiteD)).toFixed(2);
+	}
+	else
+	{
+		tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+addPrismeGalbeDroit()).toFixed(2);
+	}
+	console.log("tot:");
+	console.log(tot);
+
+	$('#prixD').val(tot+"€");
+	$('#prixDH').val(tot+"€");
+
+}
+
+function calculPriceG() {
+	var gauche = $('#gauche').is(':checked');
+	if (!gauche) {
+		$('#prixVerreG').val(0)
+	}
+	var quantiteG = $('#quantiteG').val();
+	var prixverre = $('#prixVerreG').val();
+	console.log("prixVerreG:");
+	console.log(prixverre);
+
+	var prixteinte = $('#prixTeinteG').val();
+	console.log("prixTeinteG:");
+	console.log(prixteinte);
+
+	var prixtraitement = $('#prixTraitementG').val();
+	console.log("prixTraitementG:");
+	console.log(prixtraitement);
+
+	var tot;
+	if(quantiteD != "")
+	{
+		tot = ( ((parseFloat(prixverre)
+			+parseFloat(prixtraitement)
+			+parseFloat(prixteinte)
+			+addPrismeGalbeGauche()
+		))*parseFloat(quantiteG)).toFixed(2);
+	}
+	else
+	{
+		tot = (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+addPrismeGalbeGauche()).toFixed(2);
+	}
+	console.log("tot:");
+	console.log(tot);
+
+	$('#prixG').val(tot+"€");
+	$('#prixGH').val(tot+"€");
+
+}

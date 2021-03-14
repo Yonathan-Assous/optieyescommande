@@ -45,7 +45,12 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_grille_stock');
         $this->load->model('m_config');
 		$this->load->model('m_passer_commande_verre');
-		
+        $this->load->model('m_traitement');
+        $this->load->model('m_teinte');
+        $this->load->model('m_type_verre_solaire');
+        $this->load->model('m_lenses');
+        $this->load->model('m_lens_option');
+
 		
 		if($this->session->userdata('taux_tva') === false){
 			$taux_tva = $this->m_taux_tva->get_tva();
@@ -134,7 +139,6 @@ class MY_Controller extends CI_Controller {
       if(isset($data['email_from'])) {
           $this->email->from($data['email_from'], 'Crystal Commande');
       }
-
         switch($this->config->item('opti_env')) {
 
             case 'prod':
@@ -152,10 +156,12 @@ class MY_Controller extends CI_Controller {
             break;
 
             case 'dev':
+                $this->email->to('yonathan.optieyes@gmail.com');
+                //$this->email->cc('testproxicom@gmail.com');
+                break;
             default:
-
-            $this->email->to('optieyescommande@gmail.com');
-            $this->email->cc('testproxicom@gmail.com');
+                $this->email->to('optieyescommande@gmail.com');
+                $this->email->cc('testproxicom@gmail.com');
 
 
         }
@@ -182,7 +188,6 @@ class MY_Controller extends CI_Controller {
           else
           $this->email->attach($piece_jointe);
       }
-
 
             if($this->email->send()) {
                 return true;

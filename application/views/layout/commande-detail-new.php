@@ -190,8 +190,8 @@
 				if($recap_commande[0]->total_remise_paire > 0) {
 					echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
 				}
-				echo ($recap_commande[0]->prix_verre+$option_prix).' €';
-				
+                echo (number_format($recap_commande[0]->prix_verre+$option_prix,2, ',', '')).' €';
+
 				echo '</tr>';
 
             }
@@ -248,18 +248,23 @@
 					$recap_commande[0]->trad_fr = str_replace("E-Space","T-One",$recap_commande[0]->trad_fr);
 					$recap_commande[0]->libelle_verre = str_replace("E-Space","T-One",$recap_commande[0]->libelle_verre);
 				}
-				
-				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';
+				$prixVerreG = $recap_commande[0]->total_commande - $recap_commande[0]->prix_verre
+                              - $recap_commande[0]->tarif_express;
+				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr
+                     .$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';
 				echo '<td class="center">1</td>';
 				
 				echo '<td class="center">';
 				
 				if($recap_commande[0]->total_remise_paire > 0) {
-					echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
+					echo '<del>'.($prixVerreG+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
 				}
-				echo ($recap_commande[0]->prix_verre+$option_prix).' €';
-				
-				echo '</tr>';
+
+//				echo ($prixVerreG+$option_prix).' €';
+                echo (number_format($prixVerreG+$option_prix,2, ',', '')).' €';
+
+
+                echo '</tr>';
 
             }
                 

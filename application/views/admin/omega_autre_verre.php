@@ -1214,7 +1214,7 @@ $('#type_de_verreD').on('change', function() {
 							});*/
 
 							$.each(data, function(key, value){
-								$('#teinteD').append('<option value="'+ value.code +'">' + value.name + '</option>');
+								$('#teinteD').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 						
 							});
 							
@@ -1532,7 +1532,7 @@ $('#type_de_verreG').on('change', function() {
 						});*/
 
 						$.each(data, function(key, value){
-							$('#teinteG').append('<option value="'+ value.code +'">' + value.name + '</option>');
+							$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 					
 						});
 						
@@ -3321,7 +3321,7 @@ $(document).ready(function() {
 																				<div class="col-xs-2"><input type="text" class="form-control" name="sphereD" id="sphereD" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="text" class="form-control" name="cylindreD" id="cylindreD" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="number" class="form-control" name="axeD" id="axeD" value='0' min='0' max="360"></div>
-																				<div class="col-xs-2"><input type="text" class="form-control" name="additionD" id="additionD" value="+0.75"></div>
+																				<div class="col-xs-2"><input type="text" class="form-control" name="additionD" id="additionD" value="+0.00"></div>
 																		 </div>
 																		 <div class="form-group row">
 																				<div class="col-xs-1"></div>
@@ -3331,7 +3331,7 @@ $(document).ready(function() {
 																				<div class="col-xs-2"><input type="text" class="form-control" name="sphereG" id="sphereG" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="text" class="form-control" name="cylindreG" id="cylindreG" value="+0.00"></div>
 																				<div class="col-xs-2"><input type="number" class="form-control" name="axeG" id="axeG" value='0' min='0' max="360"></div>
-																				<div class="col-xs-2"><input type="text" class="form-control" name="additionG" id="additionG" value="+0.75"></div>
+																				<div class="col-xs-2"><input type="text" class="form-control" name="additionG" id="additionG" value="+0.00"></div>
 																		 </div>
 																	</div>
 																  </div>
@@ -3780,15 +3780,50 @@ $(document).ready(function() {
 	$('#cylindreG').prop('readOnly', false);
 	$('#axeD').prop('readOnly', false);
 	$('#axeG').prop('readOnly', false);
-	
-    $('#sphereD').val("+0.00");
-    $('#cylindreD').val("+0.00");
-    $('#axeD').val("0");
-    $('#additionD').val("+0.00");
-    $('#sphereG').val("+0.00");
-    $('#cylindreG').val("+0.00");
-    $('#axeG').val("0");
-    $('#additionG').val("+0.00");
+
+	function addPlus(number) {
+        if (!number.includes("-")) {
+            number = "+" + number;
+        }
+        return number;
+    }
+	let sphereD = document.getElementById('spanSphereD').innerText;
+        sphereD = addPlus(sphereD)
+	let cylindreD = document.getElementById('spanCylindreD').innerText;
+        cylindreD = addPlus(cylindreD);
+    let axeD = 0;
+    if (document.getElementById("spanAxeD")) {
+        axeD = document.getElementById('spanAxeD').innerText;
+    }
+    let additionD = "+0.75";
+    if (document.getElementById("spanAdditionD")) {
+        additionD = document.getElementById('spanAdditionD').innerText;
+        additionD = addPlus(additionD);
+    }
+
+        $('#sphereD').val(sphereD);
+    $('#cylindreD').val(cylindreD);
+    $('#axeD').val(axeD);
+    $('#additionD').val(additionD);
+
+    let sphereG = document.getElementById('spanSphereG').innerText;
+        sphereG = addPlus(sphereG)
+    let cylindreG = document.getElementById('spanCylindreG').innerText;
+        cylindreG = addPlus(cylindreG);
+    let axeG = 0;
+    if (document.getElementById("spanAxeG")) {
+        axeG = document.getElementById('spanAxeG').innerText;
+    }
+    let additionG = "+0.75";
+    if (document.getElementById("spanAdditionG")) {
+        additionG = document.getElementById('spanAdditionG').innerText;
+        additionG = addPlus(additionG);
+    }
+
+    $('#sphereG').val(sphereG);
+    $('#cylindreG').val(cylindreG);
+    $('#axeG').val(axeG);
+    $('#additionG').val(additionG);
  	
     
     var lensFocalGroup = $(this).val();
@@ -3820,9 +3855,13 @@ $(document).ready(function() {
 			{
 				$("#detailG").css("display", "block");
 			}
-			$('#additionD').val("+0.75");
-			$('#additionG').val("+0.75");
-		  }
+			if ($('#additionD').val == 0 || $('#additionD').val == "+0.00") {
+                $('#additionD').val("+0.75");
+            }
+            if ($('#additionG').val == 0 || $('#additionD').val == "+0.00") {
+                $('#additionG').val("+0.75");
+            }
+          }
 		  else
 		  {
 			$("#generation_progressif").css("display", "none");
@@ -3839,8 +3878,11 @@ $(document).ready(function() {
 			$("#additionD").css("display", "none");
 			$("#additionG").css("display", "none");
 			$(".addition").css("display", "none");
-	
-		  }
+			console.log($('#additionD').val());
+              $('#additionD').val("+0.00");
+              $('#additionG').val("+0.00");
+
+          }
 		  else
 		  {
 			$("#additionD").css("display", "block");

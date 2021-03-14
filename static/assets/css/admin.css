@@ -297,4 +297,72 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dt
     }
 }
 
+.prix_traitement_inactive, .prix_teinte_inactive {
+    background-color: #de9595a3 !important;
+}
 
+.prix_traitement_active, .prix_teinte_active {
+    background-color: #95de97a3 !important;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: absolute;
+    left: 47%;
+    margin-top: 12px;
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 58px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 40px;
+}
+
+@media(max-width: 900px) {
+    .material-switch > label{
+        left: 46%;
+    }
+}
+
+@media(max-width: 767px) {
+    .material-switch > label{
+        left: 45%;
+    }
+}
+
+table.variation_factures td {
+    font-weight: bold;
+}

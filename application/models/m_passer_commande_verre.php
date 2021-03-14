@@ -187,9 +187,9 @@ class m_passer_commande_verre extends CI_Model
                                      . addslashes($from->name) . "', '" . $from->generation . "')");
 
             }
-            echo "OK";
+            return "OK";
         } else {
-            echo "";
+            return false;
         }
     }
 

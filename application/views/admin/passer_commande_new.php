@@ -3275,8 +3275,9 @@ $('#teinteD').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
-				},
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
+                },
 				dataType: "json",
 				success: function (data) {
 
@@ -3442,7 +3443,8 @@ $('#teinteG').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -3782,7 +3784,8 @@ $('#traitementD').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -3827,7 +3830,8 @@ $('#traitementD').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4045,7 +4049,8 @@ $('#traitementG').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4103,7 +4108,8 @@ $('#traitementG').on('change', function() {
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
 				"name" : nomteinte,
-				"nom_du_verre" : nomverre
+				"nom_du_verre" : nomverre,
+                "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {

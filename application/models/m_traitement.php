@@ -486,11 +486,38 @@ class m_traitement extends CI_Model
         echo "OK";
     }
 
+    public function duplicateTraitements($userId, $fromUserId) {
+        if ($userId != ""
+            && $fromUserId != "") {
+            $sql = "UPDATE `traitement_prix` SET `is_active` = 0 WHERE id_user = '" . $userId . "'";
+            $this->db->query($sql);
+            $fromRes = $this->db->query("SELECT * FROM traitement_prix WHERE id_user = '" . $fromUserId . "' AND is_active = 1");
+            $fromTraitements = $fromRes->result();
+            foreach ($fromTraitements as $fromTraitement) {
+                if (empty($fromTraitement->id_type_verre_solaire)) {
+                    $typeVerreSolaireId = 'NULL';
+                }
+                else {
+                    $typeVerreSolaireId = "'" . $fromTraitement->id_type_verre_solaire . "'";
+                }
+                $sql = "INSERT INTO `traitement_prix` (`id_traitement`, `id_lenses`, `id_indice_verre`, `id_type_verre_solaire`, `id_user`, `price`)
+                        VALUES ('" . $fromTraitement->id_traitement . "', '" . $fromTraitement->id_lenses . "', '" . $fromTraitement->id_indice_verre . "', " . $typeVerreSolaireId . ", '" . $userId . "', '" . $fromTraitement->price . "')";
+                $this->db->query($sql);
+
+            }
+            return "OK";
+        }
+        else {
+            return false;
+        }
+    }
+
     public function duplicateTraitementPrix458() {
         $userId = 458;
             $listUsers = [459,461,462,463,473,483];
             $this->duplicateTraitementPrix($userId, $listUsers);
     }
+
 
     public function duplicateTraitementPrix370() {
         $userId = 370;

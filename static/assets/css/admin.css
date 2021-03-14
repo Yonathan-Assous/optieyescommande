@@ -362,3 +362,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dt
         left: 45%;
     }
 }
+
+table.variation_factures td {
+    font-weight: bold;
+}

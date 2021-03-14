@@ -174,62 +174,85 @@ class m_teinte extends CI_Model
                 INNER JOIN teinte_prix 
                 WHERE teinte_prix.id_teinte = teintes.id 
                 AND teinte_prix.id_lenses = $lensId
+                AND id_user IS NULL
                 AND teinte_prix.is_active = 1";
 
         $query = $this->db->query($sql);
         $teintesArray = [];
         $teintes =  $query->result();
+        $teintesArray[0]["name"] = "All Normal";
+        $teintesArray[1]["name"] = "All Nm";
+
+
         foreach ($teintes as $key => $teinte) {
             foreach($teinte as $keyTeinte => $value)
-                $teintesArray[$key][$keyTeinte] = $value;
+                $teintesArray[$key+2][$keyTeinte] = $value;
         }
         return $teintesArray;
     }
 
     public
-    function getTeintePriceList($user_id)
+    function getTeintePriceList($user_id, $rowStart = NULL, $rowLength = NULL, $search = NULL)
     {
         $tab = array();
 
         if ($user_id != "") {
             $i = 0;
-
-            $sql = "SELECT teintes.id, prix.id_lenses, lenses.code as lens_code, lenses.trad_fr, teintes.name, teintes.code, prix.price, ref.price as price_initial, prix.is_active, prix.created_at, prix.desactived_at  FROM `teinte_prix` as prix
+            $sqlLimit = "";
+            if (!is_null($rowStart) && !is_null($rowLength)) {
+                $sqlLimit = "LIMIT " . $rowStart . "," . $rowLength;
+            }
+            $sqlSearch = "";
+            if (!is_null($search) && $search != "") {
+                $sqlSearch = "AND (lenses.code LIKE '%" . $search . "%' OR teintes.code LIKE '%" . $search . "%' OR lenses.trad_fr LIKE '%" . $search . "%' OR prix.price LIKE '%" . $search . "%' OR teintes.name LIKE '%" . $search . "%' OR prix.created_at LIKE '%" . $search . "%')";
+            }
+            $sql = "SELECT teintes.id, prix.id_lenses, lenses.code as lens_code, lenses.trad_fr, teintes.name, teintes.code, prix.price, prix.initial_price, prix.is_active, prix.created_at, prix.desactived_at  FROM `teinte_prix` as prix
                     INNER JOIN lenses ON id_lenses = lenses.id
                     INNER JOIN teintes ON id_teinte = teintes.id
-                    LEFT JOIN `teinte_prix` AS ref ON ref.`id_user` is NULL and prix.`id_teinte`=ref.`id_teinte` and prix.`id_lenses` = ref.`id_lenses`
                     WHERE prix.id_user = $user_id
-                    ORDER BY created_at DESC, prix.id DESC";
+                    $sqlSearch
+                    ORDER BY created_at DESC, prix.id DESC
+                    $sqlLimit";
             $res = $this->db->query($sql);
+            if ($res->num_rows() > 0) {
+                $teintes = $res->result();
+                foreach ($teintes as $teinte) {
+                    $tab[$i]['code'] = $teinte->lens_code . " / " . $teinte->code;
+                    $tab[$i]['verre'] = $teinte->trad_fr;
+                    $tab[$i]['prix'] = $teinte->price . ' (' . $teinte->initial_price . ')';
+                    $tab[$i]['teinte'] = $teinte->name;
+                    $tab[$i]['date'] = $teinte->created_at;
+                    if ($teinte->is_active) {
+                        $tab[$i]['action'] =
+                            '<a class="desactive_prix_teinte btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
+                            . $teinte->id_lenses . '*' . $teinte->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
+                    } else {
+                        $tab[$i]['action'] = $teinte->desactived_at;
+                    }
+                    $tab[$i]['active'] = $teinte->is_active;
 
-            $teintes = $res->result();
-            foreach ($teintes as $teinte) {
-                $tab[$i]['code'] = $teinte->lens_code . " / " . $teinte->code;
-                $tab[$i]['verre'] = $teinte->trad_fr;
-                $tab[$i]['prix'] = $teinte->price . ' (' . $teinte->price_initial . ')';
-                $tab[$i]['teinte'] = $teinte->name;
-                $tab[$i]['date'] = $teinte->created_at;
-                if ($teinte->is_active) {
-                    $tab[$i]['action'] =
-                        '<a class="desactive_prix_teinte btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="'
-                        . $teinte->id_lenses . '*' . $teinte->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
+                    $i++;
                 }
-                else {
-                    $tab[$i]['action'] = $teinte->desactived_at;
-                }
-                $tab[$i]['active'] = $teinte->is_active;
-
-                $i++;
             }
 
-
+//        var_dump($tab);die;
         }
         return $tab;
 
     }
 
-    public function setPriceTeinte($newPrice, $lensId, $nameVerre, $teinteId, $userId = NULL) {
+    public
+    function getCountTeintePriceList($user_id) {
+        $sql = "SELECT count(*) AS total_row  FROM `teinte_prix` as prix
+                    INNER JOIN lenses ON id_lenses = lenses.id
+                    INNER JOIN teintes ON id_teinte = teintes.id
+                    WHERE prix.id_user = $user_id
+                    ORDER BY created_at DESC, prix.id DESC";
+        $res = $this->db->query($sql);
+        return $res->result()[0]->total_row;
+    }
 
+    public function setPriceTeinte($newPrice, $lensId, $nameVerre, $teinteId, $userId = NULL) {
         if ($teinteId != ""
             && $newPrice != ""
             && $lensId != "") {
@@ -265,28 +288,7 @@ class m_teinte extends CI_Model
             else {
                 $userIdRequest = "id_user IS NULL";
             }
-            $sql = "SELECT * FROM `teinte_prix` 
-                WHERE id_teinte = $teinteId
-                AND id_lenses = $lensId
-                AND is_active = 1
-                AND $userIdRequest";
 
-            $query = $this->db->query($sql);
-            if ($query->num_rows() > 0) {
-                $teintePrix = $query->result()[0];
-                if ($teintePrix->price == $newPrice) {
-                    $insert = false;
-                }
-                else {
-                    $sql = "UPDATE `teinte_prix` SET `is_active` = 0
-                                  WHERE id_teinte = $teinteId
-                                  AND id_lenses = $lensId
-                                  AND is_active = 1
-                                  AND $userIdRequest";
-                    var_dump($sql);die;
-                    $this->db->query($sql);
-                }
-            }
             if (empty($typeVerreSolaireId)) {
                 $typeVerreSolaireId = 'NULL';
             }
@@ -299,12 +301,91 @@ class m_teinte extends CI_Model
             else {
                 $userId = "'" . $userId . "'";
             }
-            if ($insert) {
-                $sql = "INSERT INTO teinte_prix (id_teinte, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price) 
-                VALUES ('".$teinteId."','".$lensId."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."')";
+            if ($teinteId == "All Normal" || $teinteId == "All Nm") {
+                $teinteRequestToUpdate = "SELECT id FROM `teintes` WHERE ";
+
+                if ($teinteId == "All Normal") {
+                    $teinteRequest = "name NOT LIKE '%Nm%'";
+                }
+                else if ($teinteId == "All Nm") {
+                    $teinteRequest = "name LIKE '%Nm%'";
+                }
+                $teinteRequestToUpdate .= $teinteRequest;
+
+                $sql = "SELECT * FROM teinte_prix WHERE id_teinte IN ($teinteRequestToUpdate) 
+                    AND id_lenses = $lensId
+                    AND is_active = 1
+                    AND id_user IS NULL";
+//                var_dump($sql);die;
+                $res = $this->db->query($sql);
+                $teintes = $res->result();
+
+                $teintesArray = [];
+                foreach ($teintes as $teinte) {
+                    $teintesArray[$teinte->id_teinte] = $teinte->price;
+                }
+                $sql = "UPDATE `teinte_prix` SET `is_active` = 0, `desactived_at` = NOW()
+                              WHERE id_teinte IN ($teinteRequestToUpdate)
+                              AND id_lenses = $lensId
+                              AND is_active = 1
+                              AND $userIdRequest";
 
                 $this->db->query($sql);
+
+
+                $sql = "SELECT * FROM `teintes` 
+                        WHERE $teinteRequest
+                        AND active_to_user = 1";
+                $query = $this->db->query($sql);
+                $teintesInsert = $query->result();
+                foreach ($teintesInsert as $teinteInsert) {
+                    $sql = "INSERT INTO teinte_prix (id_teinte, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price, initial_price) 
+                    VALUES ('".$teinteInsert->id."','".$lensId."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."','".$teintesArray[$teinteInsert->id]."')";
+                    var_dump($sql);die;
+                    $this->db->query($sql);
+                }
+                //var_dump($teintesInsert);die;
             }
+            else {
+                $sql = "SELECT * FROM `teinte_prix` 
+                WHERE id_teinte = $teinteId
+                AND id_lenses = $lensId
+                AND is_active = 1
+                AND $userIdRequest";
+
+                $query = $this->db->query($sql);
+                if ($query->num_rows() > 0) {
+                    $teintePrix = $query->result()[0];
+                    if ($teintePrix->price == $newPrice) {
+                        $insert = false;
+                    }
+                    else {
+                        $sql = "UPDATE `teinte_prix` SET `is_active` = 0
+                                  WHERE id_teinte = $teinteId
+                                  AND id_lenses = $lensId
+                                  AND is_active = 1
+                                  AND $userIdRequest";
+                        $this->db->query($sql);
+                    }
+                }
+                if ($insert) {
+                    $sql = "SELECT * FROM teinte_prix WHERE id_teinte = $teinteId
+                    AND id_lenses = $lensId
+                    AND is_active = 1
+                    AND id_user IS NULL";
+//                var_dump($sql);die;
+                    $res = $this->db->query($sql);
+                    $initialPrice = $res->result()[0]->price;
+                    $sql = "INSERT INTO teinte_prix (id_teinte, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price, initial_price) 
+                VALUES ('".$teinteId."','".$lensId."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."','".$initialPrice."')";
+
+                    $this->db->query($sql);
+                }
+            }
+
+
+
+
             echo "OK";
         }
         else {
@@ -328,5 +409,30 @@ class m_teinte extends CI_Model
                                   AND $userIdRequest";
         $this->db->query($sql);
         echo "OK";
+    }
+
+    public function duplicateTeintes($userId, $fromUserId) {
+        if ($userId != ""
+            && $fromUserId != "") {
+            $sql = "UPDATE `teinte_prix` SET `is_active` = 0 WHERE id_user = '" . $userId . "'";
+            $this->db->query($sql);
+            $fromRes = $this->db->query("SELECT * FROM teinte_prix WHERE id_user = '" . $fromUserId . "' AND is_active = 1");
+            $fromTeintes = $fromRes->result();
+            foreach ($fromTeintes as $fromTeinte) {
+                if (empty($fromTeinte->id_type_verre_solaire)) {
+                    $typeVerreSolaireId = 'NULL';
+                }
+                else {
+                    $typeVerreSolaireId = "'" . $fromTeinte->id_type_verre_solaire . "'";
+                }
+                $sql = "INSERT INTO `teinte_prix` (`id_teinte`, `id_lenses`, `id_indice_verre`, `id_type_verre_solaire`, `id_user`, `price`, `initial_price`)
+                        VALUES ('" . $fromTeinte->id_teinte . "', '" . $fromTeinte->id_lenses . "', '" . $fromTeinte->id_indice_verre . "', " . $typeVerreSolaireId . ", '" . $userId . "', '" . $fromTeinte->price . "', '" . $fromTeinte->initial_price . "')";
+                $this->db->query($sql);
+            }
+            return "OK";
+        }
+        else {
+            return false;
+        }
     }
 }

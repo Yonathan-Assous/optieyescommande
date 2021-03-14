@@ -644,7 +644,7 @@ if (is_object($pair_order)) {
                                                                                                        class="form-control"
                                                                                                        name="additionD"
                                                                                                        id="additionD"
-                                                                                                       value="+0.75">
+                                                                                                       value="+0.00">
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group row">
@@ -689,7 +689,7 @@ if (is_object($pair_order)) {
                                                                                                        class="form-control"
                                                                                                        name="additionG"
                                                                                                        id="additionG"
-                                                                                                       value="+0.75">
+                                                                                                       value="+0.00">
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

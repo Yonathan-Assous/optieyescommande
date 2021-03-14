@@ -278,197 +278,200 @@ class admin
     public
     function getColors_price($recovery = false)
     {
-
+        $userId =
+            $_POST['id_user'];
         $name =
             $_POST['name'];
         $code =
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
+        $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId);
+        $res['fr'] = $name;
+        $res['id'] = $code;
 
-
-        if (strpos($nom_du_verre,
-                   'E-Space') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Omega') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Platinium') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Elysium') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Top Office') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Bifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Bfocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Trifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Office') !==
-            false) {
-
-            if (strpos($name,
-                       'Nm') !==
-                false) {
-                $res['prix'] =
-                    10.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-
-            } else {
-                $res['prix'] =
-                    6.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-            }
-        }
-        if (strpos($nom_du_verre,
-                   'Bifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Bfocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Trifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Double Foyer') !==
-            false) {
-
-            if (strpos($name,
-                       'Nm') !==
-                false) {
-                $res['prix'] =
-                    10.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-
-            } else {
-                $res['prix'] =
-                    4.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-            }
-        }
-        if (strpos($nom_du_verre,
-                   'T-One') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Eyefatigue') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Initial') !==
-            false) {
-
-            if (strpos($name,
-                       'Nm') !==
-                false) {
-                $res['prix'] =
-                    10.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-
-            } else {
-                $res['prix'] =
-                    5.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-            }
-        }
-        if ((strpos($nom_du_verre,
-                    'Freestyle') !==
-             false ||
-             strpos($nom_du_verre,
-                    'Panier A Unifocal RX') !==
-             false) &&
-            strpos($nom_du_verre,
-                   '1,5') !==
-            false) {
-
-            if (strpos($name,
-                       'Nm') !==
-                false) {
-                $res['prix'] =
-                    10.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-
-            } else {
-                $res['prix'] =
-                    2.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-            }
-        }
-        if ((strpos($nom_du_verre,
-                    'Freestyle') !==
-             false ||
-             strpos($nom_du_verre,
-                    'Panier A Unifocal RX') !==
-             false) &&
-            strpos($nom_du_verre,
-                   '1,5') ===
-            false) {
-
-            if (strpos($name,
-                       'Nm') !==
-                false) {
-                $res['prix'] =
-                    10.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-
-            } else {
-                $res['prix'] =
-                    5.00;
-                $res['fr'] =
-                    $name;
-                $res['id'] =
-                    $code;
-            }
-        }
-
-        if (strpos($nom_du_verre,
-                   'Mineral') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Minéral') !==
-            false) {
-
-            $res['prix'] =
-                7.00;
-            $res['fr'] =
-                $name;
-            $res['id'] =
-                $code;
-
-        }
+//        if (strpos($nom_du_verre,
+//                   'E-Space') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Omega') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Platinium') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Elysium') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Top Office') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Bifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Bfocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Trifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Office') !==
+//            false) {
+//
+//            if (strpos($name,
+//                       'Nm') !==
+//                false) {
+//                $res['prix'] =
+//                    10.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//
+//            } else {
+//                $res['prix'] =
+//                    6.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//            }
+//        }
+//        if (strpos($nom_du_verre,
+//                   'Bifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Bfocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Trifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Double Foyer') !==
+//            false) {
+//
+//            if (strpos($name,
+//                       'Nm') !==
+//                false) {
+//                $res['prix'] =
+//                    10.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//
+//            } else {
+//                $res['prix'] =
+//                    4.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//            }
+//        }
+//        if (strpos($nom_du_verre,
+//                   'T-One') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Eyefatigue') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Initial') !==
+//            false) {
+//
+//            if (strpos($name,
+//                       'Nm') !==
+//                false) {
+//                $res['prix'] =
+//                    10.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//
+//            } else {
+//                $res['prix'] =
+//                    5.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//            }
+//        }
+//        if ((strpos($nom_du_verre,
+//                    'Freestyle') !==
+//             false ||
+//             strpos($nom_du_verre,
+//                    'Panier A Unifocal RX') !==
+//             false) &&
+//            strpos($nom_du_verre,
+//                   '1,5') !==
+//            false) {
+//
+//            if (strpos($name,
+//                       'Nm') !==
+//                false) {
+//                $res['prix'] =
+//                    10.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//
+//            } else {
+//                $res['prix'] =
+//                    2.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//            }
+//        }
+//        if ((strpos($nom_du_verre,
+//                    'Freestyle') !==
+//             false ||
+//             strpos($nom_du_verre,
+//                    'Panier A Unifocal RX') !==
+//             false) &&
+//            strpos($nom_du_verre,
+//                   '1,5') ===
+//            false) {
+//
+//            if (strpos($name,
+//                       'Nm') !==
+//                false) {
+//                $res['prix'] =
+//                    10.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//
+//            } else {
+//                $res['prix'] =
+//                    5.00;
+//                $res['fr'] =
+//                    $name;
+//                $res['id'] =
+//                    $code;
+//            }
+//        }
+//
+//        if (strpos($nom_du_verre,
+//                   'Mineral') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Minéral') !==
+//            false) {
+//
+//            $res['prix'] =
+//                7.00;
+//            $res['fr'] =
+//                $name;
+//            $res['id'] =
+//                $code;
+//
+//        }
 
         //var_dump($res);
         $t[] = $res;
@@ -480,524 +483,523 @@ class admin
     public
     function getOptions_price($recovery = false)
     {
-
-        //var_dump($_POST['tab_options']);
-        $name =
-            $_POST['name'];
+        $userId = $_POST['id_user'];
         $code =
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
-
-
-        if (strpos($nom_du_verre,
-                   'Omega') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Platinium') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Elysium') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Top Office') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Bifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Bfocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Trifocal') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Office') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Double Foyer') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Mineral') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Minéral') !==
-            false) {
-
-            if ($name ==
-                'Durci' ||
-                $name == '') {
-                $res['prix'] =
-                    0.00;
-
-            } elseif (strpos($name,
-                             'Miroir') !==
-                      false) {
-                $res['prix'] =
-                    14.00;
-
-            } elseif ($name ==
-                      'Satin') {
-                $res['prix'] =
-                    8.00;
-
-            } elseif ($name ==
-                      'Achromatique') {
-                $res['prix'] =
-                    16.00;
-
-            } elseif ($name ==
-                      'Satin Max') {
-                $res['prix'] =
-                    18.00;
-
-            } elseif ($name ==
-                      'Satin UV') {
-                $res['prix'] =
-                    11.00;
-
-            } elseif ($name ==
-                      'BlueCoat') {
-                $res['prix'] =
-                    16.00;
-
-            } elseif ($name ==
-                      'Satin Face Interne') {
-                $res['prix'] =
-                    8.00;
-
-            } elseif ($name ==
-                      'Satin Max Face Interne') {
-                $res['prix'] =
-                    18.00;
-
-            } elseif ($name ==
-                      'Achromatique Face Interne') {
-                $res['prix'] =
-                    16.00;
-
-            } elseif ($name ==
-                      'Satin UV Face Interne') {
-                $res['prix'] =
-                    11.00;
-
-            } elseif ($name ==
-                      'Satin Drive Or') {
-                $res['prix'] =
-                    18.00;
-
-            } elseif (strpos($name,
-                             'HMC') !==
-                      false) {
-                $res['prix'] =
-                    4.00;
-
-            }
-
-        }
-        if (strpos($nom_du_verre,
-                   'T-One') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Initial') !==
-            false) {
-
-            if (strpos($nom_du_verre,
-                       'Transition') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Xtractive') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Polarisé') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Drivewear') !==
-                false) {
-                if ($name ==
-                    'Durci' ||
-                    $name ==
-                    '') {
-                    $res['prix'] =
-                        0.00;
-
-                } elseif (strpos($name,
-                                 'Miroir') !==
-                          false) {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'Satin') {
-                    $res['prix'] =
-                        8.00;
-
-                } elseif ($name ==
-                          'Achromatique') {
-                    $res['prix'] =
-                        16.00;
-
-                } elseif ($name ==
-                          'Satin Max') {
-                    $res['prix'] =
-                        18.00;
-
-                } elseif ($name ==
-                          'Satin UV') {
-                    $res['prix'] =
-                        11.00;
-
-                } elseif ($name ==
-                          'BlueCoat') {
-                    $res['prix'] =
-                        16.00;
-
-                } elseif ($name ==
-                          'Satin Face Interne') {
-                    $res['prix'] =
-                        8.00;
-
-                } elseif ($name ==
-                          'Satin Max Face Interne') {
-                    $res['prix'] =
-                        18.00;
-
-                } elseif ($name ==
-                          'Achromatique Face Interne') {
-                    $res['prix'] =
-                        16.00;
-
-                } elseif ($name ==
-                          'Satin UV Face Interne') {
-                    $res['prix'] =
-                        11.00;
-
-                } elseif ($name ==
-                          'Satin Drive Or') {
-                    $res['prix'] =
-                        18.00;
-
-                } elseif (strpos($name,
-                                 'HMC') !==
-                          false) {
-                    $res['prix'] =
-                        4.00;
-
-                }
-            } else {
-                if ($name ==
-                    'Durci' ||
-                    $name ==
-                    '') {
-                    $res['prix'] =
-                        0.00;
-
-                } elseif (strpos($name,
-                                 'Miroir') !==
-                          false) {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'Satin') {
-                    $res['prix'] =
-                        12.00;
-
-                } elseif ($name ==
-                          'Achromatique') {
-                    $res['prix'] =
-                        20.00;
-
-                } elseif ($name ==
-                          'Satin Max') {
-                    $res['prix'] =
-                        22.00;
-
-                } elseif ($name ==
-                          'Satin UV') {
-                    $res['prix'] =
-                        15.00;
-
-                } elseif ($name ==
-                          'BlueCoat') {
-                    $res['prix'] =
-                        20.00;
-
-                } elseif ($name ==
-                          'Satin Face Interne') {
-                    $res['prix'] =
-                        12.00;
-
-                } elseif ($name ==
-                          'Satin Max Face Interne') {
-                    $res['prix'] =
-                        22.00;
-
-                } elseif ($name ==
-                          'Achromatique Face Interne') {
-                    $res['prix'] =
-                        20.00;
-
-                } elseif ($name ==
-                          'Satin UV Face Interne') {
-                    $res['prix'] =
-                        15.00;
-
-                } elseif ($name ==
-                          'Satin Drive Or') {
-                    $res['prix'] =
-                        22.00;
-
-                } elseif (strpos($name,
-                                 'HMC') !==
-                          false) {
-                    $res['prix'] =
-                        7.00;
-
-                }
-            }
-
-        }
-        if (strpos($nom_du_verre,
-                   'E-Space') !==
-            false) {
-
-            if (strpos($nom_du_verre,
-                       'Transition') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Xtractive') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Polarisé') !==
-                false ||
-                strpos($nom_du_verre,
-                       'Drivewear') !==
-                false) {
-                if ($name ==
-                    'Durci' ||
-                    $name ==
-                    '') {
-                    $res['prix'] =
-                        0.00;
-
-                } elseif (strpos($name,
-                                 'Miroir') !==
-                          false) {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'Satin') {
-                    $res['prix'] =
-                        7.00;
-
-                } elseif ($name ==
-                          'Achromatique') {
-                    $res['prix'] =
-                        15.00;
-
-                } elseif ($name ==
-                          'Satin Max') {
-                    $res['prix'] =
-                        17.00;
-
-                } elseif ($name ==
-                          'Satin UV') {
-                    $res['prix'] =
-                        10.00;
-
-                } elseif ($name ==
-                          'BlueCoat') {
-                    $res['prix'] =
-                        15.00;
-
-                } elseif ($name ==
-                          'Satin Face Interne') {
-                    $res['prix'] =
-                        7.00;
-
-                } elseif ($name ==
-                          'Satin Max Face Interne') {
-                    $res['prix'] =
-                        17.00;
-
-                } elseif ($name ==
-                          'Achromatique Face Interne') {
-                    $res['prix'] =
-                        15.00;
-
-                } elseif ($name ==
-                          'Satin UV Face Interne') {
-                    $res['prix'] =
-                        10.00;
-
-                } elseif ($name ==
-                          'Satin Drive Or') {
-                    $res['prix'] =
-                        17.00;
-
-                } elseif (strpos($name,
-                                 'HMC') !==
-                          false) {
-                    $res['prix'] =
-                        3.00;
-
-                }
-            } else {
-                if ($name ==
-                    'Durci' ||
-                    $name ==
-                    '') {
-                    $res['prix'] =
-                        0.00;
-
-                } elseif (strpos($name,
-                                 'Miroir') !==
-                          false) {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'Satin') {
-                    $res['prix'] =
-                        11.00;
-
-                } elseif ($name ==
-                          'Achromatique') {
-                    $res['prix'] =
-                        19.00;
-
-                } elseif ($name ==
-                          'Satin Max') {
-                    $res['prix'] =
-                        21.00;
-
-                } elseif ($name ==
-                          'Satin UV') {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'BlueCoat') {
-                    $res['prix'] =
-                        19.00;
-
-                } elseif ($name ==
-                          'Satin Face Interne') {
-                    $res['prix'] =
-                        11.00;
-
-                } elseif ($name ==
-                          'Satin Max Face Interne') {
-                    $res['prix'] =
-                        21.00;
-
-                } elseif ($name ==
-                          'Achromatique Face Interne') {
-                    $res['prix'] =
-                        19.00;
-
-                } elseif ($name ==
-                          'Satin UV Face Interne') {
-                    $res['prix'] =
-                        14.00;
-
-                } elseif ($name ==
-                          'Satin Drive Or') {
-                    $res['prix'] =
-                        21.00;
-
-                } elseif (strpos($name,
-                                 'HMC') !==
-                          false) {
-                    $res['prix'] =
-                        7.00;
-
-                }
-            }
-
-        }
-        if (strpos($nom_du_verre,
-                   'Eyefatigue') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Freestyle') !==
-            false ||
-            strpos($nom_du_verre,
-                   'Panier A Unifocal RX') !==
-            false) {
-            if ($name ==
-                'Durci' ||
-                $name == '') {
-                $res['prix'] =
-                    0.00;
-
-            } elseif (strpos($name,
-                             'Miroir') !==
-                      false) {
-                $res['prix'] =
-                    14.00;
-
-            } elseif ($name ==
-                      'Satin') {
-                $res['prix'] =
-                    7.00;
-
-            } elseif ($name ==
-                      'Achromatique') {
-                $res['prix'] =
-                    15.00;
-
-            } elseif ($name ==
-                      'Satin Max') {
-                $res['prix'] =
-                    17.00;
-
-            } elseif ($name ==
-                      'Satin UV') {
-                $res['prix'] =
-                    10.00;
-
-            } elseif ($name ==
-                      'BlueCoat') {
-                $res['prix'] =
-                    15.00;
-
-            } elseif ($name ==
-                      'Satin Face Interne') {
-                $res['prix'] =
-                    7.00;
-
-            } elseif ($name ==
-                      'Satin Max Face Interne') {
-                $res['prix'] =
-                    17.00;
-
-            } elseif ($name ==
-                      'Achromatique Face Interne') {
-                $res['prix'] =
-                    15.00;
-
-            } elseif ($name ==
-                      'Satin UV Face Interne') {
-                $res['prix'] =
-                    10.00;
-
-            } elseif ($name ==
-                      'Satin Drive Or') {
-                $res['prix'] =
-                    17.00;
-
-            } elseif (strpos($name,
-                             'HMC') !==
-                      false) {
-                $res['prix'] =
-                    3.00;
-
-            }
-        }
-
+        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+
+
+        //        if (strpos($nom_du_verre,
+//                   'Omega') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Platinium') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Elysium') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Top Office') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Bifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Bfocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Trifocal') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Office') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Double Foyer') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Mineral') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Minéral') !==
+//            false) {
+//
+//            if ($name ==
+//                'Durci' ||
+//                $name == '') {
+//                $res['prix'] =
+//                    0.00;
+//
+//            } elseif (strpos($name,
+//                             'Miroir') !==
+//                      false) {
+//                $res['prix'] =
+//                    14.00;
+//
+//            } elseif ($name ==
+//                      'Satin') {
+//                $res['prix'] =
+//                    8.00;
+//
+//            } elseif ($name ==
+//                      'Achromatique') {
+//                $res['prix'] =
+//                    16.00;
+//
+//            } elseif ($name ==
+//                      'Satin Max') {
+//                $res['prix'] =
+//                    18.00;
+//
+//            } elseif ($name ==
+//                      'Satin UV') {
+//                $res['prix'] =
+//                    11.00;
+//
+//            } elseif ($name ==
+//                      'BlueCoat') {
+//                $res['prix'] =
+//                    16.00;
+//
+//            } elseif ($name ==
+//                      'Satin Face Interne') {
+//                $res['prix'] =
+//                    8.00;
+//
+//            } elseif ($name ==
+//                      'Satin Max Face Interne') {
+//                $res['prix'] =
+//                    18.00;
+//
+//            } elseif ($name ==
+//                      'Achromatique Face Interne') {
+//                $res['prix'] =
+//                    16.00;
+//
+//            } elseif ($name ==
+//                      'Satin UV Face Interne') {
+//                $res['prix'] =
+//                    11.00;
+//
+//            } elseif ($name ==
+//                      'Satin Drive Or') {
+//                $res['prix'] =
+//                    18.00;
+//
+//            } elseif (strpos($name,
+//                             'HMC') !==
+//                      false) {
+//                $res['prix'] =
+//                    4.00;
+//
+//            }
+//
+//        }
+//        if (strpos($nom_du_verre,
+//                   'T-One') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Initial') !==
+//            false) {
+//
+//            if (strpos($nom_du_verre,
+//                       'Transition') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Xtractive') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Polarisé') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Drivewear') !==
+//                false) {
+//                if ($name ==
+//                    'Durci' ||
+//                    $name ==
+//                    '') {
+//                    $res['prix'] =
+//                        0.00;
+//
+//                } elseif (strpos($name,
+//                                 'Miroir') !==
+//                          false) {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'Satin') {
+//                    $res['prix'] =
+//                        8.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique') {
+//                    $res['prix'] =
+//                        16.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max') {
+//                    $res['prix'] =
+//                        18.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV') {
+//                    $res['prix'] =
+//                        11.00;
+//
+//                } elseif ($name ==
+//                          'BlueCoat') {
+//                    $res['prix'] =
+//                        16.00;
+//
+//                } elseif ($name ==
+//                          'Satin Face Interne') {
+//                    $res['prix'] =
+//                        8.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max Face Interne') {
+//                    $res['prix'] =
+//                        18.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique Face Interne') {
+//                    $res['prix'] =
+//                        16.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV Face Interne') {
+//                    $res['prix'] =
+//                        11.00;
+//
+//                } elseif ($name ==
+//                          'Satin Drive Or') {
+//                    $res['prix'] =
+//                        18.00;
+//
+//                } elseif (strpos($name,
+//                                 'HMC') !==
+//                          false) {
+//                    $res['prix'] =
+//                        4.00;
+//
+//                }
+//            } else {
+//                if ($name ==
+//                    'Durci' ||
+//                    $name ==
+//                    '') {
+//                    $res['prix'] =
+//                        0.00;
+//
+//                } elseif (strpos($name,
+//                                 'Miroir') !==
+//                          false) {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'Satin') {
+//                    $res['prix'] =
+//                        12.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique') {
+//                    $res['prix'] =
+//                        20.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max') {
+//                    $res['prix'] =
+//                        22.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV') {
+//                    $res['prix'] =
+//                        15.00;
+//
+//                } elseif ($name ==
+//                          'BlueCoat') {
+//                    $res['prix'] =
+//                        20.00;
+//
+//                } elseif ($name ==
+//                          'Satin Face Interne') {
+//                    $res['prix'] =
+//                        12.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max Face Interne') {
+//                    $res['prix'] =
+//                        22.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique Face Interne') {
+//                    $res['prix'] =
+//                        20.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV Face Interne') {
+//                    $res['prix'] =
+//                        15.00;
+//
+//                } elseif ($name ==
+//                          'Satin Drive Or') {
+//                    $res['prix'] =
+//                        22.00;
+//
+//                } elseif (strpos($name,
+//                                 'HMC') !==
+//                          false) {
+//                    $res['prix'] =
+//                        7.00;
+//
+//                }
+//            }
+//
+//        }
+//        if (strpos($nom_du_verre,
+//                   'E-Space') !==
+//            false) {
+//
+//            if (strpos($nom_du_verre,
+//                       'Transition') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Xtractive') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Polarisé') !==
+//                false ||
+//                strpos($nom_du_verre,
+//                       'Drivewear') !==
+//                false) {
+//                if ($name ==
+//                    'Durci' ||
+//                    $name ==
+//                    '') {
+//                    $res['prix'] =
+//                        0.00;
+//
+//                } elseif (strpos($name,
+//                                 'Miroir') !==
+//                          false) {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'Satin') {
+//                    $res['prix'] =
+//                        7.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique') {
+//                    $res['prix'] =
+//                        15.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max') {
+//                    $res['prix'] =
+//                        17.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV') {
+//                    $res['prix'] =
+//                        10.00;
+//
+//                } elseif ($name ==
+//                          'BlueCoat') {
+//                    $res['prix'] =
+//                        15.00;
+//
+//                } elseif ($name ==
+//                          'Satin Face Interne') {
+//                    $res['prix'] =
+//                        7.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max Face Interne') {
+//                    $res['prix'] =
+//                        17.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique Face Interne') {
+//                    $res['prix'] =
+//                        15.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV Face Interne') {
+//                    $res['prix'] =
+//                        10.00;
+//
+//                } elseif ($name ==
+//                          'Satin Drive Or') {
+//                    $res['prix'] =
+//                        17.00;
+//
+//                } elseif (strpos($name,
+//                                 'HMC') !==
+//                          false) {
+//                    $res['prix'] =
+//                        3.00;
+//
+//                }
+//            } else {
+//                if ($name ==
+//                    'Durci' ||
+//                    $name ==
+//                    '') {
+//                    $res['prix'] =
+//                        0.00;
+//
+//                } elseif (strpos($name,
+//                                 'Miroir') !==
+//                          false) {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'Satin') {
+//                    $res['prix'] =
+//                        11.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique') {
+//                    $res['prix'] =
+//                        19.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max') {
+//                    $res['prix'] =
+//                        21.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV') {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'BlueCoat') {
+//                    $res['prix'] =
+//                        19.00;
+//
+//                } elseif ($name ==
+//                          'Satin Face Interne') {
+//                    $res['prix'] =
+//                        11.00;
+//
+//                } elseif ($name ==
+//                          'Satin Max Face Interne') {
+//                    $res['prix'] =
+//                        21.00;
+//
+//                } elseif ($name ==
+//                          'Achromatique Face Interne') {
+//                    $res['prix'] =
+//                        19.00;
+//
+//                } elseif ($name ==
+//                          'Satin UV Face Interne') {
+//                    $res['prix'] =
+//                        14.00;
+//
+//                } elseif ($name ==
+//                          'Satin Drive Or') {
+//                    $res['prix'] =
+//                        21.00;
+//
+//                } elseif (strpos($name,
+//                                 'HMC') !==
+//                          false) {
+//                    $res['prix'] =
+//                        7.00;
+//
+//                }
+//            }
+//
+//        }
+//        if (strpos($nom_du_verre,
+//                   'Eyefatigue') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Freestyle') !==
+//            false ||
+//            strpos($nom_du_verre,
+//                   'Panier A Unifocal RX') !==
+//            false) {
+//            if ($name ==
+//                'Durci' ||
+//                $name == '') {
+//                $res['prix'] =
+//                    0.00;
+//
+//            } elseif (strpos($name,
+//                             'Miroir') !==
+//                      false) {
+//                $res['prix'] =
+//                    14.00;
+//
+//            } elseif ($name ==
+//                      'Satin') {
+//                $res['prix'] =
+//                    7.00;
+//
+//            } elseif ($name ==
+//                      'Achromatique') {
+//                $res['prix'] =
+//                    15.00;
+//
+//            } elseif ($name ==
+//                      'Satin Max') {
+//                $res['prix'] =
+//                    17.00;
+//
+//            } elseif ($name ==
+//                      'Satin UV') {
+//                $res['prix'] =
+//                    10.00;
+//
+//            } elseif ($name ==
+//                      'BlueCoat') {
+//                $res['prix'] =
+//                    15.00;
+//
+//            } elseif ($name ==
+//                      'Satin Face Interne') {
+//                $res['prix'] =
+//                    7.00;
+//
+//            } elseif ($name ==
+//                      'Satin Max Face Interne') {
+//                $res['prix'] =
+//                    17.00;
+//
+//            } elseif ($name ==
+//                      'Achromatique Face Interne') {
+//                $res['prix'] =
+//                    15.00;
+//
+//            } elseif ($name ==
+//                      'Satin UV Face Interne') {
+//                $res['prix'] =
+//                    10.00;
+//
+//            } elseif ($name ==
+//                      'Satin Drive Or') {
+//                $res['prix'] =
+//                    17.00;
+//
+//            } elseif (strpos($name,
+//                             'HMC') !==
+//                      false) {
+//                $res['prix'] =
+//                    3.00;
+//
+//            }
+//        }
+        $t = [];
+        $res['prix'] = $price;
         if (isset($res)) {
             $t[] = $res;
         }
@@ -4537,9 +4539,12 @@ class admin
                                    $information_commande->verre->correction_droit->teinte .
                                    '.';
                     }
+
                     if (strpos($information_commande->verre->correction_droit->teinte,
                                'CUST_') !==
                         false) {
+                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
+                        $teinteD = $lensOption->name;
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Right tint: Sample color send by mail.';
                         }
@@ -4560,6 +4565,8 @@ class admin
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                                'CUST_') !==
                         false) {
+                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
+                        $teinteG = $lensOption->name;
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                             $remark .= ' Left tint: Sample color send by mail.';
                         }
@@ -4673,7 +4680,6 @@ class admin
 //                    'PAI-18174') {
 //                    $remark .= " Change to product INITIAL ";
 //                }
-
 
                 if ($remark !=
                     '') {
@@ -6878,7 +6884,6 @@ class admin
 
                     $remark =
                         '';
-
                     if (isset($information_commande->verre->correction_droit->teinte) &&
                         !empty($information_commande->verre->correction_droit->teinte)) {
                         if ($teinteD ==
@@ -6890,6 +6895,8 @@ class admin
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                    'CUST_') !==
                             false) {
+                            $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
+                            $teinteD = $lensOption->name;
                             if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                 $remark .= 'Right tint: Sample color send by mail.';
                             }
@@ -6909,6 +6916,8 @@ class admin
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                    'CUST_') !==
                             false) {
+                            $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
+                            $teinteG = $lensOption->name;
                             if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                                 $remark .= ' Left tint: Sample color send by mail.';
                             }
@@ -7670,7 +7679,6 @@ class admin
                     }
 
                     $edg = "";
-
                     if ($precal ==
                         '1') {
 
@@ -8152,6 +8160,7 @@ class admin
 
                     }
 
+//                    var_dump($xml);die;
 
                     $CommandeOmega =
                         $this->m_commande->getTextCommandeOmega($commande->id_commande,
@@ -8271,17 +8280,17 @@ class admin
                 //var_dump($information_commande);
                 if (isset($information_commande->verre->correction_droit)) {
                     $detail .= "<b>OD:</b>";
-                    $detail .= "<span style='font-size:20px'> " .
+                    $detail .= "<span id='spanSphereD' style='font-size:20px'>" .
                                $information_commande->verre->correction_droit->sphere .
-                               "";
-                    $detail .= " (" .
+                               "</span>";
+                    $detail .= " (<span id='spanCylindreD' style='font-size:20px'>" .
                                $information_commande->verre->correction_droit->cylindre .
-                               ")</span>";
+                               "</span>)";
                     if ($information_commande->verre->correction_droit->axe !=
                         "0.00") {
-                        $detail .= " " .
+                        $detail .= " <span id='spanAxeD'>" .
                                    $information_commande->verre->correction_droit->axe .
-                                   "°";
+                                   "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_droit->addition) &&
@@ -8289,9 +8298,9 @@ class admin
                          "0.00" &&
                          $commande->id_generation_verre !=
                          34)) {
-                        $detail .= " ADD   " .
+                        $detail .= " ADD <span id='spanAdditionD'>" .
                                    $information_commande->verre->correction_droit->addition .
-                                   "";
+                                   "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
@@ -8361,17 +8370,17 @@ class admin
 
                 if (isset($information_commande->verre->correction_gauche)) {
                     $detail .= "<br><br><b>OG</b>";
-                    $detail .= "<span style='font-size:20px'> " .
+                    $detail .= "<span id='spanSphereG' style='font-size:20px'>" .
                                $information_commande->verre->correction_gauche->sphere .
-                               "";
-                    $detail .= "(" .
+                               "</span>";
+                    $detail .= "(<span id='spanCylindreG' style='font-size:20px'>" .
                                $information_commande->verre->correction_gauche->cylindre .
-                               ")</span>";
+                               "</span>)";
                     if ($information_commande->verre->correction_gauche->axe !=
                         "0.00") {
-                        $detail .= " " .
+                        $detail .= " <span id='spanAxeG'>" .
                                    $information_commande->verre->correction_gauche->axe .
-                                   "°";
+                                   "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -8379,9 +8388,9 @@ class admin
                         "0.00" &&
                         $commande->id_generation_verre !=
                         34) {
-                        $detail .= " ADD  " .
+                        $detail .= " ADD <span id='spanAdditionG'>" .
                                    $information_commande->verre->correction_gauche->addition .
-                                   "";
+                                   "</span>";
                     }
                     if (isset($information_commande->verre->correction_gauche->addition) &&
                         $information_commande->verre->correction_gauche->addition !=
@@ -9079,6 +9088,8 @@ class admin
                 if (strpos($data["teinteD"],
                            'CUST_') !==
                     false) {
+                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
+                    $teinteD = $lensOption->name;
                     if ($data["teinteD"] == 'CUST_24') {
                         $remark .= 'Right tint: Sample color send by mail.';
                     }
@@ -9098,6 +9109,8 @@ class admin
                 if (strpos($data["teinteG"],
                            'CUST_') !==
                     false) {
+                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
+                    $teinteG = $lensOption->name;
                     if ($data["teinteG"] == 'CUST_24') {
                         $remark .= ' Left tint: Sample color send by mail.';
                     }
@@ -15223,11 +15236,11 @@ class admin
                             '" class="btn btn-warning"><i class="zmdi zmdi-search"></i></a>&nbsp;&nbsp; ',
                             '<a class="btn btn-inverse get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
                             $user->id_users .
-                            '"><i class="zmdi zmdi-search"></i> Voir</a>'
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            $classColor
                         );
                 }
             }
-
             die(json_encode($data));
         } else {
             $this->redirect();
@@ -20101,6 +20114,7 @@ class admin
                             echo 'Prix: ' .
                                  $monture->prix_vente .
                                  '&#8364;<br />';
+                            echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
                                  $monture->id .
                                  '">Ajouter à mon panier</a>';
@@ -20526,6 +20540,7 @@ class admin
             $this->m_users->getUserById($user_id)[0];
         $data['data_admin']['admin_info'] =
             $this->m_users->getUserById(1)[0];
+        $qty = $this->input->post('qty');
 
         $monture_id =
             (int)$this->input->post('id');
@@ -20553,13 +20568,14 @@ class admin
         } else {
             //$data = array('id_client' => $user_id, 'id_monture' => $monture_id, 'qty' => 1, 'date' => date('Y-m-d H:i:s'), 'status' => 0);
             //$this->db->insert('commande_montures_temp', $data);
-            $this->db->query("INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '" .
-                             $user_id .
-                             "', '" .
-                             $monture_id .
-                             "', '1', '" .
-                             date('Y-m-d H:i:s') .
-                             "', '0', '0', '0', '');");
+            $sql = "INSERT INTO `commande_montures_temp` (`id`, `id_client`, `id_monture`, `qty`, `date`, `status`, `id_pack`, `avec_verres`, `ref_client`) VALUES (NULL, '" .
+                $user_id .
+                "', '" .
+                $monture_id .
+                "', '". $qty."', '" .
+                date('Y-m-d H:i:s') .
+                "', '0', '0', '0', '');";
+            $this->db->query($sql);
         }
     }
 
@@ -21229,6 +21245,28 @@ class admin
         echo json_encode($tab);
     }
 
+    function getAllTraitements()
+    {
+        $tab =
+            $this->m_traitement->getAllTraitements();
+
+        //var_dump($tab);
+
+        echo json_encode($tab);
+    }
+
+    function getAllTypeVerreSolaire()
+    {
+        $tab =
+            $this->m_type_verre_solaire->getAllTypeVerreSolaire();
+
+        //var_dump($tab);
+
+        echo json_encode($tab);
+    }
+
+
+
     public
     function getCustomPriceList()
     {
@@ -21237,7 +21275,6 @@ class admin
 
         $tab =
             $this->m_passer_commande_verre->getCustomPriceList($data['user_id']);
-
         echo json_encode($tab);
     }
 
@@ -21275,7 +21312,7 @@ class admin
         $result =
             $this->m_passer_commande_verre->setPriceVerre($data['user_id'],
                                                           $data['new_price'],
-                                                          $data['code_verre'],
+                                                          $data['lens_id'],
                                                           $data['name_verre']);
 
         echo $result;
@@ -21297,12 +21334,20 @@ class admin
     {
         $data =
             $this->input->post();
+        $resultTraitements = $this->m_traitement->duplicateTraitements($data['user_id'],
+            $data['from_user_id']);
 
-        $result =
-            $this->m_passer_commande_verre->duplicatePriceTab($data['user_id'],
-                                                              $data['from_user_id']);
+        $resultTeintes = $this->m_teinte->duplicateTeintes($data['user_id'],
+            $data['from_user_id']);
 
-        echo $result;
+        $resultVerres = $this->m_passer_commande_verre->duplicatePriceTab($data['user_id'], $data['from_user_id']);
+
+        if (!empty($resultVerres) && !empty($resultTraitements) && !empty($resultTeintes)) {
+            echo "OK";
+        }
+        else {
+            echo "";
+        }
     }
 
 

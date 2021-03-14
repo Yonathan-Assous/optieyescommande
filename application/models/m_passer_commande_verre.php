@@ -112,12 +112,18 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function setPriceVerre($user_id, $new_price, $code_verre, $name_verre)
+    function setPriceVerre($user_id, $new_price, $lens_id, $name_verre)
     {
 
         if ($user_id != ""
             && $new_price != ""
-            && $code_verre != "") {
+            && $lens_id != "") {
+            $sql = "SELECT code
+                    FROM lenses
+                    WHERE id = $lens_id";
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            $code_verre = $result[0]->code;
             $generation = "";
             if (strpos($name_verre, 'E-Space') !== false) {
                 $generation = "E-Space";
@@ -181,9 +187,9 @@ class m_passer_commande_verre extends CI_Model
                                      . addslashes($from->name) . "', '" . $from->generation . "')");
 
             }
-            echo "OK";
+            return "OK";
         } else {
-            echo "";
+            return false;
         }
     }
 
@@ -220,6 +226,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
+                $tab[$i]['lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
@@ -256,6 +263,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
+                $tab[$i]['lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
@@ -1514,11 +1522,12 @@ class m_passer_commande_verre extends CI_Model
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
-            $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
-                                      . " AND ppc.generation LIKE '%" . $generation . "%')
-			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'");
+                . " AND ppc.name LIKE '%" . $generation . "%')
+			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
+            $res_f = $this->db->query($sql);
 
         } else {
             $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
@@ -1680,7 +1689,6 @@ class m_passer_commande_verre extends CI_Model
                     $from = $ref100->cylinderPart_from;
                     $to = $ref100->cylinderPart_to;
 
-
                     if ($from == '100'
                         && $to == '0') {
 
@@ -1799,9 +1807,10 @@ class m_passer_commande_verre extends CI_Model
 						 ->orderBy('diameter_physical', 'ASC')->groupBy('diameter_physical')->get();
 						 */
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
+            $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
+                . "  GROUP BY diameter_physical ORDER BY diameter_physical";
 
-            $resultats = $this->db->query("SELECT * FROM lensRanges WHERE " . $rangesids
-                                          . "  GROUP BY diameter_physical ORDER BY diameter_physical");
+            $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";
             $rangesFDiameters = $resultats->result();
         }
@@ -1901,8 +1910,9 @@ class m_passer_commande_verre extends CI_Model
             //return json_encode($codef)
 
             //return "SELECT * FROM lensOptions WHERE code IN ('".$codes."') ORDER BY id,name,color ";
-            $optionList = $this->db->query("SELECT * FROM lensOptions WHERE code IN ('" . $codes
-                                           . "') AND display='X' AND color!='COLOR' GROUP BY trad_fr ORDER BY sorting ");
+
+            $optionList = $this->db->query("SELECT trad_fr, sorting, code, name FROM lensOptions WHERE code IN ('" . $codes
+                . "') AND display='X' AND color!='COLOR' GROUP BY trad_fr, sorting, code, name ORDER BY sorting");
 
             //echo "SELECT * FROM lensOptions WHERE code IN ('".$codes."') GROUP BY trad_fr ORDER BY sorting ";
             //$optionList = DB::table('lensOptions')

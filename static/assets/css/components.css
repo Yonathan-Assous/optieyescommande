@@ -1154,6 +1154,11 @@ table.focus-on tbody tr.focused td {
 #datatable td {
   font-weight: normal;
 }
+
+#datatable.datatable_bold td {
+  font-weight: bold;
+}
+
 .paginate_button {
   display: inline-block !important;
 }

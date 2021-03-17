@@ -50,6 +50,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_type_verre_solaire');
         $this->load->model('m_lenses');
         $this->load->model('m_lens_option');
+        $this->load->model('m_verres_stock');
 
 		
 		if($this->session->userdata('taux_tva') === false){

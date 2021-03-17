@@ -91,7 +91,7 @@ class m_teinte extends CI_Model
         $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();
         $myTypeVerreSolaire = NULL;
         foreach ($typeVerreSolaires as $typeVerreSolaire) {
-            if(strpos($_POST['nom_du_verre'], $typeVerreSolaire->name) !== false){
+            if(strpos($nom_du_verre, $typeVerreSolaire->name) !== false){
                 $myTypeVerreSolaire = $typeVerreSolaire->name;
                 break;
             }

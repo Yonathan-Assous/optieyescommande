@@ -427,8 +427,6 @@ class m_commande extends CI_Model {
 				{
 					return 0;
 				}
-
-
 			}
 		}
 	}

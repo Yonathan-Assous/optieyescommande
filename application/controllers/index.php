@@ -2788,7 +2788,6 @@ class index extends MY_Controller {
             if (!empty($prisme)) {
                 $prismePrice = 3.9;
             }
-
             return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
         }
     }
@@ -2824,7 +2823,7 @@ class index extends MY_Controller {
                     }
                     $prisme = NULL;
                     if(isset($data['PrismeSphereD'])) {
-                        $teinteCode = $data['PrismeSphereD'];
+                        $prisme = $data['PrismeSphereD'];
                     }
                     $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                         $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
@@ -2850,7 +2849,7 @@ class index extends MY_Controller {
                     }
                     $prisme = NULL;
                     if(isset($data['PrismeSphereG'])) {
-                        $teinteCode = $data['PrismeSphereG'];
+                        $prisme = $data['PrismeSphereG'];
                     }
                     $data['prixGH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreGH'],
                         $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,

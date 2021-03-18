@@ -1960,7 +1960,38 @@ class index extends MY_Controller {
 
             $data = $this->session->userdata('order');
             $add = $this->input->post();
-
+//
+//            $verreName = stristr($data['nomverreDH'], ' -', true);
+//            $userId = $data['id_users'];
+//            $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockD) {
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+//                    $data['type_de_verreD'], $data['generation'], $data['traitementD'], $data['galbeD'],
+//                    $data['PrismeSphereD'], $teinteCode);
+//            }
+//            $verreName = stristr($data['nomverreGH'], ' -', true);
+//            $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockG) {
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreGH'],
+//                    $data['type_de_verreG'], $data['generation'], $data['traitementG'], $data['galbeG'],
+//                    $data['PrismeSphereG'], $teinteCode);
+//            }
+//
+//            var_dump($data['prixDH']);die;
             $data['commentaire'] = "";
             if(isset($add['commentaire']))
 				$data['commentaire'] = $add['commentaire'];
@@ -2735,18 +2766,22 @@ class index extends MY_Controller {
                                          $generation = NULL, $traitementCode = NULL, $galbe = NULL,
                                          $prisme = NULL, $teinteCode = NULL) {
 //        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
         if ($verreStock) {
-            $data['prixDH'] = $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
         }
         else {
             $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
-            $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
             $teintePrice = 0;
             if(!empty($teinteCode)) {
                 $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
             }
             $galbePrice = 0;
-            if ($galbe != "Standard") {
+            if (!empty($galbe) && $galbe != "Standard") {
                 $galbePrice = 3.9;
             }
             $prismePrice = 0;
@@ -2766,20 +2801,34 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
                 $user = $this->session->userdata('data_user');
+//                var_dump($data);die;
                 $verreName = stristr($data['nomverreDH'], ' -', true);
                 $userId = $user['user_info']->id_users;
                 $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
                 if ($verreStockD) {
                     $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+                    ///var_dump($data['prixDH']);die;
                 }
                 else {
                     $teinteCode = NULL;
                     if(isset($data['teinteD'])) {
                         $teinteCode = $data['teinteD'];
                     }
+                    $traitementCode = NULL;
+                    if(isset($data['traitementD'])) {
+                        $traitementCode = $data['traitementD'];
+                    }
+                    $galbe = NULL;
+                    if(isset($data['galbeD'])) {
+                        $galbe = $data['galbeD'];
+                    }
+                    $prisme = NULL;
+                    if(isset($data['PrismeSphereD'])) {
+                        $teinteCode = $data['PrismeSphereD'];
+                    }
                     $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
-                        $data['type_de_verreD'], $data['generation'], $data['traitementD'], $data['galbeD'],
-                        $data['PrismeSphereD'], $teinteCode);
+                        $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
+                        $prisme, $teinteCode);
                 }
                 $verreName = stristr($data['nomverreGH'], ' -', true);
                 $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
@@ -2788,12 +2837,24 @@ class index extends MY_Controller {
                 }
                 else {
                     $teinteCode = NULL;
-                    if(isset($data['teinteD'])) {
-                        $teinteCode = $data['teinteD'];
+                    if(isset($data['teinteG'])) {
+                        $teinteCode = $data['teinteG'];
+                    }
+                    $traitementCode = NULL;
+                    if(isset($data['traitementG'])) {
+                        $traitementCode = $data['traitementG'];
+                    }
+                    $galbe = NULL;
+                    if(isset($data['galbeG'])) {
+                        $galbe = $data['galbeG'];
+                    }
+                    $prisme = NULL;
+                    if(isset($data['PrismeSphereG'])) {
+                        $teinteCode = $data['PrismeSphereG'];
                     }
                     $data['prixGH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreGH'],
-                        $data['type_de_verreG'], $data['generation'], $data['traitementG'], $data['galbeG'],
-                        $data['PrismeSphereG'], $teinteCode);
+                        $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
+                        $prisme, $teinteCode);
                 }
 
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];

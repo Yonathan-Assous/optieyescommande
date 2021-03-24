@@ -2910,6 +2910,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 2;
 							$data['type_commande_verreD'] = 2;
+							$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeD'] = 2;
 						}
@@ -2917,13 +2918,15 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 1;
 							$data['type_commande_verreD'] = 1;
+							$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
                         	$data['tarif_supplement'] = $supplement;
 						}
 					}
-					if($data['nomverreGH']!="")
+
+                    if($data['nomverreGH']!="")
 					{
 
 						if(strpos($data['nomverreGH'], "Panier A") !== false)
@@ -2935,6 +2938,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeG'] = 2;
 							$data['type_commande_verreG'] = 2;
+							$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeG'] = 2;
 						}
@@ -2942,12 +2946,14 @@ class index extends MY_Controller {
 						{
 							//$data['type_commandeG'] = 1;
 							$data['type_commande_verreG'] = 1;
+							$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
 							$data['tarif_supplement'] = $supplement;
 						}
-					}
+
+                    }
 				}
 				else
 				{
@@ -3003,7 +3009,6 @@ class index extends MY_Controller {
 					$data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
-
 				if($data['diametreD'] == 'precalibrage')
 				{
 					if(isset($data['calibre']) && !empty($data['calibre']))

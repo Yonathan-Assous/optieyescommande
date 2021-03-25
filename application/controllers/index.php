@@ -1637,7 +1637,6 @@ class index extends MY_Controller {
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
-
 					$this->load->view('layout/commande-detail-new', $data);
 				}
         		else
@@ -1960,7 +1959,6 @@ class index extends MY_Controller {
 
             $data = $this->session->userdata('order');
             $add = $this->input->post();
-
 //
 //            $verreName = stristr($data['nomverreDH'], ' -', true);
 //            $userId = $data['id_users'];
@@ -2100,7 +2098,6 @@ class index extends MY_Controller {
 
 
                 }
-			//	var_dump($data);
                 if ($order = $this->m_commande->addOrder($data)) {
                     //echo " - here 2 !";
                     $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
@@ -2751,7 +2748,6 @@ class index extends MY_Controller {
 					*/
 						//set_cookie('flag_monture','1','180000');
 					}
-
 
 					echo $this->load->view('ajax_recap_commande',$data);
 				}else{
@@ -3511,7 +3507,7 @@ class index extends MY_Controller {
 				}
 				elseif($unVerreG==1)
 				{
-					$data['prix_verre'] = $data['prixUnitaireG'];
+					$data['prix_verre'] = 0;
 				}
 				else
 				{
@@ -3687,8 +3683,7 @@ class index extends MY_Controller {
 					*/
 				}
 
-
-				echo $this->load->view('ajax_recap_commande',$data);
+                echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
 			}

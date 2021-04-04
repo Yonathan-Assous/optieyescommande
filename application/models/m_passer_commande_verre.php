@@ -1497,13 +1497,14 @@ class m_passer_commande_verre extends CI_Model
     public
     function getPrixStock($lens = "", $user_id)
     {
-        $stock_res = $this->db->query("SELECT *, ppc.prix as prix_perso  
+        $sql = "SELECT *, ppc.prix as prix_perso  
 												FROM verres_stock 
 									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre
                                        LEFT JOIN prix_par_client ppc ON (ppc.code = verres_stock.id_verre AND id_client="
-                                      . $user_id . ")
+            . $user_id . ")
 									   WHERE verres_stock.id_verre = '" . $lens
-                                      . "' AND grille_tarifaire.id_grille_tarifaire = 1");
+            . "' AND grille_tarifaire.id_grille_tarifaire = 1";
+        $stock_res = $this->db->query($sql);
 
         $stock_query = $stock_res->result();
 

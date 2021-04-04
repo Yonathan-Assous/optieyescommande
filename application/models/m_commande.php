@@ -427,8 +427,6 @@ class m_commande extends CI_Model {
 				{
 					return 0;
 				}
-
-
 			}
 		}
 	}
@@ -2998,12 +2996,10 @@ class m_commande extends CI_Model {
 
     public function addOrder($data){
         if(is_array($data)){
-
         $pair = $data['pair'];
         unset($data['discount']);
         if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
         {
-
             $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 			$data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3065,7 +3061,6 @@ class m_commande extends CI_Model {
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 //            var_dump($data);
-
             $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                    .implode(",", $data).")";
             if($this->db->query($sql)){
@@ -3263,7 +3258,8 @@ class m_commande extends CI_Model {
                     $premiereCommande = $data['premiere_commande'];
                     $data['premiere_commande'] = 0;
                 }
-				//echo "Verre != 4 <br>";
+
+                //echo "Verre != 4 <br>";
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                        .implode(",", $data).")";
@@ -3304,10 +3300,12 @@ class m_commande extends CI_Model {
 				  }
 
 				}
-			}
+
+            }
 			else
 			{
-				$ok = 0;
+
+                $ok = 0;
 				if($id_verreD!="")
 				{
 					//$data['type_commande'] = $type_commandeD;
@@ -3372,7 +3370,8 @@ class m_commande extends CI_Model {
 
 					echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 				*/
-					if($nb_multi_commande == 1 && $quantiteD>1 && $unVerreD==0 && $id_verreD!=$id_verreG)
+
+                    if($nb_multi_commande == 1 && $quantiteD>1 && $unVerreD==0 && $id_verreD!=$id_verreG)
 					{
 						$data['prix_verre'] = $prixUnitaireD;
 						$data['total_commande'] = $prixUnitaireD;
@@ -3425,7 +3424,6 @@ class m_commande extends CI_Model {
 					//$data['type_commande'] = $type_commandeG;
 					$type_commande_verre = $type_commande_verreG;
 					$data['origine_commande'] = $origine_commandeG;
-
 					if($unVerreG==0)
 					{
 						$data['prix_verre'] = $prixGH;
@@ -3433,7 +3431,9 @@ class m_commande extends CI_Model {
 					}
 					else
 					{
-						$data['total_commande'] = $data['prix_verre'];
+//					    var_dump($data);die;
+                        $data['prix_verre'] = 0;
+						$data['total_commande'] = $prixGH;
 					}
 
 					$data['information_commande'] = str_replace("+","",$information_commandeG);
@@ -3515,7 +3515,8 @@ class m_commande extends CI_Model {
 					}
 					else
 					{
-						if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+
+                        if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
 						{
 
 						  $commande_id = $this->db->insert_id();
@@ -3533,7 +3534,6 @@ class m_commande extends CI_Model {
 						}
 					}
 				}
-
 				if($ok == 1)
 				  {
 					  if(true === $pair) {

@@ -91,7 +91,7 @@ class m_teinte extends CI_Model
         $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();
         $myTypeVerreSolaire = NULL;
         foreach ($typeVerreSolaires as $typeVerreSolaire) {
-            if(strpos($_POST['nom_du_verre'], $typeVerreSolaire->name) !== false){
+            if(strpos($nom_du_verre, $typeVerreSolaire->name) !== false){
                 $myTypeVerreSolaire = $typeVerreSolaire->name;
                 break;
             }
@@ -341,7 +341,6 @@ class m_teinte extends CI_Model
                 foreach ($teintesInsert as $teinteInsert) {
                     $sql = "INSERT INTO teinte_prix (id_teinte, id_lenses, id_indice_verre, id_type_verre_solaire, id_user, price, initial_price) 
                     VALUES ('".$teinteInsert->id."','".$lensId."','".$indiceId."',".$typeVerreSolaireId.",".$userId.",'".$newPrice."','".$teintesArray[$teinteInsert->id]."')";
-                    //var_dump($sql);die;
                     $this->db->query($sql);
                 }
                 //var_dump($teintesInsert);die;

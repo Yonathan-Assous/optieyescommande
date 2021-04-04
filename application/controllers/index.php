@@ -125,6 +125,8 @@ class index extends MY_Controller {
 			$typedelens = $_POST['typedelens'];
 
 
+//            var_dump($idlens);
+
 			$idlens = str_replace("]","",$idlens);
 
 			$user_id = $this->data['user_info']->id_users;
@@ -136,6 +138,7 @@ class index extends MY_Controller {
 			else
 			{
 				$generation = $_POST['generation'];
+//                var_dump($generation);
 				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation);
 			}
 			echo json_encode($res);
@@ -1634,7 +1637,6 @@ class index extends MY_Controller {
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
-
 					$this->load->view('layout/commande-detail-new', $data);
 				}
         		else
@@ -1957,7 +1959,38 @@ class index extends MY_Controller {
 
             $data = $this->session->userdata('order');
             $add = $this->input->post();
-
+//
+//            $verreName = stristr($data['nomverreDH'], ' -', true);
+//            $userId = $data['id_users'];
+//            $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockD) {
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+//                    $data['type_de_verreD'], $data['generation'], $data['traitementD'], $data['galbeD'],
+//                    $data['PrismeSphereD'], $teinteCode);
+//            }
+//            $verreName = stristr($data['nomverreGH'], ' -', true);
+//            $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockG) {
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreGH'],
+//                    $data['type_de_verreG'], $data['generation'], $data['traitementG'], $data['galbeG'],
+//                    $data['PrismeSphereG'], $teinteCode);
+//            }
+//
+//            var_dump($data['prixDH']);die;
             $data['commentaire'] = "";
             if(isset($add['commentaire']))
 				$data['commentaire'] = $add['commentaire'];
@@ -1971,6 +2004,7 @@ class index extends MY_Controller {
             }
 
             $errors = 0;
+
             for ($i = 1; $i <= $data['nb_multi_commande']; $i++) {
 
                 if(isset($data['discount'])) {
@@ -2064,9 +2098,7 @@ class index extends MY_Controller {
 
 
                 }
-			//	var_dump($data);
                 if ($order = $this->m_commande->addOrder($data)) {
-
                     //echo " - here 2 !";
                     $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                     $this->db->where(array('user_id' => $data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
@@ -2082,6 +2114,8 @@ class index extends MY_Controller {
                     ++$errors;
                 }
             }
+//            var_dump('oops');die;
+
             if($errors == 0) {
 
 
@@ -2715,7 +2749,6 @@ class index extends MY_Controller {
 						//set_cookie('flag_monture','1','180000');
 					}
 
-
 					echo $this->load->view('ajax_recap_commande',$data);
 				}else{
 					 echo "error";
@@ -2728,6 +2761,36 @@ class index extends MY_Controller {
             $this->redirect();
     }
 
+    private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
+                                         $generation = NULL, $traitementCode = NULL, $galbe = NULL,
+                                         $prisme = NULL, $teinteCode = NULL) {
+//        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
+        if ($verreStock) {
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+        }
+        else {
+            $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
+            $teintePrice = 0;
+            if(!empty($teinteCode)) {
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+            }
+            $galbePrice = 0;
+            if (!empty($galbe) && $galbe != "Standard") {
+                $galbePrice = 3.9;
+            }
+            $prismePrice = 0;
+            if (!empty($prisme)) {
+                $prismePrice = 3.9;
+            }
+            return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
+        }
+    }
+
     public function setOrderRecapNew(){
 
 		if($this->input->is_ajax_request()){
@@ -2736,6 +2799,67 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
                 $user = $this->session->userdata('data_user');
+                $userId = $user['user_info']->id_users;
+                $data['prixDH'] = 0;
+                $data['prixGH'] = 0;
+                if (isset($data['droit'])) {
+                    $verreName = stristr($data['nomverreDH'], ' -', true);
+
+                    $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                    if ($verreStockD) {
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+                        ///var_dump($data['prixDH']);die;
+                    }
+                    else {
+                        $teinteCode = NULL;
+                        if(isset($data['teinteD'])) {
+                            $teinteCode = $data['teinteD'];
+                        }
+                        $traitementCode = NULL;
+                        if(isset($data['traitementD'])) {
+                            $traitementCode = $data['traitementD'];
+                        }
+                        $galbe = NULL;
+                        if(isset($data['galbeD'])) {
+                            $galbe = $data['galbeD'];
+                        }
+                        $prisme = NULL;
+                        if(isset($data['PrismeSphereD'])) {
+                            $prisme = $data['PrismeSphereD'];
+                        }
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+                            $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode);
+                    }
+                }
+                if (isset($data['gauche'])) {
+                    $verreName = stristr($data['nomverreGH'], ' -', true);
+                    $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+
+                    if ($verreStockG) {
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId);
+                    } else {
+                        $teinteCode = NULL;
+                        if (isset($data['teinteG'])) {
+                            $teinteCode = $data['teinteG'];
+                        }
+                        $traitementCode = NULL;
+                        if (isset($data['traitementG'])) {
+                            $traitementCode = $data['traitementG'];
+                        }
+                        $galbe = NULL;
+                        if (isset($data['galbeG'])) {
+                            $galbe = $data['galbeG'];
+                        }
+                        $prisme = NULL;
+                        if (isset($data['PrismeSphereG'])) {
+                            $prisme = $data['PrismeSphereG'];
+                        }
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
+                            $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode);
+                    }
+                }
 
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];
 
@@ -2782,6 +2906,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 2;
 							$data['type_commande_verreD'] = 2;
+							$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeD'] = 2;
 						}
@@ -2789,13 +2914,15 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 1;
 							$data['type_commande_verreD'] = 1;
+							$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
                         	$data['tarif_supplement'] = $supplement;
 						}
 					}
-					if($data['nomverreGH']!="")
+
+                    if($data['nomverreGH']!="")
 					{
 
 						if(strpos($data['nomverreGH'], "Panier A") !== false)
@@ -2807,6 +2934,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeG'] = 2;
 							$data['type_commande_verreG'] = 2;
+							$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeG'] = 2;
 						}
@@ -2814,12 +2942,14 @@ class index extends MY_Controller {
 						{
 							//$data['type_commandeG'] = 1;
 							$data['type_commande_verreG'] = 1;
+							$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
 							$data['tarif_supplement'] = $supplement;
 						}
-					}
+
+                    }
 				}
 				else
 				{
@@ -2875,7 +3005,6 @@ class index extends MY_Controller {
 					$data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
-
 				if($data['diametreD'] == 'precalibrage')
 				{
 					if(isset($data['calibre']) && !empty($data['calibre']))
@@ -3378,7 +3507,7 @@ class index extends MY_Controller {
 				}
 				elseif($unVerreG==1)
 				{
-					$data['prix_verre'] = $data['prixUnitaireG'];
+					$data['prix_verre'] = 0;
 				}
 				else
 				{
@@ -3554,8 +3683,7 @@ class index extends MY_Controller {
 					*/
 				}
 
-
-				echo $this->load->view('ajax_recap_commande',$data);
+                echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
 			}

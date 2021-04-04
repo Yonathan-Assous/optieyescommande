@@ -249,7 +249,7 @@ class m_traitement extends CI_Model
         $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();
         $myTypeVerreSolaire = NULL;
         foreach ($typeVerreSolaires as $typeVerreSolaire) {
-            if(strpos($_POST['nom_du_verre'], $typeVerreSolaire->name) !== false){
+            if(strpos($nom_du_verre, $typeVerreSolaire->name) !== false){
                 $myTypeVerreSolaire = $typeVerreSolaire->name;
                 break;
             }
@@ -259,7 +259,7 @@ class m_traitement extends CI_Model
                                                 $typeVerreSolaireId, $userId);
     }
 
-    public function getPrice($traitementId, $lensId, $typeVerreSolaireId, $userId) {
+    private function getPrice($traitementId, $lensId, $typeVerreSolaireId, $userId) {
         if (!empty($typeVerreSolaireId)) {
             $sql = "SELECT * FROM `traitement_prix` 
                 WHERE `id_traitement` = '$traitementId'

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-03-27T17:59:38+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>557867-307</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>200005</commercialCode>
+               <rxData>
+                  <sphere>3.00</sphere>
+                  <cylinder>
+                      <power>0.25</power>
+                      <axis>0</axis>
+                  </cylinder></rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700104</commercialCode>
+					   </coating>
+               <centration>
+					  <monocularCentrationDistance reference="FAR">27</monocularCentrationDistance>
+					  <height reference="NEAR" referenceHeight="OVERBOX">22</height>
+               </centration>
+				   <geometry>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>true</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>200005</commercialCode>
+               <rxData>
+                  <sphere>1.50</sphere>
+                  <cylinder>
+                      <power>0.25</power>
+                      <axis>70</axis>
+                  </cylinder></rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700104</commercialCode>
+					   </coating>
+               <centration>
+					  <monocularCentrationDistance reference="FAR">27.5</monocularCentrationDistance>
+					  <height reference="NEAR" referenceHeight="OVERBOX">22</height>
+               </centration>
+				   <geometry>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>true</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1"><material>PLASTIC</material>
+				   <boxWidth>48</boxWidth>
+				   <boxHeight>42</boxHeight>
+				   <distanceBetweenLenses>16</distanceBetweenLenses>
+				   <shape>
+						  <tracerData>
+							 <tracerType>Unknown</tracerType>
+							 <tracerVersion>TBLNAT</tracerVersion>
+							 <binaries format="NIDEK">25302553257525982612261726202620261726122606260025842567255025272494246024272385234022952254222621982170214521262107209120972103210921142120212621402165219022152257230323482394244224902538257526092643267326892705271027052688267226552640262626122600260326062609261226152618262626432660267726892700271227202708268626642633258825432498244823962345230022692238220721842164214421302128212721252124212221212128214221562170219622222247227022902309232923362342234823482346234323402347235523642374239124082424244824762504</binaries>
+						  </tracerData>
+					   </shape>
+				</frame>
+						<edging edgingType="NONE">
+						   <bevel>
+							  <type>BEVEL</type>
+							  <position posType="AUTO">0</position>
+						  </bevel>
+						  <polish>false</polish>
+						</edging> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

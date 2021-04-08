@@ -2517,7 +2517,7 @@ $('#quantiteD').on('change', function() {
 	calculPriceD();
 	
 	
-	//var qty = $('#quantiteD').val();
+	var qty = $('#quantiteD').val();
 	//var prixf = prix*qty;
 	//console.log("PrixD3")
 	//$('#prixD').val(prixf.toFixed(2)+'€');

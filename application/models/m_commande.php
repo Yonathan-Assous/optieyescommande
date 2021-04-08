@@ -1620,7 +1620,7 @@ class m_commande extends CI_Model {
             $add = 'AND id_users = '.$user;
         }
 
-        $query = $this->db->query('SELECT c.* FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate GROUP BY id_users');
+        $query = $this->db->query('SELECT c.* FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users');
         $total = 0;
 
         if ($query && $query->num_rows() > 0) {

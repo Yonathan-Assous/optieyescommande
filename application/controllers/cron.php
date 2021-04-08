@@ -97,12 +97,11 @@ class cron extends MY_Controller {
 	
 	public function payment_test(){
 
-        
             $this->load->model('m_commande');
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
-            $date = date('m-Y', time());
+            //$date = date('m-Y', time());
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
@@ -128,7 +127,9 @@ class cron extends MY_Controller {
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
 
-                    $get_packaging = $this->db->query('SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate');
+                    $facture_cli->date_commande = $facture_cli->y_m_commande;
+                    $sql = 'SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate AND id_users = ' . $facture_cli->id_users;
+                    $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
 
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();
@@ -179,26 +180,29 @@ class cron extends MY_Controller {
                     $data['paiement'][$key] = $paiement;
 
                 }
-/*
-			echo '<pre>';
-			var_dump($facture_client);
-			echo '</pre>';
-			
-            echo '<pre>';
-			var_dump($facture);
-			echo '</pre>';
 
-			echo '<pre>';
-			var_dump($paiement);
-			echo '</pre>';
-	*/		
-			echo '--------------------------------
-			<pre>';
-			var_dump($data);
-			echo '</pre>';
+        /*
+                    echo '<pre>';
+                    var_dump($facture_client);
+                    echo '</pre>';
+
+                    echo '<pre>';
+                    var_dump($facture);
+                    echo '</pre>';
+
+                    echo '<pre>';
+                    var_dump($paiement);
+                    echo '</pre>';
+            */
+        $this->load->view('admin/payment_process', $data);
+//			echo '--------------------------------
+//			<pre>';
+//			var_dump($data);
+//			echo '</pre>';
             
         }
-	
+
+
     public function payment_process(){
 
         if(date('j') == 1) {
@@ -233,8 +237,8 @@ class cron extends MY_Controller {
 
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
-
-                    $get_packaging = $this->db->query('SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate');
+                    $sql = 'SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate AND id_users = ' . $facture_cli->id_users;
+                    $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
 
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();

@@ -1615,12 +1615,16 @@ class m_commande extends CI_Model {
     public function getPackagingByMonth($date, $user = null) {
 
         $add = '';
+//        $limit = '';
 
         if($user !== null) {
             $add = 'AND id_users = '.$user;
+//            $limit = 'LIMIT 1';
         }
 
-        $query = $this->db->query('SELECT c.* FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate GROUP BY id_users');
+        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande 
+WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+        $query = $this->db->query($sql);
         $total = 0;
 
         if ($query && $query->num_rows() > 0) {
@@ -1777,8 +1781,7 @@ class m_commande extends CI_Model {
         }
 
          $TabHoraireTarifLiv = array();
-
-         $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, date_update_commande, COUNT(1) AS expeditions
+        $sql = "SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, date(date_update_commande) AS date_update_commande, COUNT(1) AS expeditions
             FROM ".$this->table." c
             LEFT JOIN 
               ( 
@@ -1788,8 +1791,8 @@ class m_commande extends CI_Model {
                 AND tarif_livraison > 0 
                 AND id_etat_commande = 6
                 AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
-                GROUP BY id_users,date(date_update_commande)
-                ) as tarif_livr
+                GROUP BY id_users,date(date_update_commande), cc.tarif_livraison, cc.id_commande)
+                as tarif_livr
             ON (
              c.id_commande = idCommande
             )
@@ -1800,8 +1803,8 @@ class m_commande extends CI_Model {
               AND tarif_livraison > 0
               AND id_etat_commande = 6
               AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
-              GROUP BY id_users,date(date_update_commande)
-            ) as tarif_livr2
+              GROUP BY id_users,date(date_update_commande), cc.tarif_livraison, cc.id_commande)
+            as tarif_livr2
             ON (
               c.id_commande = idCommande2
             )
@@ -1810,9 +1813,10 @@ class m_commande extends CI_Model {
             AND id_etat_commande = 6
             ".$excl."
             ".$user."
-            GROUP BY c.id_users,date(date_update_commande)
-            ORDER BY c.id_users ASC");
-
+            GROUP BY c.id_users,date(date_update_commande), TarifLivraison, idCommande  
+            ORDER BY c.id_users ASC";
+        //var_dump($sql);die;
+         $query = $this->db->query($sql);
 
         $tarif_appoint = array();
         if ($query && $query->num_rows() > 0){
@@ -1830,8 +1834,7 @@ class m_commande extends CI_Model {
           }
         }
 
-
-          $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, id_users, date_update_commande
+            $sql = "SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, id_users, date_update_commande
              FROM ".$this->table." c
              LEFT JOIN 
               ( 
@@ -1842,7 +1845,7 @@ class m_commande extends CI_Model {
                 AND tarif_livraison > 0 
                 AND id_etat_commande = 6
                 AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
-                GROUP BY id_users,date(date_update_commande)
+                GROUP BY id_users,date(date_update_commande), TarifLivraison, idCommande
                 ) as tarif_livr
               ON (
                  c.id_commande = idCommande
@@ -1855,7 +1858,7 @@ class m_commande extends CI_Model {
                   AND tarif_livraison > 0
                   AND id_etat_commande = 6
                   AND (date(date_update_commande) > '2015-07-19' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
-                  GROUP BY id_users,date(date_update_commande)
+                  GROUP BY id_users,date(date_update_commande), TarifLivraison2, idCommande2
                ) as tarif_livr2
                ON (
                   c.id_commande = idCommande2
@@ -1866,8 +1869,10 @@ class m_commande extends CI_Model {
              ".$excl."
              ".$user."
              AND DATE_FORMAT(date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."'
-             GROUP BY id_users,date(date_update_commande)
-             ORDER BY c.id_users");
+             GROUP BY id_users, date(date_update_commande), date_update_commande
+             ORDER BY c.id_users";
+
+        $query = $this->db->query($sql);
 
 
         if ($query && $query->num_rows() > 0){
@@ -1901,8 +1906,7 @@ class m_commande extends CI_Model {
           }
         }
 
-
-        $query = $this->db->query("SELECT COALESCE(total_stock, 0)  + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, total_express, c.type_commande, c.tarif_express, c.penalty, c.date_commande,c.id_users, COALESCE(total_reductions, 0) as reduction,cp,nom_magasin,id_grille_tarifaire,nom_societe,intitule_bl, 0 as tarif_liv, COALESCE(exp_stock) AS expeditions_stock, COALESCE(exp_fabric) AS expeditions_fabric
+        $sql = "SELECT COALESCE(total_stock, 0)  + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, total_express, DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande,c.id_users, COALESCE(total_reductions, 0) as reduction,cp,nom_magasin,id_grille_tarifaire,nom_societe, 0 as tarif_liv, COALESCE(exp_stock) AS expeditions_stock, COALESCE(exp_fabric) AS expeditions_fabric
            FROM ".$this->table." c
            LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
            INNER JOIN users u ON u.id_users = c.id_users
@@ -1910,78 +1914,79 @@ class m_commande extends CI_Model {
             (SELECT
                 SUM(reduction) AS total_reductions,
                 id_users as idusers,
-                date_remise
+                DATE_FORMAT(date_remise, '%Y-%m') as y_m_remise
             FROM
                 facture_reduction
             WHERE DATE_FORMAT(date_remise, '%m-%Y') = '".$date."'
-            GROUP BY id_users) AS reductions
+            GROUP BY id_users, y_m_remise) AS reductions
            ON (
-            c.id_users = idusers AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(date_remise, '%Y-%m')
+            c.id_users = idusers AND DATE_FORMAT(c.date_commande, '%Y-%m') = y_m_remise
            )
            LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_stock,id_users as idusersstock,date_commande, COUNT(1) AS exp_stock
+            SUM(total_commande) as total_stock,id_users as idusersstock,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_stock
             FROM ".$this->table." c
             WHERE (id_type_generation_verre = 5 OR id_type_generation_verre = 23 OR origine_commande=2) 
             AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
             AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."'
             AND commande_monture = 0
             AND id_verre IS NOT NULL
-            GROUP BY idusersstock) as commande_stock
+            GROUP BY idusersstock, y_m_commande) as commande_stock
           ON (
-              c.id_users = idusersstock AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_stock.date_commande, '%Y-%m')
+              c.id_users = idusersstock AND DATE_FORMAT(c.date_commande, '%Y-%m') = commande_stock.y_m_commande
           )
           LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_fabrique,id_users as idusersfabrique,date_commande, COUNT(1) AS exp_fabric
+            SUM(total_commande) as total_fabrique,id_users as idusersfabrique,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_fabric
             FROM ".$this->table." c
             WHERE (origine_commande=1)
             AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
             AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."'
             AND commande_monture = 0
             AND id_verre IS NOT NULL
-            GROUP BY idusersfabrique) as commande_fabrique
+            GROUP BY idusersfabrique, y_m_commande) as commande_fabrique
           ON (
-              c.id_users = idusersfabrique AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_fabrique.date_commande, '%Y-%m')
+              c.id_users = idusersfabrique AND DATE_FORMAT(c.date_commande, '%Y-%m') = commande_fabrique.y_m_commande
           )
           LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_lentilles,id_users as iduserslentilles,date_commande, COUNT(1) AS exp_lentilles
+            SUM(total_commande) as total_lentilles,id_users as iduserslentilles,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_lentilles
             FROM ".$this->table." c
             WHERE lens_id > 0
             AND id_verre IS NULL
             AND commande_monture = 0
             AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."'
-            GROUP BY iduserslentilles) as commande_lentilles
+            GROUP BY iduserslentilles, y_m_commande) as commande_lentilles
           ON (
-              c.id_users = iduserslentilles AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_lentilles.date_commande, '%Y-%m')
+              c.id_users = iduserslentilles AND DATE_FORMAT(c.date_commande, '%Y-%m') = commande_lentilles.y_m_commande
           )
 		  LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_montures,id_users as idusersmontures,date_commande, COUNT(1) AS exp_montures
+            SUM(total_commande) as total_montures,id_users as idusersmontures,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_montures
             FROM ".$this->table." c
             WHERE commande_monture = 1
             AND id_verre IS NULL
             AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."'
-            GROUP BY idusersmontures) as commande_montures
+            GROUP BY idusersmontures, y_m_commande) as commande_montures
           ON (
-              c.id_users = idusersmontures AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_montures.date_commande, '%Y-%m')
+              c.id_users = idusersmontures AND DATE_FORMAT(c.date_commande, '%Y-%m') = commande_montures.y_m_commande
           )
            LEFT JOIN 
           (SELECT 
-            SUM(tarif_express) as total_express,id_users as idusersexpress,date_commande, COUNT(1) AS exp_express
+            SUM(tarif_express) as total_express,id_users as idusersexpress,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_express
             FROM ".$this->table." c
             WHERE type_commande > 1 AND penalty != 1
             AND DATE_FORMAT(date_commande, '%m-%Y') = '".$date."'
-            GROUP BY idusersexpress) as commande_express
+            GROUP BY idusersexpress, y_m_commande) as commande_express
           ON (
-              c.id_users = idusersexpress AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_express.date_commande, '%Y-%m')
+              c.id_users = idusersexpress AND DATE_FORMAT(c.date_commande, '%Y-%m') = commande_express.y_m_commande
           )
           WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '".$date."'
           ".$excl."
           ".$user."
-          GROUP BY c.id_users
-          ORDER BY c.id_users");
+          GROUP BY c.id_users, y_m_commande, commande_stock.total_stock, commande_fabrique.total_fabrique, commande_lentilles.total_lentilles, commande_montures.total_montures, commande_express.total_express, total, reduction, commande_stock.exp_stock, commande_fabrique.exp_fabric
+          ORDER BY c.id_users";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             $data = $query->result();
@@ -1994,8 +1999,7 @@ class m_commande extends CI_Model {
                 }
               }
             }
-
-			$query2 = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as total,0 as total_stock,0 as total_fabrique, 0 as reduction, c.id_users, '01-".$date."' as date_commande,cp,nom_magasin, type_commande, id_grille_tarifaire,nom_societe,intitule_bl, COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv
+            $sql2 = "SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as total,0 as total_stock,0 as total_fabrique, 0 as reduction, c.id_users, '01-".$date."' as date_commande,cp,nom_magasin, id_grille_tarifaire,nom_societe, COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv
                 FROM ".$this->table." c
                 INNER JOIN users u ON c.id_users = u.id_users
                 LEFT JOIN 
@@ -2006,7 +2010,7 @@ class m_commande extends CI_Model {
                 AND tarif_livraison > 0 
                 AND id_etat_commande = 6
                 AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00'))
-                GROUP BY id_users,date(date_update_commande)
+                GROUP BY id_users,date(date_update_commande), TarifLivraison, idCommande
                 ) as tarif_livr
               ON (
                  c.id_commande = idCommande
@@ -2018,7 +2022,7 @@ class m_commande extends CI_Model {
                   AND tarif_livraison > 0
                   AND id_etat_commande = 6
                   AND (date(date_update_commande) > '2015-07-19' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
-                  GROUP BY date(date_update_commande),id_users
+                  GROUP BY date(date_update_commande),id_users, TarifLivraison2, idCommande2
                ) as tarif_livr2
                ON (
                   c.id_commande = idCommande2
@@ -2033,7 +2037,8 @@ class m_commande extends CI_Model {
                                       WHERE DATE_FORMAT(c2.date_commande, '%m-%Y') = '".$date."')
             
                 GROUP BY id_users
-                ORDER BY c.id_users");
+                ORDER BY c.id_users";
+			$query2 = $this->db->query($sql2);
 
 			foreach($query2->result() as $data2){
          if($data2->total > 0)

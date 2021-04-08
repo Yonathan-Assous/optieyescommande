@@ -7310,7 +7310,8 @@ class admin
                     $xml .= '
       	<pair>
          ';
-
+//            var_dump($lenses_code);
+//            var_dump($information_commande->verre);die;
                     if (isset($information_commande->verre->correction_droit)) {
                         $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
@@ -7547,7 +7548,6 @@ class admin
 						  <commercialCode>' .
                                     $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
-
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -8027,7 +8027,6 @@ class admin
   </items>
 </b2bOptic>
 ';
-
                     if ($commande->type_commande >
                         1) {
 
@@ -14882,7 +14881,7 @@ class admin
                 =>
                          $facture_cli)
                 {
-
+                    $facture_cli->date_commande = $facture_cli->y_m_commande;
 
                     /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
 
@@ -14898,6 +14897,10 @@ class admin
                                0,
                                -3);
 
+//                    var_dump($facture_cli->id_users);
+//                    var_dump($facture_cli->tarif_liv);
+//                    var_dump($this->m_commande->getPackagingByMonth($date,
+//                        $facture_cli->id_users));
                     $data['aaData'][$key] =
                         array(
                             $facture_cli->id_users,
@@ -15003,7 +15006,6 @@ class admin
                                            '.',
                                            ' '),
                 );
-
 
             die(json_encode($data));
         } else {

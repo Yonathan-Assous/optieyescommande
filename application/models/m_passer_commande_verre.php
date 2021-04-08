@@ -112,18 +112,24 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function setPriceVerre($user_id, $new_price, $lens_id, $name_verre)
+    function setPriceVerre($user_id, $new_price, $verre_or_lens_id, $name_verre)
     {
 
         if ($user_id != ""
             && $new_price != ""
-            && $lens_id != "") {
-            $sql = "SELECT code
+            && $verre_or_lens_id != "") {
+            if(strpos($verre_or_lens_id, 'stock_') !== false){
+                $code_verre = str_replace("stock_","",$verre_or_lens_id);
+            }
+            else {
+                $sql = "SELECT code
                     FROM lenses
-                    WHERE id = $lens_id";
-            $query = $this->db->query($sql);
-            $result = $query->result();
-            $code_verre = $result[0]->code;
+                    WHERE id = $verre_or_lens_id";
+                $query = $this->db->query($sql);
+                $result = $query->result();
+                $code_verre = $result[0]->code;
+            }
+            
             $generation = "";
             if (strpos($name_verre, 'E-Space') !== false) {
                 $generation = "E-Space";
@@ -210,7 +216,7 @@ class m_passer_commande_verre extends CI_Model
             $stock_query = $stock_res->result();
 
             foreach ($stock_query as $stock) {
-                $tab[$i]['code'] = $stock->id_verre;
+                $tab[$i]['verre_or_lens_id'] = 'stock_' . $stock->id_verre;
                 $tab[$i]['libelle'] = $stock->libelle_verre;
                 $tab[$i]['prix'] = $stock->prix_verre;
                 $tab[$i]['source'] = "stock";
@@ -226,7 +232,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
-                $tab[$i]['lens_id'] = $omega->id;
+                $tab[$i]['verre_or_lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
@@ -247,7 +253,7 @@ class m_passer_commande_verre extends CI_Model
             $stock_query = $stock_res->result();
 
             foreach ($stock_query as $stock) {
-                $tab[$i]['code'] = $stock->id_verre;
+                $tab[$i]['verre_or_lens_id'] = 'stock_' . $stock->id_verre;
                 $tab[$i]['libelle'] = $stock->libelle_verre;
                 $tab[$i]['prix'] = $stock->prix_verre;
                 $tab[$i]['source'] = "stock";
@@ -263,7 +269,7 @@ class m_passer_commande_verre extends CI_Model
             $omega_query = $omega_res->result();
 
             foreach ($omega_query as $omega) {
-                $tab[$i]['lens_id'] = $omega->id;
+                $tab[$i]['verre_or_lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
@@ -274,7 +280,6 @@ class m_passer_commande_verre extends CI_Model
 
         }
 
-        //var_dump($tab);
 
         return $tab;
     }

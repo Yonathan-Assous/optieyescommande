@@ -21314,7 +21314,7 @@ class admin
         $result =
             $this->m_passer_commande_verre->setPriceVerre($data['user_id'],
                                                           $data['new_price'],
-                                                          $data['lens_id'],
+                                                          $data['verre_or_lens_id'],
                                                           $data['name_verre']);
 
         echo $result;

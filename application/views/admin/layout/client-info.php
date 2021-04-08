@@ -682,7 +682,7 @@ $(document).ready(function(){
 					//console.log(data);
 					
 					$.each(data, function(key, value){
-						$('#listeVerres').append('<option value="'+ value.lens_id +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
+						$('#listeVerres').append('<option value="'+ value.verre_or_lens_id +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
 					});
 				
 				}
@@ -711,7 +711,7 @@ $(document).ready(function(){
 				data: {
 					'user_id' : <?php echo $info_user[0]->id_users ?>,
 					'new_price' : $('#nouveau_prix').val(),
-					'lens_id' : $('#listeVerres').val(),
+					'verre_or_lens_id' : $('#listeVerres').val(),
 					'name_verre' : name_verre
 				},
 				dataType: "html",

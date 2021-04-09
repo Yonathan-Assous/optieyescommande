@@ -304,7 +304,11 @@ class m_traitement extends CI_Model
             }
             $query = $this->db->query($sql);
         }
+        if ($query->num_rows() == 0) {
+            return 0;
+        }
         $traitement =  $query->result();
+
         return $traitement[0]->price;
     }
 

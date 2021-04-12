@@ -3004,7 +3004,7 @@ class m_commande extends CI_Model {
         if(is_array($data)){
         $pair = $data['pair'];
         unset($data['discount']);
-        if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
+            if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
         {
             $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 			$data['ancienne_commande'] = (int) $ancienne_commande;
@@ -3269,7 +3269,6 @@ class m_commande extends CI_Model {
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                        .implode(",", $data).")";
-
 				if($this->db->query($sql));
 				{
 

@@ -2802,12 +2802,14 @@ class index extends MY_Controller {
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
                 $data['prixGH'] = 0;
+//                var_dump($data);die;
                 if (isset($data['droit'])) {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
 
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
                     if ($verreStockD) {
-                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) *
+                                          $data['quantiteD'];
                         ///var_dump($data['prixDH']);die;
                     }
                     else {
@@ -2837,7 +2839,8 @@ class index extends MY_Controller {
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
 
                     if ($verreStockG) {
-                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId);
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) *
+                                          $data['quantiteG'];
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {

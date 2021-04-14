@@ -5122,6 +5122,8 @@ if (is_object($pair_order)) {
                 var diametreG = $('#diametreG').val();
                 var dCheck    = $('#droit').is(':checked');
                 var diametreD = $('#diametreD').val();
+                var verreG = $('#type_de_verreG').val();
+                var verreD = $('#type_de_verreD').val();
 
                 var nameD = $("#type_de_verreD option:selected").html();
                 var nameG = $("#type_de_verreG option:selected").html();
@@ -5223,6 +5225,19 @@ if (is_object($pair_order)) {
 			});
         }
     */
+                if (gauche && verreG == "") {
+                    g = 1;
+                    swal({
+                        title: "Erreur",
+                        text: "Verre gauche non disponible dans cette dioptrie",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+
+                }
+
                 if (gauche && diametreG == "") {
                     g = 1;
                     swal({

@@ -65,7 +65,9 @@ class m_passer_commande_verre extends CI_Model
 									   FROM prix_par_client ppc 
 									   LEFT JOIN lenses l ON (ppc.code = l.code)
 									   LEFT JOIN verres_stock v ON ppc.code = v.id_verre
-									   WHERE id_client = '" . $user_id . "' AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
+									   WHERE id_client = '" . $user_id . "' 
+									   AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
+									   AND ppc.name <> ''
 									   ORDER BY l.trad_fr,v.id_verre ASC");
 
 
@@ -200,18 +202,19 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getAllLenses($requete = "")
+    function getAllLenses($requete = "", $user_id)
     {
         $tab = array();
 
         if ($requete != "") {
             $i = 0;
 
-            $stock_res = $this->db->query("SELECT * 
-									   FROM verres_stock 
-									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre		
-									   WHERE libelle_verre LIKE '%" . $requete . "%' AND id_grille_tarifaire = 1
-									   ORDER BY libelle_verre ASC");
+            $sql = "SELECT * 
+                    FROM verres_stock 
+                    JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre		
+                    WHERE libelle_verre LIKE '%" . $requete . "%' AND id_grille_tarifaire = 1
+                    ORDER BY libelle_verre ASC";
+            $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
 
@@ -220,7 +223,16 @@ class m_passer_commande_verre extends CI_Model
                 $tab[$i]['libelle'] = $stock->libelle_verre;
                 $tab[$i]['prix'] = $stock->prix_verre;
                 $tab[$i]['source'] = "stock";
+                $sql = "SELECT prix 
+                        FROM prix_par_client
+                        WHERE code = '" . $stock->id_verre . "'
+                        AND id_client = $user_id";
+                $query = $this->db->query($sql);
 
+                if ($query->num_rows() > 0) {
+                    $prix = $query->result()[0]->prix;
+                    $tab[$i]['prix'] = $prix;
+                }
                 $i++;
             }
 
@@ -237,12 +249,20 @@ class m_passer_commande_verre extends CI_Model
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
                 $tab[$i]['source'] = "omega";
+                $sql = "SELECT prix 
+                        FROM prix_par_client
+                        WHERE code = '" . $omega->code . "'
+                        AND id_client = $user_id";
+                $query = $this->db->query($sql);
 
+                if ($query->num_rows() > 0) {
+                    $prix = $query->result()[0]->prix;
+                    $tab[$i]['prix'] = $prix;
+                }
                 $i++;
             }
         } else {
             $i = 0;
-
             $stock_res = $this->db->query("SELECT * 
 									   FROM verres_stock 
 									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre		
@@ -251,13 +271,22 @@ class m_passer_commande_verre extends CI_Model
 
 
             $stock_query = $stock_res->result();
-
             foreach ($stock_query as $stock) {
                 $tab[$i]['verre_or_lens_id'] = 'stock_' . $stock->id_verre;
                 $tab[$i]['libelle'] = $stock->libelle_verre;
                 $tab[$i]['prix'] = $stock->prix_verre;
                 $tab[$i]['source'] = "stock";
 
+                $sql = "SELECT prix 
+                        FROM prix_par_client
+                        WHERE code = '" . $stock->id_verre . "'
+                        AND id_client = $user_id";
+                $query = $this->db->query($sql);
+
+                if ($query->num_rows() > 0) {
+                    $prix = $query->result()[0]->prix;
+                    $tab[$i]['prix'] = $prix;
+                }
                 $i++;
             }
 
@@ -274,6 +303,17 @@ class m_passer_commande_verre extends CI_Model
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
                 $tab[$i]['source'] = "omega";
+
+                $sql = "SELECT prix 
+                        FROM prix_par_client
+                        WHERE code = '" . $omega->code . "'
+                        AND id_client = $user_id";
+                $query = $this->db->query($sql);
+
+                if ($query->num_rows() > 0) {
+                    $prix = $query->result()[0]->prix;
+                    $tab[$i]['prix'] = $prix;
+                }
 
                 $i++;
             }
@@ -462,7 +502,6 @@ class m_passer_commande_verre extends CI_Model
 
             //echo "sphereD: ".$sphereD." - cylindreD: ".$cylindreD;
             //return $stock_query;
-
             foreach ($stock_query as $stock) {
                 $grille_stock = json_decode($stock->grille_stock, true);
                 if (array_key_exists($sphereD, $grille_stock)) {
@@ -487,7 +526,6 @@ class m_passer_commande_verre extends CI_Model
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
                      $panierA, $type = "1")
     {
-
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -557,6 +595,8 @@ class m_passer_commande_verre extends CI_Model
 
                 }
             }
+
+
             if (!empty($sphereD_res->result())) {
                 $resultat_query = $sphereD_res->result();
                 //return json_encode($resultat_query);
@@ -616,7 +656,9 @@ class m_passer_commande_verre extends CI_Model
 										   AND name LIKE '%mineral%' 
 										   AND display = 'X'
 										   ORDER BY sorting,trad_fr");
+
                             } elseif ($indice == "all") {
+
                                 //echo "LENSFOCAL:".$lensFocalGroup."<br>";
                                 //echo "conditions:".$conditions."<br><br><br>";
                                 if ($lensFocalGroup != "-") {
@@ -629,6 +671,7 @@ class m_passer_commande_verre extends CI_Model
 										   ORDER BY sorting,trad_fr");
 
                                 } else {
+
                                     //$res = DB::table("lenses")->whereRaw(\DB::raw($conditions))->orderBy('name', 'ASC')->pluck("id","name");
                                     $res = $this->db->query("SELECT * 
 													FROM " . $this->table_lenses . " 
@@ -639,17 +682,19 @@ class m_passer_commande_verre extends CI_Model
 
                                 }
                             } else {
-
-                                $res = $this->db->query("SELECT * 
+                                $sql = "SELECT * 
 													FROM " . $this->table_lenses . " 
 										   WHERE focalGroupId=" . $lensFocalGroup . "
 										   AND " . $conditions . "
 										   AND (name LIKE '%" . $indice . " %' OR name LIKE '%" . $indice
-                                                        . "' OR name LIKE '%" . $indice . "-%' OR name LIKE '%"
-                                                        . $indice . "0%')
+                                    . "' OR name LIKE '%" . $indice . "-%' OR name LIKE '%"
+                                    . $indice . "0%')
 										   AND name NOT LIKE '%mineral%'
 										   AND display = 'X'
-										   ORDER BY sorting,trad_fr");
+										   ORDER BY sorting,trad_fr";
+//                                var_dump($sql);die;
+
+                                $res = $this->db->query($sql);
 
                                 /*echo "SELECT *
 													FROM ".$this->table_lenses."
@@ -795,18 +840,21 @@ class m_passer_commande_verre extends CI_Model
 						*/
 
                         if ($n_code > 2) {
-                            $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
-	FROM lenses L LEFT JOIN lenses l2
-	 ON (L.trad_fr = l2.trad_fr AND L.sorting > l2.sorting)
-	WHERE l2.sorting IS NULL AND  (" . $codes_f . " L.code = '0') " . $P_A . " ORDER BY sorting,trad_fr");
+                            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
+                                    FROM lenses L LEFT JOIN lenses l2
+                                    ON (L.trad_fr = l2.trad_fr AND L.sorting > l2.sorting)
+                                    WHERE l2.sorting IS NULL AND  (" . $codes_f . " L.code = '0') " . $P_A . " ORDER BY sorting,trad_fr";
                         } else {
-                            $res_f = $this->db->query("SELECT L.code,L.id, L.name, L.trad_fr, L.prix, ppc.prix as prix_perso, L.sorting 
+                            $sql = "SELECT L.code,L.id, L.name, L.trad_fr, L.prix, ppc.prix as prix_perso, L.sorting 
 														FROM " . $this->table_lenses . " L 
 														LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client="
-                                                      . $user_id . ")
+                                . $user_id . ")
 											   WHERE (" . $codes_f . " L.code = '0') " . $P_A
-                                                      . "  ORDER BY sorting,trad_fr,prix");
+                                . "  ORDER BY sorting,trad_fr,prix";
                         }
+
+                        $res_f = $this->db->query($sql);
+
 
 
                     }
@@ -1509,6 +1557,7 @@ class m_passer_commande_verre extends CI_Model
             . $user_id . ")
 									   WHERE verres_stock.id_verre = '" . $lens
             . "' AND grille_tarifaire.id_grille_tarifaire = 1";
+//        var_dump($sql);die;
         $stock_res = $this->db->query($sql);
 
         $stock_query = $stock_res->result();
@@ -1533,14 +1582,14 @@ class m_passer_commande_verre extends CI_Model
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
-            $res_f = $this->db->query($sql);
 
         } else {
-            $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
-			WHERE  L.code = '" . $lens . "'");
+			WHERE  L.code = '" . $lens . "'";
         }
+        $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
 

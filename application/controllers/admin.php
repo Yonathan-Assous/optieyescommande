@@ -21240,7 +21240,8 @@ class admin
             $this->input->post();
 
         $tab =
-            $this->m_passer_commande_verre->getAllLenses($data['requete']);
+            $this->m_passer_commande_verre->getAllLenses($data['requete'], $data
+            ['user_id']);
 
         //var_dump($tab);
 

@@ -4851,7 +4851,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							dataType: "json",
 							success: function (data) {	
 							//alert(data);
-							if(data != "")
+							if(data)
 							{
 								console.log(data);	
 								$.each(data, function(key, value){
@@ -5381,7 +5381,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							//alert(data);
 							//console.log(data);
 							//console.log("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereG+" ,cylindreD:"+cylindreG+" ,axeD:"+axeG+" ,additionD:"+additionG+" ,stockD:"+stockG+" ,panierA:"+panierAm);	
-							if(data != "")
+							if(data)
 							{
 								$.each(data, function(key, value){
 									setTimeout(function(){

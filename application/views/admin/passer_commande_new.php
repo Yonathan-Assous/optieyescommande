@@ -1814,7 +1814,7 @@ $('#type_de_verreD').on('change', function() {
 						$('#teinteD').prop('disabled', false);
 					}
 
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
+					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
 					{
 						$('#traitementD').prop('disabled', true);
 					}
@@ -1845,13 +1845,14 @@ $('#type_de_verreD').on('change', function() {
 							dataType: "json",
 							success: function (data) {
 							$('#traitementD option:eq(0)').prop('selected', true);
-							$('#traitementDH').val("Durci");
+							//$('#traitementDH').val("Durci");
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementD').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
 
 							});
-
+                            var selectedText = $("#traitementD option:selected").html();
+                            $('#traitementDH').val(selectedText);
 						}
 
 					});
@@ -2295,7 +2296,7 @@ $('#type_de_verreG').on('change', function() {
 						$('#teinteG').prop('disabled', false);
 					}
 
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0) || selectedText.indexOf("Panier") >= 0)
+					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
 					{
 						$('#traitementG').prop('disabled', true);
 					}
@@ -3866,7 +3867,6 @@ $('#traitementD').on('change', function() {
 
     var selectedText = $("#traitementD option:selected").html();
     $("#traitementDH").val(selectedText);
-
     if (String(sphereD).indexOf("+") >= 0)
 	{
 		sphereD = String(sphereD).replace('+', '');
@@ -9962,7 +9962,6 @@ $('input[name=additionG]').change(function() {
 
 		var formData = $('#commandeForm').serialize();
 		console.log(formData);
-
 		$.ajax({
 			type: "POST",
 			url: "/admin/setOrderRecapNew/<?php echo $user_info[0]->id_users; ?>",

@@ -65,7 +65,9 @@ class m_passer_commande_verre extends CI_Model
 									   FROM prix_par_client ppc 
 									   LEFT JOIN lenses l ON (ppc.code = l.code)
 									   LEFT JOIN verres_stock v ON ppc.code = v.id_verre
-									   WHERE id_client = '" . $user_id . "' AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
+									   WHERE id_client = '" . $user_id . "' 
+									   AND (l.trad_fr LIKE (CONCAT('%', ppc.generation ,'%')) OR l.trad_fr IS NULL)
+									   AND ppc.name <> ''
 									   ORDER BY l.trad_fr,v.id_verre ASC");
 
 
@@ -1555,6 +1557,7 @@ class m_passer_commande_verre extends CI_Model
             . $user_id . ")
 									   WHERE verres_stock.id_verre = '" . $lens
             . "' AND grille_tarifaire.id_grille_tarifaire = 1";
+//        var_dump($sql);die;
         $stock_res = $this->db->query($sql);
 
         $stock_query = $stock_res->result();

@@ -1579,14 +1579,14 @@ class m_passer_commande_verre extends CI_Model
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
-            $res_f = $this->db->query($sql);
 
         } else {
-            $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
-			WHERE  L.code = '" . $lens . "'");
+			WHERE  L.code = '" . $lens . "'";
         }
+        $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
 

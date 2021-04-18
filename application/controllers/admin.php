@@ -5172,6 +5172,16 @@ class admin
                         $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                     }
+                    if (isset($information_commande->verre->correction_droit->galbe) &&
+                        $information_commande->verre->correction_droit->galbe !=
+                        "Standard") {
+                        $xml .= '
+                  <curve>
+                    <baseCurve>' .
+                    $information_commande->verre->correction_droit->galbe .
+                    '</baseCurve>
+                  </curve>';
+                    }
                     $xml .= '
                </geometry>
             </lens>
@@ -5338,6 +5348,16 @@ class admin
                         $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                     }
+                    if (isset($information_commande->verre->correction_gauche->galbe) &&
+                        $information_commande->verre->correction_gauche->galbe !=
+                        "Standard") {
+                        $xml .= '
+                  <curve>
+                    <baseCurve>' .
+                    $information_commande->verre->correction_gauche->galbe .
+                    '</baseCurve>
+                  </curve>';
+                        }
                     $xml .= '
                </geometry>
             </lens>
@@ -5348,26 +5368,26 @@ class admin
                 $xml .= '
             	<frame quantity="1">';
 
-                if ((isset($information_commande->verre->correction_droit->galbe) &&
-                     $information_commande->verre->correction_droit->galbe !=
-                     "Standard") ||
-                    (isset($information_commande->verre->correction_gauche->galbe) &&
-                     $information_commande->verre->correction_gauche->galbe !=
-                     "Standard")) {
-                    if (isset($information_commande->verre->correction_droit->galbe) &&
-                        $information_commande->verre->correction_droit->galbe !=
-                        "Standard") {
-                        $xml .= '
-<frameBowAngle>' .
-                                $information_commande->verre->correction_droit->galbe .
-                                '</frameBowAngle>';
-                    } else {
-                        $xml .= '
-<frameBowAngle>' .
-                                $information_commande->verre->correction_gauche->galbe .
-                                '</frameBowAngle>';
-                    }
-                }
+//                if ((isset($information_commande->verre->correction_droit->galbe) &&
+//                     $information_commande->verre->correction_droit->galbe !=
+//                     "Standard") ||
+//                    (isset($information_commande->verre->correction_gauche->galbe) &&
+//                     $information_commande->verre->correction_gauche->galbe !=
+//                     "Standard")) {
+//                    if (isset($information_commande->verre->correction_droit->galbe) &&
+//                        $information_commande->verre->correction_droit->galbe !=
+//                        "Standard") {
+//                        $xml .= '
+//<frameBowAngle>' .
+//                                $information_commande->verre->correction_droit->galbe .
+//                                '</frameBowAngle>';
+//                    } else {
+//                        $xml .= '
+//<frameBowAngle>' .
+//                                $information_commande->verre->correction_gauche->galbe .
+//                                '</frameBowAngle>';
+//                    }
+//                }
 
                 $edg = "";
 
@@ -7483,6 +7503,16 @@ class admin
                             $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                         }
+                        if (isset($information_commande->verre->correction_droit->galbe) &&
+                            $information_commande->verre->correction_droit->galbe !=
+                            "Standard") {
+                            $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $information_commande->verre->correction_droit->galbe .
+                      '</baseCurve>
+                  </curve>';
+                        }
                         $xml .= '
                </geometry>
             </lens>
@@ -7649,6 +7679,16 @@ class admin
                             $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                         }
+                        if (isset($information_commande->verre->correction_gauche->galbe) &&
+                            $information_commande->verre->correction_gauche->galbe !=
+                            "Standard") {
+                            $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $information_commande->verre->correction_gauche->galbe .
+                      '</baseCurve>
+                  </curve>';
+                        }
                         $xml .= '
                </geometry>
             </lens>
@@ -7657,26 +7697,26 @@ class admin
                     }
                     $xml .= '
             	<frame quantity="1">';
-                    if ((isset($information_commande->verre->correction_droit->galbe) &&
-                         $information_commande->verre->correction_droit->galbe !=
-                         "Standard") ||
-                        (isset($information_commande->verre->correction_gauche->galbe) &&
-                         $information_commande->verre->correction_gauche->galbe !=
-                         "Standard")) {
-                        if (isset($information_commande->verre->correction_droit->galbe) &&
-                            $information_commande->verre->correction_droit->galbe !=
-                            "Standard") {
-                            $xml .= '
-<frameBowAngle>' .
-                                    $information_commande->verre->correction_droit->galbe .
-                                    '</frameBowAngle>';
-                        } else {
-                            $xml .= '
-<frameBowAngle>' .
-                                    $information_commande->verre->correction_gauche->galbe .
-                                    '</frameBowAngle>';
-                        }
-                    }
+//                    if ((isset($information_commande->verre->correction_droit->galbe) &&
+//                         $information_commande->verre->correction_droit->galbe !=
+//                         "Standard") ||
+//                        (isset($information_commande->verre->correction_gauche->galbe) &&
+//                         $information_commande->verre->correction_gauche->galbe !=
+//                         "Standard")) {
+//                        if (isset($information_commande->verre->correction_droit->galbe) &&
+//                            $information_commande->verre->correction_droit->galbe !=
+//                            "Standard") {
+//                            $xml .= '
+//<frameBowAngle>' .
+//                                    $information_commande->verre->correction_droit->galbe .
+//                                    '</frameBowAngle>';
+//                        } else {
+//                            $xml .= '
+//<frameBowAngle>' .
+//                                    $information_commande->verre->correction_gauche->galbe .
+//                                    '</frameBowAngle>';
+//                        }
+//                    }
 
                     $edg = "";
                     if ($precal ==
@@ -9639,6 +9679,16 @@ class admin
                     $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                 }
+                if (isset($data["galbeD"]) &&
+                    $data["galbeD"] !=
+                    "Standard") {
+                    $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                        $data["galbeD"] .
+                      '</baseCurve>
+                  </curve>';
+                }
                 $xml .= '
                </geometry>
             </lens>
@@ -9795,6 +9845,16 @@ class admin
                 } else {
                     $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
+                }
+                if (isset($data["galbeG"]) &&
+                    $data["galbeG"] !=
+                    "Standard") {
+                    $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $data["galbeG"] .
+                      '</baseCurve>
+                  </curve>';
                 }
                 $xml .= '
                </geometry>

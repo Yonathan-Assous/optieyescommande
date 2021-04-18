@@ -3828,12 +3828,11 @@ $(document).ready(function() {
         if (document.getElementById("spanAdditionG")) {
             additionG = document.getElementById('spanAdditionG').innerText;
             additionG = addPlus(additionG);
-
-            $('#sphereG').val(sphereG);
-            $('#cylindreG').val(cylindreG);
-            $('#axeG').val(axeG);
-            $('#additionG').val(additionG);
         }
+        $('#sphereG').val(sphereG);
+        $('#cylindreG').val(cylindreG);
+        $('#axeG').val(axeG);
+        $('#additionG').val(additionG);
     }
     else {
         $('#gauche').prop('checked', false);

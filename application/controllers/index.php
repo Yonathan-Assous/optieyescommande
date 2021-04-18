@@ -2892,9 +2892,9 @@ class index extends MY_Controller {
 
 				$data['panierA'] = 0;
 				$data['tarif_supplement'] = 0;
-
-				if($data['type_de_verreD']!=$data['type_de_verreG'])
+				if($data['type_de_verreD']!=$data['type_de_verreG'] && $data['type_de_verreD'] != "")
 				{
+				    //var_dump($data['nomverreDH']);die;
 					//$data['type_commande'] = 4;
 					$data['type_commande_verre'] = 4;
 
@@ -2909,7 +2909,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 2;
 							$data['type_commande_verreD'] = 2;
-							$data['type_commande_verre'] = 2;
+							//$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeD'] = 2;
 						}
@@ -2917,14 +2917,13 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 1;
 							$data['type_commande_verreD'] = 1;
-							$data['type_commande_verre'] = 1;
+							//$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
                         	$data['tarif_supplement'] = $supplement;
 						}
 					}
-
                     if($data['nomverreGH']!="")
 					{
 
@@ -2937,7 +2936,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeG'] = 2;
 							$data['type_commande_verreG'] = 2;
-							$data['type_commande_verre'] = 2;
+							//$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeG'] = 2;
 						}
@@ -2945,7 +2944,7 @@ class index extends MY_Controller {
 						{
 							//$data['type_commandeG'] = 1;
 							$data['type_commande_verreG'] = 1;
-							$data['type_commande_verre'] = 1;
+							//$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
@@ -3685,7 +3684,6 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
-
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

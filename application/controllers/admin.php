@@ -4736,264 +4736,264 @@ class admin
                     $commande->lenscode;
 
                 $paA = "";
-//
-//                if ($lenses_code ==
-//                    'PAU-15') {
-//                    $lenses_code =
-//                        '200010';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAU-159') {
-//                    $lenses_code =
-//                        '200051';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAU-16') {
-//                    $lenses_code =
-//                        '200005';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAU-167') {
-//                    $lenses_code =
-//                        '200003';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAU-174') {
-//                    $lenses_code =
-//                        '200464';
-//                    $paA =
-//                        "1";
-//                }
-//
-//                if ($lenses_code ==
-//                    'PAD-15') {
-//                    $lenses_code =
-//                        '200076';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAD-159') {
-//                    $lenses_code =
-//                        '200086';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAD-16') {
-//                    $lenses_code =
-//                        '200078';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAD-167') {
-//                    $lenses_code =
-//                        '200913';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAD-174') {
-//                    $lenses_code =
-//                        '200853';
-//                    $paA =
-//                        "1";
-//                }
-//
-//
-//                if ($lenses_code ==
-//                    'PAO-15') {
-//                    $lenses_code =
-//                        '202954';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAO-159') {
-//                    $lenses_code =
-//                        '202980';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAO-16') {
-//                    $lenses_code =
-//                        '202955';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAO-167') {
-//                    $lenses_code =
-//                        '202956';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAO-174') {
-//                    $lenses_code =
-//                        '202981';
-//                    $paA =
-//                        "1";
-//                }
-//
-//                if ($lenses_code ==
-//                    'PAI-1515') {
-//                    $lenses_code =
-//                        'S4UW50';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1615') {
-//                    $lenses_code =
-//                        'S3UW50';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1715') {
-//                    $lenses_code =
-//                        'S2UW50';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1815') {
-//                    $lenses_code =
-//                        'S1UW50';
-//                    $paA =
-//                        "1";
-//                }
-//
-//
-//                if ($lenses_code ==
-//                    'PAI-15159') {
-//                    $lenses_code =
-//                        'S4UY59';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-16159') {
-//                    $lenses_code =
-//                        'S3UY59';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-17159') {
-//                    $lenses_code =
-//                        'S2UY59';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-18159') {
-//                    $lenses_code =
-//                        'S1UY59';
-//                    $paA =
-//                        "1";
-//                }
-//
-//
-//                if ($lenses_code ==
-//                    'PAI-1516') {
-//                    $lenses_code =
-//                        'S4UH60';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1616') {
-//                    $lenses_code =
-//                        'S3UH60';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1716') {
-//                    $lenses_code =
-//                        'S2UH60';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-1816') {
-//                    $lenses_code =
-//                        'S1UH60';
-//                    $paA =
-//                        "1";
-//                }
-//
-//
-//                if ($lenses_code ==
-//                    'PAI-15167') {
-//                    $lenses_code =
-//                        'S4UH67';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-16167') {
-//                    $lenses_code =
-//                        'S3UH67';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-17167') {
-//                    $lenses_code =
-//                        'S2UH67';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-18167') {
-//                    $lenses_code =
-//                        'S1UH67';
-//                    $paA =
-//                        "1";
-//                }
-//
-//
-//                if ($lenses_code ==
-//                    'PAI-15174') {
-//                    $lenses_code =
-//                        'S4UH74';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-16174') {
-//                    $lenses_code =
-//                        'S3UH74';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-17174') {
-//                    $lenses_code =
-//                        'S2UH74';
-//                    $paA =
-//                        "1";
-//                }
-//                if ($lenses_code ==
-//                    'PAI-18174') {
-//                    $lenses_code =
-//                        'S1UH74';
-//                    $paA =
-//                        "1";
-//                }
+
+                if ($lenses_code ==
+                    'PAU-15') {
+                    $lenses_code =
+                        '200010';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAU-159') {
+                    $lenses_code =
+                        '200051';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAU-16') {
+                    $lenses_code =
+                        '200005';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAU-167') {
+                    $lenses_code =
+                        '200003';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAU-174') {
+                    $lenses_code =
+                        '200464';
+                    $paA =
+                        "1";
+                }
+
+                if ($lenses_code ==
+                    'PAD-15') {
+                    $lenses_code =
+                        '200076';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAD-159') {
+                    $lenses_code =
+                        '200086';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAD-16') {
+                    $lenses_code =
+                        '200078';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAD-167') {
+                    $lenses_code =
+                        '200913';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAD-174') {
+                    $lenses_code =
+                        '200853';
+                    $paA =
+                        "1";
+                }
+
+
+                if ($lenses_code ==
+                    'PAO-15') {
+                    $lenses_code =
+                        '202954';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAO-159') {
+                    $lenses_code =
+                        '202980';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAO-16') {
+                    $lenses_code =
+                        '202955';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAO-167') {
+                    $lenses_code =
+                        '202956';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAO-174') {
+                    $lenses_code =
+                        '202981';
+                    $paA =
+                        "1";
+                }
+
+                if ($lenses_code ==
+                    'PAI-1515') {
+                    $lenses_code =
+                        'S4UW50';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1615') {
+                    $lenses_code =
+                        'S3UW50';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1715') {
+                    $lenses_code =
+                        'S2UW50';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1815') {
+                    $lenses_code =
+                        'S1UW50';
+                    $paA =
+                        "1";
+                }
+
+
+                if ($lenses_code ==
+                    'PAI-15159') {
+                    $lenses_code =
+                        'S4UY59';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-16159') {
+                    $lenses_code =
+                        'S3UY59';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-17159') {
+                    $lenses_code =
+                        'S2UY59';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-18159') {
+                    $lenses_code =
+                        'S1UY59';
+                    $paA =
+                        "1";
+                }
+
+
+                if ($lenses_code ==
+                    'PAI-1516') {
+                    $lenses_code =
+                        'S4UH60';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1616') {
+                    $lenses_code =
+                        'S3UH60';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1716') {
+                    $lenses_code =
+                        'S2UH60';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-1816') {
+                    $lenses_code =
+                        'S1UH60';
+                    $paA =
+                        "1";
+                }
+
+
+                if ($lenses_code ==
+                    'PAI-15167') {
+                    $lenses_code =
+                        'S4UH67';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-16167') {
+                    $lenses_code =
+                        'S3UH67';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-17167') {
+                    $lenses_code =
+                        'S2UH67';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-18167') {
+                    $lenses_code =
+                        'S1UH67';
+                    $paA =
+                        "1";
+                }
+
+
+                if ($lenses_code ==
+                    'PAI-15174') {
+                    $lenses_code =
+                        'S4UH74';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-16174') {
+                    $lenses_code =
+                        'S3UH74';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-17174') {
+                    $lenses_code =
+                        'S2UH74';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PAI-18174') {
+                    $lenses_code =
+                        'S1UH74';
+                    $paA =
+                        "1";
+                }
 
                 $xml .= '
       	<pair>
@@ -5172,6 +5172,16 @@ class admin
                         $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                     }
+                    if (isset($information_commande->verre->correction_droit->galbe) &&
+                        $information_commande->verre->correction_droit->galbe !=
+                        "Standard") {
+                        $xml .= '
+                  <curve>
+                    <baseCurve>' .
+                    $information_commande->verre->correction_droit->galbe .
+                    '</baseCurve>
+                  </curve>';
+                    }
                     $xml .= '
                </geometry>
             </lens>
@@ -5338,6 +5348,16 @@ class admin
                         $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                     }
+                    if (isset($information_commande->verre->correction_gauche->galbe) &&
+                        $information_commande->verre->correction_gauche->galbe !=
+                        "Standard") {
+                        $xml .= '
+                  <curve>
+                    <baseCurve>' .
+                    $information_commande->verre->correction_gauche->galbe .
+                    '</baseCurve>
+                  </curve>';
+                        }
                     $xml .= '
                </geometry>
             </lens>
@@ -5348,26 +5368,26 @@ class admin
                 $xml .= '
             	<frame quantity="1">';
 
-                if ((isset($information_commande->verre->correction_droit->galbe) &&
-                     $information_commande->verre->correction_droit->galbe !=
-                     "Standard") ||
-                    (isset($information_commande->verre->correction_gauche->galbe) &&
-                     $information_commande->verre->correction_gauche->galbe !=
-                     "Standard")) {
-                    if (isset($information_commande->verre->correction_droit->galbe) &&
-                        $information_commande->verre->correction_droit->galbe !=
-                        "Standard") {
-                        $xml .= '
-<frameBowAngle>' .
-                                $information_commande->verre->correction_droit->galbe .
-                                '</frameBowAngle>';
-                    } else {
-                        $xml .= '
-<frameBowAngle>' .
-                                $information_commande->verre->correction_gauche->galbe .
-                                '</frameBowAngle>';
-                    }
-                }
+//                if ((isset($information_commande->verre->correction_droit->galbe) &&
+//                     $information_commande->verre->correction_droit->galbe !=
+//                     "Standard") ||
+//                    (isset($information_commande->verre->correction_gauche->galbe) &&
+//                     $information_commande->verre->correction_gauche->galbe !=
+//                     "Standard")) {
+//                    if (isset($information_commande->verre->correction_droit->galbe) &&
+//                        $information_commande->verre->correction_droit->galbe !=
+//                        "Standard") {
+//                        $xml .= '
+//<frameBowAngle>' .
+//                                $information_commande->verre->correction_droit->galbe .
+//                                '</frameBowAngle>';
+//                    } else {
+//                        $xml .= '
+//<frameBowAngle>' .
+//                                $information_commande->verre->correction_gauche->galbe .
+//                                '</frameBowAngle>';
+//                    }
+//                }
 
                 $edg = "";
 
@@ -7483,6 +7503,16 @@ class admin
                             $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                         }
+                        if (isset($information_commande->verre->correction_droit->galbe) &&
+                            $information_commande->verre->correction_droit->galbe !=
+                            "Standard") {
+                            $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $information_commande->verre->correction_droit->galbe .
+                      '</baseCurve>
+                  </curve>';
+                        }
                         $xml .= '
                </geometry>
             </lens>
@@ -7649,6 +7679,16 @@ class admin
                             $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                         }
+                        if (isset($information_commande->verre->correction_gauche->galbe) &&
+                            $information_commande->verre->correction_gauche->galbe !=
+                            "Standard") {
+                            $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $information_commande->verre->correction_gauche->galbe .
+                      '</baseCurve>
+                  </curve>';
+                        }
                         $xml .= '
                </geometry>
             </lens>
@@ -7657,26 +7697,26 @@ class admin
                     }
                     $xml .= '
             	<frame quantity="1">';
-                    if ((isset($information_commande->verre->correction_droit->galbe) &&
-                         $information_commande->verre->correction_droit->galbe !=
-                         "Standard") ||
-                        (isset($information_commande->verre->correction_gauche->galbe) &&
-                         $information_commande->verre->correction_gauche->galbe !=
-                         "Standard")) {
-                        if (isset($information_commande->verre->correction_droit->galbe) &&
-                            $information_commande->verre->correction_droit->galbe !=
-                            "Standard") {
-                            $xml .= '
-<frameBowAngle>' .
-                                    $information_commande->verre->correction_droit->galbe .
-                                    '</frameBowAngle>';
-                        } else {
-                            $xml .= '
-<frameBowAngle>' .
-                                    $information_commande->verre->correction_gauche->galbe .
-                                    '</frameBowAngle>';
-                        }
-                    }
+//                    if ((isset($information_commande->verre->correction_droit->galbe) &&
+//                         $information_commande->verre->correction_droit->galbe !=
+//                         "Standard") ||
+//                        (isset($information_commande->verre->correction_gauche->galbe) &&
+//                         $information_commande->verre->correction_gauche->galbe !=
+//                         "Standard")) {
+//                        if (isset($information_commande->verre->correction_droit->galbe) &&
+//                            $information_commande->verre->correction_droit->galbe !=
+//                            "Standard") {
+//                            $xml .= '
+//<frameBowAngle>' .
+//                                    $information_commande->verre->correction_droit->galbe .
+//                                    '</frameBowAngle>';
+//                        } else {
+//                            $xml .= '
+//<frameBowAngle>' .
+//                                    $information_commande->verre->correction_gauche->galbe .
+//                                    '</frameBowAngle>';
+//                        }
+//                    }
 
                     $edg = "";
                     if ($precal ==
@@ -9639,6 +9679,16 @@ class admin
                     $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
                 }
+                if (isset($data["galbeD"]) &&
+                    $data["galbeD"] !=
+                    "Standard") {
+                    $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                        $data["galbeD"] .
+                      '</baseCurve>
+                  </curve>';
+                }
                 $xml .= '
                </geometry>
             </lens>
@@ -9795,6 +9845,16 @@ class admin
                 } else {
                     $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
+                }
+                if (isset($data["galbeG"]) &&
+                    $data["galbeG"] !=
+                    "Standard") {
+                    $xml .= '
+                  <curve>
+                      <baseCurve>' .
+                      $data["galbeG"] .
+                      '</baseCurve>
+                  </curve>';
                 }
                 $xml .= '
                </geometry>

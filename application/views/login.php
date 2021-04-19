@@ -254,6 +254,33 @@
             </div>
         </div>
 
+        <div id="siret_exist" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="siret_exist_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Email existant</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_siret_exist"></p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-warning waves-effect waves-light"
+                                    data-dismiss="modal">Ok</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
         <script>
 
 
@@ -351,6 +378,7 @@
                     data: $("#registerForm").serialize(),
                     success: function(data){
                         var res = $.parseJSON(data);
+                        console.log(res);
                         if(res.status == 'ok') {
                             $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
                         }
@@ -362,7 +390,12 @@
                             $('#password_exist').modal('show');
                         }
                         else if(res.status == 'error') {
-                            if(res.error !== undefined) {
+                            if (res.error == 'duplicate_siret') {
+                                $('#text_siret_exist').html('Veuillez noter que ce numéro de SIRET existe déjà pour le ' +
+                                'numéro de magasin ' + res.magasin + ' en interne');
+                                $('#siret_exist').modal('show');
+                            }
+                            else if(res.error !== undefined) {
                                 $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
                             }
                         }

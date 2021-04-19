@@ -74,16 +74,22 @@ class m_users extends CI_Model {
                                   ($data['email']));
 
         if ($query->num_rows() > 0) {
-            return $query->result()[0];
+            $error = $query->result()[0];
+            $error->error = "DUPLICATE_EMAIL";
+            return $error;
         }
-//		$query = $this->db->query("SELECT numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']));
-//
-//		if ($query->num_rows() > 0)
-//            return "DUPLICATE";
-//        else{
+        $sql = "SELECT id_users ,numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']);
+        $query = $this->db->query($sql);
+
+		if ($query->num_rows() > 0) {
+            $error = $query->result()[0];
+            $error->error = "DUPLICATE_SIRET";
+            return $error;
+        }
+        else{
      //   var_dump($data);
 			$this->db->insert($this->table, $data);
-//		}
+		}
     }
 
     public function updateUser($data){

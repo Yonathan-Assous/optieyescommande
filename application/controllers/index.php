@@ -2892,9 +2892,9 @@ class index extends MY_Controller {
 
 				$data['panierA'] = 0;
 				$data['tarif_supplement'] = 0;
-				if($data['type_de_verreD']!=$data['type_de_verreG'] && $data['type_de_verreD'] != "")
+
+				if($data['type_de_verreD']!=$data['type_de_verreG'])
 				{
-				    //var_dump($data['nomverreDH']);die;
 					//$data['type_commande'] = 4;
 					$data['type_commande_verre'] = 4;
 
@@ -2924,6 +2924,7 @@ class index extends MY_Controller {
                         	$data['tarif_supplement'] = $supplement;
 						}
 					}
+
                     if($data['nomverreGH']!="")
 					{
 
@@ -3684,6 +3685,7 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
+
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
@@ -4800,18 +4802,22 @@ class index extends MY_Controller {
     public function subscribe(){
         if($this->input->is_ajax_request()){
             $data = $this->input->post('inscription');
-
             if($this->checkSiret($data['numero_siret'])){
                 //if($this->checkTvaIntraComm($data['numero_siret']) == $data['tva_intracom']){
                     $passAleatoire = $this->CarAleatoire(8);
                     $data['email'] = strtolower($data['email']);
                     $data['pass'] = md5($data['email'].'&&'.$passAleatoire);
                     $data['date_inscription'] = date("Y-m-d H:i:s");
-
                     if(($return = $this->m_users->addUser($data))!=""){
-                        setlocale(LC_TIME, "fr_FR");
-                        $date = strftime("%A %d %B %Y", strtotime($return->date_inscription));
-                        echo json_encode(array('status'=> 'exists', 'date' => $date));
+                        if ($return->error == "DUPLICATE_SIRET") {
+                            echo json_encode(array('status'=> 'error', 'error' => 'duplicate_siret',
+                                'magasin' => $return->id_users));
+                        }
+                        else if ($return->error == "DUPLICATE_EMAIL") {
+                            setlocale(LC_TIME, "fr_FR");
+                            $date = utf8_encode(strftime('%A %d %B %Y', strtotime($return->date_inscription)));
+                            echo json_encode(array('status'=> 'exists', 'date' => $date));
+                        }
                     }
                     else{
                         echo json_encode(array('status'=> 'ok'));

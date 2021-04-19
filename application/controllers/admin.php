@@ -5036,14 +5036,20 @@ class admin
                           '700100' ||
                           (($information_commande->verre->correction_droit->traitement ==
                             '700100') &&
-                           ((strpos($commande->lensname,
-                                    '1.5') === false) ||
+                           (((strpos($commande->lensname,
+                                    '1.5') === false)) ||
                             (strpos($commande->lensname,
                                     '1.53') !== false) ||
                             (strpos($commande->lensname,
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
-                                    '1.59') !== false))
+                                    '1.59') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Transition') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Polarisé') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Xtractive') !== false))
                           ))) ||
                         $paA ==
                         "1") {
@@ -5231,7 +5237,13 @@ class admin
                             (strpos($commande->lensname,
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
-                                    '1.59') !== false))
+                                    '1.59') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Transition') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Polarisé') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Xtractive') !== false))
                           ))) ||
                         $paA ==
                         "1") {
@@ -6502,7 +6514,13 @@ class admin
                                (strpos($commande->lensname,
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
-                                       '1.59') !== false))
+                                       '1.59') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Transition') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Polarisé') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Xtractive') !== false))
                              ))) {
                             if ($traitementD !=
                                 "") {
@@ -6685,7 +6703,13 @@ class admin
                                (strpos($commande->lensname,
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
-                                       '1.59') !== false))
+                                       '1.59') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Transition') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Polarisé') !== false) ||
+                                  (strpos($commande->lensname,
+                                          'Xtractive') !== false))
                              ))) {
                             $textarea .= "<br>Coating code: " .
                                          $information_commande->verre->correction_gauche->traitement .
@@ -7374,7 +7398,13 @@ class admin
                                 (strpos($commande->lensname,
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
-                                        '1.59') !== false))
+                                        '1.59') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Transition') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Polarisé') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Xtractive') !== false))
                               ))) ||
                             $paA ==
                             "1") {
@@ -7563,7 +7593,13 @@ class admin
                                 (strpos($commande->lensname,
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
-                                        '1.59') !== false))
+                                        '1.59') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Transition') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Polarisé') !== false) ||
+                                   (strpos($commande->lensname,
+                                           'Xtractive') !== false))
                               ))) ||
                             $paA ==
                             "1") {
@@ -8863,7 +8899,13 @@ class admin
                    (strpos($data['nomverreDH'],
                            '1.56') !== false) ||
                    (strpos($data['nomverreDH'],
-                           '1.59') !== false))
+                           '1.59') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Transition') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Polarisé') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Xtractive') !== false))
                  )))
                  {
 
@@ -8951,14 +8993,20 @@ class admin
                     !empty($data["traitementG"]) &&
                     ($data["traitementG"] != '700100' ||
                      (($data["traitementG"] == '700100') &&
-                      ((strpos($data['nomverreDH'],
+                      ((strpos($data['nomverreGH'],
                                '1.5') === false) ||
-                       (strpos($data['nomverreDH'],
+                       (strpos($data['nomverreGH'],
                                '1.53') !== false) ||
-                       (strpos($data['nomverreDH'],
+                       (strpos($data['nomverreGH'],
                                '1.56') !== false) ||
-                       (strpos($data['nomverreDH'],
-                               '1.59') !== false))
+                       (strpos($data['nomverreGH'],
+                               '1.59') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Transition') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Polarisé') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Xtractive') !== false))
                      ))) {
 
                     $textarea .= "<br>Coating code: " .
@@ -9553,7 +9601,13 @@ class admin
                         (strpos($data['nomverreDH'],
                                 '1.56') !== false) ||
                         (strpos($data['nomverreDH'],
-                                '1.59') !== false))
+                                '1.59') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Transition') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Polarisé') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Xtractive') !== false))
                       ))) ||
                     $paA ==
                     "1") {
@@ -9729,14 +9783,20 @@ class admin
                      !empty($data["traitementG"]) &&
                      ($data["traitementG"] != '700100' ||
                       (($data["traitementG"] == '700100') &&
-                       ((strpos($data['nomverreDH'],
+                       ((strpos($data['nomverreGH'],
                                 '1.5') === false) ||
-                        (strpos($data['nomverreDH'],
+                        (strpos($data['nomverreGH'],
                                 '1.53') !== false) ||
-                        (strpos($data['nomverreDH'],
+                        (strpos($data['nomverreGH'],
                                 '1.56') !== false) ||
-                        (strpos($data['nomverreDH'],
-                                '1.59') !== false))
+                        (strpos($data['nomverreGH'],
+                                '1.59') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Transition') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Polarisé') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Xtractive') !== false))
                       ))) ||
                     $paA ==
                     "1") {

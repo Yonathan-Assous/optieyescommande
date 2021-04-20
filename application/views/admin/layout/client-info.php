@@ -1125,6 +1125,7 @@ $(document).ready(function(){
             type: "POST",
             url: "/traitement/getAllTraitementsWithPrice",
             data: {
+                'user_id': <?php echo $info_user[0]->id_users ?>,
                 'idLenses' : $('#listeVerres').val()
             },
             dataType: "json",
@@ -1155,6 +1156,7 @@ $(document).ready(function(){
             type: "POST",
             url: "/teinte/getAllTeintesWithPrice",
             data: {
+                'user_id': <?php echo $info_user[0]->id_users ?>,
                 'idLenses' : $('#listeVerres').val()
             },
             dataType: "json",

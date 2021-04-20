@@ -33,8 +33,34 @@ class index extends MY_Controller {
 		    $this->login();
 	}
 
+	public function test() {
+        $data['certificat'] = $this->m_commande->getCertificatStock('565817');
+
+        $data['control'] = array(
+            'certificat' => bin2hex(openssl_random_pseudo_bytes(10))
+        );
+
+        /*$this->db->insert('controle', array(
+            'id' => $data['control']['certificat'],
+            'control' => count($data['certificat'])
+        ));
+        */
+
+//        $this->db->insert('controle_test', array(
+//            'v' => $data['control']['certificat'],
+//            'control' => count($data['certificat'])
+//        ));
+
+        //$message = json_encode($data);
+
+
+        // Génération des PDF
+        $docs = array(
+            'certificat' => $this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, 565817, false, 'paysage', $customsize = array(0,0,243,153))
+        );
+    }
+
     public function export_verre_csv() {
-        //var_dump('dddd');die;
         $sql = "SELECT id_grille_tarifaire, libelle_verre, prix_verre 
                 FROM `grille_tarifaire` AS gt 
                 INNER JOIN `verres` as v ON v.id_verre = gt.id_verre 
@@ -2142,12 +2168,13 @@ class index extends MY_Controller {
 
 
 						// Génération des PDF
+//                        var_dump($data);
+//                        var_dump($order);
 						$docs = array(
 							'certificat' => $this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, $order['id'], false, 'paysage', $customsize = array(0,0,243,153))
 						);
 
 					}
-
 				set_cookie('panierA_sans_monture','0','1800');
 				set_cookie('typecommande','fab','1800');
 

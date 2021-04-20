@@ -3429,17 +3429,17 @@ class m_commande extends CI_Model {
 					//$data['type_commande'] = $type_commandeG;
 					$type_commande_verre = $type_commande_verreG;
 					$data['origine_commande'] = $origine_commandeG;
-					if($unVerreG==0)
-					{
-						$data['prix_verre'] = $prixGH;
-						$data['total_commande'] = $prixGH;
-					}
-					else
-					{
+//					if($unVerreG==0)
+//					{
+//						$data['prix_verre'] = $prixGH;
+//						$data['total_commande'] = $prixGH;
+//					}
+//					else
+//					{
 //					    var_dump($data);die;
                         $data['prix_verre'] = 0;
 						$data['total_commande'] = $prixGH;
-					}
+//					}
 
 					$data['information_commande'] = str_replace("+","",$information_commandeG);
 					$data['information_commande'] = $this->db->escape($data['information_commande']);

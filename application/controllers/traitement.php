@@ -56,8 +56,10 @@ class traitement extends MY_Controller {
     {
         $data =
             $this->input->post();
+        $lensesId = $data['idLenses'];
+        $userId = $data['user_id'];
         $tab =
-            $this->m_traitement->getAllTraitementsWithPrice($data['idLenses']);
+            $this->m_traitement->getAllTraitementsWithPrice($lensesId, $userId);
 
         //var_dump($tab);
 

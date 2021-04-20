@@ -13578,6 +13578,22 @@ class admin
                     $_GET['id_users'];
             }
 
+            $reference_optieyes = false;
+            if (isset($_GET['reference_optieyes']) &&
+                $_GET['reference_optieyes'] !=
+                "") {
+                $reference_optieyes =
+                    $_GET['reference_optieyes'];
+            }
+
+            $reference_client = false;
+            if (isset($_GET['recherche_reference_client']) &&
+                $_GET['recherche_reference_client'] !=
+                "") {
+                $reference_client =
+                    $_GET['reference_client'];
+            }
+
             $start =
                 (isset($_GET['start']) ?
                     $_GET['start'] :
@@ -13595,8 +13611,9 @@ class admin
             $data_commande =
                 $this->m_commande->getOldOrder($start,
                                                $length,
-                                               $search,
-                                               $id_users);
+                                               $id_users,
+                                               $reference_optieyes,
+                                               $reference_client);
 
             $data['recordsTotal'] =
                 $this->m_commande->countAllCommande()[0]->total;

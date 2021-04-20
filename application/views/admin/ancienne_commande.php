@@ -33,9 +33,20 @@ include_once('menu.php');
                             </select>
                         </div>
 
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_reference_optieyes"> Référence optieyes</label>
+                            <input type="number" id="recherche_reference_optieyes" class="form-control">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_reference_client"> Référence Client</label>
+                            <input type="text" id="recherche_reference_client" class="form-control">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="search">&nbsp;</label>
+                            <button id="search" type="button" class="btn btn-warning waves-effect waves-light" style="display: block">Rechercher</button>
+                        </div>
                     </div>
-
-
                 </div>
 
 
@@ -109,7 +120,7 @@ include_once('menu.php');
 <script>
     $(document).ready(function() {
 
-        var table = $('#datatable').DataTable({
+            var table = $('#datatable').DataTable({
             ajax: { url: "/admin/ancienne_commande_ajax", dataSrc: 'aaData' },
             deferRender: true,
             ordering: false,
@@ -138,7 +149,7 @@ include_once('menu.php');
                 "info": "Affichage de la page page _PAGE_ sur _PAGES_",
                 "infoEmpty": "Aucune commande à afficher",
                 "infoFiltered": "(Filtrat de _MAX_ entrées)",
-                "search": "Recherche",
+                // "search": "Recherche",
                 "paginate": {
                     "first":      "Première",
                     "last":       "Dernière",
@@ -148,17 +159,46 @@ include_once('menu.php');
             }
         });
 
-        $(document).on("change", "#recherche_num_magasin", function(){
-            var value = $(this).val();
 
-            if(value != '') {
-                table.ajax.url('/admin/ancienne_commande_ajax?id_users='+value).load();
+
+
+        // $(document).on("change", "#recherche_num_magasin", function(){
+        //     // var value = $(this).val();
+        //     //
+        //     // if(value != '') {
+        //     //     table.ajax.url('/admin/ancienne_commande_ajax?id_users='+value).load();
+        //     // }
+        //     // else {
+        //     //     table.ajax.url('/admin/ancienne_commande_ajax').load();
+        //     // }
+        //     console.log('a');
+        //     search();
+        // });
+
+        // $(document).on("change", "#recherche_reference_optieyes", function(){
+        //     console.log('a');
+        //     search();
+        //
+        // });
+
+        $('#search').click(function () {
+            search();
+        });
+
+        function search() {
+            var magasin = $("#recherche_num_magasin").val();
+            var reference_optieyes = $("#recherche_reference_optieyes").val();
+            var reference_client = $("#recherche_reference_client").val();
+
+            if(magasin != '' || reference_optieyes != '' || reference_client != '') {
+                table.ajax.url('/admin/ancienne_commande_ajax?id_users='+magasin +
+                    '&reference_optieyes=' + reference_optieyes +
+                    '&reference_client=' + reference_client).load();
             }
             else {
                 table.ajax.url('/admin/ancienne_commande_ajax').load();
             }
-
-        });
+        }
 
         $(document).on("click", "button[id^=annule_envoi_]", function(){
             var num_commande = $(this).attr('id').split('_')[2];

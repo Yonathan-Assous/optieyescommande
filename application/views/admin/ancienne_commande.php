@@ -44,16 +44,16 @@ include_once('menu.php');
                         </div>
 
 
-                        <div class="col-sm-2">
-                            <label class="m-b-10" for="date_start"> Depuis </label>
-                            <select id="date_start" class="form-control">
-                                <option value="1 month" selected>1 mois</option>
-                                <option value="3 months">3 mois</option>
-                                <option value="6 months">6 mois</option>
-                                <option value="1 year">1 an</option>
-                                <option value="all">Toujours</option>
-                            </select>
-                        </div>
+<!--                        <div class="col-sm-2">-->
+<!--                            <label class="m-b-10" for="date_start"> Depuis </label>-->
+<!--                            <select id="date_start" class="form-control">-->
+<!--                                <option value="1 month" selected>1 mois</option>-->
+<!--                                <option value="3 months">3 mois</option>-->
+<!--                                <option value="6 months">6 mois</option>-->
+<!--                                <option value="1 year">1 an</option>-->
+<!--                                <option value="all">Toujours</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
 
                         <div class="col-sm-2">
                             <label class="m-b-10" for="recherche_sphere"> Sphère </label>
@@ -64,12 +64,19 @@ include_once('menu.php');
                             <label class="m-b-10" for="recherche_cylindre"> Cylindre </label>
                             <input type="text" id="recherche_cylindre" class="form-control">
                         </div>
-<!--                        <div class="col-sm-2">-->
-<!--                            <label class="m-b-10" for="search">&nbsp;</label>-->
-<!--                            <button id="search" type="button" class="btn btn-warning waves-effect waves-light" style="display: block">Rechercher</button>-->
-<!--                        </div>-->
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_axe"> Axe </label>
+                            <input type="text" id="recherche_axe" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="m-b-10" for="search">&nbsp;</label>
+                            <button id="search" type="button" class="btn btn-warning form-control waves-effect waves-light" style="display: block">Rechercher</button>
+                        </div>
                     </div>
                 </div>
+
 
 
                 <div class="col-sm-12">
@@ -141,10 +148,12 @@ include_once('menu.php');
 
 <script>
     $(document).ready(function() {
-        var dateStart = $("#date_start").val();
+        //var dateStart = $("#date_start").val();
         var x = 500;
             var table = $('#datatable').DataTable({
-            ajax: { url: "/admin/ancienne_commande_ajax?date_start="+dateStart, dataSrc: 'aaData' },
+            ajax: { url: "/admin/ancienne_commande_ajax"
+                    //+ "?date_start="+dateStart
+                , dataSrc: 'aaData' },
             deferRender: true,
             ordering: false,
             serverSide: true,
@@ -190,13 +199,13 @@ include_once('menu.php');
             search();
         });
 
-        $(document).on("change", "#date_start", function(){
-            search();
-        });
-
-        $("input").on('input', function() {
-            search();
-        });
+        // $(document).on("change", "#date_start", function(){
+        //     search();
+        // });
+        //
+        // $("input").on('input', function() {
+        //     search();
+        // });
         // $(document).on("change", "#recherche_reference_optieyes", function(){
         //     search();
         // });
@@ -215,24 +224,28 @@ include_once('menu.php');
             var magasin = $("#recherche_num_magasin").val();
             var reference_optieyes = $("#recherche_reference_optieyes").val();
             var reference_client = $("#recherche_reference_client").val();
-            var dateStart = $("#date_start").val();
+            // var dateStart = $("#date_start").val();
             var recherche_sphere = $("#recherche_sphere").val();
             var recherche_cylindre = $("#recherche_cylindre").val();
+            var recherche_axe = $("#recherche_axe").val();
 
             if(magasin != '' || reference_optieyes != '' || reference_client != '') {
                 table.ajax.url('/admin/ancienne_commande_ajax?id_users='+magasin +
                     '&reference_optieyes=' + reference_optieyes +
                     '&reference_client=' + reference_client +
-                    '&date_start=' + dateStart +
+                    // '&date_start=' + dateStart +
                     '&recherche_sphere=' + recherche_sphere +
-                    '&recherche_cylindre=' + recherche_cylindre
+                    '&recherche_cylindre=' + recherche_cylindre +
+                    '&recherche_axe=' + recherche_axe
                 ).load();
             }
             else {
                 table.ajax.url('/admin/ancienne_commande_ajax?' +
-                'date_start=' + dateStart +
+                // 'date_start=' + dateStart +
                 '&recherche_sphere=' + recherche_sphere +
-                '&recherche_cylindre=' + recherche_cylindre).load();
+                '&recherche_cylindre=' + recherche_cylindre +
+                '&recherche_axe=' + recherche_axe
+                ).load();
             }
         }
 

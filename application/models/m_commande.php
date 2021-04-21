@@ -891,7 +891,7 @@ class m_commande extends CI_Model {
     }
 
 	public function getOldOrder($startLimit,$offsetLimit, $id_users, $reference_optieyes,
-                                $reference_client, $date_start, $sphere, $cylindre){
+                                $reference_client, $sphere, $cylindre, $axe){
 		$limit = $sWhere = "";
 
 		if(isset( $startLimit ) && $offsetLimit != '-1' ){
@@ -915,24 +915,42 @@ class m_commande extends CI_Model {
             $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
         }
 
-        $addDate_start = '';
-        if($date_start != false) {
-            $now = date('Y-m-d');
-//            var_dump($date_start);
-//            var_dump($now . ' ' . $date_start);
-            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
-//            var_dump($date_start);die;
-            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
-        }
+//        $addDate_start = '';
+//        if($date_start != false) {
+//            $now = date('Y-m-d');
+//            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
+//            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
+//        }
 
         $addSphere = "";
-        if($sphere != false) {
-            $addSphere .= " AND c.information_commande LIKE '%\"sphere\":\"" . number_format($sphere, 2). "%'";
+        if($sphere != false && $sphere != "-") {
+            $addSphere .= " AND c.information_commande LIKE '%\"sphere\":\"" . number_format($sphere, 2);
+            if ($cylindre != false && $cylindre != "-") {
+                $addSphere .= "\",\"cylindre\":\"" . number_format($cylindre,2);
+                if ($axe != false) {
+                    $addSphere .= "\",\"axe\":\"" . $axe;
+                }
+            }
+            else if ($axe != false) {
+                $addSphere .= "\",\"cylindre\":\"____\",\"axe\":\"" . $axe;
+            }
+            $addSphere .= "%'";
         }
 
         $addCylindre = "";
-        if($cylindre != false) {
-            $addCylindre .= " AND c.information_commande LIKE '%\"cylindre\":\"" . number_format($cylindre,2). "%'";
+        if($cylindre != false && $cylindre != "-") {
+            if (!$addSphere) {
+                $addCylindre .= " AND c.information_commande LIKE '%\"cylindre\":\"" . number_format($cylindre,2);
+                if ($axe != false) {
+                    $addCylindre .= "\",\"axe\":\"" . $axe;
+                }
+                $addCylindre .= "%'";
+            }
+        }
+
+        $addAxe = "";
+        if($axe != false && !$addSphere && !$addCylindre) {
+            $addAxe .= " AND c.information_commande LIKE '%\"axe\":\"" . $axe. "%'";
         }
 
 //        $addReferenceClient = "";
@@ -969,16 +987,14 @@ class m_commande extends CI_Model {
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                     WHERE c.id_etat_commande = 6
                                     AND c.lens_id = 0 AND c.commande_monture = 0
-                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start.$addSphere.$addCylindre."
+                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addSphere.$addCylindre.$addAxe."
                                     ORDER BY date_update_commande DESC ".$limit;
-//        var_dump($sql);die;
-
          $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
 			$data = array();
 			$data['results'] = $query->result();
-            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start;
+            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient.$addSphere.$addCylindre.$addAxe;
             $query2 = $this->db->query($sql);
 			if($query2 && $query2->num_rows() > 0){
 				$result = $query2->row();

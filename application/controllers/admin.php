@@ -13592,13 +13592,13 @@ class admin
                     $_GET['reference_client'];
             }
 
-            $date_start = false;
-            if (isset($_GET['date_start']) &&
-                $_GET['date_start'] !=
-                "all") {
-                $date_start =
-                    $_GET['date_start'];
-            }
+//            $date_start = false;
+//            if (isset($_GET['date_start']) &&
+//                $_GET['date_start'] !=
+//                "all") {
+//                $date_start =
+//                    $_GET['date_start'];
+//            }
 
             $recherche_sphere = false;
             if (isset($_GET['recherche_sphere']) &&
@@ -13614,6 +13614,14 @@ class admin
                 "all") {
                 $recherche_cylindre =
                     $_GET['recherche_cylindre'];
+            }
+
+            $recherche_axe = false;
+            if (isset($_GET['recherche_axe']) &&
+                $_GET['recherche_axe'] !=
+                "all") {
+                $recherche_axe =
+                    $_GET['recherche_axe'];
             }
 
             $start =
@@ -13635,9 +13643,10 @@ class admin
                                                $id_users,
                                                $reference_optieyes,
                                                $reference_client,
-                                               $date_start,
+//                                               $date_start,
                                                $recherche_sphere,
-                                               $recherche_cylindre
+                                               $recherche_cylindre,
+                                               $recherche_axe
                 );
 
 //            $data['recordsTotal'] =

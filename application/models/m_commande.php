@@ -891,7 +891,7 @@ class m_commande extends CI_Model {
     }
 
 	public function getOldOrder($startLimit,$offsetLimit, $id_users, $reference_optieyes,
-                                $reference_client, $date_start){
+                                $reference_client, $date_start, $sphere, $cylindre){
 		$limit = $sWhere = "";
 
 		if(isset( $startLimit ) && $offsetLimit != '-1' ){
@@ -914,6 +914,7 @@ class m_commande extends CI_Model {
         if($reference_client != false) {
             $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
         }
+
         $addDate_start = '';
         if($date_start != false) {
             $now = date('Y-m-d');
@@ -924,6 +925,20 @@ class m_commande extends CI_Model {
             $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
         }
 
+        $addSphere = "";
+        if($sphere != false) {
+            $addSphere .= " AND c.information_commande LIKE '%\"sphere\":\"" . number_format($sphere, 2). "%'";
+        }
+
+        $addCylindre = "";
+        if($cylindre != false) {
+            $addCylindre .= " AND c.information_commande LIKE '%\"cylindre\":\"" . number_format($cylindre,2). "%'";
+        }
+
+//        $addReferenceClient = "";
+//        if($reference_client != false) {
+//            $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
+//        }
             /*if(preg_match("/^(CR|cr)([0-9])+(-)?([0-9])*$/", $search) && $addField == ""){
                 $num_commande = explode("-",$search);
                 $num_commande = substr($num_commande[0],2);
@@ -954,9 +969,11 @@ class m_commande extends CI_Model {
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                     WHERE c.id_etat_commande = 6
                                     AND c.lens_id = 0 AND c.commande_monture = 0
-                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start."
+                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start.$addSphere.$addCylindre."
                                     ORDER BY date_update_commande DESC ".$limit;
-        $query = $this->db->query($sql);
+//        var_dump($sql);die;
+
+         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
 			$data = array();

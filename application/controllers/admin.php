@@ -13600,6 +13600,22 @@ class admin
                     $_GET['date_start'];
             }
 
+            $recherche_sphere = false;
+            if (isset($_GET['recherche_sphere']) &&
+                $_GET['recherche_sphere'] !=
+                "all") {
+                $recherche_sphere =
+                    $_GET['recherche_sphere'];
+            }
+
+            $recherche_cylindre = false;
+            if (isset($_GET['recherche_cylindre']) &&
+                $_GET['recherche_cylindre'] !=
+                "all") {
+                $recherche_cylindre =
+                    $_GET['recherche_cylindre'];
+            }
+
             $start =
                 (isset($_GET['start']) ?
                     $_GET['start'] :
@@ -13608,10 +13624,10 @@ class admin
                 (isset($_GET['length']) ?
                     $_GET['length'] :
                     100);
-            $search =
-                (isset($_GET['search']['value']) ?
-                    $_GET['search']['value'] :
-                    '');
+//            $search =
+//                (isset($_GET['search']['value']) ?
+//                    $_GET['search']['value'] :
+//                    '');
 
             $data_commande =
                 $this->m_commande->getOldOrder($start,
@@ -13619,7 +13635,10 @@ class admin
                                                $id_users,
                                                $reference_optieyes,
                                                $reference_client,
-                                               $date_start);
+                                               $date_start,
+                                               $recherche_sphere,
+                                               $recherche_cylindre
+                );
 
 //            $data['recordsTotal'] =
 //                $this->m_commande->countAllCommande()[0]->total;

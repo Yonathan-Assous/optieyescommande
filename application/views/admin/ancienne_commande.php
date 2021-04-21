@@ -55,11 +55,15 @@ include_once('menu.php');
                             </select>
                         </div>
 
-<!--                        <div class="col-sm-2">-->
-<!--                            <label class="m-b-10" for="recherche_cylindre"> Cylindre</label>-->
-<!--                            <input type="text" id="recherche_cylindre" class="form-control">-->
-<!--                        </div>-->
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_sphere"> Sphère </label>
+                            <input type="text" id="recherche_sphere" class="form-control">
+                        </div>
 
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_cylindre"> Cylindre </label>
+                            <input type="text" id="recherche_cylindre" class="form-control">
+                        </div>
 <!--                        <div class="col-sm-2">-->
 <!--                            <label class="m-b-10" for="search">&nbsp;</label>-->
 <!--                            <button id="search" type="button" class="btn btn-warning waves-effect waves-light" style="display: block">Rechercher</button>-->
@@ -212,15 +216,23 @@ include_once('menu.php');
             var reference_optieyes = $("#recherche_reference_optieyes").val();
             var reference_client = $("#recherche_reference_client").val();
             var dateStart = $("#date_start").val();
+            var recherche_sphere = $("#recherche_sphere").val();
+            var recherche_cylindre = $("#recherche_cylindre").val();
 
             if(magasin != '' || reference_optieyes != '' || reference_client != '') {
                 table.ajax.url('/admin/ancienne_commande_ajax?id_users='+magasin +
                     '&reference_optieyes=' + reference_optieyes +
                     '&reference_client=' + reference_client +
-                    '&date_start=' + dateStart).load();
+                    '&date_start=' + dateStart +
+                    '&recherche_sphere=' + recherche_sphere +
+                    '&recherche_cylindre=' + recherche_cylindre
+                ).load();
             }
             else {
-                table.ajax.url('/admin/ancienne_commande_ajax?date_start='+dateStart).load();
+                table.ajax.url('/admin/ancienne_commande_ajax?' +
+                'date_start=' + dateStart +
+                '&recherche_sphere=' + recherche_sphere +
+                '&recherche_cylindre=' + recherche_cylindre).load();
             }
         }
 

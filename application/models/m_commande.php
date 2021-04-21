@@ -891,7 +891,7 @@ class m_commande extends CI_Model {
     }
 
 	public function getOldOrder($startLimit,$offsetLimit, $id_users, $reference_optieyes,
-                                $reference_client){
+                                $reference_client, $date_start){
 		$limit = $sWhere = "";
 
 		if(isset( $startLimit ) && $offsetLimit != '-1' ){
@@ -907,12 +907,21 @@ class m_commande extends CI_Model {
 
         $addReferenceOptieyes = "";
         if($reference_optieyes != false) {
-            $addReferenceOptieyes .= " AND c.id_commande = " . $reference_optieyes;
+            $addReferenceOptieyes .= " AND c.id_commande LIKE '%" . $reference_optieyes. "%'";
         }
 
         $addReferenceClient = "";
         if($reference_client != false) {
             $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
+        }
+        $addDate_start = '';
+        if($date_start != false) {
+            $now = date('Y-m-d');
+//            var_dump($date_start);
+//            var_dump($now . ' ' . $date_start);
+            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
+//            var_dump($date_start);die;
+            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
         }
 
             /*if(preg_match("/^(CR|cr)([0-9])+(-)?([0-9])*$/", $search) && $addField == ""){
@@ -945,20 +954,18 @@ class m_commande extends CI_Model {
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                     WHERE c.id_etat_commande = 6
                                     AND c.lens_id = 0 AND c.commande_monture = 0
-                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient."
+                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start."
                                     ORDER BY date_update_commande DESC ".$limit;
-//        var_dump($sql);die;
-		 $query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
 			$data = array();
 			$data['results'] = $query->result();
-            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c INNER JOIN users u ON c.id_users = u.id_users WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient;
+            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient.$addDate_start;
             $query2 = $this->db->query($sql);
 			if($query2 && $query2->num_rows() > 0){
 				$result = $query2->row();
 				$data['total_num_rows'] = $result->nb_commande;
-
 				return $data;
 			}
 		}

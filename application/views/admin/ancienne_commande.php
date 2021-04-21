@@ -42,10 +42,28 @@ include_once('menu.php');
                             <label class="m-b-10" for="recherche_reference_client"> Référence Client</label>
                             <input type="text" id="recherche_reference_client" class="form-control">
                         </div>
+
+
                         <div class="col-sm-2">
-                            <label class="m-b-10" for="search">&nbsp;</label>
-                            <button id="search" type="button" class="btn btn-warning waves-effect waves-light" style="display: block">Rechercher</button>
+                            <label class="m-b-10" for="date_start"> Depuis </label>
+                            <select id="date_start" class="form-control">
+                                <option value="1 month" selected>1 mois</option>
+                                <option value="3 months">3 mois</option>
+                                <option value="6 months">6 mois</option>
+                                <option value="1 year">1 an</option>
+                                <option value="all">Toujours</option>
+                            </select>
                         </div>
+
+<!--                        <div class="col-sm-2">-->
+<!--                            <label class="m-b-10" for="recherche_cylindre"> Cylindre</label>-->
+<!--                            <input type="text" id="recherche_cylindre" class="form-control">-->
+<!--                        </div>-->
+
+<!--                        <div class="col-sm-2">-->
+<!--                            <label class="m-b-10" for="search">&nbsp;</label>-->
+<!--                            <button id="search" type="button" class="btn btn-warning waves-effect waves-light" style="display: block">Rechercher</button>-->
+<!--                        </div>-->
                     </div>
                 </div>
 
@@ -119,12 +137,14 @@ include_once('menu.php');
 
 <script>
     $(document).ready(function() {
-
+        var dateStart = $("#date_start").val();
+        var x = 500;
             var table = $('#datatable').DataTable({
-            ajax: { url: "/admin/ancienne_commande_ajax", dataSrc: 'aaData' },
+            ajax: { url: "/admin/ancienne_commande_ajax?date_start="+dateStart, dataSrc: 'aaData' },
             deferRender: true,
             ordering: false,
             serverSide: true,
+            bFilter: false,
             columnDefs: [{
                 "targets": 9,
                 "createdCell": function (td, cellData, rowData, row, col) {
@@ -148,8 +168,8 @@ include_once('menu.php');
                 "zeroRecords": "Aucune commande trouvée",
                 "info": "Affichage de la page page _PAGE_ sur _PAGES_",
                 "infoEmpty": "Aucune commande à afficher",
-                "infoFiltered": "(Filtrat de _MAX_ entrées)",
-                // "search": "Recherche",
+               // "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                "search": "Recherche",
                 "paginate": {
                     "first":      "Première",
                     "last":       "Dernière",
@@ -162,16 +182,18 @@ include_once('menu.php');
 
 
 
-        // $(document).on("change", "#recherche_num_magasin", function(){
-        //     // var value = $(this).val();
-        //     //
-        //     // if(value != '') {
-        //     //     table.ajax.url('/admin/ancienne_commande_ajax?id_users='+value).load();
-        //     // }
-        //     // else {
-        //     //     table.ajax.url('/admin/ancienne_commande_ajax').load();
-        //     // }
-        //     console.log('a');
+        $(document).on("change", "#recherche_num_magasin", function(){
+            search();
+        });
+
+        $(document).on("change", "#date_start", function(){
+            search();
+        });
+
+        $("input").on('input', function() {
+            search();
+        });
+        // $(document).on("change", "#recherche_reference_optieyes", function(){
         //     search();
         // });
 
@@ -189,14 +211,16 @@ include_once('menu.php');
             var magasin = $("#recherche_num_magasin").val();
             var reference_optieyes = $("#recherche_reference_optieyes").val();
             var reference_client = $("#recherche_reference_client").val();
+            var dateStart = $("#date_start").val();
 
             if(magasin != '' || reference_optieyes != '' || reference_client != '') {
                 table.ajax.url('/admin/ancienne_commande_ajax?id_users='+magasin +
                     '&reference_optieyes=' + reference_optieyes +
-                    '&reference_client=' + reference_client).load();
+                    '&reference_client=' + reference_client +
+                    '&date_start=' + dateStart).load();
             }
             else {
-                table.ajax.url('/admin/ancienne_commande_ajax').load();
+                table.ajax.url('/admin/ancienne_commande_ajax?date_start='+dateStart).load();
             }
         }
 

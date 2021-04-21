@@ -6310,7 +6310,6 @@ class admin
                     $detail =
                     $textarea =
                         "";
-
                     if ($commande->origine_commande ==
                         '2') {
                         $detail .= "<b>Commande Stock Déporté</b><br>";
@@ -6515,11 +6514,11 @@ class admin
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
                                        '1.59') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Transition') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Polarisé') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Xtractive') !== false))
                              ))) {
                             if ($traitementD !=
@@ -6704,11 +6703,11 @@ class admin
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
                                        '1.59') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Transition') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Polarisé') !== false) ||
-                                  (strpos($commande->lensname,
+                                  (strpos($commande->trad_fr,
                                           'Xtractive') !== false))
                              ))) {
                             $textarea .= "<br>Coating code: " .
@@ -7399,11 +7398,11 @@ class admin
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
                                         '1.59') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Transition') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Polarisé') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Xtractive') !== false))
                               ))) ||
                             $paA ==
@@ -7594,11 +7593,11 @@ class admin
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
                                         '1.59') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Transition') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Polarisé') !== false) ||
-                                   (strpos($commande->lensname,
+                                   (strpos($commande->trad_fr,
                                            'Xtractive') !== false))
                               ))) ||
                             $paA ==
@@ -8887,7 +8886,6 @@ class admin
 
                 $textarea .= " Galbe: " .
                              $data['galbeD'];
-
                 if (isset($data["traitementD"]) &&
                     !empty($data["traitementD"]) &&
                 ($data["traitementD"] != '700100' ||
@@ -13594,6 +13592,14 @@ class admin
                     $_GET['reference_client'];
             }
 
+            $date_start = false;
+            if (isset($_GET['date_start']) &&
+                $_GET['date_start'] !=
+                "all") {
+                $date_start =
+                    $_GET['date_start'];
+            }
+
             $start =
                 (isset($_GET['start']) ?
                     $_GET['start'] :
@@ -13607,20 +13613,24 @@ class admin
                     $_GET['search']['value'] :
                     '');
 
-
             $data_commande =
                 $this->m_commande->getOldOrder($start,
                                                $length,
                                                $id_users,
                                                $reference_optieyes,
-                                               $reference_client);
+                                               $reference_client,
+                                               $date_start);
 
-            $data['recordsTotal'] =
-                $this->m_commande->countAllCommande()[0]->total;
-            $data['recordsFiltered'] =
-                $this->m_commande->countAllCommande($id_users,
-                                                    $search)[0]->total;
+//            $data['recordsTotal'] =
+//                $this->m_commande->countAllCommande()[0]->total;
+//
+//            var_dump($data['recordsTotal']);
 
+            $data['recordsFiltered'] = $data_commande['total_num_rows'];
+//            $data['recordsFiltered'] =
+//                $this->m_commande->countAllCommande($id_users,
+//                                                    $search)[0]->total;
+//            var_dump($data['recordsFiltered']);die;
             if ($data_commande !==
                 false) {
 

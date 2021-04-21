@@ -912,7 +912,7 @@ class m_commande extends CI_Model {
 
         $addReferenceClient = "";
         if($reference_client != false) {
-            $addReferenceClient .= " AND c.reference_client LIKE %" . $reference_client. "%";
+            $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
         }
 
             /*if(preg_match("/^(CR|cr)([0-9])+(-)?([0-9])*$/", $search) && $addField == ""){
@@ -947,15 +947,14 @@ class m_commande extends CI_Model {
                                     AND c.lens_id = 0 AND c.commande_monture = 0
                                     ".$addUser.$addReferenceOptieyes.$addReferenceClient."
                                     ORDER BY date_update_commande DESC ".$limit;
-         
+//        var_dump($sql);die;
 		 $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
 			$data = array();
 			$data['results'] = $query->result();
-
-			$query2 = $this->db->query("SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c INNER JOIN users u ON c.id_users = u.id_users WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient);
-
+            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c INNER JOIN users u ON c.id_users = u.id_users WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient;
+            $query2 = $this->db->query($sql);
 			if($query2 && $query2->num_rows() > 0){
 				$result = $query2->row();
 				$data['total_num_rows'] = $result->nb_commande;

@@ -13587,8 +13587,8 @@ class admin
             }
 
             $reference_client = false;
-            if (isset($_GET['recherche_reference_client']) &&
-                $_GET['recherche_reference_client'] !=
+            if (isset($_GET['reference_client']) &&
+                $_GET['reference_client'] !=
                 "") {
                 $reference_client =
                     $_GET['reference_client'];

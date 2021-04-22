@@ -6873,6 +6873,7 @@ function copyVersDroit()
 	    	// },800);
 		}
 	}
+
 	
 	if(diametreD != "" && type_de_verreD != "")
 	{

@@ -557,7 +557,6 @@ class m_passer_commande_verre extends CI_Model
         }
 
         //return "Stock: ".$stockLens;
-
         if ($sphereD != "-"
             && $cylindreD != "-") {
 
@@ -597,11 +596,12 @@ class m_passer_commande_verre extends CI_Model
             }
 
 
+
             if (!empty($sphereD_res->result())) {
                 $resultat_query = $sphereD_res->result();
                 //return json_encode($resultat_query);
 
-
+//                var_dump($resultat_query);die;
                 $ranges = [];
                 foreach ($resultat_query as $sphereDres) {
                     $lensRanges = $sphereDres->lensRanges;
@@ -628,14 +628,17 @@ class m_passer_commande_verre extends CI_Model
                     }
                 }
 
+
                 $r = array_unique($ranges);
                 //return json_encode($r);
 
 
                 //dd($r);
                 $conditions = "(";
+//                var_dump($r);die;
                 foreach ($r as $field) {
-                    $conditions .= "(JSON_EXTRACT(ranges, \"$[*].rangeId\") like '%\"" . $field . "\"%') OR ";
+//                    $conditions .= "(JSON_EXTRACT(ranges, \"$[*].rangeId\") like '%\"" . $field . "\"%') OR ";
+                    $conditions .= "(ranges like '%\"rangeId\": {\"0\": \"" . $field . "\"%') OR ";
                 }
                 $conditions = rtrim($conditions, " OR ");
                 $conditions .= ")";
@@ -645,7 +648,6 @@ class m_passer_commande_verre extends CI_Model
                 if ($conditions != "()") {
                     if ($generation == '-') {
                         if ($indice != '-') {
-
                             if ($indice == "mineral") {
 
 
@@ -695,7 +697,7 @@ class m_passer_commande_verre extends CI_Model
 //                                var_dump($sql);die;
 
                                 $res = $this->db->query($sql);
-
+//                                var_dump('test');die;
                                 /*echo "SELECT *
 													FROM ".$this->table_lenses."
 										   WHERE focalGroupId=".$lensFocalGroup."

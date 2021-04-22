@@ -6868,9 +6868,9 @@ function copyVersDroit()
 		}
 		else
 		{
-			setTimeout(function(){
-				getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
-	    	},800);
+			// setTimeout(function(){
+			// 	getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	    	// },800);
 		}
 	}
 	

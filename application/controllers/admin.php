@@ -5796,7 +5796,6 @@ class admin
     public
     function edi_omega_expediee()
     {
-
         $data['newUser'] =
             $this->session->userdata('newUser');
         $data['parametre_lang_datable'] =
@@ -5820,12 +5819,22 @@ class admin
     public
     function edi_omega_expedie_ajax()
     {
+
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
                 array();
+
+            $start =
+                (isset($_GET['date_start']) ?
+                    $_GET['date_start'] :
+                    NULL);
+
             $data_commande =
-                $this->m_commande->getAllCommandeEdiOmegaExpediee();
+                $this->m_commande->getAllCommandeEdiOmegaExpediee($start);
+
+
+
             $compteur = 0;
             if ($data_commande !==
                 false) {

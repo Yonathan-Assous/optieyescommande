@@ -644,10 +644,16 @@ class m_commande extends CI_Model {
         return false;
 	}
 
-	public function getAllCommandeEdiOmegaExpediee()
+	public function getAllCommandeEdiOmegaExpediee($date_start = NULL)
 	{
-		$sql_add = "WHERE (c.id_etat_commande < 6)";
-		$query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
+		//$sql_add = "WHERE (c.id_etat_commande < 6)";
+        $addDate_start = '';
+        if($date_start) {
+            $now = date('Y-m-d');
+            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
+            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
+        }
+		$sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -655,7 +661,8 @@ class m_commande extends CI_Model {
                                    INNER JOIN commande_omega co ON co.id_commande = c.id_commande
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                                   WHERE status_omega!=0 AND status = 2 ORDER BY date_omega DESC,id_commande DESC");
+                                   WHERE status_omega!=0 AND status = 2" . $addDate_start . " ORDER BY date_omega DESC,id_commande DESC";
+		$query = $this->db->query($sql);
 
 
 
@@ -989,6 +996,7 @@ class m_commande extends CI_Model {
                                     AND c.lens_id = 0 AND c.commande_monture = 0
                                     ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addSphere.$addCylindre.$addAxe."
                                     ORDER BY date_update_commande DESC ".$limit;
+
          $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){

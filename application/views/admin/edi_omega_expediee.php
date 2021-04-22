@@ -18,7 +18,17 @@ include_once('menu.php');
                     <div class="card-box">
 
                         <h4 class="header-title m-t-0 m-b-30">Liste des commandes Fabrication</h4>
-
+                        <div class="col-sm-2" style="float: initial; margin-bottom: 22px">
+                            <label class="m-b-10" for="date_start"> Depuis </label>
+                            <select id="date_start" class="form-control">
+                                <option value="2 weeks" selected>2 semaines</option>
+                                <option value="1 month">1 mois</option>
+                                <option value="3 months">3 mois</option>
+                                <option value="6 months">6 mois</option>
+                                <option value="1 year">1 an</option>
+                                <option value="all">Toujours</option>
+                            </select>
+                        </div>
                         <table id="datatable" class="table table-striped table-admin-commandes dt-responsive nowrap">
                             <thead>
                             <tr>
@@ -73,9 +83,11 @@ include_once('menu.php');
 
 <script>
 	$(document).ready(function() {
-
+        var dateStart = $("#date_start").val();
         var table = $('#datatable').DataTable({
-            ajax: { url: "/admin/edi_omega_expedie_ajax", dataSrc: 'aaData' },
+            ajax: { url: "/admin/edi_omega_expedie_ajax" +
+                    "?date_start=" + dateStart,
+                    dataSrc: 'aaData' },
             aLengthMenu: [
                 [10, 25, 50, 100, 200, -1],
                 [10, 25, 50, 100, 200, "Tout"]
@@ -102,7 +114,7 @@ include_once('menu.php');
                 "zeroRecords": "Aucune commande trouvée",
                 "info": "Affichage de la page page _PAGE_ sur _PAGES_",
                 "infoEmpty": "Aucune commande à afficher",
-                "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                //"infoFiltered": "(Filtrat de _MAX_ entrées)",
                 "search": "Recherche",
                 "paginate": {
                     "first":      "Première",
@@ -112,8 +124,17 @@ include_once('menu.php');
                 }
             }
         });
-       
-        
+
+        $(document).on("change", "#date_start", function(){
+                search();
+            });
+
+        function search() {
+            var dateStart = $("#date_start").val();
+            table.ajax.url('/admin/edi_omega_expedie_ajax?' +
+                'date_start=' + dateStart
+            ).load();
+        }
     });
     TableManageButtons.init();
 </script>

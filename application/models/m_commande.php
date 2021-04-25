@@ -644,10 +644,16 @@ class m_commande extends CI_Model {
         return false;
 	}
 
-	public function getAllCommandeEdiOmegaExpediee()
+	public function getAllCommandeEdiOmegaExpediee($date_start = NULL)
 	{
-		$sql_add = "WHERE (c.id_etat_commande < 6)";
-		$query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
+		//$sql_add = "WHERE (c.id_etat_commande < 6)";
+        $addDate_start = '';
+        if($date_start) {
+            $now = date('Y-m-d');
+            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
+            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
+        }
+		$sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -655,7 +661,8 @@ class m_commande extends CI_Model {
                                    INNER JOIN commande_omega co ON co.id_commande = c.id_commande
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                                   WHERE status_omega!=0 AND status = 2 ORDER BY date_omega DESC,id_commande DESC");
+                                   WHERE status_omega!=0 AND status = 2" . $addDate_start . " ORDER BY date_omega DESC,id_commande DESC";
+		$query = $this->db->query($sql);
 
 
 
@@ -890,23 +897,73 @@ class m_commande extends CI_Model {
         return '0';
     }
 
-	public function getOldOrder($startLimit,$offsetLimit,$search, $id_users){
+	public function getOldOrder($startLimit,$offsetLimit, $id_users, $reference_optieyes,
+                                $reference_client, $sphere, $cylindre, $axe){
 		$limit = $sWhere = "";
 
 		if(isset( $startLimit ) && $offsetLimit != '-1' ){
 			$limit = "LIMIT ". $startLimit .", ".$offsetLimit;
 		}
 
-		if($search != "" || $id_users !== false){
-			$addOthersFields = true;
-			$addField = "";
-			$sWhere = " AND ";
 
-            if($id_users !== false) {
-              $addField .= "c.id_users = " . $id_users;
+//		if($search != "" || $id_users !== false){
+        $addUser = "";
+        if($id_users != false) {
+          $addUser .= " AND c.id_users = " . $id_users;
+        }
+
+        $addReferenceOptieyes = "";
+        if($reference_optieyes != false) {
+            $addReferenceOptieyes .= " AND c.id_commande LIKE '%" . $reference_optieyes. "%'";
+        }
+
+        $addReferenceClient = "";
+        if($reference_client != false) {
+            $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
+        }
+
+//        $addDate_start = '';
+//        if($date_start != false) {
+//            $now = date('Y-m-d');
+//            $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
+//            $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
+//        }
+
+        $addSphere = "";
+        if($sphere != false && $sphere != "-") {
+            $addSphere .= " AND c.information_commande LIKE '%\"sphere\":\"" . number_format($sphere, 2);
+            if ($cylindre != false && $cylindre != "-") {
+                $addSphere .= "\",\"cylindre\":\"" . number_format($cylindre,2);
+                if ($axe != false) {
+                    $addSphere .= "\",\"axe\":\"" . $axe;
+                }
             }
+            else if ($axe != false) {
+                $addSphere .= "\",\"cylindre\":\"____\",\"axe\":\"" . $axe;
+            }
+            $addSphere .= "%'";
+        }
 
+        $addCylindre = "";
+        if($cylindre != false && $cylindre != "-") {
+            if (!$addSphere) {
+                $addCylindre .= " AND c.information_commande LIKE '%\"cylindre\":\"" . number_format($cylindre,2);
+                if ($axe != false) {
+                    $addCylindre .= "\",\"axe\":\"" . $axe;
+                }
+                $addCylindre .= "%'";
+            }
+        }
 
+        $addAxe = "";
+        if($axe != false && !$addSphere && !$addCylindre) {
+            $addAxe .= " AND c.information_commande LIKE '%\"axe\":\"" . $axe. "%'";
+        }
+
+//        $addReferenceClient = "";
+//        if($reference_client != false) {
+//            $addReferenceClient .= " AND c.reference_client LIKE '%" . $reference_client. "%'";
+//        }
             /*if(preg_match("/^(CR|cr)([0-9])+(-)?([0-9])*$/", $search) && $addField == ""){
                 $num_commande = explode("-",$search);
                 $num_commande = substr($num_commande[0],2);
@@ -919,37 +976,37 @@ class m_commande extends CI_Model {
                 $addField .= "c.date_commande like '".$date[2]."-".$date[1]."-".$date[0]."%' OR c.date_update_commande like '".$date[2]."-".$date[1]."-".$date[0]."%'";
             }*/
 
-            if($addField == ""){
-                $addField .= "(c.reference_client like '%".$this->db->escape_str( $search )."%' ||
-                c.date_commande like '%".$this->db->escape_str( $search )."%' ||
-                c.id_commande like '%".$this->db->escape_str( $search )."%' ||
-                c.intitule_bl like '%".$this->db->escape_str( $search )."%' ||
-                c.reference_client like '%".$this->db->escape_str( $search )."%'
-                )";
-            }
+//            if($addField == ""){
+//                $addField .= "(c.reference_client like '%".$this->db->escape_str( $search )."%' ||
+//                c.date_commande like '%".$this->db->escape_str( $search )."%' ||
+//                c.id_commande like '%".$this->db->escape_str( $search )."%' ||
+//                c.intitule_bl like '%".$this->db->escape_str( $search )."%' ||
+//                c.reference_client like '%".$this->db->escape_str( $search )."%'
+//                )";
+//            }
 
-			$sWhere .= $addField;
-		}
+//			$sWhere .= $addField;
+//		}
 
-		 $query = $this->db->query("SELECT c.id_users,c.id_commande,c.intitule_bl, c.tarif_express, c.penalty, c.ancienne_commande, c.total_commande, c.tarif_express, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
+         $sql = "SELECT c.id_users,c.id_commande,c.intitule_bl, c.tarif_express, c.penalty, c.ancienne_commande, c.total_commande, c.tarif_express, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
                                     FROM ".$this->table." c
                                     INNER JOIN users u ON c.id_users = u.id_users 
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                     WHERE c.id_etat_commande = 6
                                     AND c.lens_id = 0 AND c.commande_monture = 0
-                                    ".$sWhere."
-                                    ORDER BY date_update_commande DESC ".$limit);
+                                    ".$addUser.$addReferenceOptieyes.$addReferenceClient.$addSphere.$addCylindre.$addAxe."
+                                    ORDER BY date_update_commande DESC ".$limit;
+
+         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
 			$data = array();
 			$data['results'] = $query->result();
-
-			$query2 = $this->db->query("SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c INNER JOIN users u ON c.id_users = u.id_users WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$sWhere);
-
+            $sql = "SELECT COUNT(id_commande) as nb_commande FROM ".$this->table." c WHERE c.id_etat_commande = 6 AND c.lens_id = 0".$addUser.$addReferenceOptieyes.$addReferenceClient.$addSphere.$addCylindre.$addAxe;
+            $query2 = $this->db->query($sql);
 			if($query2 && $query2->num_rows() > 0){
 				$result = $query2->row();
 				$data['total_num_rows'] = $result->nb_commande;
-
 				return $data;
 			}
 		}
@@ -2442,9 +2499,12 @@ class m_commande extends CI_Model {
 
 		$supplement = 0;
 
-        $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
+		$sql = 'SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00';
+		var_dump($sql);
+
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2458,8 +2518,7 @@ class m_commande extends CI_Model {
 		$time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-
-        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
+        $sql = "SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1 AND penalty != 1) AND Samuel = 100.00)
                                    +
@@ -2474,7 +2533,8 @@ class m_commande extends CI_Model {
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Samuel = 100.00) as ca");
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Samuel = 100.00) as ca";
+        $query = $this->db->query($sql);
 
         $total = 0;
 
@@ -3429,17 +3489,17 @@ class m_commande extends CI_Model {
 					//$data['type_commande'] = $type_commandeG;
 					$type_commande_verre = $type_commande_verreG;
 					$data['origine_commande'] = $origine_commandeG;
-					if($unVerreG==0)
-					{
-						$data['prix_verre'] = $prixGH;
-						$data['total_commande'] = $prixGH;
-					}
-					else
-					{
+//					if($unVerreG==0)
+//					{
+//						$data['prix_verre'] = $prixGH;
+//						$data['total_commande'] = $prixGH;
+//					}
+//					else
+//					{
 //					    var_dump($data);die;
                         $data['prix_verre'] = 0;
 						$data['total_commande'] = $prixGH;
-					}
+//					}
 
 					$data['information_commande'] = str_replace("+","",$information_commandeG);
 					$data['information_commande'] = $this->db->escape($data['information_commande']);

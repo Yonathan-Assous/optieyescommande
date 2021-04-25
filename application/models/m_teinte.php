@@ -164,7 +164,7 @@ class m_teinte extends CI_Model
         return $teintesArray;
     }
 
-    public function getAllTeintesWithPrice($lensId) {
+    public function getAllTeintesWithPrice($lensId, $userId) {
         $lens = $this->m_lenses->getLensesById($lensId);
         if (!$lens) {
             return false;
@@ -174,8 +174,9 @@ class m_teinte extends CI_Model
                 INNER JOIN teinte_prix 
                 WHERE teinte_prix.id_teinte = teintes.id 
                 AND teinte_prix.id_lenses = $lensId
-                AND id_user IS NULL
-                AND teinte_prix.is_active = 1";
+                AND (id_user = $userId OR id_user IS NULL)
+                AND teinte_prix.is_active = 1
+                ORDER BY id, id_user DESC";
 
         $query = $this->db->query($sql);
         $teintesArray = [];
@@ -183,10 +184,14 @@ class m_teinte extends CI_Model
         $teintesArray[0]["name"] = "All Normal";
         $teintesArray[1]["name"] = "All Nm";
 
-
+        $teintesExist = [];
         foreach ($teintes as $key => $teinte) {
-            foreach($teinte as $keyTeinte => $value)
-                $teintesArray[$key+2][$keyTeinte] = $value;
+            if (!in_array($teinte->id, $teintesExist)) {
+                foreach ($teinte as $keyTeinte => $value) {
+                    $teintesArray[$key + 2][$keyTeinte] = $value;
+                }
+                array_push($teintesExist, $teinte->id);
+            }
         }
         return $teintesArray;
     }

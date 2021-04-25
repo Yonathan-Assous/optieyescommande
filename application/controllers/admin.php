@@ -5036,14 +5036,20 @@ class admin
                           '700100' ||
                           (($information_commande->verre->correction_droit->traitement ==
                             '700100') &&
-                           ((strpos($commande->lensname,
-                                    '1.5') === false) ||
+                           (((strpos($commande->lensname,
+                                    '1.5') === false)) ||
                             (strpos($commande->lensname,
                                     '1.53') !== false) ||
                             (strpos($commande->lensname,
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
-                                    '1.59') !== false))
+                                    '1.59') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Transition') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Polarisé') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Xtractive') !== false))
                           ))) ||
                         $paA ==
                         "1") {
@@ -5231,7 +5237,13 @@ class admin
                             (strpos($commande->lensname,
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
-                                    '1.59') !== false))
+                                    '1.59') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Transition') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Polarisé') !== false) ||
+                               (strpos($commande->lensname,
+                                       'Xtractive') !== false))
                           ))) ||
                         $paA ==
                         "1") {
@@ -5784,7 +5796,6 @@ class admin
     public
     function edi_omega_expediee()
     {
-
         $data['newUser'] =
             $this->session->userdata('newUser');
         $data['parametre_lang_datable'] =
@@ -5808,12 +5819,22 @@ class admin
     public
     function edi_omega_expedie_ajax()
     {
+
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
                 array();
+
+            $start =
+                (isset($_GET['date_start']) ?
+                    $_GET['date_start'] :
+                    NULL);
+
             $data_commande =
-                $this->m_commande->getAllCommandeEdiOmegaExpediee();
+                $this->m_commande->getAllCommandeEdiOmegaExpediee($start);
+
+
+
             $compteur = 0;
             if ($data_commande !==
                 false) {
@@ -6298,7 +6319,6 @@ class admin
                     $detail =
                     $textarea =
                         "";
-
                     if ($commande->origine_commande ==
                         '2') {
                         $detail .= "<b>Commande Stock Déporté</b><br>";
@@ -6502,7 +6522,13 @@ class admin
                                (strpos($commande->lensname,
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
-                                       '1.59') !== false))
+                                       '1.59') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Transition') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Polarisé') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Xtractive') !== false))
                              ))) {
                             if ($traitementD !=
                                 "") {
@@ -6685,7 +6711,13 @@ class admin
                                (strpos($commande->lensname,
                                        '1.56') !== false) ||
                                (strpos($commande->lensname,
-                                       '1.59') !== false))
+                                       '1.59') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Transition') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Polarisé') !== false) ||
+                                  (strpos($commande->trad_fr,
+                                          'Xtractive') !== false))
                              ))) {
                             $textarea .= "<br>Coating code: " .
                                          $information_commande->verre->correction_gauche->traitement .
@@ -7374,7 +7406,13 @@ class admin
                                 (strpos($commande->lensname,
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
-                                        '1.59') !== false))
+                                        '1.59') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Transition') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Polarisé') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Xtractive') !== false))
                               ))) ||
                             $paA ==
                             "1") {
@@ -7563,7 +7601,13 @@ class admin
                                 (strpos($commande->lensname,
                                         '1.56') !== false) ||
                                 (strpos($commande->lensname,
-                                        '1.59') !== false))
+                                        '1.59') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Transition') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Polarisé') !== false) ||
+                                   (strpos($commande->trad_fr,
+                                           'Xtractive') !== false))
                               ))) ||
                             $paA ==
                             "1") {
@@ -8851,7 +8895,6 @@ class admin
 
                 $textarea .= " Galbe: " .
                              $data['galbeD'];
-
                 if (isset($data["traitementD"]) &&
                     !empty($data["traitementD"]) &&
                 ($data["traitementD"] != '700100' ||
@@ -8863,7 +8906,13 @@ class admin
                    (strpos($data['nomverreDH'],
                            '1.56') !== false) ||
                    (strpos($data['nomverreDH'],
-                           '1.59') !== false))
+                           '1.59') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Transition') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Polarisé') !== false) ||
+                      (strpos($data['nomverreDH'],
+                              'Xtractive') !== false))
                  )))
                  {
 
@@ -8951,14 +9000,20 @@ class admin
                     !empty($data["traitementG"]) &&
                     ($data["traitementG"] != '700100' ||
                      (($data["traitementG"] == '700100') &&
-                      ((strpos($data['nomverreDH'],
+                      ((strpos($data['nomverreGH'],
                                '1.5') === false) ||
-                       (strpos($data['nomverreDH'],
+                       (strpos($data['nomverreGH'],
                                '1.53') !== false) ||
-                       (strpos($data['nomverreDH'],
+                       (strpos($data['nomverreGH'],
                                '1.56') !== false) ||
-                       (strpos($data['nomverreDH'],
-                               '1.59') !== false))
+                       (strpos($data['nomverreGH'],
+                               '1.59') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Transition') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Polarisé') !== false) ||
+                          (strpos($data['nomverreGH'],
+                                  'Xtractive') !== false))
                      ))) {
 
                     $textarea .= "<br>Coating code: " .
@@ -9553,7 +9608,13 @@ class admin
                         (strpos($data['nomverreDH'],
                                 '1.56') !== false) ||
                         (strpos($data['nomverreDH'],
-                                '1.59') !== false))
+                                '1.59') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Transition') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Polarisé') !== false) ||
+                           (strpos($data['nomverreDH'],
+                                   'Xtractive') !== false))
                       ))) ||
                     $paA ==
                     "1") {
@@ -9729,14 +9790,20 @@ class admin
                      !empty($data["traitementG"]) &&
                      ($data["traitementG"] != '700100' ||
                       (($data["traitementG"] == '700100') &&
-                       ((strpos($data['nomverreDH'],
+                       ((strpos($data['nomverreGH'],
                                 '1.5') === false) ||
-                        (strpos($data['nomverreDH'],
+                        (strpos($data['nomverreGH'],
                                 '1.53') !== false) ||
-                        (strpos($data['nomverreDH'],
+                        (strpos($data['nomverreGH'],
                                 '1.56') !== false) ||
-                        (strpos($data['nomverreDH'],
-                                '1.59') !== false))
+                        (strpos($data['nomverreGH'],
+                                '1.59') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Transition') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Polarisé') !== false) ||
+                           (strpos($data['nomverreGH'],
+                                   'Xtractive') !== false))
                       ))) ||
                     $paA ==
                     "1") {
@@ -13518,6 +13585,54 @@ class admin
                     $_GET['id_users'];
             }
 
+            $reference_optieyes = false;
+            if (isset($_GET['reference_optieyes']) &&
+                $_GET['reference_optieyes'] !=
+                "") {
+                $reference_optieyes =
+                    $_GET['reference_optieyes'];
+            }
+
+            $reference_client = false;
+            if (isset($_GET['reference_client']) &&
+                $_GET['reference_client'] !=
+                "") {
+                $reference_client =
+                    $_GET['reference_client'];
+            }
+
+//            $date_start = false;
+//            if (isset($_GET['date_start']) &&
+//                $_GET['date_start'] !=
+//                "all") {
+//                $date_start =
+//                    $_GET['date_start'];
+//            }
+
+            $recherche_sphere = false;
+            if (isset($_GET['recherche_sphere']) &&
+                $_GET['recherche_sphere'] !=
+                "all") {
+                $recherche_sphere =
+                    $_GET['recherche_sphere'];
+            }
+
+            $recherche_cylindre = false;
+            if (isset($_GET['recherche_cylindre']) &&
+                $_GET['recherche_cylindre'] !=
+                "all") {
+                $recherche_cylindre =
+                    $_GET['recherche_cylindre'];
+            }
+
+            $recherche_axe = false;
+            if (isset($_GET['recherche_axe']) &&
+                $_GET['recherche_axe'] !=
+                "all") {
+                $recherche_axe =
+                    $_GET['recherche_axe'];
+            }
+
             $start =
                 (isset($_GET['start']) ?
                     $_GET['start'] :
@@ -13526,24 +13641,33 @@ class admin
                 (isset($_GET['length']) ?
                     $_GET['length'] :
                     100);
-            $search =
-                (isset($_GET['search']['value']) ?
-                    $_GET['search']['value'] :
-                    '');
-
+//            $search =
+//                (isset($_GET['search']['value']) ?
+//                    $_GET['search']['value'] :
+//                    '');
 
             $data_commande =
                 $this->m_commande->getOldOrder($start,
                                                $length,
-                                               $search,
-                                               $id_users);
+                                               $id_users,
+                                               $reference_optieyes,
+                                               $reference_client,
+//                                               $date_start,
+                                               $recherche_sphere,
+                                               $recherche_cylindre,
+                                               $recherche_axe
+                );
 
-            $data['recordsTotal'] =
-                $this->m_commande->countAllCommande()[0]->total;
-            $data['recordsFiltered'] =
-                $this->m_commande->countAllCommande($id_users,
-                                                    $search)[0]->total;
+//            $data['recordsTotal'] =
+//                $this->m_commande->countAllCommande()[0]->total;
+//
+//            var_dump($data['recordsTotal']);
 
+            $data['recordsFiltered'] = $data_commande['total_num_rows'];
+//            $data['recordsFiltered'] =
+//                $this->m_commande->countAllCommande($id_users,
+//                                                    $search)[0]->total;
+//            var_dump($data['recordsFiltered']);die;
             if ($data_commande !==
                 false) {
 

@@ -5225,6 +5225,28 @@ if (is_object($pair_order)) {
 			});
         }
     */
+                let nameVerreD = $('#type_de_verreD').find(":selected").text();
+                let nameVerreG = $('#type_de_verreG').find(":selected").text();
+                console.log("$nameVerreD" + nameVerreD);
+                console.log("$nameVerreG" + nameVerreG);
+                if (nameVerreD.indexOf("Panier A") !== -1 && nameVerreD.indexOf("Stock") !== -1
+                    && (nameVerreG.indexOf("Panier A") === -1 || nameVerreG.indexOf("Stock") === -1)
+                    ||
+                    (nameVerreG.indexOf("Panier A") !== -1 && nameVerreG.indexOf("Stock") !== -1
+                        && (nameVerreD.indexOf("Panier A") === -1 || nameVerreD.indexOf("Stock") === -1)
+                    )
+                ) {
+                    g = 1;
+                    swal({
+                        title: "Erreur",
+                        text: "Un panier A de stock peut uniquement être associé à un autre panier A de stock. Merci de bien vouloir corriger votre commande",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                }
+
                 if (gauche && verreG == "") {
                     g = 1;
                     swal({

@@ -81,8 +81,10 @@ class teinte extends MY_Controller {
     {
         $data =
             $this->input->post();
+        $lensesId = $data['idLenses'];
+        $userId = $data['user_id'];
         $tab =
-            $this->m_teinte->getAllTeintesWithPrice($data['idLenses']);
+            $this->m_teinte->getAllTeintesWithPrice($lensesId, $userId);
 
         //var_dump($tab);
 

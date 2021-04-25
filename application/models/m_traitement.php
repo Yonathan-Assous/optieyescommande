@@ -325,7 +325,7 @@ class m_traitement extends CI_Model
         return $traitementsArray;
     }
 
-    public function getAllTraitementsWithPrice($lensId) {
+    public function getAllTraitementsWithPrice($lensId, $userId) {
         $lens = $this->m_lenses->getLensesById($lensId);
         if (!$lens) {
             return false;
@@ -335,15 +335,21 @@ class m_traitement extends CI_Model
                 INNER JOIN traitement_prix 
                 WHERE traitement_prix.id_traitement = traitements.id 
                 AND traitement_prix.id_lenses = $lensId
-                AND traitement_prix.is_active = 1";
+                AND traitement_prix.is_active = 1
+				AND (id_user = $userId OR id_user IS NULL)
+                ORDER BY id, id_user DESC";
 
         $query = $this->db->query($sql);
         $traitementsArray = [];
         $traitements =  $query->result();
-        //$i = 0;
+        $traitementsExist = [];
         foreach ($traitements as $key => $traitement) {
-            foreach($traitement as $keyTraitement => $value)
-            $traitementsArray[$key][$keyTraitement] = $value;
+            if (!in_array($traitement->id, $traitementsExist)) {
+                foreach ($traitement as $keyTraitement => $value) {
+                    $traitementsArray[$key][$keyTraitement] = $value;
+                }
+                array_push($traitementsExist, $traitement->id);
+            }
         }
         return $traitementsArray;
     }

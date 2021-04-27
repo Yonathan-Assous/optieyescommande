@@ -1818,7 +1818,42 @@ $('#type_de_verreD').on('change', function() {
 									console.log("PrixD2")
 									$('#prixD').val(value.prix+"€");
     								$('#prixDH').val(value.prix);
-							});	
+									// var indice = $('#indices').val();
+									// var generation = $('#generation').val();
+									// var nomtraitement = $("#traitementD option:selected").html();
+									var nomverre = $("#type_de_verreD option:selected").html();
+									var traitementD = $('#traitementD').val();
+									var prixverre = $('#prixVerreD').val();
+
+
+									if (!traitementD) {
+										traitementD = "700100";
+									}
+
+									$.ajax({
+										type: "POST",
+										url: "/index/getOptions_price",
+										data: {"code" : traitementD,
+											"nom_du_verre" : nomverre,
+											"indice": indice,
+											"generation": generation
+										},
+										dataType: "json",
+										success: function (data) {
+											setTimeout(function(){
+												let prixteinte = $('#prixTeinteD').val();
+												$.each(data, function(key, value){
+													$('#prixTraitementD').val(value.prix);
+													var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+													console.log("PrixD5")
+													$('#prixD').val(tot+"€");
+													$('#prixDH').val(tot+"€");
+												});
+											},1000);
+										}
+
+									});
+								});
 								
 							}
 					});
@@ -1883,6 +1918,7 @@ $('#type_de_verreD').on('change', function() {
 				
 					$('#quantiteD').prop('disabled', true);
 
+					console.log('22222222222222222222222222222222222222222222222222222222222222222')
 
 					$.ajax({
 							type: "POST",
@@ -1904,7 +1940,10 @@ $('#type_de_verreD').on('change', function() {
 						}
 			
 					});
-				
+
+
+
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
@@ -2063,6 +2102,7 @@ $('#type_de_verreD').on('change', function() {
 
 
 $('#type_de_verreG').on('change', function() {
+	console.log('testTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
 
 	$('#precalibrage').addClass('hide');
 	var indiceId = $('#indices').val();
@@ -2306,9 +2346,52 @@ $('#type_de_verreG').on('change', function() {
 							success: function (data) {	
 								$.each(data, function(key, value){
 									$('#prixVerreG').val(value.prix);
-									calculPriceG();
+									//calculPriceG();
 									// $('#prixG').val(value.prix+"€");
-    								$('#prixGH').val(value.prix);
+    								//$('#prixGH').val(value.prix);
+									var indice = $('#indices').val();
+									var generation = $('#generation').val();
+									var nomtraitement = $("#traitementD option:selected").html();
+									var nomverre = $("#type_de_verreG option:selected").html();
+									var traitementG = $('#traitementG').val();
+									var prixverre = $('#prixVerreG').val();
+									console.log('test6')
+									console.log(indice)
+									console.log(generation)
+									console.log(nomtraitement)
+									console.log(nomverre)
+									console.log(traitementG)
+									console.log(prixverre)
+									if (!nomtraitement) {
+										nomtraitement = "Durci";
+									}
+									if (!traitementG) {
+										traitementG = "700100";
+									}
+									$.ajax({
+										type: "POST",
+										url: "/index/getOptions_price",
+										data: {"code" : traitementG,
+											"name" : nomtraitement,
+											"nom_du_verre" : nomverre,
+											"indice": indice,
+											"generation": generation
+										},
+										dataType: "json",
+										success: function (data) {
+											setTimeout(function(){
+												var prixteinte = $('#prixTeinteG').val();
+												$.each(data, function(key, value){
+													$('#prixTraitementG').val(value.prix);
+													var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
+													console.log("PrixG5")
+													$('#prixG').val(tot+"€");
+													$('#prixGH').val(tot+"€");
+												});
+											},1000);
+										}
+
+									});
 								});
 							}
 					});
@@ -2370,7 +2453,7 @@ $('#type_de_verreG').on('change', function() {
 				
 					$('#quantiteG').prop('disabled', true);
 			
-			
+					console.log('11111111111111111111111111111111111111111111111111111')
 					var k = "";
 					$.ajax({
 							type: "POST",
@@ -2390,7 +2473,9 @@ $('#type_de_verreG').on('change', function() {
 							$('#traitementGH').val(selectedText);
 						}
 					});
-				
+
+
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
@@ -3359,7 +3444,9 @@ $('#teinteD').on('change', function() {
 				}
 		
 			});
-			
+			console.log(nomtraitement);
+			console.log('55555555555555555555555555555555555555555555555555555555555555')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3409,7 +3496,9 @@ $('#teinteD').on('change', function() {
 			var nomverre = $("#type_de_verreD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+			console.log(nomtraitement);
+			console.log('8888888888888888888888888888888888888888888888888888888888')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3536,7 +3625,9 @@ $('#teinteG').on('change', function() {
 				}
 		
 			});
-			
+			console.log(nomtraitement);
+			console.log('777777777777777777777777777777777777777777777777')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3586,7 +3677,9 @@ $('#teinteG').on('change', function() {
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+			console.log(nomtraitement);
+			console.log('6666666666666666666666666666666666666666666666666666')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3857,6 +3950,8 @@ $('#traitementD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
+
+			console.log('4444444444444444444444444444444444444444444444444444444444444444')
 
 			var indice = $('#indices').val();
 			var generation = $('#generation').val();
@@ -4130,6 +4225,7 @@ $('#traitementG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
+			console.log('333333333333333333333333333333333333333333333333333333333333333333333333333')
 
 			var indice = $('#indices').val();
 			var generation = $('#generation').val();

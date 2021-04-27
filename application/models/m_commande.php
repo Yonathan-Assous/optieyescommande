@@ -2502,7 +2502,7 @@ class m_commande extends CI_Model {
 		$sql = 'SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
 		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00';
-		var_dump($sql);
+		//var_dump($sql);
 
         $query = $this->db->query($sql);
 

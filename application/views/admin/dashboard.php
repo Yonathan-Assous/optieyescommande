@@ -37,8 +37,8 @@ else
         <div class="container">
 			
 			 <div class="row">
-				 <div class="col-lg-6 col-md-6 col-xs-6" style="background-color: grey; padding-top: 20px">
-					<div class="col-lg-6 col-md-6 col-xs-6">
+				 <div class="col-lg-6 col-md-6 col-xs-6" style="background-color: grey; padding-top: 20px; padding-right: 0px">
+					<div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_mensuel,2,'.',''); ?></span>  €</h2>
@@ -46,7 +46,7 @@ else
 							</div>
 						</div>
 					</div>
-					 <div class="col-lg-6 col-md-6 col-xs-6">
+					 <div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_mensuel_sans_livraison,2,'.',''); ?></span>  €</h2>
@@ -54,7 +54,7 @@ else
 							</div>
 						</div>
 					</div>
-					 <div class="col-lg-6 col-md-6 col-xs-6">
+					 <div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php 
@@ -66,7 +66,7 @@ else
 							</div>
 						</div>
 					</div>
-					 <div class="col-lg-6 col-md-6 col-xs-6">
+					 <div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($lens_month->total_commande,2,'.',''); ?></span>  €</h2>
@@ -74,7 +74,7 @@ else
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-xs-6">
+					<div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($montures_month->total_commande,2,'.',''); ?></span>  €</h2>
@@ -82,7 +82,7 @@ else
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-xs-6">
+					<div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
 								<h2 class="text-warning"><span data-plugin="counterup"><?php 
@@ -93,7 +93,7 @@ else
 						</div>
 					</div>
 					 
-					 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+					 <div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial">
 						<div class="card-box card-box-commercial widget-user">
 							<div>
 								<h2 class="text-warning" style="color: #FFF
@@ -102,7 +102,7 @@ else
 							</div>
 						</div>
 					</div>
-					 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+					 <div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial">
 						<div class="card-box card-box-commercial widget-user"
                              >
 							<div>
@@ -111,7 +111,7 @@ else
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+					<div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial">
 						<div class="card-box card-box-commercial widget-user">
 							<div>
 								<h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Gregory,2,'.',''); ?></span>  €</h2>
@@ -119,7 +119,7 @@ else
 							</div>
 						</div>
 					</div>
-                    <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+                    <div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial">
                         <div class="card-box card-box-commercial widget-user">
                             <div>
                                 <h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Glenn,2,'.',''); ?></span>  €</h2>
@@ -127,7 +127,7 @@ else
                             </div>
                         </div>
                     </div>
-					<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+					<div class="col-lg-3 col-md-3 col-xs-12 col-box-commercial">
 						<div class="card-box card-box-commercial widget-user">
 							<div>
 								<h2 class="text-warning" style="color: #FFF !important"><span ><?php echo number_format($CAmonth_Optical_Service,2,'.',''); ?></span>  €</h2>
@@ -136,10 +136,10 @@ else
 						</div>
 					</div>
 			 	</div>
-				 <div class="col-lg-6 col-md-6 col-xs-6" style="background-color: gainsboro; padding-top: 20px">
+				 <div class="col-lg-6 col-md-6 col-xs-6" style="background-color: gainsboro; padding-top: 20px; padding-left: 0px">
 					
 						
-							<div class="col-lg-6 col-md-6 col-xs-6">
+							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_journalier,2,'.',''); ?></span> €</h2>
@@ -147,7 +147,7 @@ else
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-xs-6">
+							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_journalier_sans_livraison,2,'.',''); ?></span>  €</h2>
@@ -155,7 +155,7 @@ else
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-xs-6">
+							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php 
@@ -166,7 +166,7 @@ else
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-xs-6">
+							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($lens_day->total_commande,2,'.',''); ?></span>  €</h2>
@@ -174,7 +174,7 @@ else
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-xs-6">
+							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($montures_day->total_commande,2,'.',''); ?></span>  €</h2>
@@ -182,7 +182,7 @@ else
 									</div>
 								</div>
 							</div>
-					 		<div class="col-lg-6 col-md-6 col-xs-6">
+					 		<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
 										<h2 class="text-warning"><span data-plugin="counterup"><?php 
@@ -193,7 +193,7 @@ else
 								</div>
 							</div>			
 						
-					 		<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+					 		<div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial" >
 								<div class="card-box card-box-commercial widget-user">
 									<div>
 										<h2 class="text-warning"><span ><?php echo number_format($CAday_Samuel,2,'.',''); ?></span>  €</h2>
@@ -201,7 +201,7 @@ else
 									</div>
 								</div>
 							</div>
-							 <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+							 <div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial" >
 								<div class="card-box card-box-commercial widget-user">
 									<div>
 										<h2 class="text-warning"><span ><?php echo number_format($CAday_Daniel,2,'.',''); ?></span>  €</h2>
@@ -209,7 +209,7 @@ else
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+							<div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial" >
 								<div class="card-box card-box-commercial widget-user">
 									<div>
 										<h2 class="text-warning"><span ><?php echo number_format($CAday_Gregory,2,'.',''); ?></span>  €</h2>
@@ -217,7 +217,7 @@ else
 									</div>
 								</div>
 							</div>
-                            <div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial" >
+                            <div class="col-lg-3 col-md-3 col-xs-6 col-box-commercial" >
                                 <div class="card-box card-box-commercial widget-user">
                                     <div>
                                         <h2 class="text-warning"><span ><?php echo number_format($CAday_Glenn,2,'.',''); ?></span>  €</h2>
@@ -225,7 +225,7 @@ else
                                     </div>
                                 </div>
                             </div>
-							<div class="col-lg-3 col-md-3 col-xs-3 col-box-commercial">
+							<div class="col-lg-3 col-md-3 col-xs-12 col-box-commercial">
 								<div class="card-box card-box-commercial widget-user">
 									<div>
 										<h2 class="text-warning" style="font-size: 16px; color: #FFF !important"><span ><?php echo number_format($CAday_Optical_Service,2,'.',''); ?></span>  €</h2>

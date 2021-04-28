@@ -215,9 +215,8 @@
                 if(isset($info_commande['verre']['hauteur_gauche'])) {
                     $correction_gauche .= ' <b>Hauteur :</b> ' . $info_commande['verre']['hauteur_gauche'] . '<br>';
                 }
-
-                if(isset($info_commande['verre']['ecart_puppillaire_gauche'])) {
-                    $correction_gauche .= ' <b>Ecart pupillaire :</b> ' . $info_commande['verre']['ecart_puppillaire_gauche'].'<br>';
+                if(isset($info_commande['mesure_freeform']['ecart_puppillaire_gauche'])) {
+                    $correction_gauche .= ' <b>Ecart pupillaire :</b> ' . $info_commande['mesure_freeform']['ecart_puppillaire_gauche'].'<br>';
                 }
 
                 if(isset($info_commande['verre']['correction_gauche']['dioptrie'])) {

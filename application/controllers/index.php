@@ -1909,7 +1909,6 @@ class index extends MY_Controller {
                 $data = $this->input->post();
 
                 if($order_data = $this->m_commande->getCommandeById($data['order_id'], $this->data['user_info']->id_users, false)[0]) {
-
                     $order_data = (array) $order_data;
 
                     $data_corrections = json_decode($order_data['information_commande'], true);
@@ -1984,6 +1983,7 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
+
             $add = $this->input->post();
 //
 //            $verreName = stristr($data['nomverreDH'], ' -', true);
@@ -2124,6 +2124,7 @@ class index extends MY_Controller {
 
 
                 }
+
                 if ($order = $this->m_commande->addOrder($data)) {
                     //echo " - here 2 !";
                     $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
@@ -3054,18 +3055,25 @@ class index extends MY_Controller {
 					if(isset($data['coted']) && !empty($data['coted']))
 						$data_commandeD['mesure_freeform']['diametre_utile'] = $data['coted'];
 
-					if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
-						$data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+					if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit'])) {
+                        $data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+                        $data_commandeD['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+                    }
 
-					if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche']))
-						$data_commande['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+					if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                        $data_commande['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                        $data_commandeG['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                    }
 
 
 					if(isset($data['hauteur']) && !empty($data['hauteur']))
 						$data_commande['mesure_freeform']['hauteur'] = $data['hauteur'];
+						$data_commandeD['mesure_freeform']['hauteur'] = $data['hauteur'];
 
-					if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche']))
-						$data_commande['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+					if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche'])) {
+                        $data_commande['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                        $data_commandeG['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                    }
 
 					//if(isset($data['diametreD']) && !empty($data['diametreD']))
 					//	$data_commande['diametreD'] = $data['diametreD'];
@@ -3102,6 +3110,13 @@ class index extends MY_Controller {
 					if(isset($data['coted']) && !empty($data['coted']))
 						$data_commandeG['mesure_freeform']['diametre_utile'] = $data['coted'];
 
+                    if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                        $data_commandeG['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                    }
+
+                    if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche'])) {
+                        $data_commandeG['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                    }
 					//if(isset($data['diametreD']) && !empty($data['diametreD']))
 					//	$data_commande['diametreD'] = $data['diametreD'];
 

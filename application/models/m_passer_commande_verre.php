@@ -249,10 +249,17 @@ class m_passer_commande_verre extends CI_Model
                 $tab[$i]['libelle'] = $omega->trad_fr;
                 $tab[$i]['prix'] = $omega->prix;
                 $tab[$i]['source'] = "omega";
+                $sql_generation = "";
+                if (strpos( $omega->trad_fr, "T-One") !== false) {
+                    $sql_generation .= " AND generation = 'T-One'";
+                }
+                else if (strpos($omega->trad_fr, "E-Space") !== false) {
+                    $sql_generation .= " AND generation = 'E-Space";
+                }
                 $sql = "SELECT prix 
                         FROM prix_par_client
                         WHERE code = '" . $omega->code . "'
-                        AND id_client = $user_id";
+                        AND id_client = $user_id" . $sql_generation;
                 $query = $this->db->query($sql);
 
                 if ($query->num_rows() > 0) {

@@ -1776,6 +1776,7 @@ $('#type_de_verreD').on('change', function() {
 									console.log("PrixD1")
 									$('#prixD').val(value.prix+"€");
     								$('#prixDH').val(value.prix);
+
 								});
 							}
 					});
@@ -1818,7 +1819,7 @@ $('#type_de_verreD').on('change', function() {
 									console.log("PrixD2")
 									$('#prixD').val(value.prix+"€");
     								$('#prixDH').val(value.prix);
-									// var indice = $('#indices').val();
+									var indice = $('#indices').val();
 									// var generation = $('#generation').val();
 									// var nomtraitement = $("#traitementD option:selected").html();
 									var nomverre = $("#type_de_verreD option:selected").html();

@@ -3061,6 +3061,7 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
+
         if(is_array($data)){
         $pair = $data['pair'];
         unset($data['discount']);
@@ -3127,7 +3128,8 @@ class m_commande extends CI_Model {
 			// https://www.codeigniter.com/userguide2/database/active_record.html
 			//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
 //            var_dump($data);
-            $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
+
+                $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                    .implode(",", $data).")";
             if($this->db->query($sql)){
 
@@ -3194,7 +3196,8 @@ class m_commande extends CI_Model {
 		//   $type_commandeG = $data['type_commandeG'];
 		   $type_commande_verreG = $data['type_commande_verreG'];
 		   $origine_commandeG = $data['origine_commandeG'];
-		   $information_commandeG = $data['information_commandeG'];
+
+            $information_commandeG = $data['information_commandeG'];
 		   $data['id_type_generation_verre']=0;
 
 		   $type_commande_verre = $data['type_commande_verre'];
@@ -3272,7 +3275,8 @@ class m_commande extends CI_Model {
 
 			$data = array_intersect_key($data, $this->fields);
 			unset($data['date_annule']);
-			foreach($data as $num => $key){
+
+            foreach($data as $num => $key){
 			  $update_fields[] = $num."='".$data[$num]."'";
 			  $data_key[] = $num;
 			}
@@ -3327,6 +3331,7 @@ class m_commande extends CI_Model {
 
                 //echo "Verre != 4 <br>";
 				//echo "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                        .implode(",", $data).")";
 				if($this->db->query($sql));
@@ -3555,7 +3560,8 @@ class m_commande extends CI_Model {
 
 					if($nb_multi_commande == '1' && $quantiteG>1 && $unVerreG==0 && $id_verreD!=$id_verreG)
 					{
-						$data['prix_verre'] = $prixUnitaireG;
+
+                        $data['prix_verre'] = $prixUnitaireG;
 						$data['total_commande'] = $prixUnitaireG;
 
 						for($i=0;$i<$quantiteG;$i++)

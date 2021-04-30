@@ -244,6 +244,13 @@ class m_traitement extends CI_Model
     }
 
     public function calculPrice($nom_du_verre, $code, $userId) {
+
+        $num = strpos($nom_du_verre, " - Stock");
+        if ($num !== false) {
+            $nom_du_verre = substr($nom_du_verre, 0, $num);
+//            var_dump($nom_du_verre);die;
+        }
+
         $lens = $this->m_lenses->getLensesByTradFr($nom_du_verre);
         $traitement = $this->getTraitementByCode($code);
         $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();

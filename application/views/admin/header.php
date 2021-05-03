@@ -85,7 +85,7 @@ $maintenance = false;
 
 <body class="fixed-left">
 
-<div>
+<div id="wrapper">
     <div class="topbar">
 
         <div class="topbar-left">

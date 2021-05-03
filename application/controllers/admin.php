@@ -5044,11 +5044,11 @@ class admin
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
                                     '1.59') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Transition') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Polarisé') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Xtractive') !== false))
                           ))) ||
                         $paA ==
@@ -5238,11 +5238,11 @@ class admin
                                     '1.56') !== false) ||
                             (strpos($commande->lensname,
                                     '1.59') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Transition') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Polarisé') !== false) ||
-                               (strpos($commande->lensname,
+                               (strpos($commande->trad_fr,
                                        'Xtractive') !== false))
                           ))) ||
                         $paA ==

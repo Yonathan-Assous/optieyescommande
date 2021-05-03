@@ -3202,7 +3202,6 @@ class admin
         $data['taux_tva'] =
             $this->session->userdata('taux_tva');
 
-        var_dump('cool');
         $data['lens_month'] =
             $this->m_lens->getLensIncomesByMonth(date("Y-m"));
         $data['lens_day'] =
@@ -3228,7 +3227,6 @@ class admin
         $data['CAmonth_Optical_Service'] =
             $this->m_commande->getCAmonth_Optical_Service(date("m-Y")) -
             $this->m_commande->getCAmonthSupplement_Optical_Service(date("m-Y"));
-        var_dump('cool');die;
 
         $data['CAday_Samuel'] =
             $this->m_commande->getCAday_Samuel() -

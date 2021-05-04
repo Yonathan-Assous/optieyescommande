@@ -219,6 +219,9 @@ class m_lens extends CI_Model
 
         unset($params['commentaire']);
 
+        if(!empty($commentaire)){
+            $params['is_confirmed'] = 0;
+        }
 
         if($this->db->insert('commande', $params)) {
 
@@ -243,6 +246,7 @@ class m_lens extends CI_Model
         $this->db->select('c.*, cc.id_commande as cid, cc.commentaire, lens.*, lens_check.*');
         $this->db->from('commande c');
         $this->db->join('lens', 'lens.id = c.lens_id');
+        $this->db->where('is_confirmed', 1);
 
         switch($status) {
 

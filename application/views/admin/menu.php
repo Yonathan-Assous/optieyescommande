@@ -61,7 +61,11 @@
                 <li class="has_sub <?php echo ($page == "documents" ? 'active' : ''); ?>">
                     <a href="<?php echo $pre_url;?>admin/documents" class="waves-effect <?php echo ($page == "documents" ? 'active' : ''); ?>"><i class="zmdi zmdi-receipt"></i> <span> Documents </span> </a>
                 </li>
-				
+
+                <li class="has_sub <?php echo ($page == "valid_commentaire" ? 'active' : ''); ?>">
+                    <a href="<?php echo $pre_url;?>admin/valid_commentaire" class="waves-effect <?php echo ($page == "valid_commentaire" ? 'active' : ''); ?>"><i class="zmdi zmdi-shopping-basket"></i> <span> Commentaires </span> </a>
+                </li>
+
 				<li class="text-muted menu-title">Commandes Expédiées</li>
 
                 <li class="has_sub <?php echo ($page == "ancienne_commande" ? 'active' : ''); ?>"><a href="<?php echo $pre_url;?>admin/ancienne_commande" class="waves-effect <?php echo ($page == "ancienne_commande" ? 'active' : ''); ?>"><i class="zmdi zmdi-check"></i> <span> Verres Expédiés </span> </a>

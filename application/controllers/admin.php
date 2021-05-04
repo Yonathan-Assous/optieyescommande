@@ -5304,28 +5304,6 @@ class admin
                     $xml .= '</rxData>';
                     //var_dump($information_commande);
                     if ((isset($information_commande->verre->correction_droit->traitement) &&
-<<<<<<< HEAD
-                         !empty($information_commande->verre->correction_droit->traitement) &&
-                         ($information_commande->verre->correction_droit->traitement !=
-                          '700100' ||
-                          (($information_commande->verre->correction_droit->traitement ==
-                            '700100') &&
-                           (((strpos($commande->lensname,
-                                    '1.5') === false)) ||
-                            (strpos($commande->lensname,
-                                    '1.53') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.56') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.59') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Transition') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Polarisé') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Xtractive') !== false))
-                          ))) ||
-=======
                             !empty($information_commande->verre->correction_droit->traitement) &&
                             ($information_commande->verre->correction_droit->traitement !=
                                 '700100' ||
@@ -5346,7 +5324,6 @@ class admin
                                         (strpos($commande->trad_fr,
                                                 'Xtractive') !== false))
                                 ))) ||
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                         $paA ==
                         "1") {
 
@@ -5521,28 +5498,6 @@ class admin
 
                     $xml .= '</rxData>';
                     if ((isset($information_commande->verre->correction_gauche->traitement) &&
-<<<<<<< HEAD
-                         !empty($information_commande->verre->correction_gauche->traitement) &&
-                         ($information_commande->verre->correction_gauche->traitement !=
-                          '700100' ||
-                          (($information_commande->verre->correction_gauche->traitement ==
-                            '700100') &&
-                           ((strpos($commande->lensname,
-                                    '1.5') === false) ||
-                            (strpos($commande->lensname,
-                                    '1.53') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.56') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.59') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Transition') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Polarisé') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Xtractive') !== false))
-                          ))) ||
-=======
                             !empty($information_commande->verre->correction_gauche->traitement) &&
                             ($information_commande->verre->correction_gauche->traitement !=
                                 '700100' ||
@@ -5563,7 +5518,6 @@ class admin
                                         (strpos($commande->trad_fr,
                                                 'Xtractive') !== false))
                                 ))) ||
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                         $paA ==
                         "1") {
 

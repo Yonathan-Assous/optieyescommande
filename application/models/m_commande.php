@@ -2380,11 +2380,7 @@ class m_commande extends CI_Model {
         $TabHoraireTarifLiv = array();
 
         if($tarif_Livraison){
-<<<<<<< HEAD
-          $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
-=======
             $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                      FROM ".$this->table."
                                      WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                      AND tarif_livraison > 0
@@ -2407,11 +2403,7 @@ class m_commande extends CI_Model {
                 }
 
 
-<<<<<<< HEAD
-         $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
-=======
             $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                      FROM ".$this->table."
                                      WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                      AND tarif_livraison > 0
@@ -2433,11 +2425,7 @@ class m_commande extends CI_Model {
                     }
                 }
 
-<<<<<<< HEAD
-          $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison,id_users,date(date_update_commande), DATE_FORMAT(date_update_commande, '%e') as day
-=======
             $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison,id_users,date(date_update_commande), DATE_FORMAT(date_update_commande, '%e') as day
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -2469,13 +2457,10 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($date.' -1 month'))."'
                                      GROUP BY id_users,date(date_update_commande), day");
-<<<<<<< HEAD
-=======
 
             if($query && $query->num_rows() > 0)
                 foreach($query->result() as $value){
                     $add = true;
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
 
                     if(isset($TabHoraireTarifLiv[$value->id_users])){
                         foreach($TabHoraireTarifLiv[$value->id_users] as $dateHoraire){
@@ -3886,11 +3871,7 @@ class m_commande extends CI_Model {
                                      AND id_etat_commande = 6
                                      AND ( DATE_FORMAT(date_commande, '%Y-%m')='".date('Y-m')."' AND ((date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
                                      GROUP BY date(date_update_commande),id_users,TarifLivraison";
-<<<<<<< HEAD
-          $query = $this->db->query($sql);
-=======
             $query = $this->db->query($sql);
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
 
             if($query && $query->num_rows() > 0)
                 foreach($query->result() as $value){
@@ -3899,11 +3880,7 @@ class m_commande extends CI_Model {
                     $TarifLivraison += $value->TarifLivraison;
                 }
 
-<<<<<<< HEAD
-          $query2 = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande)
-=======
             $query2 = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande)
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                       FROM ".$this->table."
                                       WHERE date_update_commande>='".date("Y-m-d 00:00:00")."'
                                       AND date_update_commande<='".date("Y-m-d 23:59:59")."'
@@ -3921,11 +3898,7 @@ class m_commande extends CI_Model {
                     $TarifLivraison += $value->TarifLivraison;
                 }
 
-<<<<<<< HEAD
-          $query = $this->db->query("SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
-=======
             $query = $this->db->query("SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -4025,13 +3998,8 @@ class m_commande extends CI_Model {
 
         $TabHoraireTarifLiv = array();
 
-<<<<<<< HEAD
-    $tarif = 0;
-     $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
-=======
         $tarif = 0;
         $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
@@ -4088,11 +4056,7 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-<<<<<<< HEAD
-           $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
-=======
         $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
->>>>>>> c7e79313502d4098f4f11783077f9ed35dd22fc1
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 

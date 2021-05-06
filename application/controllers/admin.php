@@ -17292,7 +17292,7 @@ class admin
                                 'id_users' => $data['id_users'],
                                 'total_commande' => $total_order,
                                 'tarif_livraison' => $userdata->tarif_livraison,
-                                'tarif_packaging' => $userdata->tarif_packaging,
+                                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                                 'commande_monture' => 1
                             );
 
@@ -20188,7 +20188,7 @@ class admin
                 'information_commande' => json_encode($data['build']),
                 'commentaire' => $data['commentaire'],
                 'id_users' => (int)$data['user_id'],
-                'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'tarif_livraison' => $userdata->tarif_livraison,
                 'total_commande' => $total_order
             );
@@ -21164,7 +21164,7 @@ class admin
                 $data['tarif_livraison'] =
                     $userdata->tarif_livraison;
                 $data['tarif_packaging'] =
-                    $userdata->tarif_packaging;
+                    $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
                 $this->session->set_userdata('order',
                     $data);
                 echo $this->load->view('admin/ajax_show_montures_order',
@@ -21330,11 +21330,11 @@ class admin
                 'lens_id' => 0,
                 'lens_generation' => 0,
                 'information_commande' => json_encode($data['montures']),
-                'commentaire' => $data['commentaire'],
+                'commentaire' => isset($data['commentaire']) ? $data['commentaire'] : "",
                 'id_users' => $user_id,
                 'total_commande' => $total_order,
                 'tarif_livraison' => $userdata->tarif_livraison,
-                'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'commande_monture' => 1
             );
 

@@ -2221,7 +2221,7 @@ class index extends MY_Controller {
 							'id_users' => $data['id_users'],
 							'total_commande' => $total_order,
 							'tarif_livraison' => $userdata->tarif_livraison,
-							'tarif_packaging' => $userdata->tarif_packaging,
+							'tarif_packaging' => $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 							'commande_monture' => 1
 						);
 
@@ -2482,7 +2482,7 @@ class index extends MY_Controller {
                 $data['ancienne_commande'] = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['taux_tva'] = $this->m_taux_tva->get_tva();
                 $data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
                 $prix_miroir = 7;
 
                 $pair_order = false;
@@ -5287,7 +5287,7 @@ class index extends MY_Controller {
                 'information_commande' => json_encode($data['build']),
                 'commentaire' => $data['commentaire'],
                 'id_users' => (int) $data['user_id'],
-				'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'tarif_livraison' => $userdata->tarif_livraison,
                 'total_commande' => $total_order
             );
@@ -5316,7 +5316,6 @@ class index extends MY_Controller {
 			$user_id = $this->data['user_info']->id_users;
 
             $data = $this->session->userdata('order');
-            //var_dump($data['montures']);die;
 			$total_order = 0;
 
 			//echo json_encode($data['montures']);
@@ -5401,7 +5400,7 @@ class index extends MY_Controller {
                 'id_users' => $user_id,
                 'total_commande' => $total_order,
 				'tarif_livraison' => $userdata->tarif_livraison,
-				'tarif_packaging' => $userdata->tarif_packaging,
+				'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 				'commande_monture' => 1
             );
 
@@ -5886,7 +5885,7 @@ class index extends MY_Controller {
 				$data['data_admin']['admin_info'] = $this->m_users->getUserById(1)[0];
 				$userdata = $this->m_users->getUserById($id_user)[0];
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
 				$this->session->set_userdata('order', $data);
                 echo $this->load->view('ajax_show_montures_order',$data);
 			}

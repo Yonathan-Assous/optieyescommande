@@ -3155,6 +3155,9 @@ class admin
     public
     function index()
     {
+        $data['caByDay'] =
+            $this->m_commande->getCaByDayOfMonth(date("Y-m"));
+        //var_dump($data);die;
         $data =
             $this->session->userdata('data_admin');
         $data['newUser'] =
@@ -3175,16 +3178,23 @@ class admin
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
 
-
+//        var_dump($ca_journalier);
+//        var_dump($ca_journalier_sans_livraison);
+//        var_dump($ca_mensuel);
+//        var_dump($ca_mensuel_sans_livraison);die;
+        $data['packaging_mois'] =
+            $this->m_commande->getPackagingByMonth(date("m-Y"));
         $data['ca_journalier'] =
             $ca_journalier[0]->ca_journalier +
             $this->m_commande->getPackagingByDay();              //  - $this->m_commande->getSupplementByDay()
         $data['ca_mensuel'] =
             $ca_mensuel +
-            $this->m_commande->getPackagingByMonth(date("m-Y")); //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
-        $data['packaging_mois'] =
-            $this->m_commande->getPackagingByMonth(date("m-Y"));
+            $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
 
+//        var_dump($ca_mensuel);
+//        var_dump($ca_mensuel_sans_livraison);
+//        var_dump($data['packaging_mois']);
+//        die;
         $data['ca_journalier_sans_livraison'] =
             $ca_journalier_sans_livraison[0]->ca_journalier -
             $this->m_commande->getSupplementByDay();
@@ -3206,12 +3216,12 @@ class admin
             $this->m_lens->getLensIncomesByMonth(date("Y-m"));
         $data['lens_day'] =
             $this->m_lens->getLensIncomesByDay(date("Y-m-d"));
-
         $data['montures_month'] =
             $this->m_montures->getMonturesIncomesByMonth(date("Y-m"));
         $data['montures_day'] =
             $this->m_montures->getMonturesIncomesByDay(date("Y-m-d"));
 
+        //var_dump($data);die;
         $data['CAmonth_Samuel'] =
             $this->m_commande->getCAmonth_Samuel(date("m-Y")) -
             $this->m_commande->getCAmonthSupplement_Samuel(date("m-Y"));

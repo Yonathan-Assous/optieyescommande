@@ -1708,18 +1708,16 @@ class m_commande extends CI_Model {
 //            $limit = 'LIMIT 1';
         }
 
-        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande 
-        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" ' . $add;
+//        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
+//        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
         $query = $this->db->query($sql);
-
+        $result = $query->result();
         $total = 0;
 
         if ($query && $query->num_rows() > 0) {
-            foreach ($query->result() as $result) {
-                $total += $result->tarif_packaging;
-            }
+            $total = $result[0]->total;
         }
-
         return $total;
 
     }
@@ -2500,14 +2498,17 @@ class m_commande extends CI_Model {
         }
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM commande
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1
+                                   AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(total_commande),0) as ca_journalier_penalty FROM commande
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1
+                                   AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND type_commande > 1 AND penalty != 1) 
+                                   AND type_commande > 1 AND penalty != 1
+                                   AND is_confirmed = 1) 
                                    +
                                    (".$TarifLivraison.")
 								   -
@@ -3967,17 +3968,20 @@ class m_commande extends CI_Model {
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
-                                   AND type_commande = 1 AND penalty != 1)
+                                   AND type_commande = 1 AND penalty != 1
+                                   AND is_confirmed = 1)
                                    + 
                                    (SELECT IFNULL(SUM(total_commande),0) as ca_journalier_penalty FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
-                                   AND type_commande > 1 AND penalty = 1)
+                                   AND type_commande > 1 AND penalty = 1
+                                   AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
-                                   AND type_commande > 1 AND penalty != 1) 
+                                   AND type_commande > 1 AND penalty != 1
+                                   AND is_confirmed = 1) 
                                    +
                                    (".$TarifLivraison.")
                                    -

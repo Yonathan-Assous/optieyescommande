@@ -1183,8 +1183,8 @@ class admin
                 $this->m_taux_tva->get_tva();
             $data['tarif_livraison'] =
                 $userdata->tarif_livraison;
-            $data['tarif_packaging'] =
-                $userdata->tarif_packaging;
+            $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
+
             $prix_miroir = 7;
 
             $pair_order =

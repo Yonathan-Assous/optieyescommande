@@ -3092,7 +3092,6 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
-
         if(is_array($data)){
             $pair = $data['pair'];
             unset($data['discount']);
@@ -5017,4 +5016,20 @@ class m_commande extends CI_Model {
 
         return false;
     }
+
+    public function getTarifPackaging($id_users, $userTarifPackaging) {
+        $year = date('Y');
+        $month = date('m');
+        $sql = "SELECT * FROM commande
+                WHERE YEAR(date_commande)=$year AND MONTH(date_commande)=$month
+                AND id_users = $id_users";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return 0;
+        }
+        else {
+            return $userTarifPackaging;
+        }
+    }
+
 }

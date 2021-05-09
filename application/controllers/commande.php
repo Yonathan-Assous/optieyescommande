@@ -19,4 +19,11 @@ class commande extends MY_Controller {
         $result = $this->db->query($sql);
         //echo $result;
     }
+
+    public function numCommentaire() {
+        $sql = "SELECT COUNT(*) as num_commentaire FROM `commande` WHERE is_confirmed = 0";
+        $query = $this->db->query($sql);
+        echo $query->result()[0]->num_commentaire;
+//        return $query->result()[0]->num_commentaire;
+    }
 }

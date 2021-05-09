@@ -111,7 +111,6 @@ include_once('menu.php');
         });
 
         function getCommande() {
-            console.log('TEST');
             $('#datatable').DataTable({
                 ajax: { url: "/admin/valid_commentaire_ajax", dataSrc: 'aaData' },
                 aLengthMenu: [
@@ -170,6 +169,17 @@ include_once('menu.php');
                     console.log('dsadsas');
                     //$('#datatable').DataTable().clear();
                     getCommande();
+                    $.ajax({
+                        type: "POST",
+                        url: "/commande/numCommentaire",
+                        success: function(data){
+                            console.log(data);
+                            $("#num_commentaire").html(data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            $("#num_commentaire").html('<div style="width:150px;text-align:center;margin-left:auto;margin-right:auto;margin-top:15%;margin-bottom:15%:color:red">Server Error : '+txtError+textStatus+" "+errorThrown+'</div>');
+                        }
+                    });
                 },
                 error: function(data){
                     alert('dsadsas');

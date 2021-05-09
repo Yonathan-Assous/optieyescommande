@@ -617,7 +617,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    INNER JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) AND status_omega=0 ORDER BY id_commande DESC";
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) AND status_omega=0 AND is_confirmed = 1 ORDER BY id_commande DESC";
         $query = $this->db->query($sql);
 
 
@@ -3715,6 +3715,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$this->table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN verres_traduction vt ON vt.id_verre = c.id_verre
                                    WHERE (".$date_add." ".$sql_add.") ".$email_send."
+                                   AND c.is_confirmed = 1
                                    ORDER BY ".$order_by;
         //var_dump($sql);die;
 

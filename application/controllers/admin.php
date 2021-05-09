@@ -3254,7 +3254,6 @@ class admin
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
 
-
         $this->load->view('admin/dashboard',
             $data);
     }
@@ -3964,9 +3963,8 @@ class admin
             $data_commande =
                 $this->m_commande->getCommandeWithCommentaireNotConfirmed();
 
-            $data_etiquette =
-                $this->m_commande->getEtiquetteAlreadySet();
-
+//            $data_etiquette =
+//                $this->m_commande->getEtiquetteAlreadySet();
 
             if ($data_commande !==
                 false) {
@@ -4035,13 +4033,13 @@ class admin
                             '<img src="/static/img/expediee.png" width="50">';
                     }
 
-                    if ($data_etiquette !==
-                        false &&
-                        (isset($data_etiquette[$commande->id_commande]['droit']) ||
-                            isset($data_etiquette[$commande->id_commande]['gauche']))) {
-                        $cl =
-                            ' is_checked';
-                    }
+//                    if ($data_etiquette !==
+//                        false &&
+//                        (isset($data_etiquette[$commande->id_commande]['droit']) ||
+//                            isset($data_etiquette[$commande->id_commande]['gauche']))) {
+//                        $cl =
+//                            ' is_checked';
+//                    }
 
                     switch ($commande->type_commande) {
 

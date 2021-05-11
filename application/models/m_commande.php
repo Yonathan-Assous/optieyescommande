@@ -3340,7 +3340,6 @@ class m_commande extends CI_Model {
                         $data['total_commande']=$prixUnitaireD+$prixUnitaireG;
                     }
 
-
                     if($express == 1)
                     {
                         $data['tarif_express'] = 25;
@@ -3373,7 +3372,6 @@ class m_commande extends CI_Model {
 
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-//                var_dump($sql);die;
                     if($this->db->query($sql));
                     {
 
@@ -3662,6 +3660,7 @@ class m_commande extends CI_Model {
                             }
                         }
                     }
+
                     if($ok == 1)
                     {
                         if(true === $pair) {

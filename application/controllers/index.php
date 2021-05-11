@@ -1955,6 +1955,7 @@ class index extends MY_Controller {
                     $order_data['total_commande'] = $total_commande;
                     $order_data['total_remise_paire'] = 0;
 
+
                     if ($order = $this->m_commande->addOrder($order_data)) {
                         $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                         $this->db->where(array('user_id' => $order_data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
@@ -3032,7 +3033,8 @@ class index extends MY_Controller {
 				$prix_miroir = 7;
 
 				$pair_order = false;
-				if(isset($data['pair_order'])) {
+
+                if(isset($data['pair_order'])) {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
@@ -3241,6 +3243,10 @@ class index extends MY_Controller {
 
 					$data['id_verre'] = $data['id_verreG'];
 				}
+
+                if($data['quantiteG'] != $data['quantiteD']) {
+                    $prix_double = false;
+                }
 
 				$data['prixDH'] = str_replace("€","",$data['prixDH']);
 				$data['prixGH'] = str_replace("€","",$data['prixGH']);

@@ -1759,20 +1759,23 @@ $('#type_de_verreD').on('change', function() {
 		{
 		if(type_de_verreD != "") {
 		console.log('daadsasdsdadsadsasadasdasdasdsdaasdasdsadasdasdasdasasdasdsad');
-			$.ajax({
-							type: "POST",
-							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
-							data: {"lens" : type_de_verreD,
-							"typedelens" : "fab",
-							"generation" : generation},
-							dataType: "json",
-							success: function (data) {
-						//console.log(data);
-							$.each(data, function(key, value){
-									$('#prixVerreD').val(value.prix);
-									console.log("PrixD2")
-									// $('#prixD').val(value.prix+"€");
-    								// $('#prixDH').val(value.prix);
+
+				if(selectedText.indexOf(" - Stock") >= 0)
+				{
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
+                        data: {"lens" : type_de_verreD,
+                            "typedelens" : "fab",
+                            "generation" : generation},
+                        dataType: "json",
+                        success: function (data) {
+                            //console.log(data);
+                            $.each(data, function(key, value){
+                                $('#prixVerreD').val(value.prix);
+                                console.log("PrixD2")
+                                // $('#prixD').val(value.prix+"€");
+                                // $('#prixDH').val(value.prix);
                                 var nomverre = $("#type_de_verreD option:selected").html();
                                 var traitementD = $('#traitementD').val();
                                 var prixverre = $('#prixVerreD').val();
@@ -1803,14 +1806,12 @@ $('#type_de_verreD').on('change', function() {
                                     }
 
                                 });
-							});
+                            });
 
-							}
-					});
+                        }
+                    });
 
-				if(selectedText.indexOf(" - Stock") >= 0)
-				{
-					type_commande_verre = 2;
+                    type_commande_verre = 2;
 					$('#teinteD').append('<option value="">----</option>');
 					$('#teinteD option:eq(0)').prop('selected', true);
 					//$('#traitementD').empty();
@@ -1883,7 +1884,56 @@ $('#type_de_verreD').on('change', function() {
 							});
                             var selectedText = $("#traitementD option:selected").html();
                             $('#traitementDH').val(selectedText);
-						}
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
+                                    data: {"lens" : type_de_verreD,
+                                        "typedelens" : "fab",
+                                        "generation" : generation},
+                                    dataType: "json",
+                                    success: function (data) {
+                                        //console.log(data);
+                                        $.each(data, function(key, value){
+                                            $('#prixVerreD').val(value.prix);
+                                            console.log("PrixD2")
+                                            // $('#prixD').val(value.prix+"€");
+                                            // $('#prixDH').val(value.prix);
+                                            var nomverre = $("#type_de_verreD option:selected").html();
+                                            var traitementD = $('#traitementD').val();
+                                            var prixverre = $('#prixVerreD').val();
+
+                                            if (!traitementD) {
+                                                traitementD = "700100";
+                                            }
+
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "/admin/getOptions_price",
+                                                data: {"code" : traitementD,
+                                                    "nom_du_verre" : nomverre,
+                                                    "id_user" : <?php echo $user_id;?>
+                                                },
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    setTimeout(function(){
+                                                        let prixteinte = $('#prixTeinteD').val();
+                                                        $.each(data, function(key, value){
+                                                            $('#prixTraitementD').val(value.prix);
+                                                            var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
+                                                            console.log("PrixD5")
+                                                            $('#prixD').val(tot+"€");
+                                                            $('#prixDH').val(tot+"€");
+                                                        });
+                                                    },1000);
+                                                }
+
+                                            });
+                                        });
+
+                                    }
+                                });
+
+                            }
 
 					});
 
@@ -2065,6 +2115,66 @@ function addPrismeGalbeDroit() {
         prixGalbe = 3.9;
     }
     return parseFloat(prixPrisme) + parseFloat(prixGalbe);
+}
+
+function getPrixG() {
+    $.ajax({
+        type: "POST",
+        url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
+        data: {"lens" : type_de_verreG,
+            "typedelens" : "fab",
+            "generation" : generation},
+        dataType: "json",
+        success: function (data) {
+            $.each(data, function(key, value){
+                $('#prixVerreG').val(value.prix);
+                // $('#prixG').val(value.prix+"€");
+                // $('#prixGH').val(value.prix);
+
+                var indice = $('#indices').val();
+                var generation = $('#generation').val();
+                var nomtraitement = $("#traitementD option:selected").html();
+                var nomverre = $("#type_de_verreG option:selected").html();
+                var traitementG = $('#traitementG').val();
+                var prixverre = $('#prixVerreG').val();
+                console.log('test6')
+                if (!nomtraitement) {
+                    nomtraitement = "Durci";
+                }
+                console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+                console.log(traitementG);
+                console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+                if (!traitementG) {
+                    traitementG = "700100";
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/getOptions_price",
+                    data: {"code" : traitementG,
+                        "nom_du_verre" : nomverre,
+                        "id_user" : <?php echo $user_id;?>
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        setTimeout(function(){
+                            var prixteinte = $('#prixTeinteG').val();
+                            $.each(data, function(key, value){
+                                $('#prixTraitementG').val(value.prix);
+                                calculPriceG();
+
+                                // var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+                                console.log("PrixG5")
+                                // $('#prixG').val(tot+"€");
+                                // $('#prixGH').val(tot+"€");
+                                $('#prixGH').val($('#prixG').val());
+                            });
+                        },1000);
+                    }
+
+                });
+            });
+        }
+    });
 }
 
 $('#type_de_verreG').on('change', function() {
@@ -2300,66 +2410,66 @@ $('#type_de_verreG').on('change', function() {
 		else
 		{
 			if(type_de_verreG != "") {
-				$.ajax({
-							type: "POST",
-							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
-							data: {"lens" : type_de_verreG,
-							"typedelens" : "fab",
-							"generation" : generation},
-							dataType: "json",
-							success: function (data) {
-								$.each(data, function(key, value){
-									$('#prixVerreG').val(value.prix);
-									// $('#prixG').val(value.prix+"€");
-    								// $('#prixGH').val(value.prix);
-
-                                    var indice = $('#indices').val();
-                                    var generation = $('#generation').val();
-                                    var nomtraitement = $("#traitementD option:selected").html();
-                                    var nomverre = $("#type_de_verreG option:selected").html();
-                                    var traitementG = $('#traitementG').val();
-                                    var prixverre = $('#prixVerreG').val();
-                                    console.log('test6')
-                                    console.log(indice)
-                                    console.log(generation)
-                                    console.log(nomtraitement)
-                                    console.log(nomverre)
-                                    console.log(traitementG)
-                                    console.log(prixverre)
-                                    if (!nomtraitement) {
-                                        nomtraitement = "Durci";
-                                    }
-                                    if (!traitementG) {
-                                        traitementG = "700100";
-                                    }
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "/admin/getOptions_price",
-                                        data: {"code" : traitementG,
-                                            "nom_du_verre" : nomverre,
-                                            "id_user" : <?php echo $user_id;?>
-                                        },
-                                        dataType: "json",
-                                        success: function (data) {
-                                            setTimeout(function(){
-                                                var prixteinte = $('#prixTeinteG').val();
-                                                $.each(data, function(key, value){
-                                                    $('#prixTraitementG').val(value.prix);
-                                                    var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
-                                                    console.log("PrixG5")
-                                                    $('#prixG').val(tot+"€");
-                                                    $('#prixGH').val(tot+"€");
-                                                });
-                                            },1000);
-                                        }
-
-                                    });
-								});
-							}
-					});
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
-					type_commande_verre = 2;
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
+                        data: {"lens" : type_de_verreG,
+                            "typedelens" : "fab",
+                            "generation" : generation},
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function(key, value){
+                                $('#prixVerreG').val(value.prix);
+                                // $('#prixG').val(value.prix+"€");
+                                // $('#prixGH').val(value.prix);
+
+                                var indice = $('#indices').val();
+                                var generation = $('#generation').val();
+                                var nomtraitement = $("#traitementD option:selected").html();
+                                var nomverre = $("#type_de_verreG option:selected").html();
+                                var traitementG = $('#traitementG').val();
+                                var prixverre = $('#prixVerreG').val();
+                                console.log('test6')
+                                if (!nomtraitement) {
+                                    nomtraitement = "Durci";
+                                }
+                                console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+                                console.log(traitementG);
+                                console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+                                if (!traitementG) {
+                                    traitementG = "700100";
+                                }
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/getOptions_price",
+                                    data: {"code" : traitementG,
+                                        "nom_du_verre" : nomverre,
+                                        "id_user" : <?php echo $user_id;?>
+                                    },
+                                    dataType: "json",
+                                    success: function (data) {
+                                        setTimeout(function(){
+                                            var prixteinte = $('#prixTeinteG').val();
+                                            $.each(data, function(key, value){
+                                                $('#prixTraitementG').val(value.prix);
+                                                calculPriceG();
+
+                                                // var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+                                                console.log("PrixG5")
+                                                // $('#prixG').val(tot+"€");
+                                                // $('#prixGH').val(tot+"€");
+                                                $('#prixGH').val($('#prixG').val());
+                                            });
+                                        },1000);
+                                    }
+
+                                });
+                            });
+                        }
+                    });
+                    type_commande_verre = 2;
 					$('#teinteG').append('<option value="">----</option>');
 					$('#teinteG option:eq(0)').prop('selected', true);
 
@@ -2424,13 +2534,62 @@ $('#type_de_verreG').on('change', function() {
 							dataType: "json",
 							success: function (data) {
 							$('#traitementG option:eq(0)').prop('selected', true);
-							$('#traitementGH').val("Durci");
+							//$('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
 
 							});
-						}
+                            var selectedText = $("#traitementG option:selected").html();
+                            $('#traitementGH').val(selectedText);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
+                                    data: {"lens" : type_de_verreG,
+                                        "typedelens" : "fab",
+                                        "generation" : generation},
+                                    dataType: "json",
+                                    success: function (data) {
+                                        $.each(data, function(key, value){
+                                            $('#prixVerreG').val(value.prix);
+                                            var nomtraitement = $("#traitementD option:selected").html();
+                                            var nomverre = $("#type_de_verreG option:selected").html();
+                                            var traitementG = $('#traitementG').val();
+                                            var prixverre = $('#prixVerreG').val();
+                                            console.log('test6')
+                                            if (!nomtraitement) {
+                                                nomtraitement = "Durci";
+                                            }
+                                            console.log(traitementG);
+                                            if (!traitementG) {
+                                                traitementG = "700100";
+                                            }
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "/admin/getOptions_price",
+                                                data: {"code" : traitementG,
+                                                    "nom_du_verre" : nomverre,
+                                                    "id_user" : <?php echo $user_id;?>
+                                                },
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    setTimeout(function(){
+                                                        var prixteinte = $('#prixTeinteG').val();
+                                                        $.each(data, function(key, value){
+                                                            $('#prixTraitementG').val(value.prix);
+                                                            var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+                                                            console.log("PrixG5")
+                                                            $('#prixG').val(tot+"€");
+                                                            $('#prixGH').val(tot+"€");
+                                                        });
+                                                    },1000);
+                                                }
+
+                                            });
+                                        });
+                                    }
+                                });
+                        }
 					});
 
 					if(indiceId != "1.53" && indiceId != "1.59")
@@ -10055,7 +10214,9 @@ $('input[name=additionG]').change(function() {
 		}
 
 		var formData = $('#commandeForm').serialize();
-		console.log(formData);
+        console.log(formData);
+
+        console.log(formData);
 		$.ajax({
 			type: "POST",
 			url: "/admin/setOrderRecapNew/<?php echo $user_info[0]->id_users; ?>",
@@ -10191,6 +10352,45 @@ $('input[name=additionG]').change(function() {
 			orderOk = true;
 			placeOrder();
 		}
+
+        function calculPriceG() {
+            var gauche = $('#gauche').is(':checked');
+            if (!gauche) {
+                $('#prixVerreG').val(0)
+            }
+            var quantiteG = $('#quantiteG').val();
+            var prixverre = $('#prixVerreG').val();
+            console.log("prixVerreG:");
+            console.log(prixverre);
+
+            var prixteinte = $('#prixTeinteG').val();
+            console.log("prixTeinteG:");
+            console.log(prixteinte);
+
+            var prixtraitement = $('#prixTraitementG').val();
+            console.log("prixTraitementG:");
+            console.log(prixtraitement);
+
+            var tot;
+            if(quantiteD != "")
+            {
+                tot = ( ((parseFloat(prixverre)
+                    +parseFloat(prixtraitement)
+                    +parseFloat(prixteinte)
+                    +addPrismeGalbeGauche()
+                ))*parseFloat(quantiteG)).toFixed(2);
+            }
+            else
+            {
+                tot = (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+addPrismeGalbeGauche()).toFixed(2);
+            }
+            console.log("tot:");
+            console.log(tot);
+
+            $('#prixG').val(tot+"€");
+            $('#prixGH').val(tot+"€");
+
+        }
 
 		function placeOrder()
 		{

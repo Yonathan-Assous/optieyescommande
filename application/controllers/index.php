@@ -150,7 +150,6 @@ class index extends MY_Controller {
 			$idlens = $_POST['lens'];
 			$typedelens = $_POST['typedelens'];
 
-
 //            var_dump($idlens);
 
 			$idlens = str_replace("]","",$idlens);
@@ -2826,6 +2825,8 @@ class index extends MY_Controller {
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
+//                var_dump($data['prixDH']);die;
+
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
@@ -2857,9 +2858,10 @@ class index extends MY_Controller {
                         if(isset($data['PrismeSphereD'])) {
                             $prisme = $data['PrismeSphereD'];
                         }
+
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode);
+                            $prisme, $teinteCode) * $data['quantiteD'];;
                     }
                 }
                 if (isset($data['gauche'])) {
@@ -2888,7 +2890,7 @@ class index extends MY_Controller {
                         }
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode);
+                            $prisme, $teinteCode) * $data['quantiteG'];;
                     }
                 }
 
@@ -3728,6 +3730,7 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
+//                var_dump($data['recap_commande']);die;
 
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{

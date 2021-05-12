@@ -2837,10 +2837,10 @@ class index extends MY_Controller {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
 
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                    $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
+
                     if ($verreStockD) {
-                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) *
-                                          $data['quantiteD'];
-                        ///var_dump($data['prixDH']);die;
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
                     }
                     else {
                         $teinteCode = NULL;
@@ -2862,16 +2862,15 @@ class index extends MY_Controller {
 
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $data['quantiteD'];;
+                            $prisme, $teinteCode) * $quantiteD;;
                     }
                 }
                 if (isset($data['gauche'])) {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
-
+                    $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG) {
-                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) *
-                                          $data['quantiteG'];
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -2891,7 +2890,7 @@ class index extends MY_Controller {
                         }
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $data['quantiteG'];;
+                            $prisme, $teinteCode) * $quantiteG;;
                     }
                 }
 

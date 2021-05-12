@@ -3,10 +3,10 @@
     include_once('menu.php');
 
 
-//if(isset($_POST['password']) && $_POST['password']=='1141')
-//{
+if(isset($_POST['password']) && $_POST['password']=='1141')
+{
 	$_SESSION['login'] = true;
-//}
+}
 
 if(!isset($_SESSION['login'])) 
   {

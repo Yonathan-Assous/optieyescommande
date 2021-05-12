@@ -483,13 +483,16 @@ class admin
     public
     function getOptions_price($recovery = false)
     {
+
         $userId = $_POST['id_user'];
         $code =
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
-        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+//        var_dump($code);die;
 
+        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+        //var_dump($price);die;
 
         //        if (strpos($nom_du_verre,
 //                   'Omega') !==
@@ -17155,7 +17158,7 @@ class admin
                 }
 
                 // FUCK
-
+                var_dump($data);die;
                 if ($order =
                     $this->m_commande->addOrder($data)) {
                     if ($data['pair'] ==
@@ -17175,7 +17178,7 @@ class admin
                     $errors++;
                 }
             }
-
+            var_dump('test');die;
             if ($errors ==
                 0) {
                 if ($data['id_generation_verre'] ==

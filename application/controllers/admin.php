@@ -1514,7 +1514,6 @@ class admin
                 $data['id_verre'] =
                     $data['id_verreG'];
             }
-
             $data['prixDH'] =
                 str_replace("€",
                             "",
@@ -2130,6 +2129,7 @@ class admin
                 $this->db->update('flag_monture');
             }
 
+//            var_dump($data['recap_commande']);die;
 
             echo $this->load->view('/admin/ajax_recap_commande',
                                    $data);
@@ -16659,7 +16659,6 @@ class admin
                     }
 
                 }
-
                 $this->session->set_userdata('order',
                                              $data);
 

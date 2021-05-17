@@ -14,7 +14,7 @@ class admin
         parent::__construct();
 
         $this->session->set_userdata('newUser',
-                                     $this->m_users->getNewUser());
+            $this->m_users->getNewUser());
 
         if ($this->session->userdata('data_user') ===
             false ||
@@ -46,8 +46,8 @@ class admin
 
         $this->data['generation_verre'] =
             $this->m_generation_verre->getGenerationVerre(NULL,
-                                                          NULL,
-                                                          false);
+                NULL,
+                false);
         $this->data['generation_lentilles'] =
             $this->m_lens->getGenerations();
 
@@ -83,15 +83,15 @@ class admin
 
         $res =
             $this->m_passer_commande_verre->getlens($indice,
-                                                    $lensFocalGroup,
-                                                    $generation,
-                                                    $sphereD,
-                                                    $cylindreD,
-                                                    $axeD,
-                                                    $additionD,
-                                                    $stock,
-                                                    $user_id,
-                                                    $panierA);
+                $lensFocalGroup,
+                $generation,
+                $sphereD,
+                $cylindreD,
+                $axeD,
+                $additionD,
+                $stock,
+                $user_id,
+                $panierA);
         echo json_encode($res);
 
     }
@@ -127,15 +127,15 @@ class admin
 
         $res =
             $this->m_passer_commande_verre->getlensAdminAll($indice,
-                                                            $lensFocalGroup,
-                                                            $generation,
-                                                            $sphereD,
-                                                            $cylindreD,
-                                                            $axeD,
-                                                            $additionD,
-                                                            $stock,
-                                                            $user_id,
-                                                            $panierA);
+                $lensFocalGroup,
+                $generation,
+                $sphereD,
+                $cylindreD,
+                $axeD,
+                $additionD,
+                $stock,
+                $user_id,
+                $panierA);
         echo json_encode($res);
 
     }
@@ -169,15 +169,15 @@ class admin
 
         $res =
             $this->m_passer_commande_verre->getstocklens($indice,
-                                                         $lensFocalGroup,
-                                                         $generation,
-                                                         $sphereD,
-                                                         $cylindreD,
-                                                         $axeD,
-                                                         $additionD,
-                                                         $stock,
-                                                         $user_id,
-                                                         $panierA);
+                $lensFocalGroup,
+                $generation,
+                $sphereD,
+                $cylindreD,
+                $axeD,
+                $additionD,
+                $stock,
+                $user_id,
+                $panierA);
         echo json_encode($res);
         //	}
         //	else
@@ -191,10 +191,10 @@ class admin
         $name_lens =
             $_POST['lens'];
         if (strpos($name_lens,
-                   'Mineral') !==
+                'Mineral') !==
             false ||
             strpos($name_lens,
-                   'Minéral') !==
+                'Minéral') !==
             false) {
             $res =
                 $this->m_passer_commande_verre->getColors($_POST['lens']);
@@ -212,10 +212,10 @@ class admin
         $name_lens =
             $_POST['lens'];
         if (strpos($name_lens,
-                   'Mineral') !==
+                'Mineral') !==
             false ||
             strpos($name_lens,
-                   'Minéral') !==
+                'Minéral') !==
             false) {
             $res =
                 $this->m_passer_commande_verre->getColorsWithPerso($_POST['lens']);
@@ -241,8 +241,8 @@ class admin
 
         $res =
             $this->m_passer_commande_verre->getDiametres($lens,
-                                                         $sphere,
-                                                         $cylindre);
+                $sphere,
+                $cylindre);
         echo json_encode($res);
 
     }
@@ -483,13 +483,16 @@ class admin
     public
     function getOptions_price($recovery = false)
     {
+
         $userId = $_POST['id_user'];
         $code =
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
-        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+//        var_dump($code);die;
 
+        $price = $this->m_traitement->calculPrice($nom_du_verre, $code, $userId);
+        //var_dump($price);die;
 
         //        if (strpos($nom_du_verre,
 //                   'Omega') !==
@@ -1065,14 +1068,14 @@ class admin
                 if ($data['nomverreDH'] !=
                     "") {
                     if (strpos($data['nomverreDH'],
-                               "Panier A") !==
+                            "Panier A") !==
                         false) {
                         $data['panierA_D'] =
                             1;
                     }
 
                     if (strpos($data['nomverreDH'],
-                               " - Stock") !==
+                            " - Stock") !==
                         false) {
                         //	$data['type_commandeD'] = 2;
                         $data['type_commande_verreD'] =
@@ -1095,14 +1098,14 @@ class admin
                     "") {
 
                     if (strpos($data['nomverreGH'],
-                               "Panier A") !==
+                            "Panier A") !==
                         false) {
                         $data['panierA_G'] =
                             1;
                     }
 
                     if (strpos($data['nomverreGH'],
-                               " - Stock") !==
+                            " - Stock") !==
                         false) {
                         //	$data['type_commandeG'] = 2;
                         $data['type_commande_verreG'] =
@@ -1123,14 +1126,14 @@ class admin
                 }
             } else {
                 if (strpos($data['nomverreDH'],
-                           "Panier A") !==
+                        "Panier A") !==
                     false) {
                     $data['panierA'] =
                         1;
                 }
 
                 if (strpos($data['nomverreDH'],
-                           " - Stock") !==
+                        " - Stock") !==
                     false) {
                     //$data['type_commandeD'] = 2;
                     $data['type_commande_verreD'] =
@@ -1183,8 +1186,8 @@ class admin
                 $this->m_taux_tva->get_tva();
             $data['tarif_livraison'] =
                 $userdata->tarif_livraison;
-            $data['tarif_packaging'] =
-                $userdata->tarif_packaging;
+            $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
+
             $prix_miroir = 7;
 
             $pair_order =
@@ -1192,8 +1195,8 @@ class admin
             if (isset($data['pair_order'])) {
                 $pair_order =
                     $this->m_commande->getCommandeByIdNew($data['pair_order'],
-                                                          $user['user_info']->id_users,
-                                                          true)[0];
+                        $user['user_info']->id_users,
+                        true)[0];
                 $pair_order_id =
                     $data['pair_order'];
                 //$data['type_commande'] = $pair_order->type_commande;
@@ -1516,12 +1519,12 @@ class admin
             }
             $data['prixDH'] =
                 str_replace("€",
-                            "",
-                            $data['prixDH']);
+                    "",
+                    $data['prixDH']);
             $data['prixGH'] =
                 str_replace("€",
-                            "",
-                            $data['prixGH']);
+                    "",
+                    $data['prixGH']);
 
             $data['prixUnitaireD'] =
                 $data['prixDH'] /
@@ -1892,7 +1895,7 @@ class admin
                 $data['prix_verre'] =
                     $data['prixUnitaireD'];
             } elseif ($unVerreG ==
-                      1) {
+                1) {
                 $data['prix_verre'] =
                     $data['prixUnitaireG'];
             } else {
@@ -1926,7 +1929,7 @@ class admin
 
                 $info_commande_pair =
                     json_decode($pair_order->information_commande,
-                                true);
+                        true);
 
                 if (isset($info_commande_pair["verre"]["correction_droit"]["traitement"])) {
                     $traitementD_paire =
@@ -1996,7 +1999,7 @@ class admin
 
                 $discount['amount'] =
                     $this->m_commande->getDiscountByOrderIdNew($data['pair_order_recap']['id_commande'],
-                                                               true);
+                        true);
                 /*	}
 					else
 					{
@@ -2048,7 +2051,7 @@ class admin
             }
 
             $this->session->set_userdata('order',
-                                         $data);
+                $data);
 
             $data['recap_commande'] =
                 $data;
@@ -2058,18 +2061,18 @@ class admin
                 $this->db->from('commande_montures_temp cm');
                 $this->db->select('m.*, cm.id as id_temp, cm.qty, cm.status, cm.id_client, collec.name as collection, m_pack.id as pack_id, m_pack.name as pack, m_pack.prix as prixpack');
                 $this->db->where('cm.id_client',
-                                 $data['id_users']);
+                    $data['id_users']);
                 $this->db->where('cm.status',
-                                 0);
+                    0);
                 $this->db->join('montures m',
-                                'm.id = cm.id_monture',
-                                'left');
+                    'm.id = cm.id_monture',
+                    'left');
                 $this->db->join('montures_collection collec',
-                                'm.id_collection = collec.id',
-                                'left');
+                    'm.id_collection = collec.id',
+                    'left');
                 $this->db->join('montures_pack m_pack',
-                                'm_pack.id = cm.id_pack',
-                                'left');
+                    'm_pack.id = cm.id_pack',
+                    'left');
                 $query =
                     $this->db->get();
                 if ($query->num_rows() >
@@ -2085,10 +2088,10 @@ class admin
                 if ($panierA_sans_monture !=
                     '1') {
                     $this->db->where('id',
-                                     1);
+                        1);
                     $this->db->set('flag',
-                                   1,
-                                   FALSE);
+                        1,
+                        FALSE);
                     $this->db->update('flag_monture');
                 }
 
@@ -2099,18 +2102,18 @@ class admin
                 $this->db->from('commande_montures_temp cm');
                 $this->db->select('m.*, cm.id as id_temp, cm.qty, cm.status, cm.id_client, collec.name as collection, m_pack.id as pack_id, m_pack.name as pack, m_pack.prix as prixpack');
                 $this->db->where('cm.id_client',
-                                 $data['id_users']);
+                    $data['id_users']);
                 $this->db->where('cm.status',
-                                 0);
+                    0);
                 $this->db->join('montures m',
-                                'm.id = cm.id_monture',
-                                'left');
+                    'm.id = cm.id_monture',
+                    'left');
                 $this->db->join('montures_collection collec',
-                                'm.id_collection = collec.id',
-                                'left');
+                    'm.id_collection = collec.id',
+                    'left');
                 $this->db->join('montures_pack m_pack',
-                                'm_pack.id = cm.id_pack',
-                                'left');
+                    'm_pack.id = cm.id_pack',
+                    'left');
                 $query =
                     $this->db->get();
                 if ($query->num_rows() >
@@ -2122,17 +2125,17 @@ class admin
                 }
 
                 $this->db->where('id',
-                                 1);
+                    1);
                 $this->db->set('flag',
-                               1,
-                               FALSE);
+                    1,
+                    FALSE);
                 $this->db->update('flag_monture');
             }
 
 //            var_dump($data['recap_commande']);die;
 
             echo $this->load->view('/admin/ajax_recap_commande',
-                                   $data);
+                $data);
 
         } else {
             $this->redirect();
@@ -2869,16 +2872,16 @@ class admin
 
             $query =
                 $this->db->query('SELECT * FROM verres WHERE id_generation_verre = ' .
-                                 $indice->id_generation_verre .
-                                 ' AND active = 1 AND id_indice_verre = ' .
-                                 $indice->id_indice_verre);
+                    $indice->id_generation_verre .
+                    ' AND active = 1 AND id_indice_verre = ' .
+                    $indice->id_indice_verre);
             $nom_verre =
                 $this->db->query('SELECT generation_verre FROM generation_verre WHERE id_generation_verre = ' .
-                                 $indice->id_generation_verre);
+                    $indice->id_generation_verre);
 
 
             echo $nom_verre->result()[0]->generation_verre .
-                 '<br /><br />';
+                '<br /><br />';
 
             // Tableau des verres en base
             foreach ($query->result()
@@ -2891,16 +2894,16 @@ class admin
 
                 if (false !==
                     strpos($verre,
-                           'Bifocaux')) {
+                        'Bifocaux')) {
                     $verre =
                         str_replace('Bifocaux Pastille 28',
-                                    '',
-                                    $verre);
+                            '',
+                            $verre);
                 } else {
                     $verre =
                         str_replace($nom_verre->result()[0]->generation_verre,
-                                    '',
-                                    $verre);
+                            '',
+                            $verre);
                 }
 
                 $verre =
@@ -2908,7 +2911,7 @@ class admin
 
                 $lib =
                     explode(' ',
-                            $verre);
+                        $verre);
                 $indice =
                     $lib[0];
 
@@ -2918,7 +2921,7 @@ class admin
                 unset($lib[0]);
                 $verre =
                     implode(' ',
-                            $lib);
+                        $lib);
 
 
                 $compare_verres[$result->id_verre] =
@@ -2937,7 +2940,7 @@ class admin
 
                 $verre_ids =
                     array_keys($compare_verres,
-                               $v);
+                        $v);
                 $defender_array =
                     array();
 
@@ -2955,21 +2958,21 @@ class admin
                         );
                     $verre_def =
                         str_replace('BlueCoat',
-                                    'BlueCoat Defender',
-                                    $compare_verres[$vid]);
+                            'BlueCoat Defender',
+                            $compare_verres[$vid]);
 
 
                     // Si le verre existe aussi en defender, on l'ajoute à la suite
                     if (strpos($verre_def,
-                               'BlueCoat Defender') !==
+                            'BlueCoat Defender') !==
                         false) {
 
                         if (in_array($verre_def,
-                                     $compare_verres)) {
+                            $compare_verres)) {
 
                             $def_id =
                                 array_search($verre_def,
-                                             $compare_verres);
+                                    $compare_verres);
 
                             $indice_verres[$def_id] =
                                 $indice_verres[$vid];
@@ -3015,7 +3018,7 @@ class admin
             $loop = 0;
 
             while ($loop <
-                   100) {
+                100) {
 
                 foreach (array_keys($defender_verres)
                          as
@@ -3048,19 +3051,19 @@ class admin
 
                 $verre =
                     explode('#',
-                            $v);
+                        $v);
 
                 echo $indice_verres[$verre[0]] .
-                     ' ' .
-                     $verre[1] .
-                     ' / Position ' .
-                     $position;
+                    ' ' .
+                    $verre[1] .
+                    ' / Position ' .
+                    $position;
                 echo '<br/>';
 
                 $this->db->where('id_verre',
-                                 $verre[0])
-                         ->update('verres',
-                                  array('ordre_verre' => $position))
+                    $verre[0])
+                    ->update('verres',
+                        array('ordre_verre' => $position))
                 ;
 
                 ++$position;
@@ -3080,11 +3083,11 @@ class admin
         $this->load->model('m_users');
 
         $date = date('m-Y',
-                     strtotime('last day of last month'));
+            strtotime('last day of last month'));
         $dateY = date('Y-m',
-                      strtotime('last day of last month'));
+            strtotime('last day of last month'));
         $datemonth = date('m',
-                          strtotime('last day of last month'));
+            strtotime('last day of last month'));
 
         $facture_client =
             $this->m_commande->getAllCommandeByMonthAndUser($date);
@@ -3117,9 +3120,9 @@ class admin
             => $facture_cli) {
                 $piece_jointe =
                     $this->generer_pdf_facture('facture',
-                                               $dateY,
-                                               $facture_cli->id_users,
-                                               false);
+                        $dateY,
+                        $facture_cli->id_users,
+                        false);
                 $piece_jointe =
                     $this->config->item('directory_pdf') .
                     "/" .
@@ -3137,12 +3140,12 @@ class admin
                     $month[$datemonth] .
                     " " .
                     date('Y',
-                         strtotime('last day of last month'));
+                        strtotime('last day of last month'));
                 $this->mail($data,
-                            $mess_txt,
-                            true,
-                            $subjet_txt,
-                            $piece_jointe);
+                    $mess_txt,
+                    true,
+                    $subjet_txt,
+                    $piece_jointe);
 
                 if (file_exists($piece_jointe)) {
                     unlink($piece_jointe);
@@ -3155,6 +3158,9 @@ class admin
     public
     function index()
     {
+        $data['caByDay'] =
+            $this->m_commande->getCaByDayOfMonth(date("Y-m"));
+        //var_dump($data);die;
         $data =
             $this->session->userdata('data_admin');
         $data['newUser'] =
@@ -3173,21 +3179,31 @@ class admin
             $this->m_commande->CAMensuel(date("m-Y"));
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
-                                         false);
-
-
-        $data['ca_journalier'] =
-            $ca_journalier[0]->ca_journalier +
-            $this->m_commande->getPackagingByDay();              //  - $this->m_commande->getSupplementByDay()
-        $data['ca_mensuel'] =
-            $ca_mensuel +
-            $this->m_commande->getPackagingByMonth(date("m-Y")); //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
+                false);
+//        var_dump(
+//            $ca_journalier
+//        );die;
+//        var_dump($ca_journalier);
+//        var_dump($ca_journalier_sans_livraison);
+//        var_dump($ca_mensuel);
+//        var_dump($ca_mensuel_sans_livraison);die;
         $data['packaging_mois'] =
             $this->m_commande->getPackagingByMonth(date("m-Y"));
+        $data['ca_journalier'] = $ca_journalier ?
+            $ca_journalier[0]->ca_journalier +
+            $this->m_commande->getPackagingByDay() : 0;              //  -
+            // $this->m_commande->getSupplementByDay()
+        $data['ca_mensuel'] =
+            $ca_mensuel +
+            $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
 
-        $data['ca_journalier_sans_livraison'] =
+//        var_dump($ca_mensuel);
+//        var_dump($ca_mensuel_sans_livraison);
+//        var_dump($data['packaging_mois']);
+//        die;
+        $data['ca_journalier_sans_livraison'] = $ca_journalier_sans_livraison ?
             $ca_journalier_sans_livraison[0]->ca_journalier -
-            $this->m_commande->getSupplementByDay();
+            $this->m_commande->getSupplementByDay() : 0;
         $data['supplement_jour'] =
             $this->m_commande->getSupplementByDay();
         $data['ca_mensuel_sans_livraison'] =
@@ -3206,12 +3222,12 @@ class admin
             $this->m_lens->getLensIncomesByMonth(date("Y-m"));
         $data['lens_day'] =
             $this->m_lens->getLensIncomesByDay(date("Y-m-d"));
-
         $data['montures_month'] =
             $this->m_montures->getMonturesIncomesByMonth(date("Y-m"));
         $data['montures_day'] =
             $this->m_montures->getMonturesIncomesByDay(date("Y-m-d"));
 
+        //var_dump($data);die;
         $data['CAmonth_Samuel'] =
             $this->m_commande->getCAmonth_Samuel(date("m-Y")) -
             $this->m_commande->getCAmonthSupplement_Samuel(date("m-Y"));
@@ -3244,9 +3260,8 @@ class admin
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
 
-
         $this->load->view('admin/dashboard',
-                          $data);
+            $data);
     }
 
     public
@@ -3275,7 +3290,7 @@ class admin
             $this->session->userdata('taux_tva');
 
         $this->load->view('admin/emails',
-                          $data);
+            $data);
     }
 
     public
@@ -3298,8 +3313,8 @@ class admin
         foreach ($files as $f)
         {
             if (preg_match("(_([0-9]{2})_([0-9]{2})_([0-9]{2})-([0-9]{2})-([0-9]{2}))",
-                           $f,
-                           $matches)) {
+                $f,
+                $matches)) {
                 preg_match_all('#[0-9]+#',$f,$extract);
                 $year = $extract[0][0];
                 $month = $extract[0][1];
@@ -3320,7 +3335,7 @@ class admin
 
 
         $this->load->view('admin/documents',
-                          $data);
+            $data);
 
     }
 
@@ -3349,10 +3364,10 @@ class admin
             $this->m_facture_reduction->reduction($data);
 
             echo number_format($data['totalFacture_reduct_facture'] -
-                               $data['reduction_facture'],
-                               2,
-                               '.',
-                               '');
+                $data['reduction_facture'],
+                2,
+                '.',
+                '');
         }
     }
 
@@ -3364,7 +3379,7 @@ class admin
                 $this->m_facture_reduction->getListReduction($this->input->post());
 
             echo $this->load->view('admin/ajax_list_reduction',
-                                   $data);
+                $data);
         }
     }
 
@@ -3377,10 +3392,10 @@ class admin
             $this->m_facture_reduction->delete_reduction($data);
 
             echo number_format($data['reduction'] +
-                               $data['totalFacture'],
-                               2,
-                               '.',
-                               '');
+                $data['totalFacture'],
+                2,
+                '.',
+                '');
         }
     }
 
@@ -3413,7 +3428,7 @@ class admin
                 $date;
 
             echo $this->load->view('admin/ajax_ca_journalier',
-                                   $data);
+                $data);
         }
     }
 
@@ -3437,7 +3452,7 @@ class admin
     function valid_prelevement()
     {
         $this->session->set_userdata('newUser',
-                                     false);
+            false);
 
         $data['parametre_lang_datable'] =
             $this->config->item('parametre_lang_datable');
@@ -3453,7 +3468,7 @@ class admin
         $data['page'] =
             "Validation Prélèvement";
         $this->load->view('admin/valid_prelevement',
-                          $data);
+            $data);
     }
 
     public
@@ -3475,9 +3490,9 @@ class admin
                 $data['email'] =
                     $email[0]->email;
                 $this->mail($data,
-                            $mess_txt,
-                            true,
-                            $sujet_txt);
+                    $mess_txt,
+                    true,
+                    $sujet_txt);
             }
         }
     }
@@ -3501,13 +3516,13 @@ class admin
                 if ($k ==
                     'tarif_packaging') {
                     $this->m_commande->updatePackaging($user,
-                                                       $v);
+                        $v);
                 }
 
                 if (!$this->m_users->updateUser(array(
-                                                    'id_users' => $user,
-                                                    $k => $v
-                                                ))) {
+                    'id_users' => $user,
+                    $k => $v
+                ))) {
                     ++$errors;
                 }
             }
@@ -3561,38 +3576,38 @@ class admin
 
 
                 $this->db->where('id_users',
-                                 $user);
+                    $user);
                 $this->db->set('Samuel',
-                               $data['Samuel'],
-                               FALSE);
+                    $data['Samuel'],
+                    FALSE);
                 $this->db->update('users');
 
                 $this->db->where('id_users',
-                                 $user);
+                    $user);
                 $this->db->set('Daniel',
-                               $data['Daniel'],
-                               FALSE);
+                    $data['Daniel'],
+                    FALSE);
                 $this->db->update('users');
 
                 $this->db->where('id_users',
-                                 $user);
+                    $user);
                 $this->db->set('Gregory',
-                               $data['Gregory'],
-                               FALSE);
+                    $data['Gregory'],
+                    FALSE);
                 $this->db->update('users');
 
                 $this->db->where('id_users',
-                                 $user);
+                    $user);
                 $this->db->set('Glenn',
-                               $data['Glenn'],
-                               FALSE);
+                    $data['Glenn'],
+                    FALSE);
                 $this->db->update('users');
 
                 $this->db->where('id_users',
-                                 $user);
+                    $user);
                 $this->db->set('Optical_Service',
-                               $data['Optical_Service'],
-                               FALSE);
+                    $data['Optical_Service'],
+                    FALSE);
                 $this->db->update('users');
             }
 
@@ -3622,9 +3637,9 @@ class admin
             {
 
                 if (!$this->m_users->updateUser(array(
-                                                    'id_users' => $user,
-                                                    $k => $v
-                                                ))) {
+                    'id_users' => $user,
+                    $k => $v
+                ))) {
                     ++$errors;
                 }
 
@@ -3645,9 +3660,9 @@ class admin
                 'optieyescommande@gmail.com';
 
             $this->mail($data,
-                        $mess_txt,
-                        true,
-                        $subject);
+                $mess_txt,
+                true,
+                $subject);
 
             echo $errors;
 
@@ -3672,11 +3687,11 @@ class admin
             $mail = trim($user[0]->email);
 
             if ($this->m_users->updateUser(array(
-                                               'id_users' => $user[0]->id_users,
-                                               'pass' => md5($mail .
-                                                             '&&' .
-                                                             $password)
-                                           ))) {
+                'id_users' => $user[0]->id_users,
+                'pass' => md5($mail .
+                    '&&' .
+                    $password)
+            ))) {
 
                 echo json_encode(array('status' => 'ok'));
 
@@ -3685,7 +3700,7 @@ class admin
                     <body><b>Bonjour</b>!
                     <br><br> 
                     Votre mot de passe a été modifié. Voici votre nouveau mot de passe : <b>" .
-                            $password . "</b>, il vous permet de vous connecter au site, converservez le précieusement.
+                    $password . "</b>, il vous permet de vous connecter au site, converservez le précieusement.
                     </body>
                 </html>";
 
@@ -3696,9 +3711,9 @@ class admin
                     $user[0]->email;
 
                 $this->mail($data,
-                            $mess_txt,
-                            true,
-                            $subjet_txt);
+                    $mess_txt,
+                    true,
+                    $subjet_txt);
 
 
             } else {
@@ -3736,8 +3751,8 @@ class admin
 
         if ($order =
             $this->m_commande->getCommandeById($order_id,
-                                               $id_users,
-                                               false)) {
+                $id_users,
+                false)) {
 
             $this->data['recap_commande'] =
                 $order[0];
@@ -3749,7 +3764,7 @@ class admin
                 $id_users;
 
             $this->load->view('admin/reorder',
-                              $this->data);
+                $this->data);
 
         } else {
             $this->redirect('/admin/valid_commande');
@@ -3787,15 +3802,15 @@ class admin
 
             if ($order_data =
                 $this->m_commande->getCommandeById($data['order_id'],
-                                                   $id_users,
-                                                   false)[0]) {
+                    $id_users,
+                    false)[0]) {
 
                 $order_data =
                     (array)$order_data;
 
                 $data_corrections =
                     json_decode($order_data['information_commande'],
-                                true);
+                        true);
 
                 if (isset($data_corrections['verre']['correction_droit'], $data_corrections['verre']['correction_gauche'])) {
                     $verres =
@@ -3868,17 +3883,17 @@ class admin
 
                     $day =
                         mktime(0,
-                               0,
-                               0,
-                               date('m'),
-                               date('d'),
-                               date('Y'));
+                            0,
+                            0,
+                            date('m'),
+                            date('d'),
+                            date('Y'));
                     $this->db->where(array(
-                                         'user_id' => $order_data['id_users'],
-                                         'day' => $day
-                                     ))
-                             ->update('user_sessions',
-                                      array('has_order' => 1))
+                        'user_id' => $order_data['id_users'],
+                        'day' => $day
+                    ))
+                        ->update('user_sessions',
+                            array('has_order' => 1))
                     ;
 
                     echo json_encode(array('status' => 'ok'));
@@ -3904,7 +3919,7 @@ class admin
                 $this->input->post();
             $data['nouveau_taux_tva'] =
                 ($data['taux_tva'] /
-                 100) + 1;
+                    100) + 1;
 
             unset($data['taux_tva']);
 
@@ -3912,6 +3927,279 @@ class admin
         }
     }
 
+    public
+    function valid_commentaire()
+    {
+        $data['newUser'] =
+            $this->session->userdata('newUser');
+        $data['parametre_lang_datable'] =
+            $this->config->item('parametre_lang_datable');
+        $data['parametre_export_datable'] =
+            $this->config->item('parametre_export_datable');
+
+        $result =
+            $this->m_users->getMaxUser();
+        $data['maxUser'] =
+            $result[0]->maxUser;
+
+        $data['page'] =
+        $data['title'] =
+            "Validation Commentaire";
+        $data['modules'] =
+            array(
+                'datatables' => true,
+                'datepicker' => true,
+                'sweetalert' => true
+            );
+        $this->load->view('admin/valid_commentaire',
+            $data);
+    }
+
+    public
+    function valid_commentaire_ajax()
+    {
+        if ($this->input->is_ajax_request()) {
+
+
+            $data = array();
+            $data['aaData'] =
+                array();
+//            $data_commandeOld =
+//                $this->m_commande->getAllCommande();
+            $data_commande =
+                $this->m_commande->getCommandeWithCommentaireNotConfirmed();
+
+//            $data_etiquette =
+//                $this->m_commande->getEtiquetteAlreadySet();
+
+            if ($data_commande !==
+                false) {
+                foreach ($data_commande
+                         as
+                         $key
+                => $commande)
+                {
+                    $d1 =
+                        new DateTime(date("Y-m-d H:i:s"));
+                    $d2 =
+                        new DateTime(date('Y-m-d H:i:s',
+                            strtotime($commande->date_commande .
+                                ' + 6 days')));
+                    $diff =
+                        $d1->diff($d2);
+                    $color =
+                        "ff3237"; //rouge
+
+                    if ($diff->invert ==
+                        0) {
+                        if ($diff->d >=
+                            5) {
+                            $color =
+                                "80c3cb";
+                        } //bleu
+                        elseif ($diff->d ==
+                            4) {
+                            $color =
+                                "019e59";
+                        } //vert
+                        elseif ($diff->d ==
+                            3 ||
+                            $diff->d ==
+                            2) {
+                            $color =
+                                "ffcc01";
+                        } //jaune
+                        elseif ($diff->d ==
+                            1) {
+                            $color =
+                                "ff7638";
+                        } //orange
+                    }
+
+
+                    $correction =
+                        json_decode($commande->information_commande,
+                            true);
+
+                    $commande_verres =
+                        '';
+                    $cl = '';
+
+                    if (isset($correction['verre']['correction_droit'])) {
+                        $commande_verres .= 'd';
+                    }
+                    if (isset($correction['verre']['correction_gauche'])) {
+                        $commande_verres .= 'g';
+                    }
+
+                    $rx = ' ';
+                    if ($commande->status_omega ==
+                        '1') {
+                        $rx =
+                            '<img src="/static/img/expediee.png" width="50">';
+                    }
+
+//                    if ($data_etiquette !==
+//                        false &&
+//                        (isset($data_etiquette[$commande->id_commande]['droit']) ||
+//                            isset($data_etiquette[$commande->id_commande]['gauche']))) {
+//                        $cl =
+//                            ' is_checked';
+//                    }
+
+                    switch ($commande->type_commande) {
+
+                        case 1:
+                            $prix_commande =
+                                $commande->total_commande .
+                                ' €';
+                            break;
+
+                        case 2:
+
+                            $prix_commande =
+                                '<del>' .
+                                $commande->total_commande .
+                                '</del> ' .
+                                ($commande->tarif_express >
+                                0 ?
+                                    $commande->tarif_express :
+                                    '0') .
+                                ' €<br />Casse atelier';
+                            break;
+
+                        case 3:
+                            $prix_commande =
+                                '<del>' .
+                                $commande->total_commande .
+                                '</del> ' .
+                                ($commande->tarif_express >
+                                0 ?
+                                    $commande->tarif_express :
+                                    '0') .
+                                ' €<br />Erreur ophta';
+                            break;
+                    }
+
+                    if ($commande->type_commande >
+                        1) {
+
+                        $ancienne_commande =
+                            '';
+
+                        if ($commande->ancienne_commande >
+                            0) {
+                            $ancienne_commande .= '<br />(CR' .
+                                $commande->ancienne_commande .
+                                '-' .
+                                $commande->id_users .
+                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                $commande->id_commande .
+                                '">Comparer</a>';
+                        }
+                        if ($commande->penalty !=
+                            1) {
+                            $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
+                                $commande->id_commande .
+                                '">Rejeter</a>';
+                        }
+                    } else {
+                        $ancienne_commande =
+                            '';
+                    }
+
+                    $data['aaData'][$key] =
+                        array(
+                            '<a ' .
+                            ($commande->tarif_express >
+                            0 ?
+                                'style="border: 10px solid #e42a2a !important"' :
+                                '') .
+                            ' class="commande-info btn btn-icon waves-effect waves-light ' .
+                            (!empty($commande->commentaire) ?
+                                'btn-warning tooltipster' :
+                                'btn-inverse') .
+                            '" data-toggle="modal" data-target="#detail-commande" rel="' .
+                            $commande->id_commande .
+                            '" ' .
+                            (!empty($commande->commentaire) ?
+                                'original-title="' .
+                                htmlentities($commande->commentaire) .
+                                '" title="' .
+                                htmlentities($commande->commentaire) .
+                                '"' :
+                                '') .
+                            ' ><i class="zmdi zmdi-' .
+                            (!empty($commande->commentaire) ?
+                                'comment' :
+                                'search') .
+                            '"></i> Voir</a>',
+                            'CR' .
+                            $commande->id_commande .
+                            '-' .
+                            $commande->id_users .
+                            $ancienne_commande,
+                            $commande->intitule_bl .
+                            '<br /><a class="btn btn-inverse btn-sm" id="button_nouvel_intitule_' .
+                            $commande->id_commande .
+                            '_' .
+                            $commande->id_users .
+                            '" data-toggle="modal" data-target="#edit-bl"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
+                            $commande->id_commande .
+                            '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
+                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+                            $commande->id_users .
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            date('d/m/Y H:i',
+                                strtotime($commande->date_commande)),
+                            $commande->reference_client,
+                            /*'<div class="checkbox"><input type="checkbox" id="expedier_'.$commande->id_commande.'_'.$commande->id_users.'" name="expedier_'.$commande->id_commande.'_'.$commande->id_users.'" /><label>'.($commande->date_annule !== null ? date('d/m/Y', strtotime($commande->date_annule)) : '').'</label></div>',
+                       '<a class="btn btn-default btn-sm" href="#" id="deleteOrder_'.$commande->id_commande.'" ><i class="zmdi zmdi-close"></i></a>',
+                       */
+//                                '<div class="checkbox checkbox-success checkbox-inline">
+//                                <input type="checkbox" value="' .
+//                                (!empty($commande->date_pointage) ?
+//                                    1 :
+//                                    0) .
+//                                '" id="pointage_' .
+//                                $commande->id_commande .
+//                                '" name="pointage_' .
+//                                $commande->id_commande .
+//                                '" ' .
+//                                (!empty($commande->date_pointage) ?
+//                                    'checked' :
+//                                    '') .
+//                                '/><label for="pointage_' .
+//                                $commande->id_commande .
+//                                '" id="pointage_date_' .
+//                                $commande->id_commande .
+//                                '">' .
+//                                (!empty($commande->date_pointage) ?
+//                                    date("d-m-Y",
+//                                        strtotime($commande->date_pointage)) :
+//                                    "") .
+//                                '</label></div>',
+                        '<a class="m-b-5 btn btn-danger btn-sm btn-block valid_commentaire' .
+                        $cl .
+                        '" data-commande="' .
+                        $commande->id_commande .
+                        '">Valider</a>',
+                        $commande->type_commande,
+                        ($commande->date_annule !==
+                        null ?
+                            1 :
+                            0)
+                    );
+
+//                    var_dump($data);die;
+                }
+            }
+//            var_dump($data);die;
+            die(json_encode($data));
+        } else {
+            $this->redirect("/index");
+        }
+    }
     public
     function valid_commande()
     {
@@ -3937,7 +4225,7 @@ class admin
                 'sweetalert' => true
             );
         $this->load->view('admin/valid_commande',
-                          $data);
+            $data);
     }
 
     public
@@ -3953,12 +4241,11 @@ class admin
                 $this->m_commande->getAllCommande();
             $data_commandeNew =
                 $this->m_commande->getAllCommandeNew();
-
             if (is_array($data_commandeOld)) {
                 if (is_array($data_commandeNew)) {
                     $data_commande =
                         array_merge($data_commandeNew,
-                                    $data_commandeOld);
+                            $data_commandeOld);
                 } else {
                     $data_commande =
                         $data_commandeOld;
@@ -3983,8 +4270,8 @@ class admin
                         new DateTime(date("Y-m-d H:i:s"));
                     $d2 =
                         new DateTime(date('Y-m-d H:i:s',
-                                          strtotime($commande->date_commande .
-                                                    ' + 6 days')));
+                            strtotime($commande->date_commande .
+                                ' + 6 days')));
                     $diff =
                         $d1->diff($d2);
                     $color =
@@ -3998,19 +4285,19 @@ class admin
                                 "80c3cb";
                         } //bleu
                         elseif ($diff->d ==
-                                4) {
+                            4) {
                             $color =
                                 "019e59";
                         } //vert
                         elseif ($diff->d ==
-                                3 ||
-                                $diff->d ==
-                                2) {
+                            3 ||
+                            $diff->d ==
+                            2) {
                             $color =
                                 "ffcc01";
                         } //jaune
                         elseif ($diff->d ==
-                                1) {
+                            1) {
                             $color =
                                 "ff7638";
                         } //orange
@@ -4019,7 +4306,7 @@ class admin
 
                     $correction =
                         json_decode($commande->information_commande,
-                                    true);
+                            true);
 
                     $commande_verres =
                         '';
@@ -4042,7 +4329,7 @@ class admin
                     if ($data_etiquette !==
                         false &&
                         (isset($data_etiquette[$commande->id_commande]['droit']) ||
-                         isset($data_etiquette[$commande->id_commande]['gauche']))) {
+                            isset($data_etiquette[$commande->id_commande]['gauche']))) {
                         $cl =
                             ' is_checked';
                     }
@@ -4062,7 +4349,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -4074,7 +4361,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -4090,18 +4377,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                                  $commande->ancienne_commande .
-                                                  '-' .
-                                                  $commande->id_users .
-                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Comparer</a>';
+                                $commande->ancienne_commande .
+                                '-' .
+                                $commande->id_users .
+                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                $commande->id_commande .
+                                '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Rejeter</a>';
+                                $commande->id_commande .
+                                '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -4130,7 +4417,7 @@ class admin
                             array(
                                 '<a ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4169,7 +4456,7 @@ class admin
                                 $commande->id_users .
                                 '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_commande)),
+                                    strtotime($commande->date_commande)),
                                 $commande->reference_client,
                                 $ispanier_A,
                                 '<span style="color:#' .
@@ -4204,7 +4491,7 @@ class admin
                                 '">' .
                                 (!empty($commande->date_pointage) ?
                                     date("d-m-Y",
-                                         strtotime($commande->date_pointage)) :
+                                        strtotime($commande->date_pointage)) :
                                     "") .
                                 '</label></div>',
                                 '<a class="m-b-5 btn btn-danger btn-sm btn-block valid_commande' .
@@ -4224,15 +4511,15 @@ class admin
                                     '<span class="certif_ico">C</span>' :
                                     '') .
                                 ($commande->date_annule !==
-                                 null ?
+                                null ?
                                     '<span class="highlight-yellow">' .
                                     date('d/m/Y',
-                                         strtotime($commande->date_annule)) .
+                                        strtotime($commande->date_annule)) .
                                     '</span>' :
                                     ''),
                                 $commande->type_commande,
                                 ($commande->date_annule !==
-                                 null ?
+                                null ?
                                     1 :
                                     0)
                             );
@@ -4241,7 +4528,7 @@ class admin
                             array(
                                 '<a ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4280,7 +4567,7 @@ class admin
                                 $commande->id_users .
                                 '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_commande)),
+                                    strtotime($commande->date_commande)),
                                 $commande->reference_client,
                                 $ispanier_A,
                                 '<span style="color:#' .
@@ -4315,7 +4602,7 @@ class admin
                                 '">' .
                                 (!empty($commande->date_pointage) ?
                                     date("d-m-Y",
-                                         strtotime($commande->date_pointage)) :
+                                        strtotime($commande->date_pointage)) :
                                     "") .
                                 '</label></div>',
                                 '<a class="m-b-5 btn btn-danger btn-sm btn-block valid_commande' .
@@ -4335,15 +4622,15 @@ class admin
                                     '<span class="certif_ico">C</span>' :
                                     '') .
                                 ($commande->date_annule !==
-                                 null ?
+                                null ?
                                     '<span class="highlight-yellow">' .
                                     date('d/m/Y',
-                                         strtotime($commande->date_annule)) .
+                                        strtotime($commande->date_annule)) .
                                     '</span>' :
                                     ''),
                                 $commande->type_commande,
                                 ($commande->date_annule !==
-                                 null ?
+                                null ?
                                     1 :
                                     0)
                             );
@@ -4375,7 +4662,7 @@ class admin
             $data['ancienne_commande'] =
                 $this->m_commande->getCommandeByIdNew($data['recap_commande'][0]->ancienne_commande);
             $this->load->view('admin/compare_commande',
-                              $data);
+                $data);
 
         }
     }
@@ -4402,8 +4689,8 @@ class admin
 
             // var_dump($data);
             $this->regenerate_xml_omega("seconde_omega",
-                                        $data['ref_seconde_omega'],
-                                        $data['id_commande_seconde_paire_omega']);
+                $data['ref_seconde_omega'],
+                $data['id_commande_seconde_paire_omega']);
             // $user = $this->m_users->getUserById($data['id_users']);
             // $data['email'] = $user[0]->email;
 
@@ -4422,8 +4709,8 @@ class admin
                 $this->input->post();
 
             $this->regenerate_xml_omega("commentaire_omega",
-                                        $data['commentaire_omega'],
-                                        $data['id_commande_commentaire_omega']);
+                $data['commentaire_omega'],
+                $data['id_commande_commentaire_omega']);
             // $user = $this->m_users->getUserById($data['id_users']);
             // $data['email'] = $user[0]->email;
 
@@ -4510,7 +4797,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                       date("Y-m-d\TH:i:sO") . '</dateTime> 
+                    date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -4536,12 +4823,12 @@ class admin
                         $teinteD ==
                         "") {
                         $remark .= 'Right tint: ' .
-                                   $information_commande->verre->correction_droit->teinte .
-                                   '.';
+                            $information_commande->verre->correction_droit->teinte .
+                            '.';
                     }
 
                     if (strpos($information_commande->verre->correction_droit->teinte,
-                               'CUST_') !==
+                            'CUST_') !==
                         false) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
@@ -4559,11 +4846,11 @@ class admin
                         $teinteG ==
                         "") {
                         $remark .= ' Left tint: ' .
-                                   $information_commande->verre->correction_gauche->teinte .
-                                   '.';
+                            $information_commande->verre->correction_gauche->teinte .
+                            '.';
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
-                               'CUST_') !==
+                            'CUST_') !==
                         false) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
@@ -4583,10 +4870,10 @@ class admin
                     if ($typechange ==
                         "commentaire_omega") {
                         $remark .= " " .
-                                   $change;
+                            $change;
                     } else {
                         $remark .= " " .
-                                   $commande->commentaire_omega;
+                            $commande->commentaire_omega;
                     }
                 }
 
@@ -4690,9 +4977,9 @@ class admin
 
                 $xml .= '
          <referenceNo>' .
-                        $commande->id_commande .
-                        '-' .
-                        $commande->id_users . '</referenceNo>
+                    $commande->id_commande .
+                    '-' .
+                    $commande->id_users . '</referenceNo>
          <manufacturer />';
 
                 if ($commande->premiere_commande !=
@@ -4711,14 +4998,14 @@ class admin
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                    $change . '</referenceNo>
+                                $change . '</referenceNo>
 			 </multiplePair>';
                         } else {
                             $xml .= '
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                    $commande->seconde_omega . '</referenceNo>
+                                $commande->seconde_omega . '</referenceNo>
 			 </multiplePair>';
                         }
                     } else {
@@ -4726,8 +5013,8 @@ class admin
 			 <secondPair>true</secondPair>
 			 <multiplePair>
 				<referenceNo>' .
-                                $commande->premiere_commande . "-" .
-                                $commande->id_users . '</referenceNo>
+                            $commande->premiere_commande . "-" .
+                            $commande->id_users . '</referenceNo>
 			 </multiplePair>';
                     }
                 }
@@ -5004,53 +5291,53 @@ class admin
 
                     $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                        $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_droit->sphere . '</sphere>
+                        $information_commande->verre->correction_droit->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_droit->cylindre . '</power>
+                        $information_commande->verre->correction_droit->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_droit->axe . '</axis>
+                        $information_commande->verre->correction_droit->axe . '</axis>
                   </cylinder>';
                     if (isset($information_commande->verre->correction_droit->addition)) {
                         $xml .= '<addition>' .
-                                $information_commande->verre->correction_droit->addition . '</addition>
+                            $information_commande->verre->correction_droit->addition . '</addition>
 						  ';
                     }
                     if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                         !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                         $xml .= '<prism>
 						 <power>' .
-                                $information_commande->verre->correction_droit->PrismeSphere . '</power>
+                            $information_commande->verre->correction_droit->PrismeSphere . '</power>
 						 <base>' .
-                                $information_commande->verre->correction_droit->PrismeCylindre . '</base>
+                            $information_commande->verre->correction_droit->PrismeCylindre . '</base>
 					  </prism>';
                     }
                     $xml .= '</rxData>';
                     //var_dump($information_commande);
                     if ((isset($information_commande->verre->correction_droit->traitement) &&
-                         !empty($information_commande->verre->correction_droit->traitement) &&
-                         ($information_commande->verre->correction_droit->traitement !=
-                          '700100' ||
-                          (($information_commande->verre->correction_droit->traitement ==
-                            '700100') &&
-                           (((strpos($commande->lensname,
-                                    '1.5') === false)) ||
-                            (strpos($commande->lensname,
-                                    '1.53') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.56') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.59') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Transition') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Polarisé') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Xtractive') !== false))
-                          ))) ||
+                            !empty($information_commande->verre->correction_droit->traitement) &&
+                            ($information_commande->verre->correction_droit->traitement !=
+                                '700100' ||
+                                (($information_commande->verre->correction_droit->traitement ==
+                                        '700100') &&
+                                    (((strpos($commande->lensname,
+                                                '1.5') === false)) ||
+                                        (strpos($commande->lensname,
+                                                '1.53') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.56') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.59') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Transition') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Polarisé') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Xtractive') !== false))
+                                ))) ||
                         $paA ==
                         "1") {
 
@@ -5063,7 +5350,7 @@ class admin
                         $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                            $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
 
                     }
@@ -5074,12 +5361,12 @@ class admin
                             $information_commande->verre->correction_droit->teinte !=
                             "" &&
                             strpos($information_commande->verre->correction_droit->teinte,
-                                   'CUST_') ===
+                                'CUST_') ===
                             false) {
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                $information_commande->verre->correction_droit->teinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5118,34 +5405,34 @@ class admin
                         !empty($information_commande->verre->ecart_puppillaire->droit)) {
                         $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->droit .
-                                '</monocularCentrationDistance>';
+                            $information_commande->verre->ecart_puppillaire->droit .
+                            '</monocularCentrationDistance>';
                     }
 
                     if (isset($information_commande->verre->hauteur) &&
                         !empty($information_commande->verre->hauteur)) {
                         $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $hauteurD .
-                                '</height>';
+                            $hauteurD .
+                            '</height>';
                     }
 
                     $xml .= '
                </centration>';
 
                     if (strpos($information_commande->verre->correction_droit->diametre,
-                               "/") !==
+                            "/") !==
                         false) {
                         $d1 =
                             explode("/",
-                                    $information_commande->verre->correction_droit->diametre);
+                                $information_commande->verre->correction_droit->diametre);
                         $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                            $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                            $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                     } else {
@@ -5156,7 +5443,7 @@ class admin
                             $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_droit->diametre . '</physical>
+                                $information_commande->verre->correction_droit->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                         }
@@ -5166,8 +5453,8 @@ class admin
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
+                            $information_commande->bord_verre->epaisseur .
+                            '</thickness>';
                     }
 
                     if (isset($information_commande->verre->ecart_puppillaire->droit) &&
@@ -5184,8 +5471,8 @@ class admin
                         $xml .= '
                   <curve>
                     <baseCurve>' .
-                    $information_commande->verre->correction_droit->galbe .
-                    '</baseCurve>
+                            $information_commande->verre->correction_droit->galbe .
+                            '</baseCurve>
                   </curve>';
                     }
                     $xml .= '
@@ -5197,19 +5484,19 @@ class admin
                 if (isset($information_commande->verre->correction_gauche)) {
                     $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                        $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_gauche->sphere . '</sphere>
+                        $information_commande->verre->correction_gauche->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_gauche->cylindre . '</power>
+                        $information_commande->verre->correction_gauche->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_gauche->axe . '</axis>
+                        $information_commande->verre->correction_gauche->axe . '</axis>
                   </cylinder>';
                     if (isset($information_commande->verre->correction_gauche->addition)) {
                         $xml .= '<addition>' .
-                                $information_commande->verre->correction_gauche->addition . '</addition>
+                            $information_commande->verre->correction_gauche->addition . '</addition>
 						  ';
                     }
 
@@ -5217,34 +5504,34 @@ class admin
                         !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                         $xml .= '<prism>
 						 <power>' .
-                                $information_commande->verre->correction_gauche->PrismeSphere . '</power>
+                            $information_commande->verre->correction_gauche->PrismeSphere . '</power>
 						 <base>' .
-                                $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
+                            $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
 					  </prism>';
                     }
 
                     $xml .= '</rxData>';
                     if ((isset($information_commande->verre->correction_gauche->traitement) &&
-                         !empty($information_commande->verre->correction_gauche->traitement) &&
-                         ($information_commande->verre->correction_gauche->traitement !=
-                          '700100' ||
-                          (($information_commande->verre->correction_gauche->traitement ==
-                            '700100') &&
-                           ((strpos($commande->lensname,
-                                    '1.5') === false) ||
-                            (strpos($commande->lensname,
-                                    '1.53') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.56') !== false) ||
-                            (strpos($commande->lensname,
-                                    '1.59') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Transition') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Polarisé') !== false) ||
-                               (strpos($commande->trad_fr,
-                                       'Xtractive') !== false))
-                          ))) ||
+                            !empty($information_commande->verre->correction_gauche->traitement) &&
+                            ($information_commande->verre->correction_gauche->traitement !=
+                                '700100' ||
+                                (($information_commande->verre->correction_gauche->traitement ==
+                                        '700100') &&
+                                    ((strpos($commande->lensname,
+                                                '1.5') === false) ||
+                                        (strpos($commande->lensname,
+                                                '1.53') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.56') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.59') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Transition') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Polarisé') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Xtractive') !== false))
+                                ))) ||
                         $paA ==
                         "1") {
 
@@ -5256,7 +5543,7 @@ class admin
                         $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                            $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
 
                     }
@@ -5267,12 +5554,12 @@ class admin
                             $information_commande->verre->correction_gauche->teinte !=
                             "" &&
                             strpos($information_commande->verre->correction_gauche->teinte,
-                                   'CUST_') ===
+                                'CUST_') ===
                             false) {
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                $information_commande->verre->correction_gauche->teinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5300,34 +5587,34 @@ class admin
                         !empty($information_commande->verre->ecart_puppillaire->gauche)) {
                         $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->gauche .
-                                '</monocularCentrationDistance>';
+                            $information_commande->verre->ecart_puppillaire->gauche .
+                            '</monocularCentrationDistance>';
                     }
 
                     if (isset($information_commande->verre->hauteur_gauche) &&
                         !empty($information_commande->verre->hauteur_gauche)) {
                         $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $hauteurG .
-                                '</height>';
+                            $hauteurG .
+                            '</height>';
                     }
 
                     $xml .= '
                </centration>';
 
                     if (strpos($information_commande->verre->correction_gauche->diametre,
-                               "/") !==
+                            "/") !==
                         false) {
                         $d1 =
                             explode("/",
-                                    $information_commande->verre->correction_gauche->diametre);
+                                $information_commande->verre->correction_gauche->diametre);
                         $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                            $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                            $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                     } else {
@@ -5338,7 +5625,7 @@ class admin
                             $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_gauche->diametre . '</physical>
+                                $information_commande->verre->correction_gauche->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                         }
@@ -5348,8 +5635,8 @@ class admin
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
+                            $information_commande->bord_verre->epaisseur .
+                            '</thickness>';
                     }
 
                     if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
@@ -5366,10 +5653,10 @@ class admin
                         $xml .= '
                   <curve>
                     <baseCurve>' .
-                    $information_commande->verre->correction_gauche->galbe .
-                    '</baseCurve>
+                            $information_commande->verre->correction_gauche->galbe .
+                            '</baseCurve>
                   </curve>';
-                        }
+                    }
                     $xml .= '
                </geometry>
             </lens>
@@ -5733,15 +6020,15 @@ class admin
                     }
 
                     $xml .= '<material>' .
-                            $monture_type . '</material>
+                        $monture_type . '</material>
 				   <boxWidth>' .
-                            $boxWidth . '</boxWidth>
+                        $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                            $boxHeight . '</boxHeight>
+                        $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                            $DBL . '</distanceBetweenLenses>
+                        $DBL . '</distanceBetweenLenses>
 				   ' .
-                            $calibre;
+                        $calibre;
                 }
                 $xml .= '
             	</frame>';
@@ -5755,9 +6042,9 @@ class admin
 
                 $CommandeOmega =
                     $this->m_commande->updateXMLCommandeOmega($commande->id_commande,
-                                                              $typechange,
-                                                              $change,
-                                                              $xml);
+                        $typechange,
+                        $change,
+                        $xml);
 
 
             }
@@ -5790,7 +6077,7 @@ class admin
                 'sweetalert' => true
             );
         $this->load->view('admin/edi_omega',
-                          $data);
+            $data);
     }
 
     public
@@ -5813,7 +6100,7 @@ class admin
                 'sweetalert' => true
             );
         $this->load->view('admin/edi_omega_expediee',
-                          $data);
+            $data);
     }
 
     public
@@ -5859,11 +6146,11 @@ class admin
                     }
 
                     $detail .= "<br>Nom du verre: <b>" .
-                               $commande->trad_fr .
-                               "</b>";
+                        $commande->trad_fr .
+                        "</b>";
                     $detail .= "<br>Indice: " .
-                               $commande->indice_verre .
-                               '';
+                        $commande->indice_verre .
+                        '';
 
                     $information_commande =
                         json_decode($commande->information_commande);
@@ -5871,16 +6158,16 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $detail .= "<br><br><b>OD:</b>";
                         $detail .= " " .
-                                   $information_commande->verre->correction_droit->sphere .
-                                   "";
+                            $information_commande->verre->correction_droit->sphere .
+                            "";
                         $detail .= " (" .
-                                   $information_commande->verre->correction_droit->cylindre .
-                                   ")";
+                            $information_commande->verre->correction_droit->cylindre .
+                            ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $detail .= " " .
-                                       $information_commande->verre->correction_droit->axe .
-                                       "°";
+                                $information_commande->verre->correction_droit->axe .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -5889,8 +6176,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                       $information_commande->verre->correction_droit->addition .
-                                       "";
+                                $information_commande->verre->correction_droit->addition .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -5899,8 +6186,8 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                       $information_commande->verre->correction_droit->addition .
-                                       "";
+                                $information_commande->verre->correction_droit->addition .
+                                "";
                         }
 
 
@@ -5911,30 +6198,30 @@ class admin
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $detail .= " " .
-                                       $information_commande->verre->correction_droit->PrismeSphere .
-                                       "Δ";
+                                $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                             $detail .= " base " .
-                                       $information_commande->verre->correction_droit->PrismeCylindre .
-                                       "°";
+                                $information_commande->verre->correction_droit->PrismeCylindre .
+                                "°";
 
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $detail .= " Galbe: " .
-                                       $information_commande->verre->correction_droit->galbe .
-                                       " ";
+                                $information_commande->verre->correction_droit->galbe .
+                                " ";
                         }
                         if (isset($information_commande->verre->correction_droit->traitement) &&
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                             $detail .= "<br>Traitement: " .
-                                       $traitementD .
-                                       "";
+                                $traitementD .
+                                "";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -5942,22 +6229,22 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                           $teinteD .
-                                           "</b>";
+                                    $teinteD .
+                                    "</b>";
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                               $information_commande->verre->correction_droit->teinte .
-                                               "</b>";
+                                        $information_commande->verre->correction_droit->teinte .
+                                        "</b>";
                                 }
                             }
                         }
                         if (isset($information_commande->verre->correction_droit->diametre) &&
                             !empty($information_commande->verre->correction_droit->diametre)) {
                             $detail .= "<br>Diametre: " .
-                                       $information_commande->verre->correction_droit->diametre .
-                                       "";
+                                $information_commande->verre->correction_droit->diametre .
+                                "";
 
                         }
 
@@ -5966,17 +6253,17 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $detail .= "<br><br><b>OG:</b>";
                         $detail .= " " .
-                                   $information_commande->verre->correction_gauche->sphere .
-                                   "";
+                            $information_commande->verre->correction_gauche->sphere .
+                            "";
                         $detail .= " (" .
-                                   $information_commande->verre->correction_gauche->cylindre .
-                                   ")";
+                            $information_commande->verre->correction_gauche->cylindre .
+                            ")";
 
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $detail .= " " .
-                                       $information_commande->verre->correction_gauche->axe .
-                                       "°";
+                                $information_commande->verre->correction_gauche->axe .
+                                "°";
                         }
                         /*if(isset($information_commande->verre->correction_gauche->addition) && $information_commande->verre->correction_gauche->addition != "0.00")
                 			$detail .=" ".$information_commande->verre->correction_gauche->addition."</b>";*/
@@ -5987,8 +6274,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                       $information_commande->verre->correction_gauche->addition .
-                                       "";
+                                $information_commande->verre->correction_gauche->addition .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -5997,28 +6284,28 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                       $information_commande->verre->correction_gauche->addition .
-                                       "";
+                                $information_commande->verre->correction_gauche->addition .
+                                "";
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $detail .= " " .
-                                       $information_commande->verre->correction_gauche->PrismeSphere .
-                                       "Δ";
+                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $detail .= " base  " .
-                                       $information_commande->verre->correction_gauche->PrismeCylindre .
-                                       "°";
+                                $information_commande->verre->correction_gauche->PrismeCylindre .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $detail .= " Galbe: " .
-                                       $information_commande->verre->correction_gauche->galbe .
-                                       " ";
+                                $information_commande->verre->correction_gauche->galbe .
+                                " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -6026,8 +6313,8 @@ class admin
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                             $detail .= "<br>Traitement: " .
-                                       $traitementG .
-                                       "";
+                                $traitementG .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -6036,20 +6323,20 @@ class admin
                             if ($teinteG !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                           $teinteG .
-                                           "</b>";
+                                    $teinteG .
+                                    "</b>";
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                               $information_commande->verre->correction_gauche->teinte .
-                                               "</b>";
+                                        $information_commande->verre->correction_gauche->teinte .
+                                        "</b>";
                                 }
                             }
                         }
                         $detail .= "<br>Diametre: " .
-                                   $information_commande->verre->correction_gauche->diametre .
-                                   "";
+                            $information_commande->verre->correction_gauche->diametre .
+                            "";
 
                     }
 
@@ -6057,19 +6344,19 @@ class admin
                         0;
 
                     if ((isset($information_commande->verre->correction_droit) &&
-                         $information_commande->verre->correction_droit->diametre ==
-                         'precalibrage') ||
+                            $information_commande->verre->correction_droit->diametre ==
+                            'precalibrage') ||
                         (isset($information_commande->verre->correction_gauche) &&
-                         $information_commande->verre->correction_gauche->diametre ==
-                         'precalibrage')) {
+                            $information_commande->verre->correction_gauche->diametre ==
+                            'precalibrage')) {
                         $precal =
                             1;
                         $detail .= '<br><br><b>Précalibrage:</b> <br>';
 
                         if (isset($information_commande->precalibrage)) {
                             $detail .= '<br><img src="/static/img/calibre/' .
-                                       $information_commande->precalibrage->calibre .
-                                       '.jpg" width="150" heigth="70" /><br>';
+                                $information_commande->precalibrage->calibre .
+                                '.jpg" width="150" heigth="70" /><br>';
                         }
 
                         $mesure_freeform_opt =
@@ -6103,43 +6390,43 @@ class admin
 
                         if (isset($information_commande->monture->type)) {
                             $detail .= 'Type monture: ' .
-                                       $information_commande->monture->type .
-                                       '<br>';
+                                $information_commande->monture->type .
+                                '<br>';
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $detail .= 'EP au bord minimum: ' .
-                                       $information_commande->bord_verre->epaisseur .
-                                       '<br>';
+                                $information_commande->bord_verre->epaisseur .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $detail .= 'Ecart puppillaire droit: ' .
-                                       $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                                       '<br>';
+                                $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $detail .= 'Ecart puppillaire gauche: ' .
-                                       $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                                       '<br>';
+                                $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $detail .= 'Hauteur de montage droit: ' .
-                                       $information_commande->mesure_freeform->hauteur .
-                                       '<br>';
+                                $information_commande->mesure_freeform->hauteur .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $detail .= 'Hauteur de montage gauche: ' .
-                                       $information_commande->mesure_freeform->hauteur_gauche .
-                                       '<br>';
+                                $information_commande->mesure_freeform->hauteur_gauche .
+                                '<br>';
                         }
 
                     }
@@ -6153,18 +6440,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                                  $commande->ancienne_commande .
-                                                  '-' .
-                                                  $commande->id_users .
-                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Comparer</a>';
+                                $commande->ancienne_commande .
+                                '-' .
+                                $commande->id_users .
+                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                $commande->id_commande .
+                                '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Rejeter</a>';
+                                $commande->id_commande .
+                                '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -6192,7 +6479,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -6204,7 +6491,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -6214,7 +6501,7 @@ class admin
                     $infos =
                         "Date: <b>" .
                         date('d/m/Y H:i',
-                             strtotime($commande->date_commande)) .
+                            strtotime($commande->date_commande)) .
                         "</b><br>Ref.&nbsp;Optieyes: <b>" .
                         $ref_optieyes .
                         "</b><br>Ref. client: <b>" .
@@ -6230,47 +6517,47 @@ class admin
                     if ($commande->commentaire !=
                         "") {
                         $infos .= "<br><br>Commentaires client: <b><br>" .
-                                  $commande->commentaire .
-                                  "</b>";
+                            $commande->commentaire .
+                            "</b>";
                     }
 
                     if ($commande->commentaire_omega !=
                         "") {
                         $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                                  $commande->commentaire_omega .
-                                  '</b>';
+                            $commande->commentaire_omega .
+                            '</b>';
                     }
 
                     $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                              $commande->id_commande .
-                              '_' .
-                              $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                        $commande->id_commande .
+                        '_' .
+                        $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                     if ($commande->seconde_omega !=
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                  $commande->seconde_omega .
-                                  "</b>";
+                            $commande->seconde_omega .
+                            "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                  $commande->id_commande .
-                                  '_' .
-                                  $commande->id_users .
-                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                            $commande->id_commande .
+                            '_' .
+                            $commande->id_users .
+                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     } else {
                         if ($commande->premiere_commande !=
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                      $commande->premiere_commande .
-                                      "-" .
-                                      $commande->id_users .
-                                      "</b>";
+                                $commande->premiere_commande .
+                                "-" .
+                                $commande->id_users .
+                                "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                      $commande->id_commande .
-                                      '_' .
-                                      $commande->id_users .
-                                      '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                $commande->id_commande .
+                                '_' .
+                                $commande->id_users .
+                                '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                         }
 
                     }
@@ -6332,19 +6619,19 @@ class admin
                     }
 
                     $detail .= "<br>Nom du verre: <b>" .
-                               $commande->trad_fr .
-                               "</b>";
+                        $commande->trad_fr .
+                        "</b>";
                     $detail .= "<br>Indice: " .
-                               $commande->indice_verre .
-                               '';
+                        $commande->indice_verre .
+                        '';
 
                     if ($commande->premiere_commande !=
                         '0') {
                         $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
-                                     $commande->premiere_commande .
-                                     "-" .
-                                     $commande->id_users .
-                                     "<br>";
+                            $commande->premiere_commande .
+                            "-" .
+                            $commande->id_users .
+                            "<br>";
                     }
 
                     if ($commande->tarif_express !=
@@ -6353,16 +6640,16 @@ class admin
                     }
 
                     $textarea .= "Optieyes reference: " .
-                                 $commande->id_commande .
-                                 "-" .
-                                 $commande->id_users;
+                        $commande->id_commande .
+                        "-" .
+                        $commande->id_users;
                     $textarea .= "<br><br>Lens Code: " .
-                                 $commande->lenscode;
+                        $commande->lenscode;
                     $textarea .= "<br>Lens Name: " .
-                                 $commande->lensname;
+                        $commande->lensname;
 
                     $textarea .= "<br><br>Optical Index: " .
-                                 $commande->indice_verre;
+                        $commande->indice_verre;
 
 
                     $information_commande =
@@ -6371,16 +6658,16 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $detail .= "<br><br><b>OD :</b>";
                         $detail .= " " .
-                                   $information_commande->verre->correction_droit->sphere .
-                                   " ";
+                            $information_commande->verre->correction_droit->sphere .
+                            " ";
                         $detail .= "(" .
-                                   $information_commande->verre->correction_droit->cylindre .
-                                   ")";
+                            $information_commande->verre->correction_droit->cylindre .
+                            ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $detail .= " " .
-                                       $information_commande->verre->correction_droit->axe .
-                                       "°";
+                                $information_commande->verre->correction_droit->axe .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6389,8 +6676,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD " .
-                                       $information_commande->verre->correction_droit->addition .
-                                       "";
+                                $information_commande->verre->correction_droit->addition .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6399,29 +6686,29 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG " .
-                                       $information_commande->verre->correction_droit->addition .
-                                       "";
+                                $information_commande->verre->correction_droit->addition .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $detail .= " " .
-                                       $information_commande->verre->correction_droit->PrismeSphere .
-                                       "Δ";
+                                $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                             $detail .= " base " .
-                                       $information_commande->verre->correction_droit->PrismeCylindre .
-                                       "°";
+                                $information_commande->verre->correction_droit->PrismeCylindre .
+                                "°";
 
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $detail .= " Galbe: " .
-                                       $information_commande->verre->correction_droit->galbe .
-                                       " ";
+                                $information_commande->verre->correction_droit->galbe .
+                                " ";
                         }
 
                         if (isset($information_commande->verre->correction_droit->traitement) &&
@@ -6429,8 +6716,8 @@ class admin
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                             $detail .= "<br>Traitement: " .
-                                       $traitementD .
-                                       "";
+                                $traitementD .
+                                "";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6438,36 +6725,36 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                           $teinteD .
-                                           "</b>";
+                                    $teinteD .
+                                    "</b>";
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                               $information_commande->verre->correction_droit->teinte .
-                                               "</b>";
+                                        $information_commande->verre->correction_droit->teinte .
+                                        "</b>";
                                 }
                             }
                         }
                         if (isset($information_commande->verre->correction_droit->diametre) &&
                             !empty($information_commande->verre->correction_droit->diametre)) {
                             $detail .= "<br>Diametre: " .
-                                       $information_commande->verre->correction_droit->diametre .
-                                       "";
+                                $information_commande->verre->correction_droit->diametre .
+                                "";
 
                         }
 
                         $textarea .= "<br><br>OD :";
                         $textarea .= "  " .
-                                     $information_commande->verre->correction_droit->sphere;
+                            $information_commande->verre->correction_droit->sphere;
                         $textarea .= " ( " .
-                                     $information_commande->verre->correction_droit->cylindre .
-                                     ")";
+                            $information_commande->verre->correction_droit->cylindre .
+                            ")";
                         if ($information_commande->verre->correction_droit->axe !=
                             "0.00") {
                             $textarea .= "  " .
-                                         $information_commande->verre->correction_droit->axe .
-                                         "°";
+                                $information_commande->verre->correction_droit->axe .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6476,7 +6763,7 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $textarea .= " ADD  " .
-                                         $information_commande->verre->correction_droit->addition;
+                                $information_commande->verre->correction_droit->addition;
                         }
 
                         if (isset($information_commande->verre->correction_droit->addition) &&
@@ -6485,7 +6772,7 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $textarea .= " DEG  " .
-                                         $information_commande->verre->correction_droit->addition;
+                                $information_commande->verre->correction_droit->addition;
                         }
 
 
@@ -6493,50 +6780,50 @@ class admin
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
 
                             $textarea .= "  " .
-                                         $information_commande->verre->correction_droit->PrismeSphere .
-                                         "Δ";
+                                $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ";
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
 
                             $textarea .= " base " .
-                                         $information_commande->verre->correction_droit->PrismeCylindre .
-                                         "°";
+                                $information_commande->verre->correction_droit->PrismeCylindre .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
                             $textarea .= " Galbe: " .
-                                         $information_commande->verre->correction_droit->galbe .
-                                         " ";
+                                $information_commande->verre->correction_droit->galbe .
+                                " ";
                         }
                         if (isset($information_commande->verre->correction_droit->traitement) &&
                             !empty($information_commande->verre->correction_droit->traitement) &&
                             ($information_commande->verre->correction_droit->traitement !=
-                             '700100' ||
-                             (($information_commande->verre->correction_droit->traitement ==
-                               '700100') &&
-                              ((strpos($commande->lensname,
-                                       '1.5') === false) ||
-                               (strpos($commande->lensname,
-                                       '1.53') !== false) ||
-                               (strpos($commande->lensname,
-                                       '1.56') !== false) ||
-                               (strpos($commande->lensname,
-                                       '1.59') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Transition') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Polarisé') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Xtractive') !== false))
-                             ))) {
+                                '700100' ||
+                                (($information_commande->verre->correction_droit->traitement ==
+                                        '700100') &&
+                                    ((strpos($commande->lensname,
+                                                '1.5') === false) ||
+                                        (strpos($commande->lensname,
+                                                '1.53') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.56') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.59') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Transition') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Polarisé') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Xtractive') !== false))
+                                ))) {
                             if ($traitementD !=
                                 "") {
                                 $textarea .= "<br>Coating code: " .
-                                             $information_commande->verre->correction_droit->traitement .
-                                             "(" .
-                                             $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
-                                             ")";
+                                    $information_commande->verre->correction_droit->traitement .
+                                    "(" .
+                                    $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
+                                    ")";
                             }
                         }
 
@@ -6544,12 +6831,12 @@ class admin
                             if ($teinteD !=
                                 "") {
                                 $textarea .= "<br>Tint: " .
-                                             $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
                             } else {
                                 if ($information_commande->verre->correction_droit->teinte !=
                                     "") {
                                     $textarea .= "<br>Custom Tint: " .
-                                                 $information_commande->verre->correction_droit->teinte;
+                                        $information_commande->verre->correction_droit->teinte;
                                 }
                             }
                         }
@@ -6559,7 +6846,7 @@ class admin
                             $information_commande->verre->correction_droit->diametre !=
                             "precalibrage") {
                             $textarea .= "<br>Diameter physical: " .
-                                         $information_commande->verre->correction_droit->diametre;
+                                $information_commande->verre->correction_droit->diametre;
                         }
 
 
@@ -6568,16 +6855,16 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $detail .= "<br><br><b>OG :</b>";
                         $detail .= " " .
-                                   $information_commande->verre->correction_gauche->sphere .
-                                   "";
+                            $information_commande->verre->correction_gauche->sphere .
+                            "";
                         $detail .= " (" .
-                                   $information_commande->verre->correction_gauche->cylindre .
-                                   ")";
+                            $information_commande->verre->correction_gauche->cylindre .
+                            ")";
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $detail .= "  " .
-                                       $information_commande->verre->correction_gauche->axe .
-                                       "°";
+                                $information_commande->verre->correction_gauche->axe .
+                                "°";
                         }
                         if (isset($information_commande->verre->correction_gauche->addition) &&
                             $information_commande->verre->correction_gauche->addition !=
@@ -6585,8 +6872,8 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $detail .= " ADD  " .
-                                       $information_commande->verre->correction_gauche->addition .
-                                       "";
+                                $information_commande->verre->correction_gauche->addition .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -6595,28 +6882,28 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $detail .= " DEG  " .
-                                       $information_commande->verre->correction_gauche->addition .
-                                       "";
+                                $information_commande->verre->correction_gauche->addition .
+                                "";
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $detail .= " " .
-                                       $information_commande->verre->correction_gauche->PrismeSphere .
-                                       "Δ";
+                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $detail .= " base  " .
-                                       $information_commande->verre->correction_gauche->PrismeCylindre .
-                                       "°";
+                                $information_commande->verre->correction_gauche->PrismeCylindre .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $detail .= " Galbe: " .
-                                       $information_commande->verre->correction_gauche->galbe .
-                                       " ";
+                                $information_commande->verre->correction_gauche->galbe .
+                                " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -6624,8 +6911,8 @@ class admin
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                             $detail .= "<br>Traitement: " .
-                                       $traitementG .
-                                       "";
+                                $traitementG .
+                                "";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -6634,32 +6921,32 @@ class admin
                             if ($teinteG !=
                                 "") {
                                 $detail .= "<br>Teinte: <b>" .
-                                           $teinteG .
-                                           "</b>";
+                                    $teinteG .
+                                    "</b>";
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $detail .= "<br>Teinte personnalisée: <b>" .
-                                               $information_commande->verre->correction_gauche->teinte .
-                                               "</b>";
+                                        $information_commande->verre->correction_gauche->teinte .
+                                        "</b>";
                                 }
                             }
                         }
                         $detail .= "<br>Diametre: " .
-                                   $information_commande->verre->correction_gauche->diametre .
-                                   "";
+                            $information_commande->verre->correction_gauche->diametre .
+                            "";
 
                         $textarea .= "<br><br>OG:";
                         $textarea .= "  " .
-                                     $information_commande->verre->correction_gauche->sphere;
+                            $information_commande->verre->correction_gauche->sphere;
                         $textarea .= " (" .
-                                     $information_commande->verre->correction_gauche->cylindre .
-                                     ")";
+                            $information_commande->verre->correction_gauche->cylindre .
+                            ")";
                         if ($information_commande->verre->correction_gauche->axe !=
                             "0.00") {
                             $textarea .= "  " .
-                                         $information_commande->verre->correction_gauche->axe .
-                                         "°";
+                                $information_commande->verre->correction_gauche->axe .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -6668,7 +6955,7 @@ class admin
                             $commande->id_generation_verre !=
                             34) {
                             $textarea .= " ADD  " .
-                                         $information_commande->verre->correction_gauche->addition;
+                                $information_commande->verre->correction_gauche->addition;
                         }
                         if (isset($information_commande->verre->correction_gauche->addition) &&
                             $information_commande->verre->correction_gauche->addition !=
@@ -6676,65 +6963,65 @@ class admin
                             $commande->id_generation_verre ==
                             34) {
                             $textarea .= " DEG  " .
-                                         $information_commande->verre->correction_gauche->addition;
+                                $information_commande->verre->correction_gauche->addition;
                         }
 
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $textarea .= " " .
-                                         $information_commande->verre->correction_gauche->PrismeSphere .
-                                         "Δ";
+                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $textarea .= " base  " .
-                                         $information_commande->verre->correction_gauche->PrismeSphere .
-                                         "°";
+                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                "°";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
                             $textarea .= " Galbe: " .
-                                         $information_commande->verre->correction_gauche->galbe .
-                                         " ";
+                                $information_commande->verre->correction_gauche->galbe .
+                                " ";
                         }
                         if (isset($information_commande->verre->correction_gauche->traitement) &&
                             !empty($information_commande->verre->correction_gauche->traitement) &&
                             ($information_commande->verre->correction_gauche->traitement !=
-                             '700100' ||
-                             (($information_commande->verre->correction_gauche->traitement ==
-                               '700100') &&
-                              ((strpos($commande->lensname,
-                                       '1.5') === false) ||
-                               (strpos($commande->lensname,
-                                       '1.53') !== false) ||
-                               (strpos($commande->lensname,
-                                       '1.56') !== false) ||
-                               (strpos($commande->lensname,
-                                       '1.59') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Transition') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Polarisé') !== false) ||
-                                  (strpos($commande->trad_fr,
-                                          'Xtractive') !== false))
-                             ))) {
+                                '700100' ||
+                                (($information_commande->verre->correction_gauche->traitement ==
+                                        '700100') &&
+                                    ((strpos($commande->lensname,
+                                                '1.5') === false) ||
+                                        (strpos($commande->lensname,
+                                                '1.53') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.56') !== false) ||
+                                        (strpos($commande->lensname,
+                                                '1.59') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Transition') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Polarisé') !== false) ||
+                                        (strpos($commande->trad_fr,
+                                                'Xtractive') !== false))
+                                ))) {
                             $textarea .= "<br>Coating code: " .
-                                         $information_commande->verre->correction_gauche->traitement .
-                                         "(" .
-                                         $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
-                                         ")";
+                                $information_commande->verre->correction_gauche->traitement .
+                                "(" .
+                                $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
+                                ")";
                         }
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
                                 "") {
                                 $textarea .= "<br>Tint: " .
-                                             $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
                             } else {
                                 if ($information_commande->verre->correction_gauche->teinte !=
                                     "") {
                                     $textarea .= "<br>Custom Tint: " .
-                                                 $information_commande->verre->correction_gauche->teinte;
+                                        $information_commande->verre->correction_gauche->teinte;
                                 }
                             }
                         }
@@ -6744,7 +7031,7 @@ class admin
                             $information_commande->verre->correction_gauche->diametre !=
                             "precalibrage") {
                             $textarea .= "<br>Diameter physical: " .
-                                         $information_commande->verre->correction_gauche->diametre;
+                                $information_commande->verre->correction_gauche->diametre;
                         }
 
                     }
@@ -6753,19 +7040,19 @@ class admin
                         0;
 
                     if ((isset($information_commande->verre->correction_droit) &&
-                         $information_commande->verre->correction_droit->diametre ==
-                         'precalibrage') ||
+                            $information_commande->verre->correction_droit->diametre ==
+                            'precalibrage') ||
                         (isset($information_commande->verre->correction_gauche) &&
-                         $information_commande->verre->correction_gauche->diametre ==
-                         'precalibrage')) {
+                            $information_commande->verre->correction_gauche->diametre ==
+                            'precalibrage')) {
                         $precal =
                             1;
                         $detail .= '<br><br><b>Précalibrage:</b> <br>';
 
                         if (isset($information_commande->precalibrage)) {
                             $detail .= '<br><img src="/static/img/calibre/' .
-                                       $information_commande->precalibrage->calibre .
-                                       '.jpg" width="150" heigth="70" /><br>';
+                                $information_commande->precalibrage->calibre .
+                                '.jpg" width="150" heigth="70" /><br>';
                         }
 
                         $mesure_freeform_opt =
@@ -6799,43 +7086,43 @@ class admin
 
                         if (isset($information_commande->monture->type)) {
                             $detail .= 'Type monture: ' .
-                                       $information_commande->monture->type .
-                                       '<br>';
+                                $information_commande->monture->type .
+                                '<br>';
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $detail .= 'EP au bord minimum: ' .
-                                       $information_commande->bord_verre->epaisseur .
-                                       '<br>';
+                                $information_commande->bord_verre->epaisseur .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $detail .= 'Ecart puppillaire droit: ' .
-                                       $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                                       '<br>';
+                                $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $detail .= 'Ecart puppillaire gauche: ' .
-                                       $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                                       '<br>';
+                                $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $detail .= 'Hauteur de montage droit: ' .
-                                       $information_commande->mesure_freeform->hauteur .
-                                       '<br>';
+                                $information_commande->mesure_freeform->hauteur .
+                                '<br>';
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $detail .= 'Hauteur de montage gauche: ' .
-                                       $information_commande->mesure_freeform->hauteur_gauche .
-                                       '<br>';
+                                $information_commande->mesure_freeform->hauteur_gauche .
+                                '<br>';
                         }
 
 
@@ -6844,66 +7131,66 @@ class admin
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                             $textarea .= "<br>PD right: " .
-                                         $information_commande->mesure_freeform->ecart_puppillaire_droit;
+                                $information_commande->mesure_freeform->ecart_puppillaire_droit;
                         }
                         if (isset($information_commande->mesure_freeform->hauteur) &&
                             !empty($information_commande->mesure_freeform->hauteur)) {
                             $textarea .= "<br>Height right: " .
-                                         $information_commande->mesure_freeform->hauteur;
+                                $information_commande->mesure_freeform->hauteur;
                         }
 
                         if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                             !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                             $textarea .= "<br>PD left: " .
-                                         $information_commande->mesure_freeform->ecart_puppillaire_gauche;
+                                $information_commande->mesure_freeform->ecart_puppillaire_gauche;
                         }
                         if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                             !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                             $textarea .= "<br>Height left: " .
-                                         $information_commande->mesure_freeform->hauteur_gauche;
+                                $information_commande->mesure_freeform->hauteur_gauche;
                         }
 
                         if (isset($information_commande->bord_verre->epaisseur) &&
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $textarea .= "<br>Minimal edge thickn.: " .
-                                         $information_commande->bord_verre->epaisseur;
+                                $information_commande->bord_verre->epaisseur;
                         }
 
                         if (isset($information_commande->mesure_freeform->taille_du_pont) &&
                             !empty($information_commande->mesure_freeform->taille_du_pont)) {
                             $textarea .= "<br>DBL: " .
-                                         $information_commande->mesure_freeform->taille_du_pont;
+                                $information_commande->mesure_freeform->taille_du_pont;
                         }
 
                         if (isset($information_commande->mesure_freeform->largeur_boxing) &&
                             !empty($information_commande->mesure_freeform->largeur_boxing)) {
                             $textarea .= "<br>Boxing width: " .
-                                         $information_commande->mesure_freeform->largeur_boxing;
+                                $information_commande->mesure_freeform->largeur_boxing;
                         }
 
                         if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
                             !empty($information_commande->mesure_freeform->hauteur_boxing)) {
                             $textarea .= "<br>Boxing height: " .
-                                         $information_commande->mesure_freeform->hauteur_boxing;
+                                $information_commande->mesure_freeform->hauteur_boxing;
                         }
 
                         if (isset($information_commande->mesure_freeform->diametre_utile) &&
                             !empty($information_commande->mesure_freeform->diametre_utile)) {
                             $textarea .= "<br>Diameter: " .
-                                         $information_commande->mesure_freeform->diametre_utile;
+                                $information_commande->mesure_freeform->diametre_utile;
                         }
 
                         if (isset($information_commande->monture->type) &&
                             !empty($information_commande->monture->type)) {
                             $textarea .= "<br>Frame Type: " .
-                                         $information_commande->monture->type;
+                                $information_commande->monture->type;
                         }
 
                         if (isset($information_commande->precalibrage->calibre) &&
                             !empty($information_commande->precalibrage->calibre)) {
                             $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
-                                         $information_commande->precalibrage->calibre .
-                                         ".jpg' width='150' heigth='70' /><br>";
+                                $information_commande->precalibrage->calibre .
+                                ".jpg' width='150' heigth='70' /><br>";
                         }
 
 
@@ -6916,7 +7203,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                           date("Y-m-d\TH:i:sO") . '</dateTime> 
+                        date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -6941,11 +7228,11 @@ class admin
                         if ($teinteD ==
                             "") {
                             $remark .= 'Right tint: ' .
-                                       $information_commande->verre->correction_droit->teinte .
-                                       '.';
+                                $information_commande->verre->correction_droit->teinte .
+                                '.';
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
-                                   'CUST_') !==
+                                'CUST_') !==
                             false) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
@@ -6962,11 +7249,11 @@ class admin
                         if ($teinteG ==
                             "") {
                             $remark .= ' Left tint: ' .
-                                       $information_commande->verre->correction_gauche->teinte .
-                                       '.';
+                                $information_commande->verre->correction_gauche->teinte .
+                                '.';
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
-                                   'CUST_') !==
+                                'CUST_') !==
                             false) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
@@ -7080,9 +7367,9 @@ class admin
 
                     $xml .= '
          <referenceNo>' .
-                            $commande->id_commande .
-                            '-' .
-                            $commande->id_users . '</referenceNo>
+                        $commande->id_commande .
+                        '-' .
+                        $commande->id_users . '</referenceNo>
          <manufacturer />';
 
                     if ($commande->premiere_commande !=
@@ -7091,8 +7378,8 @@ class admin
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                                $commande->premiere_commande . "-" .
-                                                             $commande->id_users . '</referenceNo>
+                            $commande->premiere_commande . "-" .
+                            $commande->id_users . '</referenceNo>
 		 </multiplePair>';
                     }
 
@@ -7367,53 +7654,53 @@ class admin
                     if (isset($information_commande->verre->correction_droit)) {
                         $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                                $lenses_code . '</commercialCode>
+                            $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                                $information_commande->verre->correction_droit->sphere . '</sphere>
+                            $information_commande->verre->correction_droit->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                                $information_commande->verre->correction_droit->cylindre . '</power>
+                            $information_commande->verre->correction_droit->cylindre . '</power>
                       <axis>' .
-                                $information_commande->verre->correction_droit->axe . '</axis>
+                            $information_commande->verre->correction_droit->axe . '</axis>
                   </cylinder>';
                         if (isset($information_commande->verre->correction_droit->addition)) {
                             $xml .= '<addition>' .
-                                    $information_commande->verre->correction_droit->addition . '</addition>
+                                $information_commande->verre->correction_droit->addition . '</addition>
 						  ';
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                             $xml .= '<prism>
 						 <power>' .
-                                    $information_commande->verre->correction_droit->PrismeSphere . '</power>
+                                $information_commande->verre->correction_droit->PrismeSphere . '</power>
 						 <base>' .
-                                    $information_commande->verre->correction_droit->PrismeCylindre . '</base>
+                                $information_commande->verre->correction_droit->PrismeCylindre . '</base>
 					  </prism>';
                         }
                         $xml .= '</rxData>';
 
                         if ((isset($information_commande->verre->correction_droit->traitement) &&
-                             !empty($information_commande->verre->correction_droit->traitement) &&
-                             ($information_commande->verre->correction_droit->traitement !=
-                              '700100' ||
-                              (($information_commande->verre->correction_droit->traitement ==
-                                '700100') &&
-                               ((strpos($commande->lensname,
-                                        '1.5') === false) ||
-                                (strpos($commande->lensname,
-                                        '1.53') !== false) ||
-                                (strpos($commande->lensname,
-                                        '1.56') !== false) ||
-                                (strpos($commande->lensname,
-                                        '1.59') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Transition') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Polarisé') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Xtractive') !== false))
-                              ))) ||
+                                !empty($information_commande->verre->correction_droit->traitement) &&
+                                ($information_commande->verre->correction_droit->traitement !=
+                                    '700100' ||
+                                    (($information_commande->verre->correction_droit->traitement ==
+                                            '700100') &&
+                                        ((strpos($commande->lensname,
+                                                    '1.5') === false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.53') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.56') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.59') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Transition') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Polarisé') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Xtractive') !== false))
+                                    ))) ||
                             $paA ==
                             "1") {
 
@@ -7426,7 +7713,7 @@ class admin
                             $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
 
                         }
@@ -7436,12 +7723,12 @@ class admin
                             if ($teinteD !=
                                 "" &&
                                 strpos($information_commande->verre->correction_droit->teinte,
-                                       'CUST_') ===
+                                    'CUST_') ===
                                 false) {
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                        $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7480,16 +7767,16 @@ class admin
                             !empty($information_commande->verre->ecart_puppillaire->droit)) {
                             $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                    $information_commande->verre->ecart_puppillaire->droit .
-                                    '</monocularCentrationDistance>';
+                                $information_commande->verre->ecart_puppillaire->droit .
+                                '</monocularCentrationDistance>';
                         }
 
                         if (isset($information_commande->verre->hauteur) &&
                             !empty($information_commande->verre->hauteur)) {
                             $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                    $information_commande->verre->hauteur .
-                                    '</height>';
+                                $information_commande->verre->hauteur .
+                                '</height>';
                         }
 
                         $xml .= '
@@ -7497,18 +7784,18 @@ class admin
 
 
                         if (strpos($information_commande->verre->correction_droit->diametre,
-                                   "/") !==
+                                "/") !==
                             false) {
                             $d1 =
                                 explode("/",
-                                        $information_commande->verre->correction_droit->diametre);
+                                    $information_commande->verre->correction_droit->diametre);
                             $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                    $d1[0] . '</physical>
+                                $d1[0] . '</physical>
                      <optical>' .
-                                    $d1[1] . '</optical>
+                                $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                         } else {
@@ -7519,7 +7806,7 @@ class admin
                                 $xml .= '
 						  <diameter>
 							 <physical>' .
-                                        $information_commande->verre->correction_droit->diametre . '</physical>
+                                    $information_commande->verre->correction_droit->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                             }
@@ -7529,8 +7816,8 @@ class admin
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $xml .= '
 			    	<thickness reference="EDGE">' .
-                                    $information_commande->bord_verre->epaisseur .
-                                    '</thickness>';
+                                $information_commande->bord_verre->epaisseur .
+                                '</thickness>';
                         }
 
                         if (isset($information_commande->verre->ecart_puppillaire->droit) &&
@@ -7547,8 +7834,8 @@ class admin
                             $xml .= '
                   <curve>
                       <baseCurve>' .
-                      $information_commande->verre->correction_droit->galbe .
-                      '</baseCurve>
+                                $information_commande->verre->correction_droit->galbe .
+                                '</baseCurve>
                   </curve>';
                         }
                         $xml .= '
@@ -7560,19 +7847,19 @@ class admin
                     if (isset($information_commande->verre->correction_gauche)) {
                         $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                                $lenses_code . '</commercialCode>
+                            $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                                $information_commande->verre->correction_gauche->sphere . '</sphere>
+                            $information_commande->verre->correction_gauche->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                                $information_commande->verre->correction_gauche->cylindre . '</power>
+                            $information_commande->verre->correction_gauche->cylindre . '</power>
                       <axis>' .
-                                $information_commande->verre->correction_gauche->axe . '</axis>
+                            $information_commande->verre->correction_gauche->axe . '</axis>
                   </cylinder>';
                         if (isset($information_commande->verre->correction_gauche->addition)) {
                             $xml .= '<addition>' .
-                                    $information_commande->verre->correction_gauche->addition . '</addition>
+                                $information_commande->verre->correction_gauche->addition . '</addition>
 						  ';
                         }
 
@@ -7580,35 +7867,35 @@ class admin
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $xml .= '<prism>
 						 <power>' .
-                                    $information_commande->verre->correction_gauche->PrismeSphere . '</power>
+                                $information_commande->verre->correction_gauche->PrismeSphere . '</power>
 						 <base>' .
-                                    $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
+                                $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
 					  </prism>';
                         }
 
                         $xml .= '</rxData>';
 
                         if ((isset($information_commande->verre->correction_gauche->traitement) &&
-                             !empty($information_commande->verre->correction_gauche->traitement) &&
-                             ($information_commande->verre->correction_gauche->traitement !=
-                              '700100' ||
-                              (($information_commande->verre->correction_gauche->traitement ==
-                                '700100') &&
-                               ((strpos($commande->lensname,
-                                        '1.5') === false) ||
-                                (strpos($commande->lensname,
-                                        '1.53') !== false) ||
-                                (strpos($commande->lensname,
-                                        '1.56') !== false) ||
-                                (strpos($commande->lensname,
-                                        '1.59') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Transition') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Polarisé') !== false) ||
-                                   (strpos($commande->trad_fr,
-                                           'Xtractive') !== false))
-                              ))) ||
+                                !empty($information_commande->verre->correction_gauche->traitement) &&
+                                ($information_commande->verre->correction_gauche->traitement !=
+                                    '700100' ||
+                                    (($information_commande->verre->correction_gauche->traitement ==
+                                            '700100') &&
+                                        ((strpos($commande->lensname,
+                                                    '1.5') === false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.53') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.56') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.59') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Transition') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Polarisé') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Xtractive') !== false))
+                                    ))) ||
                             $paA ==
                             "1") {
 
@@ -7620,7 +7907,7 @@ class admin
                             $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
                         }
 
@@ -7629,12 +7916,12 @@ class admin
                             if ($teinteG !=
                                 "" &&
                                 strpos($information_commande->verre->correction_gauche->teinte,
-                                       'CUST_') ===
+                                    'CUST_') ===
                                 false) {
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                        $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7662,16 +7949,16 @@ class admin
                             !empty($information_commande->verre->ecart_puppillaire->gauche)) {
                             $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                    $information_commande->verre->ecart_puppillaire->gauche .
-                                    '</monocularCentrationDistance>';
+                                $information_commande->verre->ecart_puppillaire->gauche .
+                                '</monocularCentrationDistance>';
                         }
 
                         if (isset($information_commande->verre->hauteur_gauche) &&
                             !empty($information_commande->verre->hauteur_gauche)) {
                             $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                    $information_commande->verre->hauteur_gauche .
-                                    '</height>';
+                                $information_commande->verre->hauteur_gauche .
+                                '</height>';
                         }
 
                         $xml .= '
@@ -7679,18 +7966,18 @@ class admin
 
 
                         if (strpos($information_commande->verre->correction_gauche->diametre,
-                                   "/") !==
+                                "/") !==
                             false) {
                             $d1 =
                                 explode("/",
-                                        $information_commande->verre->correction_gauche->diametre);
+                                    $information_commande->verre->correction_gauche->diametre);
                             $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                    $d1[0] . '</physical>
+                                $d1[0] . '</physical>
                      <optical>' .
-                                    $d1[1] . '</optical>
+                                $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                         } else {
@@ -7701,7 +7988,7 @@ class admin
                                 $xml .= '
 						  <diameter>
 							 <physical>' .
-                                        $information_commande->verre->correction_gauche->diametre . '</physical>
+                                    $information_commande->verre->correction_gauche->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                             }
@@ -7711,8 +7998,8 @@ class admin
                             !empty($information_commande->bord_verre->epaisseur)) {
                             $xml .= '
 			    	<thickness reference="EDGE">' .
-                                    $information_commande->bord_verre->epaisseur .
-                                    '</thickness>';
+                                $information_commande->bord_verre->epaisseur .
+                                '</thickness>';
                         }
 
                         if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
@@ -7729,8 +8016,8 @@ class admin
                             $xml .= '
                   <curve>
                       <baseCurve>' .
-                      $information_commande->verre->correction_gauche->galbe .
-                      '</baseCurve>
+                                $information_commande->verre->correction_gauche->galbe .
+                                '</baseCurve>
                   </curve>';
                         }
                         $xml .= '
@@ -8093,15 +8380,15 @@ class admin
                         }
 
                         $xml .= '<material>' .
-                                $monture_type . '</material>
+                            $monture_type . '</material>
 				   <boxWidth>' .
-                                $boxWidth . '</boxWidth>
+                            $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                                $boxHeight . '</boxHeight>
+                            $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                                $DBL . '</distanceBetweenLenses>
+                            $DBL . '</distanceBetweenLenses>
 				   ' .
-                                $calibre;
+                            $calibre;
                     }
                     $xml .= '
 				</frame>';
@@ -8120,18 +8407,18 @@ class admin
                         if ($commande->ancienne_commande >
                             0) {
                             $ancienne_commande .= '<br />(CR' .
-                                                  $commande->ancienne_commande .
-                                                  '-' .
-                                                  $commande->id_users .
-                                                  ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Comparer</a>';
+                                $commande->ancienne_commande .
+                                '-' .
+                                $commande->id_users .
+                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                $commande->id_commande .
+                                '">Comparer</a>';
                         }
                         if ($commande->penalty !=
                             1) {
                             $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                                  $commande->id_commande .
-                                                  '">Rejeter</a>';
+                                $commande->id_commande .
+                                '">Rejeter</a>';
                         }
                     } else {
                         $ancienne_commande =
@@ -8159,7 +8446,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -8171,7 +8458,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -8181,7 +8468,7 @@ class admin
                     $infos =
                         "Date: <b>" .
                         date('d/m/Y H:i',
-                             strtotime($commande->date_commande)) .
+                            strtotime($commande->date_commande)) .
                         "</b><br>Ref.&nbsp;Optieyes: <b>" .
                         $ref_optieyes .
                         "</b><br>Ref. client: <b>" .
@@ -8198,47 +8485,47 @@ class admin
                     if ($commande->commentaire !=
                         "") {
                         $infos .= "<br><br><div style='border:2px solid red; padding:5px 10px'><b style='color:red'>Commentaires client:  <br>" .
-                                  $commande->commentaire .
-                                  "</b></div>";
+                            $commande->commentaire .
+                            "</b></div>";
                     }
 
                     if ($commande->commentaire_omega !=
                         "") {
                         $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                                  $commande->commentaire_omega .
-                                  '</b>';
+                            $commande->commentaire_omega .
+                            '</b>';
                     }
 
                     $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                              $commande->id_commande .
-                              '_' .
-                              $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                        $commande->id_commande .
+                        '_' .
+                        $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                     if ($commande->seconde_omega !=
                         "") {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                  $commande->seconde_omega .
-                                  "</b>";
+                            $commande->seconde_omega .
+                            "</b>";
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                  $commande->id_commande .
-                                  '_' .
-                                  $commande->id_users .
-                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                            $commande->id_commande .
+                            '_' .
+                            $commande->id_users .
+                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     } else {
                         if ($commande->premiere_commande !=
                             0) {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                      $commande->premiere_commande .
-                                      "-" .
-                                      $commande->id_users .
-                                      "</b>";
+                                $commande->premiere_commande .
+                                "-" .
+                                $commande->id_users .
+                                "</b>";
                         } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                      $commande->id_commande .
-                                      '_' .
-                                      $commande->id_users .
-                                      '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                                $commande->id_commande .
+                                '_' .
+                                $commande->id_users .
+                                '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                         }
 
                     }
@@ -8247,8 +8534,8 @@ class admin
 
                     $CommandeOmega =
                         $this->m_commande->getTextCommandeOmega($commande->id_commande,
-                                                                $textarea,
-                                                                $xml);
+                            $textarea,
+                            $xml);
 
                     $c_omega =
                         "";
@@ -8273,7 +8560,7 @@ class admin
                             $commande->id_commande .
                             '" ' .
                             ($CommandeOmega[0]->status ==
-                             '1' ?
+                            '1' ?
                                 'checked' :
                                 '') .
                             '/><label for="edi_' .
@@ -8283,7 +8570,7 @@ class admin
                             '">' .
                             (!empty($commande->edi_date) ?
                                 date("d-m-Y",
-                                     strtotime($commande->edi_date)) :
+                                    strtotime($commande->edi_date)) :
                                 "") .
                             '</label><button class="btn btn-danger waves-effect waves-light delete-order-edi" rel="' .
                             $commande->id_commande .
@@ -8316,10 +8603,10 @@ class admin
             if ($post['edi'] ==
                 1) {
                 $this->m_commande->updateEdiStatus($post['id_commande'],
-                                                   '1');
+                    '1');
             } else {
                 $this->m_commande->updateEdiStatus($post['id_commande'],
-                                                   '0');
+                    '0');
             }
         }
     }
@@ -8364,65 +8651,65 @@ class admin
                 if (isset($information_commande->verre->correction_droit)) {
                     $detail .= "<b>OD:</b>";
                     $detail .= "<span id='spanSphereD' style='font-size:20px'>" .
-                               $information_commande->verre->correction_droit->sphere .
-                               "</span>";
+                        $information_commande->verre->correction_droit->sphere .
+                        "</span>";
                     $detail .= " (<span id='spanCylindreD' style='font-size:20px'>" .
-                               $information_commande->verre->correction_droit->cylindre .
-                               "</span>)";
+                        $information_commande->verre->correction_droit->cylindre .
+                        "</span>)";
                     if ($information_commande->verre->correction_droit->axe !=
                         "0.00") {
                         $detail .= " <span id='spanAxeD'>" .
-                                   $information_commande->verre->correction_droit->axe .
-                                   "</span>°";
+                            $information_commande->verre->correction_droit->axe .
+                            "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
-                         "0.00" &&
-                         $commande->id_generation_verre !=
-                         34)) {
+                            "0.00" &&
+                            $commande->id_generation_verre !=
+                            34)) {
                         $detail .= " ADD <span id='spanAdditionD'>" .
-                                   $information_commande->verre->correction_droit->addition .
-                                   "</span>";
+                            $information_commande->verre->correction_droit->addition .
+                            "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->addition) &&
                         ($information_commande->verre->correction_droit->addition !=
-                         "0.00" &&
-                         $commande->id_generation_verre ==
-                         34)) {
+                            "0.00" &&
+                            $commande->id_generation_verre ==
+                            34)) {
                         $detail .= " DEG   " .
-                                   $information_commande->verre->correction_droit->addition .
-                                   "";
+                            $information_commande->verre->correction_droit->addition .
+                            "";
                     }
 
 
                     if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                         !empty($information_commande->verre->correction_droit->PrismeSphere)) {
                         $detail .= " " .
-                                   $information_commande->verre->correction_droit->PrismeSphere .
-                                   "Δ";
+                            $information_commande->verre->correction_droit->PrismeSphere .
+                            "Δ";
 
                     }
                     if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
                         $detail .= " base " .
-                                   $information_commande->verre->correction_droit->PrismeCylindre .
-                                   "°";
+                            $information_commande->verre->correction_droit->PrismeCylindre .
+                            "°";
 
                     }
 
                     if (isset($information_commande->verre->correction_droit->galbe)) {
                         $detail .= " Galbe: " .
-                                   $information_commande->verre->correction_droit->galbe .
-                                   " ";
+                            $information_commande->verre->correction_droit->galbe .
+                            " ";
                     }
                     if (isset($information_commande->verre->correction_droit->traitement) &&
                         !empty($information_commande->verre->correction_droit->traitement)) {
                         $traitementD =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
                         $detail .= "<br>Traitement: " .
-                                   $traitementD .
-                                   "";
+                            $traitementD .
+                            "";
                     }
                     if (isset($information_commande->verre->correction_droit->teinte)) {
                         $teinteD =
@@ -8430,22 +8717,22 @@ class admin
                         if ($teinteD !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
-                                       $teinteD .
-                                       "</b>";
+                                $teinteD .
+                                "</b>";
                         } else {
                             if ($information_commande->verre->correction_droit->teinte !=
                                 "") {
                                 $detail .= "<br>Teinte personnalisée: <b>" .
-                                           $information_commande->verre->correction_droit->teinte .
-                                           "</b>";
+                                    $information_commande->verre->correction_droit->teinte .
+                                    "</b>";
                             }
                         }
                     }
                     if (isset($information_commande->verre->correction_droit->diametre) &&
                         !empty($information_commande->verre->correction_droit->diametre)) {
                         $detail .= "<br>Diametre: " .
-                                   $information_commande->verre->correction_droit->diametre .
-                                   "";
+                            $information_commande->verre->correction_droit->diametre .
+                            "";
 
                     }
 
@@ -8454,16 +8741,16 @@ class admin
                 if (isset($information_commande->verre->correction_gauche)) {
                     $detail .= "<br><br><b>OG</b>";
                     $detail .= "<span id='spanSphereG' style='font-size:20px'>" .
-                               $information_commande->verre->correction_gauche->sphere .
-                               "</span>";
+                        $information_commande->verre->correction_gauche->sphere .
+                        "</span>";
                     $detail .= "(<span id='spanCylindreG' style='font-size:20px'>" .
-                               $information_commande->verre->correction_gauche->cylindre .
-                               "</span>)";
+                        $information_commande->verre->correction_gauche->cylindre .
+                        "</span>)";
                     if ($information_commande->verre->correction_gauche->axe !=
                         "0.00") {
                         $detail .= " <span id='spanAxeG'>" .
-                                   $information_commande->verre->correction_gauche->axe .
-                                   "</span>°";
+                            $information_commande->verre->correction_gauche->axe .
+                            "</span>°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->addition) &&
@@ -8472,8 +8759,8 @@ class admin
                         $commande->id_generation_verre !=
                         34) {
                         $detail .= " ADD <span id='spanAdditionG'>" .
-                                   $information_commande->verre->correction_gauche->addition .
-                                   "</span>";
+                            $information_commande->verre->correction_gauche->addition .
+                            "</span>";
                     }
                     if (isset($information_commande->verre->correction_gauche->addition) &&
                         $information_commande->verre->correction_gauche->addition !=
@@ -8481,28 +8768,28 @@ class admin
                         $commande->id_generation_verre ==
                         34) {
                         $detail .= " DEG  " .
-                                   $information_commande->verre->correction_gauche->addition .
-                                   "";
+                            $information_commande->verre->correction_gauche->addition .
+                            "";
                     }
 
 
                     if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                         !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                         $detail .= " " .
-                                   $information_commande->verre->correction_gauche->PrismeSphere .
-                                   "Δ";
+                            $information_commande->verre->correction_gauche->PrismeSphere .
+                            "Δ";
                     }
                     if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                         $detail .= " Base " .
-                                   $information_commande->verre->correction_gauche->PrismeCylindre .
-                                   "°";
+                            $information_commande->verre->correction_gauche->PrismeCylindre .
+                            "°";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->galbe)) {
                         $detail .= " Galbe: " .
-                                   $information_commande->verre->correction_gauche->galbe .
-                                   " ";
+                            $information_commande->verre->correction_gauche->galbe .
+                            " ";
                     }
                     if (isset($information_commande->verre->correction_gauche->traitement) &&
                         !empty($information_commande->verre->correction_gauche->traitement)) {
@@ -8510,8 +8797,8 @@ class admin
                         $traitementG =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
                         $detail .= "<br>Traitement: " .
-                                   $traitementG .
-                                   "";
+                            $traitementG .
+                            "";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -8520,38 +8807,38 @@ class admin
                         if ($teinteG !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
-                                       $teinteG .
-                                       "</b>";
+                                $teinteG .
+                                "</b>";
                         } else {
                             if ($information_commande->verre->correction_gauche->teinte !=
                                 "") {
                                 $detail .= "<br>Teinte personnalisée: <b>" .
-                                           $information_commande->verre->correction_gauche->teinte .
-                                           "</b>";
+                                    $information_commande->verre->correction_gauche->teinte .
+                                    "</b>";
                             }
                         }
                     }
                     $detail .= "<br>Diametre: " .
-                               $information_commande->verre->correction_gauche->diametre .
-                               "";
+                        $information_commande->verre->correction_gauche->diametre .
+                        "";
 
                 }
 
                 $precal = 0;
 
                 if ((isset($information_commande->verre->correction_droit) &&
-                     $information_commande->verre->correction_droit->diametre ==
-                     'precalibrage') ||
+                        $information_commande->verre->correction_droit->diametre ==
+                        'precalibrage') ||
                     (isset($information_commande->verre->correction_gauche) &&
-                     $information_commande->verre->correction_gauche->diametre ==
-                     'precalibrage')) {
+                        $information_commande->verre->correction_gauche->diametre ==
+                        'precalibrage')) {
                     $precal =
                         1;
                     $p .= '<b>Précalibrage:</b>';
 
                     $p .= '<img src="/static/img/calibre/' .
-                          $information_commande->precalibrage->calibre .
-                          '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
+                        $information_commande->precalibrage->calibre .
+                        '.jpg" width="150" heigth="70" align="left" style="margin: 34px 19px;" /><br>';
 
                     $mesure_freeform_opt =
                         "";
@@ -8584,43 +8871,43 @@ class admin
 
                     if (isset($information_commande->monture->type)) {
                         $p .= 'Type monture: ' .
-                              $information_commande->monture->type .
-                              '<br>';
+                            $information_commande->monture->type .
+                            '<br>';
                     }
 
                     if (isset($information_commande->bord_verre->epaisseur) &&
                         !empty($information_commande->bord_verre->epaisseur)) {
                         $p .= 'EP au bord minimum: ' .
-                              $information_commande->bord_verre->epaisseur .
-                              '<br>';
+                            $information_commande->bord_verre->epaisseur .
+                            '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
                         !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
                         $p .= 'Ecart puppillaire droit: ' .
-                              $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                              '<br>';
+                            $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                            '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
                         !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
                         $p .= 'Ecart puppillaire gauche: ' .
-                              $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                              '<br>';
+                            $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                            '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->hauteur) &&
                         !empty($information_commande->mesure_freeform->hauteur)) {
                         $p .= 'Hauteur de montage droit: ' .
-                              $information_commande->mesure_freeform->hauteur .
-                              '<br>';
+                            $information_commande->mesure_freeform->hauteur .
+                            '<br>';
                     }
 
                     if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
                         !empty($information_commande->mesure_freeform->hauteur_gauche)) {
                         $p .= 'Hauteur de montage gauche: ' .
-                              $information_commande->mesure_freeform->hauteur_gauche .
-                              '<br>';
+                            $information_commande->mesure_freeform->hauteur_gauche .
+                            '<br>';
                     }
 
                 }
@@ -8634,18 +8921,18 @@ class admin
                     if ($commande->ancienne_commande >
                         0) {
                         $ancienne_commande .= '<br />(CR' .
-                                              $commande->ancienne_commande .
-                                              '-' .
-                                              $commande->id_users .
-                                              ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                              $commande->id_commande .
-                                              '">Comparer</a>';
+                            $commande->ancienne_commande .
+                            '-' .
+                            $commande->id_users .
+                            ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                            $commande->id_commande .
+                            '">Comparer</a>';
                     }
                     if ($commande->penalty !=
                         1) {
                         $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                              $commande->id_commande .
-                                              '">Rejeter</a>';
+                            $commande->id_commande .
+                            '">Rejeter</a>';
                     }
                 } else {
                     $ancienne_commande =
@@ -8673,7 +8960,7 @@ class admin
                             $commande->total_commande .
                             '</del> ' .
                             ($commande->tarif_express >
-                             0 ?
+                            0 ?
                                 $commande->tarif_express :
                                 '0') .
                             ' €<br />Casse atelier';
@@ -8685,7 +8972,7 @@ class admin
                             $commande->total_commande .
                             '</del> ' .
                             ($commande->tarif_express >
-                             0 ?
+                            0 ?
                                 $commande->tarif_express :
                                 '0') .
                             ' €<br />Erreur ophta';
@@ -8695,7 +8982,7 @@ class admin
                 $infos =
                     "Date: <b>" .
                     date('d/m/Y H:i',
-                         strtotime($commande->date_commande)) .
+                        strtotime($commande->date_commande)) .
                     "</b><br>Ref.&nbsp;Optieyes: <b>" .
                     $ref_optieyes .
                     "</b><br>Ref. client: <b>" .
@@ -8711,47 +8998,47 @@ class admin
                 if ($commande->commentaire !=
                     "") {
                     $infos .= "<br><br>Commentaires client: <b><br>" .
-                              $commande->commentaire .
-                              "</b>";
+                        $commande->commentaire .
+                        "</b>";
                 }
 
                 if ($commande->commentaire_omega !=
                     "") {
                     $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                              $commande->commentaire_omega .
-                              '</b>';
+                        $commande->commentaire_omega .
+                        '</b>';
                 }
 
                 $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                          $commande->id_commande .
-                          '_' .
-                          $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+                    $commande->id_commande .
+                    '_' .
+                    $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
             		';
 
                 if ($commande->seconde_omega !=
                     "") {
                     $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                              $commande->seconde_omega .
-                              "</b>";
+                        $commande->seconde_omega .
+                        "</b>";
                     $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                              $commande->id_commande .
-                              '_' .
-                              $commande->id_users .
-                              '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                        $commande->id_commande .
+                        '_' .
+                        $commande->id_users .
+                        '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                 } else {
                     if ($commande->premiere_commande !=
                         0) {
                         $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                  $commande->premiere_commande .
-                                  "-" .
-                                  $commande->id_users .
-                                  "</b>";
+                            $commande->premiere_commande .
+                            "-" .
+                            $commande->id_users .
+                            "</b>";
                     } else {
                         $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
-                                  $commande->id_commande .
-                                  '_' .
-                                  $commande->id_users .
-                                  '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                            $commande->id_commande .
+                            '_' .
+                            $commande->id_users .
+                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
                     }
 
                 }
@@ -8770,11 +9057,11 @@ class admin
                 }
 
                 $infos .= "<br>Nom du verre: <b>" .
-                          $commande->trad_fr .
-                          "</b>";
+                    $commande->trad_fr .
+                    "</b>";
                 $infos .= "<br>Indice: " .
-                          $commande->indice_verre .
-                          '';
+                    $commande->indice_verre .
+                    '';
             }
         }
 
@@ -8785,7 +9072,7 @@ class admin
         $data['p'] = $p;
 
         $this->load->view('admin/omega_autre_verre',
-                          $data);
+            $data);
     }
 
     public
@@ -8807,16 +9094,16 @@ class admin
             if ($commande_origine->premiere_commande !=
                 '0') {
                 $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
-                             $commande_origine->premiere_commande .
-                             "-" .
-                             $commande_origine->id_users .
-                             "<br>";
+                    $commande_origine->premiere_commande .
+                    "-" .
+                    $commande_origine->id_users .
+                    "<br>";
             }
 
             $textarea .= "Optieyes reference: " .
-                         $commande_origine->id_commande .
-                         "-" .
-                         $commande_origine->id_users;
+                $commande_origine->id_commande .
+                "-" .
+                $commande_origine->id_users;
 
             if (isset($data['type_de_verreD']) &&
                 !empty($data['type_de_verreD'])) {
@@ -8834,12 +9121,12 @@ class admin
             }
 
             $textarea .= "<br><br>Lens Code: " .
-                         $lens_code;
+                $lens_code;
             $textarea .= "<br>Lens Name: " .
-                         $lens_name;
+                $lens_name;
 
             $textarea .= "<br><br>Optical Index: " .
-                         $data['indices'];
+                $data['indices'];
 
             if ($commande_origine->tarif_express !=
                 '0') {
@@ -8851,16 +9138,16 @@ class admin
                     'droit') {
                 $textarea .= "<br>OD:";
                 $textarea .= " " .
-                             $data["sphereD"];
+                    $data["sphereD"];
                 $textarea .= " (" .
-                             $data["cylindreD"] .
-                             ")";
+                    $data["cylindreD"] .
+                    ")";
 
                 if ($data['axeD'] !=
                     "0.00") {
                     $textarea .= " " .
-                                 $data['axeD'] .
-                                 "°";
+                        $data['axeD'] .
+                        "°";
                 }
 
                 if ($data['additionD'] !=
@@ -8868,7 +9155,7 @@ class admin
                     $commande_origine->id_generation_verre !=
                     34) {
                     $textarea .= " ADD " .
-                                 $data['additionD'];
+                        $data['additionD'];
                 }
 
                 if ($data['additionD'] !=
@@ -8876,51 +9163,51 @@ class admin
                     $commande_origine->id_generation_verre ==
                     34) {
                     $textarea .= " DEG " .
-                                 $data['additionD'];
+                        $data['additionD'];
                 }
 
 
                 if (isset($data["PrismeSphereD"]) &&
                     !empty($data["PrismeSphereD"])) {
                     $textarea .= " " .
-                                 $data['PrismeSphereD'] .
-                                 "Δ";
+                        $data['PrismeSphereD'] .
+                        "Δ";
                 }
                 if (isset($data["PrismeCylindreD"]) &&
                     !empty($data["PrismeCylindreD"])) {
                     $textarea .= " base " .
-                                 $data['PrismeCylindreD'] .
-                                 "°";
+                        $data['PrismeCylindreD'] .
+                        "°";
                 }
 
                 $textarea .= " Galbe: " .
-                             $data['galbeD'];
+                    $data['galbeD'];
                 if (isset($data["traitementD"]) &&
                     !empty($data["traitementD"]) &&
-                ($data["traitementD"] != '700100' ||
-                 (($data["traitementD"] == '700100') &&
-                  ((strpos($data['nomverreDH'],
-                           '1.5') === false) ||
-                   (strpos($data['nomverreDH'],
-                           '1.53') !== false) ||
-                   (strpos($data['nomverreDH'],
-                           '1.56') !== false) ||
-                   (strpos($data['nomverreDH'],
-                           '1.59') !== false) ||
-                      (strpos($data['nomverreDH'],
-                              'Transition') !== false) ||
-                      (strpos($data['nomverreDH'],
-                              'Polarisé') !== false) ||
-                      (strpos($data['nomverreDH'],
-                              'Xtractive') !== false))
-                 )))
-                 {
+                    ($data["traitementD"] != '700100' ||
+                        (($data["traitementD"] == '700100') &&
+                            ((strpos($data['nomverreDH'],
+                                        '1.5') === false) ||
+                                (strpos($data['nomverreDH'],
+                                        '1.53') !== false) ||
+                                (strpos($data['nomverreDH'],
+                                        '1.56') !== false) ||
+                                (strpos($data['nomverreDH'],
+                                        '1.59') !== false) ||
+                                (strpos($data['nomverreDH'],
+                                        'Transition') !== false) ||
+                                (strpos($data['nomverreDH'],
+                                        'Polarisé') !== false) ||
+                                (strpos($data['nomverreDH'],
+                                        'Xtractive') !== false))
+                        )))
+                {
 
                     $textarea .= "<br>Coating code: " .
-                                 $data['traitementD'] .
-                                 "(" .
-                                 $this->m_commande->getTraitementNameByCode($data['traitementD']) .
-                                 ")";
+                        $data['traitementD'] .
+                        "(" .
+                        $this->m_commande->getTraitementNameByCode($data['traitementD']) .
+                        ")";
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -8928,13 +9215,13 @@ class admin
                     $teinteD =
                         $this->m_commande->getTeinteEnById($data['teinteD']);
                     $textarea .= "<br>Tint: " .
-                                 $this->m_commande->getTeinteEnById($data['teinteD']);
+                        $this->m_commande->getTeinteEnById($data['teinteD']);
 
                 }
                 if (isset($data["teintepersoD"]) &&
                     !empty($data["teintepersoD"])) {
                     $textarea .= "<br>Custom Tint: " .
-                                 $data['teintepersoD'];
+                        $data['teintepersoD'];
                 }
 
                 if (isset($data['diametreD']) &&
@@ -8942,7 +9229,7 @@ class admin
                     $data['diametreD'] !=
                     "precalibrage") {
                     $textarea .= "<br>Diameter physical: " .
-                                 $data['diametreD'];
+                        $data['diametreD'];
                 }
 
 
@@ -8953,15 +9240,15 @@ class admin
                     'gauche') {
                 $textarea .= "<br>OG:";
                 $textarea .= " " .
-                             $data["sphereG"];
+                    $data["sphereG"];
                 $textarea .= "(" .
-                             $data["cylindreG"] .
-                             ")";
+                    $data["cylindreG"] .
+                    ")";
                 if ($data['axeG'] !=
                     "0.00") {
                     $textarea .= " " .
-                                 $data['axeG'] .
-                                 "°";
+                        $data['axeG'] .
+                        "°";
                 }
 
                 if ($data['additionG'] !=
@@ -8969,58 +9256,58 @@ class admin
                     $commande_origine->id_generation_verre !=
                     34) {
                     $textarea .= " ADD " .
-                                 $data['additionG'];
+                        $data['additionG'];
                 }
                 if ($data['additionG'] !=
                     "0.00" &&
                     $commande_origine->id_generation_verre ==
                     34) {
                     $textarea .= " DEG " .
-                                 $data['additionG'];
+                        $data['additionG'];
                 }
 
 
                 if (isset($data["PrismeSphereG"]) &&
                     !empty($data["PrismeSphereG"])) {
                     $textarea .= " " .
-                                 $data['PrismeSphereG'] .
-                                 "Δ";
+                        $data['PrismeSphereG'] .
+                        "Δ";
                 }
                 if (isset($data["PrismeCylindreG"]) &&
                     !empty($data["PrismeCylindreG"])) {
                     $textarea .= " base " .
-                                 $data['PrismeCylindreG'] .
-                                 "°";
+                        $data['PrismeCylindreG'] .
+                        "°";
                 }
 
                 $textarea .= " Galbe: " .
-                             $data['galbeG'];
+                    $data['galbeG'];
 
                 if (isset($data["traitementG"]) &&
                     !empty($data["traitementG"]) &&
                     ($data["traitementG"] != '700100' ||
-                     (($data["traitementG"] == '700100') &&
-                      ((strpos($data['nomverreGH'],
-                               '1.5') === false) ||
-                       (strpos($data['nomverreGH'],
-                               '1.53') !== false) ||
-                       (strpos($data['nomverreGH'],
-                               '1.56') !== false) ||
-                       (strpos($data['nomverreGH'],
-                               '1.59') !== false) ||
-                          (strpos($data['nomverreGH'],
-                                  'Transition') !== false) ||
-                          (strpos($data['nomverreGH'],
-                                  'Polarisé') !== false) ||
-                          (strpos($data['nomverreGH'],
-                                  'Xtractive') !== false))
-                     ))) {
+                        (($data["traitementG"] == '700100') &&
+                            ((strpos($data['nomverreGH'],
+                                        '1.5') === false) ||
+                                (strpos($data['nomverreGH'],
+                                        '1.53') !== false) ||
+                                (strpos($data['nomverreGH'],
+                                        '1.56') !== false) ||
+                                (strpos($data['nomverreGH'],
+                                        '1.59') !== false) ||
+                                (strpos($data['nomverreGH'],
+                                        'Transition') !== false) ||
+                                (strpos($data['nomverreGH'],
+                                        'Polarisé') !== false) ||
+                                (strpos($data['nomverreGH'],
+                                        'Xtractive') !== false))
+                        ))) {
 
                     $textarea .= "<br>Coating code: " .
-                                 $data['traitementG'] .
-                                 "(" .
-                                 $this->m_commande->getTraitementNameByCode($data['traitementG']) .
-                                 ")";
+                        $data['traitementG'] .
+                        "(" .
+                        $this->m_commande->getTraitementNameByCode($data['traitementG']) .
+                        ")";
                 }
 
                 if (isset($data["teinteG"]) &&
@@ -9028,13 +9315,13 @@ class admin
                     $teinteG =
                         $this->m_commande->getTeinteEnById($data['teinteG']);
                     $textarea .= "<br>Tint: " .
-                                 $this->m_commande->getTeinteEnById($data['teinteG']);
+                        $this->m_commande->getTeinteEnById($data['teinteG']);
 
                 }
                 if (isset($data["teintepersoG"]) &&
                     !empty($data["teintepersoG"])) {
                     $textarea .= "<br>Custom Tint: " .
-                                 $data['teintepersoG'];
+                        $data['teintepersoG'];
                 }
 
                 if (isset($data['diametreG']) &&
@@ -9042,7 +9329,7 @@ class admin
                     $data['diametreG'] !=
                     "precalibrage") {
                     $textarea .= "<br>Diameter physical: " .
-                                 $data['diametreG'];
+                        $data['diametreG'];
                 }
             }
 
@@ -9080,66 +9367,66 @@ class admin
                 if (isset($data["ecart_puppillaire_droit"]) &&
                     !empty($data["ecart_puppillaire_droit"])) {
                     $textarea .= "<br>PD right: " .
-                                 $data["ecart_puppillaire_droit"];
+                        $data["ecart_puppillaire_droit"];
                 }
                 if (isset($data["hauteur"]) &&
                     !empty($data["hauteur"])) {
                     $textarea .= "<br>Height right: " .
-                                 $data["hauteur"];
+                        $data["hauteur"];
                 }
 
                 if (isset($data["ecart_puppillaire_gauche"]) &&
                     !empty($data["ecart_puppillaire_gauche"])) {
                     $textarea .= "<br>PD left: " .
-                                 $data["ecart_puppillaire_gauche"];
+                        $data["ecart_puppillaire_gauche"];
                 }
                 if (isset($data["hauteur_gauche"]) &&
                     !empty($data["hauteur_gauche"])) {
                     $textarea .= "<br>Height left: " .
-                                 $data["hauteur_gauche"];
+                        $data["hauteur_gauche"];
                 }
 
                 if (isset($data['epaisseur_bord_verre']) &&
                     !empty($data['epaisseur_bord_verre'])) {
                     $textarea .= "<br>Minimal edge thickn.: " .
-                                 $data['epaisseur_bord_verre'];
+                        $data['epaisseur_bord_verre'];
                 }
 
                 if (isset($data['cotec']) &&
                     !empty($data['cotec'])) {
                     $textarea .= "<br>DBL: " .
-                                 $data['cotec'];
+                        $data['cotec'];
                 }
 
                 if (isset($data['cotea']) &&
                     !empty($data['cotea'])) {
                     $textarea .= "<br>Boxing width: " .
-                                 $data['cotea'];
+                        $data['cotea'];
                 }
 
                 if (isset($data['coteb']) &&
                     !empty($data['coteb'])) {
                     $textarea .= "<br>Boxing height: " .
-                                 $data['coteb'];
+                        $data['coteb'];
                 }
 
                 if (isset($data['coted']) &&
                     !empty($data['coted'])) {
                     $textarea .= "<br>Diameter: " .
-                                 $data['coted'];
+                        $data['coted'];
                 }
 
                 if (isset($data['type_monture']) &&
                     !empty($data['type_monture'])) {
                     $textarea .= "<br>Frame Type: " .
-                                 $data['type_monture'];
+                        $data['type_monture'];
                 }
 
                 if (isset($data['calibre']) &&
                     !empty($data['calibre'])) {
                     $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
-                                 $data['calibre'] .
-                                 ".jpg' width='150' heigth='70' /><br>";
+                        $data['calibre'] .
+                        ".jpg' width='150' heigth='70' /><br>";
                 }
 
             }
@@ -9151,7 +9438,7 @@ class admin
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                   date("Y-m-d\TH:i:sO") . '</dateTime> 
+                date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -9176,11 +9463,11 @@ class admin
                 if ($teinteD ==
                     "") {
                     $remark .= 'Right tint: ' .
-                               $data["teinteD"] .
-                               '.';
+                        $data["teinteD"] .
+                        '.';
                 }
                 if (strpos($data["teinteD"],
-                           'CUST_') !==
+                        'CUST_') !==
                     false) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
@@ -9197,11 +9484,11 @@ class admin
                 if ($teinteG ==
                     "") {
                     $remark .= ' Left tint: ' .
-                               $data["teinteG"] .
-                               '.';
+                        $data["teinteG"] .
+                        '.';
                 }
                 if (strpos($data["teinteG"],
-                           'CUST_') !==
+                        'CUST_') !==
                     false) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
@@ -9210,8 +9497,8 @@ class admin
                     }
                     else  if (isset($teinteG)) {
                         $remark .= ' Left tint: ' .
-                                   $teinteG .
-                                   '.';
+                            $teinteG .
+                            '.';
                     }
                 }
             }
@@ -9320,9 +9607,9 @@ class admin
 
             $xml .= '
          <referenceNo>' .
-                    $commande_origine->id_commande .
-                    '-' .
-                    $commande_origine->id_users . '</referenceNo>
+                $commande_origine->id_commande .
+                '-' .
+                $commande_origine->id_users . '</referenceNo>
          <manufacturer />';
 
             if ($commande_origine->premiere_commande !=
@@ -9331,7 +9618,7 @@ class admin
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                        $commande_origine->premiere_commande . '</referenceNo>
+                    $commande_origine->premiere_commande . '</referenceNo>
 		 </multiplePair>';
             }
 
@@ -9572,50 +9859,50 @@ class admin
                     'droit') {
                 $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                        $lenses_code . '</commercialCode>
+                    $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                        $data["sphereD"] . '</sphere>
+                    $data["sphereD"] . '</sphere>
                   <cylinder>
                       <power>' .
-                        $data["cylindreD"] . '</power>
+                    $data["cylindreD"] . '</power>
                       <axis>' .
-                        $data["axeD"] . '</axis>
+                    $data["axeD"] . '</axis>
                   </cylinder>
                   <addition>' .
-                        $data["additionD"] . '</addition>
+                    $data["additionD"] . '</addition>
                   ';
 
                 if (isset($data["PrismeSphereD"]) &&
                     !empty($data["PrismeSphereD"])) {
                     $xml .= '<prism>
 						 <power>' .
-                            $data["PrismeSphereD"] . '</power>
+                        $data["PrismeSphereD"] . '</power>
 						 <base>' .
-                            $data["PrismeCylindreD"] . '</base>
+                        $data["PrismeCylindreD"] . '</base>
 					  </prism>';
                 }
                 $xml .= '</rxData>';
 
                 if ((isset($data["traitementD"]) &&
-                     !empty($data["traitementD"]) &&
-                     ($data["traitementD"] != '700100' ||
-                      (($data["traitementD"] == '700100') &&
-                       ((strpos($data['nomverreDH'],
-                                '1.5') === false) ||
-                        (strpos($data['nomverreDH'],
-                                '1.53') !== false) ||
-                        (strpos($data['nomverreDH'],
-                                '1.56') !== false) ||
-                        (strpos($data['nomverreDH'],
-                                '1.59') !== false) ||
-                           (strpos($data['nomverreDH'],
-                                   'Transition') !== false) ||
-                           (strpos($data['nomverreDH'],
-                                   'Polarisé') !== false) ||
-                           (strpos($data['nomverreDH'],
-                                   'Xtractive') !== false))
-                      ))) ||
+                        !empty($data["traitementD"]) &&
+                        ($data["traitementD"] != '700100' ||
+                            (($data["traitementD"] == '700100') &&
+                                ((strpos($data['nomverreDH'],
+                                            '1.5') === false) ||
+                                    (strpos($data['nomverreDH'],
+                                            '1.53') !== false) ||
+                                    (strpos($data['nomverreDH'],
+                                            '1.56') !== false) ||
+                                    (strpos($data['nomverreDH'],
+                                            '1.59') !== false) ||
+                                    (strpos($data['nomverreDH'],
+                                            'Transition') !== false) ||
+                                    (strpos($data['nomverreDH'],
+                                            'Polarisé') !== false) ||
+                                    (strpos($data['nomverreDH'],
+                                            'Xtractive') !== false))
+                            ))) ||
                     $paA ==
                     "1") {
 
@@ -9627,7 +9914,7 @@ class admin
                     $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $data["traitementD"] . '</commercialCode>
+                        $data["traitementD"] . '</commercialCode>
 					   </coating>';
 
                 }
@@ -9638,12 +9925,12 @@ class admin
                     if ($teinteD !=
                         "" &&
                         strpos($data["teinteD"],
-                               'CUST_') ===
+                            'CUST_') ===
                         false) {
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $data["teinteD"] . '</commercialCode>
+                            $data["teinteD"] . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -9680,32 +9967,32 @@ class admin
                     !empty($data["ecart_puppillaire_droit"])) {
                     $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                            $data["ecart_puppillaire_droit"] .
-                            '</monocularCentrationDistance>';
+                        $data["ecart_puppillaire_droit"] .
+                        '</monocularCentrationDistance>';
                 }
                 if (!isset($hauteurD)) {
                     $hauteurD = "";
                 }
-                    $xml .= '
+                $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                            $hauteurD . '</height>
+                    $hauteurD . '</height>
                   </centration>';
 
 
 
                 if (strpos($data["diametreD"],
-                           "/") !==
+                        "/") !==
                     false) {
                     $d1 =
                         explode("/",
-                                $data["diametreD"]);
+                            $data["diametreD"]);
                     $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                            $d1[0] . '</physical>
+                        $d1[0] . '</physical>
                      <optical>' .
-                            $d1[1] . '</optical>
+                        $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                 } else {
@@ -9717,7 +10004,7 @@ class admin
                         $xml .= '
 						  <diameter>
 							 <physical>' .
-                                $data["diametreD"] . '</physical>
+                            $data["diametreD"] . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                     }
@@ -9728,8 +10015,8 @@ class admin
                     !empty($data['epaisseur_bord_verre'])) {
                     $xml .= '
 			    	<thickness reference="EDGE">' .
-                            $data['epaisseur_bord_verre'] .
-                            '</thickness>';
+                        $data['epaisseur_bord_verre'] .
+                        '</thickness>';
                 }
 
                 if (isset($data["ecart_puppillaire_droit"]) &&
@@ -9747,7 +10034,7 @@ class admin
                   <curve>
                       <baseCurve>' .
                         $data["galbeD"] .
-                      '</baseCurve>
+                        '</baseCurve>
                   </curve>';
                 }
                 $xml .= '
@@ -9761,50 +10048,50 @@ class admin
                     'gauche') {
                 $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                        $lenses_code . '</commercialCode>
+                    $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                        $data["sphereG"] . '</sphere>
+                    $data["sphereG"] . '</sphere>
                   <cylinder>
                       <power>' .
-                        $data["cylindreG"] . '</power>
+                    $data["cylindreG"] . '</power>
                       <axis>' .
-                        $data["axeG"] . '</axis>
+                    $data["axeG"] . '</axis>
                   </cylinder>
                   <addition>' .
-                        $data["additionG"] .
-                        '</addition>';
+                    $data["additionG"] .
+                    '</addition>';
                 if (isset($data["PrismeSphereG"]) &&
                     !empty($data["PrismeSphereG"])) {
                     $xml .= '<prism>
 						 <power>' .
-                            $data["PrismeSphereG"] . '</power>
+                        $data["PrismeSphereG"] . '</power>
 						 <base>' .
-                            $data["PrismeCylindreG"] . '</base>
+                        $data["PrismeCylindreG"] . '</base>
 					  </prism>';
                 }
 
                 $xml .= '</rxData>';
 
                 if ((isset($data["traitementG"]) &&
-                     !empty($data["traitementG"]) &&
-                     ($data["traitementG"] != '700100' ||
-                      (($data["traitementG"] == '700100') &&
-                       ((strpos($data['nomverreGH'],
-                                '1.5') === false) ||
-                        (strpos($data['nomverreGH'],
-                                '1.53') !== false) ||
-                        (strpos($data['nomverreGH'],
-                                '1.56') !== false) ||
-                        (strpos($data['nomverreGH'],
-                                '1.59') !== false) ||
-                           (strpos($data['nomverreGH'],
-                                   'Transition') !== false) ||
-                           (strpos($data['nomverreGH'],
-                                   'Polarisé') !== false) ||
-                           (strpos($data['nomverreGH'],
-                                   'Xtractive') !== false))
-                      ))) ||
+                        !empty($data["traitementG"]) &&
+                        ($data["traitementG"] != '700100' ||
+                            (($data["traitementG"] == '700100') &&
+                                ((strpos($data['nomverreGH'],
+                                            '1.5') === false) ||
+                                    (strpos($data['nomverreGH'],
+                                            '1.53') !== false) ||
+                                    (strpos($data['nomverreGH'],
+                                            '1.56') !== false) ||
+                                    (strpos($data['nomverreGH'],
+                                            '1.59') !== false) ||
+                                    (strpos($data['nomverreGH'],
+                                            'Transition') !== false) ||
+                                    (strpos($data['nomverreGH'],
+                                            'Polarisé') !== false) ||
+                                    (strpos($data['nomverreGH'],
+                                            'Xtractive') !== false))
+                            ))) ||
                     $paA ==
                     "1") {
 
@@ -9816,7 +10103,7 @@ class admin
                     $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $data["traitementG"] . '</commercialCode>
+                        $data["traitementG"] . '</commercialCode>
 					   </coating>';
 
                 }
@@ -9827,12 +10114,12 @@ class admin
                     if ($teinteG !=
                         "" &&
                         strpos($data["teinteG"],
-                               'CUST_') ===
+                            'CUST_') ===
                         false) {
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $data["teinteG"] . '</commercialCode>
+                            $data["teinteG"] . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -9857,31 +10144,31 @@ class admin
                     !empty($data["ecart_puppillaire_gauche"])) {
                     $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                            $data["ecart_puppillaire_gauche"] .
-                            '</monocularCentrationDistance>';
+                        $data["ecart_puppillaire_gauche"] .
+                        '</monocularCentrationDistance>';
                 }
                 if (!isset($hauteurG)) {
                     $hauteurG = "";
                 }
-                    $xml .= '
+                $xml .= '
                   <height reference="NEAR" referenceHeight="OVERBOX">' .
-                            $hauteurG . '</height>
+                    $hauteurG . '</height>
                   </centration>';
 
 
                 if (strpos($data["diametreG"],
-                           "/") !==
+                        "/") !==
                     false) {
                     $d1 =
                         explode("/",
-                                $data["diametreG"]);
+                            $data["diametreG"]);
                     $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                            $d1[0] . '</physical>
+                        $d1[0] . '</physical>
                      <optical>' .
-                            $d1[1] . '</optical>
+                        $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
                 } else {
@@ -9892,7 +10179,7 @@ class admin
                         $xml .= '
 						  <diameter>
 							 <physical>' .
-                                $data["diametreG"] . '</physical>
+                            $data["diametreG"] . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
                     }
@@ -9902,8 +10189,8 @@ class admin
                     !empty($data['epaisseur_bord_verre'])) {
                     $xml .= '
 			    	<thickness reference="EDGE">' .
-                            $data['epaisseur_bord_verre'] .
-                            '</thickness>';
+                        $data['epaisseur_bord_verre'] .
+                        '</thickness>';
                 }
                 if (isset($data["ecart_puppillaire_gauche"]) &&
                     !empty($data["ecart_puppillaire_gauche"])) {
@@ -9919,8 +10206,8 @@ class admin
                     $xml .= '
                   <curve>
                       <baseCurve>' .
-                      $data["galbeG"] .
-                      '</baseCurve>
+                        $data["galbeG"] .
+                        '</baseCurve>
                   </curve>';
                 }
                 $xml .= '
@@ -9932,23 +10219,23 @@ class admin
             $xml .= '
             	<frame quantity="1">';
             if ((isset($data["galbeD"]) &&
-                 $data["galbeD"] !=
-                 "Standard") ||
+                    $data["galbeD"] !=
+                    "Standard") ||
                 (isset($data["galbeG"]) &&
-                 $data["galbeG"] !=
-                 "Standard")) {
+                    $data["galbeG"] !=
+                    "Standard")) {
                 if ((isset($data["galbeD"])) &&
                     $data["galbeD"] !=
                     "Standard") {
                     $xml .= '
 <frameBowAngle>' .
-                            $data["galbeD"] .
-                            '</frameBowAngle>';
+                        $data["galbeD"] .
+                        '</frameBowAngle>';
                 } else {
                     $xml .= '
 <frameBowAngle>' .
-                            $data["galbeG"] .
-                            '</frameBowAngle>';
+                        $data["galbeG"] .
+                        '</frameBowAngle>';
                 }
             }
 
@@ -10282,15 +10569,15 @@ class admin
                 }
 
                 $xml .= '<material>' .
-                        $monture_type . '</material>
+                    $monture_type . '</material>
 				   <boxWidth>' .
-                        $boxWidth . '</boxWidth>
+                    $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                        $boxHeight . '</boxHeight>
+                    $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                        $DBL . '</distanceBetweenLenses>
+                    $DBL . '</distanceBetweenLenses>
 				   ' .
-                        $calibre;
+                    $calibre;
             }
             $xml .= '
              </frame>';
@@ -10304,8 +10591,8 @@ class admin
 
             $CommandeOmega =
                 $this->m_commande->updateCommandeOmega($id_commande_omega,
-                                                       $textarea,
-                                                       $xml);
+                    $textarea,
+                    $xml);
             if ($CommandeOmega ==
                 1) {
                 echo 'sent';
@@ -10336,29 +10623,29 @@ class admin
                     ".xml";
 
                 if (!write_file('/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
-                                $filename,
-                                $commande->xml)) {
+                    $filename,
+                    $commande->xml)) {
                     echo $filename .
-                         'ERROR - ';
+                        'ERROR - ';
                 } else {
                     //echo $filename.'OK - ';
                     //	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
                     if ($this->uploadFTP("ftpserver.omega-optix.cz",
-                                         "optieyes",
-                                         "OptiEyes-2020",
-                                         '/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
-                                         $filename,
-                                         "/Orders/" .
-                                         $filename)) {
+                        "optieyes",
+                        "OptiEyes-2020",
+                        '/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
+                        $filename,
+                        "/Orders/" .
+                        $filename)) {
                         echo $filename .
-                             'OK - ';
+                            'OK - ';
                         $s =
                             $this->m_commande->updateEdiStatus($commande->id_commande,
-                                                               "2",
-                                                               $filename);
+                                "2",
+                                $filename);
                     } else {
                         echo $filename .
-                             'ERROR - ';
+                            'ERROR - ';
                     }
                 }
             }
@@ -10377,17 +10664,17 @@ class admin
 
         // login
         if (@ftp_login($connection,
-                       $username,
-                       $password)) {
+            $username,
+            $password)) {
             // successfully connected
         } else {
             return false;
         }
 
         ftp_put($connection,
-                $remote_file,
-                $local_file,
-                FTP_BINARY);
+            $remote_file,
+            $local_file,
+            FTP_BINARY);
         ftp_close($connection);
         return true;
     }
@@ -10413,7 +10700,7 @@ class admin
                 'sweetalert' => true
             );
         $this->load->view('admin/valid_commande_stock',
-                          $data);
+            $data);
     }
 
 
@@ -10427,17 +10714,17 @@ class admin
 
             $data_commandeOld =
                 $this->m_commande->getAllCommande(false,
-                                                  2);
+                    2);
             $data_commandeNew =
                 $this->m_commande->getAllCommandeNew(false,
-                                                     2);
+                    2);
 
             // if(is_array($data_commandeNew) && is_array($data_commandeOld))
             if (is_array($data_commandeOld) &&
                 is_array($data_commandeNew)) {
                 $data_commande =
                     array_merge($data_commandeNew,
-                                $data_commandeOld);
+                        $data_commandeOld);
             } else {
                 if (is_array($data_commandeOld)) {
                     $data_commande =
@@ -10480,7 +10767,7 @@ class admin
                 {
                     $correction =
                         json_decode($commande->information_commande,
-                                    true);
+                            true);
                     $data_correction =
                         "";
                     $noFoundRight =
@@ -10526,9 +10813,9 @@ class admin
                                 "Non Photocromique") {
                                 continue;
                             } elseif ($_GET['photochromie'] !=
-                                      "Non Photocromique" &&
-                                      $_GET['photochromie'] !=
-                                      $photochromie) {
+                                "Non Photocromique" &&
+                                $_GET['photochromie'] !=
+                                $photochromie) {
                                 continue;
                             }
                         }
@@ -10540,14 +10827,14 @@ class admin
                             $teinte) {
                             continue;
                         } elseif (isset($_GET['teinte']) &&
-                                  $_GET['teinte'] ==
-                                  "Non Teinté" &&
-                                  ($teinte ==
-                                   "G15 C" ||
-                                   $teinte ==
-                                   "Gris C" ||
-                                   $teinte ==
-                                   "Brun C")) {
+                            $_GET['teinte'] ==
+                            "Non Teinté" &&
+                            ($teinte ==
+                                "G15 C" ||
+                                $teinte ==
+                                "Gris C" ||
+                                $teinte ==
+                                "Brun C")) {
                             continue;
                         }
 
@@ -10562,10 +10849,10 @@ class admin
 
                         if (isset($correction['verre']['correction_droit'])) {
                             $data_correction .= "OD : " .
-                                                $correction['verre']['correction_droit']['sphere'] .
-                                                "(" .
-                                                $correction['verre']['correction_droit']['cylindre'] .
-                                                ")<br>";
+                                $correction['verre']['correction_droit']['sphere'] .
+                                "(" .
+                                $correction['verre']['correction_droit']['cylindre'] .
+                                ")<br>";
 
                             if (isset($_GET['sphere']) &&
                                 $_GET['sphere'] !=
@@ -10584,10 +10871,10 @@ class admin
 
                         if (isset($correction['verre']['correction_gauche'])) {
                             $data_correction .= "OG : " .
-                                                $correction['verre']['correction_gauche']['sphere'] .
-                                                "(" .
-                                                $correction['verre']['correction_gauche']['cylindre'] .
-                                                ")<br>";
+                                $correction['verre']['correction_gauche']['sphere'] .
+                                "(" .
+                                $correction['verre']['correction_gauche']['cylindre'] .
+                                ")<br>";
 
                             if (isset($_GET['sphere']) &&
                                 $_GET['sphere'] !=
@@ -10605,18 +10892,18 @@ class admin
                         }
 
                         if (($noFoundRight &&
-                             $noFoundLeft) ||
+                                $noFoundLeft) ||
                             ($noFoundLeft &&
-                             !isset($correction['verre']['correction_droit'])) ||
+                                !isset($correction['verre']['correction_droit'])) ||
                             ($noFoundRight &&
-                             !isset($correction['verre']['correction_gauche']))) {
+                                !isset($correction['verre']['correction_gauche']))) {
                             continue;
                         }
 
                         $dep =
                             substr($commande->cp,
-                                   0,
-                                   -3);
+                                0,
+                                -3);
 
                         if ($teinte ==
                             "Brun C") {
@@ -10665,7 +10952,7 @@ class admin
                         if ($data_etiquette !==
                             false &&
                             (isset($data_etiquette[$commande->id_commande]['droit']) ||
-                             isset($data_etiquette[$commande->id_commande]['gauche']))) {
+                                isset($data_etiquette[$commande->id_commande]['gauche']))) {
                             $cl =
                                 ' is_checked';
                         }
@@ -10709,8 +10996,8 @@ class admin
                                     $commande->id_commande .
                                     '" ' .
                                     ($data_etiquette !==
-                                     false &&
-                                     isset($data_etiquette[$commande->id_commande]['droit']) ?
+                                    false &&
+                                    isset($data_etiquette[$commande->id_commande]['droit']) ?
                                         'checked' :
                                         '') .
                                     ' /> <label for="verre_droit_' .
@@ -10724,8 +11011,8 @@ class admin
                                     $commande->id_commande .
                                     '" ' .
                                     ($data_etiquette !==
-                                     false &&
-                                     isset($data_etiquette[$commande->id_commande]['gauche']) ?
+                                    false &&
+                                    isset($data_etiquette[$commande->id_commande]['gauche']) ?
                                         'checked' :
                                         '') .
                                     ' /> <label for="verre_gauche_' .
@@ -10771,18 +11058,18 @@ class admin
                             if ($commande->ancienne_commande >
                                 0) {
                                 $ancienne_commande .= '<br />(CR' .
-                                                      $commande->ancienne_commande .
-                                                      '-' .
-                                                      $commande->id_users .
-                                                      ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                                      $commande->id_commande .
-                                                      '">Comparer</a>';
+                                    $commande->ancienne_commande .
+                                    '-' .
+                                    $commande->id_users .
+                                    ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                    $commande->id_commande .
+                                    '">Comparer</a>';
                             }
                             if ($commande->penalty !=
                                 1) {
                                 $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                                      $commande->id_commande .
-                                                      '">Rejeter</a>';
+                                    $commande->id_commande .
+                                    '">Rejeter</a>';
                             }
                         } else {
                             $ancienne_commande =
@@ -10811,11 +11098,11 @@ class admin
                                 "Panier A";
                             $certif_panierA = "<br>
 							<a href=\"/static/aa/certificat_authenticite_" .
-                                              $commande->id_commande .
-                                              ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
+                                $commande->id_commande .
+                                ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>";
                             $certif_panierA .= '<a class="commande-info btn btn-icon waves-effect waves-light" data-toggle="modal" id="regenerer_certif" data-target="#regenerer_certif" rel="' .
-                                               $commande->id_commande .
-                                               '">Regenerer</a>';
+                                $commande->id_commande .
+                                '">Regenerer</a>';
 
                         }
 
@@ -10860,7 +11147,7 @@ class admin
                                     $commande->id_users .
                                     '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                     date('d/m/Y H:i',
-                                         strtotime($commande->date_commande)),
+                                        strtotime($commande->date_commande)),
                                     $commande->reference_client,
                                     $ispanier_A,
                                     $teinte,
@@ -10884,14 +11171,14 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         date('d/m/Y',
-                                             strtotime($commande->date_annule)) :
+                                            strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     //( ($commande->id_generation_verre == 19 || $commande->indice_verre == '1.76 (délais : 10 jours ouvrés)' || $commande->indice_verre == '1.74'/* || $correction['verre']['traitement'] == "BlueCoat" || $correction['verre']['traitement'] == "BlueCoat Defender" || isset($correction['verre']['polarise'])*/ ) ? '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="'.(!empty($commande->date_pointage) ? 1 : 0 ).'" id="pointage_'.$commande->id_commande.'" name="pointage_'.$commande->id_commande.'" '.(!empty($commande->date_pointage) ? 'checked' : '').'/><label for="pointage_'.$commande->id_commande.'" id="pointage_date_'.$commande->id_commande.'">'.(!empty($commande->date_pointage) ? date("d-m-Y",strtotime($commande->date_pointage)) : "") : '').'</label></div>',
                                     (($stockDeporte ==
-                                      '1') ?
+                                        '1') ?
                                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
                                         (!empty($commande->date_pointage) ?
                                             1 :
@@ -10911,14 +11198,14 @@ class admin
                                         '">' .
                                         (!empty($commande->date_pointage) ?
                                             date("d-m-Y",
-                                                 strtotime($commande->date_pointage)) :
+                                                strtotime($commande->date_pointage)) :
                                             "") :
                                         '') .
                                     '</label></div>',
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         1 :
                                         0)
                                 );
@@ -10962,7 +11249,7 @@ class admin
                                     $commande->id_users .
                                     '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                     date('d/m/Y H:i',
-                                         strtotime($commande->date_commande)),
+                                        strtotime($commande->date_commande)),
                                     $commande->reference_client,
                                     $ispanier_A,
                                     $teinte,
@@ -10986,14 +11273,14 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         date('d/m/Y',
-                                             strtotime($commande->date_annule)) :
+                                            strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     //( ($commande->id_generation_verre == 19 || $commande->indice_verre == '1.76 (délais : 10 jours ouvrés)' || $commande->indice_verre == '1.74' /* || $correction['verre']['traitement'] == "BlueCoat" || $correction['verre']['traitement'] == "BlueCoat Defender" || isset($correction['verre']['polarise'])*/ ) ? '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="'.(!empty($commande->date_pointage) ? 1 : 0 ).'" id="pointage_'.$commande->id_commande.'" name="pointage_'.$commande->id_commande.'" '.(!empty($commande->date_pointage) ? 'checked' : '').'/><label for="pointage_'.$commande->id_commande.'" id="pointage_date_'.$commande->id_commande.'">'.(!empty($commande->date_pointage) ? date("d-m-Y",strtotime($commande->date_pointage)) : "") : '').'</label></div>',
                                     (($stockDeporte ==
-                                      '1') ?
+                                        '1') ?
                                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
                                         (!empty($commande->date_pointage) ?
                                             1 :
@@ -11013,14 +11300,14 @@ class admin
                                         '">' .
                                         (!empty($commande->date_pointage) ?
                                             date("d-m-Y",
-                                                 strtotime($commande->date_pointage)) :
+                                                strtotime($commande->date_pointage)) :
                                             "") :
                                         '') .
                                     '</label></div>',
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         1 :
                                         0)
                                 );
@@ -11037,18 +11324,18 @@ class admin
                             if ($commande->ancienne_commande >
                                 0) {
                                 $ancienne_commande .= '<br />(CR' .
-                                                      $commande->ancienne_commande .
-                                                      '-' .
-                                                      $commande->id_users .
-                                                      ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                                      $commande->id_commande .
-                                                      '">Comparer</a>';
+                                    $commande->ancienne_commande .
+                                    '-' .
+                                    $commande->id_users .
+                                    ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                    $commande->id_commande .
+                                    '">Comparer</a>';
                             }
                             if ($commande->penalty !=
                                 1) {
                                 $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                                      $commande->id_commande .
-                                                      '">Rejeter</a>';
+                                    $commande->id_commande .
+                                    '">Rejeter</a>';
                             }
                         } else {
                             $ancienne_commande =
@@ -11066,7 +11353,7 @@ class admin
                                 "Panier A";
                             $certif_panierA = "<br>
 							<a href=\"/static/aa/certificat_authenticite_" .
-                                              $commande->id_commande . ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+                                $commande->id_commande . ".pdf\" target=\"_blank\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 							";
                         }
 
@@ -11079,8 +11366,8 @@ class admin
                                 $commande->id_commande .
                                 '" ' .
                                 ($data_etiquette !==
-                                 false &&
-                                 isset($data_etiquette[$commande->id_commande]['droit']) ?
+                                false &&
+                                isset($data_etiquette[$commande->id_commande]['droit']) ?
                                     'checked' :
                                     '') .
                                 ' /> <label for="verre_droit_' .
@@ -11094,8 +11381,8 @@ class admin
                                 $commande->id_commande .
                                 '" ' .
                                 ($data_etiquette !==
-                                 false &&
-                                 isset($data_etiquette[$commande->id_commande]['gauche']) ?
+                                false &&
+                                isset($data_etiquette[$commande->id_commande]['gauche']) ?
                                     'checked' :
                                     '') .
                                 ' /> <label for="verre_gauche_' .
@@ -11167,7 +11454,7 @@ class admin
                                     $commande->id_users .
                                     '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                     date('d/m/Y H:i',
-                                         strtotime($commande->date_commande)),
+                                        strtotime($commande->date_commande)),
                                     $commande->reference_client,
                                     $ispanier_A,
                                     $teinte,
@@ -11191,9 +11478,9 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         date('d/m/Y',
-                                             strtotime($commande->date_annule)) :
+                                            strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
@@ -11215,13 +11502,13 @@ class admin
                                     '">' .
                                     (!empty($commande->date_pointage) ?
                                         date("d-m-Y",
-                                             strtotime($commande->date_pointage)) :
+                                            strtotime($commande->date_pointage)) :
                                         "") .
                                     '</label></div>',
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         1 :
                                         0)
                                 );
@@ -11266,7 +11553,7 @@ class admin
                                     $commande->id_users .
                                     '"><i class="zmdi zmdi-search"></i> Voir</a>',
                                     date('d/m/Y H:i',
-                                         strtotime($commande->date_commande)),
+                                        strtotime($commande->date_commande)),
                                     $commande->reference_client,
                                     $ispanier_A,
                                     $teinte,
@@ -11290,9 +11577,9 @@ class admin
                                     $commande->id_users .
                                     '">' .
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         date('d/m/Y',
-                                             strtotime($commande->date_annule)) :
+                                            strtotime($commande->date_annule)) :
                                         '') .
                                     '</label></div>',
                                     '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
@@ -11314,13 +11601,13 @@ class admin
                                     '">' .
                                     (!empty($commande->date_pointage) ?
                                         date("d-m-Y",
-                                             strtotime($commande->date_pointage)) :
+                                            strtotime($commande->date_pointage)) :
                                         "") .
                                     '</label></div>',
                                     $traitement,
                                     $commande->type_commande,
                                     ($commande->date_annule !==
-                                     null ?
+                                    null ?
                                         1 :
                                         0)
                                 );
@@ -11363,28 +11650,28 @@ class admin
 			*/
 
             $this->db->insert('controle_test',
-                              array(
-                                  'v' => $data['control']['certificat'],
-                                  'control' => count($data['certificat'])
-                              ));
+                array(
+                    'v' => $data['control']['certificat'],
+                    'control' => count($data['certificat'])
+                ));
 
             // var_dump($data);
             //$this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, $id_commande, false, 'paysage', $customsize = array(0,0,243,153));
             $docs = array(
                 'certificat' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf('certificat_authenticite',
-                                           $data,
-                                           $id_commande,
-                                           false,
-                                           'paysage',
-                                           $customsize =
-                                               array(
-                                                   0,
-                                                   0,
-                                                   243,
-                                                   153
-                                               ))
+                    '/' .
+                    $this->pdf('certificat_authenticite',
+                        $data,
+                        $id_commande,
+                        false,
+                        'paysage',
+                        $customsize =
+                            array(
+                                0,
+                                0,
+                                243,
+                                153
+                            ))
             );
 
             //$file_pdf = 'certificat_authenticite_'.$id_commande;
@@ -11418,7 +11705,7 @@ class admin
             );
 
         $this->load->view('admin/valid_commande_lentille',
-                          $data);
+            $data);
 
     }
 
@@ -11445,7 +11732,7 @@ class admin
             );
 
         $this->load->view('admin/ancienne_commande_montures',
-                          $data);
+            $data);
 
     }
 
@@ -11473,7 +11760,7 @@ class admin
             );
 
         $this->load->view('admin/valid_commande_montures',
-                          $data);
+            $data);
 
     }
 
@@ -11500,7 +11787,7 @@ class admin
             );
 
         $this->load->view('admin/ancienne_commande_lentille',
-                          $data);
+            $data);
 
     }
 
@@ -11513,7 +11800,6 @@ class admin
 
         if ($orders =
             $this->getLensOrders($status)) {
-
             foreach ($orders
                      as
                      $order) {
@@ -11522,7 +11808,7 @@ class admin
                     $this->m_lens->getLens($order->lens_id);
                 $build =
                     json_decode($order->information_commande,
-                                true);
+                        true);
 
                 $corrections =
                     '';
@@ -11538,7 +11824,7 @@ class admin
                     if (!isset($build['excl'][$side])) {
 
                         $corrections .= $v .
-                                        ' : ';
+                            ' : ';
 
                         foreach ($config['attrs']
                                  as
@@ -11548,9 +11834,9 @@ class admin
                         {
                             if (isset($build[$attr][$side])) {
                                 $corrections .= $name .
-                                                ' : ' .
-                                                $build[$attr][$side] .
-                                                ', ';
+                                    ' : ' .
+                                    $build[$attr][$side] .
+                                    ', ';
                             }
                         }
 
@@ -11586,7 +11872,7 @@ class admin
                         '-' .
                         $order->id_users,
                         date('d/m/Y H:i',
-                             strtotime($order->date_commande)),
+                            strtotime($order->date_commande)),
                         '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
                         $order->id_users .
                         '"><i class="zmdi zmdi-search"></i> Voir</a>',
@@ -11602,9 +11888,9 @@ class admin
                         $order->name,
                         $corrections,
                         number_format($order->total_commande,
-                                      2,
-                                      ',',
-                                      '') .
+                            2,
+                            ',',
+                            '') .
                         ' €',
                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" class="lensCheck" data-order="' .
                         $order->id_commande .
@@ -11618,7 +11904,7 @@ class admin
                         $order->id_users .
                         '" ' .
                         ($order->check_date !=
-                         null ?
+                        null ?
                             'checked' :
                             '') .
                         ' /> <label for="check_' .
@@ -11631,9 +11917,9 @@ class admin
                         $order->id_users .
                         '">' .
                         ($order->date_annule !==
-                         null ?
+                        null ?
                             date('d/m/Y',
-                                 strtotime($order->date_annule)) :
+                                strtotime($order->date_annule)) :
                             '') .
                         '</label></div>',
                     );
@@ -11662,7 +11948,7 @@ class admin
                 //$montures = $this->m_montures->getMontures($order->montures_id);
                 $montures =
                     json_decode($order->information_commande,
-                                true);
+                        true);
 
                 $corrections =
                     '';
@@ -11680,31 +11966,31 @@ class admin
                     if ($monture['id'] !=
                         null) {
                         $details .= '<strong>' .
-                                    $monture['collection'] .
-                                    ' ' .
-                                    $monture['modele'] .
-                                    ':</strong> ' .
-                                    $monture['size'] .
-                                    ' ' .
-                                    $monture['type'] .
-                                    ' ' .
-                                    $monture['couleur'] .
-                                    ' x' .
-                                    $monture['qty'] .
-                                    ', ';
+                            $monture['collection'] .
+                            ' ' .
+                            $monture['modele'] .
+                            ':</strong> ' .
+                            $monture['size'] .
+                            ' ' .
+                            $monture['type'] .
+                            ' ' .
+                            $monture['couleur'] .
+                            ' x' .
+                            $monture['qty'] .
+                            ', ';
                     } else {
                         $details .= '<strong>Pack ' .
-                                    $monture['pack'] .
-                                    '</strong> x' .
-                                    $monture['qty'] .
-                                    ', ';
+                            $monture['pack'] .
+                            '</strong> x' .
+                            $monture['qty'] .
+                            ', ';
                     }
 
 
                 }
                 $details =
                     rtrim($details,
-                          ", ");
+                        ", ");
 
                 $data['aaData'][] =
                     array(
@@ -11732,7 +12018,7 @@ class admin
                         '-' .
                         $order->id_users,
                         date('d/m/Y H:i',
-                             strtotime($order->date_commande)),
+                            strtotime($order->date_commande)),
                         '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
                         $order->id_users .
                         '"><i class="zmdi zmdi-search"></i> Voir</a>',
@@ -11744,9 +12030,9 @@ class admin
                         $order->reference_client,
                         $details,
                         number_format($order->total_commande,
-                                      2,
-                                      ',',
-                                      '') .
+                            2,
+                            ',',
+                            '') .
                         ' €',
                         '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" class="monturesCheck" data-order="' .
                         $order->id_commande .
@@ -11760,7 +12046,7 @@ class admin
                         $order->id_users .
                         '" ' .
                         ($order->check_date !=
-                         null ?
+                        null ?
                             'checked' :
                             '') .
                         ' /> <label for="check_' .
@@ -11773,9 +12059,9 @@ class admin
                         $order->id_users .
                         '">' .
                         ($order->date_annule !==
-                         null ?
+                        null ?
                             date('d/m/Y',
-                                 strtotime($order->date_annule)) :
+                                strtotime($order->date_annule)) :
                             '') .
                         '</label></div>',
                     );
@@ -11800,7 +12086,7 @@ class admin
                 ($day, $month,
                 $year) =
                 explode("/",
-                        $data['date_bl']);
+                    $data['date_bl']);
             $date =
                 $year . "-" .
                 $month . "-" .
@@ -11811,7 +12097,7 @@ class admin
 
             $intitule =
                 substr($year,
-                       2, 2) .
+                    2, 2) .
                 $month . $day;
 
             $max_intitule =
@@ -11833,8 +12119,8 @@ class admin
                     1;
                 $min =
                     str_replace($intitule,
-                                '',
-                                (string)$min);
+                        '',
+                        (string)$min);
                 $max = 999;
 
                 if ($min >=
@@ -11846,10 +12132,10 @@ class admin
                 do {
                     $rand =
                         mt_rand($min,
-                                $max);
+                            $max);
                 } while ($this->m_commande->checkIntituleBl($intitule,
-                                                            $rand)[0]->IntituleBL !=
-                         0);
+                    $rand)[0]->IntituleBL !=
+                0);
 
                 $data['intitule_bl'] =
                     $intitule .
@@ -11874,8 +12160,8 @@ class admin
                 $file_pdf =
                     'bon_livraison_lentille';
             } elseif (isset($data['is_montures']) &&
-                      $data['is_montures'] ==
-                      1) {
+                $data['is_montures'] ==
+                1) {
                 $file_pdf =
                     'bon_livraison_montures';
             } else {
@@ -11887,8 +12173,8 @@ class admin
                 $this->config->item('directory_pdf') .
                 "/" .
                 $this->generer_pdf($file_pdf,
-                                   $data['id_commande'],
-                                   true);
+                    $data['id_commande'],
+                    true);
 
             /*$user = $this->m_users->getUserById(1);
             $data['email_cc'] = $user[0]->email;*/
@@ -11916,10 +12202,10 @@ class admin
             $html = true;
 
             $this->mail($data,
-                        $mess_txt,
-                        $html,
-                        $subjet_txt,
-                        $piece_jointe);
+                $mess_txt,
+                $html,
+                $subjet_txt,
+                $piece_jointe);
 
             if (is_file($piece_jointe)) {
                 unlink($piece_jointe);
@@ -11945,7 +12231,7 @@ class admin
                 ($day, $month,
                 $year) =
                 explode("/",
-                        $data['date_bl']);
+                    $data['date_bl']);
             $date =
                 $year . "-" .
                 $month . "-" .
@@ -11956,7 +12242,7 @@ class admin
 
             $intitule =
                 substr($year,
-                       2, 2) .
+                    2, 2) .
                 $month . $day;
 
             $max_intitule =
@@ -11976,19 +12262,19 @@ class admin
                 isset($data['libelle_quantite_lentille_gauche'])) {
                 $data['quantite_type_optique'] =
                     json_encode(array(
-                                    'quantite_droit' => $data['libelle_quantite_lentille_droit'],
-                                    'quantite_gauche' => $data['libelle_quantite_lentille_gauche']
-                                ));
+                        'quantite_droit' => $data['libelle_quantite_lentille_droit'],
+                        'quantite_gauche' => $data['libelle_quantite_lentille_gauche']
+                    ));
 
                 unset($data['libelle_quantite_lentille_droit']);
                 unset($data['libelle_quantite_lentille_gauche']);
             } elseif (isset($data['libelle_quantite_montures_droit']) &&
-                      isset($data['libelle_quantite_montures_gauche'])) {
+                isset($data['libelle_quantite_montures_gauche'])) {
                 $data['quantite_type_optique'] =
                     json_encode(array(
-                                    'quantite_droit' => $data['libelle_quantite_montures_droit'],
-                                    'quantite_gauche' => $data['libelle_quantite_montures_gauche']
-                                ));
+                        'quantite_droit' => $data['libelle_quantite_montures_droit'],
+                        'quantite_gauche' => $data['libelle_quantite_montures_gauche']
+                    ));
 
                 unset($data['libelle_quantite_montures_droit']);
                 unset($data['libelle_quantite_montures_gauche']);
@@ -12021,8 +12307,8 @@ class admin
                 $this->config->item('directory_pdf') .
                 "/" .
                 $this->generer_pdf('bon_livraison',
-                                   $data['id_commande'],
-                                   true);
+                    $data['id_commande'],
+                    true);
 
             $user =
                 $this->m_users->getUserById(1);
@@ -12045,10 +12331,10 @@ class admin
             $html = true;
 
             $this->mail($data,
-                        $mess_txt,
-                        $html,
-                        $subjet_txt,
-                        $piece_jointe);
+                $mess_txt,
+                $html,
+                $subjet_txt,
+                $piece_jointe);
 
             if (is_file($piece_jointe)) {
                 unlink($piece_jointe);
@@ -12090,7 +12376,7 @@ class admin
             $data['recap_commande'] =
                 $this->m_commande->getCommandeById($id_commande);
             $this->load->view('admin/commande',
-                              $data);
+                $data);
         } else {
             $this->redirect('/admin');
         }
@@ -12127,7 +12413,7 @@ class admin
                 "0") {
                 $info_commande =
                     json_decode($data['recap_commande'][0]->information_commande,
-                                true);
+                        true);
 
                 if (isset($info_commande['verre']['correction_droit'])) {
                     if (isset($info_commande['verre']['correction_droit']['teinte']) &&
@@ -12163,10 +12449,10 @@ class admin
                 }
 
                 $this->load->view('admin/layout/commande-detail-new',
-                                  $data);
+                    $data);
             } else {
                 $this->load->view('admin/layout/commande-detail',
-                                  $data);
+                    $data);
             }
 
         }
@@ -12213,10 +12499,10 @@ class admin
             $order[0]->commentaire;
         $data['build'] =
             json_decode($order[0]->information_commande,
-                        true);
+                true);
 
         echo $this->load->view('ajax_view_lens_order',
-                               $data);
+            $data);
 
     }
 
@@ -12243,10 +12529,10 @@ class admin
             $order[0]->commentaire;
         $data['montures'] =
             json_decode($order[0]->information_commande,
-                        true);
+                true);
 
         echo $this->load->view('ajax_view_montures_order',
-                               $data);
+            $data);
     }
 
     public
@@ -12285,20 +12571,20 @@ class admin
         ));*/
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['etiquettes'],
-                              'control' => $total['etiquettes']
-                          ));
+            array(
+                'v' => $data['control']['etiquettes'],
+                'control' => $total['etiquettes']
+            ));
 
 
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                            '/' .
-                            $this->pdf("etiquette",
-                                       $data,
-                                       "",
-                                       false),
+                '/' .
+                $this->pdf("etiquette",
+                    $data,
+                    "",
+                    false),
         );
 
         $commandes = array();
@@ -12320,10 +12606,10 @@ class admin
                 //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
                 $get =
                     $this->db->select('value')
-                             ->where('v',
-                                     $v)
-                             ->get('controle_test')
-                             ->result()
+                        ->where('v',
+                            $v)
+                        ->get('controle_test')
+                        ->result()
                 ;
                 $gen[$k] =
                     $get[0]->value;
@@ -12344,16 +12630,16 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                        count($commandes) . '</b><br />
+                count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                        $c['etiquettes'] .
-                        '">' .
-                        ($gen['etiquettes'] !=
-                         '' ?
-                            $gen['etiquettes'] :
-                            0) .
-                        ' / ' .
-                        $total['etiquettes'] . '</b><br />
+                $c['etiquettes'] .
+                '">' .
+                ($gen['etiquettes'] !=
+                '' ?
+                    $gen['etiquettes'] :
+                    0) .
+                ' / ' .
+                $total['etiquettes'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -12361,7 +12647,7 @@ class admin
                      $v) {
                 //$this->db->delete('controle', array('id' => $v));
                 $this->db->delete('controle_test',
-                                  array('v' => $v));
+                    array('v' => $v));
             }
 
             $sujet_txt =
@@ -12372,10 +12658,10 @@ class admin
 
 
             $this->mail($data,
-                        $mess_txt,
-                        true,
-                        $sujet_txt,
-                        $docs);
+                $mess_txt,
+                true,
+                $sujet_txt,
+                $docs);
             echo 'sent';
 
         } else {
@@ -12428,13 +12714,13 @@ class admin
             $date =
                 date("Y-m-d H:i:s");
             $this->m_commande->updateCommandeSend($date,
-                                                  4);
+                4);
             $this->config->item('directory_pdf') .
             '/' .
             $this->pdf("etiquette_montures",
-                       $data,
-                       "",
-                       false);
+                $data,
+                "",
+                false);
 
         } else {
             echo 'empty';
@@ -12475,7 +12761,7 @@ class admin
                      $value) {
                 $info_commande =
                     json_decode($value->information_commande,
-                                true);
+                        true);
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
@@ -12517,43 +12803,43 @@ class admin
 
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['etiquettes'],
-                              'control' => $total['etiquettes']
-                          ));
+            array(
+                'v' => $data['control']['etiquettes'],
+                'control' => $total['etiquettes']
+            ));
 
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['certificat'],
-                              'control' => count($data['certificat'])
-                          ));
+            array(
+                'v' => $data['control']['certificat'],
+                'control' => count($data['certificat'])
+            ));
 
 
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                            '/' .
-                            $this->pdf("etiquette_fabrication",
-                                       $data,
-                                       '' .
-                                       date('Y_m_d_H-i-s'),
-                                       false),
+                '/' .
+                $this->pdf("etiquette_fabrication",
+                    $data,
+                    '' .
+                    date('Y_m_d_H-i-s'),
+                    false),
             'certificat' => $this->config->item('directory_pdf') .
-                            '/' .
-                            $this->pdf('certificat_authenticite',
-                                       $data,
-                                       '' .
-                                       date('Y_m_d_H-i-s'),
-                                       false,
-                                       'paysage',
-                                       $customsize =
-                                           array(
-                                               0,
-                                               0,
-                                               243,
-                                               153
-                                           ))
+                '/' .
+                $this->pdf('certificat_authenticite',
+                    $data,
+                    '' .
+                    date('Y_m_d_H-i-s'),
+                    false,
+                    'paysage',
+                    $customsize =
+                        array(
+                            0,
+                            0,
+                            243,
+                            153
+                        ))
         );
 
         $commandes = array();
@@ -12575,10 +12861,10 @@ class admin
                 //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
                 $get =
                     $this->db->select('value')
-                             ->where('v',
-                                     $v)
-                             ->get('controle_test')
-                             ->result()
+                        ->where('v',
+                            $v)
+                        ->get('controle_test')
+                        ->result()
                 ;
                 $gen[$k] =
                     $get[0]->value;
@@ -12599,25 +12885,25 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                        count($commandes) . '</b><br />
+                count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                        $c['etiquettes'] .
-                        '">' .
-                        ($gen['etiquettes'] !=
-                         '' ?
-                            $gen['etiquettes'] :
-                            0) .
-                        ' / ' .
-                        $total['etiquettes'] . '</b><br />
+                $c['etiquettes'] .
+                '">' .
+                ($gen['etiquettes'] !=
+                '' ?
+                    $gen['etiquettes'] :
+                    0) .
+                ' / ' .
+                $total['etiquettes'] . '</b><br />
             - Nombre de certificats générées : <b style="color: ' .
-                        $c['certificat'] .
-                        '">' .
-                        ($gen['certificat'] !=
-                         '' ?
-                            $gen['certificat'] :
-                            0) .
-                        ' / ' .
-                        $total['certificat'] . '</b><br />
+                $c['certificat'] .
+                '">' .
+                ($gen['certificat'] !=
+                '' ?
+                    $gen['certificat'] :
+                    0) .
+                ' / ' .
+                $total['certificat'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -12625,7 +12911,7 @@ class admin
                      $v) {
                 //$this->db->delete('controle', array('id' => $v));
                 $this->db->delete('controle_test',
-                                  array('v' => $v));
+                    array('v' => $v));
             }
 
             $sujet_txt =
@@ -12644,11 +12930,11 @@ class admin
         }
 
         return $this->config->item('directory_pdf') .
-               '/' .
-               $this->pdf("etiquette_fabrication",
-                          $data,
-                          "",
-                          true);
+            '/' .
+            $this->pdf("etiquette_fabrication",
+                $data,
+                "",
+                true);
 
     }
 
@@ -12685,7 +12971,7 @@ class admin
                      $value) {
                 $info_commande =
                     json_decode($value->information_commande,
-                                true);
+                        true);
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
@@ -12727,189 +13013,189 @@ class admin
 
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['etiquettes'],
-                              'control' => $total['etiquettes']
-                          ));
+            array(
+                'v' => $data['control']['etiquettes'],
+                'control' => $total['etiquettes']
+            ));
 
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['certificat'],
-                              'control' => count($data['certificat'])
-                          ));
+            array(
+                'v' => $data['control']['certificat'],
+                'control' => count($data['certificat'])
+            ));
 
 
         if (count($etiquettes) >
             200) {
             $data['etiquette'] =
                 $this->m_commande->getEtiquetteFabricationNew(0,
-                                                              100);
+                    100);
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false),
+                    '/' .
+                    $this->pdf("etiquette_fabrication",
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false),
                 'certificat' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf('certificat_authenticite',
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false,
-                                           'paysage',
-                                           $customsize =
-                                               array(
-                                                   0,
-                                                   0,
-                                                   243,
-                                                   153
-                                               ))
+                    '/' .
+                    $this->pdf('certificat_authenticite',
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false,
+                        'paysage',
+                        $customsize =
+                            array(
+                                0,
+                                0,
+                                243,
+                                153
+                            ))
             );
 
             $data['etiquette'] =
                 $this->m_commande->getEtiquetteFabricationNew(100,
-                                                              100);
+                    100);
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false)
+                    '/' .
+                    $this->pdf("etiquette_fabrication",
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false)
             );
 
             $data['etiquette'] =
                 $this->m_commande->getEtiquetteFabricationNew(200,
-                                                              100);
+                    100);
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false)
+                    '/' .
+                    $this->pdf("etiquette_fabrication",
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false)
             );
 
             if (count($etiquettes) >
                 300) {
                 $data['etiquette'] =
                     $this->m_commande->getEtiquetteFabricationNew(300,
-                                                                  100);
+                        100);
                 // Génération des PDF
                 $docs = array(
                     'etiquettes' => $this->config->item('directory_pdf') .
-                                    '/' .
-                                    $this->pdf("etiquette_fabrication",
-                                               $data,
-                                               '' .
-                                               date('Y_m_d_H-i-s'),
-                                               false)
+                        '/' .
+                        $this->pdf("etiquette_fabrication",
+                            $data,
+                            '' .
+                            date('Y_m_d_H-i-s'),
+                            false)
                 );
 
                 if (count($etiquettes) >
                     400) {
                     $data['etiquette'] =
                         $this->m_commande->getEtiquetteFabricationNew(400,
-                                                                      100);
+                            100);
                     // Génération des PDF
                     $docs =
                         array(
                             'etiquettes' => $this->config->item('directory_pdf') .
-                                            '/' .
-                                            $this->pdf("etiquette_fabrication",
-                                                       $data,
-                                                       '' .
-                                                       date('Y_m_d_H-i-s'),
-                                                       false)
+                                '/' .
+                                $this->pdf("etiquette_fabrication",
+                                    $data,
+                                    '' .
+                                    date('Y_m_d_H-i-s'),
+                                    false)
                         );
                     if (count($etiquettes) >
                         500) {
                         $data['etiquette'] =
                             $this->m_commande->getEtiquetteFabricationNew(500,
-                                                                          100);
+                                100);
                         // Génération des PDF
                         $docs =
                             array(
                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                                '/' .
-                                                $this->pdf("etiquette_fabrication",
-                                                           $data,
-                                                           '' .
-                                                           date('Y_m_d_H-i-s'),
-                                                           false)
+                                    '/' .
+                                    $this->pdf("etiquette_fabrication",
+                                        $data,
+                                        '' .
+                                        date('Y_m_d_H-i-s'),
+                                        false)
                             );
                         if (count($etiquettes) >
                             600) {
                             $data['etiquette'] =
                                 $this->m_commande->getEtiquetteFabricationNew(600,
-                                                                              100);
+                                    100);
                             // Génération des PDF
                             $docs =
                                 array(
                                     'etiquettes' => $this->config->item('directory_pdf') .
-                                                    '/' .
-                                                    $this->pdf("etiquette_fabrication",
-                                                               $data,
-                                                               '' .
-                                                               date('Y_m_d_H-i-s'),
-                                                               false)
+                                        '/' .
+                                        $this->pdf("etiquette_fabrication",
+                                            $data,
+                                            '' .
+                                            date('Y_m_d_H-i-s'),
+                                            false)
                                 );
                             if (count($etiquettes) >
                                 700) {
                                 $data['etiquette'] =
                                     $this->m_commande->getEtiquetteFabricationNew(700,
-                                                                                  100);
+                                        100);
                                 // Génération des PDF
                                 $docs =
                                     array(
                                         'etiquettes' => $this->config->item('directory_pdf') .
-                                                        '/' .
-                                                        $this->pdf("etiquette_fabrication",
-                                                                   $data,
-                                                                   '' .
-                                                                   date('Y_m_d_H-i-s'),
-                                                                   false)
+                                            '/' .
+                                            $this->pdf("etiquette_fabrication",
+                                                $data,
+                                                '' .
+                                                date('Y_m_d_H-i-s'),
+                                                false)
                                     );
                                 if (count($etiquettes) >
                                     800) {
                                     $data['etiquette'] =
                                         $this->m_commande->getEtiquetteFabricationNew(800,
-                                                                                      100);
+                                            100);
                                     // Génération des PDF
                                     $docs =
                                         array(
                                             'etiquettes' => $this->config->item('directory_pdf') .
-                                                            '/' .
-                                                            $this->pdf("etiquette_fabrication",
-                                                                       $data,
-                                                                       '' .
-                                                                       date('Y_m_d_H-i-s'),
-                                                                       false)
+                                                '/' .
+                                                $this->pdf("etiquette_fabrication",
+                                                    $data,
+                                                    '' .
+                                                    date('Y_m_d_H-i-s'),
+                                                    false)
                                         );
                                     if (count($etiquettes) >
                                         900) {
                                         $data['etiquette'] =
                                             $this->m_commande->getEtiquetteFabricationNew(900,
-                                                                                          100);
+                                                100);
                                         // Génération des PDF
                                         $docs =
                                             array(
                                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                                                '/' .
-                                                                $this->pdf("etiquette_fabrication",
-                                                                           $data,
-                                                                           '' .
-                                                                           date('Y_m_d_H-i-s'),
-                                                                           false)
+                                                    '/' .
+                                                    $this->pdf("etiquette_fabrication",
+                                                        $data,
+                                                        '' .
+                                                        date('Y_m_d_H-i-s'),
+                                                        false)
                                             );
 
                                     }
@@ -12920,17 +13206,17 @@ class admin
                                             1000;
                                         $data['etiquette'] =
                                             $this->m_commande->getEtiquetteFabricationNew(1000,
-                                                                                          $to);
+                                                $to);
                                         // Génération des PDF
                                         $docs =
                                             array(
                                                 'etiquettes' => $this->config->item('directory_pdf') .
-                                                                '/' .
-                                                                $this->pdf("etiquette_fabrication",
-                                                                           $data,
-                                                                           '' .
-                                                                           date('Y_m_d_H-i-s'),
-                                                                           false)
+                                                    '/' .
+                                                    $this->pdf("etiquette_fabrication",
+                                                        $data,
+                                                        '' .
+                                                        date('Y_m_d_H-i-s'),
+                                                        false)
                                             );
 
                                     }
@@ -12954,27 +13240,27 @@ class admin
             // Génération des PDF
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false),
+                    '/' .
+                    $this->pdf("etiquette_fabrication",
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false),
                 'certificat' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf('certificat_authenticite',
-                                           $data,
-                                           '' .
-                                           date('Y_m_d_H-i-s'),
-                                           false,
-                                           'paysage',
-                                           $customsize =
-                                               array(
-                                                   0,
-                                                   0,
-                                                   243,
-                                                   153
-                                               ))
+                    '/' .
+                    $this->pdf('certificat_authenticite',
+                        $data,
+                        '' .
+                        date('Y_m_d_H-i-s'),
+                        false,
+                        'paysage',
+                        $customsize =
+                            array(
+                                0,
+                                0,
+                                243,
+                                153
+                            ))
             );
         }
 
@@ -12998,10 +13284,10 @@ class admin
                 //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
                 $get =
                     $this->db->select('value')
-                             ->where('v',
-                                     $v)
-                             ->get('controle_test')
-                             ->result()
+                        ->where('v',
+                            $v)
+                        ->get('controle_test')
+                        ->result()
                 ;
                 $gen[$k] =
                     $get[0]->value;
@@ -13022,25 +13308,25 @@ class admin
 
             $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
             - Nombre de commandes : <b>' .
-                        count($commandes) . '</b><br />
+                count($commandes) . '</b><br />
             - Nombre d\'étiquettes générées : <b style="color: ' .
-                        $c['etiquettes'] .
-                        '">' .
-                        ($gen['etiquettes'] !=
-                         '' ?
-                            $gen['etiquettes'] :
-                            0) .
-                        ' / ' .
-                        $total['etiquettes'] . '</b><br />
+                $c['etiquettes'] .
+                '">' .
+                ($gen['etiquettes'] !=
+                '' ?
+                    $gen['etiquettes'] :
+                    0) .
+                ' / ' .
+                $total['etiquettes'] . '</b><br />
             - Nombre de certificats générées : <b style="color: ' .
-                        $c['certificat'] .
-                        '">' .
-                        ($gen['certificat'] !=
-                         '' ?
-                            $gen['certificat'] :
-                            0) .
-                        ' / ' .
-                        $total['certificat'] . '</b><br />
+                $c['certificat'] .
+                '">' .
+                ($gen['certificat'] !=
+                '' ?
+                    $gen['certificat'] :
+                    0) .
+                ' / ' .
+                $total['certificat'] . '</b><br />
             ';
 
             foreach ($data['control']
@@ -13048,7 +13334,7 @@ class admin
                      $v) {
                 //$this->db->delete('controle', array('id' => $v));
                 $this->db->delete('controle_test',
-                                  array('v' => $v));
+                    array('v' => $v));
             }
 
             $sujet_txt =
@@ -13067,11 +13353,11 @@ class admin
         }
 
         return $this->config->item('directory_pdf') .
-               '/' .
-               $this->pdf("etiquette_fabrication",
-                          $data,
-                          "",
-                          true);
+            '/' .
+            $this->pdf("etiquette_fabrication",
+                $data,
+                "",
+                true);
 
     }
 
@@ -13103,7 +13389,7 @@ class admin
                      $value) {
                 $info_commande =
                     json_decode($value->information_commande,
-                                true);
+                        true);
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
@@ -13152,40 +13438,40 @@ class admin
         ));
         */
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['etiquettes'],
-                              'control' => $total['etiquettes']
-                          ));
+            array(
+                'v' => $data['control']['etiquettes'],
+                'control' => $total['etiquettes']
+            ));
 
 
         $this->db->insert('controle_test',
-                          array(
-                              'v' => $data['control']['certificat'],
-                              'control' => count($data['certificat'])
-                          ));
+            array(
+                'v' => $data['control']['certificat'],
+                'control' => count($data['certificat'])
+            ));
 
         // Génération des PDF
         $docs = array(
             'etiquettes' => $this->config->item('directory_pdf') .
-                            '/' .
-                            $this->pdf("etiquette_fabrication",
-                                       $data,
-                                       "",
-                                       false),
+                '/' .
+                $this->pdf("etiquette_fabrication",
+                    $data,
+                    "",
+                    false),
             'certificat' => $this->config->item('directory_pdf') .
-                            '/' .
-                            $this->pdf('certificat_authenticite',
-                                       $data,
-                                       '',
-                                       false,
-                                       'paysage',
-                                       $customsize =
-                                           array(
-                                               0,
-                                               0,
-                                               243,
-                                               153
-                                           ))
+                '/' .
+                $this->pdf('certificat_authenticite',
+                    $data,
+                    '',
+                    false,
+                    'paysage',
+                    $customsize =
+                        array(
+                            0,
+                            0,
+                            243,
+                            153
+                        ))
         );
 
         $commandes = array();
@@ -13199,11 +13485,11 @@ class admin
             }
 
             return $this->config->item('directory_pdf') .
-                   '/' .
-                   $this->pdf("etiquette_fabrication",
-                              $data,
-                              "",
-                              true);
+                '/' .
+                $this->pdf("etiquette_fabrication",
+                    $data,
+                    "",
+                    true);
 
         }
 
@@ -13229,16 +13515,16 @@ class admin
                 $expedie[] =
                     $commande->id_commande;
                 $this->update_commande($commande->id_commande,
-                                       6,
-                                       $commande->id_users,
-                                       true);
+                    6,
+                    $commande->id_users,
+                    true);
 
                 $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
-                                 $commande->id_users .
-                                 ', ' .
-                                 time() .
-                                 ') ON DUPLICATE KEY UPDATE expedition_date = ' .
-                                 time());
+                    $commande->id_users .
+                    ', ' .
+                    time() .
+                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+                    time());
 
             }
 
@@ -13280,26 +13566,26 @@ class admin
         if (!empty($_FILES['csv_file']['name'])) {
             $file_data =
                 fopen($_FILES['csv_file']['tmp_name'],
-                      'r');
+                    'r');
             $i = 0;
             while (($data =
                     fgetcsv($file_data,
-                            1000,
-                            ";")) !==
-                   FALSE) {
+                        1000,
+                        ";")) !==
+                FALSE) {
                 $num =
                     count($data);
 
                 if ($i > 0) {
                     echo $data[1] .
-                         "\n";
+                        "\n";
                     $ref =
                         explode("-",
-                                $data[1]);
+                            $data[1]);
                     $query =
                         $this->db->query("INSERT INTO `commande_pointage` (`id_commande`, `date_pointage`) VALUES ('" .
-                                         $ref[0] .
-                                         "', CURRENT_DATE());");
+                            $ref[0] .
+                            "', CURRENT_DATE());");
                     //$verre = $query->result();
                 }
                 $i++;
@@ -13387,10 +13673,10 @@ class admin
                          as
                          $c) {
                     $message .= 'Magasin ' .
-                                $c->user_id .
-                                '<br />';
+                        $c->user_id .
+                        '<br />';
                     $this->db->delete('expedition',
-                                      array('user_id' => $c->user_id));
+                        array('user_id' => $c->user_id));
                 }
             }
 
@@ -13402,9 +13688,9 @@ class admin
                 'Clients ayant des commandes expediées';
 
             if ($this->mail($data,
-                            $message,
-                            true,
-                            $title)) {
+                $message,
+                true,
+                $title)) {
                 echo 'ok';
             }
 
@@ -13433,22 +13719,22 @@ class admin
 
                     $correction =
                         json_decode($c->information_commande,
-                                    true);
+                            true);
                     //echo $c->name."<br>";
                     if (strpos($c->name,
-                               "- stock") !==
+                            "- stock") !==
                         false ||
                         strpos($c->name,
-                               "-stock") !==
+                            "-stock") !==
                         false ||
                         strpos($c->name,
-                               "-Stock") !==
+                            "-Stock") !==
                         false ||
                         strpos($c->name,
-                               " - Stock") !==
+                            " - Stock") !==
                         false ||
                         strpos($c->name,
-                               " - stock") !==
+                            " - stock") !==
                         false) {
                         $type =
                             'stock';
@@ -13463,18 +13749,18 @@ class admin
                         $c->id_users .
                         ' from ' .
                         date('Y-m-d',
-                             strtotime($c->date_commande));
+                            strtotime($c->date_commande));
                 }
             }
             //var_dump($orders);
             if (isset($orders['fabric'])) {
                 $message .= '<b>RX Lenses :</b><br />' .
-                            PHP_EOL;
+                    PHP_EOL;
                 foreach ($orders['fabric']
                          as
                          $f) {
                     $message .= $f .
-                                '<br />';
+                        '<br />';
                 }
 
                 $message .= '<br />';
@@ -13482,12 +13768,12 @@ class admin
 
             if (isset($orders['stock'])) {
                 $message .= '<b>Stock Lenses :</b><br />' .
-                            PHP_EOL;
+                    PHP_EOL;
                 foreach ($orders['stock']
                          as
                          $s) {
                     $message .= $s .
-                                '<br />';
+                        '<br />';
                 }
             }
 
@@ -13503,9 +13789,9 @@ class admin
                 'Order status ?';
 
             if ($this->mail($data,
-                            $message,
-                            true,
-                            $title)) {
+                $message,
+                true,
+                $title)) {
                 echo 'ok';
             }
 
@@ -13566,7 +13852,7 @@ class admin
             $result[0]->maxUser;
 
         $this->load->view('admin/ancienne_commande',
-                          $data);
+            $data);
     }
 
     public
@@ -13648,14 +13934,14 @@ class admin
 
             $data_commande =
                 $this->m_commande->getOldOrder($start,
-                                               $length,
-                                               $id_users,
-                                               $reference_optieyes,
-                                               $reference_client,
+                    $length,
+                    $id_users,
+                    $reference_optieyes,
+                    $reference_client,
 //                                               $date_start,
-                                               $recherche_sphere,
-                                               $recherche_cylindre,
-                                               $recherche_axe
+                    $recherche_sphere,
+                    $recherche_cylindre,
+                    $recherche_axe
                 );
 
 //            $data['recordsTotal'] =
@@ -13693,12 +13979,12 @@ class admin
                     if ($commande->ancienne_commande >
                         0) {
                         $ref_commande .= '<br />(CR' .
-                                         $commande->ancienne_commande .
-                                         '-' .
-                                         $commande->id_users .
-                                         ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                         $commande->id_commande .
-                                         '">Comparer</a>';
+                            $commande->ancienne_commande .
+                            '-' .
+                            $commande->id_users .
+                            ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                            $commande->id_commande .
+                            '">Comparer</a>';
                     }
 
                     if ($commande->penalty ==
@@ -13721,7 +14007,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Casse atelier';
@@ -13733,7 +14019,7 @@ class admin
                                 $commande->total_commande .
                                 '</del> ' .
                                 ($commande->tarif_express >
-                                 0 ?
+                                0 ?
                                     $commande->tarif_express :
                                     '0') .
                                 ' €<br />Erreur ophta';
@@ -13761,7 +14047,7 @@ class admin
                         '23') {
                         $certif_panierA = "<br>
 						<a href=\"/static/aa/certificat_authenticite_" .
-                                          $commande->id_commande . ".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
+                            $commande->id_commande . ".pdf\" class=\"btn btn-warning btn-sm\"><i class=\"zmdi zmdi-download\"></i> Certif</a>
 						";
                     }
                     if ($commande->id_commande >
@@ -13773,9 +14059,9 @@ class admin
                                 $ref_commande,
                                 $commande->intitule_bl,
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_commande)),
+                                    strtotime($commande->date_commande)),
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_update_commande)),
+                                    strtotime($commande->date_update_commande)),
                                 $diff->days,
                                 $commande->reference_client,
                                 $ispanier_A,
@@ -13821,9 +14107,9 @@ class admin
                                 $ref_commande,
                                 $commande->intitule_bl,
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_commande)),
+                                    strtotime($commande->date_commande)),
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_update_commande)),
+                                    strtotime($commande->date_update_commande)),
                                 $diff->days,
                                 $commande->reference_client,
                                 $ispanier_A,
@@ -13901,15 +14187,15 @@ class admin
 
             $data_commande =
                 $this->m_lens->getOldOrder($start,
-                                           $length,
-                                           $search,
-                                           $id_users);
+                    $length,
+                    $search,
+                    $id_users);
 
             $data['recordsTotal'] =
                 $this->m_lens->countAllOrders()[0]->total;
             $data['recordsFiltered'] =
                 $this->m_lens->countAllOrders($id_users,
-                                              $search)[0]->total;
+                    $search)[0]->total;
 
             if ($data_commande !==
                 false) {
@@ -13937,9 +14223,9 @@ class admin
                             $commande->id_users,
                             $commande->intitule_bl,
                             date('d/m/Y H:i',
-                                 strtotime($commande->date_commande)),
+                                strtotime($commande->date_commande)),
                             date('d/m/Y H:i',
-                                 strtotime($commande->date_update_commande)),
+                                strtotime($commande->date_update_commande)),
                             $diff->days,
                             $commande->reference_client,
                             '<a href="/admin/generer_pdf/bon_livraison_lentille/' .
@@ -14012,15 +14298,15 @@ class admin
 
             $data_commande =
                 $this->m_montures->getOldOrder($start,
-                                               $length,
-                                               $search,
-                                               $id_users);
+                    $length,
+                    $search,
+                    $id_users);
 
             $data['recordsTotal'] =
                 $this->m_montures->countAllOrders()[0]->total;
             $data['recordsFiltered'] =
                 $this->m_montures->countAllOrders($id_users,
-                                                  $search)[0]->total;
+                    $search)[0]->total;
 
             if ($data_commande !==
                 false) {
@@ -14047,9 +14333,9 @@ class admin
                             '-' .
                             $commande->id_users,
                             date('d/m/Y H:i',
-                                 strtotime($commande->date_commande)),
+                                strtotime($commande->date_commande)),
                             date('d/m/Y H:i',
-                                 strtotime($commande->date_update_commande)),
+                                strtotime($commande->date_update_commande)),
                             $commande->reference_client,
                             '<a href="/admin/generer_pdf/bon_livraison_montures/' .
                             $commande->id_commande .
@@ -14111,7 +14397,7 @@ class admin
             $data['id_generation'] =
                 $id_generation;
             $this->load->view('admin/prix_verre',
-                              $data);
+                $data);
         } else {
             $this->redirect("/index");
         }
@@ -14208,7 +14494,7 @@ class admin
             );
 
         $this->load->view('admin/liste_lentille',
-                          $data);
+            $data);
 
     }
 
@@ -14278,7 +14564,7 @@ class admin
             $data['id_generation'] =
                 $id_generation;
             $this->load->view('admin/prix_lentille',
-                              $data);
+                $data);
         } else {
             $this->redirect("/index");
         }
@@ -14308,7 +14594,7 @@ class admin
 
             if ($lenses =
                 $this->m_lens->getLensPrices($id_generation,
-                                             $grille)) {
+                    $grille)) {
 
                 foreach ($lenses
                          as
@@ -14389,7 +14675,7 @@ class admin
                     $this->db->select('image');
                     $this->db->from('montures');
                     $this->db->where('id',
-                                     $id_monture);
+                        $id_monture);
                     $query =
                         $this->db->get();
 
@@ -14410,7 +14696,7 @@ class admin
                 $this->db->select('image');
                 $this->db->from('montures');
                 $this->db->where('id',
-                                 $id_monture);
+                    $id_monture);
                 $query =
                     $this->db->get();
 
@@ -14418,7 +14704,7 @@ class admin
                     $filename =
                         $query->result()[0]->image;
                     unlink('/var/www/vhosts/optieyescommande.com/httpdocs_new/uploads/' .
-                           $filename);
+                        $filename);
                 }
 
                 $filename =
@@ -14426,18 +14712,18 @@ class admin
 
             }
             $this->db->where('id',
-                             $id_monture);
+                $id_monture);
             if ($this->db->update('montures',
-                                  array(
-                                      'modele' => $_POST['modele'],
-                                      'type' => $_POST['type'],
-                                      'size' => $_POST['size'],
-                                      'couleur' => $_POST['couleur'],
-                                      'prix_achat' => $_POST['prix_achat'],
-                                      'prix_vente' => $_POST['prix_vente'],
-                                      'stock' => $_POST['stock'],
-                                      'image' => $filename
-                                  ))) {
+                array(
+                    'modele' => $_POST['modele'],
+                    'type' => $_POST['type'],
+                    'size' => $_POST['size'],
+                    'couleur' => $_POST['couleur'],
+                    'prix_achat' => $_POST['prix_achat'],
+                    'prix_vente' => $_POST['prix_vente'],
+                    'stock' => $_POST['stock'],
+                    'image' => $filename
+                ))) {
 
                 $url_to_redirect =
                     '/admin/modifier_monture/' .
@@ -14496,7 +14782,7 @@ class admin
         }
 
         $this->load->view('admin/modifier_montures',
-                          $data);
+            $data);
 
     }
 
@@ -14508,13 +14794,13 @@ class admin
         //$montures = array();
 
         if ((isset($_POST) &&
-             !empty($_POST))) {
+            !empty($_POST))) {
             $checkboxes =
                 $this->input->post('monturesPack');
             $this->m_montures->clearPackMonture($id_pack);
             $prix = 0;
             for ($i = 0; $i <
-                         count($checkboxes);
+            count($checkboxes);
                  $i++) {
 
                 $id_to_db =
@@ -14524,20 +14810,20 @@ class admin
                 $prix += $this->m_montures->getMonture($checkboxes[$i])->prix_vente;
 
                 $this->db->where('id',
-                                 $checkboxes[$i]);
+                    $checkboxes[$i]);
                 $this->db->set('pack',
-                               'CONCAT(pack,\',\',\'' .
-                               $id_to_db .
-                               '\')',
-                               FALSE);
+                    'CONCAT(pack,\',\',\'' .
+                    $id_to_db .
+                    '\')',
+                    FALSE);
                 $this->db->update('montures');
 
             }
             $this->db->where('id',
-                             $id_pack);
+                $id_pack);
             $this->db->set('prix',
-                           $prix,
-                           FALSE);
+                $prix,
+                FALSE);
             $this->db->update('montures_pack');
 
         }
@@ -14572,7 +14858,7 @@ class admin
 
 
         $this->load->view('admin/liste_montures_pack',
-                          $data);
+            $data);
 
     }
 
@@ -14661,17 +14947,17 @@ class admin
             }
 
             if ($this->db->insert('montures',
-                                  array(
-                                      'modele' => $_POST['modele'],
-                                      'image' => $filename,
-                                      'id_collection' => $_POST['collection_id'],
-                                      'type' => $_POST['type'],
-                                      'size' => $_POST['size'],
-                                      'couleur' => $_POST['couleur'],
-                                      'prix_achat' => $_POST['prix_achat'],
-                                      'prix_vente' => $_POST['prix_vente'],
-                                      'stock' => $_POST['stock']
-                                  ))) {
+                array(
+                    'modele' => $_POST['modele'],
+                    'image' => $filename,
+                    'id_collection' => $_POST['collection_id'],
+                    'type' => $_POST['type'],
+                    'size' => $_POST['size'],
+                    'couleur' => $_POST['couleur'],
+                    'prix_achat' => $_POST['prix_achat'],
+                    'prix_vente' => $_POST['prix_vente'],
+                    'stock' => $_POST['stock']
+                ))) {
                 $url_to_redirect =
                     '/admin/liste_montures/' .
                     $id_collection;
@@ -14711,7 +14997,7 @@ class admin
         }
 
         $this->load->view('admin/liste_montures',
-                          $data);
+            $data);
 
     }
 
@@ -14767,7 +15053,7 @@ class admin
     {
         $this->m_montures->del_monture($id_monture);
         $this->redirect('/admin/liste_montures/' .
-                        $id_collection);
+            $id_collection);
 
     }
 
@@ -14890,7 +15176,7 @@ class admin
             $data['id_generation'] =
                 $id_generation;
             $this->load->view('admin/prix_montures',
-                              $data);
+                $data);
         } else {
             $this->redirect("/index");
         }
@@ -14920,7 +15206,7 @@ class admin
 
             if ($montures =
                 $this->m_montures->getMonturesPrices($id_generation,
-                                                     $grille)) {
+                    $grille)) {
 
                 foreach ($montures
                          as
@@ -14970,7 +15256,7 @@ class admin
 
         $ndate =
             DateTime::createFromFormat('m-Y',
-                                       $date);
+                $date);
 
         $data['caByDay'] =
             $this->m_commande->getCaByDayOfMonth($ndate->format('Y-m'));
@@ -14983,7 +15269,7 @@ class admin
 
         $ca_mensuel_hors_livraison =
             $this->m_commande->CAMensuel($date,
-                                         false);
+                false);
         $data['ca_mensuel_hors_livraison'] =
             $ca_mensuel_hors_livraison;
 
@@ -14995,16 +15281,16 @@ class admin
 
         $html =
             $this->load->view($this->dirPdf .
-                              "/" .
-                              $nom_fichier_pdf,
-                              $data,
-                              true);
+                "/" .
+                $nom_fichier_pdf,
+                $data,
+                true);
         //echo $html;
         //var_dump()
         $this->pdf($nom_fichier_pdf,
-                   $data,
-                   $data_custom_file,
-                   true);
+            $data,
+            $data_custom_file,
+            true);
     }
 
     public
@@ -15034,7 +15320,7 @@ class admin
             $result[0]->maxUser;
 
         $this->load->view('admin/facture_client',
-                          $data);
+            $data);
     }
 
     public
@@ -15047,8 +15333,8 @@ class admin
                 $this->config->item('regions');
             $facture_client =
                 $this->m_commande->getAllCommandeByMonthAndUser($date,
-                                                                null,
-                                                                $user);
+                    null,
+                    $user);
 
             $data = array();
             $data['aaData'] =
@@ -15078,8 +15364,8 @@ class admin
 
                     $dep =
                         substr($facture_cli->cp,
-                               0,
-                               -3);
+                            0,
+                            -3);
 
 //                    var_dump($facture_cli->id_users);
 //                    var_dump($facture_cli->tarif_liv);
@@ -15091,67 +15377,67 @@ class admin
                             $facture_cli->nom_magasin,
                             $facture_cli->nom_societe,
                             date("m-Y",
-                                 strtotime($facture_cli->date_commande)),
+                                strtotime($facture_cli->date_commande)),
                             '<span id="totalFacture_' .
                             date("Y-m",
-                                 strtotime($facture_cli->date_commande)) .
+                                strtotime($facture_cli->date_commande)) .
                             '_' .
                             $facture_cli->id_users .
                             '">' .
                             number_format($facture_cli->total +
-                                          $this->m_commande->getPackagingByMonth($date,
-                                                                                 $facture_cli->id_users),
-                                          2,
-                                          '.',
-                                          ' ') .
+                                $this->m_commande->getPackagingByMonth($date,
+                                    $facture_cli->id_users),
+                                2,
+                                '.',
+                                ' ') .
                             '</span> €',
                             '<span>' .
                             number_format($facture_cli->total_lentilles,
-                                          2,
-                                          '.',
-                                          ' ') .
+                                2,
+                                '.',
+                                ' ') .
                             '</span> €',
                             '<span>' .
                             number_format($facture_cli->total_montures,
-                                          2,
-                                          '.',
-                                          ' ') .
+                                2,
+                                '.',
+                                ' ') .
                             '</span> €',
                             '<span>' .
                             number_format($facture_cli->total_stock,
-                                          2,
-                                          '.',
-                                          ' ') .
+                                2,
+                                '.',
+                                ' ') .
                             '</span> €',
                             '<span>' .
                             number_format(($facture_cli->total_fabrique +
-                                           $facture_cli->total_express),
+                                $facture_cli->total_express),
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
                             $facture_cli->tarif_liv +
                             $this->m_commande->getPackagingByMonth($date,
-                                                                   $facture_cli->id_users),
+                                $facture_cli->id_users),
                             '<a href="/admin/generer_pdf_facture/facture/' .
                             date("Y-m",
-                                 strtotime($facture_cli->date_commande)) .
+                                strtotime($facture_cli->date_commande)) .
                             '/' .
                             $facture_cli->id_users .
                             '" class="btn btn-warning"><i class="zmdi zmdi-download"></i></a>',
                             '<a class="btn btn-inverse" data-toggle="modal" data-target="#add-reduction" id="openReduction_' .
                             date("Y-m",
-                                 strtotime($facture_cli->date_commande)) .
+                                strtotime($facture_cli->date_commande)) .
                             '_' .
                             $facture_cli->id_users . '"><i class="zmdi zmdi-edit"></i></a>
                              <a class="btn btn-warning" data-toggle="modal" data-target="#get-reduction" id="deleteReduction_' .
                             date("Y-m",
-                                 strtotime($facture_cli->date_commande)) .
+                                strtotime($facture_cli->date_commande)) .
                             '_' .
                             $facture_cli->id_users .
                             '" ' .
                             ($facture_cli->reduction ==
-                             "0.00" ?
+                            "0.00" ?
                                 'style="display:none;"' :
                                 '') .
                             '><i class="zmdi zmdi-search"></i></a>',
@@ -15161,7 +15447,7 @@ class admin
 
                     $total_ht += $facture_cli->total;
                     $total_ht_liv += ($facture_cli->total -
-                                      $facture_cli->tarif_liv);
+                        $facture_cli->tarif_liv);
 
 
                     /*if($facture_cli->total_express > 0) {
@@ -15178,17 +15464,17 @@ class admin
             $data['totals'] =
                 array(
                     'ht' => number_format($total_ht +
-                                          $this->m_commande->getPackagingByMonth($date,
-                                                                                 $user),
-                                          2,
-                                          '.',
-                                          ' '),
+                        $this->m_commande->getPackagingByMonth($date,
+                            $user),
+                        2,
+                        '.',
+                        ' '),
                     'liv' => number_format($total_ht_liv -
-                                           $this->m_commande->getSupplementByMonth($date,
-                                                                                   $user),
-                                           2,
-                                           '.',
-                                           ' '),
+                        $this->m_commande->getSupplementByMonth($date,
+                            $user),
+                        2,
+                        '.',
+                        ' '),
                 );
 
             die(json_encode($data));
@@ -15205,14 +15491,14 @@ class admin
         $this->load->helper('slimpay');
 
         $date = date('m-Y',
-                     strtotime('last day of last month'));
+            strtotime('last day of last month'));
 
         $factures =
             $this->db->select('debit_id')
-                     ->where('mois',
-                             $date)
-                     ->get('paiements')
-                     ->result()
+                ->where('mois',
+                    $date)
+                ->get('paiements')
+                ->result()
         ;
 
         foreach ($factures as
@@ -15228,13 +15514,13 @@ class admin
                     'status' => $status['executionStatus'],
                     'execution_date' => $status['executionDate'],
                     'last_update' => date('Y-m-d H:i:s',
-                                          time())
+                        time())
                 );
 
                 $this->db->where('debit_id',
-                                 $f->debit_id)
-                         ->update('paiements',
-                                  $data)
+                    $f->debit_id)
+                    ->update('paiements',
+                        $data)
                 ;
 
             }
@@ -15279,7 +15565,7 @@ class admin
             $result[0]->maxUser;
 
         $this->load->view('admin/users',
-                          $data);
+            $data);
     }
 
     public
@@ -15315,8 +15601,8 @@ class admin
 
             $users =
                 $this->m_users->getAllUser($id_users,
-                                           $rib,
-                                           $deleted);
+                    $rib,
+                    $deleted);
             $nbGrilleTarifaire =
                 2;
             $regions =
@@ -15345,25 +15631,25 @@ class admin
                         $prix_livraison += 0.5)
                     {
                         $optionTarif .= '<option value="' .
-                                        $prix_livraison .
-                                        '" ' .
-                                        ($prix_livraison ==
-                                         $user->tarif_livraison ?
-                                            'selected' :
-                                            '') .
-                                        '>' .
-                                        $prix_livraison .
-                                        '</option>';
+                            $prix_livraison .
+                            '" ' .
+                            ($prix_livraison ==
+                            $user->tarif_livraison ?
+                                'selected' :
+                                '') .
+                            '>' .
+                            $prix_livraison .
+                            '</option>';
                     }
 
                     $dep =
                         substr($user->cp,
-                               0,
-                               -3);
+                            0,
+                            -3);
 
                     $sp =
                         ($user->valid_mandat ==
-                         1 ?
+                        1 ?
                             'sp' :
                             'sp no_sp');
                     $commander =
@@ -15371,21 +15657,21 @@ class admin
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                         0 ?
+                        0 ?
                             'disabled' :
                             '') .
                         '>Verres</a> <a href="/admin/commande_lentilles/' .
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                         0 ?
+                        0 ?
                             'disabled' :
                             '') .
                         '>Lentilles</a> <a href="/admin/commande_montures/' .
                         $user->id_users .
                         '" class="btn btn-warning" ' .
                         ($user->valid_mandat ==
-                         0 ?
+                        0 ?
                             'disabled' :
                             '') .
                         '>Montures</a>';
@@ -15414,7 +15700,7 @@ class admin
                             '<br>' .
                             $user->cp,
                             date('d/m/Y H:i',
-                                 strtotime($user->date_inscription)),
+                                strtotime($user->date_inscription)),
                             $user->id_grille_tarifaire,
                             $commander,
                             '<a href="/admin/erreur_casse/' .
@@ -15460,8 +15746,8 @@ class admin
                 if ($noPass !=
                     '1') {
                     set_cookie('noPass',
-                               '1',
-                               '300');
+                        '1',
+                        '300');
                 } // 5 mins
 
                 $Samuel = "";
@@ -15502,23 +15788,23 @@ class admin
 
                 $data['DataCom'] = '<div class="form-check form-check-inline">
 				  <input id="Samuel" name="Samuel" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                                   $Samuel . '>
+                    $Samuel . '>
 				  <label for="Samuel" class="form-check-label">Samuel&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Daniel" name="Daniel" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                                   $Daniel . '>
+                    $Daniel . '>
 				  <label for="Daniel" class="form-check-label">Daniel&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Gregory" name="Gregory" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                                   $Gregory . '>
+                    $Gregory . '>
 				  <label for="Gregory" class="form-check-label">Gregory&nbsp;&nbsp;&nbsp;</label>
 				
 				  <input id="Glenn" name="Glenn" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                                   $Glenn . '>
+                    $Glenn . '>
 				  <label for="Glenn" class="form-check-label">Glenn&nbsp;&nbsp;&nbsp;</label>
 				  
 				  <input id="Optical_Service" name="Optical_Service" value="100.00" class="form-check-input" type="checkbox" data-toggle="toggle" data-onstyle="success" data-height="37" data-width="65" ' .
-                                   $Optical_Service . '>
+                    $Optical_Service . '>
 				  <label for="Optical_Service" class="form-check-label">Optical Service</label>
 				</div>';
 
@@ -15551,8 +15837,8 @@ class admin
                 1141) {
 
                 die(json_encode([
-                                    'status' => 0
-                                ]));
+                    'status' => 0
+                ]));
             }
 
             $idUser =
@@ -15567,7 +15853,7 @@ class admin
                     $this->m_users->getUserById($idUser);
 
                 $this->load->view('admin/layout/client-dashboard',
-                                  $data);
+                    $data);
             }
 
         }
@@ -15598,37 +15884,37 @@ class admin
 
         $this->data['ec']['taux'] =
             number_format($taux[0]->taux_erreur,
-                          2,
-                          '.',
-                          '');
+                2,
+                '.',
+                '');
         $this->data['ec']['total'] =
             number_format($total_commandes[0]->total,
-                          2,
-                          '.',
-                          '');
+                2,
+                '.',
+                '');
         $this->data['ec']['useable'] =
             number_format($total_commandes[0]->total *
-                          ($taux[0]->taux_erreur /
-                           100),
-                          2,
-                          '.',
-                          '');
+                ($taux[0]->taux_erreur /
+                    100),
+                2,
+                '.',
+                '');
         $this->data['ec']['used'] =
             number_format($total_commandes_ec[0]->total,
-                          2,
-                          '.',
-                          '');
+                2,
+                '.',
+                '');
         $this->data['ec']['rest'] =
             number_format(($total_commandes[0]->total *
-                           ($taux[0]->taux_erreur /
-                            100)) -
-                          $total_commandes_ec[0]->total,
-                          2,
-                          '.',
-                          '');
+                    ($taux[0]->taux_erreur /
+                        100)) -
+                $total_commandes_ec[0]->total,
+                2,
+                '.',
+                '');
 
         $this->load->view('admin/erreur_casse',
-                          $this->data);
+            $this->data);
 
     }
 
@@ -15637,8 +15923,8 @@ class admin
     {
 
         setlocale(LC_TIME,
-                  'fr_FR.utf8',
-                  'fra');
+            'fr_FR.utf8',
+            'fra');
 
         $this->load->model('m_users');
 
@@ -15660,43 +15946,43 @@ class admin
 
             $this->data['ec']['taux'] =
                 number_format($taux[0]->taux_erreur,
-                              2,
-                              '.',
-                              '');
+                    2,
+                    '.',
+                    '');
             $this->data['ec']['total'] =
                 number_format($total_commandes[0]->total,
-                              2,
-                              '.',
-                              '');
+                    2,
+                    '.',
+                    '');
             $this->data['ec']['useable'] =
                 number_format($total_commandes[0]->total *
-                              ($taux[0]->taux_erreur /
-                               100),
-                              2,
-                              '.',
-                              '');
+                    ($taux[0]->taux_erreur /
+                        100),
+                    2,
+                    '.',
+                    '');
             $this->data['ec']['used'] =
                 number_format($total_commandes_ec[0]->total,
-                              2,
-                              '.',
-                              '');
+                    2,
+                    '.',
+                    '');
             $this->data['ec']['rest'] =
                 number_format(($total_commandes[0]->total *
-                               ($taux[0]->taux_erreur /
-                                100)) -
-                              $total_commandes_ec[0]->total,
-                              2,
-                              '.',
-                              '');
+                        ($taux[0]->taux_erreur /
+                            100)) -
+                    $total_commandes_ec[0]->total,
+                    2,
+                    '.',
+                    '');
 
             $data['aaData'][] =
                 array(
                     'Montant total des achats depuis le 1er Janvier de l\'année en cours',
                     '<strong>' .
                     number_format($total_commandes[0]->total,
-                                  2,
-                                  '.',
-                                  ' ') .
+                        2,
+                        '.',
+                        ' ') .
                     ' €</strong>'
                 );
 
@@ -15707,11 +15993,11 @@ class admin
                     '% )',
                     '<strong>' .
                     number_format($total_commandes[0]->total *
-                                  ($taux[0]->taux_erreur /
-                                   100),
-                                  2,
-                                  '.',
-                                  ' ') .
+                        ($taux[0]->taux_erreur /
+                            100),
+                        2,
+                        '.',
+                        ' ') .
                     ' €</strong>'
                 );
 
@@ -15720,9 +16006,9 @@ class admin
                     'Montant déjà utilisé pour commander en casse atelier et erreur ophtalmologiste',
                     '<strong>' .
                     number_format($total_commandes_ec[0]->total,
-                                  2,
-                                  '.',
-                                  ' ') .
+                        2,
+                        '.',
+                        ' ') .
                     ' €</strong>'
                 );
 
@@ -15730,15 +16016,15 @@ class admin
                 array(
                     'Montant total utilisable pour commander en casse atelier et erreur ophtalmologiste au ' .
                     strftime('%e %B %Y à %Hh%M',
-                             time()),
+                        time()),
                     '<strong>' .
                     number_format(($total_commandes[0]->total *
-                                   ($taux[0]->taux_erreur /
-                                    100)) -
-                                  $total_commandes_ec[0]->total,
-                                  2,
-                                  '.',
-                                  ' ') .
+                            ($taux[0]->taux_erreur /
+                                100)) -
+                        $total_commandes_ec[0]->total,
+                        2,
+                        '.',
+                        ' ') .
                     ' €</strong>'
                 );
 
@@ -15756,7 +16042,7 @@ class admin
         $this->data['title'] =
             "Contrôle de la plateforme";
         $this->load->view('admin/controle',
-                          $this->data);
+            $this->data);
 
     }
 
@@ -15777,8 +16063,8 @@ class admin
             $pair_order) {
             $this->data['pair_order'] =
                 $this->m_commande->getCommandeById($pair_order,
-                                                   $user_id,
-                                                   true)[0];
+                    $user_id,
+                    true)[0];
         }
 
         $this->data['user_id'] =
@@ -15813,17 +16099,17 @@ class admin
             json_decode($result[0]->param_config);
         $this->data['id_commandes'] =
             $this->getUserOrders($user_id,
-                                 $date);
+                $date);
         $regions =
             $this->config->item('regions');
 
         if (isset($this->data['user_info'][0]->cp)) {
             $dep =
                 substr($this->data['user_info'][0]->cp,
-                       0, -3);
+                    0, -3);
             $this->data['region'] =
                 ($regions[$dep] ==
-                 "Ile-de-France" ?
+                "Ile-de-France" ?
                     1 : 0);
         } else {
             $this->data['region'] =
@@ -15851,7 +16137,7 @@ class admin
         }
 
         $this->load->view('admin/passer_commande_new',
-                          $this->data);
+            $this->data);
 
     }
 
@@ -15869,9 +16155,9 @@ class admin
             if (isset($data['pair_order'])) {
                 $data['pair_order'] =
                     $this->m_commande->getCommandeById($data['pair_order'],
-                                                       $data['id_users'],
-                                                       $pair =
-                                                           true)[0];
+                        $data['id_users'],
+                        $pair =
+                            true)[0];
             }
 
             if ($data['type_commande_verre'] ==
@@ -15890,7 +16176,7 @@ class admin
                 $post;
 
             echo $this->load->view('ajax_correction',
-                                   $data);
+                $data);
         } else {
             $this->redirect();
         }
@@ -15921,14 +16207,14 @@ class admin
                     {
                         $grille_stock =
                             json_decode($d->grille_stock,
-                                        true);
+                                true);
 
                         if (array_key_exists($post['sphere'],
-                                             $grille_stock)) {
+                            $grille_stock)) {
                             if (in_array($post['cylindre'],
-                                         $grille_stock[$post['sphere']])) {
+                                $grille_stock[$post['sphere']])) {
                                 array_push($data,
-                                           $d->diametre);
+                                    $d->diametre);
                             }
                         }
                     }
@@ -15953,9 +16239,9 @@ class admin
             if (isset($pair_order_id)) {
                 $pair_order =
                     $this->m_commande->getCommandeById($pair_order_id,
-                                                       $this->data['user_info']->id_users,
-                                                       $pair =
-                                                           true)[0];
+                        $this->data['user_info']->id_users,
+                        $pair =
+                            true)[0];
             }
 
             if (($result =
@@ -16053,7 +16339,7 @@ class admin
                              $k
                     => $r) {
                         if (in_array($r->id_indice_verre,
-                                     $outOfRange)) {
+                            $outOfRange)) {
                             unset($result[$k]);
                         }
                     }
@@ -16066,7 +16352,7 @@ class admin
                 //	echo "AAAA";
 
                 echo $this->load->view('ajax_indice_verre',
-                                       $data);
+                    $data);
 
             }
         }
@@ -16085,21 +16371,21 @@ class admin
 
         $idlens =
             str_replace("]",
-                        "",
-                        $idlens);
+                "",
+                $idlens);
 
         if ($typedelens ==
             "stock") {
             $res =
                 $this->m_passer_commande_verre->getPrixStock($idlens,
-                                                             $user_id);
+                    $user_id);
         } else {
             $generation =
                 $_POST['generation'];
             $res =
                 $this->m_passer_commande_verre->getPrix($idlens,
-                                                        $user_id,
-                                                        $generation);
+                    $user_id,
+                    $generation);
         }
         echo json_encode($res);
 
@@ -16122,9 +16408,9 @@ class admin
 
             $query =
                 $this->db->query('SELECT prix_verre FROM grille_tarifaire WHERE id_verre=' .
-                                 $id_verre .
-                                 ' AND id_grille_tarifaire = ' .
-                                 $grille);
+                    $id_verre .
+                    ' AND id_grille_tarifaire = ' .
+                    $grille);
             $verre =
                 $query->result();
 
@@ -16176,8 +16462,8 @@ class admin
             if (isset($data['pair_order'])) {
                 $pair_order =
                     $this->m_commande->getCommandeById($data['pair_order'],
-                                                       $user_id,
-                                                       true)[0];
+                        $user_id,
+                        true)[0];
                 $pair_order_id =
                     $data['pair_order'];
                 $data['type_commande'] =
@@ -16296,9 +16582,9 @@ class admin
                         )
                     );
             } elseif (isset($data['sphere_droit']) &&
-                      isset($data['addition_droit']) &&
-                      isset($data['sphere_gauche']) &&
-                      isset($data['addition_gauche'])) {
+                isset($data['addition_droit']) &&
+                isset($data['sphere_gauche']) &&
+                isset($data['addition_gauche'])) {
                 $data_commande['verre'] =
                     array(
                         'correction_droit' => array(
@@ -16527,8 +16813,8 @@ class admin
 
             $prix_verre =
                 $this->m_verres->getPrixVerre($data['id_verre'],
-                                              $id_grille_tarifaire,
-                                              $data['id_users']);
+                    $id_grille_tarifaire,
+                    $data['id_users']);
 
             if ($prix_verre !==
                 false) {
@@ -16550,7 +16836,7 @@ class admin
                 if (!empty($prix_verre[0]->libelle_verre_personnalise)) {
                     $prix_verre[0]->libelle_verre =
                         $this->remplace_personnalisation_verre($prix_verre[0]->libelle_verre,
-                                                               $prix_verre[0]->libelle_verre_personnalise);
+                            $prix_verre[0]->libelle_verre_personnalise);
                 }
 
                 $data['total_commande'] =
@@ -16590,18 +16876,18 @@ class admin
                     $this->db->from('commande_montures_temp cm');
                     $this->db->select('m.*, cm.id as id_temp, cm.qty, cm.status, cm.id_client, collec.name as collection, m_pack.id as pack_id, m_pack.name as pack, m_pack.prix as prixpack');
                     $this->db->where('cm.id_client',
-                                     $data['id_users']);
+                        $data['id_users']);
                     $this->db->where('cm.status',
-                                     0);
+                        0);
                     $this->db->join('montures m',
-                                    'm.id = cm.id_monture',
-                                    'left');
+                        'm.id = cm.id_monture',
+                        'left');
                     $this->db->join('montures_collection collec',
-                                    'm.id_collection = collec.id',
-                                    'left');
+                        'm.id_collection = collec.id',
+                        'left');
                     $this->db->join('montures_pack m_pack',
-                                    'm_pack.id = cm.id_pack',
-                                    'left');
+                        'm_pack.id = cm.id_pack',
+                        'left');
                     $query =
                         $this->db->get();
                     if ($query->num_rows() >
@@ -16616,10 +16902,10 @@ class admin
                     if ($panierA_sans_monture !=
                         '1') {
                         $this->db->where('id',
-                                         1);
+                            1);
                         $this->db->set('flag',
-                                       1,
-                                       FALSE);
+                            1,
+                            FALSE);
                         $this->db->update('flag_monture');
                     }
 
@@ -16634,7 +16920,7 @@ class admin
 
                     $discount['amount'] =
                         $this->m_commande->getDiscountByOrderId($data['pair_order_recap']['id_commande'],
-                                                                true);
+                            true);
 
                     $pair_verre =
                         floatval($data['pair_order_recap']['prix_verre']);
@@ -16660,10 +16946,10 @@ class admin
 
                 }
                 $this->session->set_userdata('order',
-                                             $data);
+                    $data);
 
                 echo $this->load->view('ajax_recap_commande',
-                                       $data);
+                    $data);
             } else {
                 echo "error";
             }
@@ -16679,11 +16965,11 @@ class admin
     {
         $fig =
             (int)str_pad('1',
-                         $precision,
-                         '0');
+                $precision,
+                '0');
         return (ceil($number *
-                     $fig) /
-                $fig);
+                $fig) /
+            $fig);
     }
 
     // FUCK THIS SHIT
@@ -16746,23 +17032,23 @@ class admin
             $errors = 0;
 
             for ($i = 1; $i <=
-                         $data['nb_multi_commande'];
+            $data['nb_multi_commande'];
                  $i++) {
 
                 if (isset($data['discount'])) {
 
                     $pair_order_data =
                         $this->m_commande->getCommandeByIdNew($data['pair_order_id'],
-                                                              $data['id_users'],
-                                                              $pair =
-                                                                  true)[0];
+                            $data['id_users'],
+                            $pair =
+                                true)[0];
 
                     $data_corrections =
                         json_decode($data['information_commande'],
-                                    true);
+                            true);
                     $pair_order_data_corrections =
                         json_decode($pair_order_data->information_commande,
-                                    true);
+                            true);
 
                     if (isset($data_corrections['verre']['correction_droit'], $data_corrections['verre']['correction_gauche'])) {
                         $verres =
@@ -16790,27 +17076,27 @@ class admin
                         'order') {
                         $data['total_remise_paire'] =
                             (($data['prix_verre'] /
-                              100) *
-                             $data['discount']['amount']);
+                                    100) *
+                                $data['discount']['amount']);
                         $data['prix_verre'] =
                             $data['prix_verre'] -
                             $data['total_remise_paire'];
                         $data['prix_verre'] =
                             round($data['prix_verre'],
-                                  2,
-                                  PHP_ROUND_HALF_UP);
+                                2,
+                                PHP_ROUND_HALF_UP);
                     } else {
                         $pair_order_data->total_remise_paire =
                             (($pair_order_data->prix_verre /
-                              100) *
-                             $data['discount']['amount']);
+                                    100) *
+                                $data['discount']['amount']);
                         $pair_order_data->prix_verre =
                             $pair_order_data->prix_verre -
                             $pair_order_data->total_remise_paire;
                         $pair_order_data->prix_verre =
                             round($pair_order_data->prix_verre,
-                                  2,
-                                  PHP_ROUND_HALF_UP);
+                                2,
+                                PHP_ROUND_HALF_UP);
                     }
 
                     $data['total_commande'] =
@@ -16855,9 +17141,9 @@ class admin
 
                         if (!isset($pair_order_id['id'])) {
                             echo json_encode(array(
-                                                 'status' => 'error',
-                                                 'message' => 'pair'
-                                             ));
+                                'status' => 'error',
+                                'message' => 'pair'
+                            ));
                             exit();
                         } else {
                             $data['premiere_commande'] =
@@ -16867,7 +17153,7 @@ class admin
                         }
 
                         $this->m_commande->delete(array('id_commande' => $pair_order_temp_id),
-                                                  true);
+                            true);
 
                     }
 
@@ -16875,17 +17161,16 @@ class admin
                 }
 
                 // FUCK
-
                 if ($order =
                     $this->m_commande->addOrder($data)) {
                     if ($data['pair'] ==
                         true) {
                         $message =
                             json_encode(array(
-                                            'status' => 'ok',
-                                            'pair' => true,
-                                            'order_id' => $order['id']
-                                        ));
+                                'status' => 'ok',
+                                'pair' => true,
+                                'order_id' => $order['id']
+                            ));
                     } else {
                         $message =
                             json_encode(array('status' => 'ok'));
@@ -16895,7 +17180,6 @@ class admin
                     $errors++;
                 }
             }
-
             if ($errors ==
                 0) {
                 if ($data['id_generation_verre'] ==
@@ -16918,10 +17202,10 @@ class admin
 
 
                     $this->db->insert('controle_test',
-                                      array(
-                                          'v' => $data['control']['certificat'],
-                                          'control' => count($data['certificat'])
-                                      ));
+                        array(
+                            'v' => $data['control']['certificat'],
+                            'control' => count($data['certificat'])
+                        ));
 
                     //$message = json_encode($data);
 
@@ -16930,32 +17214,32 @@ class admin
                     $docs =
                         array(
                             'certificat' => $this->config->item('directory_pdf') .
-                                            '/' .
-                                            $this->pdf('certificat_authenticite',
-                                                       $data,
-                                                       $order['id'],
-                                                       false,
-                                                       'paysage',
-                                                       $customsize =
-                                                           array(
-                                                               0,
-                                                               0,
-                                                               243,
-                                                               153
-                                                           ))
+                                '/' .
+                                $this->pdf('certificat_authenticite',
+                                    $data,
+                                    $order['id'],
+                                    false,
+                                    'paysage',
+                                    $customsize =
+                                        array(
+                                            0,
+                                            0,
+                                            243,
+                                            153
+                                        ))
                         );
 
                 }
 
                 set_cookie('panierA_sans_monture',
-                           '0',
-                           '1800');
+                    '0',
+                    '1800');
                 set_cookie('typecommande',
-                           'fab',
-                           '1800');
+                    'fab',
+                    '1800');
                 set_cookie('refPanierA',
-                           '',
-                           '1800');
+                    '',
+                    '1800');
 
                 $panierA =
                     get_cookie("panierA");
@@ -16965,15 +17249,15 @@ class admin
                     $this->db->from('commande_montures_temp cm');
                     $this->db->select('m.*, cm.id as id_temp, cm.qty, cm.status, cm.id_client, collec.name as collection, cm.ref_client');
                     $this->db->where('cm.id_client',
-                                     $data['id_users']);
+                        $data['id_users']);
                     $this->db->where('cm.avec_verres',
-                                     1);
+                        1);
                     $this->db->join('montures m',
-                                    'm.id = cm.id_monture',
-                                    'left');
+                        'm.id = cm.id_monture',
+                        'left');
                     $this->db->join('montures_collection collec',
-                                    'm.id_collection = collec.id',
-                                    'left');
+                        'm.id_collection = collec.id',
+                        'left');
                     $query =
                         $this->db->get();
                     if ($query->num_rows() >
@@ -16994,11 +17278,11 @@ class admin
                         $stock_avant =
                             $data['montures'][0]->stock;
                         $this->db->where('id',
-                                         $data['montures'][0]->id);
+                            $data['montures'][0]->id);
                         $this->db->set('stock',
-                                       'stock-' .
-                                       $data['montures'][0]->qty,
-                                       FALSE);
+                            'stock-' .
+                            $data['montures'][0]->qty,
+                            FALSE);
                         $this->db->update('montures');
                         $stock_apres =
                             $data['montures'][0]->stock -
@@ -17019,7 +17303,7 @@ class admin
                                 'id_users' => $data['id_users'],
                                 'total_commande' => $total_order,
                                 'tarif_livraison' => $userdata->tarif_livraison,
-                                'tarif_packaging' => $userdata->tarif_packaging,
+                                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                                 'commande_monture' => 1
                             );
 
@@ -17027,14 +17311,14 @@ class admin
 
                         if ($this->m_montures->addMonturesOrder($args)) {
                             $this->db->query('DELETE FROM commande_montures_temp WHERE id_client = "' .
-                                             $data['id_users'] .
-                                             '" AND avec_verres=1');
+                                $data['id_users'] .
+                                '" AND avec_verres=1');
                             set_cookie('panierA',
-                                       '0',
-                                       '1800');
+                                '0',
+                                '1800');
                             set_cookie('refPanierA',
-                                       '',
-                                       '1800');
+                                '',
+                                '1800');
                         }
 
 
@@ -17062,7 +17346,7 @@ class admin
 
             $query =
                 $this->db->query('SELECT libelle_verre FROM verres WHERE id_verre=' .
-                                 $id_verre);
+                    $id_verre);
             $verre =
                 $query->result();
 
@@ -17103,7 +17387,7 @@ class admin
                     if (!empty($value->libelle_verre_personnalise)) {
                         $value->libelle_verre =
                             $this->remplace_personnalisation_verre($value->libelle_verre,
-                                                                   $value->libelle_verre_personnalise);
+                                $value->libelle_verre_personnalise);
                     }
 
                 }
@@ -17114,7 +17398,7 @@ class admin
                 1 ? 1 : 0;
 
             echo $this->load->view('ajax_verre',
-                                   $data);
+                $data);
         } else {
             $this->redirect();
         }
@@ -17129,9 +17413,9 @@ class admin
                 $this->input->post('user_id');
             $data['type_generation_verre'] =
                 $this->m_type_generation_verre->getTypeGenerationVerre($id_magasin,
-                                                                       $pair_type);
+                    $pair_type);
             $this->load->view('ajax_type_verre',
-                              $data);
+                $data);
         } else {
             echo "redirect";
         }
@@ -17162,12 +17446,12 @@ class admin
                     if ((
                         $data['generation_verre'] =
                             $this->m_generation_verre->getGenerationVerre("27",
-                                                                          $user_id,
-                                                                          true,
-                                                                          false)) !==
+                                $user_id,
+                                true,
+                                false)) !==
                         false) {
                         echo $this->load->view('ajax_type_generation_verre',
-                                               $data);
+                            $data);
                     }
                 }
                 if ($this->input->post('id_type_generation_verre') ==
@@ -17175,12 +17459,12 @@ class admin
                     if ((
                         $data['generation_verre'] =
                             $this->m_generation_verre->getGenerationVerre("26",
-                                                                          $user_id,
-                                                                          true,
-                                                                          false)) !==
+                                $user_id,
+                                true,
+                                false)) !==
                         false) {
                         echo $this->load->view('ajax_type_generation_verre',
-                                               $data);
+                            $data);
                     }
                 }
                 if ($this->input->post('id_type_generation_verre') ==
@@ -17188,12 +17472,12 @@ class admin
                     if ((
                         $data['generation_verre'] =
                             $this->m_generation_verre->getGenerationVerre("25",
-                                                                          $user_id,
-                                                                          true,
-                                                                          false)) !==
+                                $user_id,
+                                true,
+                                false)) !==
                         false) {
                         echo $this->load->view('ajax_type_generation_verre',
-                                               $data);
+                            $data);
                     }
                 }
                 if ($this->input->post('id_type_generation_verre') ==
@@ -17201,12 +17485,12 @@ class admin
                     if ((
                         $data['generation_verre'] =
                             $this->m_generation_verre->getGenerationVerre("24",
-                                                                          $user_id,
-                                                                          true,
-                                                                          false)) !==
+                                $user_id,
+                                true,
+                                false)) !==
                         false) {
                         echo $this->load->view('ajax_type_generation_verre',
-                                               $data);
+                            $data);
                     }
                 }
             } else {
@@ -17214,12 +17498,12 @@ class admin
                 if ((
                     $data['generation_verre'] =
                         $this->m_generation_verre->getGenerationVerre($this->input->post('id_type_generation_verre'),
-                                                                      $user_id,
-                                                                      true,
-                                                                      false)) !==
+                            $user_id,
+                            true,
+                            false)) !==
                     false) {
                     echo $this->load->view('ajax_type_generation_verre',
-                                           $data);
+                        $data);
                 }
             }
         } else {
@@ -17252,7 +17536,7 @@ class admin
                 $verres =
                     $this->m_verres->getVerreASM($data);
             } elseif ($panierA ==
-                      $user_id) {
+                $user_id) {
                 $verres =
                     $this->m_verres->getVerreA($data);
             } else {
@@ -17272,7 +17556,7 @@ class admin
                         21) {
 
                         if (strpos($verre->libelle_verre,
-                                   $data['teinte']) ===
+                                $data['teinte']) ===
                             false) {
                             continue;
                         }
@@ -17295,17 +17579,17 @@ class admin
                                 true;
 
                             if (strpos($verre->libelle_verre,
-                                       $data['photocromie']) ===
+                                    $data['photocromie']) ===
                                 false) {
                                 continue;
                             }
 
                         } else {
                             if (strpos($verre->libelle_verre,
-                                       "PhotoGrey") !==
+                                    "PhotoGrey") !==
                                 false ||
                                 strpos($verre->libelle_verre,
-                                       "PhotoBrown") !==
+                                    "PhotoBrown") !==
                                 false) {
                                 continue;
                             }
@@ -17318,7 +17602,7 @@ class admin
                             $miroir =
                                 true;
                             if (strpos($verre->libelle_verre,
-                                       "miroir") ===
+                                    "miroir") ===
                                 false) {
                                 continue;
                             } else {
@@ -17339,8 +17623,8 @@ class admin
 
                                 $verre->libelle_verre =
                                     str_replace("miroir",
-                                                $options_miroir[$data['miroir']],
-                                                $verre->libelle_verre);
+                                        $options_miroir[$data['miroir']],
+                                        $verre->libelle_verre);
                             }
                         }
 
@@ -17356,14 +17640,14 @@ class admin
                                 $polarise =
                                     true;
                                 if (strpos($verre->libelle_verre,
-                                           "polarisé") ===
+                                        "polarisé") ===
                                     false) {
                                     continue;
                                 } else {
                                     $verre->libelle_verre =
                                         str_replace("polarisé",
-                                                    $data['polarise'],
-                                                    $verre->libelle_verre);
+                                            $data['polarise'],
+                                            $verre->libelle_verre);
                                 }
                             }
 
@@ -17373,13 +17657,13 @@ class admin
                                 true;
 
                             if (strpos($verre->libelle_verre,
-                                       $data['teinte']) ===
+                                    $data['teinte']) ===
                                 false) {
                                 continue;
                             }
 
                             if (strpos($verre->libelle_verre,
-                                       $data['polarise']) ===
+                                    $data['polarise']) ===
                                 false) {
                                 continue;
                             }
@@ -17395,7 +17679,7 @@ class admin
                                 $data['teinte'] !=
                                 "Non Teinté") {
                                 if (strpos($verre->libelle_verre,
-                                           $data['teinte']) ===
+                                        $data['teinte']) ===
                                     false) {
                                     continue;
                                 }
@@ -17403,19 +17687,19 @@ class admin
                                 if (!$isPhotocromie &&
                                     (strpos($verre->libelle_verre,
                                             "G15 C") !==
-                                     false ||
-                                     strpos($verre->libelle_verre,
+                                        false ||
+                                        strpos($verre->libelle_verre,
                                             "Brun C") !==
-                                     false ||
-                                     strpos($verre->libelle_verre,
+                                        false ||
+                                        strpos($verre->libelle_verre,
                                             "Gris C") !==
-                                     false)) {
+                                        false)) {
                                     continue;
                                 }
                             }
 
                             if (strpos($verre->libelle_verre,
-                                       $data['traitement']) ===
+                                    $data['traitement']) ===
                                 false) {
                                 continue;
                             }
@@ -17442,24 +17726,24 @@ class admin
                          $id_verre
                 => $v) {
                     if (strpos($v['intitule'],
-                               "BlueCoat") !==
+                            "BlueCoat") !==
                         false) {
                         if (strpos($v['intitule'],
-                                   $data['traitement']) !==
+                                $data['traitement']) !==
                             false) {
                             $prix_verre =
                                 $this->m_verres->getPrixVerre($id_verre,
-                                                              $this->data['user_info']->id_grille_tarifaire,
-                                                              $user_id);
+                                    $this->data['user_info']->id_grille_tarifaire,
+                                    $user_id);
                             echo json_encode(array(
-                                                 'intutile' => $v['intitule'] .
-                                                               " diamètre " .
-                                                               $data['diametre'] .
-                                                               " (" .
-                                                               ($prix_verre[0]->prix_verre) .
-                                                               " €)",
-                                                 'id_verre' => $id_verre
-                                             ));
+                                'intutile' => $v['intitule'] .
+                                    " diamètre " .
+                                    $data['diametre'] .
+                                    " (" .
+                                    ($prix_verre[0]->prix_verre) .
+                                    " €)",
+                                'id_verre' => $id_verre
+                            ));
                             exit;
                         }
                     }
@@ -17475,23 +17759,23 @@ class admin
                 => $v) {
                     $prix_verre =
                         $this->m_verres->getPrixVerre($id_verre,
-                                                      $this->data['user_info']->id_grille_tarifaire,
-                                                      $user_id);
+                            $this->data['user_info']->id_grille_tarifaire,
+                            $user_id);
                     echo json_encode(array(
-                                         'intutile' => $v['intitule'] .
-                                                       " diamètre " .
-                                                       $data['diametre'] .
-                                                       " (" .
-                                                       ($prix_verre[0]->prix_verre) .
-                                                       " €)",
-                                         'id_verre' => $id_verre
-                                     ));
+                        'intutile' => $v['intitule'] .
+                            " diamètre " .
+                            $data['diametre'] .
+                            " (" .
+                            ($prix_verre[0]->prix_verre) .
+                            " €)",
+                        'id_verre' => $id_verre
+                    ));
                 }
             } else {
                 echo json_encode(array(
-                                     'intutile' => 'Aucun verre ne correspond à votre recherche',
-                                     'id_verre' => ''
-                                 ));
+                    'intutile' => 'Aucun verre ne correspond à votre recherche',
+                    'id_verre' => ''
+                ));
             }
         } else {
             echo json_encode(array('disconnect' => true));
@@ -17515,12 +17799,12 @@ class admin
 
             $credit =
                 number_format(($total_commandes[0]->total *
-                               ($taux[0]->taux_erreur /
-                                100)) -
-                              $total_commandes_ec[0]->total,
-                              2,
-                              '.',
-                              ' ');
+                        ($taux[0]->taux_erreur /
+                            100)) -
+                    $total_commandes_ec[0]->total,
+                    2,
+                    '.',
+                    ' ');
 
             die($credit);
 
@@ -17539,7 +17823,7 @@ class admin
 
         $commandes =
             $this->m_commande->getAllCommandeByUser($user_id,
-                                                    $date);
+                $date);
 
         if (is_array($commandes)) {
             foreach ($commandes
@@ -17547,18 +17831,18 @@ class admin
                 $date =
                     strtotime($c->date_commande);
                 $select .= '<option value="' .
-                           $c->id_commande .
-                           '">' .
-                           $c->id_commande .
-                           ' - ' .
-                           $c->reference_client .
-                           ' - ' .
-                           $c->libelle_verre .
-                           ' - Commandé le ' .
-                           date('d/m/Y',
-                                $date) .
-                           '</option>' .
-                           "\n";
+                    $c->id_commande .
+                    '">' .
+                    $c->id_commande .
+                    ' - ' .
+                    $c->reference_client .
+                    ' - ' .
+                    $c->libelle_verre .
+                    ' - Commandé le ' .
+                    date('d/m/Y',
+                        $date) .
+                    '</option>' .
+                    "\n";
             }
         }
 
@@ -17632,10 +17916,10 @@ class admin
                         $etat_commande =
                             $commande->libelle_etat_commande .
                             ($commande->id_etat_commande ==
-                             6 ?
+                            6 ?
                                 ' le ' .
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_update_commande)) :
+                                    strtotime($commande->date_update_commande)) :
                                 '') .
                             ' (' .
                             $commande->id_etat_commande .
@@ -17650,7 +17934,7 @@ class admin
                                 $commande->libelle_etat_commande .
                                 ' le ' .
                                 date('d/m/Y H:i',
-                                     strtotime($commande->date_update_commande)) .
+                                    strtotime($commande->date_update_commande)) .
                                 ' (2/2)';
                     }
 
@@ -17677,7 +17961,7 @@ class admin
                                 'search') .
                             '"></i> Voir</a>',
                             date('d/m/Y H:i:s',
-                                 strtotime($commande->date_commande)),
+                                strtotime($commande->date_commande)),
                             'CR' .
                             $commande->id_commande .
                             '-' .
@@ -17737,10 +18021,10 @@ class admin
                         $data['email'] =
                             $email;
                         $this->mail($data,
-                                    $mess_html,
-                                    true,
-                                    $sujet_txt,
-                                    $piece_jointe);
+                            $mess_html,
+                            true,
+                            $sujet_txt,
+                            $piece_jointe);
                     }
                 }
 
@@ -17767,10 +18051,10 @@ class admin
                      $key =>
                      $value) {
                 $data .= '<option value="' .
-                         $value->email .
-                         '">Magasin ' .
-                         $value->id_users .
-                         '</option>';
+                    $value->email .
+                    '">Magasin ' .
+                    $value->id_users .
+                    '</option>';
             }
         }
 
@@ -17810,14 +18094,14 @@ class admin
                      $key =>
                      $value) {
                 if (strpos(strtolower($value->libelle_verre),
-                           $q) !==
+                        $q) !==
                     false) {
                     array_push($result,
-                               array(
-                                   "id" => $value->id_verre,
-                                   "label" => $value->libelle_verre,
-                                   "value" => strip_tags($value->libelle_verre)
-                               ));
+                        array(
+                            "id" => $value->id_verre,
+                            "label" => $value->libelle_verre,
+                            "value" => strip_tags($value->libelle_verre)
+                        ));
                 }
                 if (count($result) >
                     11) {
@@ -17841,7 +18125,7 @@ class admin
         $data['verres'] =
             $this->m_verres->getVerre($dataVerre);
         $this->load->view('admin/correction_stock',
-                          $data);
+            $data);
     }
 
     public
@@ -17854,8 +18138,8 @@ class admin
                 $this->input->post();
             $facture_client =
                 $this->m_commande->getAllCommandeByMonthAndUser($post['mois'] .
-                                                                "-" .
-                                                                $post['annee']);
+                    "-" .
+                    $post['annee']);
 
             if ($facture_client !==
                 false) {
@@ -17889,11 +18173,11 @@ class admin
                 {
                     $piece_jointe =
                         $this->generer_pdf_facture('facture',
-                                                   $post['annee'] .
-                                                   "-" .
-                                                   $post['mois'],
-                                                   $facture_cli->id_users,
-                                                   false);
+                            $post['annee'] .
+                            "-" .
+                            $post['mois'],
+                            $facture_cli->id_users,
+                            false);
                     $piece_jointe =
                         $this->config->item('directory_pdf') .
                         "/" .
@@ -17916,10 +18200,10 @@ class admin
                         " " .
                         $post['annee'];
                     $this->mail($data,
-                                $mess_txt,
-                                true,
-                                $subjet_txt,
-                                $piece_jointe);
+                        $mess_txt,
+                        true,
+                        $subjet_txt,
+                        $piece_jointe);
 
                     if (file_exists($piece_jointe)) {
                         unlink($piece_jointe);
@@ -17942,14 +18226,14 @@ class admin
                 false) {
                 $grille =
                     json_decode($grille_stock[0]->grille_stock,
-                                true);
+                        true);
 
                 if ($post['statut'] ==
                     "ajout") {
                     if (isset($grille[$post['sphere']]) &&
                         is_array($grille[$post['sphere']])) {
                         array_push($grille[$post['sphere']],
-                                   $post['cylindre']);
+                            $post['cylindre']);
                     } else {
                         $grille[(string)$post['sphere']] =
                             array($post['cylindre']);
@@ -17964,7 +18248,7 @@ class admin
                             }
 
                             return (float)$a <
-                                   (float)$b ?
+                            (float)$b ?
                                 1 :
                                 -1;
                         });
@@ -17979,18 +18263,18 @@ class admin
                             }
 
                             return (float)$a >
-                                   (float)$b ?
+                            (float)$b ?
                                 1 :
                                 -1;
                         });
 
                 } elseif ($post['statut'] ==
-                          "supprimer") {
+                    "supprimer") {
                     if (isset($grille[$post['sphere']]) &&
                         (
                         $key =
                             array_search($post['cylindre'],
-                                         $grille[$post['sphere']])) !==
+                                $grille[$post['sphere']])) !==
                         false) {
                         unset($grille[$post['sphere']][$key]);
                     }
@@ -18036,11 +18320,11 @@ class admin
                 false) {
                 $data['grille_stock'] =
                     json_decode($grille_stock[0]->grille_stock,
-                                true);
+                        true);
             }
 
             echo $this->load->view('admin/ajax_correction_stock',
-                                   $data);
+                $data);
         }
     }
 
@@ -18061,14 +18345,14 @@ class admin
 
             $dep =
                 substr($data['info_user'][0]->cp,
-                       0, -3);
+                    0, -3);
             $data['region'] =
                 isset($regions[$dep]) ?
                     $regions[$dep] :
                     'Région Inconnue';
 
             $this->load->view('admin/layout/client-info',
-                              $data);
+                $data);
         }
 
     }
@@ -18138,7 +18422,7 @@ class admin
         $data['title'] =
             "Profile";
         $this->load->view('admin/profile',
-                          $data);
+            $data);
     }
 
     public
@@ -18147,7 +18431,7 @@ class admin
         $data['page'] =
             "Statistique";
         $this->load->view('admin/stats',
-                          $data);
+            $data);
     }
 
     public
@@ -18156,7 +18440,7 @@ class admin
         $data['page'] =
             "Erreur";
         $this->load->view('404',
-                          $data);
+            $data);
     }
 
     public
@@ -18166,7 +18450,7 @@ class admin
         $this->data['title'] =
             "Mise à jour grille fabrication";
         $this->load->view('admin/maj_tarif_fabrication',
-                          $this->data);
+            $this->data);
     }
 
     public
@@ -18198,7 +18482,7 @@ class admin
         }
 
         $this->load->view('admin/maj_tarif_fabrication',
-                          $this->data);
+            $this->data);
     }
 
     public
@@ -18220,7 +18504,7 @@ class admin
 
         //$this->data['test'] = $this->m_commande->getAllCommandeByYearAndUser(array('annee' => 2016, 'numero_magasin' => null));
         $this->load->view('admin/variations_facture_clients',
-                          $this->data);
+            $this->data);
     }
 
     public
@@ -18258,12 +18542,12 @@ class admin
         for ($i = 1; $i <= 12;
              $i++) {
             $table .= "<th>" .
-                      ($i < 10 ?
-                          '0' :
-                          '') . $i .
-                      "/" .
-                      $tab['annee'] .
-                      "</th>";
+                ($i < 10 ?
+                    '0' :
+                    '') . $i .
+                "/" .
+                $tab['annee'] .
+                "</th>";
         }
 
         $table .= "</tr></thead><tbody>";
@@ -18288,19 +18572,19 @@ class admin
 
 
                         $table .= '<tr' .
-                                  $cl .
-                                  '>';
+                            $cl .
+                            '>';
 
                         if (!$this->input->post('client_set')) {
                             $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
-                                      $current_user .
-                                      '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
-                                      $current_user .
-                                      '</td><td>' .
-                                      $current_nom_soc .
-                                      '</td><td>' .
-                                      $current_nom_mag .
-                                      '</td>';
+                                $current_user .
+                                '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                                $current_user .
+                                '</td><td>' .
+                                $current_nom_soc .
+                                '</td><td>' .
+                                $current_nom_mag .
+                                '</td>';
                         }
 
                         $val_precedent =
@@ -18327,19 +18611,19 @@ class admin
                                 }
                             }
                             $table .= '<td ' .
-                                      ($color !=
-                                       "" ?
-                                          'style="color:' .
-                                          $color .
-                                          '"' :
-                                          '') .
-                                      '>' .
-                                      $l .
-                                      ($l !=
-                                       0 ?
-                                          ' HT' :
-                                          '') .
-                                      '</td>';
+                                ($color !=
+                                "" ?
+                                    'style="color:' .
+                                    $color .
+                                    '"' :
+                                    '') .
+                                '>' .
+                                $l .
+                                ($l !=
+                                0 ?
+                                    ' HT' :
+                                    '') .
+                                '</td>';
 
                             $val_precedent =
                                 $l;
@@ -18362,19 +18646,19 @@ class admin
                     $users->total .
                     ' HT</b><br />(' .
                     (($users->total_stock +
-                      $users->total_fabrique) >
-                     0 ?
+                        $users->total_fabrique) >
+                    0 ?
                         ($users->total_stock +
-                         $users->total_fabrique) :
+                            $users->total_fabrique) :
                         '0.00') .
                     ' Verres)<br />(' .
                     ($users->total_lentilles >
-                     0 ?
+                    0 ?
                         $users->total_lentilles :
                         '0.00') .
                     ' Lentilles)<br />(' .
                     ($users->total_montures >
-                     0 ?
+                    0 ?
                         $users->total_montures :
                         '0.00') .
                     ' Montures)';
@@ -18393,18 +18677,18 @@ class admin
                 "") {
 
                 $table .= '<tr' .
-                          $cl . '>';
+                    $cl . '>';
 
                 if (!$this->input->post('client_set')) {
                     $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
-                              $current_user .
-                              '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
-                              $current_user .
-                              '</td><td>' .
-                              $current_nom_soc .
-                              '</td><td>' .
-                              $current_nom_mag .
-                              '</td>';
+                        $current_user .
+                        '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                        $current_user .
+                        '</td><td>' .
+                        $current_nom_soc .
+                        '</td><td>' .
+                        $current_nom_mag .
+                        '</td>';
                 }
 
                 $val_precedent =
@@ -18429,15 +18713,15 @@ class admin
                         }
                     }
                     $table .= '<td ' .
-                              ($color !=
-                               "" ?
-                                  'style="color:' .
-                                  $color .
-                                  '"' :
-                                  '') .
-                              '>' .
-                              $l .
-                              '</td>';
+                        ($color !=
+                        "" ?
+                            'style="color:' .
+                            $color .
+                            '"' :
+                            '') .
+                        '>' .
+                        $l .
+                        '</td>';
 
                     $val_precedent =
                         $l;
@@ -18446,19 +18730,19 @@ class admin
             }
             else {
                 $table .= '<tr' .
-                          $cl .
-                          '>';
+                    $cl .
+                    '>';
 
                 if (!$this->input->post('client_set')) {
                     $table .= '<td><a class="btn btn-warning get-userinfo" data-toggle="modal" data-target="#user-modal" data-user="' .
-                              $current_user .
-                              '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
-                              $current_user .
-                              '</td><td>' .
-                              $current_nom_soc .
-                              '</td><td>' .
-                              $current_nom_mag .
-                              '</td>';
+                        $current_user .
+                        '"><i class="zmdi zmdi-search"></i> Voir</a></td><td>' .
+                        $current_user .
+                        '</td><td>' .
+                        $current_nom_soc .
+                        '</td><td>' .
+                        $current_nom_mag .
+                        '</td>';
                 }
                 $val_precedent =
                     "";
@@ -18484,19 +18768,19 @@ class admin
                         }
                     }
                     $table .= '<td ' .
-                              ($color !=
-                               "" ?
-                                  'style="color:' .
-                                  $color .
-                                  '"' :
-                                  '') .
-                              '>' .
-                              $l .
-                              ($l !=
-                               0 ?
-                                  ' HT' :
-                                  '') .
-                              '</td>';
+                        ($color !=
+                        "" ?
+                            'style="color:' .
+                            $color .
+                            '"' :
+                            '') .
+                        '>' .
+                        $l .
+                        ($l !=
+                        0 ?
+                            ' HT' :
+                            '') .
+                        '</td>';
 
                     $val_precedent =
                         $l;
@@ -18527,12 +18811,12 @@ class admin
                 $id_grille_tarifaire++)
             {
                 $this->m_grille_tarifaire->addGrille($id_grille_tarifaire,
-                                                     $id_verre);
+                    $id_verre);
             }
         }
 
         $this->load->view('admin/ajout_verre',
-                          $this->data);
+            $this->data);
     }
 
     public
@@ -18708,7 +18992,7 @@ class admin
                              $jsp)
                     {
                         if (stripos($verre->libelle_verre,
-                                    $jsp) !==
+                                $jsp) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -18721,7 +19005,7 @@ class admin
                              $transition)
                     {
                         if (strpos($verre->libelle_verre,
-                                   $transition) !==
+                                $transition) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -18734,7 +19018,7 @@ class admin
                              $nupolar)
                     {
                         if (stripos($verre->libelle_verre,
-                                    $nupolar) !==
+                                $nupolar) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -18747,7 +19031,7 @@ class admin
                              $teinte)
                     {
                         if (stripos($verre->libelle_verre,
-                                    $teinte) !==
+                                $teinte) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -18760,7 +19044,7 @@ class admin
                              $puissanceTeinte)
                     {
                         if (stripos($verre->libelle_verre,
-                                    $puissanceTeinte) !==
+                                $puissanceTeinte) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -18785,18 +19069,18 @@ class admin
                          as $k
                 => $v) {
                     echo $val .
-                         " | " .
-                         $v .
-                         "<br>";
+                        " | " .
+                        $v .
+                        "<br>";
                     $ok =
                         true;
                     if (stripos($v,
-                                $val) !==
+                            $val) !==
                         false) {
                         if ($val ==
                             'Satin') {
                             if (stripos($v,
-                                        'UV') !==
+                                    'UV') !==
                                 false) {
                                 $ok =
                                     false;
@@ -18843,12 +19127,12 @@ class admin
                                 $verre->libelle_verre;
 
                             if (!stripos($verre->libelle_verre,
-                                         $jsp)) {
+                                $jsp)) {
                                 continue;
                             }
 
                             if (!stripos($verre->libelle_verre,
-                                         $teinte)) {
+                                $teinte)) {
                                 continue;
                             }
 
@@ -18868,18 +19152,18 @@ class admin
                         => $v)
                         {
                             echo $val .
-                                 " | " .
-                                 $v .
-                                 "<br>";
+                                " | " .
+                                $v .
+                                "<br>";
                             $ok =
                                 true;
                             if (stripos($v,
-                                        $val) !==
+                                    $val) !==
                                 false) {
                                 if ($val ==
                                     'Satin') {
                                     if (stripos($v,
-                                                'UV') !==
+                                            'UV') !==
                                         false) {
                                         $ok =
                                             false;
@@ -18923,7 +19207,7 @@ class admin
                              $jsp)
                     {
                         if (stripos($verre->libelle_verre,
-                                    $jsp) !==
+                                $jsp) !==
                             false) {
                             $jeRentre =
                                 true;
@@ -19056,7 +19340,7 @@ class admin
                                 $_POST['data'][$prop]['excl']) {
                                 $lens['props'][$prop]['excl'] =
                                     explode(',',
-                                            $_POST['data'][$prop]['excl']);
+                                        $_POST['data'][$prop]['excl']);
                             }
 
                             break;
@@ -19070,7 +19354,7 @@ class admin
                                     array(
                                         'type' => 'list',
                                         'data' => explode(',',
-                                                          $_POST['data'][$prop]['list'])
+                                            $_POST['data'][$prop]['list'])
                                     );
 
                             }
@@ -19101,35 +19385,35 @@ class admin
 
 
             if ($this->db->insert('lens',
-                                  array(
-                                      'name' => $lens['name'],
-                                      'packaging' => $lens['packaging'],
-                                      'progressive' => $lens['progressive'],
-                                      'toric' => $lens['toric'],
-                                      'generation_id' => $lens['generation_id'],
-                                      'brand_id' => $lens['brand_id'],
-                                      'image' => $filename,
-                                  ))) {
+                array(
+                    'name' => $lens['name'],
+                    'packaging' => $lens['packaging'],
+                    'progressive' => $lens['progressive'],
+                    'toric' => $lens['toric'],
+                    'generation_id' => $lens['generation_id'],
+                    'brand_id' => $lens['brand_id'],
+                    'image' => $filename,
+                ))) {
 
                 $insert_id =
                     $this->db->insert_id();
 
                 $this->db->insert('lens_build',
-                                  array(
-                                      'lens_id' => $insert_id,
-                                      'data' => json_encode($lens['props'])
-                                  ));
+                    array(
+                        'lens_id' => $insert_id,
+                        'data' => json_encode($lens['props'])
+                    ));
 
                 for ($i = 1;
                      $i <= 6;
                      ++$i) {
 
                     $this->db->insert('lens_price',
-                                      array(
-                                          'lens_id' => $insert_id,
-                                          'grid_id' => $i,
-                                          'price' => $price
-                                      ));
+                        array(
+                            'lens_id' => $insert_id,
+                            'grid_id' => $i,
+                            'price' => $price
+                        ));
 
                 }
 
@@ -19152,19 +19436,19 @@ class admin
             $this->lens_config;
 
         $this->load->view('admin/add_lens',
-                          array(
-                              'modules' => array(
-                                  'sweetalert' => true,
-                                  'touchspin' => true,
-                              ),
-                              'page' => 'add_lens',
-                              'title' => $title,
-                              'msg' => $msg,
-                              'lens_data' => $lens,
-                              'config' => $config,
-                              'lens_generations' => $this->m_lens->getGenerations(),
-                              'lens_brands' => $this->m_lens->getBrands(),
-                          ));
+            array(
+                'modules' => array(
+                    'sweetalert' => true,
+                    'touchspin' => true,
+                ),
+                'page' => 'add_lens',
+                'title' => $title,
+                'msg' => $msg,
+                'lens_data' => $lens,
+                'config' => $config,
+                'lens_generations' => $this->m_lens->getGenerations(),
+                'lens_brands' => $this->m_lens->getBrands(),
+            ));
 
     }
 
@@ -19211,19 +19495,19 @@ class admin
 
                 $this->db->trans_start();
                 $this->db->where('id',
-                                 $lens_id);
+                    $lens_id);
                 $this->db->delete('lens');
                 $this->db->trans_complete();
 
                 $this->db->trans_start();
                 $this->db->where('lens_id',
-                                 $lens_id);
+                    $lens_id);
                 $this->db->delete('lens_build');
                 $this->db->trans_complete();
 
                 $this->db->trans_start();
                 $this->db->where('lens_id',
-                                 $lens_id);
+                    $lens_id);
                 $this->db->delete('lens_price');
                 $this->db->trans_complete();
 
@@ -19297,7 +19581,7 @@ class admin
                                     $_POST['data'][$prop]['excl']) {
                                     $lens['props'][$prop]['excl'] =
                                         explode(',',
-                                                $_POST['data'][$prop]['excl']);
+                                            $_POST['data'][$prop]['excl']);
                                 }
 
                                 break;
@@ -19311,7 +19595,7 @@ class admin
                                         array(
                                             'type' => 'list',
                                             'data' => explode(',',
-                                                              $_POST['data'][$prop]['list'])
+                                                $_POST['data'][$prop]['list'])
                                         );
 
                                 }
@@ -19339,7 +19623,7 @@ class admin
                             '';
                         $this->db->select('image');
                         $this->db->where('id',
-                                         $lens_id);
+                            $lens_id);
                         $query =
                             $this->db->get('lens');
 
@@ -19359,7 +19643,7 @@ class admin
 
                     $this->db->select('image');
                     $this->db->where('id',
-                                     $lens_id);
+                        $lens_id);
                     $query =
                         $this->db->get('lens');
 
@@ -19367,8 +19651,8 @@ class admin
                         $filename =
                             $query->result()[0]->image;
                         unlink(FCPATH .
-                               'uploads/' .
-                               $filename);
+                            'uploads/' .
+                            $filename);
                     }
 
                     $filename =
@@ -19377,24 +19661,24 @@ class admin
                 }
 
                 $this->db->where('id',
-                                 $lens_id);
+                    $lens_id);
                 if ($this->db->update('lens',
-                                      array(
-                                          'name' => $lens['name'],
-                                          'packaging' => $lens['packaging'],
-                                          'progressive' => $lens['progressive'],
-                                          'toric' => $lens['toric'],
-                                          'generation_id' => $lens['generation_id'],
-                                          'brand_id' => $lens['brand_id'],
-                                          'image' => $filename
-                                      ))) {
+                    array(
+                        'name' => $lens['name'],
+                        'packaging' => $lens['packaging'],
+                        'progressive' => $lens['progressive'],
+                        'toric' => $lens['toric'],
+                        'generation_id' => $lens['generation_id'],
+                        'brand_id' => $lens['brand_id'],
+                        'image' => $filename
+                    ))) {
 
                     $this->db->where('lens_id',
-                                     $lens_id);
+                        $lens_id);
                     $this->db->update('lens_build',
-                                      array(
-                                          'data' => json_encode($lens['props'])
-                                      ));
+                        array(
+                            'data' => json_encode($lens['props'])
+                        ));
 
                     for ($i =
                              1;
@@ -19404,12 +19688,12 @@ class admin
                     {
 
                         $this->db->where('lens_id',
-                                         $lens_id);
+                            $lens_id);
                         $this->db->update('lens_price',
-                                          array(
-                                              'grid_id' => $i,
-                                              'price' => $price
-                                          ));
+                            array(
+                                'grid_id' => $i,
+                                'price' => $price
+                            ));
 
                     }
 
@@ -19433,21 +19717,21 @@ class admin
         $msg = false;
 
         $this->load->view('admin/edit_lens',
-                          array(
-                              'modules' => array(
-                                  'sweetalert' => true,
-                                  'touchspin' => true,
-                              ),
-                              'page' => 'edit_lens',
-                              'title' => $title,
-                              'msg' => $msg,
-                              'error' => $error,
-                              'lens' => $lens,
-                              'lens_data' => $lens_data,
-                              'config' => $config,
-                              'lens_generations' => $this->m_lens->getGenerations(),
-                              'lens_brands' => $this->m_lens->getBrands(),
-                          ));
+            array(
+                'modules' => array(
+                    'sweetalert' => true,
+                    'touchspin' => true,
+                ),
+                'page' => 'edit_lens',
+                'title' => $title,
+                'msg' => $msg,
+                'error' => $error,
+                'lens' => $lens,
+                'lens_data' => $lens_data,
+                'config' => $config,
+                'lens_generations' => $this->m_lens->getGenerations(),
+                'lens_brands' => $this->m_lens->getBrands(),
+            ));
 
     }
 
@@ -19465,8 +19749,8 @@ class admin
 
             $brands =
                 $this->m_lens->getAvailableBrands($generation,
-                                                  $progressive,
-                                                  $toric);
+                    $progressive,
+                    $toric);
 
             if ($brands) {
                 echo '<select class="form-control" name="brand">';
@@ -19476,11 +19760,11 @@ class admin
                          $brand)
                 {
                     echo '<option value="' .
-                         $brand->id .
-                         '">' .
-                         $brand->name .
-                         '</option>' .
-                         "\n";
+                        $brand->id .
+                        '">' .
+                        $brand->name .
+                        '</option>' .
+                        "\n";
                 }
                 echo '</select>';
             } else {
@@ -19514,24 +19798,24 @@ class admin
                 {
                     echo '<div class="item">';
                     echo '<div class="thumb"><img src="' .
-                         site_url('uploads/' .
-                                  $lens->image) .
-                         '" /></div>';
+                        site_url('uploads/' .
+                            $lens->image) .
+                        '" /></div>';
                     echo '<b>' .
-                         $lens->name .
-                         '</b><br />';
+                        $lens->name .
+                        '</b><br />';
                     echo 'Boite de ' .
-                         $lens->packaging .
-                         '<br />';
+                        $lens->packaging .
+                        '<br />';
                     echo '<span class="price">' .
-                         number_format($lens->price,
-                                       2,
-                                       ',',
-                                       '') .
-                         '€</span><br />';
+                        number_format($lens->price,
+                            2,
+                            ',',
+                            '') .
+                        '€</span><br />';
                     echo '<a class="btn btn-warning product-select" rel="' .
-                         $lens->id .
-                         '">Choisir</a>';
+                        $lens->id .
+                        '">Choisir</a>';
                     echo '</div>';
                 }
 
@@ -19577,8 +19861,8 @@ class admin
                 echo '<div class="product-config">';
 
                 echo '<input type="hidden" name="lens_id" value="' .
-                     $lens_id .
-                     '">';
+                    $lens_id .
+                    '">';
 
 
                 foreach ($config['sides']
@@ -19586,13 +19870,13 @@ class admin
                 => $v) {
 
                     echo '<div class="side" data-side="' .
-                         $k .
-                         '">';
+                        $k .
+                        '">';
 
                     echo '<div class="mask"></div>';
 
                     echo '<h4>Corrections Oeil ' .
-                         $v . '</h4>
+                        $v . '</h4>
                             <div class="form-horizontal">';
 
                     foreach ($build_data
@@ -19611,21 +19895,21 @@ class admin
 
                             echo '<div class="form-group">
                                         <label class="col-sm-3 text-center" for="' .
-                                 $attr .
-                                 '[' .
-                                 $k .
-                                 ']">' .
-                                 $config['attrs'][$attr] . '</label>
+                                $attr .
+                                '[' .
+                                $k .
+                                ']">' .
+                                $config['attrs'][$attr] . '</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="' .
-                                 $attr .
-                                 '[' .
-                                 $k .
-                                 ']" name="build[' .
-                                 $attr .
-                                 '][' .
-                                 $k .
-                                 ']">';
+                                $attr .
+                                '[' .
+                                $k .
+                                ']" name="build[' .
+                                $attr .
+                                '][' .
+                                $k .
+                                ']">';
 
                             switch ($props->type) {
 
@@ -19652,40 +19936,40 @@ class admin
                                         {
 
                                             if (!in_array($i,
-                                                          $props->excl)) {
+                                                $props->excl)) {
 
                                                 if ($attr ==
                                                     'axe') {
                                                     $value =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '');
+                                                            0,
+                                                            '',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '') .
+                                                            0,
+                                                            '',
+                                                            '') .
                                                         ' °';
                                                 } else {
                                                     $value =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                 }
 
 
                                                 echo '<option value="' .
-                                                     $value .
-                                                     '">' .
-                                                     $show .
-                                                     '</option>';
+                                                    $value .
+                                                    '">' .
+                                                    $show .
+                                                    '</option>';
                                             }
 
                                         }
@@ -19693,39 +19977,39 @@ class admin
                                         if ($rangeLoop ==
                                             $numItems) {
                                             if (!in_array($i,
-                                                          $props->excl)) {
+                                                $props->excl)) {
 
                                                 if ($attr ==
                                                     'axe') {
                                                     $value =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '');
+                                                            0,
+                                                            '',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '') .
+                                                            0,
+                                                            '',
+                                                            '') .
                                                         ' °';
                                                 } else {
                                                     $value =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                 }
 
                                                 echo '<option value="' .
-                                                     $value .
-                                                     '">' .
-                                                     $show .
-                                                     '</option>';
+                                                    $value .
+                                                    '">' .
+                                                    $show .
+                                                    '</option>';
                                             }
                                         }
 
@@ -19749,10 +20033,10 @@ class admin
                                              $step)
                                     {
                                         echo '<option value="' .
-                                             $step .
-                                             '">' .
-                                             $step .
-                                             '</option>';
+                                            $step .
+                                            '">' .
+                                            $step .
+                                            '</option>';
                                     }
 
                                     break;
@@ -19769,13 +20053,13 @@ class admin
 
                     echo '<div class="form-group">
                                 <label class="col-sm-3 text-center" for="qty[' .
-                         $k . ']">Quantité</label>
+                        $k . ']">Quantité</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="qty[' .
-                         $k .
-                         ']" name="build[qty][' .
-                         $k .
-                         ']">';
+                        $k .
+                        ']" name="build[qty][' .
+                        $k .
+                        ']">';
                     for ($i =
                              1;
                          $i <=
@@ -19783,10 +20067,10 @@ class admin
                          ++$i)
                     {
                         echo '<option value="' .
-                             $i .
-                             '">' .
-                             $i .
-                             '</option>';
+                            $i .
+                            '">' .
+                            $i .
+                            '</option>';
                     }
                     echo '</select>
                                 </div>
@@ -19801,14 +20085,14 @@ class admin
                     }
 
                     echo '<div class="col-sm-9 col-sm-offset-3"><input type="checkbox" value="1" class="excl" name="build[excl][' .
-                         $excl .
-                         ']" id="build[excl][' .
-                         $excl .
-                         ']" /> <label class="control-label" for="excl[' .
-                         $excl .
-                         ']"> Commander uniquement oeil ' .
-                         $v .
-                         '</label></div>';
+                        $excl .
+                        ']" id="build[excl][' .
+                        $excl .
+                        ']" /> <label class="control-label" for="excl[' .
+                        $excl .
+                        ']"> Commander uniquement oeil ' .
+                        $v .
+                        '</label></div>';
 
                     echo '</div>
                         </div>';
@@ -19854,9 +20138,9 @@ class admin
                 $this->m_lens->getLens($data['lens_id']);
 
             $this->session->set_userdata('order',
-                                         $data);
+                $data);
             echo $this->load->view('ajax_show_lens_order',
-                                   $data);
+                $data);
 
         }
     }
@@ -19915,7 +20199,7 @@ class admin
                 'information_commande' => json_encode($data['build']),
                 'commentaire' => $data['commentaire'],
                 'id_users' => (int)$data['user_id'],
-                'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'tarif_livraison' => $userdata->tarif_livraison,
                 'total_commande' => $total_order
             );
@@ -19953,10 +20237,10 @@ class admin
         if (isset($user_info[0]->cp)) {
             $dep =
                 substr($user_info[0]->cp,
-                       0, -3);
+                    0, -3);
             $region =
                 ($regions[$dep] ==
-                 "Ile-de-France" ?
+                "Ile-de-France" ?
                     1 : 0);
         } else {
             $region = 0;
@@ -19967,23 +20251,23 @@ class admin
         $date->modify('-60 days');
 
         $this->load->view('admin/lens',
-                          array(
-                              'modules' => array(
-                                  'sweetalert' => true,
-                                  'touchspin' => true,
-                              ),
-                              'user_info' => $user_info[0],
-                              'user_id' => $user_id,
-                              'page' => $title,
-                              'title' => $title,
-                              'region' => $region,
-                              'numero_siret' => $this->session->userdata('numero_siret'),
-                              'tva_intracomm' => $this->session->userdata('tva_intracomm'),
-                              'commentaire_actif' => json_decode($result[0]->param_config),
-                              'id_commandes' => $this->getUserOrders($user_id,
-                                                                     $date),
-                              'lens_generations' => $this->m_lens->getGenerations()
-                          ));
+            array(
+                'modules' => array(
+                    'sweetalert' => true,
+                    'touchspin' => true,
+                ),
+                'user_info' => $user_info[0],
+                'user_id' => $user_id,
+                'page' => $title,
+                'title' => $title,
+                'region' => $region,
+                'numero_siret' => $this->session->userdata('numero_siret'),
+                'tva_intracomm' => $this->session->userdata('tva_intracomm'),
+                'commentaire_actif' => json_decode($result[0]->param_config),
+                'id_commandes' => $this->getUserOrders($user_id,
+                    $date),
+                'lens_generations' => $this->m_lens->getGenerations()
+            ));
 
     }
 
@@ -20029,10 +20313,10 @@ class admin
             }
 
             if ($this->db->insert('montures_collection',
-                                  array(
-                                      'name' => $_POST['name'],
-                                      'image' => $filename,
-                                  ))) {
+                array(
+                    'name' => $_POST['name'],
+                    'image' => $filename,
+                ))) {
 
 
             } else {
@@ -20054,10 +20338,10 @@ class admin
 
             if (isset($_POST['namePack'])) {
                 if ($this->db->insert('montures_pack',
-                                      array(
-                                          'name' => $_POST['namePack'],
-                                          'image' => $filenamePack,
-                                      ))) {
+                    array(
+                        'name' => $_POST['namePack'],
+                        'image' => $filenamePack,
+                    ))) {
 
 
                 } else {
@@ -20093,7 +20377,7 @@ class admin
 
 
         $this->load->view('admin/liste_collections',
-                          $data);
+            $data);
     }
 
 
@@ -20111,8 +20395,8 @@ class admin
 
             $brands =
                 $this->m_montures->getAvailableBrands($generation,
-                                                      $progressive,
-                                                      $toric);
+                    $progressive,
+                    $toric);
 
             if ($brands) {
                 echo '<select class="form-control" name="brand">';
@@ -20122,11 +20406,11 @@ class admin
                          $brand)
                 {
                     echo '<option value="' .
-                         $brand->id .
-                         '">' .
-                         $brand->name .
-                         '</option>' .
-                         "\n";
+                        $brand->id .
+                        '">' .
+                        $brand->name .
+                        '</option>' .
+                        "\n";
                 }
                 echo '</select>';
             } else {
@@ -20143,33 +20427,33 @@ class admin
         $user_id =
             (int)$this->input->post('user_id');
         $this->db->query('DELETE FROM commande_montures_temp WHERE id_client = ' .
-                         $user_id .
-                         ' ');
+            $user_id .
+            ' ');
         set_cookie('panierA',
-                   0, '1800');
+            0, '1800');
         set_cookie('panierA_sans_monture',
-                   '0',
-                   '1800');
+            '0',
+            '1800');
         set_cookie('refPanierA',
-                   '',
-                   '1800');
+            '',
+            '1800');
         $rel =
             $this->input->post('id');
 
         if (strpos($rel,
-                   'add_pack') !==
+                'add_pack') !==
             false) {
             //echo "Add pack Rel:".$rel;
         } else {
             if (strpos($rel,
-                       'voir_pack') !==
+                    'voir_pack') !==
                 false) {
 
                 //echo "Voir pack Rel:".$rel;
                 $pack_id =
                     str_replace("voir_pack_",
-                                "",
-                                $rel);
+                        "",
+                        $rel);
                 //echo "Pack id:".$pack_id;
                 $montures_du_pack =
                     $this->m_montures->getAllMonturesDuPack($pack_id);
@@ -20179,24 +20463,24 @@ class admin
                 {
                     echo '<div class="item">';
                     echo '<div class="thumb"><img src="' .
-                         site_url('uploads/' .
-                                  $monture->image) .
-                         '"  style="max-width: 312px;" /></div>';
+                        site_url('uploads/' .
+                            $monture->image) .
+                        '"  style="max-width: 312px;" /></div>';
                     echo '<b>' .
-                         $monture->modele .
-                         '</b><br />';
+                        $monture->modele .
+                        '</b><br />';
                     echo 'Type: ' .
-                         $monture->type .
-                         '<br />';
+                        $monture->type .
+                        '<br />';
                     echo 'Taille: ' .
-                         $monture->size .
-                         '<br />';
+                        $monture->size .
+                        '<br />';
                     echo 'Couleur: ' .
-                         $monture->couleur .
-                         '<br />';
+                        $monture->couleur .
+                        '<br />';
                     echo 'Prix: ' .
-                         $monture->prix_vente .
-                         '<br />';
+                        $monture->prix_vente .
+                        '<br />';
                     echo '</div>';
                 }
 
@@ -20234,25 +20518,25 @@ class admin
                             0) {
                             echo '<div class="item"><br><br>';
                             echo '<div class="thumb"><img src="' .
-                                 site_url('uploads/' .
-                                          $pack->image) .
-                                 '" style="max-width: 312px;" /></div>';
+                                site_url('uploads/' .
+                                    $pack->image) .
+                                '" style="max-width: 312px;" /></div>';
                             echo '<b>' .
-                                 $pack->name .
-                                 '</b><br />';
+                                $pack->name .
+                                '</b><br />';
                             if ($pack->id !=
                                 1) {
                                 echo '<a class="btn btn-warning product-select" rel="voir_pack_' .
-                                     $pack->id .
-                                     '">Voir les montures</a>';
+                                    $pack->id .
+                                    '">Voir les montures</a>';
                             } else {
                                 echo "Prix: " .
-                                     $pack->prix .
-                                     "&#8364;<br><br>";
+                                    $pack->prix .
+                                    "&#8364;<br><br>";
                             }
                             echo '<a class="btn btn-warning product-select" rel="add_pack_' .
-                                 $pack->id .
-                                 '">Ajouter à mon panier</a>&nbsp;&nbsp;';
+                                $pack->id .
+                                '">Ajouter à mon panier</a>&nbsp;&nbsp;';
                             echo '</div>';
                         }
                     }
@@ -20278,31 +20562,31 @@ class admin
                             $s_temp >
                             0) {
                             echo '<div class="item ' .
-                                 $monture->modele .
-                                 '">';
+                                $monture->modele .
+                                '">';
                             echo '<div class="thumb"><img src="' .
-                                 site_url('uploads/' .
-                                          $monture->image) .
-                                 '"  style="max-width: 312px;" /></div>';
+                                site_url('uploads/' .
+                                    $monture->image) .
+                                '"  style="max-width: 312px;" /></div>';
                             echo '<b>' .
-                                 $monture->modele .
-                                 '</b><br />';
+                                $monture->modele .
+                                '</b><br />';
                             echo 'Type: ' .
-                                 $monture->type .
-                                 '<br />';
+                                $monture->type .
+                                '<br />';
                             echo 'Taille: ' .
-                                 $monture->size .
-                                 '<br />';
+                                $monture->size .
+                                '<br />';
                             echo 'Couleur: ' .
-                                 $monture->couleur .
-                                 '<br />';
+                                $monture->couleur .
+                                '<br />';
                             echo 'Prix: ' .
-                                 $monture->prix_vente .
-                                 '&#8364;<br />';
+                                $monture->prix_vente .
+                                '&#8364;<br />';
                             echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
-                                 $monture->id .
-                                 '">Ajouter à mon panier</a>';
+                                $monture->id .
+                                '">Ajouter à mon panier</a>';
                             echo '</div>';
                         }
                     }
@@ -20348,8 +20632,8 @@ class admin
                 echo '<div class="product-config">';
 
                 echo '<input type="hidden" name="montures_id" value="' .
-                     $montures_id .
-                     '">';
+                    $montures_id .
+                    '">';
 
 
                 foreach ($config['sides']
@@ -20357,13 +20641,13 @@ class admin
                 => $v) {
 
                     echo '<div class="side" data-side="' .
-                         $k .
-                         '">';
+                        $k .
+                        '">';
 
                     echo '<div class="mask"></div>';
 
                     echo '<h4>Corrections Oeil ' .
-                         $v . '</h4>
+                        $v . '</h4>
                             <div class="form-horizontal">';
 
                     foreach ($build_data
@@ -20382,21 +20666,21 @@ class admin
 
                             echo '<div class="form-group">
                                         <label class="col-sm-3 text-center" for="' .
-                                 $attr .
-                                 '[' .
-                                 $k .
-                                 ']">' .
-                                 $config['attrs'][$attr] . '</label>
+                                $attr .
+                                '[' .
+                                $k .
+                                ']">' .
+                                $config['attrs'][$attr] . '</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" id="' .
-                                 $attr .
-                                 '[' .
-                                 $k .
-                                 ']" name="build[' .
-                                 $attr .
-                                 '][' .
-                                 $k .
-                                 ']">';
+                                $attr .
+                                '[' .
+                                $k .
+                                ']" name="build[' .
+                                $attr .
+                                '][' .
+                                $k .
+                                ']">';
 
                             switch ($props->type) {
 
@@ -20423,40 +20707,40 @@ class admin
                                         {
 
                                             if (!in_array($i,
-                                                          $props->excl)) {
+                                                $props->excl)) {
 
                                                 if ($attr ==
                                                     'axe') {
                                                     $value =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '');
+                                                            0,
+                                                            '',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '') .
+                                                            0,
+                                                            '',
+                                                            '') .
                                                         ' °';
                                                 } else {
                                                     $value =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                 }
 
 
                                                 echo '<option value="' .
-                                                     $value .
-                                                     '">' .
-                                                     $show .
-                                                     '</option>';
+                                                    $value .
+                                                    '">' .
+                                                    $show .
+                                                    '</option>';
                                             }
 
                                         }
@@ -20464,39 +20748,39 @@ class admin
                                         if ($rangeLoop ==
                                             $numItems) {
                                             if (!in_array($i,
-                                                          $props->excl)) {
+                                                $props->excl)) {
 
                                                 if ($attr ==
                                                     'axe') {
                                                     $value =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '');
+                                                            0,
+                                                            '',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      0,
-                                                                      '',
-                                                                      '') .
+                                                            0,
+                                                            '',
+                                                            '') .
                                                         ' °';
                                                 } else {
                                                     $value =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                     $show =
                                                         number_format($i,
-                                                                      2,
-                                                                      '.',
-                                                                      '');
+                                                            2,
+                                                            '.',
+                                                            '');
                                                 }
 
                                                 echo '<option value="' .
-                                                     $value .
-                                                     '">' .
-                                                     $show .
-                                                     '</option>';
+                                                    $value .
+                                                    '">' .
+                                                    $show .
+                                                    '</option>';
                                             }
                                         }
 
@@ -20520,10 +20804,10 @@ class admin
                                              $step)
                                     {
                                         echo '<option value="' .
-                                             $step .
-                                             '">' .
-                                             $step .
-                                             '</option>';
+                                            $step .
+                                            '">' .
+                                            $step .
+                                            '</option>';
                                     }
 
                                     break;
@@ -20540,13 +20824,13 @@ class admin
 
                     echo '<div class="form-group">
                                 <label class="col-sm-3 text-center" for="qty[' .
-                         $k . ']">Quantité</label>
+                        $k . ']">Quantité</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="qty[' .
-                         $k .
-                         ']" name="build[qty][' .
-                         $k .
-                         ']">';
+                        $k .
+                        ']" name="build[qty][' .
+                        $k .
+                        ']">';
                     for ($i =
                              1;
                          $i <=
@@ -20554,10 +20838,10 @@ class admin
                          ++$i)
                     {
                         echo '<option value="' .
-                             $i .
-                             '">' .
-                             $i .
-                             '</option>';
+                            $i .
+                            '">' .
+                            $i .
+                            '</option>';
                     }
                     echo '</select>
                                 </div>
@@ -20572,14 +20856,14 @@ class admin
                     }
 
                     echo '<div class="col-sm-9 col-sm-offset-3"><input type="checkbox" value="1" class="excl" name="build[excl][' .
-                         $excl .
-                         ']" id="build[excl][' .
-                         $excl .
-                         ']" /> <label class="control-label" for="excl[' .
-                         $excl .
-                         ']"> Commander uniquement oeil ' .
-                         $v .
-                         '</label></div>';
+                        $excl .
+                        ']" id="build[excl][' .
+                        $excl .
+                        ']" /> <label class="control-label" for="excl[' .
+                        $excl .
+                        ']"> Commander uniquement oeil ' .
+                        $v .
+                        '</label></div>';
 
                     echo '</div>
                         </div>';
@@ -20614,15 +20898,15 @@ class admin
 
         $d =
             date("Y/m/d H:i:s",
-                 strtotime("-30 minutes"));
+                strtotime("-30 minutes"));
         $this->db->from('commande_montures_temp');
         $this->db->select('*');
         $this->db->where('id_client',
-                         $user_id);
+            $user_id);
         $this->db->where('status',
-                         0);
+            0);
         $this->db->where('date >',
-                         $d);
+            $d);
         $query =
             $this->db->get();
         if ($query->num_rows() >
@@ -20664,18 +20948,18 @@ class admin
                 0) {
                 echo '<div class="item">';
                 echo '<div class="thumb"><img src="' .
-                     site_url('uploads/' .
-                              $pack->image) .
-                     '" style="max-width: 312px;" /></div>';
+                    site_url('uploads/' .
+                        $pack->image) .
+                    '" style="max-width: 312px;" /></div>';
                 echo '<b>' .
-                     $pack->name .
-                     '</b><br />';
+                    $pack->name .
+                    '</b><br />';
                 echo '<a class="btn btn-warning product-select" rel="add_pack_' .
-                     $pack->id .
-                     '">Choisir</a>&nbsp;&nbsp;';
+                    $pack->id .
+                    '">Choisir</a>&nbsp;&nbsp;';
                 echo '<a class="btn btn-warning product-select" rel="voir_pack_' .
-                     $pack->id .
-                     '">Voir les montures</a>';
+                    $pack->id .
+                    '">Voir les montures</a>';
                 echo '</div>';
             }
         }
@@ -20700,15 +20984,15 @@ class admin
         {
             echo '<div class="item">';
             echo '<div class="thumb"><img src="' .
-                 site_url('uploads/' .
-                          $collection->image) .
-                 '"  style="max-width: 312px;" /></div>';
+                site_url('uploads/' .
+                    $collection->image) .
+                '"  style="max-width: 312px;" /></div>';
             echo '<b>' .
-                 $collection->name .
-                 '</b><br />';
+                $collection->name .
+                '</b><br />';
             echo '<a class="btn btn-warning product-select" rel="' .
-                 $collection->id .
-                 '">Voir collection</a>';
+                $collection->id .
+                '">Voir collection</a>';
             echo '</div>';
         }
 
@@ -20732,11 +21016,11 @@ class admin
         $this->db->from('commande_montures_temp');
         $this->db->select('*');
         $this->db->where('id_client',
-                         $user_id);
+            $user_id);
         $this->db->where('id_monture',
-                         $monture_id);
+            $monture_id);
         $this->db->where('status',
-                         0);
+            0);
         $query =
             $this->db->get();
         if ($query->num_rows() >
@@ -20744,12 +21028,12 @@ class admin
             $id_temp =
                 $query->result()[0];
             $this->db->where('id',
-                             $id_temp->id);
+                $id_temp->id);
             $this->db->update('commande_montures_temp',
-                              array(
-                                  'qty' => $id_temp->qty +
-                                           1
-                              ));
+                array(
+                    'qty' => $id_temp->qty +
+                        1
+                ));
         } else {
             //$data = array('id_client' => $user_id, 'id_monture' => $monture_id, 'qty' => 1, 'date' => date('Y-m-d H:i:s'), 'status' => 0);
             //$this->db->insert('commande_montures_temp', $data);
@@ -20773,20 +21057,20 @@ class admin
             $this->input->post('user_id');
 
         $this->db->where('id_client',
-                         $user_id);
+            $user_id);
         $this->db->update('commande_montures_temp',
-                          array(
-                              'avec_verres' => 1,
-                              'ref_client' => $data['client_ref']
-                          ));
+            array(
+                'avec_verres' => 1,
+                'ref_client' => $data['client_ref']
+            ));
 
 
         set_cookie('panierA',
-                   $user_id,
-                   '1800');
+            $user_id,
+            '1800');
         set_cookie('refPanierA',
-                   $data['client_ref'],
-                   '1800');
+            $data['client_ref'],
+            '1800');
 
 
     }
@@ -20804,18 +21088,18 @@ class admin
 
         $pack_id =
             str_replace("add_pack_",
-                        "",
-                        $this->input->post('id'));
+                "",
+                $this->input->post('id'));
 
         //$monture_id = (int) $this->input->post('id');
         $this->db->from('commande_montures_temp');
         $this->db->select('*');
         $this->db->where('id_client',
-                         $user_id);
+            $user_id);
         $this->db->where('id_pack',
-                         $pack_id);
+            $pack_id);
         $this->db->where('status',
-                         0);
+            0);
         $query =
             $this->db->get();
         if ($query->num_rows() >
@@ -20823,12 +21107,12 @@ class admin
             $id_temp =
                 $query->result()[0];
             $this->db->where('id',
-                             $id_temp->id);
+                $id_temp->id);
             $this->db->update('commande_montures_temp',
-                              array(
-                                  'qty' => $id_temp->qty +
-                                           1
-                              ));
+                array(
+                    'qty' => $id_temp->qty +
+                        1
+                ));
         } else {
             $data = array(
                 'id_client' => $user_id,
@@ -20838,7 +21122,7 @@ class admin
                 'status' => 0
             );
             $this->db->insert('commande_montures_temp',
-                              $data);
+                $data);
         }
     }
 
@@ -20868,18 +21152,18 @@ class admin
             $this->db->from('commande_montures_temp cm');
             $this->db->select('m.*, cm.id as id_temp, cm.qty, cm.status, cm.id_client, collec.name as collection, m_pack.id as pack_id, m_pack.name as pack, m_pack.prix as prixpack');
             $this->db->where('cm.id_client',
-                             $id_user);
+                $id_user);
             $this->db->where('cm.status',
-                             0);
+                0);
             $this->db->join('montures m',
-                            'm.id = cm.id_monture',
-                            'left');
+                'm.id = cm.id_monture',
+                'left');
             $this->db->join('montures_collection collec',
-                            'm.id_collection = collec.id',
-                            'left');
+                'm.id_collection = collec.id',
+                'left');
             $this->db->join('montures_pack m_pack',
-                            'm_pack.id = cm.id_pack',
-                            'left');
+                'm_pack.id = cm.id_pack',
+                'left');
             $query =
                 $this->db->get();
             if ($query->num_rows() >
@@ -20891,11 +21175,11 @@ class admin
                 $data['tarif_livraison'] =
                     $userdata->tarif_livraison;
                 $data['tarif_packaging'] =
-                    $userdata->tarif_packaging;
+                    $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
                 $this->session->set_userdata('order',
-                                             $data);
+                    $data);
                 echo $this->load->view('admin/ajax_show_montures_order',
-                                       $data);
+                    $data);
             } else {
                 echo '<b>Erreur</b>';
             }
@@ -20908,10 +21192,10 @@ class admin
                                     $id_client)
     {
         $this->db->query('DELETE FROM commande_montures_temp WHERE id = "' .
-                         $id_monture_temp .
-                         '" AND status=0');
+            $id_monture_temp .
+            '" AND status=0');
         $this->redirect('/admin/commande_montures/' .
-                        $id_client);
+            $id_client);
     }
 
     public
@@ -20953,15 +21237,15 @@ class admin
                 if ($monture->pack ==
                     null) {
                     $total_order += $monture->prix_vente *
-                                    $monture->qty;
+                        $monture->qty;
                     $stock_avant =
                         $monture->stock;
                     $this->db->where('id',
-                                     $monture->id);
+                        $monture->id);
                     $this->db->set('stock',
-                                   'stock-' .
-                                   $monture->qty,
-                                   FALSE);
+                        'stock-' .
+                        $monture->qty,
+                        FALSE);
                     $this->db->update('montures');
                     $stock_apres =
                         $monture->stock -
@@ -20975,13 +21259,13 @@ class admin
                         <head></head>
                         <body>
                         Collection : " .
-                                    $monture->collection .
-                                    ' ,Modele : ' .
-                                    $monture->modele .
-                                    ',Couleur : ' .
-                                    $monture->couleur .
-                                    " ,Stock : " .
-                                    $stock_apres . "
+                            $monture->collection .
+                            ' ,Modele : ' .
+                            $monture->modele .
+                            ',Couleur : ' .
+                            $monture->couleur .
+                            " ,Stock : " .
+                            $stock_apres . "
                         </body>
                       </html>";
                         $subjet_txt =
@@ -20995,7 +21279,7 @@ class admin
                     }
                 } else {
                     $total_order += $monture->prixpack *
-                                    $monture->qty;
+                        $monture->qty;
 
                     $montures_du_pack =
                         $this->m_montures->getAllMonturesDuPack($monture->pack_id);
@@ -21006,11 +21290,11 @@ class admin
                         $stock_avant =
                             $monture_du_pack->stock;
                         $this->db->where('id',
-                                         $monture_du_pack->id);
+                            $monture_du_pack->id);
                         $this->db->set('stock',
-                                       'stock-' .
-                                       $monture->qty,
-                                       FALSE);
+                            'stock-' .
+                            $monture->qty,
+                            FALSE);
                         $this->db->update('montures');
                         $stock_apres =
                             $monture_du_pack->stock -
@@ -21022,13 +21306,13 @@ class admin
 							<head></head>
 							<body>
 							Pack : " .
-                                        $monture->pack .
-                                        ' ,Modele : ' .
-                                        $monture_du_pack->modele .
-                                        ',Couleur : ' .
-                                        $monture_du_pack->couleur .
-                                        " ,Stock : " .
-                                        $stock_apres . "
+                                $monture->pack .
+                                ' ,Modele : ' .
+                                $monture_du_pack->modele .
+                                ',Couleur : ' .
+                                $monture_du_pack->couleur .
+                                " ,Stock : " .
+                                $stock_apres . "
 							</body>
 						  </html>";
                             $subjet_txt =
@@ -21057,17 +21341,17 @@ class admin
                 'lens_id' => 0,
                 'lens_generation' => 0,
                 'information_commande' => json_encode($data['montures']),
-                'commentaire' => $data['commentaire'],
+                'commentaire' => isset($data['commentaire']) ? $data['commentaire'] : "",
                 'id_users' => $user_id,
                 'total_commande' => $total_order,
                 'tarif_livraison' => $userdata->tarif_livraison,
-                'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'commande_monture' => 1
             );
 
             $this->db->query('DELETE FROM commande_montures_temp WHERE id_client = "' .
-                             $user_id .
-                             '" AND status=0');
+                $user_id .
+                '" AND status=0');
 
 
             if ($this->m_montures->addMonturesOrder($args)) {
@@ -21102,10 +21386,10 @@ class admin
         if (isset($user_info[0]->cp)) {
             $dep =
                 substr($user_info[0]->cp,
-                       0, -3);
+                    0, -3);
             $region =
                 ($regions[$dep] ==
-                 "Ile-de-France" ?
+                "Ile-de-France" ?
                     1 : 0);
         } else {
             $region = 0;
@@ -21116,25 +21400,25 @@ class admin
         $date->modify('-60 days');
 
         $this->session->set_userdata('user_id_temp',
-                                     $user_id);
+            $user_id);
 
         $this->load->view('admin/montures',
-                          array(
-                              'modules' => array(
-                                  'sweetalert' => true,
-                                  'touchspin' => true,
-                              ),
-                              'user_info' => $user_info[0],
-                              'user_id' => $user_id,
-                              'page' => $title,
-                              'title' => $title,
-                              'region' => $region,
-                              'numero_siret' => $this->session->userdata('numero_siret'),
-                              'tva_intracomm' => $this->session->userdata('tva_intracomm'),
-                              'commentaire_actif' => json_decode($result[0]->param_config),
-                              'id_commandes' => $this->getUserOrders($user_id,
-                                                                     $date)
-                          ));
+            array(
+                'modules' => array(
+                    'sweetalert' => true,
+                    'touchspin' => true,
+                ),
+                'user_info' => $user_info[0],
+                'user_id' => $user_id,
+                'page' => $title,
+                'title' => $title,
+                'region' => $region,
+                'numero_siret' => $this->session->userdata('numero_siret'),
+                'tva_intracomm' => $this->session->userdata('tva_intracomm'),
+                'commentaire_actif' => json_decode($result[0]->param_config),
+                'id_commandes' => $this->getUserOrders($user_id,
+                    $date)
+            ));
 
     }
 
@@ -21163,10 +21447,10 @@ class admin
                 $this->input->post();
 
             if ($this->m_lens->setOrderCheck($data['order'],
-                                             $data['check'])) {
+                $data['check'])) {
                 $commandes =
                     $this->m_lens->getOrders(0,
-                                             true);
+                        true);
 
                 if (is_array($commandes)) {
                     echo count($commandes);
@@ -21191,10 +21475,10 @@ class admin
             //echo $data['order']." - ".$data['check'];
 
             if ($this->m_montures->setOrderCheck($data['order'],
-                                                 $data['check'])) {
+                $data['check'])) {
                 $commandes =
                     $this->m_montures->getOrders(0,
-                                                 true);
+                        true);
 
                 if (is_array($commandes)) {
                     echo count($commandes);
@@ -21214,7 +21498,7 @@ class admin
 
         $commandes =
             $this->m_lens->getOrders(0,
-                                     true);
+                true);
 
         if (is_array($commandes)) {
             echo count($commandes);
@@ -21228,7 +21512,7 @@ class admin
 
         $commandes =
             $this->m_montures->getOrders(0,
-                                         true);
+                true);
 
         if (is_array($commandes)) {
             echo count($commandes);
@@ -21243,7 +21527,7 @@ class admin
 
         $commandes =
             $this->m_montures->getOrders(0,
-                                         true);
+                true);
         $data['commande'] =
             $commandes;
         $data['email'] =
@@ -21252,11 +21536,11 @@ class admin
         // Génération des PDF
         $docs = array(
             'bl' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("bons_livraison_montures",
-                               $data,
-                               "bons_livraison_montures.pdf",
-                               false),
+                '/' .
+                $this->pdf("bons_livraison_montures",
+                    $data,
+                    "bons_livraison_montures.pdf",
+                    false),
         );
 
 
@@ -21274,10 +21558,10 @@ class admin
                 date('H\hi');
 
             $this->mail($data,
-                        $mess_txt,
-                        true,
-                        $sujet_txt,
-                        $docs);
+                $mess_txt,
+                true,
+                $sujet_txt,
+                $docs);
             echo 'sent';
 
         } else {
@@ -21293,7 +21577,7 @@ class admin
 
         $commandes =
             $this->m_lens->getOrders(0,
-                                     true);
+                true);
         $data['commande'] =
             $commandes;
         $data['email'] =
@@ -21302,11 +21586,11 @@ class admin
         // Génération des PDF
         $docs = array(
             'bl' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("bons_livraison_lentille",
-                               $data,
-                               "bons_livraison_lentille.pdf",
-                               false),
+                '/' .
+                $this->pdf("bons_livraison_lentille",
+                    $data,
+                    "bons_livraison_lentille.pdf",
+                    false),
         );
 
 
@@ -21324,10 +21608,10 @@ class admin
                 date('H\hi');
 
             $this->mail($data,
-                        $mess_txt,
-                        true,
-                        $sujet_txt,
-                        $docs);
+                $mess_txt,
+                true,
+                $sujet_txt,
+                $docs);
             echo 'sent';
 
         } else {
@@ -21344,7 +21628,7 @@ class admin
 
             $commandes =
                 $this->m_lens->getOrders(0,
-                                         true);
+                    true);
 
             $expedie =
                 array();
@@ -21357,17 +21641,17 @@ class admin
                 $expedie[] =
                     $commande->id_commande;
                 $this->update_commande($commande->id_commande,
-                                       6,
-                                       $commande->id_users,
-                                       true,
-                                       true);
+                    6,
+                    $commande->id_users,
+                    true,
+                    true);
 
                 $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
-                                 $commande->id_users .
-                                 ', ' .
-                                 time() .
-                                 ') ON DUPLICATE KEY UPDATE expedition_date = ' .
-                                 time());
+                    $commande->id_users .
+                    ', ' .
+                    time() .
+                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+                    time());
 
             }
 
@@ -21384,7 +21668,7 @@ class admin
 
             $commandes =
                 $this->m_montures->getOrders(0,
-                                             true);
+                    true);
 
             $expedie =
                 array();
@@ -21397,17 +21681,17 @@ class admin
                 $expedie[] =
                     $commande->id_commande;
                 $this->update_commande($commande->id_commande,
-                                       6,
-                                       $commande->id_users,
-                                       true,
-                                       true);
+                    6,
+                    $commande->id_users,
+                    true,
+                    true);
 
                 $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
-                                 $commande->id_users .
-                                 ', ' .
-                                 time() .
-                                 ') ON DUPLICATE KEY UPDATE expedition_date = ' .
-                                 time());
+                    $commande->id_users .
+                    ', ' .
+                    time() .
+                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+                    time());
 
             }
 
@@ -21484,7 +21768,7 @@ class admin
 
         $result =
             $this->m_passer_commande_verre->setPriceVerreById($data['new_price'],
-                                                              $data['id_prix']);
+                $data['id_prix']);
 
         echo $result;
     }
@@ -21497,9 +21781,9 @@ class admin
 
         $result =
             $this->m_passer_commande_verre->setPriceVerre($data['user_id'],
-                                                          $data['new_price'],
-                                                          $data['verre_or_lens_id'],
-                                                          $data['name_verre']);
+                $data['new_price'],
+                $data['verre_or_lens_id'],
+                $data['name_verre']);
 
         echo $result;
     }

@@ -1,8 +1,34 @@
 <?php
 include_once('header.php');
 include_once('menu.php');
-?>
 
+if(isset($_POST['password']) && $_POST['password']=='1141')
+{
+    $_SESSION['login'] = true;
+}
+
+if(!isset($_SESSION['login']))
+{
+    ?>
+    <div style="width: 285px;
+    height: auto;
+    margin: auto;
+    margin-top: 150px;
+    padding: 20px;
+    border: 1px solid #bbb;">
+        <form name='input' action='' method='post'>
+            <div style="width: 100%;float: left; margin-bottom: 20px"><div style="width:105px;float: left"><label for='password'>Mot de passe: </label></div><div style="width:180px;float:left" ><input type='password' value='' id='password' name='password' /></div>
+                <div class='error'><?php
+                    if(isset($passError))
+                        echo $passError;?></div></div>
+            <input type='submit' value='Connexion' name='sub' style="margin-left:84px" />
+        </form>
+    </div>
+    <?php
+}
+else
+{
+    ?>
     <div class="content-page">
     <!-- Start content -->
     <div class="content">
@@ -202,6 +228,7 @@ include_once('menu.php');
 
 
     </script>
-
-
-<?php include_once('footer.php'); ?>
+    
+    <?php
+}
+include_once('footer.php'); ?>

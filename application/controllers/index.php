@@ -1955,6 +1955,7 @@ class index extends MY_Controller {
                     $order_data['total_commande'] = $total_commande;
                     $order_data['total_remise_paire'] = 0;
 
+
                     if ($order = $this->m_commande->addOrder($order_data)) {
                         $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                         $this->db->where(array('user_id' => $order_data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
@@ -2220,7 +2221,7 @@ class index extends MY_Controller {
 							'id_users' => $data['id_users'],
 							'total_commande' => $total_order,
 							'tarif_livraison' => $userdata->tarif_livraison,
-							'tarif_packaging' => $userdata->tarif_packaging,
+							'tarif_packaging' => $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 							'commande_monture' => 1
 						);
 
@@ -2481,7 +2482,7 @@ class index extends MY_Controller {
                 $data['ancienne_commande'] = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['taux_tva'] = $this->m_taux_tva->get_tva();
                 $data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
                 $prix_miroir = 7;
 
                 $pair_order = false;
@@ -2836,10 +2837,10 @@ class index extends MY_Controller {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
 
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                    $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
+
                     if ($verreStockD) {
-                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) *
-                                          $data['quantiteD'];
-                        ///var_dump($data['prixDH']);die;
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
                     }
                     else {
                         $teinteCode = NULL;
@@ -2861,16 +2862,15 @@ class index extends MY_Controller {
 
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $data['quantiteD'];;
+                            $prisme, $teinteCode) * $quantiteD;;
                     }
                 }
                 if (isset($data['gauche'])) {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
-
+                    $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG) {
-                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) *
-                                          $data['quantiteG'];
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -2890,7 +2890,7 @@ class index extends MY_Controller {
                         }
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $data['quantiteG'];;
+                            $prisme, $teinteCode) * $quantiteG;;
                     }
                 }
 
@@ -3027,11 +3027,13 @@ class index extends MY_Controller {
 				$data['ancienne_commande'] = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 				$data['taux_tva'] = $this->m_taux_tva->get_tva();
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
-				$data['tarif_packaging'] = $userdata->tarif_packaging;
+
+				$data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
 				$prix_miroir = 7;
 
 				$pair_order = false;
-				if(isset($data['pair_order'])) {
+
+                if(isset($data['pair_order'])) {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
@@ -3240,6 +3242,10 @@ class index extends MY_Controller {
 
 					$data['id_verre'] = $data['id_verreG'];
 				}
+
+                if($data['quantiteG'] != $data['quantiteD']) {
+                    $prix_double = false;
+                }
 
 				$data['prixDH'] = str_replace("€","",$data['prixDH']);
 				$data['prixGH'] = str_replace("€","",$data['prixGH']);
@@ -5289,7 +5295,7 @@ class index extends MY_Controller {
                 'information_commande' => json_encode($data['build']),
                 'commentaire' => $data['commentaire'],
                 'id_users' => (int) $data['user_id'],
-				'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'tarif_livraison' => $userdata->tarif_livraison,
                 'total_commande' => $total_order
             );
@@ -5318,7 +5324,6 @@ class index extends MY_Controller {
 			$user_id = $this->data['user_info']->id_users;
 
             $data = $this->session->userdata('order');
-            //var_dump($data['montures']);die;
 			$total_order = 0;
 
 			//echo json_encode($data['montures']);
@@ -5403,7 +5408,7 @@ class index extends MY_Controller {
                 'id_users' => $user_id,
                 'total_commande' => $total_order,
 				'tarif_livraison' => $userdata->tarif_livraison,
-				'tarif_packaging' => $userdata->tarif_packaging,
+				'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 				'commande_monture' => 1
             );
 
@@ -5888,7 +5893,7 @@ class index extends MY_Controller {
 				$data['data_admin']['admin_info'] = $this->m_users->getUserById(1)[0];
 				$userdata = $this->m_users->getUserById($id_user)[0];
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
 				$this->session->set_userdata('order', $data);
                 echo $this->load->view('ajax_show_montures_order',$data);
 			}

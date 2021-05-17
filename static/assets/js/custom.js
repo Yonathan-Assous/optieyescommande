@@ -2545,11 +2545,11 @@ $('#type_de_verreG').on('change', function() {
 											//$('#prixGH').val(value.prix);
 											var indice = $('#indices').val();
 											var generation = $('#generation').val();
-											var nomtraitement = $("#traitementD option:selected").html();
+											var nomtraitement = $("#traitementG option:selected").html();
 											var nomverre = $("#type_de_verreG option:selected").html();
 											var traitementG = $('#traitementG').val();
 											var prixverre = $('#prixVerreG').val();
-											console.log('test6')
+											console.log('test11')
 											console.log(indice)
 											console.log(generation)
 											console.log(nomtraitement)
@@ -2758,16 +2758,16 @@ $('#quantiteG').on('change', function() {
 	//
 	// var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
 	//
-	// var qty = $('#quantiteG').val();
+	var qty = $('#quantiteG').val();
 	// var prixf = prix*qty;
 	// $('#prixG').val(prixf.toFixed(2)+'€');
 	calculPriceG();
-	$('#prixGH').val(prixf.toFixed(2)+'€');	
-	
+	$('#prixGH').val(prixf.toFixed(2)+'€');
+	$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
-		$('#quantiteG').val(qty);
-		$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
+
+		// $('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 		console.log("PrixD4")
 		calculPriceG();
 		//$('#prixD').val($('#prixG').val());

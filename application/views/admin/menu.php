@@ -20,6 +20,11 @@
 					<li class="has_sub <?php echo ($page == "facture_client" ? 'active' : ''); ?>">
 					<a href="<?php echo $pre_url;?>admin/facture_client" class="waves-effect <?php echo ($page == "facture_client" ? 'active' : ''); ?>"><i class="zmdi zmdi-receipt"></i> <span> Factures clients </span> </a>
 					</li>
+                    <li class="has_sub <?php echo ($page == "valid_commentaire" ? 'active' : ''); ?>">
+                        <a href="<?php echo $pre_url;?>admin/valid_commentaire" class="waves-effect <?php echo ($page == "valid_commentaire" ? 'active' : ''); ?>"><i class="zmdi zmdi-shopping-basket"></i> <span> Commentaires </span>
+                            <span id="num_commentaire" style="float: right;"></span>
+                        </a>
+                    </li>
 				</li>
 				<li class="text-muted menu-title">Commandes en cours</li>
 
@@ -61,7 +66,7 @@
                 <li class="has_sub <?php echo ($page == "documents" ? 'active' : ''); ?>">
                     <a href="<?php echo $pre_url;?>admin/documents" class="waves-effect <?php echo ($page == "documents" ? 'active' : ''); ?>"><i class="zmdi zmdi-receipt"></i> <span> Documents </span> </a>
                 </li>
-				
+
 				<li class="text-muted menu-title">Commandes Expédiées</li>
 
                 <li class="has_sub <?php echo ($page == "ancienne_commande" ? 'active' : ''); ?>"><a href="<?php echo $pre_url;?>admin/ancienne_commande" class="waves-effect <?php echo ($page == "ancienne_commande" ? 'active' : ''); ?>"><i class="zmdi zmdi-check"></i> <span> Verres Expédiés </span> </a>
@@ -146,3 +151,19 @@
 		<div class="clearfix"></div>
 	</div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "/commande/numCommentaire",
+            success: function(data){
+                console.log(data);
+                $("#num_commentaire").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#num_commentaire").html('<div style="width:150px;text-align:center;margin-left:auto;margin-right:auto;margin-top:15%;margin-bottom:15%:color:red">Server Error : '+txtError+textStatus+" "+errorThrown+'</div>');
+            }
+        });
+    });
+</script>

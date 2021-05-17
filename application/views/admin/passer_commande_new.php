@@ -2137,7 +2137,7 @@ function getPrixG() {
                 var nomverre = $("#type_de_verreG option:selected").html();
                 var traitementG = $('#traitementG').val();
                 var prixverre = $('#prixVerreG').val();
-                console.log('test6')
+                console.log('test10')
                 if (!nomtraitement) {
                     nomtraitement = "Durci";
                 }
@@ -2312,8 +2312,8 @@ $('#type_de_verreG').on('change', function() {
 	$('#to_etape2').addClass('disabled');
 
 
-    $('#teinteG').empty();
-    $('#traitementG').empty();
+    // $('#teinteG').empty();
+    // $('#traitementG').empty();
 
     if(type_de_verreG != "")
     {
@@ -2525,22 +2525,26 @@ $('#type_de_verreG').on('change', function() {
 
 					$('#quantiteG').prop('disabled', true);
 
+                    console.log('2');
+                    console.log($('#traitementG').val());
 
-					var k = "";
+                    var k = "";
 					$.ajax({
 							type: "POST",
 							url: "/admin/getOptions",
 							data: {"lens" : type_de_verreG},
 							dataType: "json",
 							success: function (data) {
-							$('#traitementG option:eq(0)').prop('selected', true);
-							//$('#traitementGH').val("Durci");
+                                if (!($('#traitementG').val())) {
+                                    $('#traitementG option:eq(0)').prop('selected', true);
+                                }							//$('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
 
 							});
-                            var selectedText = $("#traitementG option:selected").html();
+
+                                var selectedText = $("#traitementG option:selected").html();
                             $('#traitementGH').val(selectedText);
                                 $.ajax({
                                     type: "POST",
@@ -2552,11 +2556,11 @@ $('#type_de_verreG').on('change', function() {
                                     success: function (data) {
                                         $.each(data, function(key, value){
                                             $('#prixVerreG').val(value.prix);
-                                            var nomtraitement = $("#traitementD option:selected").html();
+                                            var nomtraitement = $("#traitementG option:selected").html();
                                             var nomverre = $("#type_de_verreG option:selected").html();
                                             var traitementG = $('#traitementG').val();
                                             var prixverre = $('#prixVerreG').val();
-                                            console.log('test6')
+
                                             if (!nomtraitement) {
                                                 nomtraitement = "Durci";
                                             }
@@ -2757,11 +2761,11 @@ $('#quantiteG').on('change', function() {
 	var prixf = prix*qty;
 	$('#prixG').val(prixf.toFixed(2)+'€');
 	$('#prixGH').val(prixf.toFixed(2)+'€');
+    $('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
 		$('#quantiteG').val(qty);
-		$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 		console.log("PrixD4")
 		$('#prixD').val($('#prixG').val());
 		$('#prixDH').val($('#prixGH').val());

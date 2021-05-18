@@ -3180,16 +3180,19 @@ class admin
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
-
+//        var_dump(
+//            $ca_journalier
+//        );die;
 //        var_dump($ca_journalier);
 //        var_dump($ca_journalier_sans_livraison);
 //        var_dump($ca_mensuel);
 //        var_dump($ca_mensuel_sans_livraison);die;
         $data['packaging_mois'] =
             $this->m_commande->getPackagingByMonth(date("m-Y"));
-        $data['ca_journalier'] =
+        $data['ca_journalier'] = $ca_journalier ?
             $ca_journalier[0]->ca_journalier +
-            $this->m_commande->getPackagingByDay();              //  - $this->m_commande->getSupplementByDay()
+            $this->m_commande->getPackagingByDay() : 0;              //  -
+            // $this->m_commande->getSupplementByDay()
         $data['ca_mensuel'] =
             $ca_mensuel +
             $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
@@ -3198,9 +3201,9 @@ class admin
 //        var_dump($ca_mensuel_sans_livraison);
 //        var_dump($data['packaging_mois']);
 //        die;
-        $data['ca_journalier_sans_livraison'] =
+        $data['ca_journalier_sans_livraison'] = $ca_journalier_sans_livraison ?
             $ca_journalier_sans_livraison[0]->ca_journalier -
-            $this->m_commande->getSupplementByDay();
+            $this->m_commande->getSupplementByDay() : 0;
         $data['supplement_jour'] =
             $this->m_commande->getSupplementByDay();
         $data['ca_mensuel_sans_livraison'] =
@@ -17158,7 +17161,6 @@ class admin
                 }
 
                 // FUCK
-                var_dump($data);die;
                 if ($order =
                     $this->m_commande->addOrder($data)) {
                     if ($data['pair'] ==
@@ -17178,7 +17180,6 @@ class admin
                     $errors++;
                 }
             }
-            var_dump('test');die;
             if ($errors ==
                 0) {
                 if ($data['id_generation_verre'] ==

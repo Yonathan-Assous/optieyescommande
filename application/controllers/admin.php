@@ -20301,7 +20301,7 @@ class admin
         $this->upload->initialize($config);
 
         if (isset($_POST) &&
-            !empty($_POST)) {
+            !empty($_POST['namePack'])) {
 
             if (!$this->upload->do_upload('image')) {
                 $error =

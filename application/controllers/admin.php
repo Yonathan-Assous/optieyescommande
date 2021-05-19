@@ -4115,6 +4115,16 @@ class admin
                             '';
                     }
 
+                    if ($commande->lens_id == 0) {
+                        $commandeInfo = 'commande-info';
+                        $dataTarget = "#detail-commande";
+                    }
+                    else {
+                        $commandeInfo = 'commande-lentilles-info';
+                        $dataTarget = '#detail-commande-lentilles';
+                    }
+
+//                    var_dump($commande->lens_id);die;
                     $data['aaData'][$key] =
                         array(
                             '<a ' .
@@ -4122,11 +4132,11 @@ class admin
                             0 ?
                                 'style="border: 10px solid #e42a2a !important"' :
                                 '') .
-                            ' class="commande-info btn btn-icon waves-effect waves-light ' .
+                            ' class="' . $commandeInfo . ' btn btn-icon waves-effect waves-light ' .
                             (!empty($commande->commentaire) ?
                                 'btn-warning tooltipster' :
                                 'btn-inverse') .
-                            '" data-toggle="modal" data-target="#detail-commande" rel="' .
+                            '" data-toggle="modal" data-target="' . $dataTarget . '" rel="' .
                             $commande->id_commande .
                             '" ' .
                             (!empty($commande->commentaire) ?

@@ -580,8 +580,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-
-        $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,v_stock.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -593,7 +592,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   ORDER BY date_commande DESC");
+                                   ORDER BY date_commande DESC";
+        //var_dump($sql);die;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -824,7 +825,7 @@ class m_commande extends CI_Model {
 
         $sql_order = "ORDER BY date_commande DESC";
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande

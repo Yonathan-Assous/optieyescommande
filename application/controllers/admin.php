@@ -3195,20 +3195,25 @@ class admin
             // $this->m_commande->getSupplementByDay()
         $data['ca_mensuel'] =
             $ca_mensuel +
-            $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
-
+                $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
+//var_dump($data['packaging_mois']);die;
+        //var_dump($ca_mensuel);
+//var_dump($data['packaging_mois']);die;
 //        var_dump($ca_mensuel);
 //        var_dump($ca_mensuel_sans_livraison);
 //        var_dump($data['packaging_mois']);
 //        die;
+        $supplementByDay = $this->m_commande->getSupplementByDay();
         $data['ca_journalier_sans_livraison'] = $ca_journalier_sans_livraison ?
             $ca_journalier_sans_livraison[0]->ca_journalier -
-            $this->m_commande->getSupplementByDay() : 0;
+            $supplementByDay : 0;
         $data['supplement_jour'] =
-            $this->m_commande->getSupplementByDay();
+            $supplementByDay;
+        $supplementByMonth = $this->m_commande->getSupplementByMonth(date("m-Y"));
+        //var_dump($supplementByMonth);die;
         $data['ca_mensuel_sans_livraison'] =
-            $ca_mensuel_sans_livraison -
-            $this->m_commande->getSupplementByMonth(date("m-Y"));
+            $ca_mensuel_sans_livraison - $supplementByMonth
+            ;
 
         $data['firstorder'] =
             $this->m_commande->getCommandeById(1);
@@ -3418,12 +3423,14 @@ class admin
     public
     function getCaJournalierByMonth()
     {
+//        var_dump('test');die;
         if ($this->input->is_ajax_request()) {
             sleep(1);
             $date =
                 $this->input->post('date_ca_par_mois');
             $data['caByDay'] =
                 $this->m_commande->getCaByDayOfMonth($date);
+            //var_dump($data['caByDay']);die;
             $data['date'] =
                 $date;
 
@@ -20294,7 +20301,7 @@ class admin
         $this->upload->initialize($config);
 
         if (isset($_POST) &&
-            !empty($_POST)) {
+            !empty($_POST['namePack'])) {
 
             if (!$this->upload->do_upload('image')) {
                 $error =

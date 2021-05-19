@@ -1711,6 +1711,7 @@ class m_commande extends CI_Model {
         $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" ' . $add;
 //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
 //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+//        var_dump($sql);die;
         $query = $this->db->query($sql);
         $result = $query->result();
         $total = 0;
@@ -1729,8 +1730,8 @@ class m_commande extends CI_Model {
         if($user !== null) {
             $add = 'AND id_users = '.$user;
         }
-
-        $query = $this->db->query('SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add);
+        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
             return $query->result()[0]->total_supplement;
@@ -1772,7 +1773,6 @@ class m_commande extends CI_Model {
 
 
     public function getPackagingByDay($date = null, $user = null) {
-
         $add = '';
 
         if($date === null) {
@@ -1782,6 +1782,21 @@ class m_commande extends CI_Model {
         else {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
+
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE date_commande >= "' .
+               $date . '" AND date_commande <= "' . $date_end . '"';
+        //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
+        //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+        //        var_dump($sql);die;
+        //return $sql;
+        $query = $this->db->query($sql);
+        $total = 0;
+
+        if ($query && $query->num_rows() > 0) {
+            $result = $query->result();
+            $total = $result[0]->total;
+        }
+        return $total;
 
         if($user !== null) {
             $add = 'AND id_users = '.$user;
@@ -1828,7 +1843,9 @@ class m_commande extends CI_Model {
         $total = 0;
 
         if ($new_orders) {
-            $query = $this->db->query('SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN('.implode(',',$new_orders).') AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'" GROUP BY tarif_packaging, date_commande ORDER BY date_commande DESC');
+
+            $sql = 'SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN('.implode(',',$new_orders).') AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'" GROUP BY tarif_packaging, date_commande ORDER BY date_commande DESC';
+            $query = $this->db->query($sql);
 
 
 
@@ -1839,7 +1856,7 @@ class m_commande extends CI_Model {
             }
 
         }
-
+        //var_dump('merde');
         return $total;
 
     }

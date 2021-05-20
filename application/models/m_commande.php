@@ -4578,30 +4578,30 @@ class m_commande extends CI_Model {
                                ORDER BY ordre");
         */
         if($type_commande == 1) {
-            $sql = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
-            $query = $this->db->query("SELECT c.id_commande,id_users,information_certificat,date_commande
+            $sqlAdd = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
                                FROM ".$this->table." c
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                LEFT JOIN lenses l ON l.code = c.id_verre
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               ".$sql."
+                               ".$sqlAdd."
                                GROUP BY c.id_commande
-                               ORDER BY ordre");
+                               ORDER BY ordre";
         }
         else {
-            $sql = 'AND ( (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND l.id IS NULL)';
-            $query = $this->db->query("SELECT c.id_commande,id_users,information_certificat,date_commande
+            $sqlAdd = 'AND ( (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND l.id IS NULL)';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
                                FROM ".$this->table." c
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                LEFT JOIN lenses l ON l.code = c.id_verre
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               ".$sql."
+                               ".$sqlAdd."
                                GROUP BY c.id_commande
-                               ORDER BY ordre");
+                               ORDER BY ordre";
         }
-
+        $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }

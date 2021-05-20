@@ -1025,7 +1025,6 @@ class admin
             $user =
                 $this->m_users->getUserById($user_id)[0];
 
-
             $data_admin =
                 $this->m_users->getUserById(1);
             $data_admin['admin_info'] =
@@ -1192,10 +1191,11 @@ class admin
 
             $pair_order =
                 false;
+
             if (isset($data['pair_order'])) {
                 $pair_order =
                     $this->m_commande->getCommandeByIdNew($data['pair_order'],
-                        $user['user_info']->id_users,
+                        $user_id,
                         true)[0];
                 $pair_order_id =
                     $data['pair_order'];
@@ -13504,6 +13504,7 @@ class admin
 
             $commandes =
                 $this->m_commande->getUpdateCommande($type_commande);
+
             $expedie =
                 array();
 

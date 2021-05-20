@@ -4114,7 +4114,7 @@ class admin
                         $ancienne_commande =
                             '';
                     }
-
+                    $rel = "";
                     if ($commande->lens_id == 0) {
                         $commandeInfo = 'commande-info';
                         $dataTarget = "#detail-commande";
@@ -4122,6 +4122,7 @@ class admin
                     else {
                         $commandeInfo = 'commande-lentilles-info';
                         $dataTarget = '#detail-commande-lentilles';
+                        $rel = 'lens';
                     }
 
 //                    var_dump($commande->lens_id);die;
@@ -4161,7 +4162,7 @@ class admin
                             $commande->id_commande .
                             '_' .
                             $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-bl"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
+                            '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
@@ -12093,12 +12094,10 @@ class admin
     public
     function update_bl()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
                 $this->input->post();
-
             list
                 ($day, $month,
                 $year) =

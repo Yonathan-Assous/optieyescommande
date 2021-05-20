@@ -3195,20 +3195,25 @@ class admin
             // $this->m_commande->getSupplementByDay()
         $data['ca_mensuel'] =
             $ca_mensuel +
-            $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
-
+                $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
+//var_dump($data['packaging_mois']);die;
+        //var_dump($ca_mensuel);
+//var_dump($data['packaging_mois']);die;
 //        var_dump($ca_mensuel);
 //        var_dump($ca_mensuel_sans_livraison);
 //        var_dump($data['packaging_mois']);
 //        die;
+        $supplementByDay = $this->m_commande->getSupplementByDay();
         $data['ca_journalier_sans_livraison'] = $ca_journalier_sans_livraison ?
             $ca_journalier_sans_livraison[0]->ca_journalier -
-            $this->m_commande->getSupplementByDay() : 0;
+            $supplementByDay : 0;
         $data['supplement_jour'] =
-            $this->m_commande->getSupplementByDay();
+            $supplementByDay;
+        $supplementByMonth = $this->m_commande->getSupplementByMonth(date("m-Y"));
+        //var_dump($supplementByMonth);die;
         $data['ca_mensuel_sans_livraison'] =
-            $ca_mensuel_sans_livraison -
-            $this->m_commande->getSupplementByMonth(date("m-Y"));
+            $ca_mensuel_sans_livraison - $supplementByMonth
+            ;
 
         $data['firstorder'] =
             $this->m_commande->getCommandeById(1);
@@ -3418,12 +3423,14 @@ class admin
     public
     function getCaJournalierByMonth()
     {
+//        var_dump('test');die;
         if ($this->input->is_ajax_request()) {
             sleep(1);
             $date =
                 $this->input->post('date_ca_par_mois');
             $data['caByDay'] =
                 $this->m_commande->getCaByDayOfMonth($date);
+            //var_dump($data['caByDay']);die;
             $data['date'] =
                 $date;
 
@@ -4108,6 +4115,16 @@ class admin
                             '';
                     }
 
+                    if ($commande->lens_id == 0) {
+                        $commandeInfo = 'commande-info';
+                        $dataTarget = "#detail-commande";
+                    }
+                    else {
+                        $commandeInfo = 'commande-lentilles-info';
+                        $dataTarget = '#detail-commande-lentilles';
+                    }
+
+//                    var_dump($commande->lens_id);die;
                     $data['aaData'][$key] =
                         array(
                             '<a ' .
@@ -4115,11 +4132,11 @@ class admin
                             0 ?
                                 'style="border: 10px solid #e42a2a !important"' :
                                 '') .
-                            ' class="commande-info btn btn-icon waves-effect waves-light ' .
+                            ' class="' . $commandeInfo . ' btn btn-icon waves-effect waves-light ' .
                             (!empty($commande->commentaire) ?
                                 'btn-warning tooltipster' :
                                 'btn-inverse') .
-                            '" data-toggle="modal" data-target="#detail-commande" rel="' .
+                            '" data-toggle="modal" data-target="' . $dataTarget . '" rel="' .
                             $commande->id_commande .
                             '" ' .
                             (!empty($commande->commentaire) ?

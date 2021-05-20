@@ -580,8 +580,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-
-        $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,v_stock.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -593,7 +592,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   ORDER BY date_commande DESC");
+                                   ORDER BY date_commande DESC";
+        //var_dump($sql);die;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -824,7 +825,7 @@ class m_commande extends CI_Model {
 
         $sql_order = "ORDER BY date_commande DESC";
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -1711,6 +1712,7 @@ class m_commande extends CI_Model {
         $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" ' . $add;
 //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
 //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+//        var_dump($sql);die;
         $query = $this->db->query($sql);
         $result = $query->result();
         $total = 0;
@@ -1729,8 +1731,8 @@ class m_commande extends CI_Model {
         if($user !== null) {
             $add = 'AND id_users = '.$user;
         }
-
-        $query = $this->db->query('SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add);
+        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
             return $query->result()[0]->total_supplement;
@@ -1772,7 +1774,6 @@ class m_commande extends CI_Model {
 
 
     public function getPackagingByDay($date = null, $user = null) {
-
         $add = '';
 
         if($date === null) {
@@ -1782,6 +1783,21 @@ class m_commande extends CI_Model {
         else {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
+
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE date_commande >= "' .
+               $date . '" AND date_commande <= "' . $date_end . '"';
+        //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
+        //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
+        //        var_dump($sql);die;
+        //return $sql;
+        $query = $this->db->query($sql);
+        $total = 0;
+
+        if ($query && $query->num_rows() > 0) {
+            $result = $query->result();
+            $total = $result[0]->total;
+        }
+        return $total;
 
         if($user !== null) {
             $add = 'AND id_users = '.$user;
@@ -1828,7 +1844,9 @@ class m_commande extends CI_Model {
         $total = 0;
 
         if ($new_orders) {
-            $query = $this->db->query('SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN('.implode(',',$new_orders).') AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'" GROUP BY tarif_packaging, date_commande ORDER BY date_commande DESC');
+
+            $sql = 'SELECT tarif_packaging AS total, MAX(date_commande) FROM commande WHERE id_users IN('.implode(',',$new_orders).') AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'" GROUP BY tarif_packaging, date_commande ORDER BY date_commande DESC';
+            $query = $this->db->query($sql);
 
 
 
@@ -1839,7 +1857,7 @@ class m_commande extends CI_Model {
             }
 
         }
-
+        //var_dump('merde');
         return $total;
 
     }

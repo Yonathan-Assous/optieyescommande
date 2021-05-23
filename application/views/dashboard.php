@@ -3763,6 +3763,289 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div id="additional_info" class="form-group row hide">
+                                                                        <div class="col-xs-12">
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-heading"><h5>
+                                                                                        Informations complémentaires facultatives</h5></div>
+                                                                                <div class="panel-body "
+                                                                                     style="padding-top: 15px">
+                                                                                    <button style="margin-left:20px" type="button" id="btn_submit_prix_teinte" class="btn btn-warning waves-effect waves-light">OK</button>
+                                                                                </div>
+
+
+                                                                                <div id="preview_carte"
+                                                                                     class="form-group clearfix auth_fields"
+                                                                                     style="display:none; margin-top:20px">
+
+
+                                                                                    <div class="col-lg-12" id="carte_1">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div id="carte">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card"
+                                                                                                     style="float:left">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="d"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OD:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                            <tr class="g"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OG:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img"
+                                                                                                     style="float:right">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-12" id="cartesGD"
+                                                                                         style="display:none">
+                                                                                        <div class="sub-auth"
+                                                                                             id="prev_auth">
+                                                                                            <div id="carteD"
+                                                                                                 style="width:100%; float:left">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="d"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OD:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div id="carteG"
+                                                                                                 style="width:100%; float:left">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="g"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OG:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     <div id="certif" class="form-group row hide">
                                                                         <div class="col-xs-12">
                                                                             <div class="panel panel-default">

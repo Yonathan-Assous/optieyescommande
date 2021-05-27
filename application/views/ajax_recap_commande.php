@@ -301,6 +301,22 @@ $panierA = get_cookie("panierA");
                     $correction_droit .= '<b>Diamètre :</b> ' . $recap_commande['diametreD'];
                 }
 
+                if(isset($recap_commande['ecart_pup_D']) && $recap_commande['ecart_pup_D'] !== "") {
+                    $correction_droit .= '<br><b>Écart pupillaire vision de près :</b> ' . $recap_commande['ecart_pup_D'];
+                }
+                if(isset($recap_commande['angle_galbe_D']) && $recap_commande['angle_galbe_D'] !== "") {
+                    $correction_droit .= '<br><b>Angle de galbe :</b> ' . $recap_commande['angle_galbe_D'];
+                }
+                if(isset($recap_commande['distance_verre_oeil_D']) && $recap_commande['distance_verre_oeil_D'] !== "") {
+                    $correction_droit .= '<br><b>Distance verre oeil :</b> ' . $recap_commande['distance_verre_oeil_D'];
+                }
+                if(isset($recap_commande['angle_pantoscopique_D']) && $recap_commande['angle_pantoscopique_D'] !== "") {
+                    $correction_droit .= '<br><b>Angle pantoscopique :</b> ' . $recap_commande['angle_pantoscopique_D'];
+                }
+                if(isset($recap_commande['hauteur_montage_D']) && $recap_commande['hauteur_montage_D'] !== "") {
+                    $correction_droit .= '<br><b>Hauteur de montage :</b> ' . $recap_commande['hauteur_montage_D'];
+                }
+
                 if(isset($info_commande['precalibrage']['calibre'])) {
                     $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
@@ -467,10 +483,25 @@ $panierA = get_cookie("panierA");
                     $correction_gauche .= '<b>Diamètre :</b> ' . $recap_commande['diametreG'];
                 }
 
-                if(isset($info_commande['precalibrage']['calibre'])) {
-                    $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                if(isset($recap_commande['ecart_pup_G']) && $recap_commande['ecart_pup_G'] !== "") {
+                    $correction_gauche .= '<br><b>Écart pupillaire vision de près :</b> ' . $recap_commande['ecart_pup_G'];
+                }
+                if(isset($recap_commande['angle_galbe_G']) && $recap_commande['angle_galbe_G'] !== "") {
+                    $correction_gauche .= '<br><b>Angle de galbe :</b> ' . $recap_commande['angle_galbe_G'];
+                }
+                if(isset($recap_commande['distance_verre_oeil_G']) && $recap_commande['distance_verre_oeil_G'] !== "") {
+                    $correction_gauche .= '<br><b>Distance verre oeil :</b> ' . $recap_commande['distance_verre_oeil_G'];
+                }
+                if(isset($recap_commande['angle_pantoscopique_G']) && $recap_commande['angle_pantoscopique_G'] !== "") {
+                    $correction_gauche .= '<br><b>Angle pantoscopique :</b> ' . $recap_commande['angle_pantoscopique_G'];
+                }
+                if(isset($recap_commande['hauteur_montage_G']) && $recap_commande['hauteur_montage_G'] !== "") {
+                    $correction_gauche .= '<br><b>Hauteur de montage :</b> ' . $recap_commande['hauteur_montage_G'];
                 }
 
+                if(isset($info_commande['precalibrage']['calibre']) ) {
+                    $correction_gauche .= '<br><br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+                }
                 echo '<tr>';
 
 
@@ -495,6 +526,7 @@ $panierA = get_cookie("panierA");
 
                 	if($info_commande['verre']['correction_gauche']['diametre'])
                 		$correction_gauche .= '<b>Diamètre :</b> ' . $info_commande['verre']['correction_gauche']['diametre'];
+
 
                 	$correction_gauche .= $info_g;
                 	//gauchehhhhh

@@ -42,7 +42,16 @@ class m_commande extends CI_Model {
         'intitule_bl' 					 => 'intitule_bl',
         'date_annule' 					 => 'date_annule',
         'generation' 					 => 'generation',
-        'panierA' 					 	 => 'panierA'
+        'ecart_pup_D' 					 => 'ecart_pup_D',
+        'ecart_pup_G' 					 => 'ecart_pup_G',
+        'angle_galbe_D' 				 => 'angle_galbe_D',
+        'angle_galbe_G' 				 => 'angle_galbe_G',
+        'distance_verre_oeil_D' 		 => 'distance_verre_oeil_D',
+        'distance_verre_oeil_G' 		 => 'distance_verre_oeil_G',
+        'angle_pantoscopique_D' 		 => 'angle_pantoscopique_D',
+        'angle_pantoscopique_G' 		 => 'angle_pantoscopique_G',
+        'hauteur_montage_D' 			 => 'hauteur_montage_D',
+        'hauteur_montage_G' 			 => 'hauteur_montage_G'
     );
 
     public function __construct() {
@@ -3142,7 +3151,6 @@ class m_commande extends CI_Model {
                 }
 
                 $data = array_intersect_key($data, $this->fields);
-
                 unset($data['date_annule']);
 
                 foreach($data as $num => $key){
@@ -3312,6 +3320,12 @@ class m_commande extends CI_Model {
                 $data['date_commande'] = $this->db->escape($data['date_commande']);
                 $data['date_update_commande'] = $this->db->escape($data['date_update_commande']);
 
+                foreach ($this->fields as $value) {
+                    if (isset($data[$value]) && $data[$value] === '') {
+                        $data[$value] = 'NULL';
+                    }
+                }
+
                 $data['generation'] = "'".$data['generation']."'";
 
                 if(true == $pair) {
@@ -3326,13 +3340,15 @@ class m_commande extends CI_Model {
                 $expressD = 0;
 
                 $data = array_intersect_key($data, $this->fields);
+//                var_dump($data);die;
+
                 unset($data['date_annule']);
 
                 foreach($data as $num => $key){
                     $update_fields[] = $num."='".$data[$num]."'";
                     $data_key[] = $num;
                 }
-
+                //var_dump($data_key);die;
                 if($type_commande_verre!=4)
                 {
 
@@ -3387,9 +3403,11 @@ class m_commande extends CI_Model {
                         array_push( $data_key, 'is_confirmed');
                         $data['is_confirmed'] = 0;
                     }
-
+//                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
+//                    var_dump($sql);die;
+
                     if($this->db->query($sql));
                     {
 
@@ -3635,7 +3653,8 @@ class m_commande extends CI_Model {
                                     $data['is_confirmed'] = 0;
                                 }
 
-                                if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+                                $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+                                if($this->db->query($sql))
                                 {
 
                                     $commande_id = $this->db->insert_id();

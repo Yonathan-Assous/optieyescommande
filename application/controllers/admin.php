@@ -1025,7 +1025,6 @@ class admin
             $user =
                 $this->m_users->getUserById($user_id)[0];
 
-
             $data_admin =
                 $this->m_users->getUserById(1);
             $data_admin['admin_info'] =
@@ -1192,10 +1191,11 @@ class admin
 
             $pair_order =
                 false;
+
             if (isset($data['pair_order'])) {
                 $pair_order =
                     $this->m_commande->getCommandeByIdNew($data['pair_order'],
-                        $user['user_info']->id_users,
+                        $user_id,
                         true)[0];
                 $pair_order_id =
                     $data['pair_order'];
@@ -4114,7 +4114,18 @@ class admin
                         $ancienne_commande =
                             '';
                     }
+                    $rel = "";
+                    if ($commande->lens_id == 0) {
+                        $commandeInfo = 'commande-info';
+                        $dataTarget = "#detail-commande";
+                    }
+                    else {
+                        $commandeInfo = 'commande-lentilles-info';
+                        $dataTarget = '#detail-commande-lentilles';
+                        $rel = 'lens';
+                    }
 
+//                    var_dump($commande->lens_id);die;
                     $data['aaData'][$key] =
                         array(
                             '<a ' .
@@ -4122,11 +4133,11 @@ class admin
                             0 ?
                                 'style="border: 10px solid #e42a2a !important"' :
                                 '') .
-                            ' class="commande-info btn btn-icon waves-effect waves-light ' .
+                            ' class="' . $commandeInfo . ' btn btn-icon waves-effect waves-light ' .
                             (!empty($commande->commentaire) ?
                                 'btn-warning tooltipster' :
                                 'btn-inverse') .
-                            '" data-toggle="modal" data-target="#detail-commande" rel="' .
+                            '" data-toggle="modal" data-target="' . $dataTarget . '" rel="' .
                             $commande->id_commande .
                             '" ' .
                             (!empty($commande->commentaire) ?
@@ -4151,7 +4162,7 @@ class admin
                             $commande->id_commande .
                             '_' .
                             $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-bl"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
+                            '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
@@ -12083,12 +12094,10 @@ class admin
     public
     function update_bl()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
                 $this->input->post();
-
             list
                 ($day, $month,
                 $year) =
@@ -13511,6 +13520,7 @@ class admin
 
             $commandes =
                 $this->m_commande->getUpdateCommande($type_commande);
+
             $expedie =
                 array();
 

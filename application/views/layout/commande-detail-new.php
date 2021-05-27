@@ -173,7 +173,23 @@
 					
 				if($info_commande['verre']['correction_droit']['diametre'])
 					$correction_droit .= '<b>Diamètre :</b> ' . $info_commande['verre']['correction_droit']['diametre'].'<br>';
-					
+
+                if(isset($recap_commande[0]->ecart_pup_D) && $recap_commande[0]->ecart_pup_D !== "") {
+                    $correction_droit .= '<b>Écart pupillaire vision de près :</b> ' . $recap_commande[0]->ecart_pup_D .'<br>' ;
+                }
+                if(isset($recap_commande[0]->angle_galbe_D) && $recap_commande[0]->angle_galbe_D !== "") {
+                    $correction_droit .= '<b>Angle de galbe :</b> ' . $recap_commande[0]->angle_galbe_D .'<br>';
+                }
+                if(isset($recap_commande[0]->distance_verre_oeil_D) && $recap_commande[0]->distance_verre_oeil_D !== "") {
+                    $correction_droit .= '<b>Distance verre oeil :</b> ' . $recap_commande[0]->distance_verre_oeil_D .'<br>';
+                }
+                if(isset($recap_commande[0]->angle_pantoscopique_D) && $recap_commande[0]->angle_pantoscopique_D !== "") {
+                    $correction_droit .= '<b>Angle pantoscopique :</b> ' . $recap_commande[0]->angle_pantoscopique_D .'<br>';
+                }
+                if(isset($recap_commande[0]->hauteur_montage_D) && $recap_commande[0]->hauteur_montage_D !== "") {
+                    $correction_droit .= '<b>Hauteur de montage :</b> ' . $recap_commande[0]->hauteur_montage_D .'<br>';
+                }
+
 				$correction_droit .= $info_d;
 				
 				if($recap_commande[0]->generation ==  "T-One")
@@ -227,6 +243,8 @@
                     $correction_gauche .= '<b>Base :</b> ' . $info_commande['verre']['correction_gauche']['base'] . ' Degrès';
                 }
 
+
+
                 if(isset($info_commande['precalibrage']['calibre'])) {
                     $correction_gauche .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
                 }
@@ -239,7 +257,23 @@
 					
 				if($info_commande['verre']['correction_gauche']['diametre'])
 					$correction_gauche .= '<b>Diamètre :</b> ' . $info_commande['verre']['correction_gauche']['diametre'].'<br>';
-					
+
+                if(isset($recap_commande[0]->ecart_pup_G) && $recap_commande[0]->ecart_pup_G !== "") {
+                    $correction_gauche .= '<b>Écart pupillaire vision de près :</b> ' . $recap_commande[0]->ecart_pup_G .'<br>' ;
+                }
+                if(isset($recap_commande[0]->angle_galbe_G) && $recap_commande[0]->angle_galbe_G !== "") {
+                    $correction_gauche .= '<b>Angle de galbe :</b> ' . $recap_commande[0]->angle_galbe_G .'<br>';
+                }
+                if(isset($recap_commande[0]->distance_verre_oeil_G) && $recap_commande[0]->distance_verre_oeil_G !== "") {
+                    $correction_gauche .= '<b>Distance verre oeil :</b> ' . $recap_commande[0]->distance_verre_oeil_G .'<br>';
+                }
+                if(isset($recap_commande[0]->angle_pantoscopique_G) && $recap_commande[0]->angle_pantoscopique_G !== "") {
+                    $correction_gauche .= '<b>Angle pantoscopique :</b> ' . $recap_commande[0]->angle_pantoscopique_G .'<br>';
+                }
+                if(isset($recap_commande[0]->hauteur_montage_G) && $recap_commande[0]->hauteur_montage_G !== "") {
+                    $correction_gauche .= '<b>Hauteur de montage :</b> ' . $recap_commande[0]->hauteur_montage_G .'<br>';
+                }
+
 				$correction_gauche .= $info_g;
 				
 				if($recap_commande[0]->generation ==  "T-One")

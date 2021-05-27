@@ -42,7 +42,16 @@ class m_commande extends CI_Model {
         'intitule_bl' 					 => 'intitule_bl',
         'date_annule' 					 => 'date_annule',
         'generation' 					 => 'generation',
-        'panierA' 					 	 => 'panierA'
+        'ecart_pup_D' 					 => 'ecart_pup_D',
+        'ecart_pup_G' 					 => 'ecart_pup_G',
+        'angle_galbe_D' 				 => 'angle_galbe_D',
+        'angle_galbe_G' 				 => 'angle_galbe_G',
+        'distance_verre_oeil_D' 		 => 'distance_verre_oeil_D',
+        'distance_verre_oeil_G' 		 => 'distance_verre_oeil_G',
+        'angle_pantoscopique_D' 		 => 'angle_pantoscopique_D',
+        'angle_pantoscopique_G' 		 => 'angle_pantoscopique_G',
+        'hauteur_montage_D' 			 => 'hauteur_montage_D',
+        'hauteur_montage_G' 			 => 'hauteur_montage_G'
     );
 
     public function __construct() {
@@ -580,8 +589,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-
-        $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,v_stock.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -593,7 +601,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   ORDER BY date_commande DESC");
+                                   ORDER BY date_commande DESC";
+        //var_dump($sql);die;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -824,7 +834,7 @@ class m_commande extends CI_Model {
 
         $sql_order = "ORDER BY date_commande DESC";
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -3141,7 +3151,6 @@ class m_commande extends CI_Model {
                 }
 
                 $data = array_intersect_key($data, $this->fields);
-
                 unset($data['date_annule']);
 
                 foreach($data as $num => $key){
@@ -3311,6 +3320,12 @@ class m_commande extends CI_Model {
                 $data['date_commande'] = $this->db->escape($data['date_commande']);
                 $data['date_update_commande'] = $this->db->escape($data['date_update_commande']);
 
+                foreach ($this->fields as $value) {
+                    if (isset($data[$value]) && $data[$value] === '') {
+                        $data[$value] = 'NULL';
+                    }
+                }
+
                 $data['generation'] = "'".$data['generation']."'";
 
                 if(true == $pair) {
@@ -3325,13 +3340,15 @@ class m_commande extends CI_Model {
                 $expressD = 0;
 
                 $data = array_intersect_key($data, $this->fields);
+//                var_dump($data);die;
+
                 unset($data['date_annule']);
 
                 foreach($data as $num => $key){
                     $update_fields[] = $num."='".$data[$num]."'";
                     $data_key[] = $num;
                 }
-
+                //var_dump($data_key);die;
                 if($type_commande_verre!=4)
                 {
 
@@ -3386,9 +3403,11 @@ class m_commande extends CI_Model {
                         array_push( $data_key, 'is_confirmed');
                         $data['is_confirmed'] = 0;
                     }
-
+//                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
+//                    var_dump($sql);die;
+
                     if($this->db->query($sql));
                     {
 
@@ -3634,7 +3653,8 @@ class m_commande extends CI_Model {
                                     $data['is_confirmed'] = 0;
                                 }
 
-                                if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+                                $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+                                if($this->db->query($sql))
                                 {
 
                                     $commande_id = $this->db->insert_id();
@@ -4577,30 +4597,30 @@ class m_commande extends CI_Model {
                                ORDER BY ordre");
         */
         if($type_commande == 1) {
-            $sql = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
-            $query = $this->db->query("SELECT c.id_commande,id_users,information_certificat,date_commande
+            $sqlAdd = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
                                FROM ".$this->table." c
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                LEFT JOIN lenses l ON l.code = c.id_verre
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               ".$sql."
+                               ".$sqlAdd."
                                GROUP BY c.id_commande
-                               ORDER BY ordre");
+                               ORDER BY ordre";
         }
         else {
-            $sql = 'AND ( (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND l.id IS NULL)';
-            $query = $this->db->query("SELECT c.id_commande,id_users,information_certificat,date_commande
+            $sqlAdd = 'AND ( (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND l.id IS NULL)';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
                                FROM ".$this->table." c
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                LEFT JOIN lenses l ON l.code = c.id_verre
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               ".$sql."
+                               ".$sqlAdd."
                                GROUP BY c.id_commande
-                               ORDER BY ordre");
+                               ORDER BY ordre";
         }
-
+        $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }

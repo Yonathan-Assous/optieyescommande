@@ -3520,11 +3520,11 @@ class admin
                      $k => $v)
             {
 
-                if ($k ==
-                    'tarif_packaging') {
-                    $this->m_commande->updatePackaging($user,
-                        $v);
-                }
+//                if ($k ==
+//                    'tarif_packaging') {
+//                    $this->m_commande->updatePackaging($user,
+//                        $v);
+//                }
 
                 if (!$this->m_users->updateUser(array(
                     'id_users' => $user,

@@ -1265,3 +1265,8 @@ div.DTS tbody tr.even {
 .irs-single {
   background-color: #57c5a5;
 }
+
+/* Le tableau des infos complémentaires */
+#tab_info_comp th, #tab_info_comp td {
+  text-align: center;
+}

@@ -256,7 +256,7 @@ $('#indices').on('change', function() {
     $("#generation_progressif").css("display", "none");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-    
+	$('#additional_info').addClass('hide');
     $('#droit').prop('checked', true);
     $('#gauche').prop('checked', true);
 	
@@ -377,7 +377,7 @@ $('#generation').on('change', function() {
   var generation = $(this).val();
   $('#precalibrage').addClass('hide');
   $('#certif').addClass('hide');
-  
+  $('#additional_info').addClass('hide');
   $('#progressionD').prop('disabled', false);
   $('#progressionG').prop('disabled', false);
   
@@ -535,7 +535,7 @@ $("#checkbox_prismes").click(function() {
    
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     if($(this).is(":checked")) 
     {
         $("#select_prisme").css("display", "none");
@@ -552,7 +552,7 @@ $("#checkbox_prismes_extend").click(function() {
    
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     if($(this).is(":checked")) 
     {
        
@@ -574,6 +574,7 @@ $('input[name=sphereD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=cylindreD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -581,6 +582,7 @@ $('input[name=cylindreD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=axeD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -588,6 +590,7 @@ $('input[name=axeD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=additionD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -595,6 +598,7 @@ $('input[name=additionD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=sphereG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -602,6 +606,7 @@ $('input[name=sphereG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=cylindreG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -609,6 +614,7 @@ $('input[name=cylindreG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=axeG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -616,6 +622,7 @@ $('input[name=axeG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=additionG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -623,6 +630,7 @@ $('input[name=additionG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 
 
@@ -1164,7 +1172,7 @@ $('#gauche').on('change', function() {
 
 	$('#precalibrage').addClass('hide');
 	$('#certif').addClass('hide');
-
+	$('#additional_info').addClass('hide');
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
 	
@@ -1217,7 +1225,7 @@ $('#droit').on('change', function() {
 		
 	$('#precalibrage').addClass('hide');
 	$('#certif').addClass('hide');
-	
+	$('#additional_info').addClass('hide');
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
 	
@@ -1273,7 +1281,7 @@ $("input[name='dispoG']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1342,7 +1350,8 @@ $("input[name='dispoD']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
+
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1676,9 +1685,42 @@ $('#type_de_verreD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-	
+
+	if( (selectedTextG.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
+	if( (selectedTextG.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
     if(selectedTextG.indexOf("- Stock") >= 0 || type_de_verreG == "")
     {
+
     	if(panierA == 0)
 		{
     		$('#certif').addClass('hide');
@@ -2275,7 +2317,23 @@ $('#type_de_verreG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
+	if( (selectedTextD.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
     if(selectedTextD.indexOf("- Stock") >= 0 || type_de_verreD == "")
     {
     	if(panierA == 0)
@@ -2924,6 +2982,7 @@ $('#diametreD').on('change', function() {
     {
 		if(selectedTextD.indexOf(" - Stock") >= 0)
 		{
+			$('#additional_info').addClass('hide');
 			if(selectedTextG.indexOf(" - Stock") == -1 || $('#diametreG').val() == "")
 			{
 				$('#certif').addClass('hide');
@@ -2945,6 +3004,7 @@ $('#diametreD').on('change', function() {
 		}
 		else
 		{
+			$('#additional_info').removeClass('hide');
 			$('#certif').removeClass('hide');
 			
 			if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
@@ -3236,6 +3296,7 @@ $('#diametreG').on('change', function() {
     {
         if(selectedTextG.indexOf(" - Stock") >= 0)
 		{
+			$('#additional_info').addClass('hide');
 			if(selectedTextD.indexOf(" - Stock") == -1 || $('#diametreD').val() == "")
 			{
 				$('#certif').addClass('hide');
@@ -3256,6 +3317,7 @@ $('#diametreG').on('change', function() {
 		}
 		else
 		{
+			$('#additional_info').removeClass('hide');
 			$('#certif').removeClass('hide');
 			
 			if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
@@ -4631,6 +4693,7 @@ $('#afficherV').on('click', function() {
 					$("#afficherV").css("display", "inline-block");
 					$('#precalibrage').addClass('hide');
 					$('#certif').addClass('hide');
+					$('#additional_info').addClass('hide');
 				}
 			});
 
@@ -7097,6 +7160,21 @@ function copyVersDroit()
 			$('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
+		if((selectedText.toLowerCase()).indexOf("t-one") != -1 ||
+			(selectedText.toLowerCase()).indexOf("e-space") != -1 ||
+			(selectedText.toLowerCase()).indexOf("elysium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("platinium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("omega") != -1 ||
+			(selectedText.toLowerCase()).indexOf("eyefatigue") != -1 ||
+			(selectedText.toLowerCase()).indexOf("top office") != -1 ||
+			(selectedText.toLowerCase()).indexOf("freestyle") != -1
+		)
+		{
+			$('#additional_info').removeClass('hide');
+		}
+		else {
+			$('#additional_info').addClass('hide');
+		}
 		if(selectedText.indexOf(" - Stock") == -1 || selectedText.indexOf("Panier") >= 0)
 		{
 			$('#certif').removeClass('hide');
@@ -7335,6 +7413,22 @@ function copyVersGauche()
 			$('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
+		if( (selectedText.toLowerCase()).indexOf("t-one") != -1 ||
+		    (selectedText.toLowerCase()).indexOf("e-space") != -1 ||
+			(selectedText.toLowerCase()).indexOf("elysium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("platinium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("omega") != -1 ||
+			(selectedText.toLowerCase()).indexOf("eyefatigue") != -1 ||
+			(selectedText.toLowerCase()).indexOf("top office") != -1 ||
+			(selectedText.toLowerCase()).indexOf("freestyle") != -1
+		)
+		{
+			$('#additional_info').removeClass('hide');
+		}
+		else {
+			$('#additional_info').addClass('hide');
+		}
+
 		if(selectedText.indexOf(" - Stock") == -1 || selectedText.indexOf("Panier") >= 0)
 		{
 			$('#certif').removeClass('hide');

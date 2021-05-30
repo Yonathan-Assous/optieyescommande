@@ -509,8 +509,13 @@ class m_passer_commande_verre extends CI_Model
 
             //echo "sphereD: ".$sphereD." - cylindreD: ".$cylindreD;
             //return $stock_query;
+            $resultat = [];
             foreach ($stock_query as $stock) {
                 $grille_stock = json_decode($stock->grille_stock, true);
+                //var_dump($grille_stock);
+//                var_dump($sphereD);die;
+//                var_dump($grille_stock);die;
+
                 if (array_key_exists($sphereD, $grille_stock)) {
                     if (in_array($cylindreD, $grille_stock[$sphereD])) {
 
@@ -523,6 +528,7 @@ class m_passer_commande_verre extends CI_Model
                     }
                 }
             }
+            //var_dump($resultat);die;
             return $resultat;
 
         }

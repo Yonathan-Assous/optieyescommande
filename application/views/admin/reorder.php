@@ -287,8 +287,8 @@ include_once('menu.php');
 
                                     echo '<td class="center">';
 
-                                        echo (($recap_commande['prix_verre']+$option_prix+$recap_commande['total_remise_paire']) * $quantite_commande);
-                                        $total_commande += floatval(($recap_commande['prix_verre']+$recap_commande['total_remise_paire']+$option_prix) * $quantite_commande);
+                                        echo (($recap_commande['total_commande'] - $recap_commande['prix_verre']+$option_prix+$recap_commande['total_remise_paire']) * $quantite_commande);
+                                        $total_commande += floatval(($recap_commande['total_commande'] - $recap_commande['prix_verre'] + $recap_commande['total_remise_paire']+$option_prix) * $quantite_commande);
 
                                     echo ' €</td>';
 

@@ -2200,8 +2200,8 @@ $('#type_de_verreD').on('change', function() {
 
 
 $('#type_de_verreG').on('change', function() {
-	console.log('testTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
-
+	// console.log('44444444444444444444444444444444444444444444444444444');
+	// console.log($('#traitementG').val());
 	$('#precalibrage').addClass('hide');
 	var indiceId = $('#indices').val();
     var generation = $('#generation').val();
@@ -2351,8 +2351,8 @@ $('#type_de_verreG').on('change', function() {
 	$('#to_etape2').addClass('disabled');
     
     
-    $('#teinteG').empty();
-    $('#traitementG').empty();    
+    // $('#teinteG').empty();
+    // $('#traitementG').empty();
     
     if(type_de_verreG != "")
     {
@@ -2449,6 +2449,7 @@ $('#type_de_verreG').on('change', function() {
 		}
 		else
 		{
+
 			if(type_de_verreG != "") {
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
@@ -2569,8 +2570,8 @@ $('#type_de_verreG').on('change', function() {
 					type_commande_verre = 1;
 				
 					$('#quantiteG').prop('disabled', true);
-			
-					console.log('11111111111111111111111111111111111111111111111111111')
+					// console.log($('#traitementG').val());
+					// console.log('11111111111111111111111111111111111111111111111111111')
 					var k = "";
 					$.ajax({
 							type: "POST",
@@ -2578,17 +2579,24 @@ $('#type_de_verreG').on('change', function() {
 							data: {"lens" : type_de_verreG},
 							dataType: "json",
 							success: function (data) {
-								//console.log('OPTIOOOOOOOOOOOOOOOOOOOOON');
+								// console.log('OPTIOOOOOOOOOOOOOOOOOOOOON');
+								// console.log('77777777777777777777777777777777777777777777777777777777777');
+								// console.log($('#traitementG').val());
+								var traitementG = $('#traitementG').val();
 							$('#traitementG option:eq(0)').prop('selected', true);
+								// console.log('888888888888888888888888888888888888888888888888');
+								// console.log($('#traitementG').val());
+								$('#traitementG').val(traitementG);
 							// $('#traitementGH').val("Durci");
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
-
 							});
 							var selectedText = $("#traitementG option:selected").html();
 							$('#traitementGH').val(selectedText);
-								$.ajax({
+							console.log('traitementG TEST:' + $('#traitementG').val());
+							console.log(selectedText);
+							$.ajax({
 									type: "POST",
 									url: "/index/getPrix",
 									data: {"lens" : type_de_verreG,
@@ -2605,7 +2613,7 @@ $('#type_de_verreG').on('change', function() {
 											var generation = $('#generation').val();
 											var nomtraitement = $("#traitementG option:selected").html();
 											var nomverre = $("#type_de_verreG option:selected").html();
-											var traitementG = $('#traitementG').val();
+											traitementG = $('#traitementG').val();
 											var prixverre = $('#prixVerreG').val();
 											console.log('test11')
 											console.log(indice)
@@ -2620,6 +2628,7 @@ $('#type_de_verreG').on('change', function() {
 											if (!traitementG) {
 												traitementG = "700100";
 											}
+
 											$.ajax({
 												type: "POST",
 												url: "/index/getOptions_price",
@@ -2635,6 +2644,8 @@ $('#type_de_verreG').on('change', function() {
 														var prixteinte = $('#prixTeinteG').val();
 														$.each(data, function(key, value){
 															$('#prixTraitementG').val(value.prix);
+															console.log(value.prix);
+															console.log('testtttttttttttttttttt');
 															var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
 															console.log("PrixG5")
 															$('#prixG').val(tot+"€");
@@ -3625,8 +3636,8 @@ $('#teinteD').on('change', function() {
 				}
 		
 			});
-			console.log(nomtraitement);
-			console.log('55555555555555555555555555555555555555555555555555555555555555')
+			// console.log(nomtraitement);
+			// console.log('55555555555555555555555555555555555555555555555555555555555555')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
@@ -3858,8 +3869,8 @@ $('#teinteG').on('change', function() {
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			console.log(nomtraitement);
-			console.log('6666666666666666666666666666666666666666666666666666')
+			// console.log(nomtraitement);
+			// console.log('6666666666666666666666666666666666666666666666666666')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
@@ -5111,6 +5122,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				console.log("getTypedeVerre Empty type_de_verreD");
 				$('#type_de_verreD').trigger('change');
 			},300);
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			if(lensFocalGroup == "3")
 			{
 				if(progressionD == '')
@@ -5122,6 +5134,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionD == 'Short' || progressionD == 'Tous') && (stockD == 'StockD' || stockD == 'ToutD'))
 					{
+						console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -5493,11 +5507,14 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stock = {};
 				var tab_verres = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
+				console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67" || indiceId == "1.74") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
 				{
 					console.log("PanierA:"+panierAm+"AAAAA");
+					console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -5638,8 +5655,9 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
-			if(lensFocalGroup == "3")
+				console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+
+				if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
 				{
@@ -5650,6 +5668,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
+						console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -6027,10 +6047,13 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
+					console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -6316,7 +6339,8 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
+			console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+
 			if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
@@ -6328,6 +6352,8 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
+						console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -6701,10 +6727,13 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
+					console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -6964,6 +6993,8 @@ function copyVersDroit()
 		$('#type_de_verreG').val(type_de_verreD);
 		$('#teinteG').val(teinteD);
 		$('#traitementG').val(traitementD);
+		// console.log('22222222222222222222222222222222222222222');
+		// console.log($('#traitementG').val());
 		$('#diametreG').val(diametreD);
 		$('#galbeG').val(galbeD);
 	
@@ -7051,9 +7082,10 @@ function copyVersDroit()
 				$('#traitementGH').val($('#traitementDH').val());
 
 		},600);
-	
-		
-		
+
+
+		// console.log('333333333333333333333333333333333333333333333333333333333');
+		// console.log($('#traitementG').val());
 	}
 	else
 	{
@@ -7201,6 +7233,8 @@ function copyVersDroit()
 			$('#to_etape2').removeClass('disabled');
 		}
 	}
+	console.log('55555555555555555555555555555555555555555555555555555');
+	console.log($('#traitementG').val());
 	calculPrice();
 }
 
@@ -8599,6 +8633,8 @@ function addPrismeGalbeGauche() {
 function calculPrice() {
 	calculPriceD();
 	calculPriceG();
+	console.log('66666666666666666666666666666666666666666666666666666');
+	console.log($('#traitementG').val());
 }
 function calculPriceD() {
 	var droit = $('#droit').is(':checked');

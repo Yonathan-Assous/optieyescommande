@@ -3471,15 +3471,18 @@ class m_commande extends CI_Model {
 
                         $data['id_verre'] = $id_verreD;
 
-                        if($panierA_D != 0 && $panierA_D != "")
-                        {
-                            $data['panierA']=$panierA_D;
+                        if (isset($data['panierA'])) {
+                            if($panierA_D != 0 && $panierA_D != "")
+                            {
+                                $data['panierA']=$panierA_D;
+                            }
+                            else
+                            {
+                                if($data['panierA']!=2)
+                                    $data['panierA']=0;
+                            }
                         }
-                        else
-                        {
-                            if($data['panierA']!=2)
-                                $data['panierA']=0;
-                        }
+
 
                         if(strpos($id_verreD, "]") !== false)
                         {
@@ -3517,12 +3520,14 @@ class m_commande extends CI_Model {
 
                         if($nb_multi_commande == 1 && $quantiteD>1 && $unVerreD==0 && $id_verreD!=$id_verreG)
                         {
+
                             $data['prix_verre'] = $prixUnitaireD;
                             $data['total_commande'] = $prixUnitaireD;
 
 
                             for($i=0;$i<$quantiteD;$i++)
                             {
+
                                 if(!empty($commentaire)){
                                     array_push( $data_key, 'is_confirmed');
                                     $data['is_confirmed'] = 0;
@@ -3544,15 +3549,17 @@ class m_commande extends CI_Model {
 
                                 }
                             }
+
                         }
                         else
                         {
+
                             if(!empty($commentaire)){
                                 array_push( $data_key, 'is_confirmed');
                                 $data['is_confirmed'] = 0;
                             }
-
-                            if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+                            $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+                            if($this->db->query($sql))
                             {
 
                                 $commande_id = $this->db->insert_id();

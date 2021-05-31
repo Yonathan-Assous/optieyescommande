@@ -42,6 +42,7 @@ class m_commande extends CI_Model {
         'intitule_bl' 					 => 'intitule_bl',
         'date_annule' 					 => 'date_annule',
         'generation' 					 => 'generation',
+        'panierA' 					     => 'panierA',
         'ecart_pup_D' 					 => 'ecart_pup_D',
         'ecart_pup_G' 					 => 'ecart_pup_G',
         'angle_galbe_D' 				 => 'angle_galbe_D',
@@ -3471,17 +3472,14 @@ class m_commande extends CI_Model {
 
                         $data['id_verre'] = $id_verreD;
 
-                        if (isset($data['panierA'])) {
-                            if($panierA_D != 0 && $panierA_D != "")
-                            {
-                                $data['panierA']=$panierA_D;
-                            }
-                            else
-                            {
-                                if($data['panierA']!=2)
-                                    $data['panierA']=0;
-                            }
+                        if(isset($panierA_D) && $panierA_D != 0 && $panierA_D != "")
+                        {
+                            $data['panierA']=$panierA_D;
                         }
+                        else if(isset($data['panierA']) && $data['panierA']!=2) {
+                            $data['panierA']=0;
+                        }
+
 
 
                         if(strpos($id_verreD, "]") !== false)

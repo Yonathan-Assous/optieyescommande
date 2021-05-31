@@ -603,7 +603,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC";
-        //var_dump($sql);die;
+//        var_dump($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
@@ -3122,6 +3122,7 @@ class m_commande extends CI_Model {
 
     public function addOrder($data){
         if(is_array($data)){
+
             $pair = $data['pair'];
             unset($data['discount']);
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
@@ -3323,7 +3324,9 @@ class m_commande extends CI_Model {
 
                 foreach ($this->fields as $value) {
                     if (isset($data[$value]) && $data[$value] === '') {
-                        $data[$value] = 'NULL';
+                        if ($value != 'generation') {
+                            $data[$value] = 'NULL';
+                        }
                     }
                 }
 
@@ -3407,7 +3410,6 @@ class m_commande extends CI_Model {
 //                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-//                    var_dump($sql);die;
 
                     if($this->db->query($sql));
                     {

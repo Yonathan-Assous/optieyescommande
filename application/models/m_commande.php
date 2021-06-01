@@ -3125,6 +3125,7 @@ class m_commande extends CI_Model {
 
             $pair = $data['pair'];
             unset($data['discount']);
+
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3191,8 +3192,18 @@ class m_commande extends CI_Model {
                     array_push( $data_key, 'is_confirmed');
                     $data['is_confirmed'] = 0;
                 }
+//                var_dump($data);die;
+
+                foreach ($data as $key => $value) {
+                    if (is_null($value)) {
+                        if ($value != 'generation') {
+                            $data[$key] = 'NULL';
+                        }
+                    }
+                }
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                     .implode(",", $data).")";
+
                 if($this->db->query($sql)){
 
                     $commande_id = $this->db->insert_id();

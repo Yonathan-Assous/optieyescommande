@@ -6996,10 +6996,10 @@ class admin
                                 $information_commande->verre->correction_gauche->PrismeSphere .
                                 "Δ";
                         }
-                        if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
+                        if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
+                            !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $textarea .= " base  " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                $information_commande->verre->correction_gauche->PrismeCylindre .
                                 "°";
                         }
 

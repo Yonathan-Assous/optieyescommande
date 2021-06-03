@@ -1717,7 +1717,7 @@ class m_commande extends CI_Model {
                     WHERE id_users = '.$user;
         }
         else {
-            $sql = 'SELECT SUM(tarif_packaging) FROM users WHERE id_users IN (
+            $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
                         SELECT DISTINCT(id_users) FROM `commande` 
                         WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'")';
 
@@ -1730,7 +1730,6 @@ class m_commande extends CI_Model {
         $query = $this->db->query($sql);
         $result = $query->result();
         $total = 0;
-
         if ($query && $query->num_rows() > 0) {
             $total = $result[0]->total;
         }

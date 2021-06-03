@@ -3806,7 +3806,6 @@ class admin
             //$data['id_users'] = $user_id;
             $data['data_admin']['admin_info'] =
                 $this->m_users->getUserById(1)[0];
-
             if ($order_data =
                 $this->m_commande->getCommandeById($data['order_id'],
                     $id_users,
@@ -3884,6 +3883,12 @@ class admin
                     $total_commande;
                 $order_data['total_remise_paire'] =
                     0;
+
+                foreach($order_data as $key => $value) {
+                    if (is_null($value)) {
+                        unset($order_data[$key]);
+                    }
+                }
 
                 if ($order =
                     $this->m_commande->addOrder($order_data)) {
@@ -6991,10 +6996,10 @@ class admin
                                 $information_commande->verre->correction_gauche->PrismeSphere .
                                 "Δ";
                         }
-                        if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
+                        if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
+                            !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
                             $textarea .= " base  " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
+                                $information_commande->verre->correction_gauche->PrismeCylindre .
                                 "°";
                         }
 

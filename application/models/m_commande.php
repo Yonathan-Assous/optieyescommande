@@ -42,6 +42,7 @@ class m_commande extends CI_Model {
         'intitule_bl' 					 => 'intitule_bl',
         'date_annule' 					 => 'date_annule',
         'generation' 					 => 'generation',
+        'panierA' 					     => 'panierA',
         'ecart_pup_D' 					 => 'ecart_pup_D',
         'ecart_pup_G' 					 => 'ecart_pup_G',
         'angle_galbe_D' 				 => 'angle_galbe_D',
@@ -602,7 +603,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC";
-        //var_dump($sql);die;
+//        var_dump($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
@@ -1710,15 +1711,19 @@ class m_commande extends CI_Model {
 
     public function getPackagingByMonth($date, $user = null) {
 
-        $add = '';
-//        $limit = '';
-
         if($user !== null) {
-            $add = 'AND id_users = '.$user;
-//            $limit = 'LIMIT 1';
+            $sql = 'SELECT tarif_packaging as total 
+                    FROM users 
+                    WHERE id_users = '.$user;
+        }
+        else {
+            $sql = 'SELECT SUM(tarif_packaging) FROM users WHERE id_users IN (
+                        SELECT DISTINCT(id_users) FROM `commande` 
+                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'")';
+
+
         }
 
-        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" ' . $add;
 //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
 //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
 //        var_dump($sql);die;
@@ -3121,8 +3126,10 @@ class m_commande extends CI_Model {
 
     public function addOrder($data){
         if(is_array($data)){
+
             $pair = $data['pair'];
             unset($data['discount']);
+
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3189,8 +3196,18 @@ class m_commande extends CI_Model {
                     array_push( $data_key, 'is_confirmed');
                     $data['is_confirmed'] = 0;
                 }
+//                var_dump($data);die;
+
+                foreach ($data as $key => $value) {
+                    if (is_null($value)) {
+                        if ($value != 'generation') {
+                            $data[$key] = 'NULL';
+                        }
+                    }
+                }
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                     .implode(",", $data).")";
+
                 if($this->db->query($sql)){
 
                     $commande_id = $this->db->insert_id();
@@ -3322,7 +3339,9 @@ class m_commande extends CI_Model {
 
                 foreach ($this->fields as $value) {
                     if (isset($data[$value]) && $data[$value] === '') {
-                        $data[$value] = 'NULL';
+                        if ($value != 'generation') {
+                            $data[$value] = 'NULL';
+                        }
                     }
                 }
 
@@ -3406,7 +3425,6 @@ class m_commande extends CI_Model {
 //                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-//                    var_dump($sql);die;
 
                     if($this->db->query($sql));
                     {
@@ -3471,15 +3489,15 @@ class m_commande extends CI_Model {
 
                         $data['id_verre'] = $id_verreD;
 
-                        if($panierA_D != 0 && $panierA_D != "")
+                        if(isset($panierA_D) && $panierA_D != 0 && $panierA_D != "")
                         {
                             $data['panierA']=$panierA_D;
                         }
-                        else
-                        {
-                            if($data['panierA']!=2)
-                                $data['panierA']=0;
+                        else if(isset($data['panierA']) && $data['panierA']!=2) {
+                            $data['panierA']=0;
                         }
+
+
 
                         if(strpos($id_verreD, "]") !== false)
                         {
@@ -3517,12 +3535,14 @@ class m_commande extends CI_Model {
 
                         if($nb_multi_commande == 1 && $quantiteD>1 && $unVerreD==0 && $id_verreD!=$id_verreG)
                         {
+
                             $data['prix_verre'] = $prixUnitaireD;
                             $data['total_commande'] = $prixUnitaireD;
 
 
                             for($i=0;$i<$quantiteD;$i++)
                             {
+
                                 if(!empty($commentaire)){
                                     array_push( $data_key, 'is_confirmed');
                                     $data['is_confirmed'] = 0;
@@ -3544,15 +3564,17 @@ class m_commande extends CI_Model {
 
                                 }
                             }
+
                         }
                         else
                         {
+
                             if(!empty($commentaire)){
                                 array_push( $data_key, 'is_confirmed');
                                 $data['is_confirmed'] = 0;
                             }
-
-                            if($this->db->query("INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")"))
+                            $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
+                            if($this->db->query($sql))
                             {
 
                                 $commande_id = $this->db->insert_id();

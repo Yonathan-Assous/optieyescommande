@@ -117,7 +117,7 @@ class cron extends MY_Controller {
 
 
             $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, $current);
-            
+//            var_dump($facture_client);die;
            // var_dump($facture_client);
            $data = array();
 
@@ -128,10 +128,10 @@ class cron extends MY_Controller {
                 foreach ($facture_client as $key => $facture_cli) {
 
                     $facture_cli->date_commande = $facture_cli->y_m_commande;
-                    $sql = 'SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate AND id_users = ' . $facture_cli->id_users;
+                    $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
                     $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
-
+                    //var_dump($packaging);die;
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();
                     $id_mandat = $id_mandat[0]->id_mandat;
 
@@ -237,7 +237,7 @@ class cron extends MY_Controller {
 
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
-                    $sql = 'SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate AND id_users = ' . $facture_cli->id_users;
+                    $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
                     $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
 

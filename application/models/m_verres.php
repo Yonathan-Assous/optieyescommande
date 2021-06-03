@@ -23,7 +23,7 @@ class m_verres extends CI_Model {
     public function getVerre($data){
 
         $sql ='1=1';
-		$groupBy = "GROUP BY id_verre";
+		$groupBy = "GROUP BY id_verre,libelle_verre,id_generation_verre,id_grille_tarifaire,prix_verre,indice_verre,order_verre, supplement";
     
         $orderBy = "id_verre, id_grille_tarifaire";
     
@@ -47,8 +47,10 @@ class m_verres extends CI_Model {
                                    INNER JOIN indice_verre iv ON v.id_indice_verre=iv.id_indice_verre
                                    WHERE '.$sql.'
                                    AND v.active = 1
+                                   AND id_grille_tarifaire = 1
 								   '.$groupBy.'
                                    ORDER BY '.$orderBy;
+        //var_dump($sqlResult);die;
         $query = $this->db->query($sqlResult);
 		
 		

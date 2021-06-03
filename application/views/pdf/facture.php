@@ -179,16 +179,12 @@
 
                     foreach($facture as $key => $facture) {
 
-                        if($i == 0) {
-                            if(isset($facture->tarif_packaging)) {
+                        if($i == 0 && isset($facture->tarif_packaging) && $facture->tarif_packaging > 0) {
                                 $tarifPackaging = $facture->tarif_packaging;
-                            }
-                            else {
-                                $tarifPackaging = 0;
-                            }
+                                $i = 1;
                         }
 
-                        ++$i;
+                        //++$i;
 					
                         if($nbMaxElementParPage == $MaxElement){
                             echo '</tbody></table>

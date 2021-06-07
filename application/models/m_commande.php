@@ -1711,22 +1711,25 @@ class m_commande extends CI_Model {
 
     public function getPackagingByMonth($date, $user = null) {
 
-        $add = '';
-//        $limit = '';
-
         if($user !== null) {
-            $add = 'AND id_users = '.$user;
-//            $limit = 'LIMIT 1';
+            $sql = 'SELECT tarif_packaging as total 
+                    FROM users 
+                    WHERE id_users = '.$user;
+        }
+        else {
+            $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
+                        SELECT DISTINCT(id_users) FROM `commande` 
+                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'")';
+
+
         }
 
-        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" ' . $add;
 //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
 //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
 //        var_dump($sql);die;
         $query = $this->db->query($sql);
         $result = $query->result();
         $total = 0;
-
         if ($query && $query->num_rows() > 0) {
             $total = $result[0]->total;
         }

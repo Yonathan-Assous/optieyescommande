@@ -595,7 +595,7 @@ class m_commande extends CI_Model {
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
-                                   LEFT JOIN lenses v ON (v.code = c.id_verre AND v.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
+                                   LEFT JOIN lenses v ON (v.code = c.id_verre AND (v.trad_fr LIKE (CONCAT('%', c.generation ,'%'))) OR c.generation = NULL)
                                    LEFT JOIN verres v_stock ON v_stock.id_verre = c.id_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
@@ -603,7 +603,6 @@ class m_commande extends CI_Model {
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
                                    ORDER BY date_commande DESC";
-//        var_dump($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)

@@ -1777,10 +1777,10 @@ class m_commande extends CI_Model {
 
     public function updatePackaging($user, $price) {
 
-        $price = (int) $price;
-        $user = (int) $user;
-
-        $this->db->query('UPDATE commande SET tarif_packaging = '.$price.' WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.date('m-Y').'" AND id_users = '.$user);
+//        $price = (int) $price;
+//        $user = (int) $user;
+//
+//        $this->db->query('UPDATE commande SET tarif_packaging = '.$price.' WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.date('m-Y').'" AND id_users = '.$user);
 
     }
 
@@ -1876,14 +1876,14 @@ class m_commande extends CI_Model {
 
     public function updateBillsForMonth($user) {
 
-        $user_info = $this->db->query('SELECT tarif_packaging FROM users WHERE id_users = '.$user)->result();
-
-        if($this->db->query('UPDATE commande SET tarif_packaging = '.$user_info[0]->tarif_packaging.' WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.date('m-Y').'" AND id_users = '.$user)) {
-            return 1;
-        }
-
-
-        return 0;
+//        $user_info = $this->db->query('SELECT tarif_packaging FROM users WHERE id_users = '.$user)->result();
+//
+//        if($this->db->query('UPDATE commande SET tarif_packaging = '.$user_info[0]->tarif_packaging.' WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.date('m-Y').'" AND id_users = '.$user)) {
+//            return 1;
+//        }
+//
+//
+//        return 0;
 
     }
 
@@ -4210,7 +4210,6 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ttc'] = round($data[$day]['total_ht'] * 1.2 ,2);
                 }
         }
-
         $query = $this->db->query("SELECT
                                       SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
                                       taux_tva,

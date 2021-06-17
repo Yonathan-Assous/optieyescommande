@@ -58,86 +58,105 @@ class m_traitement extends CI_Model
             if (stripos($lens->trad_fr, 't-one') !== FALSE) {
                 if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
                     $prices = [
-                        'Durci' => 0,
-                        'HMC' => 7,
-                        'HMC Face Interne' => 7,
-                        'Satin' => 12,
-                        'Satin Face Interne' => 12,
-                        'Satin UV' => 15,
-                        'Satin UV Face Interne' => 15,
-                        'Achromatique' => 20,
-                        'Achromatique Face Interne' => 20,
-                        'BlueCoat' => 20,
-                        'Satin Max' => 22,
-                        'Satin Max Face Interne' => 22,
-                        'Satin Drive Or' => 22,
-                        'Miroir Argent HMC face interne' => 14,
-                        'Miroir Doré HMC face interne' => 14,
-                        'Miroir Bleu HMC face interne' => 14,
-                        'Miroir Flash HMC face interne' => 14,
+//                        'Durci' => 0,
+//                        'HMC' => 7,
+//                        'HMC Face Interne' => 7,
+//                        'Satin' => 12,
+//                        'Satin Face Interne' => 12,
+//                        'Satin UV' => 15,
+//                        'Satin UV Face Interne' => 15,
+//                        'Achromatique' => 20,
+//                        'Achromatique Face Interne' => 20,
+//                        'BlueCoat' => 20,
+//                        'Satin Max' => 22,
+//                        'Satin Max Face Interne' => 22,
+//                        'Satin Drive Or' => 22,
+//                        'Miroir Argent HMC face interne' => 14,
+//                        'Miroir Doré HMC face interne' => 14,
+//                        'Miroir Bleu HMC face interne' => 14,
+//                        'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25
+
                     ];
                 }
                 else {
                     $prices = [
-                        'Durci' => 0,
-                        'HMC' => 4,
-                        'HMC Face Interne' => 4,
-                        'Satin' => 8,
-                        'Satin Face Interne' => 8,
-                        'Satin UV' => 11,
-                        'Satin UV Face Interne' => 11,
-                        'Achromatique' => 16,
-                        'Achromatique Face Interne' => 16,
-                        'BlueCoat' => 16,
-                        'Satin Max' => 18,
-                        'Satin Max Face Interne' => 18,
-                        'Satin Drive Or' => 18,
-                        'Miroir Argent HMC face interne' => 14,
-                        'Miroir Doré HMC face interne' => 14,
-                        'Miroir Bleu HMC face interne' => 14,
-                        'Miroir Flash HMC face interne' => 14,
+//                        'Durci' => 0,
+//                        'HMC' => 4,
+//                        'HMC Face Interne' => 4,
+//                        'Satin' => 8,
+//                        'Satin Face Interne' => 8,
+//                        'Satin UV' => 11,
+//                        'Satin UV Face Interne' => 11,
+//                        'Achromatique' => 16,
+//                        'Achromatique Face Interne' => 16,
+//                        'BlueCoat' => 16,
+//                        'Satin Max' => 18,
+//                        'Satin Max Face Interne' => 18,
+//                        'Satin Drive Or' => 18,
+//                        'Miroir Argent HMC face interne' => 14,
+//                        'Miroir Doré HMC face interne' => 14,
+//                        'Miroir Bleu HMC face interne' => 14,
+//                        'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25,
                     ];
                 }
             }
             else if (stripos($lens->trad_fr, 'E-space') !== FALSE) {
                 if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
-                    $prices = ['Durci' => 0,
-                               'HMC' => 7,
-                               'HMC Face Interne' => 7,
-                               'Satin' => 11,
-                               'Satin Face Interne' => 11,
-                               'Satin UV' => 14,
-                               'Satin UV Face Interne' => 14,
-                               'Achromatique' => 19,
-                               'Achromatique Face Interne' => 19,
-                               'BlueCoat' => 19,
-                               'Satin Max' => 21,
-                               'Satin Max Face Interne' => 21,
-                               'Satin Drive Or' => 21,
-                               'Miroir Argent HMC face interne' => 14,
-                               'Miroir Doré HMC face interne' => 14,
-                               'Miroir Bleu HMC face interne' => 14,
-                               'Miroir Flash HMC face interne' => 14,
+                    $prices = [
+//                               'Durci' => 0,
+//                               'HMC' => 7,
+//                               'HMC Face Interne' => 7,
+//                               'Satin' => 11,
+//                               'Satin Face Interne' => 11,
+//                               'Satin UV' => 14,
+//                               'Satin UV Face Interne' => 14,
+//                               'Achromatique' => 19,
+//                               'Achromatique Face Interne' => 19,
+//                               'BlueCoat' => 19,
+//                               'Satin Max' => 21,
+//                               'Satin Max Face Interne' => 21,
+//                               'Satin Drive Or' => 21,
+//                               'Miroir Argent HMC face interne' => 14,
+//                               'Miroir Doré HMC face interne' => 14,
+//                               'Miroir Bleu HMC face interne' => 14,
+//                               'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25,
                     ];
                 }
                 else {
-                    $prices = ['Durci' => 0,
-                               'HMC' => 3,
-                               'HMC Face Interne' => 3,
-                               'Satin' => 7,
-                               'Satin Face Interne' => 7,
-                               'Satin UV' => 10,
-                               'Satin UV Face Interne' => 10,
-                               'Achromatique' => 15,
-                               'Achromatique Face Interne' => 15,
-                               'BlueCoat' => 15,
-                               'Satin Max' => 17,
-                               'Satin Max Face Interne' => 17,
-                               'Satin Drive Or' => 17,
-                               'Miroir Argent HMC face interne' => 14,
-                               'Miroir Doré HMC face interne' => 14,
-                               'Miroir Bleu HMC face interne' => 14,
-                               'Miroir Flash HMC face interne' => 14,
+                    $prices = [
+//                               'Durci' => 0,
+//                               'HMC' => 3,
+//                               'HMC Face Interne' => 3,
+//                               'Satin' => 7,
+//                               'Satin Face Interne' => 7,
+//                               'Satin UV' => 10,
+//                               'Satin UV Face Interne' => 10,
+//                               'Achromatique' => 15,
+//                               'Achromatique Face Interne' => 15,
+//                               'BlueCoat' => 15,
+//                               'Satin Max' => 17,
+//                               'Satin Max Face Interne' => 17,
+//                               'Satin Drive Or' => 17,
+//                               'Miroir Argent HMC face interne' => 14,
+//                               'Miroir Doré HMC face interne' => 14,
+//                               'Miroir Bleu HMC face interne' => 14,
+//                               'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25,
                     ];
                 }
             }
@@ -148,64 +167,80 @@ class m_traitement extends CI_Model
                      || stripos($lens->trad_fr, 'bifocal') !== FALSE
                      || stripos($lens->trad_fr, 'trifocal') !== FALSE
             ) {
-                $prices = ['Durci' => 0,
-                           'HMC' => 4,
-                           'HMC Face Interne' => 4,
-                           'Satin' => 8,
-                           'Satin Face Interne' => 8,
-                           'Satin UV' => 11,
-                           'Satin UV Face Interne' => 11,
-                           'Achromatique' => 16,
-                           'Achromatique Face Interne' => 16,
-                           'BlueCoat' => 16,
-                           'Satin Max' => 18,
-                           'Satin Max Face Interne' => 18,
-                           'Satin Drive Or' => 18,
-                           'Miroir Argent HMC face interne' => 14,
-                           'Miroir Doré HMC face interne' => 14,
-                           'Miroir Bleu HMC face interne' => 14,
-                           'Miroir Flash HMC face interne' => 14,                ];
+                $prices = [
+//                            'Durci' => 0,
+//                           'HMC' => 4,
+//                           'HMC Face Interne' => 4,
+//                           'Satin' => 8,
+//                           'Satin Face Interne' => 8,
+//                           'Satin UV' => 11,
+//                           'Satin UV Face Interne' => 11,
+//                           'Achromatique' => 16,
+//                           'Achromatique Face Interne' => 16,
+//                           'BlueCoat' => 16,
+//                           'Satin Max' => 18,
+//                           'Satin Max Face Interne' => 18,
+//                           'Satin Drive Or' => 18,
+//                           'Miroir Argent HMC face interne' => 14,
+//                           'Miroir Doré HMC face interne' => 14,
+//                           'Miroir Bleu HMC face interne' => 14,
+//                           'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25,
+                    ];
             }
             else if (stripos($lens->trad_fr, 'Freestyle') !== FALSE
                      || stripos($lens->trad_fr, 'EyeFatigue') !== FALSE
             ) {
                 if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
-                    $prices = ['Durci' => 0,
-                               'HMC' => 3,
-                               'HMC Face Interne' => 3,
-                               'Satin' => 7,
-                               'Satin Face Interne' => 7,
-                               'Satin UV' => 7,
-                               'Satin UV Face Interne' => 10,
-                               'Achromatique' => 10,
-                               'Achromatique Face Interne' => 15,
-                               'BlueCoat' => 15,
-                               'Satin Max' => 17,
-                               'Satin Max Face Interne' => 17,
-                               'Satin Drive Or' => 17,
-                               'Miroir Argent HMC face interne' => 14,
-                               'Miroir Doré HMC face interne' => 14,
-                               'Miroir Bleu HMC face interne' => 14,
-                               'Miroir Flash HMC face interne' => 14,
+                    $prices = [
+//                            'Durci' => 0,
+//                               'HMC' => 3,
+//                               'HMC Face Interne' => 3,
+//                               'Satin' => 7,
+//                               'Satin Face Interne' => 7,
+//                               'Satin UV' => 7,
+//                               'Satin UV Face Interne' => 10,
+//                               'Achromatique' => 10,
+//                               'Achromatique Face Interne' => 15,
+//                               'BlueCoat' => 15,
+//                               'Satin Max' => 17,
+//                               'Satin Max Face Interne' => 17,
+//                               'Satin Drive Or' => 17,
+//                               'Miroir Argent HMC face interne' => 14,
+//                               'Miroir Doré HMC face interne' => 14,
+//                               'Miroir Bleu HMC face interne' => 14,
+//                               'Miroir Flash HMC face interne' => 14,
+                        'Spectrum' => 11,
+                        'Miroir Vert HMC Face Interne' => 25,
+                        'Miroir Rouge HMC Face Interne' => 25,
+                        'Miroir Rose Gold HMC Face Interne' => 25,
                     ];
                 } else {
-                    $prices = ['Durci' => 0,
-                               'HMC' => 3,
-                               'HMC Face Interne' => 3,
-                               'Satin' => 7,
-                               'Satin Face Interne' => 7,
-                               'Satin UV' => 10,
-                               'Satin UV Face Interne' => 10,
-                               'Achromatique' => 15,
-                               'Achromatique Face Interne' => 15,
-                               'BlueCoat' => 15,
-                               'Satin Max' => 17,
-                               'Satin Max Face Interne' => 17,
-                               'Satin Drive Or' => 17,
-                               'Miroir Argent HMC face interne' => 14,
-                               'Miroir Doré HMC face interne' => 14,
-                               'Miroir Bleu HMC face interne' => 14,
-                               'Miroir Flash HMC face interne' => 14,
+                    $prices = [
+//                                'Durci' => 0,
+//                               'HMC' => 3,
+//                               'HMC Face Interne' => 3,
+//                               'Satin' => 7,
+//                               'Satin Face Interne' => 7,
+//                               'Satin UV' => 10,
+//                               'Satin UV Face Interne' => 10,
+//                               'Achromatique' => 15,
+//                               'Achromatique Face Interne' => 15,
+//                               'BlueCoat' => 15,
+//                               'Satin Max' => 17,
+//                               'Satin Max Face Interne' => 17,
+//                               'Satin Drive Or' => 17,
+//                               'Miroir Argent HMC face interne' => 14,
+//                               'Miroir Doré HMC face interne' => 14,
+//                               'Miroir Bleu HMC face interne' => 14,
+//                               'Miroir Flash HMC face interne' => 14,
+                                'Spectrum' => 11,
+                                'Miroir Vert HMC Face Interne' => 25,
+                                'Miroir Rouge HMC Face Interne' => 25,
+                                'Miroir Rose Gold HMC Face Interne' => 25,
                     ];
                 }
             }
@@ -214,19 +249,21 @@ class m_traitement extends CI_Model
             //            }
 
             foreach ($traitementArray as $traitementId => $traitementName) {
-                $price = $prices[$traitementName];
-                if ($idTypeVerreSolaire) {
-                    $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, price) VALUES ('".$traitementId."','".$lens->id."','".$indiceId."','".$idTypeVerreSolaire."','".$price."')";
+                if ($traitementId == 11 || $traitementId == 19 || $traitementId == 20 || $traitementId == 21) {
+                    $price = $prices[$traitementName];
+                    if ($idTypeVerreSolaire) {
+                        $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, price) VALUES ('".$traitementId."','".$lens->id."','".$indiceId."','".$idTypeVerreSolaire."','".$price."')";
+                    }
+                    else {
+                        $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, price) VALUES ('"
+                            .$traitementId."','".$lens->id."','".$indiceId."',NULL,'".$price."')";
+                    }
+                    if ($idTypeVerreSolaire == NULL) {
+                        $null = true;
+                    }
+                    //var_dump($sql);die;
+                    $this->db->query($sql);
                 }
-                else {
-                    $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, price) VALUES ('"
-                           .$traitementId."','".$lens->id."','".$indiceId."',NULL,'".$price."')";
-                }
-                if ($idTypeVerreSolaire == NULL) {
-                    $null = true;
-                }
-                //var_dump($sql);die;
-                $this->db->query($sql);
             }
         }
 //        $this->db->query("UPDATE `verres` SET `prix_traitement` = 0

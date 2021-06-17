@@ -539,6 +539,7 @@ class m_passer_commande_verre extends CI_Model
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
                      $panierA, $type = "1")
     {
+
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -577,16 +578,17 @@ class m_passer_commande_verre extends CI_Model
 
             if ($additionD == '-') {
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->orderBy('id', 'ASC')->get();*/
-
-                $sphereD_res = $this->db->query("SELECT * 
-												FROM " . $this->table_Refractions . " 
+                $sql = "SELECT * FROM " . $this->table_Refractions . " 
 									   WHERE maxMeridian_from<=" . $sphereD . "
 									   AND maxMeridian_to>=" . $sphereD . "
 									   AND cylinder_from <=" . $cylindreD . "
 									   AND cylinder_to >=" . $cylindreD . "
-									   ORDER BY id ASC");
+									   ORDER BY id ASC";
+
+                $sphereD_res = $this->db->query($sql);
 
             } else {
+
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->where('addition_from', '<=', $additionD)->where('addition_to', '>=', $additionD)->orderBy('id', 'ASC')->get();*/
 
                 if ($lensFocalGroup == '4'
@@ -648,7 +650,8 @@ class m_passer_commande_verre extends CI_Model
                 //dd($r);
                 $conditions = "(";
                 foreach ($r as $field) {
-                    $conditions .= "(JSON_EXTRACT(ranges, \"$[*].rangeId\") like '%\"" . $field . "\"%') OR ";
+//                    $conditions .= "(JSON_EXTRACT(ranges, \"$[*].rangeId\") like '%\"" . $field . "\"%') OR ";
+                    $conditions .= "(ranges like '%\"rangeId\": {\"0\": \"" . $field . "\"%') OR ";
                 }
                 $conditions = rtrim($conditions, " OR ");
                 $conditions .= ")";

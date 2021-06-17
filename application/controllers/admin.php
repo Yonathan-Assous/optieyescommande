@@ -3618,7 +3618,7 @@ class admin
                 $this->db->update('users');
             }
 
-            $this->m_commande->updateBillsForMonth($user);
+//            $this->m_commande->updateBillsForMonth($user);
 
             echo $errors;
 
@@ -3865,8 +3865,8 @@ class admin
                         true;
                 }
 
-                $prix_verre =
-                    $order_data['prix_verre'];
+//                $prix_verre =
+//                    $order_data['prix_verre'];
 
                 if ($order_data['total_remise_paire'] >
                     0) {
@@ -3875,12 +3875,13 @@ class admin
                         $prix_verre;
                 }
 
-                $total_commande =
-                    $prix_verre *
-                    $verres;
+//                $total_commande =
+//                    $prix_verre *
+//                    $verres;
+//
+//                $order_data['total_commande'] =
+//                    $total_commande;
 
-                $order_data['total_commande'] =
-                    $total_commande;
                 $order_data['total_remise_paire'] =
                     0;
 
@@ -4277,7 +4278,6 @@ class admin
                 $data_commande =
                     $data_commandeNew;
             }
-
             $data_etiquette =
                 $this->m_commande->getEtiquetteAlreadySet();
 
@@ -12406,6 +12406,7 @@ class admin
     public
     function commande_details()
     {
+
         if ($this->input->is_ajax_request()) {
 
             $id_commande =
@@ -15357,14 +15358,13 @@ class admin
                 $this->m_commande->getAllCommandeByMonthAndUser($date,
                     null,
                     $user);
-
+//            var_dump($facture_client);die;
             $data = array();
             $data['aaData'] =
                 array();
             $total_ht = 0;
             $total_ht_liv = 0;
             $lastkey = 0;
-
             if ($facture_client !==
                 false) {
                 foreach ($facture_client
@@ -16193,6 +16193,7 @@ class admin
                         $this->m_grille_stock->getGrilleStock($data);
                 }
             }
+
 
             $data['post_data'] =
                 $post;
@@ -18138,6 +18139,7 @@ class admin
     public
     function correction_stock()
     {
+
         $dataVerre['id_generation_verre'] =
             '9,12,13,14,15,16,17,19,20,21,23';
 

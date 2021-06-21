@@ -1021,7 +1021,6 @@ class admin
 
             $data =
                 $this->input->post();
-
             $user =
                 $this->m_users->getUserById($user_id)[0];
 
@@ -5048,6 +5047,13 @@ class admin
                 $paA = "";
 
                 if ($lenses_code ==
+                    'PAS-174') {
+                    $lenses_code =
+                        '100001';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
                     'PAU-15') {
                     $lenses_code =
                         '200010';
@@ -7412,6 +7418,13 @@ class admin
                     $paA = "";
 
                     if ($lenses_code ==
+                        'PAS-174') {
+                        $lenses_code =
+                            '100001';
+                        $paA =
+                            "1";
+                    }
+                    if ($lenses_code ==
                         'PAU-15') {
                         $lenses_code =
                             '200010';
@@ -9650,6 +9663,13 @@ class admin
 
             $paA = "";
 
+            if ($lenses_code ==
+                'PAS-174') {
+                $lenses_code =
+                    '100001';
+                $paA =
+                    "1";
+            }
             if ($lenses_code ==
                 'PAU-15') {
                 $lenses_code =
@@ -17184,6 +17204,7 @@ class admin
                 }
 
                 // FUCK
+
                 if ($order =
                     $this->m_commande->addOrder($data)) {
                     if ($data['pair'] ==

@@ -691,8 +691,12 @@ $('input[name=sphereD]').change(function() {
     		sphereD = sphereD+".00";
     		//alert(sphereD);
     		$("#sphereD").val(sphereD);
-    	}
-    		
+		}
+		if(isNaN(sphereD) == true)
+		{
+			sphereD = "0.00"
+		}
+
     	if (sphereD.indexOf("+") >= 0)
     	{
     		sphereD = sphereD.replace('+', '');
@@ -796,7 +800,10 @@ $('input[name=sphereG]').change(function() {
     		//alert(sphereD);
     		$("#sphereG").val(sphereG);
     	}
-    		
+		if(isNaN(sphereG) == true)
+		{
+			sphereG = "0.00"
+		}
     	if (sphereG.indexOf("+") >= 0)
     	{
     		sphereG = sphereG.replace('+', '');
@@ -898,7 +905,10 @@ $('input[name=cylindreD]').change(function() {
     		//alert(sphereD);
     		$("#cylindreD").val(cylindreD);
     	}
-    		
+		if(isNaN(cylindreD) == true)
+		{
+			cylindreD = "0.00"
+		}
     	if (cylindreD.indexOf("+") >= 0)
     	{
     		cylindreD = cylindreD.replace('+', '');
@@ -1025,7 +1035,12 @@ $('input[name=cylindreG]').change(function() {
     		//alert(sphereD);
     		$("#cylindreG").val(cylindreG);
     	}
-    		
+
+		if(isNaN(cylindreG) == true)
+		{
+			cylindreG = "0.00"
+		}
+
     	if (cylindreG.indexOf("+") >= 0)
     	{
     		cylindreG = cylindreG.replace('+', '');

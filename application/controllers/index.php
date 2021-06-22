@@ -1710,35 +1710,42 @@ class index extends MY_Controller {
             $data_commande = $this->m_commande->getCommandeByUserLight($dataOrder);
 
             if($data_commande !== false)
-                foreach($data_commande as $key => $commande){
+                foreach($data_commande as $key => $commande) {
 
-                    switch($commande->type_commande) {
+                    switch ($commande->type_commande) {
 
                         case 1:
-                            $prix_commande = $commande->total_commande.' €';
+                            $prix_commande = $commande->total_commande . ' €';
                             break;
 
                         case 2:
-                            $prix_commande = '<del>'.$commande->total_commande.'</del> '.($commande->tarif_express > 0 ? $commande->tarif_express : '0').' €<br />Casse atelier';
+                            $prix_commande = '<del>' . $commande->total_commande . '</del> ' . ($commande->tarif_express > 0 ? $commande->tarif_express : '0') . ' €<br />Casse atelier';
                             break;
 
                         case 3:
-                            $prix_commande = '<del>'.$commande->total_commande.'</del> '.($commande->tarif_express > 0 ? $commande->tarif_express : '0').' €<br />Erreur ophta';
+                            $prix_commande = '<del>' . $commande->total_commande . '</del> ' . ($commande->tarif_express > 0 ? $commande->tarif_express : '0') . ' €<br />Erreur ophta';
                             break;
 
                     }
 
-                    if($commande->ancienne_commande != '') {
-                        $ancienne_ref = 'CR'.$commande->ancienne_commande.'-'.$this->data['user_info']->id_users;
-                    }
-                    else {
+                    if ($commande->ancienne_commande != '') {
+                        $ancienne_ref = 'CR' . $commande->ancienne_commande . '-' . $this->data['user_info']->id_users;
+                    } else {
                         $ancienne_ref = '-';
                     }
 
-					if($commande->origine_commande == "1" )//$commande->id_type_generation_verre != 5 && $commande->id_type_generation_verre != 23)
-						$etat_commande = $commande->libelle_etat_commande.($commande->id_etat_commande == 6 ? ' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)) : '').' ('.$commande->id_etat_commande.'/6)';
-					else
-						$etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
+                    if ($commande->origine_commande == "1") {//$commande->id_type_generation_verre != 5 && $commande->id_type_generation_verre != 23)
+                        $etat_commande = $commande->libelle_etat_commande.($commande->id_etat_commande == 6 ? ' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)) : '').' ('.$commande->id_etat_commande.'/6)';
+                    }
+					else {
+                        $etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
+					}
+                    if ($commande->id_etat_commande == 1) {
+                        $bl = '<div style="color:red"> En attente d’expédition </div>';
+                    }
+                    else {
+                        $bl = '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>';
+                    }
 
 					//$commande->commentaire = "";
 
@@ -1749,7 +1756,7 @@ class index extends MY_Controller {
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $ancienne_ref,
-                                '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+                                $bl,
                                 '<del>'.$commande->total_commande.'€ </del> <b>'.number_format(($commande->tarif_express > 0 ? $commande->tarif_express : 0),2,'.',' ').'  €</b>',
                                 $commande->reference_client,
                                 $commande->generation_verre,
@@ -1770,7 +1777,7 @@ class index extends MY_Controller {
 								array(
 									'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
 									date('d/m/Y H:i:s', strtotime($commande->date_commande)),
-									'<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+									$bl,
 									$commande->reference_client,
 									$commande->generation_verre,
 									$etat_commande,
@@ -1788,7 +1795,7 @@ class index extends MY_Controller {
                             array(
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
-                                '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+                                $bl,
                                 $commande->reference_client,
                                 $commande->generation_verre,
                                 $etat_commande,
@@ -1837,13 +1844,13 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
-
+                    $bl = $order->id_etat_commande == 1 ? '<div style="color:red"> En attente d’expédition </div>' : '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
                     $data['aaData'][] = array(
                         'CR'.$order->id_commande.'-'.$order->id_users,
 						$order->reference_client,
                         date('d/m/Y H:i', strtotime($order->date_commande)),
-                        '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>',
+                        $bl,
                         //
 						$details,
                         $etat_commande,
@@ -1877,12 +1884,13 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
+                    $bl = $order->id_etat_commande == 1 ? '<div style="color:red"> En attente d’expédition </div>' : '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
 
                     $data['aaData'][] = array(
                         'CR'.$order->id_commande.'-'.$order->id_users,
                         date('d/m/Y H:i', strtotime($order->date_commande)),
-                        '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>',
+                        $bl,
                         $order->reference_client,
                         $order->name,
                         $etat_commande,

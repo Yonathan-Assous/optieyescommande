@@ -1741,7 +1741,7 @@ class index extends MY_Controller {
                         $etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
 					}
                     if ($commande->id_etat_commande == 1) {
-                        $bl = '<div style="color:red"> En attente d’expédition </div>';
+                        $bl = '';
                     }
                     else {
                         $bl = '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>';
@@ -1844,7 +1844,7 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
-                    $bl = $order->id_etat_commande == 1 ? '<div style="color:red"> En attente d’expédition </div>' : '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
+                    $bl = $order->id_etat_commande == 1 ? '' : '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
                     $data['aaData'][] = array(
                         'CR'.$order->id_commande.'-'.$order->id_users,
@@ -1884,7 +1884,7 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
-                    $bl = $order->id_etat_commande == 1 ? '<div style="color:red"> En attente d’expédition </div>' : '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
+                    $bl = $order->id_etat_commande == 1 ? '' : '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
 
                     $data['aaData'][] = array(

@@ -56,7 +56,7 @@ class m_traitement extends CI_Model
                 }
             }
             if (stripos($lens->trad_fr, 't-one') !== FALSE) {
-                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
+                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'Defender') {
                     $prices = [
 //                        'Durci' => 0,
 //                        'HMC' => 7,
@@ -109,7 +109,7 @@ class m_traitement extends CI_Model
                 }
             }
             else if (stripos($lens->trad_fr, 'E-space') !== FALSE) {
-                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
+                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'Defender') {
                     $prices = [
 //                               'Durci' => 0,
 //                               'HMC' => 7,
@@ -194,7 +194,7 @@ class m_traitement extends CI_Model
             else if (stripos($lens->trad_fr, 'Freestyle') !== FALSE
                      || stripos($lens->trad_fr, 'EyeFatigue') !== FALSE
             ) {
-                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'BlueCoat Defender') {
+                if ($idTypeVerreSolaire == NULL || $typeVerreSolaire->name == 'Defender') {
                     $prices = [
 //                            'Durci' => 0,
 //                               'HMC' => 3,

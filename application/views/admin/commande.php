@@ -65,7 +65,7 @@ include_once('menu.php');
                               <span>Compte numéro : </span> <strong><?php echo $recap_commande[0]->id_users; ?></strong>
                           </div>
                           <div >
-                              <span>Rérence Client : </span> <strong><?php echo $recap_commande[0]->reference_client; ?></strong>
+                              <span>Référence Client : </span> <strong><?php echo $recap_commande[0]->reference_client; ?></strong>
                           </div>
                           <div class="highlighted">
                               <span>Date : </span> <strong><?php echo $recap_commande[0]->date_commande; ?></strong>

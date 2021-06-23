@@ -2957,13 +2957,13 @@ class admin
                         );
                     $verre_def =
                         str_replace('BlueCoat',
-                            'BlueCoat Defender',
+                            'Defender',
                             $compare_verres[$vid]);
 
 
                     // Si le verre existe aussi en defender, on l'ajoute à la suite
                     if (strpos($verre_def,
-                            'BlueCoat Defender') !==
+                            'Defender') !==
                         false) {
 
                         if (in_array($verre_def,

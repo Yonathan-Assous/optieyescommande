@@ -877,7 +877,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN commande_pointage cp ON cp.id_commande = c.id_commande
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) ".$sql_order;
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) GROUP BY c.id_commande ".$sql_order;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)

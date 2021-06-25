@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-06-24T16:25:46+0200</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>597916-358</referenceNo>
+         <manufacturer />
+         <pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>100002</commercialCode>
+               <rxData>
+                  <sphere>-7.00</sphere>
+                  <cylinder>
+                      <power>+0.75</power>
+                      <axis>85</axis>
+                  </cylinder>
+                  <addition>+0.00</addition>
+                  </rxData>
+               <centration>
+                  <height reference="NEAR" referenceHeight="OVERBOX"></height>
+                  </centration>
+				   <geometry>
+						  <diameter>
+							 <physical>75</physical>
+							 <elliptic>false</elliptic>
+						  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>100002</commercialCode>
+               <rxData>
+                  <sphere>-5.75</sphere>
+                  <cylinder>
+                      <power>+1.00</power>
+                      <axis>85</axis>
+                  </cylinder>
+                  <addition>+0.00</addition></rxData>
+               <centration>
+                  <height reference="NEAR" referenceHeight="OVERBOX"></height>
+                  </centration>
+				   <geometry>
+						  <diameter>
+							 <physical>75</physical>
+							 <elliptic>false</elliptic>
+						  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+             </frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

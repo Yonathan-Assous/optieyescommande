@@ -1337,7 +1337,7 @@ include_once('menu.php');
 
 																			<div class="radio radio-warning radio-inline traitement-bluecoat-defender">
 																				<input type="radio" id="traitement_bluecoat_defender" value="BlueCoat Defender" name="traitement" class="required">
-																				<label for="traitement_bluecoat_defender"> BlueCoat Defender </label>
+																				<label for="traitement_bluecoat_defender"> Defender </label>
 																			</div>
 
 																		</div>

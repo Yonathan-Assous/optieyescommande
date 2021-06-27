@@ -553,7 +553,7 @@ class m_commande extends CI_Model {
             $table_commentaire = $this->table_commentaire_temp;
         }
 
-        $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                    generation_verre,type_generation_verre,libelle_verre,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin,vnew.trad_fr,c.id_type_generation_verre,v.gtin as gtin_stock, vnew.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -566,8 +566,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   ORDER BY date_commande DESC");
-
+                                   AND display = 'X'
+                                   ORDER BY date_commande DESC";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -877,7 +878,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN commande_pointage cp ON cp.id_commande = c.id_commande
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) ".$sql_order;
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) GROUP BY c.id_commande ".$sql_order;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
@@ -3423,7 +3424,7 @@ class m_commande extends CI_Model {
 //                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-
+//                    var_dump($sql);die;
                     if($this->db->query($sql));
                     {
 

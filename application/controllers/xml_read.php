@@ -23,6 +23,7 @@ class xml_read extends MY_Controller
         $lenses = $this->readCsv($csv);
 //        $lenses = utf8_decode($lenses);
         array_pop($lenses);
+
         foreach ($lenses as $key => $lens) {
             foreach ($lens as $key2 => $value) {
                 $data[$key2] = "'" . utf8_encode($value) . "'";
@@ -96,13 +97,21 @@ class xml_read extends MY_Controller
                 foreach ($lens['ranges']['range'] as $key => $range) {
 //                    array_push($array, 'rangeId');
 
-                    $array[$key]['geoId'][0] = $range['geoId'];
+                    $array[$key]['geoId']['0'] = $range['geoId'];
                     $array[$key]['rangeId'][0] = $range['rangeId'];
                     $array[$key]['combinationTreeId'][0] = $range['combinationTreeIds']['combinationTreeId'];
                     $array[$key]['combinationTreeId']['@attributes']['prio'] = 1;
-
+                    //var_dump($range['combinationTreeIds']['combinationTreeId']);die;
                 }
+//                var_dump($array);die;
+//                $range = json_encode($array, JSON_FORCE_OBJECT);
+//                var_dump($range);die;
                 $range = json_encode($array);
+//                var_dump($range);die;
+                $range = str_replace('["', ' {"0": "', $range);
+                $range = str_replace('"]', '"}', $range);
+
+//                var_dump($range);die;
                 //$range = str_replace('"', '\"', $range);
                 $orderOptionGroupId = isset($lens['orderOptions']['orderOptionGroupIds']['orderOptionGroupId']) ? $lens['orderOptions']['orderOptionGroupIds']['orderOptionGroupId'] : 0;
                 $tradFr = "";

@@ -707,7 +707,6 @@ class m_passer_commande_verre extends CI_Model
 										   AND display = 'X'
 										   ORDER BY sorting,trad_fr";
                                 $res = $this->db->query($sql);
-
                                 /*echo "SELECT *
 													FROM ".$this->table_lenses."
 										   WHERE focalGroupId=".$lensFocalGroup."
@@ -758,8 +757,7 @@ class m_passer_commande_verre extends CI_Model
 										   AND display = 'X'
 										   ORDER BY sorting,trad_fr");
                             } else {
-
-                                $res = $this->db->query("SELECT * 
+                                $sql = "SELECT * 
 										   FROM " . $this->table_lenses . " 
 										   WHERE trad_fr LIKE '%" . $generation . "%'
 										   AND focalGroupId='3'
@@ -767,7 +765,8 @@ class m_passer_commande_verre extends CI_Model
 										   AND (name LIKE '%" . $indice . " %' OR name LIKE '%" . $indice . "')
 										   AND name NOT LIKE '%mineral%'
 										   AND display = 'X'
-										   ORDER BY sorting,trad_fr");
+										   ORDER BY sorting,trad_fr";
+                                $res = $this->db->query($sql);
 
                             }
                         } else {
@@ -819,19 +818,28 @@ class m_passer_commande_verre extends CI_Model
 											   */
 
                         $res_f = $this->db->query("SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
-	FROM lenses L LEFT JOIN lenses l2
-	 ON (L.trad_fr = l2.trad_fr AND L.sorting > l2.sorting AND (L.name LIKE '%trn%' OR L.name LIKE '%transition%'  OR L.name LIKE '%chrom%'))
-	WHERE l2.sorting IS NULL AND  (" . $codes_f
+                                                FROM lenses L LEFT JOIN lenses l2
+                                                 ON (L.trad_fr = l2.trad_fr AND L.sorting > l2.sorting AND (L.name LIKE '%trn%' OR L.name LIKE '%transition%'  OR L.name LIKE '%chrom%'))
+                                                WHERE l2.sorting IS NULL AND  (" . $codes_f
                                                   . " L.code = '0') AND L.trad_fr LIKE '%E-Space%' ORDER BY sorting,trad_fr");
 
 
-                    } elseif ($generation == "Platinium") {
-                        $res_f = $this->db->query("SELECT L.code,L.id, L.name, L.trad_fr, L.prix, L.sorting
+                    }
+                    elseif ($generation == "Platinium") {
+                        $sql = "SELECT L.code,L.id, L.name, L.trad_fr, L.prix, L.sorting
 														FROM " . $this->table_lenses . " L 
-											   WHERE (" . $codes_f . " L.code = '0') ORDER BY sorting,trad_fr");
+											   WHERE (" . $codes_f . " L.code = '0') AND L.trad_fr LIKE '%Platinium%' ORDER BY sorting,trad_fr";
+                        $res_f = $this->db->query($sql);
 
+                    }
+                    elseif ($generation == "Elysium") {
+                        $sql = "SELECT L.code,L.id, L.name, L.trad_fr, L.prix, L.sorting
+														FROM " . $this->table_lenses . " L 
+											   WHERE (" . $codes_f . " L.code = '0') AND L.trad_fr LIKE '%Elysium%' ORDER BY sorting,trad_fr";
+                        $res_f = $this->db->query($sql);
 
-                    } else {
+                    }
+                    else {
 
                         if ($panierA == "1") {
                             $P_A = " AND L.trad_fr LIKE '%Panier A%'";

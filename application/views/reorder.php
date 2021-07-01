@@ -396,7 +396,7 @@ include_once('menu.php');
 
                         <div class="text-center">
                             <a href="/index" class="btn btn-default btn-lg waves-effect waves-light">Annuler</a>
-                            <a href="#" id="reOrder" class="btn btn-warning btn-lg waves-effect waves-light">Repasser cette commander</a>
+                            <a href="#" id="reOrder" class="btn btn-warning btn-lg waves-effect waves-light">Repasser cette commande</a>
                         </div>
 
                     </div>

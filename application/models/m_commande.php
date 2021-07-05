@@ -382,6 +382,7 @@ class m_commande extends CI_Model {
         if($order = $this->getCommandeById($order_id, false, $pair)) {
 
             switch($order[0]->id_generation_verre) {
+
                 case 4: // E-Space
                 case 6: // Degressif (Top Office)
                 case 7: // Bifocaux
@@ -541,7 +542,7 @@ class m_commande extends CI_Model {
         $sql_add = "";
 
         if($id_users !== false)
-            $sql_add .= "AND c.id_users =".$id_users;
+            $sql_add .= "AND c.id_users = ".$id_users;
 
 
         if(false === $pair) {
@@ -552,8 +553,16 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
+        $sql = "SELECT generation FROM " . $table_commande . " c WHERE id_commande = ". $id_commande." ".$sql_add;
+        $query = $this->db->query($sql);
 
-        $query = $this->db->query("SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        if ($query && $query->num_rows() > 0) {
+            $generation = $query->result()[0]->generation;
+            $sqlGeneration = "";
+            if (!empty($generation)) {
+                $sqlGeneration = "AND vnew.trad_fr LIKE '%" . $generation . "%'";
+            }
+            $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                    generation_verre,type_generation_verre,libelle_verre,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin,vnew.trad_fr,c.id_type_generation_verre,v.gtin as gtin_stock, vnew.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -565,12 +574,18 @@ class m_commande extends CI_Model {
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
-                                   WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   ORDER BY date_commande DESC");
+                                   WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
+                                   AND display = 'X'
+                                   ORDER BY date_commande DESC";
+            $query = $this->db->query($sql);
+            if ($query && $query->num_rows() > 0)
+                return $query->result();
+        }
 
 
-        if ($query && $query->num_rows() > 0)
-            return $query->result();
+//        var_dump($sql);die;
+
+
 
         return false;
     }
@@ -628,7 +643,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    INNER JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) AND status_omega=0 AND is_confirmed = 1 ORDER BY id_commande DESC";
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre = NULL) AND status_omega=0 AND is_confirmed = 1 AND display = 'X' ORDER BY id_commande DESC";
         $query = $this->db->query($sql);
 
 
@@ -3424,7 +3439,7 @@ class m_commande extends CI_Model {
 //                    var_dump($data);die;
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-
+//                    var_dump($sql);die;
                     if($this->db->query($sql));
                     {
 

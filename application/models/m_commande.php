@@ -571,13 +571,14 @@ class m_commande extends CI_Model {
                                    LEFT JOIN lenses vnew ON vnew.code = c.id_verre
                                    LEFT JOIN verres v ON v.id_verre = c.id_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
-                                   INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
+                                   LEFT JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
                                    AND display = 'X'
                                    ORDER BY date_commande DESC";
-            $query = $this->db->query($sql);
+           
+		$query = $this->db->query($sql);
             if ($query && $query->num_rows() > 0)
                 return $query->result();
         }

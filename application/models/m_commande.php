@@ -575,8 +575,10 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
-                                   AND display = 'X'
+                                   AND (display = 'X' OR v.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
+//            var_dump($sql);die;
+
             $query = $this->db->query($sql);
             if ($query && $query->num_rows() > 0)
                 return $query->result();

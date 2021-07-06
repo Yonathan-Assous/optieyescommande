@@ -16,6 +16,11 @@ class traitement extends MY_Controller {
         $this->m_traitement->insertPrixTraitement();
     }
 
+    public function setNewTraitementsInDatabase() {
+//        var_dump('die');die;
+        $this->m_traitement->insertPrixTraitementNew();
+    }
+
     public function getTraitementPriceList()
     {
         $data =

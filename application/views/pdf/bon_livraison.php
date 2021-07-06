@@ -490,11 +490,16 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
                 <tbody>
 
                 <?php
-				
+//				var_dump($bon_livraison[0]);die;
 				if($bon_livraison[0]->generation ==  "T-One")
 				{
 					$bon_livraison[0]->libelle_verre = str_replace("E-Space","T-One",$bon_livraison[0]->libelle_verre);
 				}
+
+                if($bon_livraison[0]->generation ==  "Elysium")
+                {
+                    $bon_livraison[0]->libelle_verre = str_replace("Platinium","Elysium",$bon_livraison[0]->libelle_verre);
+                }
 				
 				$gtin = "";
 				if($bon_livraison[0]->gtin_stock != "")

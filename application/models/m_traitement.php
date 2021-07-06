@@ -28,6 +28,7 @@ class m_traitement extends CI_Model
         foreach ($traitements as $traitement) {
             $traitementArray[$traitement->id] = $traitement->name;
         }
+//        var_dump($traitementArray);die;
         $count = 0;
         $null = false;
         $indices = ['1,53' => 2, '1,56' => 3, '1,59' => 8, '1,5' => 1,  '1,67' => 5, '1,6' => 4, '1,74' => 6];
@@ -239,7 +240,7 @@ class m_traitement extends CI_Model
             //            }
 
             foreach ($traitementArray as $traitementId => $traitementName) {
-                if ($traitementId == 11 || $traitementId == 19 || $traitementId == 20 || $traitementId == 21) {
+//                if ($traitementId == 11 || $traitementId == 19 || $traitementId == 20 || $traitementId == 21) {
                     $price = $prices[$traitementName];
                     if ($idTypeVerreSolaire) {
                         $sql = "INSERT INTO traitement_prix (id_traitement, id_lenses, id_indice_verre, id_type_verre_solaire, price) VALUES ('".$traitementId."','".$lens->id."','".$indiceId."','".$idTypeVerreSolaire."','".$price."')";
@@ -253,10 +254,10 @@ class m_traitement extends CI_Model
                     }
                     //var_dump($sql);die;
                     $this->db->query($sql);
-                }
+//                }
             }
         }
-        var_dump($lenses);die;
+        //var_dump($lenses);die;
     }
     public function insertPrixTraitement() {
         $sqlLenses = "SELECT * FROM `lenses` WHERE

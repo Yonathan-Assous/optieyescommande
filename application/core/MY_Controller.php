@@ -199,8 +199,7 @@ class MY_Controller extends CI_Controller {
     }
 	
 	public function generer_pdf($file_pdf,$id_commande="",$send_mail = false){
-
-        if(($this->session->userdata('logged_in') === true || $this->session->userdata('is_admin') === true)){
+        if($this->session->userdata('is_admin') === true){
 
 			$data = $this->session->userdata('data_user');
 			$data['data_admin'] = $this->session->userdata('data_admin');
@@ -253,7 +252,7 @@ class MY_Controller extends CI_Controller {
                         $admin_info = $this->session->userdata('data_admin');
                         $data['data_admin']['admin_info'] = $admin_info['user_info'];
                     }
-                    
+
                     $info_commande = json_decode($commande[0]->information_commande,true);
 				
 					if(isset($info_commande['verre']['correction_droit']))

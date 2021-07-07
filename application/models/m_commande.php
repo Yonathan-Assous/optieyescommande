@@ -577,14 +577,9 @@ class m_commande extends CI_Model {
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
                                    AND (display = 'X' OR v.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
-<<<<<<< HEAD
-           
-		$query = $this->db->query($sql);
-=======
-//            var_dump($sql);die;
+
 
             $query = $this->db->query($sql);
->>>>>>> be579d0cbf1b7a9656ae78920e2135fc2c3a5636
             if ($query && $query->num_rows() > 0)
                 return $query->result();
         }

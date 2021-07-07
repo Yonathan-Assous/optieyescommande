@@ -199,7 +199,7 @@ class MY_Controller extends CI_Controller {
     }
 	
 	public function generer_pdf($file_pdf,$id_commande="",$send_mail = false){
-        if($this->session->userdata('is_admin') === true){
+        if ($this->session->userdata('logged_in') === true ||$this->session->userdata('is_admin') === true){
 
 			$data = $this->session->userdata('data_user');
 			$data['data_admin'] = $this->session->userdata('data_admin');

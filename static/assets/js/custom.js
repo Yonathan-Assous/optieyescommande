@@ -249,7 +249,6 @@ $('#reference_client').keyup(function() {
 
 
 $('#indices').on('change', function() {
-
 	$('#div_refraction').addClass('hide');
     $('#generation').val("").change();
     $('#lensFocalGroup').val("").change();
@@ -331,11 +330,25 @@ $('#indices').on('change', function() {
 	else if(indiceId=='mineral')
 	{
 		$("#id_indice_verre").val("9");
-	}	
+	}
 	else
 	{
 	
 	}
+	let sel = document.getElementById("lensFocalGroup");
+	let op = sel.getElementsByTagName("option")
+	if(indiceId=='mineral') {
+		op[3].hidden = true;
+		op[4].hidden = true;
+		op[6].hidden = true;
+	}
+	else {
+		op[3].hidden = false;
+		op[4].hidden = false;
+		op[6].hidden = false;
+	}
+
+
 
 	if(lensFocalGroup == '3')
 	{

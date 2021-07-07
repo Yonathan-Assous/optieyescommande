@@ -575,10 +575,16 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
-                                   AND display = 'X'
+                                   AND (display = 'X' OR v.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
+<<<<<<< HEAD
            
 		$query = $this->db->query($sql);
+=======
+//            var_dump($sql);die;
+
+            $query = $this->db->query($sql);
+>>>>>>> be579d0cbf1b7a9656ae78920e2135fc2c3a5636
             if ($query && $query->num_rows() > 0)
                 return $query->result();
         }
@@ -614,11 +620,11 @@ class m_commande extends CI_Model {
                                    LEFT JOIN lenses v ON (v.code = c.id_verre AND (v.trad_fr LIKE (CONCAT('%', c.generation ,'%'))) OR c.generation = NULL)
                                    LEFT JOIN verres v_stock ON v_stock.id_verre = c.id_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
-                                   INNER JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
+                                   LEFT JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   AND v.display = 'X'
+                                   AND (v.display = 'X' OR v_stock.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
         $query = $this->db->query($sql);
 

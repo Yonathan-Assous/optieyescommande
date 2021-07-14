@@ -1914,6 +1914,8 @@ $('#type_de_verreD').on('change', function() {
 									},
 									dataType: "json",
 									success: function (data) {
+										console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+
 										setTimeout(function(){
 											let prixteinte = $('#prixTeinteD').val();
 											$.each(data, function(key, value){
@@ -2030,7 +2032,8 @@ $('#type_de_verreD').on('change', function() {
 											var traitementD = $('#traitementD').val();
 											var prixverre = $('#prixVerreD').val();
 
-
+											console.log('saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+											console.log($('#traitementD').val())
 											if (!traitementD) {
 												traitementD = "700100";
 											}
@@ -2514,6 +2517,8 @@ $('#type_de_verreG').on('change', function() {
 								if (!traitementG) {
 									traitementG = "700100";
 								}
+								console.log('ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')
+
 								$.ajax({
 									type: "POST",
 									url: "/index/getOptions_price",
@@ -2656,6 +2661,7 @@ $('#type_de_verreG').on('change', function() {
 											if (!traitementG) {
 												traitementG = "700100";
 											}
+											console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
 
 											$.ajax({
 												type: "POST",
@@ -2676,6 +2682,7 @@ $('#type_de_verreG').on('change', function() {
 															console.log('testtttttttttttttttttt');
 															var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
 															console.log("PrixG5")
+															console.log(tot);
 															$('#prixG').val(tot+"€");
 															$('#prixGH').val(tot+"€");
 														});
@@ -3666,6 +3673,7 @@ $('#teinteD').on('change', function() {
 			});
 			// console.log(nomtraitement);
 			// console.log('55555555555555555555555555555555555555555555555555555555555555')
+			console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
@@ -3899,6 +3907,7 @@ $('#teinteG').on('change', function() {
 			$('#divprixG').removeClass('hide');
 			// console.log(nomtraitement);
 			// console.log('6666666666666666666666666666666666666666666666666666')
+			console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{

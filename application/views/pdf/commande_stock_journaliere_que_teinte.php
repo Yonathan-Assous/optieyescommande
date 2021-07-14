@@ -51,228 +51,229 @@
                     $list_verre = array();
                     $options_miroir = array(1 => 'BLUE', 2 => 'SILVER', 3 => 'GOLD', 4 => 'GREEN', 5 => 'RED', 6 => 'ORANGE', 7 => 'PINK' ,8 => 'PURPLE', 9 => 'YELLOW', 10 => 'FLASH');
                     $options_miroir_mail = array(1 => 'Miroir Bleu', 2 => 'Miroir Argent', 3 => 'Miroir Doré', 4 => 'Miroir Vert', 5 => 'Miroir Rouge', 6 => 'Miroir Orange', 7 => 'Miroir Rose' ,8 => 'Miroir Violet', 9 => 'Miroir Jaune', 10 => 'Miroir Flash');
-
-                  //  var_dump($commande_journaliere);
                     foreach($commande_journaliere as $key => $value){
-                    
-                    	if(!empty($value->trad_fr))
+
+                        if(!empty($value->trad_fr))
 						{
 							$value->libelle_verre = $value->trad_fr;
 						}
 
                        $info_commande = json_decode($value->information_commande, true);
 						
-						if ((strpos($value->libelle_verre, 'Gris') !== false || strpos($value->libelle_verre, 'Brun') !== false || strpos($value->libelle_verre, 'G15') !== false ) && strpos($value->libelle_verre, 'Polarisé') === false)
+						if ((strpos($value->libelle_verre, 'Gris') !== false || strpos($value->libelle_verre, 'Brun') !== false || strpos($value->libelle_verre, 'G15') !== false ) && strpos($value->libelle_verre, 'Polarisé') === false && strpos($value->libelle_verre, 'Plan') === false)
 						{
-						//echo $info_commande['verre']['teinte']."<br>";
-						//	var_dump($value);
-                        if($value->libelle_verre == "Prog Eco 1,5 HMC") {
+                            //echo $info_commande['verre']['teinte']."<br>";
+                            //	var_dump($value);
+                            if($value->libelle_verre == "Prog Eco 1,5 HMC") {
 
-                            /*echo '<pre>';
-                            var_dump($info_commande['verre']);
-                            echo '</pre>';*/
+                                /*echo '<pre>';
+                                var_dump($info_commande['verre']);
+                                echo '</pre>';*/
 
-                        }
-
-                       $name = $name_gauche = "";
-                       
-                       if($envoi_chine == 1){
-
-
-                         if(strpos($value->libelle_verre, '#diametre#') !== false){
-                         	if(isset($info_commande['verre']['correction_droit']['diametre']))
-                         	{
-                         		 $name = str_replace('#diametre#',$info_commande['verre']['correction_droit']['diametre'], $value->libelle_verre);
-                         	}
-                         	else
-                         	{
-                            	if(isset($info_commande['verre']['diametre']))
-                              	$name = str_replace('#diametre#',$info_commande['verre']['diametre'], $value->libelle_verre);
-                            } 
-                            
-                            if(isset($info_commande['verre']['correction_gauche']['diametre']))
-                         	{
-                         		 $name_gauche = str_replace('#diametre#',$info_commande['verre']['correction_gauche']['diametre'], $value->libelle_verre);
-                         	}
-                         	else
-                         	{
-                            	if(isset($info_commande['verre']['diametre_gauche']))
-                              		$name_gauche = str_replace('#diametre#',$info_commande['verre']['diametre_gauche'], $value->libelle_verre);
                             }
-                         } else {
-                         	if(isset($info_commande['verre']['correction_droit']['diametre']))
-                         	{
-                         		 $name = $value->libelle_verre." ".$info_commande['verre']['correction_droit']['diametre'];
-                         	}
-                         	else
-                         	{
-								if(isset($info_commande['verre']['diametre']))
-								  $name = $value->libelle_verre." ".$info_commande['verre']['diametre'];
-							}
-                            
-                            if(isset($info_commande['verre']['correction_gauche']['diametre']))
-                         	{
-                         		 $name_gauche = $value->libelle_verre." ".$info_commande['verre']['correction_gauche']['diametre'];
-                         	}
-                         	else
-                         	{
-								if(isset($info_commande['verre']['diametre_gauche']))
-								  $name_gauche = $value->libelle_verre." ".$info_commande['verre']['diametre_gauche'];
-							}
-                         }
-                       
-                       if(strpos($value->traduction, '{color}') !== false) {
-                       		if (strpos($value->libelle_verre, 'Miroir Argent') !== false) {
-                               $name = str_replace('{color}','SILVER', $value->traduction);
-                               $name_gauche = str_replace('{color}','SILVER', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Bleu') !== false) {
-                               $name = str_replace('{color}','BLUE', $value->traduction);
-                               $name_gauche = str_replace('{color}','BLUE', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Doré') !== false) {
-                               $name = str_replace('{color}','GOLD', $value->traduction);
-                               $name_gauche = str_replace('{color}','GOLD', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Vert') !== false) {
-                               $name = str_replace('{color}','GREEN', $value->traduction);
-                               $name_gauche = str_replace('{color}','GREEN', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Rouge') !== false) {
-                               $name = str_replace('{color}','RED', $value->traduction);
-                               $name_gauche = str_replace('{color}','RED', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Orange') !== false) {
-                               $name = str_replace('{color}','ORANGE', $value->traduction);
-                               $name_gauche = str_replace('{color}','ORANGE', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Rose') !== false) {
-                               $name = str_replace('{color}','PINK', $value->traduction);
-                               $name_gauche = str_replace('{color}','PINK', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Violet') !== false) {
-                               $name = str_replace('{color}','PURPLE', $value->traduction);
-                               $name_gauche = str_replace('{color}','PURPLE', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Jaune') !== false) {
-                               $name = str_replace('{color}','YELLOW', $value->traduction);
-                               $name_gauche = str_replace('{color}','YELLOW', $value->traduction);
-                           }
-                           if (strpos($value->libelle_verre, 'Miroir Flash') !== false) {
-                               $name = str_replace('{color}','FLASH', $value->traduction);
-                               $name_gauche = str_replace('{color}','FLASH', $value->traduction);
-                           }
-                       		
-                          /* if (isset($info_commande['verre']['miroir_stock']['type_miroir'])) {
-                               $name = str_replace('{color}',$options_miroir[$info_commande['verre']['miroir_stock']['type_miroir']], $value->traduction);
-                               $name_gauche = str_replace('{color}',$options_miroir[$info_commande['verre']['miroir_stock']['type_miroir']], $value->traduction);
-                           }*/
-                           
-                       }
 
-                       } else {
-                       	   if(isset($info_commande['verre']['correction_droit']['diametre']))
-                       	   {
-                       	   		$name = $value->libelle_verre." ".$info_commande['verre']['correction_droit']['diametre'];
-                       	   }
-                       	   else
-                       	   {
-							   if(isset($info_commande['verre']['diametre']))
-								  $name = $value->libelle_verre." ".$info_commande['verre']['diametre'];
-                           }
-                            
-                           if(isset($info_commande['verre']['correction_gauche']['diametre']))
-                       	   {
-                       	   		$name_gauche = $value->libelle_verre." ".$info_commande['verre']['correction_gauche']['diametre'];
-                       	   }
-                       	   else
-                       	   {
-								if(isset($info_commande['verre']['diametre_gauche']))
-								  $name_gauche = $value->libelle_verre." ".$info_commande['verre']['diametre_gauche'];
-						   }
+                           $name = $name_gauche = "";
 
-                           if(strpos($value->libelle_verre, '{color}') !== false) {
-                               if (isset($info_commande['verre']['miroir_stock']['type_miroir'])) {
-                                   $name = str_replace('miroir',$options_miroir_mail[$info_commande['verre']['miroir_stock']['type_miroir']], $name);
-                                   $name_gauche = str_replace('miroir',$options_miroir_mail[$info_commande['verre']['miroir_stock']['type_miroir']], $name_gauche);
+                                if($envoi_chine == 1){
+
+
+                             if(strpos($value->libelle_verre, '#diametre#') !== false){
+
+                                 if(isset($info_commande['verre']['correction_droit']['diametre']))
+                                {
+                                     $name = str_replace('#diametre#',$info_commande['verre']['correction_droit']['diametre'], $value->libelle_verre);
+                                }
+                                else
+                                {
+                                    if(isset($info_commande['verre']['diametre']))
+                                    $name = str_replace('#diametre#',$info_commande['verre']['diametre'], $value->libelle_verre);
+                                }
+
+                                if(isset($info_commande['verre']['correction_gauche']['diametre']))
+                                {
+                                     $name_gauche = str_replace('#diametre#',$info_commande['verre']['correction_gauche']['diametre'], $value->libelle_verre);
+                                }
+                                else
+                                {
+                                    if(isset($info_commande['verre']['diametre_gauche']))
+                                        $name_gauche = str_replace('#diametre#',$info_commande['verre']['diametre_gauche'], $value->libelle_verre);
+                                }
+                             } else {
+                                if(isset($info_commande['verre']['correction_droit']['diametre']))
+                                {
+                                     $name = $value->libelle_verre." ".$info_commande['verre']['correction_droit']['diametre'];
+                                }
+                                else
+                                {
+                                    if(isset($info_commande['verre']['diametre']))
+                                      $name = $value->libelle_verre." ".$info_commande['verre']['diametre'];
+                                }
+
+                                if(isset($info_commande['verre']['correction_gauche']['diametre']))
+                                {
+                                     $name_gauche = $value->libelle_verre." ".$info_commande['verre']['correction_gauche']['diametre'];
+                                }
+                                else
+                                {
+                                    if(isset($info_commande['verre']['diametre_gauche']))
+                                      $name_gauche = $value->libelle_verre." ".$info_commande['verre']['diametre_gauche'];
+                                }
+                                 //var_dump('name: ' . $name);
+
+                             }
+
+                           if(strpos($value->traduction, '{color}') !== false) {
+                                if (strpos($value->libelle_verre, 'Miroir Argent') !== false) {
+                                   $name = str_replace('{color}','SILVER', $value->traduction);
+                                   $name_gauche = str_replace('{color}','SILVER', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Bleu') !== false) {
+                                   $name = str_replace('{color}','BLUE', $value->traduction);
+                                   $name_gauche = str_replace('{color}','BLUE', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Doré') !== false) {
+                                   $name = str_replace('{color}','GOLD', $value->traduction);
+                                   $name_gauche = str_replace('{color}','GOLD', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Vert') !== false) {
+                                   $name = str_replace('{color}','GREEN', $value->traduction);
+                                   $name_gauche = str_replace('{color}','GREEN', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Rouge') !== false) {
+                                   $name = str_replace('{color}','RED', $value->traduction);
+                                   $name_gauche = str_replace('{color}','RED', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Orange') !== false) {
+                                   $name = str_replace('{color}','ORANGE', $value->traduction);
+                                   $name_gauche = str_replace('{color}','ORANGE', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Rose') !== false) {
+                                   $name = str_replace('{color}','PINK', $value->traduction);
+                                   $name_gauche = str_replace('{color}','PINK', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Violet') !== false) {
+                                   $name = str_replace('{color}','PURPLE', $value->traduction);
+                                   $name_gauche = str_replace('{color}','PURPLE', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Jaune') !== false) {
+                                   $name = str_replace('{color}','YELLOW', $value->traduction);
+                                   $name_gauche = str_replace('{color}','YELLOW', $value->traduction);
+                               }
+                               if (strpos($value->libelle_verre, 'Miroir Flash') !== false) {
+                                   $name = str_replace('{color}','FLASH', $value->traduction);
+                                   $name_gauche = str_replace('{color}','FLASH', $value->traduction);
+                               }
+
+                              /* if (isset($info_commande['verre']['miroir_stock']['type_miroir'])) {
+                                   $name = str_replace('{color}',$options_miroir[$info_commande['verre']['miroir_stock']['type_miroir']], $value->traduction);
+                                   $name_gauche = str_replace('{color}',$options_miroir[$info_commande['verre']['miroir_stock']['type_miroir']], $value->traduction);
+                               }*/
+
+                           }
+
+                           } else {
+
+                               if(isset($info_commande['verre']['correction_droit']['diametre']))
+                               {
+                                    $name = $value->libelle_verre." ".$info_commande['verre']['correction_droit']['diametre'];
+                               }
+                               else
+                               {
+                                   if(isset($info_commande['verre']['diametre']))
+                                      $name = $value->libelle_verre." ".$info_commande['verre']['diametre'];
+                               }
+
+                               if(isset($info_commande['verre']['correction_gauche']['diametre']))
+                               {
+                                    $name_gauche = $value->libelle_verre." ".$info_commande['verre']['correction_gauche']['diametre'];
+                               }
+                               else
+                               {
+                                    if(isset($info_commande['verre']['diametre_gauche']))
+                                      $name_gauche = $value->libelle_verre." ".$info_commande['verre']['diametre_gauche'];
+                               }
+
+                               if(strpos($value->libelle_verre, '{color}') !== false) {
+                                   if (isset($info_commande['verre']['miroir_stock']['type_miroir'])) {
+                                       $name = str_replace('miroir',$options_miroir_mail[$info_commande['verre']['miroir_stock']['type_miroir']], $name);
+                                       $name_gauche = str_replace('miroir',$options_miroir_mail[$info_commande['verre']['miroir_stock']['type_miroir']], $name_gauche);
+                                   }
                                }
                            }
-                       }
-                       
-                        if(($name != "" && !isset($list_verre[$name])) || ($name_gauche != "" && !isset($list_verre[$name_gauche]))){
-                        
-                          if(isset($info_commande['verre']['correction_droit']['diametre']) && !isset($list_verre[$name]))
-                          	$list_verre[$name] = array();
-                          	
-                          if(isset($info_commande['verre']['correction_gauche']['diametre']) && !isset($list_verre[$name]))
-                          	$list_verre[$name_gauche] = array();
-                       	   
-                          if(isset($info_commande['verre']['diametre']) && !isset($list_verre[$name]))
-                            $list_verre[$name] = array();
-                          
-                          if(isset($info_commande['verre']['diametre_gauche']) && !isset($list_verre[$name_gauche]))
-                            $list_verre[$name_gauche] = array();
-                            
-                        }
-                       
-                       if(isset($info_commande['verre']['correction_droit'])){
+                            if(($name != "" && !isset($list_verre[$name])) || ($name_gauche != "" && !isset($list_verre[$name_gauche]))){
+
+                              if(isset($info_commande['verre']['correction_droit']['diametre']) && !isset($list_verre[$name]))
+                                $list_verre[$name] = array();
+
+                              if(isset($info_commande['verre']['correction_gauche']['diametre']) && !isset($list_verre[$name]))
+                                $list_verre[$name_gauche] = array();
+
+                              if(isset($info_commande['verre']['diametre']) && !isset($list_verre[$name]))
+                                $list_verre[$name] = array();
+
+                              if(isset($info_commande['verre']['diametre_gauche']) && !isset($list_verre[$name_gauche]))
+                                $list_verre[$name_gauche] = array();
+
+                            }
+    //                            var_dump($list_verre);
+
+                                if(isset($info_commande['verre']['correction_droit'])){
 
 
-                          if(isset($info_commande['verre']['correction_droit']['addition']) && $info_commande['verre']['correction_droit']['addition'] > 0) {
-                              $addition = number_format(floatval($info_commande['verre']['correction_droit']['addition']),2, '.', '').' '.$right;
+                              if(isset($info_commande['verre']['correction_droit']['addition']) && $info_commande['verre']['correction_droit']['addition'] > 0) {
+                                  $addition = number_format(floatval($info_commande['verre']['correction_droit']['addition']),2, '.', '').' '.$right;
 
-                              $list_verre[$name][] = array(
-                                  'correction' => $info_commande['verre']['correction_droit']['sphere'],
-                                  'addition' => $addition
-                              );
+                                  $list_verre[$name][] = array(
+                                      'correction' => $info_commande['verre']['correction_droit']['sphere'],
+                                      'addition' => $addition
+                                  );
 
-                          }
-                          else {
+                              }
+                              else {
 
-                            $correction_droit = $info_commande['verre']['correction_droit']['sphere'].'|'.$info_commande['verre']['correction_droit']['cylindre'];
+                                $correction_droit = $info_commande['verre']['correction_droit']['sphere'].'|'.$info_commande['verre']['correction_droit']['cylindre'];
 
-                              if(isset($list_verre[$name][$correction_droit])){
-                                  $list_verre[$name][$correction_droit] += 1;
-                              } else
-                                  $list_verre[$name][$correction_droit] = 1;
-                          }
+                                  if(isset($list_verre[$name][$correction_droit])){
+                                      $list_verre[$name][$correction_droit] += 1;
+                                  } else
+                                      $list_verre[$name][$correction_droit] = 1;
+                              }
 
 
-                           
 
-                       }
-                       
-                       if(isset($info_commande['verre']['correction_gauche'])) {
-
-                           if(isset($info_commande['verre']['correction_gauche']['addition']) && $info_commande['verre']['correction_gauche']['addition'] > 0) {
-                               $addition = number_format(floatval($info_commande['verre']['correction_gauche']['addition']), 2, '.', '').' '.$left;
-
-                               $list_verre[$name][] = array(
-                                   'correction' => $info_commande['verre']['correction_gauche']['sphere'],
-                                   'addition' => $addition
-                               );
 
                            }
-                           else {
 
-                               $correction_gauche = $info_commande['verre']['correction_gauche']['sphere'].'|'.$info_commande['verre']['correction_gauche']['cylindre'];
+                           if(isset($info_commande['verre']['correction_gauche'])) {
 
-                               if(isset($list_verre[$name_gauche][$correction_gauche])){
-                                   $list_verre[$name_gauche][$correction_gauche] += 1;
-                               } else
-                                   $list_verre[$name_gauche][$correction_gauche] = 1;
-                           }
+                               if(isset($info_commande['verre']['correction_gauche']['addition']) && $info_commande['verre']['correction_gauche']['addition'] > 0) {
+                                   $addition = number_format(floatval($info_commande['verre']['correction_gauche']['addition']), 2, '.', '').' '.$left;
 
-                   
+                                   $list_verre[$name][] = array(
+                                       'correction' => $info_commande['verre']['correction_gauche']['sphere'],
+                                       'addition' => $addition
+                                   );
 
+                               }
+                               else {
+
+                                   $correction_gauche = $info_commande['verre']['correction_gauche']['sphere'].'|'.$info_commande['verre']['correction_gauche']['cylindre'];
+
+                                   if(isset($list_verre[$name_gauche][$correction_gauche])){
+                                       $list_verre[$name_gauche][$correction_gauche] += 1;
+                                   } else
+                                       $list_verre[$name_gauche][$correction_gauche] = 1;
+                               }
+
+
+
+                            }
                         }
-					}
                     }
 
                     $compteur = 0;
                     $compteur_commande = 0;
                     $page = 1;
-
                     foreach($list_verre as $verre => $list){
                          if($compteur == 1){
                             $compteur = 0;

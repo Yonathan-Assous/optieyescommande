@@ -660,15 +660,14 @@ class m_passer_commande_verre extends CI_Model
                         if ($indice != '-') {
                             if ($indice == "mineral") {
 
+                                $sql = "SELECT * FROM " . $this->table_lenses . " 
+                                        WHERE focalGroupId=" . $lensFocalGroup . "
+										AND " . $conditions . "
+										AND is_mineral = 1 
+										AND display = 'X'
+										ORDER BY sorting,trad_fr";
 
-                                $res = $this->db->query("SELECT * 
-													FROM " . $this->table_lenses . " 
-										   WHERE focalGroupId=" . $lensFocalGroup . "
-										   AND " . $conditions . "
-										   AND name LIKE '%mineral%' 
-										   AND display = 'X'
-										   ORDER BY sorting,trad_fr");
-
+                                $res = $this->db->query($sql);
                             }
                             elseif ($indice == "all") {
 

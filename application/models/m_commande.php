@@ -3815,7 +3815,6 @@ class m_commande extends CI_Model {
     }
 
     public function getCommandeJournaliere($date="", $magasin = 1, $envoi_chine = 0){
-
         $sql_add = "AND c.id_verre IN (SELECT code FROM lenses)";
         $date_add = "date_commande <='".$date."'";
         $email_send = " AND email_send = 0";
@@ -3831,7 +3830,7 @@ class m_commande extends CI_Model {
             $email_send = "";
         }
 
-        $query = $this->db->query("SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
+        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -3842,7 +3841,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$this->table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN verres_traduction vt ON vt.id_verre = c.id_verre
                                    WHERE ".$date_add." ".$sql_add." ".$email_send."
-                                   ORDER BY ".$order_by);
+                                   ORDER BY ".$order_by;
+//        var_dump($sql);die;
+        $query = $this->db->query($sql);
         /*echo "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -3880,7 +3881,7 @@ class m_commande extends CI_Model {
             $email_send = "";
         }
 
-        $query = $this->db->query("SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
+        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -3891,7 +3892,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$this->table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN verres_traduction vt ON vt.id_verre = c.id_verre
                                    WHERE ".$date_add." ".$sql_add." ".$email_send." AND (libelle_verre IS NOT NULL OR generation = 'Progressif de stock')
-                                   ORDER BY ".$order_by);
+                                   ORDER BY ".$order_by;
+//        var_dump($sql);die;
+        $query = $this->db->query($sql);
 
 
         if ($query && $query->num_rows() > 0)

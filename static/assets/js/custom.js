@@ -2621,6 +2621,8 @@ $('#type_de_verreG').on('change', function() {
 								// console.log($('#traitementG').val());
 								$('#traitementG').val(traitementG);
 							// $('#traitementGH').val("Durci");
+							$("#traitementG").empty();
+
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
@@ -7021,8 +7023,8 @@ function copyVersDroit()
 	
 		$('#progressionD option').clone().appendTo('#progressionG');
 		$('#type_de_verreD option').clone().appendTo('#type_de_verreG');
-		$('#teinteD option').clone().appendTo('#teinteG');
-		$('#traitementD option').clone().appendTo('#traitementG');
+		$('#traitementG').html($('#traitementD').html());
+		$('#teinteG').html($('#teinteD').html());
 		$('#diametreD option').clone().appendTo('#diametreG');
 		$('#galbeD option').clone().appendTo('#galbeG');
 	

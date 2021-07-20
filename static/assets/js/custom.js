@@ -2718,7 +2718,8 @@ $('#type_de_verreG').on('change', function() {
 									var x = a.prix, y = b.prix;
 									return x < y ? -1 : x > y ? 1 : 0;
 								});*/
-
+								$("#teinteG").empty();
+								$('#teinteG').append('<option value>Aucune</option>');
 								$.each(data, function(key, value){
 									$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 						

@@ -1415,7 +1415,9 @@ $("input[name='dispoD']").change(function(){
 	
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
+    console.log('teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest');
+    console.log(stockD);
     if(stockD == "FabricationD")
     {
     	$('.display_fabrication').removeClass('hide');
@@ -1772,6 +1774,7 @@ $('#type_de_verreD').on('change', function() {
 
 		if (rel.indexOf("]") >= 0)
 		{
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			$('#quantiteD').prop('disabled', false);
 			type_commande_verre = 2;
 		
@@ -1873,7 +1876,8 @@ $('#type_de_verreD').on('change', function() {
 		}
 		else
 		{
-		if(type_de_verreD != "") {
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+			if(type_de_verreD != "") {
 		//console.log(generation);
 
 				if(selectedText.indexOf(" - Stock") >= 0)
@@ -1967,15 +1971,15 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#teinteD').prop('disabled', false);
 					}
-					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementD').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementD').prop('disabled', false);
-					}
+					$('#traitementD').prop('disabled', false);
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementD').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementD').prop('disabled', false);
+					// }
 					
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
@@ -2580,15 +2584,16 @@ $('#type_de_verreG').on('change', function() {
 						$('#teinteG').prop('disabled', false);
 					}
 					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementG').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementG').prop('disabled', false);
-					}
-					
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementG').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementG').prop('disabled', false);
+					// }
+					$('#traitementG').prop('disabled', false);
+
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
 						$('#galbeG').prop('disabled', true);

@@ -4546,7 +4546,7 @@ class m_commande extends CI_Model {
     }
 
     public function getEtiquetteFabrication(){
-        $query = $this->db->query("SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
@@ -4554,7 +4554,9 @@ class m_commande extends CI_Model {
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
-                               ORDER BY date_click, ordre ");
+                               AND l.display = 'X'
+                               ORDER BY date_click, ordre ";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             return $query->result();

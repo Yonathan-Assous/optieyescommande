@@ -608,18 +608,20 @@ class m_commande extends CI_Model {
             $table_commentaire = $this->table_commentaire_temp;
         }
         $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
-                                          generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,v_stock.gtin as gtin_stock, v.gtin as gtin
+                                          generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,verres.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
                                    LEFT JOIN lenses v ON (v.code = c.id_verre AND (v.trad_fr LIKE (CONCAT('%', c.generation ,'%'))) OR c.generation = NULL)
-                                   LEFT JOIN verres v_stock ON v_stock.id_verre = c.id_verre
+                                   LEFT JOIN verres ON verres.id_verre = c.id_verre
+                                   LEFT JOIN verres_stock v_stock ON v_stock.id_verre = c.id_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
                                    LEFT JOIN indice_verre iv ON iv.id_indice_verre = c.id_indice_verre
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   AND (v.display = 'X' OR v_stock.id_verre IS NOT NULL)
+                                   AND (v.display = 'X' OR v_stock.id_verre IS NOT NULL 
+                                   OR verres.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
         $query = $this->db->query($sql);
 

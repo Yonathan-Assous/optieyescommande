@@ -48,7 +48,6 @@ class index extends MY_Controller {
     }
 
 	public function index(){
-
         if($this->session->userdata('logged_in') === true)
            $this->commande();
         else

@@ -5155,7 +5155,6 @@ if (is_object($pair_order)) {
 
 
             $('#lensFocalGroup').on('change', function () {
-
                 $('#div_refraction').addClass('hide');
                 $('#progression_D').addClass('hide');
                 $('#progression_G').addClass('hide');
@@ -5347,8 +5346,8 @@ if (is_object($pair_order)) {
                         $(".addition").html("<b>Addition</b>");
                     }
 
-
-                    if (this.value == '3') {
+                    console.log($('#indices').val());
+                    if (this.value == '3' && $('#indices').val() != "mineral") {
                         $("#generation_progressif").css("display", "block");
                         $('#lensFocalGroup_panel').removeClass('focus_panel')
                         $('#generation_panel').addClass('focus_panel');
@@ -5387,7 +5386,7 @@ if (is_object($pair_order)) {
                         $(".addition").css("display", "block");
                     }
 
-                    if (lensFocalGroup != "3") {
+                    if (lensFocalGroup != "3" || $('#indices').val() == "mineral") {
                         $('#div_refraction').removeClass('hide')
                         $('#progression_D').addClass('hide')
                         $('#progression_G').addClass('hide')

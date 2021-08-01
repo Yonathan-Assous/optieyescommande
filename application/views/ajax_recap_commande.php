@@ -728,7 +728,9 @@ $panierA = get_cookie("panierA");
 
 		//echo '<h2>show_commentaire: '.$recap_commande['user_info']->show_commentaire.'</h2>';
 	//	var_dump($recap_commande['user_info']);
-		if(isset($recap_commande['user_info']->show_commentaire) && $recap_commande['user_info']->show_commentaire == '1' && $recap_commande['commentaire_actif']->active != 0) {
+		if(isset($recap_commande['user_info']->show_commentaire) &&
+           $recap_commande['user_info']->show_commentaire == '1' && $recap_commande['commentaire_actif']->active != 0
+            && strpos($recap_commande['libelle_verre'], 'Panier A') === false) {
 			?>
 			<div class="form-group  clearfix">
 				<label class="col-lg-2 control-label" for="commentaire">Commentaire (facultatif)</label>

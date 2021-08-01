@@ -1415,7 +1415,9 @@ $("input[name='dispoD']").change(function(){
 	
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
+    console.log('teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest');
+    console.log(stockD);
     if(stockD == "FabricationD")
     {
     	$('.display_fabrication').removeClass('hide');
@@ -1772,6 +1774,7 @@ $('#type_de_verreD').on('change', function() {
 
 		if (rel.indexOf("]") >= 0)
 		{
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			$('#quantiteD').prop('disabled', false);
 			type_commande_verre = 2;
 		
@@ -1873,7 +1876,8 @@ $('#type_de_verreD').on('change', function() {
 		}
 		else
 		{
-		if(type_de_verreD != "") {
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+			if(type_de_verreD != "") {
 		//console.log(generation);
 
 				if(selectedText.indexOf(" - Stock") >= 0)
@@ -1914,6 +1918,8 @@ $('#type_de_verreD').on('change', function() {
 									},
 									dataType: "json",
 									success: function (data) {
+										console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+
 										setTimeout(function(){
 											let prixteinte = $('#prixTeinteD').val();
 											$.each(data, function(key, value){
@@ -1965,15 +1971,15 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#teinteD').prop('disabled', false);
 					}
-					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementD').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementD').prop('disabled', false);
-					}
+					$('#traitementD').prop('disabled', false);
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementD').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementD').prop('disabled', false);
+					// }
 					
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
@@ -2030,7 +2036,8 @@ $('#type_de_verreD').on('change', function() {
 											var traitementD = $('#traitementD').val();
 											var prixverre = $('#prixVerreD').val();
 
-
+											console.log('saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+											console.log($('#traitementD').val())
 											if (!traitementD) {
 												traitementD = "700100";
 											}
@@ -2514,6 +2521,8 @@ $('#type_de_verreG').on('change', function() {
 								if (!traitementG) {
 									traitementG = "700100";
 								}
+								console.log('ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')
+
 								$.ajax({
 									type: "POST",
 									url: "/index/getOptions_price",
@@ -2575,15 +2584,16 @@ $('#type_de_verreG').on('change', function() {
 						$('#teinteG').prop('disabled', false);
 					}
 					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementG').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementG').prop('disabled', false);
-					}
-					
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementG').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementG').prop('disabled', false);
+					// }
+					$('#traitementG').prop('disabled', false);
+
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
 						$('#galbeG').prop('disabled', true);
@@ -2616,6 +2626,8 @@ $('#type_de_verreG').on('change', function() {
 								// console.log($('#traitementG').val());
 								$('#traitementG').val(traitementG);
 							// $('#traitementGH').val("Durci");
+							$("#traitementG").empty();
+
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
@@ -2656,6 +2668,7 @@ $('#type_de_verreG').on('change', function() {
 											if (!traitementG) {
 												traitementG = "700100";
 											}
+											console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
 
 											$.ajax({
 												type: "POST",
@@ -2676,6 +2689,7 @@ $('#type_de_verreG').on('change', function() {
 															console.log('testtttttttttttttttttt');
 															var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
 															console.log("PrixG5")
+															console.log(tot);
 															$('#prixG').val(tot+"€");
 															$('#prixGH').val(tot+"€");
 														});
@@ -2709,7 +2723,8 @@ $('#type_de_verreG').on('change', function() {
 									var x = a.prix, y = b.prix;
 									return x < y ? -1 : x > y ? 1 : 0;
 								});*/
-
+								$("#teinteG").empty();
+								$('#teinteG').append('<option value>Aucune</option>');
 								$.each(data, function(key, value){
 									$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 						
@@ -3666,6 +3681,7 @@ $('#teinteD').on('change', function() {
 			});
 			// console.log(nomtraitement);
 			// console.log('55555555555555555555555555555555555555555555555555555555555555')
+			console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
@@ -3899,6 +3915,7 @@ $('#teinteG').on('change', function() {
 			$('#divprixG').removeClass('hide');
 			// console.log(nomtraitement);
 			// console.log('6666666666666666666666666666666666666666666666666666')
+			console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
 
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
@@ -7012,8 +7029,8 @@ function copyVersDroit()
 	
 		$('#progressionD option').clone().appendTo('#progressionG');
 		$('#type_de_verreD option').clone().appendTo('#type_de_verreG');
-		$('#teinteD option').clone().appendTo('#teinteG');
-		$('#traitementD option').clone().appendTo('#traitementG');
+		$('#traitementG').html($('#traitementD').html());
+		$('#teinteG').html($('#teinteD').html());
 		$('#diametreD option').clone().appendTo('#diametreG');
 		$('#galbeD option').clone().appendTo('#galbeG');
 	

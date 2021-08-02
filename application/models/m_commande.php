@@ -3143,6 +3143,7 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
+
         if(is_array($data)){
 
             $pair = $data['pair'];
@@ -3250,7 +3251,6 @@ class m_commande extends CI_Model {
 
             else
             {
-
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3330,6 +3330,9 @@ class m_commande extends CI_Model {
                 $unVerreD = 0;
                 $unVerreG = 0;
 
+                $verreGauche = isset($data['recap_commande']['gauche']) ? true : false;
+                $verreDroit = isset($data['recap_commande']['droit']) ? true : false;
+
                 if($data['type_de_verreD']!="" && $data['type_de_verreG']==""  && !isset($data['gauche']))
                 {
                     $unVerreD = 1;
@@ -3386,9 +3389,9 @@ class m_commande extends CI_Model {
                     $data_key[] = $num;
                 }
                 //var_dump($data_key);die;
+
                 if($type_commande_verre!=4)
                 {
-
                     $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
                     if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
@@ -3440,7 +3443,7 @@ class m_commande extends CI_Model {
                         array_push( $data_key, 'is_confirmed');
                         $data['is_confirmed'] = 0;
                     }
-//                    var_dump($data);die;
+
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
 //                    var_dump($sql);die;
@@ -3486,7 +3489,7 @@ class m_commande extends CI_Model {
                 {
 
                     $ok = 0;
-                    if($id_verreD!="")
+                    if($id_verreD!="" && $verreDroit)
                     {
                         //$data['type_commande'] = $type_commandeD;
                         $type_commande_verre = $type_commande_verreD;
@@ -3591,6 +3594,7 @@ class m_commande extends CI_Model {
                                 array_push( $data_key, 'is_confirmed');
                                 $data['is_confirmed'] = 0;
                             }
+
                             $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES (".implode(",", $data).")";
                             if($this->db->query($sql))
                             {
@@ -3610,7 +3614,7 @@ class m_commande extends CI_Model {
                             }
                         }
                     }
-                    if($id_verreG!="")
+                    if($id_verreG!="" && $verreGauche)
                     {
 
                         //$data['type_commande'] = $type_commandeG;

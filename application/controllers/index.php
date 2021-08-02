@@ -2965,7 +2965,7 @@ class index extends MY_Controller {
 				$data['panierA'] = 0;
 				$data['tarif_supplement'] = 0;
 
-				if($data['type_de_verreD']!=$data['type_de_verreG'])
+				if($data['type_de_verreD']!=$data['type_de_verreG'] || !isset($data['gauche']) || !isset($data['droit']))
 				{
 					//$data['type_commande'] = 4;
 					$data['type_commande_verre'] = 4;

@@ -58,6 +58,7 @@ class index extends MY_Controller {
         $this->m_users->acceptConditions($this->data['user_info']->id_users);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
+        $data['email'] = "yonathan.optieyes@gmail.com";
         setlocale( LC_TIME, "fr" );
         $time = date('Y-m-d H:i:s');
         $date = strftime( "%A %d %B %Y" , strtotime( $time ));

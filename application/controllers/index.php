@@ -59,6 +59,7 @@ class index extends MY_Controller {
         $data = [];
         $data['email'] = $this->data['user_info']->email;
         $data['email'] = "yonathan.optieyes@gmail.com";
+        $data['email_cci'] = 'optieyescommande@gmail.com';
         setlocale( LC_TIME, "fr" );
         $time = date('Y-m-d H:i:s');
         $date = strftime( "%A %d %B %Y" , strtotime( $time ));

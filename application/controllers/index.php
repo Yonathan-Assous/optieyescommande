@@ -60,9 +60,9 @@ class index extends MY_Controller {
         $this->m_users->acceptConditions($userId);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
-        $data['email'] = "yonathan.optieyes@gmail.com";
+//        $data['email'] = "yonathan.optieyes@gmail.com";
         $data['email_cc'] = 'optieyescommande@gmail.com';
-        $data['email_cci'] = 'yonathanassous@gmail.com';
+        $data['email_cci'] = 'yonathan.optieyes@gmail.com';
         setlocale(LC_TIME,
             'fr_FR.utf8',
             'fra');

@@ -3506,7 +3506,6 @@ class admin
     public
     function updateUser()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $user =
@@ -3514,7 +3513,7 @@ class admin
             $info =
                 $this->input->post();
             $errors = 0;
-            echo json_encode($info);
+//            echo json_encode($info);
             foreach ($info as
                      $k => $v)
             {
@@ -15385,6 +15384,7 @@ class admin
             $total_ht = 0;
             $total_ht_liv = 0;
             $lastkey = 0;
+
             if ($facture_client !==
                 false) {
                 foreach ($facture_client
@@ -15395,6 +15395,7 @@ class admin
                 {
                     $facture_cli->date_commande = $facture_cli->y_m_commande;
 
+                    $tva = $this->m_users->getTva($facture_cli->id_users);
                     /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
 
                     if($shippings) {
@@ -15429,6 +15430,14 @@ class admin
                             number_format($facture_cli->total +
                                 $this->m_commande->getPackagingByMonth($date,
                                     $facture_cli->id_users),
+                                2,
+                                '.',
+                                ' ') .
+                            '</span> €',
+                            '<span>' .
+                            number_format(($facture_cli->total +
+                                $this->m_commande->getPackagingByMonth($date,
+                                    $facture_cli->id_users)) * (1 + $tva / 100),
                                 2,
                                 '.',
                                 ' ') .

@@ -130,7 +130,7 @@
                     });
 
                     $('#user-modal').modal('hide');
-					location.reload();
+					//location.reload();
 
                 },
                 error:function(){

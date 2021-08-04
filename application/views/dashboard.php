@@ -5849,15 +5849,11 @@ if (is_object($pair_order)) {
                 let nameVerreG = $('#type_de_verreG').find(":selected").text();
                 console.log("$nameVerreD" + nameVerreD);
                 console.log("$nameVerreG" + nameVerreG);
-                let valueD =  document.getElementById('type_de_verreD').options[document.getElementById('type_de_verreD').selectedIndex].value
-                let valueG =  document.getElementById('type_de_verreG').options[document.getElementById('type_de_verreG').selectedIndex].value
                 if (nameVerreD.indexOf("Panier A") !== -1 && nameVerreD.indexOf("Stock") !== -1
                     && (nameVerreG.indexOf("Panier A") === -1 || nameVerreG.indexOf("Stock") === -1)
-                    && valueG != ''
                     ||
                     (nameVerreG.indexOf("Panier A") !== -1 && nameVerreG.indexOf("Stock") !== -1
                         && (nameVerreD.indexOf("Panier A") === -1 || nameVerreD.indexOf("Stock") === -1)
-                        && valueD != ''
                     )
                 ) {
                     g = 1;

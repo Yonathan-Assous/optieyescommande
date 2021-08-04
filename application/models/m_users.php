@@ -87,8 +87,9 @@ class m_users extends CI_Model {
             return $error;
         }
         else{
+     //   var_dump($data);
 			$this->db->insert($this->table, $data);
-        }
+		}
     }
 
     public function updateUser($data){
@@ -259,10 +260,5 @@ class m_users extends CI_Model {
         }
 
         return false;
-    }
-
-    public function acceptConditions($userId) {
-        $sql = "UPDATE `users` SET accept_conditions = true WHERE `id_users` = $userId";
-        $this->db->query($sql);
     }
 }

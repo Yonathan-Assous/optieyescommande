@@ -4,26 +4,13 @@ class index extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-//        echo '<pre>';
-//        print_r($this->session->userdata());
-//        echo '</pre>';die;
+
         if($this->session->userdata('data_user') !== false && !isset($this->data['data_user'])){
             $this->data = $this->session->userdata('data_user');
             $this->data['data_admin'] = $this->session->userdata('data_admin');
             $this->data['parametre_lang_datable'] = $this->config->item('parametre_lang_datable');
             $this->data['parametre_export_datable'] = $this->config->item('parametre_export_datable');
             $this->data['taux_tva'] = $this->session->userdata('taux_tva') ;
-        }
-
-        if (isset($this->session->userdata('data_user')['user_info'])) {
-            $user = $this->getUserById($this->session->userdata('data_user')['user_info']->id_users);
-        }
-        $function = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-        if($this->session->userdata('data_user') !== false
-            && $user->accept_conditions == false && $function != 'logout' && $function != 'verifyCheckedCondition') {
-//            var_dump($this->data);die;
-            $this->data['page'] = $this->data['title'] = "CGV";
-            $this->load->view('accept_conditions', $this->data);
         }
 
         if($this->session->userdata('is_admin')){
@@ -37,15 +24,6 @@ class index extends MY_Controller {
 		$this->load->helper(array('cookie', 'url'));
     }
 
-    private function test2() {
-        $this->load->view('accept_conditions');
-    }
-
-    private function getUserById($id) {
-        $query = $this->db->where('id_users', $id)->get('users');
-        $user = $query->result();
-        return $user[0];
-    }
 
 	public function index(){
         if($this->session->userdata('logged_in') === true)
@@ -53,28 +31,6 @@ class index extends MY_Controller {
         else
 		    $this->login();
 	}
-
-	public function verifyCheckedCondition() {
-//        print_r($this->data['user_info']);die;
-        $userId = $this->data['user_info']->id_users;
-        $this->m_users->acceptConditions($userId);
-        $data = [];
-        $data['email'] = $this->data['user_info']->email;
-//        $data['email'] = "yonathan.optieyes@gmail.com";
-        $data['email_cc'] = 'optieyescommande@gmail.com';
-        $data['email_cci'] = 'yonathan.optieyes@gmail.com';
-        setlocale(LC_TIME,
-            'fr_FR.utf8',
-            'fra');
-        $time = date('Y-m-d H:i:s');
-        $date = strftime( "%A %d %B %Y" , strtotime( $time ));
-        //print_r($date);die;
-        $hour = strftime( "%H:%M:%S" , strtotime( $time ));
-        $msgTxt = "Madame, Monsieur,<br><br>Ci joint les conditions générales de ventes que vous venez d’accepter.<br><br>Merci de votre confiance !<br><br><br>L’équipe Optieyes.";
-        $subject = "CGV Optieyes acceptées par le magasin $userId le $date à $hour";
-        $this->mail($data, $msgTxt, true, $subject, 'CGV_Optieyes_24062021_clean.pdf');
-        echo 'true';
-    }
 
 	public function test() {
         $data['certificat'] = $this->m_commande->getCertificatStock('565817');
@@ -2974,7 +2930,7 @@ class index extends MY_Controller {
 				$data['panierA'] = 0;
 				$data['tarif_supplement'] = 0;
 
-				if($data['type_de_verreD']!=$data['type_de_verreG'] || !isset($data['gauche']) || !isset($data['droit']))
+				if($data['type_de_verreD']!=$data['type_de_verreG'])
 				{
 					//$data['type_commande'] = 4;
 					$data['type_commande_verre'] = 4;
@@ -4932,7 +4888,7 @@ class index extends MY_Controller {
 										<head></head>
 										<body><b>Bonjour</b>!
 										<br><br> 
-										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
+										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, converservez le précieusement.
 										</body>
 									</html>";
 

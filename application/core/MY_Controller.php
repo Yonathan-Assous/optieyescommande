@@ -158,7 +158,6 @@ class MY_Controller extends CI_Controller {
 
             case 'dev':
                 $this->email->to('yonathan.optieyes@gmail.com');
-                $this->email->from('yonathan.optieyes@gmail.com', 'Crystal Commande');
                 //$this->email->cc('testproxicom@gmail.com');
                 break;
             default:

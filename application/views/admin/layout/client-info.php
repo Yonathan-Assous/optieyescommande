@@ -133,6 +133,11 @@
                 </div>
 
                 <div class="form-group m-b-10 col-sm-12">
+                    <label for="percent_tva" class="control-label">Pourcentage de la TVA</label>
+                    <input type="text" id="percent_tva" name="percent_tva"  class="form-control" value="<?php echo $info_user[0]->percent_tva?>" />
+                </div>
+
+                <div class="form-group m-b-10 col-sm-12">
                     <label for="taux_erreur" class="control-label">Pourcentage casse</label>
                     <select id="taux_erreur" name="taux_erreur"  class="form-control">
                         <?php

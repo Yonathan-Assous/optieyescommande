@@ -34,6 +34,7 @@ class m_users extends CI_Model {
             'tarif_livraison'            => 'tarif_livraison',
             'tarif_packaging'            => 'tarif_packaging',
             'tarif_supplement'           => 'tarif_supplement',
+            'percent_tva'                => 'percent_tva',
             'nom_responsable'            => 'nom_responsable',
             'deleted'                    => 'deleted',
             'show_commentaire'           => 'show_commentaire',
@@ -93,7 +94,7 @@ class m_users extends CI_Model {
 
     public function updateUser($data){
         $data = array_intersect_key($data, $this->fields);
-		
+//		print_r($data);
         if(isset($data['id_users']))
             $this->db->where('id_users', $data['id_users']);
 
@@ -264,5 +265,10 @@ class m_users extends CI_Model {
     public function acceptConditions($userId) {
         $sql = "UPDATE `users` SET accept_conditions = true WHERE `id_users` = $userId";
         $this->db->query($sql);
+    }
+
+    public function getTva($userId) {
+        $user = $this->getUserById($userId)[0];
+        return $user->percent_tva;
     }
 }

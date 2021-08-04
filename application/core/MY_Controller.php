@@ -338,7 +338,7 @@ class MY_Controller extends CI_Controller {
                     $data['users_info'] = $data_user[0];
                 }
 
-                $data['taux_tva'] = $this->session->userdata('taux_tva');
+                $data['taux_tva'] = isset($data['users_info']->percent_tva) ? $data['users_info']->percent_tva : $this->session->userdata('taux_tva');
                 $data['reduction'] = !empty($reduction) ? $reduction : false;
 
                 $data_custom_file = array('id_users' => $data['id_users'], 'date' => $date);

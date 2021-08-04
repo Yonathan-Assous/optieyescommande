@@ -2808,7 +2808,7 @@ $('#type_de_verreG').on('change', function() {
     
 	if(panierA == 1)
 	{
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 }); 
 
@@ -2932,7 +2932,7 @@ $('#teinteG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
    
    $("#teintepersoG").val("");
@@ -3179,7 +3179,7 @@ $('#diametreD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if (String(sphereD).indexOf("+") >= 0)
@@ -3477,7 +3477,7 @@ $('#diametreG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	
 	if(diametreG=="precalibrage")
@@ -3579,7 +3579,7 @@ $('#teinteD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     $("#teinteDH").val(selectedText);
@@ -4060,7 +4060,7 @@ $('#galbeD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	
 /*	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && traitementD==traitementG && teinteD==teinteG && diametreD==diametreG && ((galbeG=="Standard" || galbeD==galbeG) && galbeD!="Standard"))
@@ -4171,7 +4171,7 @@ $('#traitementD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if(traitementD == "0")
@@ -4451,7 +4451,7 @@ $('#traitementG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if(type_de_verreG != "")
@@ -4635,7 +4635,7 @@ var galbeG = $('#galbeG').val();
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	calculPrice();
 
@@ -7489,7 +7489,7 @@ function copyVersGauche()
 		$('#to_etape2').removeClass('disabled');
 		if(panierA == 1)
 		{
-			$('#to_etape2').addClass('disabled');
+			// $('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
 		if( (selectedText.toLowerCase()).indexOf("t-one") != -1 ||
@@ -7676,7 +7676,7 @@ $(document).ready(function() {
 	
 	if(panierA == 1)
 	{
-		$('#to_etape2').removeClass('disabled');
+		// $('#to_etape2').removeClass('disabled');
 	
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();

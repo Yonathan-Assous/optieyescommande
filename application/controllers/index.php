@@ -57,6 +57,8 @@ class index extends MY_Controller {
 	public function verifyCheckedCondition() {
 //        print_r($this->data['user_info']);die;
         $userId = $this->data['user_info']->id_users;
+        $user = $this->m_users->getUserById($userId)[0];
+        $acceptCondition = $user->accept_conditions;
         $this->m_users->acceptConditions($userId);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
@@ -72,7 +74,9 @@ class index extends MY_Controller {
         $hour = strftime( "%H:%M:%S" , strtotime( $time ));
         $msgTxt = "Madame, Monsieur,<br><br>Ci joint les conditions générales de ventes que vous venez d’accepter.<br><br>Merci de votre confiance !<br><br><br>L’équipe Optieyes.";
         $subject = "CGV Optieyes acceptées par le magasin $userId le $date à $hour";
-        $this->mail($data, $msgTxt, true, $subject, 'CGV_Optieyes_24062021_clean.pdf');
+        if (!$acceptCondition) {
+            $this->mail($data, $msgTxt, true, $subject, 'CGV_Optieyes_24062021_clean.pdf');
+        }
         echo 'true';
     }
 

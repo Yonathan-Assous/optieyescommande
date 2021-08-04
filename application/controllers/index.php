@@ -55,17 +55,23 @@ class index extends MY_Controller {
 	}
 
 	public function verifyCheckedCondition() {
-        $this->m_users->acceptConditions($this->data['user_info']->id_users);
+//        print_r($this->data['user_info']);die;
+        $userId = $this->data['user_info']->id_users;
+        //$this->m_users->acceptConditions($userId);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
         $data['email'] = "yonathan.optieyes@gmail.com";
-        $data['email_cci'] = 'optieyescommande@gmail.com';
-        setlocale( LC_TIME, "fr" );
+        $data['email_cc'] = 'optieyescommande@gmail.com';
+        $data['email_cci'] = 'yonathanassous@gmail.com';
+        setlocale(LC_TIME,
+            'fr_FR.utf8',
+            'fra');
         $time = date('Y-m-d H:i:s');
         $date = strftime( "%A %d %B %Y" , strtotime( $time ));
+        //print_r($date);die;
         $hour = strftime( "%H:%M:%S" , strtotime( $time ));
         $msgTxt = "Madame, Monsieur,<br><br>Ci joint les conditions générales de ventes que vous venez d’accepter.<br><br>Merci de votre confiance !<br><br><br>L’équipe Optieyes.";
-        $subject = "CGV Optieyes acceptées le $date à $hour";
+        $subject = "CGV Optieyes acceptées par le magasin $userId le $date à $hour";
         $this->mail($data, $msgTxt, true, $subject, 'CGV_Optieyes_24062021_clean.pdf');
         echo 'true';
     }

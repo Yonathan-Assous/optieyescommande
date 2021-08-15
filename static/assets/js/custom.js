@@ -2102,7 +2102,8 @@ $('#type_de_verreD').on('change', function() {
 						url: "/index/get_Diametre",
 						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
 						dataType: "json",
-						success: function (data) {	
+						success: function (data) {
+						console.log(data);
 						$('#diametreD').empty();
 						$('#diametreD').append('<option value="">-- Choisir --</option>');
 					

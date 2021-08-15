@@ -6173,7 +6173,7 @@ class admin
                         $detail .= "<br><b>Panier A</b>";
                     }
 
-                    $detail .= "<br>Nom du verre: <b>" .
+                    $detail .= "<br>Nom du verresssss: <b>" .
                         $commande->trad_fr .
                         "</b>";
                     $detail .= "<br>Indice: " .
@@ -6247,9 +6247,9 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                                 $traitementD .
-                                "";
+                                "</span>";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6340,9 +6340,9 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<span style='color:#fbca35'><br>Traitement: " .
                                 $traitementG .
-                                "";
+                                "</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -6743,9 +6743,9 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                                 $traitementD .
-                                "";
+                                "</span>";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6938,9 +6938,9 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#fbca35'><br>Traitement: " .
                                 $traitementG .
-                                "";
+                                "</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -8742,9 +8742,9 @@ class admin
                         !empty($information_commande->verre->correction_droit->traitement)) {
                         $traitementD =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                        $detail .= "<br>Traitement: " .
+                        $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                             $traitementD .
-                            "";
+                            "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->teinte)) {
                         $teinteD =
@@ -8831,9 +8831,9 @@ class admin
 
                         $traitementG =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                        $detail .= "<br>Traitement: " .
+                        $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                             $traitementG .
-                            "";
+                            "</span>";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->teinte)) {

@@ -585,7 +585,6 @@ class m_passer_commande_verre extends CI_Model
 									   ORDER BY id ASC";
                 $sphereD_res = $this->db->query($sql);
             } else {
-                print_r('2');die;
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->where('addition_from', '<=', $additionD)->where('addition_to', '>=', $additionD)->orderBy('id', 'ASC')->get();*/
 
                 if ($lensFocalGroup == '4'

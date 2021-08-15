@@ -539,7 +539,6 @@ class m_passer_commande_verre extends CI_Model
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
                      $panierA, $type = "1")
     {
-
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -586,7 +585,7 @@ class m_passer_commande_verre extends CI_Model
 									   ORDER BY id ASC";
                 $sphereD_res = $this->db->query($sql);
             } else {
-
+                print_r('2');die;
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->where('addition_from', '<=', $additionD)->where('addition_to', '>=', $additionD)->orderBy('id', 'ASC')->get();*/
 
                 if ($lensFocalGroup == '4'
@@ -788,11 +787,21 @@ class m_passer_commande_verre extends CI_Model
                     }
 
                     $n_code = 0;
-
+//                    print_r($sphereD);
+//                    print_r($cylindreD);die;
+//                    print_r($codes_res);
                     foreach ($codes_res as $code) {
-                        $codes_f .= "L.code = '" . $code->code . "' OR ";
-                        $n_code++;
+                        $diametre = $this->getDiametres($code->code, $sphereD, $cylindreD);
+//                        if (!$diametre) {
+//                            echo $code->code;
+//                            var_dump(' ');
+//                        }
+                        if (!empty($diametre)) {
+                            $codes_f .= "L.code = '" . $code->code . "' OR ";
+                            $n_code++;
+                        }
                     }
+//                    print_r($codes_f);die;
 
                     if ($generation == "T-One") {
                         /*$res_f = $this->db->query("SELECT L.code,L.id, L.name, L.trad_fr, L.prix, ppc.prix as prix_perso , L.sorting
@@ -857,6 +866,7 @@ class m_passer_commande_verre extends CI_Model
 														LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=".$user_id.")
 											   WHERE (".$codes_f." L.code = '0') ".$P_A."  ORDER BY sorting,trad_fr,prix");
 						*/
+                        //echo ($codes_f);die;
 
                         if ($n_code > 2) {
                             $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
@@ -871,13 +881,14 @@ class m_passer_commande_verre extends CI_Model
 											   WHERE (" . $codes_f . " L.code = '0') " . $P_A
                                 . "  ORDER BY sorting,trad_fr,prix";
                         }
+//                        print_r($sql);die;
 
                         $res_f = $this->db->query($sql);
 
 
 
                     }
-
+                    //print_r('gdsggfdf');die;
                     return $res_f->result();
                 } else {
                     return "";
@@ -1664,7 +1675,6 @@ class m_passer_commande_verre extends CI_Model
 
         $res = $this->db->query($sql);
         $r = $res->result()[0]->ranges;
-
         $ranges_list = array();
 
         $rList = json_decode($r);
@@ -1768,7 +1778,6 @@ class m_passer_commande_verre extends CI_Model
 
                 $refrc_100 = $res_100->result();
 
-
                 foreach ($refrc_100 as $ref100) {
 
                     $from = $ref100->cylinderPart_from;
@@ -1812,7 +1821,8 @@ class m_passer_commande_verre extends CI_Model
                         //	echo "###".$range->diameter_physical.": Max to:".$ref100->maxMeridian_to." - Max from:".$ref100->maxMeridian_from." ";
                         for ($v = $ref100->maxMeridian_to; $v >= $ref100->maxMeridian_from; $v -= 0.25) {
                             //	echo " // ".$v."==".$sphere." : ".$c."<=".$ref100->cylinder_to;
-
+                            //print_r($v);
+                            //echo(' ');
                             if ($c <= $ref100->cylinder_to) {
 
                                 if ($v == $sphere) {
@@ -1837,7 +1847,6 @@ class m_passer_commande_verre extends CI_Model
                                     //	echo " ??".$range->diameter_physical." - Rangesids: ".$rangesids." ";
                                 }
                             }
-
                         }
 
 
@@ -1872,10 +1881,13 @@ class m_passer_commande_verre extends CI_Model
 
                     }
                 }
-
+//                die;
             }
 
         }
+//        echo '\n';
+//        print_r($rangesids);
+//        die;
 
 
         //echo "Rangesids: ".$rangesids."<br>";

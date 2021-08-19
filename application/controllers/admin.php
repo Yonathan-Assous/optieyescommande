@@ -6340,7 +6340,7 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<span style='color:#fbca35'><br>Traitement: " .
+                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                                 $traitementG .
                                 "</span>";
                         }
@@ -6623,6 +6623,7 @@ class admin
             $data_commande =
                 $this->m_commande->getAllCommandeEdiOmega();
             $compteur = 0;
+            print_r($data_commande);die;
             if ($data_commande !==
                 false) {
                 foreach ($data_commande
@@ -6847,11 +6848,11 @@ class admin
                                 ))) {
                             if ($traitementD !=
                                 "") {
-                                $textarea .= "<br>Coating code: " .
+                                $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
                                     $information_commande->verre->correction_droit->traitement .
                                     "(" .
                                     $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
-                                    ")";
+                                    ")</span>";
                             }
                         }
 
@@ -6938,7 +6939,7 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br><span style='color:#fbca35'><br>Traitement: " .
+                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
                                 $traitementG .
                                 "</span>";
                         }
@@ -7034,11 +7035,11 @@ class admin
                                         (strpos($commande->trad_fr,
                                                 'Xtractive') !== false))
                                 ))) {
-                            $textarea .= "<br>Coating code: " .
+                            $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
                                 $information_commande->verre->correction_gauche->traitement .
                                 "(" .
                                 $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
-                                ")";
+                                ")</span>";
                         }
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
@@ -9238,11 +9239,11 @@ class admin
                         )))
                 {
 
-                    $textarea .= "<br>Coating code: " .
+                    $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
                         $data['traitementD'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementD']) .
-                        ")";
+                        ")</span>";
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -9338,11 +9339,11 @@ class admin
                                         'Xtractive') !== false))
                         ))) {
 
-                    $textarea .= "<br>Coating code: " .
+                    $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
                         $data['traitementG'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementG']) .
-                        ")";
+                        ")</span>";
                 }
 
                 if (isset($data["teinteG"]) &&
@@ -9367,6 +9368,14 @@ class admin
                         $data['diametreG'];
                 }
             }
+            date_default_timezone_set('Europe/Paris');
+            setlocale(LC_TIME,
+                'fr_FR.UTF8',
+                'fra');
+            $time = date('Y-m-d H:i:s');
+            $date = strftime( "%d/%m/%Y" , strtotime( $time ));
+            $hour = strftime( "%H:%M:%S" , strtotime( $time ));
+            $textarea .= "<br><br>Changement par l'admin le " . $date . " à " . $hour;
 
             $precal = 0;
 

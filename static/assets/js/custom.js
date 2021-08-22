@@ -3288,6 +3288,15 @@ $('#diametreD').on('change', function() {
     
 });
 
+$('#ecart_puppillaire_droit').on('change', function() {
+	$('#ecart_puppillaire_gauche').val($('#ecart_puppillaire_droit').val())
+});
+
+$('#hauteur').on('change', function() {
+	$('#hauteur_gauche').val($('#hauteur').val())
+});
+
+
 $('#diametreG').on('change', function() {
 	var diametreG = $(this).val();
 	var diametreD = $('#diametreD').val();
@@ -4643,7 +4652,63 @@ var galbeG = $('#galbeG').val();
 });
 
 $('#afficherV').on('click', function() {
+	var cylindreD = $('#cylindreD').val()
+	let index = cylindreD.indexOf("-");
+	let isCylinderNegative = false;
+	if(index !== -1){
+		let sphereD = $('#sphereD').val();
+		cylindreD = (-cylindreD).toFixed(2);
+		sphereD = parseFloat(sphereD) - parseFloat(cylindreD)
+		sphereD = sphereD.toFixed(2);
+		$('#cylindreD').val(cylindreD);
+		$('#sphereD').val(sphereD);
 
+		let axeD = parseInt($('#axeD').val());
+		if (axeD >= 90) {
+			axeD -= 90;
+		}
+		else {
+			axeD += 90;
+		}
+		$('#axeD').val(axeD);
+		isCylinderNegative = true;
+	}
+	var cylindreG = $('#cylindreG').val()
+	index = cylindreG.indexOf("-");
+	if(index !== -1){
+		let cylindreG = $('#cylindreG').val();
+		let sphereG = $('#sphereG').val();
+		cylindreG = -cylindreG
+		sphereG = parseFloat(sphereG) - parseFloat(cylindreG)
+		sphereG = sphereG.toFixed(2);
+		$('#cylindreG').val(-cylindreG);
+		$('#sphereG').val(cylindreG + sphereG);
+		$('#cylindreG').val(cylindreG);
+		$('#sphereG').val(sphereG);
+
+		let axeG = parseInt($('#axeG').val());
+		if (axeG >= 90) {
+			axeG -= 90;
+		}
+		else {
+			axeG += 90;
+		}
+		$('#axeG').val(axeG);
+		isCylinderNegative = true;
+	}
+	if (isCylinderNegative) {
+		$('#cylindre_negative').modal('show');
+	}
+	else {
+		afficherV();
+	}
+});
+
+$('#cylindre_negative_ok').on('click', function() {
+	afficherV()
+});
+
+function afficherV() {
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
 	
@@ -4701,8 +4766,7 @@ $('#afficherV').on('click', function() {
 		$('#progressionD').prop('disabled', true);
 		$('#progressionG').prop('disabled', true);
 	}
-    
-    
+
     
     var forceSphStep = true;
     
@@ -4727,18 +4791,17 @@ $('#afficherV').on('click', function() {
     	{
     		checkG = checkG.replace('+', '');
     	}
-    
-		if( ((Number(checkD) > 0) != (Number(checkG) > 0)) && checkD != 0) {
 
+		if( ((Number(checkD) > 0) != (Number(checkG) > 0)) && checkD != 0) {
+			console.log('test');
 			swal({
 				title: "Signes contraires confirmés ?",
 				text: "",
 				type: "warning",
 				showCancelButton: true,
-				confirmButtonText: "Oui",
+				confirmButtonText: "ok",
 				cancelButtonText: "Modifier",
 				closeOnConfirm: true,
-				closeOnCancel: true
 			}, function(isConfirm){
 				if (isConfirm) {
 					forceSphStep = true;
@@ -4926,7 +4989,7 @@ $('#afficherV').on('click', function() {
 	
 	}
 	
-});
+}
 
 $('#VersGauche').on('click', function() {
 

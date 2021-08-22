@@ -6623,7 +6623,7 @@ class admin
             $data_commande =
                 $this->m_commande->getAllCommandeEdiOmega();
             $compteur = 0;
-            print_r($data_commande);die;
+            //print_r($data_commande);die;
             if ($data_commande !==
                 false) {
                 foreach ($data_commande
@@ -6632,6 +6632,12 @@ class admin
                 => $commande)
                 {
                     //var_dump($commande);
+
+                    $commande->indice_omega = $commande->indice_verre;
+                    if ($commande->indice_verre == '1.74'
+                        && strpos($commande->lensname, 'stock') !== false) {
+                        $commande = $this->m_commande->change_174_With_167($commande);
+                    }
                     $detail =
                     $textarea =
                         "";
@@ -6678,13 +6684,15 @@ class admin
                         $commande->lensname;
 
                     $textarea .= "<br><br>Optical Index: " .
-                        $commande->indice_verre;
+                        $commande->indice_omega;
 
 
                     $information_commande =
                         json_decode($commande->information_commande);
                     //var_dump($information_commande);
+
                     if (isset($information_commande->verre->correction_droit)) {
+
                         $detail .= "<br><br><b>OD :</b>";
                         $detail .= " " .
                             $information_commande->verre->correction_droit->sphere .
@@ -8567,7 +8575,6 @@ class admin
                     }
 
 //                    var_dump($xml);die;
-
                     $CommandeOmega =
                         $this->m_commande->getTextCommandeOmega($commande->id_commande,
                             $textarea,

@@ -120,24 +120,9 @@
 
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <label for="inscription_tel_fax">Fax</label>
-                            <input class="form-control" type="text" name="inscription[tel_fax]" id="inscription_tel_fax">
-                        </div>
-                    </div>
-
-                    <div class="form-group ">
-                        <div class="col-xs-12">
                             <label for="inscription_numero_siret">Numéro SIRET</label>
                             <input class="form-control" type="text" name="inscription[numero_siret]" id="inscription_numero_siret" required="">
                             <p class="error error-siret"></p>
-                        </div>
-                    </div>
-
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <label for="inscription_tva_intracom">Numéro TVA Intracommunautaire</label>
-                            <input class="form-control" type="text" name="inscription[tva_intracom]" id="inscription_tva_intracom">
-                            <p class="error error-tva"></p>
                         </div>
                     </div>
 

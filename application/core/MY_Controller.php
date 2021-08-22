@@ -60,6 +60,7 @@ class MY_Controller extends CI_Controller {
 	}
 
 	public function pdf($file_pdf,$data,$data_name_custom_file="",$stream=false, $orientation = 'portrait', $customsize = false){
+
         $this->load->helper(array('dompdf', 'file'));
 
         if($file_pdf == "bon_livraison" || $file_pdf == 'bon_livraison_lentille' || $file_pdf == 'bon_livraison_montures'){
@@ -67,16 +68,16 @@ class MY_Controller extends CI_Controller {
         } else {
           $file_output = $file_pdf;
         }
+
+        /*if($file_pdf != 'bon_livraison_montures')
+        {
+            if($data_name_custom_file != "")
+                    $file_output .= "_".$data_name_custom_file['date'];
+        }*/
 		
-		/*if($file_pdf != 'bon_livraison_montures')
-		{
-			if($data_name_custom_file != "")
-					$file_output .= "_".$data_name_custom_file['date'];
-		}*/
 		
 		
-		
-		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures')
+		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures' || $file_pdf == 'bon_commande')
 		{
 			$file_output .= "_".date("Y_m_d_H-i-s");
 		}
@@ -96,8 +97,10 @@ class MY_Controller extends CI_Controller {
         }
 		
 		//var_dump($data);
+        //echo $this->dirPdf."/".$file_pdf;die;
+        //print_r($data);die;
+
         $html = $this->load->view($this->dirPdf."/".$file_pdf, $data, true);
-		
        // echo $html;
 		//var_dump($data_name_custom_file);
      //   return;
@@ -107,9 +110,9 @@ class MY_Controller extends CI_Controller {
           echo $html;
           return;
         }
+        //echo $html;die;
 
         $data = pdf_create($html,$file_output,$stream, $orientation, $customsize);
-       
         if(!$stream){
             file_put_contents($this->config->item('directory_pdf').'/'.$file_output, $data);
         }

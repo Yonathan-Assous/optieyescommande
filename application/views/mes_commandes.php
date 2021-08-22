@@ -57,6 +57,7 @@
 									<th data-priority="1">Référence Optieyes</th>
 									<th>Date</th>
 									<th>Télécharger BL</th>
+									<th>Bon de commande</th>
 									<th>Référence Client</th>
 									<th>Type de verre</th>
 									<th>Etat</th>

@@ -1790,7 +1790,9 @@ class index extends MY_Controller {
                         $bl = '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>';
                     }
 
-					//$commande->commentaire = "";
+                    $bc = '<a href="/index/generer_pdf/bon_commande/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> Bon de commande</a>';
+
+                    //$commande->commentaire = "";
 
                     if($type == 'ec') {
 
@@ -1800,6 +1802,7 @@ class index extends MY_Controller {
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $ancienne_ref,
                                 $bl,
+                                $bc,
                                 '<del>'.$commande->total_commande.'€ </del> <b>'.number_format(($commande->tarif_express > 0 ? $commande->tarif_express : 0),2,'.',' ').'  €</b>',
                                 $commande->reference_client,
                                 $commande->generation_verre,
@@ -1821,6 +1824,7 @@ class index extends MY_Controller {
 									'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
 									date('d/m/Y H:i:s', strtotime($commande->date_commande)),
 									$bl,
+                                    $bc,
 									$commande->reference_client,
 									$commande->generation_verre,
 									$etat_commande,
@@ -1839,6 +1843,7 @@ class index extends MY_Controller {
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $bl,
+                                $bc,
                                 $commande->reference_client,
                                 $commande->generation_verre,
                                 $etat_commande,
@@ -3787,7 +3792,7 @@ class index extends MY_Controller {
 					*/
 				}
 //                var_dump($data['recap_commande']);die;
-
+//                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

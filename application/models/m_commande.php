@@ -743,7 +743,10 @@ class m_commande extends CI_Model {
 
     public function updateCommandeOmega($id_commande,$textarea,$axml)
     {
-        if($this->db->query("UPDATE commande_omega SET xml = '".addslashes($axml)."',commande = '".addslashes($textarea)."'  WHERE id = '".$id_commande."'")) {
+        $sql = "UPDATE commande_omega SET xml = '".addslashes($axml)."',commande = '".addslashes($textarea)."'  WHERE id = '".$id_commande."'";
+
+        //echo $sql; die;
+        if($this->db->query($sql)) {
             return 1;
         }
 
@@ -5121,4 +5124,16 @@ class m_commande extends CI_Model {
         }
     }
 
+    public function change_174_With_167($commande) {
+        $lensName = str_replace('1.74', '1.67', $commande->lensname);
+        $sql = "SELECT * FROM lenses WHERE name = '$lensName'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $lens = $query->result()[0];
+            $commande->lensname = $lensName;
+            $commande->lenscode = $lens->code;
+            $commande->indice_omega = '1.67';
+        }
+        return $commande;
+    }
 }

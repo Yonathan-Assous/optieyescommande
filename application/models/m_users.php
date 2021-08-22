@@ -271,4 +271,9 @@ class m_users extends CI_Model {
         $user = $this->getUserById($userId)[0];
         return $user->percent_tva;
     }
+
+    public function getTarifPackaging($userId) {
+        $user = $this->getUserById($userId)[0];
+        return $user->tarif_packaging;
+    }
 }

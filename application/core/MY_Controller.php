@@ -74,9 +74,9 @@ class MY_Controller extends CI_Controller {
             if($data_name_custom_file != "")
                     $file_output .= "_".$data_name_custom_file['date'];
         }*/
-		
-		
-		
+
+
+
 		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures' || $file_pdf == 'bon_commande')
 		{
 			$file_output .= "_".date("Y_m_d_H-i-s");
@@ -95,7 +95,7 @@ class MY_Controller extends CI_Controller {
         if(!$stream) {
             $file_output .= ".pdf";
         }
-		
+
 		//var_dump($data);
         //echo $this->dirPdf."/".$file_pdf;die;
         //print_r($data);die;
@@ -309,7 +309,8 @@ class MY_Controller extends CI_Controller {
             $data['date'] = $data['date_remise'] = $date;
 
             $commande = $this->m_commande->getAllCommandeByMonth($data);
-            
+            $data['tarifPackaging'] = $this->m_users->getTarifPackaging($data['id_users']);
+
          //   var_dump($commande);
             $reduction = $this->m_facture_reduction->get_reduction($data);
 
@@ -345,9 +346,8 @@ class MY_Controller extends CI_Controller {
                 $data['reduction'] = !empty($reduction) ? $reduction : false;
 
                 $data_custom_file = array('id_users' => $data['id_users'], 'date' => $date);
-                
-               // return $this->load->view('pdf/'.$nom_fichier_pdf, $data,$data_custom_file, true);
 
+               // return $this->load->view('pdf/'.$nom_fichier_pdf, $data,$data_custom_file, true);
                 if(!$stream)
                   return $this->pdf($nom_fichier_pdf,$data,$data_custom_file,$stream);
                 

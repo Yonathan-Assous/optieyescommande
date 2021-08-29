@@ -4133,8 +4133,7 @@ class admin
                     $data['aaData'][$key] =
                         array(
                             '<a ' .
-                            ($commande->tarif_express >
-                            0 ?
+                            ($commande->is_express ?
                                 'style="border: 10px solid #e42a2a !important"' :
                                 '') .
                             ' class="' . $commandeInfo . ' btn btn-icon waves-effect waves-light ' .
@@ -4437,8 +4436,7 @@ class admin
                         $data['aaData'][$key] =
                             array(
                                 '<a ' .
-                                ($commande->tarif_express >
-                                0 ?
+                                ($commande->is_express ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4548,8 +4546,7 @@ class admin
                         $data['aaData'][$key] =
                             array(
                                 '<a ' .
-                                ($commande->tarif_express >
-                                0 ?
+                                ($commande->is_express ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -5399,8 +5396,7 @@ class admin
                         }
                     }
 
-                    if ($commande->tarif_express !=
-                        "0") {
+                    if ($commande->is_express) {
                         $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -5592,8 +5588,7 @@ class admin
                         }
                     }
 
-                    if ($commande->tarif_express !=
-                        "0") {
+                    if ($commande->is_express) {
                         $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -6537,8 +6532,7 @@ class admin
                         "</b><br>Tarif HT: <b>" .
                         $prix_commande .
                         "</b>";
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $infos .= "<br><b>EXPRESS</b><br>";
                     }
 
@@ -6669,8 +6663,7 @@ class admin
                             "<br>";
                     }
 
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $textarea .= "<br>EXPRESS<br>";
                     }
 
@@ -7777,8 +7770,7 @@ class admin
                             }
                         }
 
-                        if ($commande->tarif_express !=
-                            "0") {
+                        if ($commande->is_express) {
                             $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -7970,8 +7962,7 @@ class admin
                             }
                         }
 
-                        if ($commande->tarif_express !=
-                            "0") {
+                        if ($commande->is_express) {
                             $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -8521,8 +8512,7 @@ class admin
                         $prix_commande .
                         "</b>";
 
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $infos .= "<br><b>EXPRESS</b><br>";
                         if ($commande->tarif_express == 25) {
                             $factureChecked = 'checked';
@@ -9064,8 +9054,7 @@ class admin
                     "</b><br>Tarif HT: <b>" .
                     $prix_commande .
                     "</b>";
-                if ($commande->tarif_express !=
-                    '0') {
+                if ($commande->is_express) {
                     $infos .= "<br><b>EXPRESS</b>";
                 }
 
@@ -9202,8 +9191,7 @@ class admin
             $textarea .= "<br><br>Optical Index: " .
                 $data['indices'];
 
-            if ($commande_origine->tarif_express !=
-                '0') {
+            if ($commande_origine->is_express) {
                 $textarea .= "<br><b>EXPRESS</b>";
             }
 
@@ -10024,8 +10012,7 @@ class admin
                     }
                 }
 
-                if ($commande_origine->tarif_express !=
-                    "0") {
+                if ($commande_origine->is_express) {
                     $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -10213,8 +10200,7 @@ class admin
                     }
                 }
 
-                if ($commande_origine->tarif_express !=
-                    "0") {
+                if ($commande_origine->is_express) {
                     $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';

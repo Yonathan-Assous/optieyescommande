@@ -37,6 +37,7 @@ class m_commande extends CI_Model {
         'tarif_packaging'                => 'tarif_packaging',
         'tarif_supplement'               => 'tarif_supplement',
         'tarif_express'                  => 'tarif_express',
+        'is_express'                     => 'is_express',
         'email_send'                     => 'email_send',
         'type_commande'					 => 'type_commande',
         'intitule_bl' 					 => 'intitule_bl',
@@ -97,7 +98,7 @@ class m_commande extends CI_Model {
             $add .= 'AND c.type_commande > 1';
         }
 
-        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,commande_monture,
+        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,commande_monture,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison
                                    FROM ".$this->table." c
                                    LEFT JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -169,7 +170,7 @@ class m_commande extends CI_Model {
         if(isset($data['type_commande']) && $data['type_commande'] == 1) {
             $add .= 'AND c.type_commande > 1';
         }
-        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
+        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison, trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -251,7 +252,7 @@ class m_commande extends CI_Model {
             $add .= 'AND c.type_commande > 1';
         }
 
-        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
+        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
                                    type_generation_verre,c.prix_verre,intitule_bl,c.id_generation_verre, c.origine_commande,commentaire
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -293,7 +294,7 @@ class m_commande extends CI_Model {
             $add .= 'AND c.type_commande > 1';
         }
 
-        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
+        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,IF(libelle_verre_personnalise <> 'NULL',libelle_verre_personnalise,generation_verre) as generation_verre,
                                    type_generation_verre,libelle_verre,commentaire,c.prix_verre,intitule_bl, (TarifLivraison1 + COALESCE(TarifLivraison2, 0)) as TarifLivraison,c.id_generation_verre,v.gtin as gtin_stock, l.gtin as gtin, c.origine_commande
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -640,7 +641,7 @@ class m_commande extends CI_Model {
     public function getAllCommandeEdiOmega()
     {
         $sql_add = "WHERE (c.id_verre IN (SELECT code FROM lenses) AND c.id_etat_commande < 6)";
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -683,7 +684,7 @@ class m_commande extends CI_Model {
             $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
             $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
         }
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -704,7 +705,7 @@ class m_commande extends CI_Model {
 
     public function getCommandeEdiOmegaById($id_commande){
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -725,7 +726,7 @@ class m_commande extends CI_Model {
     public function getCommandeEdiOmegaByIdD($id_commande){
 
 
-        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -828,7 +829,7 @@ class m_commande extends CI_Model {
         else
             $sql_order = "ORDER BY date_commande DESC";
 
-        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule,panierA,c.id_type_generation_verre,c.id_verre,status_omega
+        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule,panierA,c.id_type_generation_verre,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -857,7 +858,7 @@ class m_commande extends CI_Model {
 
         $sql_order = "ORDER BY date_commande DESC";
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -893,7 +894,7 @@ class m_commande extends CI_Model {
         else
             $sql_order = "ORDER BY date_commande DESC";
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -930,7 +931,7 @@ class m_commande extends CI_Model {
         else
             $sql_order = "ORDER BY date_commande DESC";
 
-        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega,libelle_verre,trad_fr
+        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,date_pointage,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega,libelle_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -1050,7 +1051,7 @@ class m_commande extends CI_Model {
 //			$sWhere .= $addField;
 //		}
 
-        $sql = "SELECT c.id_users,c.id_commande,c.intitule_bl, c.tarif_express, c.penalty, c.ancienne_commande, c.total_commande, c.tarif_express, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
+        $sql = "SELECT c.id_users,c.id_commande,c.intitule_bl, c.tarif_express, c.is_express, c.penalty, c.ancienne_commande, c.total_commande, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
                                     FROM ".$this->table." c
                                     INNER JOIN users u ON c.id_users = u.id_users 
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
@@ -1305,7 +1306,7 @@ class m_commande extends CI_Model {
         $tarif_appoint = 0;
         $TabHoraireTarifLiv = array();
 
-        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, c.tarif_express, date_update_commande, type_commande
+        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) as tarif_liv, c.id_users, c.tarif_express, c.is_express, date_update_commande, type_commande
 									   FROM ".$this->table." c
 									   LEFT JOIN 
 										  ( 
@@ -1353,7 +1354,7 @@ class m_commande extends CI_Model {
         }
 
 
-        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, c.id_users,c.tarif_express, date_update_commande, type_commande
+        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison),0) + COALESCE(SUM(TarifLivraison2),0) as tarif_liv, c.id_users,c.tarif_express, c.is_express, date_update_commande, type_commande
          FROM ".$this->table." c
          LEFT JOIN 
           ( 
@@ -1420,7 +1421,7 @@ class m_commande extends CI_Model {
             }
         }
 
-        $query = $this->db->query("SELECT l.name as lens_name, c.id_commande,c.id_users, c.type_commande, c.penalty, date_commande,c.tarif_express,reference_client,total_commande,generation_verre,taux_tva,libelle_verre_personnalise, 0 as TarifLivraison,intitule_bl, c.id_users, date_update_commande, tarif_packaging, c.commande_monture, v.libelle_verre, trad_fr
+        $query = $this->db->query("SELECT l.name as lens_name, c.id_commande,c.id_users, c.type_commande, c.penalty, date_commande,c.tarif_express,c.is_express,reference_client,total_commande,generation_verre,taux_tva,libelle_verre_personnalise, 0 as TarifLivraison,intitule_bl, c.id_users, date_update_commande, tarif_packaging, c.commande_monture, v.libelle_verre, trad_fr
                                        FROM ".$this->table." c
                                        LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
                                        LEFT JOIN lens l ON l.id = c.lens_id
@@ -3177,6 +3178,7 @@ class m_commande extends CI_Model {
                 if($data['express'] == 1) {
                     $data['tarif_express'] = 25;
                     $data['total_commande'] += 25;
+                    $data['is_express'] = true;
                 }
 
                 $data = array_intersect_key($data, $this->fields);
@@ -3421,6 +3423,7 @@ class m_commande extends CI_Model {
                     {
                         $data['tarif_express'] = 25;
                         $data['total_commande'] += 25;
+                        $data['is_express'] = true;
                     }
 
                     $data['information_commande'] = str_replace("+","",$data['information_commande']);
@@ -3543,6 +3546,7 @@ class m_commande extends CI_Model {
                         {
                             $data['tarif_express'] = 25;
                             $data['total_commande'] += 25;
+                            $data['is_express'] = true;
                             $expressD = 1;
                         }
 
@@ -3672,6 +3676,7 @@ class m_commande extends CI_Model {
                             {
                                 $data['tarif_express'] = 25;
                                 $data['total_commande'] += 25;
+                                $data['is_express'] = true;
                             }
                         }
 
@@ -3787,7 +3792,7 @@ class m_commande extends CI_Model {
             $date_add = "date_commande >='".$date." 00:00:00' AND date_commande <='".$date." 23:59:59'";
             $email_send = "";
         }
-        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
+        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express, c.is_express, information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -3839,7 +3844,7 @@ class m_commande extends CI_Model {
             $email_send = "";
         }
 
-        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
+        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express, c.is_express, information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -3890,7 +3895,7 @@ class m_commande extends CI_Model {
             $email_send = "";
         }
 
-        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express,information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
+        $sql = "SELECT u.tel_fixe, c.*, c.premiere_commande,c.id_commande,c.id_users,c.id_type_generation_verre,date_commande,c.id_etat_commande, c.tarif_express, c.is_express, information_commande,reference_client,total_commande, penalty,libelle_etat_commande,generation_verre,type_generation_verre,libelle_verre,prix_verre,commentaire, vt.traduction,c.id_verre,trad_fr
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    INNER JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
@@ -5142,5 +5147,23 @@ class m_commande extends CI_Model {
             }
         }
         return $commande;
+    }
+
+    public function setExpress($commandeId, $isExpress, $isFacture) {
+        $sql = 'SELECT * FROM `commande` WHERE id_commande = ' . $commandeId;
+        $query = $this->db->query($sql);
+        $commande = $query->result()[0];
+        $oldTarifExpress = $commande->tarif_express;
+        $tarifCommande = $commande->total_commande;
+        if ($isExpress && $isFacture) {
+            $tarifExpress = 25;
+        }
+        else {
+            $tarifExpress = 0;
+        }
+        $sql = 'UPDATE `commande` SET `tarif_express` = ' . $tarifExpress . ', `is_express` = ' . $isExpress . ',
+                    total_commande = ' . ($tarifCommande + $tarifExpress - $oldTarifExpress) . '
+                    WHERE id_commande = ' . $commandeId;
+        $this->db->query($sql);
     }
 }

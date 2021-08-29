@@ -644,7 +644,7 @@ $panierA = get_cookie("panierA");
                     $express_id = 'express_pair';
                     $is_checked = false;
 
-                    if($pair_order_recap['tarif_express'] > 0) {
+                    if($pair_order_recap['is_express']) {
                         $is_checked = true;
                     }
 

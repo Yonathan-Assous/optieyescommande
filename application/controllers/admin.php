@@ -6247,7 +6247,7 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementD .
                                 "</span>";
                         }
@@ -6340,7 +6340,7 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementG .
                                 "</span>";
                         }
@@ -6752,7 +6752,7 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementD .
                                 "</span>";
                         }
@@ -6856,7 +6856,7 @@ class admin
                                 ))) {
                             if ($traitementD !=
                                 "") {
-                                $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
+                                $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                                     $information_commande->verre->correction_droit->traitement .
                                     "(" .
                                     $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
@@ -6947,7 +6947,7 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementG .
                                 "</span>";
                         }
@@ -7043,7 +7043,7 @@ class admin
                                         (strpos($commande->trad_fr,
                                                 'Xtractive') !== false))
                                 ))) {
-                            $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
+                            $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                                 $information_commande->verre->correction_gauche->traitement .
                                 "(" .
                                 $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
@@ -8524,7 +8524,36 @@ class admin
                     if ($commande->tarif_express !=
                         '0') {
                         $infos .= "<br><b>EXPRESS</b><br>";
+                        if ($commande->tarif_express == 25) {
+                            $factureChecked = 'checked';
+                        }
+                        else {
+                            $factureChecked = '';
+                        }
+                        $expressChecked = 'checked';
+                        $displayFacture = '';
                     }
+                    else {
+                        $factureChecked = 'checked';
+                        $expressChecked = '';
+                        $displayFacture = 'display: none;';
+                    }
+
+                    $express = '<div id = "div_express_' . $commande->id_commande . '" style="text-align: center;">
+                                        <h5>Express</h5>
+                                        <label class="switch">
+                                          <input id="express_' . $commande->id_commande . '" class="express" type="checkbox" ' . $expressChecked . '>
+                                          <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div id = "div_facture_express_' . $commande->id_commande . '" style="text-align: center; ' . $displayFacture . '">
+                                        <h5>Facturé 25€</h5>
+                                        <label class="switch">
+                                          <input id="facture_express_' . $commande->id_commande . '" class="facture_express" type="checkbox" 
+                                          ' . $factureChecked . '>
+                                          <span class="slider round"></span>
+                                        </label>
+                                    </div>';
 
                     if ($commande->commentaire !=
                         "") {
@@ -8625,12 +8654,14 @@ class admin
                             $infos,
                             $detail,
                             $c_omega,
+                            $express,
                             $checkbox_omega,
                         );
 
                     $compteur++;
                 }
             }
+//            print_r($data);die;
             die(json_encode($data));
         } else {
             $this->redirect("/index");
@@ -8750,7 +8781,7 @@ class admin
                         !empty($information_commande->verre->correction_droit->traitement)) {
                         $traitementD =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                        $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                        $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                             $traitementD .
                             "</span>";
                     }
@@ -8839,7 +8870,7 @@ class admin
 
                         $traitementG =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                        $detail .= "<br><span style='color:#fbca35'>Traitement: " .
+                        $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                             $traitementG .
                             "</span>";
                     }
@@ -9246,7 +9277,7 @@ class admin
                         )))
                 {
 
-                    $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
+                    $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                         $data['traitementD'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementD']) .
@@ -9346,7 +9377,7 @@ class admin
                                         'Xtractive') !== false))
                         ))) {
 
-                    $textarea .= "<br><span style='color:#fbca35'>Coating code: " .
+                    $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                         $data['traitementG'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementG']) .
@@ -9382,7 +9413,7 @@ class admin
             $time = date('Y-m-d H:i:s');
             $date = strftime( "%d/%m/%Y" , strtotime( $time ));
             $hour = strftime( "%H:%M:%S" , strtotime( $time ));
-            $textarea .= "<br><br>Changement par l'admin le " . $date . " à " . $hour;
+            $textarea .= "<br><br><span style='background-color: #e96154; color: #fff; font-weight: bold'>Changement par l'admin le " . $date . " à " . $hour . "</span>";
 
             $precal = 0;
 

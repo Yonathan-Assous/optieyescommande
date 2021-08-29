@@ -5125,14 +5125,21 @@ class m_commande extends CI_Model {
     }
 
     public function change_174_With_167($commande) {
+        $informationCommande = json_decode($commande->information_commande);
+        $correctionDroit = $informationCommande->verre->correction_droit;
+        $correctionGauche = $informationCommande->verre->correction_gauche;
+
         $lensName = str_replace('1.74', '1.67', $commande->lensname);
         $sql = "SELECT * FROM lenses WHERE name = '$lensName'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $lens = $query->result()[0];
-            $commande->lensname = $lensName;
-            $commande->lenscode = $lens->code;
-            $commande->indice_omega = '1.67';
+            if ($this->m_passer_commande_verre->getDiametres($lens->code,$correctionDroit->sphere,$correctionDroit->cylindre)
+            && $this->m_passer_commande_verre->getDiametres($lens->code,$correctionGauche->sphere,$correctionGauche->cylindre)) {
+                $commande->lensname = $lensName;
+                $commande->lenscode = $lens->code;
+                $commande->indice_omega = '1.67';
+            }
         }
         return $commande;
     }

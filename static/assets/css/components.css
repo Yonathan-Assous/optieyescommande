@@ -153,6 +153,7 @@ File: Components
 .open > .dropdown-toggle.btn-warning {
   background-color: #fbc31c !important;
   border: 1px solid #fbc31c !important;
+  box-shadow: 0 4px 18px #f8bc06 !important;
 }
 .btn-danger {
   background-color: #e96154 !important;
@@ -227,7 +228,7 @@ File: Components
   border-bottom: 2px solid #26a3dd !important;
 }
 .btn-bordred.btn-warning {
-  border-bottom: 2px solid #f8bc05 !important;
+  /*border-bottom: 2px solid #f8bc05 !important;*/
 }
 .btn-bordred.btn-danger {
   border-bottom: 2px solid #e33727 !important;
@@ -1331,3 +1332,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+#optieyes_video::-webkit-media-controls {
+  display:none !important;
+}
+
+

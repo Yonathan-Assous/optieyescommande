@@ -3869,7 +3869,8 @@ class index extends MY_Controller {
             $data['page'] = "Connexion";
         }
 
-        $this->load->view('login',$data);
+        $this->load->view('test_login',$data);
+//        $this->load->view('login',$data);
     }
 
     public function profile(){

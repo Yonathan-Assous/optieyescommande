@@ -4580,6 +4580,7 @@ class m_commande extends CI_Model {
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
+                               AND l.display = 'X'
                                ORDER BY date_click, ordre LIMIT ".$from.",".$to);
 
         if ($query && $query->num_rows() > 0){

@@ -252,7 +252,7 @@ class m_commande extends CI_Model {
             $add .= 'AND c.type_commande > 1';
         }
 
-        $query = $this->db->query("SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
+        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
                                    type_generation_verre,c.prix_verre,intitule_bl,c.id_generation_verre, c.origine_commande,commentaire
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -260,7 +260,8 @@ class m_commande extends CI_Model {
                                     LEFT JOIN ".$this->table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN type_generation_verre tgv ON tgv.id_type_generation_verre = c.id_type_generation_verre
                                    WHERE id_users=".$data['id_users']." ".$add."
-                                   GROUP BY id_commande ORDER BY date_commande DESC LIMIT 2000");
+                                   GROUP BY id_commande ORDER BY date_commande DESC LIMIT 2000";
+        $query = $this->db->query($sql);
 
 
         if ($query && $query->num_rows() > 0)

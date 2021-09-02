@@ -7679,9 +7679,7 @@ var forceAddStep = false;
 var forceSphStep = false;
 
 $(document).ready(function() {
-	var video = document.getElementById("optieyes_video");
-	video.play();
-	$('.order-form-container').fadeIn(60);
+		$('.order-form-container').fadeIn(60);
 	$(".select-search").select2();
 
 	$('.referenceClient').on('keyup', 'input', function() {

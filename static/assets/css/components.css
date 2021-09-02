@@ -1337,4 +1337,28 @@ input:checked + .slider:before {
   display:none !important;
 }
 
+input.new-design {
+  background: transparent;
+  transition: all 0.2s;
+}
+
+input.new-design:focus {
+  border-color: #fbca35;
+}
+
+.password-icon {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 20px;
+  color: #000;
+  transition: all 0.2s;
+}
+
+.iconify {
+  cursor: pointer;
+}
 

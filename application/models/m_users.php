@@ -53,7 +53,8 @@ class m_users extends CI_Model {
 
 	public function check($data){
         $mail = trim($data['email']);
-        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0");
+        $sql = "SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0";
+        $query = $this->db->query($sql);
 
         if ($query->num_rows() > 0)
             return $query->result();
@@ -71,8 +72,9 @@ class m_users extends CI_Model {
   }
 
     public function addUser($data){
-        $query = $this->db->query("SELECT * FROM ".$this->table." WHERE email=".$this->db->escape
-                                  ($data['email']));
+        $sql = "SELECT * FROM ".$this->table." WHERE email=".$this->db->escape
+            ($data['email']);
+        $query = $this->db->query($sql);
 
         if ($query->num_rows() > 0) {
             $error = $query->result()[0];
@@ -80,6 +82,7 @@ class m_users extends CI_Model {
             return $error;
         }
         $sql = "SELECT id_users ,numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']);
+
         $query = $this->db->query($sql);
 
 		if ($query->num_rows() > 0) {

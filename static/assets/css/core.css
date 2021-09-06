@@ -629,7 +629,6 @@ textarea.form-control {
 }
 .form-control.no-border-top {
   border: 1px solid #e4e6e7;
-  border-top: 1px solid #fff;
 }
 
 .form-control:focus {
@@ -1271,7 +1270,7 @@ input:-webkit-autofill:active  {
 /*}*/
 
 .div-image {
-  width: 70rem;
+  width: 100%;
   position: fixed;
   top: 0rem;
   left: 0rem;

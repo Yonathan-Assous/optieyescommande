@@ -4275,6 +4275,7 @@ class admin
                 $data_commande =
                     $data_commandeNew;
             }
+
             $data_etiquette =
                 $this->m_commande->getEtiquetteAlreadySet();
 
@@ -4840,8 +4841,7 @@ class admin
                     if (isset($teinteD) &&
                         $teinteD ==
                         "") {
-                        $remark .= 'Right tint: ' .
-                            $information_commande->verre->correction_droit->teinte .
+                        $remark .= $information_commande->verre->correction_droit->teinte .
                             '.';
                     }
 
@@ -4851,20 +4851,19 @@ class admin
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
-                            $remark .= 'Right tint: Sample color send by mail.';
+                            $remark .= 'Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
-                            $remark .= 'Right tint: ' . $teinteD . '.';
+                            $remark .= $teinteD . '.';
                         }
                     }
                 }
-                if (isset($information_commande->verre->correction_gauche->teinte) &&
+                else if (isset($information_commande->verre->correction_gauche->teinte) &&
                     !empty($information_commande->verre->correction_gauche->teinte)) {
                     if (isset($teinteG) &&
                         $teinteG ==
                         "") {
-                        $remark .= ' Left tint: ' .
-                            $information_commande->verre->correction_gauche->teinte .
+                        $remark .= $information_commande->verre->correction_gauche->teinte .
                             '.';
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
@@ -4873,10 +4872,10 @@ class admin
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
-                            $remark .= ' Left tint: Sample color send by mail.';
+                            $remark .= 'Sample color send by mail.';
                         }
                         else  if (isset($teinteG)) {
-                            $remark .= ' Left tint: ' . $teinteG . '.';
+                            $remark .= $teinteG . '.';
                         }
                     }
                 }
@@ -7257,8 +7256,7 @@ class admin
                         !empty($information_commande->verre->correction_droit->teinte)) {
                         if ($teinteD ==
                             "") {
-                            $remark .= 'Right tint: ' .
-                                $information_commande->verre->correction_droit->teinte .
+                            $remark .= $information_commande->verre->correction_droit->teinte .
                                 '.';
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
@@ -7267,19 +7265,18 @@ class admin
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
                             if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
-                                $remark .= 'Right tint: Sample color send by mail.';
+                                $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
-                                $remark .= 'Right tint: ' . $teinteD . '.';
+                                $remark .= $teinteD . '.';
                             }
                         }
                     }
-                    if (isset($information_commande->verre->correction_gauche->teinte) &&
+                    else if (isset($information_commande->verre->correction_gauche->teinte) &&
                         !empty($information_commande->verre->correction_gauche->teinte)) {
                         if ($teinteG ==
                             "") {
-                            $remark .= ' Left tint: ' .
-                                $information_commande->verre->correction_gauche->teinte .
+                            $remark .= $information_commande->verre->correction_gauche->teinte .
                                 '.';
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
@@ -7288,10 +7285,10 @@ class admin
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
                             if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
-                                $remark .= ' Left tint: Sample color send by mail.';
+                                $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteG)) {
-                                $remark .= ' Left tint: ' . $teinteG . '.';
+                                $remark .= $teinteG . '.';
                             }
                         }
                     }
@@ -9532,8 +9529,7 @@ class admin
                 !empty($data["teinteD"])) {
                 if ($teinteD ==
                     "") {
-                    $remark .= 'Right tint: ' .
-                        $data["teinteD"] .
+                    $remark .= $data["teinteD"] .
                         '.';
                 }
                 if (strpos($data["teinteD"],
@@ -9542,19 +9538,18 @@ class admin
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
                     if ($data["teinteD"] == 'CUST_24') {
-                        $remark .= 'Right tint: Sample color send by mail.';
+                        $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteD)) {
-                        $remark .= 'Right tint: ' . $teinteD . '.';
+                        $remark .= $teinteD . '.';
                     }
                 }
             }
-            if (isset($data["teinteG"]) &&
+            else if (isset($data["teinteG"]) &&
                 !empty($data["teinteG"])) {
                 if ($teinteG ==
                     "") {
-                    $remark .= ' Left tint: ' .
-                        $data["teinteG"] .
+                    $remark .= $data["teinteG"] .
                         '.';
                 }
                 if (strpos($data["teinteG"],
@@ -9563,11 +9558,10 @@ class admin
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
                     if ($data["teinteG"] == 'CUST_24') {
-                        $remark .= ' Left tint: Sample color send by mail.';
+                        $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteG)) {
-                        $remark .= ' Left tint: ' .
-                            $teinteG .
+                        $remark .= $teinteG .
                             '.';
                     }
                 }
@@ -12521,7 +12515,6 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
-
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {

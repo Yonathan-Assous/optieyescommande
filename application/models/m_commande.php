@@ -3148,7 +3148,6 @@ class m_commande extends CI_Model {
     }
 
     public function addOrder($data){
-
         if(is_array($data)){
 
             $pair = $data['pair'];
@@ -3189,7 +3188,6 @@ class m_commande extends CI_Model {
                     $update_fields[] = $num."='".$data[$num]."'";
                     $data_key[] = $num;
                 }
-
                 if(isset($data['id_miroir']))
                     $data['id_miroir'] = $this->db->escape($data['id_miroir']);
 
@@ -3232,7 +3230,6 @@ class m_commande extends CI_Model {
                 }
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                     .implode(",", $data).")";
-
                 if($this->db->query($sql)){
 
                     $commande_id = $this->db->insert_id();
@@ -3257,6 +3254,7 @@ class m_commande extends CI_Model {
 
             else
             {
+
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3350,6 +3348,7 @@ class m_commande extends CI_Model {
                 }
 
                 $data['tarif_express'] = 0;
+                $data['is_express'] = 0;
                 $express = $data['express'];
 
                 //$data['prix_verre'] = str_replace("�","",$data['prix_verre']);
@@ -3450,10 +3449,10 @@ class m_commande extends CI_Model {
                         array_push( $data_key, 'is_confirmed');
                         $data['is_confirmed'] = 0;
                     }
-
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
 //                    var_dump($sql);die;
+
                     if($this->db->query($sql));
                     {
 
@@ -4717,8 +4716,9 @@ class m_commande extends CI_Model {
         $query = $this->db->query("SELECT id_commande,cote FROM etiquette");
 
         if ($query && $query->num_rows() > 0){
+            $result = $query->result();
             $data = array();
-            foreach($query->result() as $value)
+            foreach($result as $value)
                 $data[$value->id_commande][$value->cote] = 1;
 
             return $data;

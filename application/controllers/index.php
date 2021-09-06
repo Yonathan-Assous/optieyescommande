@@ -3869,7 +3869,7 @@ class index extends MY_Controller {
             $data['page'] = "Connexion";
         }
 
-        $this->load->view('test_login',$data);
+        $this->load->view('login',$data);
 //        $this->load->view('login',$data);
     }
 
@@ -4528,7 +4528,6 @@ class index extends MY_Controller {
 //		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
                    if(($data_user = $this->m_users->check($data)) !== false){
-
                        $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
 					   $data_user['user_info'] = $data_user[0];

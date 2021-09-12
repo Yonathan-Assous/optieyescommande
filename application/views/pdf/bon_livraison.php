@@ -183,11 +183,13 @@ if($bon_livraison[0]->type_optique != "lentille") {
     if (isset($info_commande['verre']['hauteur'])) {
 
         if(isset($info_commande['verre']['correction_droit'])) {
+            $correction_droit .= ' Écart pupillaire: ' . $info_commande['verre']['ecart_puppillaire']['droit'] . '<br>';
             $correction_droit .= ' Hauteur : ' . $info_commande['verre']['hauteur'] . '<br>';
         }
 
         if(isset($info_commande['verre']['correction_gauche'])) {
-            $correction_gauche .= ' Hauteur : ' . $info_commande['verre']['hauteur'] . '<br>';
+            $correction_gauche .= ' Écart pupillaire : ' . $info_commande['verre']['ecart_puppillaire']['gauche'] . '<br>';
+            $correction_gauche .= ' Hauteur : ' . $info_commande['verre']['hauteur_gauche'] . '<br>';
         }
 
     }
@@ -246,9 +248,9 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
         $correction_gauche .= '<br>Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_G;
     }
 
-    if(isset($info_commande['precalibrage']['calibre'])) {
-        $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
-    }
+//    if(isset($info_commande['precalibrage']['calibre'])) {
+//        $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+//    }
 
  /*   if(isset($info_commande['verre']['ecart_puppillaire']['droit'])) {
         $correction_droit .= ' Ecart pupillaire : ' . $info_commande['verre']['ecart_puppillaire']['droit'];

@@ -164,6 +164,7 @@ class CI_DB_mysqli_result extends CI_DB_result {
 	 */
 	function _fetch_object()
 	{
+        ini_set('memory_limit', '-1');
 		return mysqli_fetch_object($this->result_id);
 	}
 

@@ -628,13 +628,23 @@ $panierA = get_cookie("panierA");
                 echo '</tr>';
             }
 
-            if($type_commande_verre == 1  || (isset($type_commande_verreG) && $type_commande_verreG == 1 && $type_commande_verre == 4) || $k == 'pair_order' ) {
+            if(($type_commande_verre == 1  || (isset($type_commande_verreG) && $type_commande_verreG == 1 && $type_commande_verre == 4)
+                || $k == 'pair_order')
+                && strpos(strtolower($recap_commande['recap_commande']['nomverreDH']),
+                    'miroir') === false
+                && strpos(strtolower($recap_commande['recap_commande']['nomverreGH']),
+                    'miroir') === false
+                && strpos(strtolower($recap_commande['recap_commande']['traitementDH']),
+                    'miroir') === false
+                && strpos(strtolower($recap_commande['recap_commande']['traitementGH']),
+                    'miroir') === false
+             ) {
 
                 if($k == 'pair_order') {
                     $express_id = 'express_pair';
                     $is_checked = false;
 
-                    if($pair_order_recap['tarif_express'] > 0) {
+                    if($pair_order_recap['is_express']) {
                         $is_checked = true;
                     }
 

@@ -60,6 +60,7 @@ class MY_Controller extends CI_Controller {
 	}
 
 	public function pdf($file_pdf,$data,$data_name_custom_file="",$stream=false, $orientation = 'portrait', $customsize = false){
+
         $this->load->helper(array('dompdf', 'file'));
 
         if($file_pdf == "bon_livraison" || $file_pdf == 'bon_livraison_lentille' || $file_pdf == 'bon_livraison_montures'){
@@ -67,16 +68,16 @@ class MY_Controller extends CI_Controller {
         } else {
           $file_output = $file_pdf;
         }
-		
-		/*if($file_pdf != 'bon_livraison_montures')
-		{
-			if($data_name_custom_file != "")
-					$file_output .= "_".$data_name_custom_file['date'];
-		}*/
-		
-		
-		
-		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures')
+
+        /*if($file_pdf != 'bon_livraison_montures')
+        {
+            if($data_name_custom_file != "")
+                    $file_output .= "_".$data_name_custom_file['date'];
+        }*/
+
+
+
+		if($file_pdf == 'commande_montures_journaliere' || $file_pdf == 'bon_livraison_montures' || $file_pdf =='etiquette_montures' || $file_pdf == 'bon_commande')
 		{
 			$file_output .= "_".date("Y_m_d_H-i-s");
 		}
@@ -94,10 +95,12 @@ class MY_Controller extends CI_Controller {
         if(!$stream) {
             $file_output .= ".pdf";
         }
-		
+
 		//var_dump($data);
+        //echo $this->dirPdf."/".$file_pdf;die;
+        //print_r($data);die;
+
         $html = $this->load->view($this->dirPdf."/".$file_pdf, $data, true);
-		
        // echo $html;
 		//var_dump($data_name_custom_file);
      //   return;
@@ -107,9 +110,9 @@ class MY_Controller extends CI_Controller {
           echo $html;
           return;
         }
+        //echo $html;die;
 
         $data = pdf_create($html,$file_output,$stream, $orientation, $customsize);
-       
         if(!$stream){
             file_put_contents($this->config->item('directory_pdf').'/'.$file_output, $data);
         }
@@ -306,7 +309,8 @@ class MY_Controller extends CI_Controller {
             $data['date'] = $data['date_remise'] = $date;
 
             $commande = $this->m_commande->getAllCommandeByMonth($data);
-            
+            $data['tarifPackaging'] = $this->m_users->getTarifPackaging($data['id_users']);
+
          //   var_dump($commande);
             $reduction = $this->m_facture_reduction->get_reduction($data);
 
@@ -338,13 +342,12 @@ class MY_Controller extends CI_Controller {
                     $data['users_info'] = $data_user[0];
                 }
 
-                $data['taux_tva'] = $this->session->userdata('taux_tva');
+                $data['taux_tva'] = isset($data['users_info']->percent_tva) ? $data['users_info']->percent_tva : $this->session->userdata('taux_tva');
                 $data['reduction'] = !empty($reduction) ? $reduction : false;
 
                 $data_custom_file = array('id_users' => $data['id_users'], 'date' => $date);
-                
-               // return $this->load->view('pdf/'.$nom_fichier_pdf, $data,$data_custom_file, true);
 
+               // return $this->load->view('pdf/'.$nom_fichier_pdf, $data,$data_custom_file, true);
                 if(!$stream)
                   return $this->pdf($nom_fichier_pdf,$data,$data_custom_file,$stream);
                 

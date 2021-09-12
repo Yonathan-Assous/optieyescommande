@@ -123,6 +123,7 @@ else
                                 <th>Nom société</th>
                                 <th>Mois</th>
                                 <th>Montant HT</th>
+                                <th>Montant TTC</th>
                                 <th>Montant HT Lentilles</th>
 								<th>Montant HT Montures</th>
                                 <th>Montant HT Stock</th>

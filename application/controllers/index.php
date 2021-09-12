@@ -57,14 +57,22 @@ class index extends MY_Controller {
 	public function verifyCheckedCondition() {
 //        print_r($this->data['user_info']);die;
         $userId = $this->data['user_info']->id_users;
+<<<<<<< HEAD
         $user = $this->m_users->getUserById($userId)[0];
         $acceptCondition = $user->accept_conditions;
+=======
+>>>>>>> 3e921ca7630d4d5fe5d6357c80e6920e576480fc
         $this->m_users->acceptConditions($userId);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
 //        $data['email'] = "yonathan.optieyes@gmail.com";
+<<<<<<< HEAD
         $data['email_cc'] = 'optieyescommande@gmail.com';
         $data['email_cci'] = 'yonathan.optieyes@gmail.com';
+=======
+//        $data['email_cc'] = 'optieyescommande@gmail.com';
+//        $data['email_cci'] = 'yonathanassous@gmail.com';
+>>>>>>> 3e921ca7630d4d5fe5d6357c80e6920e576480fc
         setlocale(LC_TIME,
             'fr_FR.utf8',
             'fra');
@@ -1794,7 +1802,9 @@ class index extends MY_Controller {
                         $bl = '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>';
                     }
 
-					//$commande->commentaire = "";
+                    $bc = '<a href="/index/generer_pdf/bon_commande/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> Bon de commande</a>';
+
+                    //$commande->commentaire = "";
 
                     if($type == 'ec') {
 
@@ -1804,6 +1814,7 @@ class index extends MY_Controller {
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $ancienne_ref,
                                 $bl,
+                                $bc,
                                 '<del>'.$commande->total_commande.'€ </del> <b>'.number_format(($commande->tarif_express > 0 ? $commande->tarif_express : 0),2,'.',' ').'  €</b>',
                                 $commande->reference_client,
                                 $commande->generation_verre,
@@ -1825,6 +1836,7 @@ class index extends MY_Controller {
 									'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
 									date('d/m/Y H:i:s', strtotime($commande->date_commande)),
 									$bl,
+                                    $bc,
 									$commande->reference_client,
 									$commande->generation_verre,
 									$etat_commande,
@@ -1843,6 +1855,7 @@ class index extends MY_Controller {
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $bl,
+                                $bc,
                                 $commande->reference_client,
                                 $commande->generation_verre,
                                 $etat_commande,
@@ -3791,7 +3804,7 @@ class index extends MY_Controller {
 					*/
 				}
 //                var_dump($data['recap_commande']);die;
-
+//                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
@@ -3869,6 +3882,7 @@ class index extends MY_Controller {
         }
 
         $this->load->view('login',$data);
+//        $this->load->view('login',$data);
     }
 
     public function profile(){
@@ -4526,7 +4540,6 @@ class index extends MY_Controller {
 //		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
                    if(($data_user = $this->m_users->check($data)) !== false){
-
                        $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
 					   $data_user['user_info'] = $data_user[0];

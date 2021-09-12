@@ -3506,7 +3506,6 @@ class admin
     public
     function updateUser()
     {
-
         if ($this->input->is_ajax_request()) {
 
             $user =
@@ -3514,7 +3513,7 @@ class admin
             $info =
                 $this->input->post();
             $errors = 0;
-            echo json_encode($info);
+//            echo json_encode($info);
             foreach ($info as
                      $k => $v)
             {
@@ -4134,8 +4133,7 @@ class admin
                     $data['aaData'][$key] =
                         array(
                             '<a ' .
-                            ($commande->tarif_express >
-                            0 ?
+                            ($commande->is_express ?
                                 'style="border: 10px solid #e42a2a !important"' :
                                 '') .
                             ' class="' . $commandeInfo . ' btn btn-icon waves-effect waves-light ' .
@@ -4277,6 +4275,7 @@ class admin
                 $data_commande =
                     $data_commandeNew;
             }
+
             $data_etiquette =
                 $this->m_commande->getEtiquetteAlreadySet();
 
@@ -4438,8 +4437,7 @@ class admin
                         $data['aaData'][$key] =
                             array(
                                 '<a ' .
-                                ($commande->tarif_express >
-                                0 ?
+                                ($commande->is_express ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4549,8 +4547,7 @@ class admin
                         $data['aaData'][$key] =
                             array(
                                 '<a ' .
-                                ($commande->tarif_express >
-                                0 ?
+                                ($commande->is_express ?
                                     'style="border: 10px solid #e42a2a !important"' :
                                     '') .
                                 ' class="commande-info btn btn-icon waves-effect waves-light ' .
@@ -4844,8 +4841,7 @@ class admin
                     if (isset($teinteD) &&
                         $teinteD ==
                         "") {
-                        $remark .= 'Right tint: ' .
-                            $information_commande->verre->correction_droit->teinte .
+                        $remark .= $information_commande->verre->correction_droit->teinte .
                             '.';
                     }
 
@@ -4855,20 +4851,19 @@ class admin
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
-                            $remark .= 'Right tint: Sample color send by mail.';
+                            $remark .= 'Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
-                            $remark .= 'Right tint: ' . $teinteD . '.';
+                            $remark .= $teinteD . '.';
                         }
                     }
                 }
-                if (isset($information_commande->verre->correction_gauche->teinte) &&
+                else if (isset($information_commande->verre->correction_gauche->teinte) &&
                     !empty($information_commande->verre->correction_gauche->teinte)) {
                     if (isset($teinteG) &&
                         $teinteG ==
                         "") {
-                        $remark .= ' Left tint: ' .
-                            $information_commande->verre->correction_gauche->teinte .
+                        $remark .= $information_commande->verre->correction_gauche->teinte .
                             '.';
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
@@ -4877,10 +4872,10 @@ class admin
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
-                            $remark .= ' Left tint: Sample color send by mail.';
+                            $remark .= 'Sample color send by mail.';
                         }
                         else  if (isset($teinteG)) {
-                            $remark .= ' Left tint: ' . $teinteG . '.';
+                            $remark .= $teinteG . '.';
                         }
                     }
                 }
@@ -5400,8 +5395,7 @@ class admin
                         }
                     }
 
-                    if ($commande->tarif_express !=
-                        "0") {
+                    if ($commande->is_express) {
                         $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -5593,8 +5587,7 @@ class admin
                         }
                     }
 
-                    if ($commande->tarif_express !=
-                        "0") {
+                    if ($commande->is_express) {
                         $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -6174,7 +6167,7 @@ class admin
                         $detail .= "<br><b>Panier A</b>";
                     }
 
-                    $detail .= "<br>Nom du verre: <b>" .
+                    $detail .= "<br>Nom du verresssss: <b>" .
                         $commande->trad_fr .
                         "</b>";
                     $detail .= "<br>Indice: " .
@@ -6248,9 +6241,9 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementD .
-                                "";
+                                "</span>";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6341,9 +6334,9 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementG .
-                                "";
+                                "</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -6538,8 +6531,7 @@ class admin
                         "</b><br>Tarif HT: <b>" .
                         $prix_commande .
                         "</b>";
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $infos .= "<br><b>EXPRESS</b><br>";
                     }
 
@@ -6624,6 +6616,7 @@ class admin
             $data_commande =
                 $this->m_commande->getAllCommandeEdiOmega();
             $compteur = 0;
+            //print_r($data_commande);die;
             if ($data_commande !==
                 false) {
                 foreach ($data_commande
@@ -6632,6 +6625,12 @@ class admin
                 => $commande)
                 {
                     //var_dump($commande);
+
+                    $commande->indice_omega = $commande->indice_verre;
+                    if ($commande->indice_verre == '1.74'
+                        && strpos($commande->lensname, 'stock') !== false) {
+                        $commande = $this->m_commande->change_174_With_167($commande);
+                    }
                     $detail =
                     $textarea =
                         "";
@@ -6663,8 +6662,7 @@ class admin
                             "<br>";
                     }
 
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $textarea .= "<br>EXPRESS<br>";
                     }
 
@@ -6678,13 +6676,15 @@ class admin
                         $commande->lensname;
 
                     $textarea .= "<br><br>Optical Index: " .
-                        $commande->indice_verre;
+                        $commande->indice_omega;
 
 
                     $information_commande =
                         json_decode($commande->information_commande);
                     //var_dump($information_commande);
+
                     if (isset($information_commande->verre->correction_droit)) {
+
                         $detail .= "<br><br><b>OD :</b>";
                         $detail .= " " .
                             $information_commande->verre->correction_droit->sphere .
@@ -6744,9 +6744,9 @@ class admin
                             !empty($information_commande->verre->correction_droit->traitement)) {
                             $traitementD =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementD .
-                                "";
+                                "</span>";
                         }
                         if (isset($information_commande->verre->correction_droit->teinte)) {
                             $teinteD =
@@ -6848,11 +6848,11 @@ class admin
                                 ))) {
                             if ($traitementD !=
                                 "") {
-                                $textarea .= "<br>Coating code: " .
+                                $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                                     $information_commande->verre->correction_droit->traitement .
                                     "(" .
                                     $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
-                                    ")";
+                                    ")</span>";
                             }
                         }
 
@@ -6939,9 +6939,9 @@ class admin
 
                             $traitementG =
                                 $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br>Traitement: " .
+                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                                 $traitementG .
-                                "";
+                                "</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -7035,11 +7035,11 @@ class admin
                                         (strpos($commande->trad_fr,
                                                 'Xtractive') !== false))
                                 ))) {
-                            $textarea .= "<br>Coating code: " .
+                            $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                                 $information_commande->verre->correction_gauche->traitement .
                                 "(" .
                                 $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
-                                ")";
+                                ")</span>";
                         }
                         if (isset($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
@@ -7256,8 +7256,7 @@ class admin
                         !empty($information_commande->verre->correction_droit->teinte)) {
                         if ($teinteD ==
                             "") {
-                            $remark .= 'Right tint: ' .
-                                $information_commande->verre->correction_droit->teinte .
+                            $remark .= $information_commande->verre->correction_droit->teinte .
                                 '.';
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
@@ -7266,19 +7265,18 @@ class admin
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
                             if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
-                                $remark .= 'Right tint: Sample color send by mail.';
+                                $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
-                                $remark .= 'Right tint: ' . $teinteD . '.';
+                                $remark .= $teinteD . '.';
                             }
                         }
                     }
-                    if (isset($information_commande->verre->correction_gauche->teinte) &&
+                    else if (isset($information_commande->verre->correction_gauche->teinte) &&
                         !empty($information_commande->verre->correction_gauche->teinte)) {
                         if ($teinteG ==
                             "") {
-                            $remark .= ' Left tint: ' .
-                                $information_commande->verre->correction_gauche->teinte .
+                            $remark .= $information_commande->verre->correction_gauche->teinte .
                                 '.';
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
@@ -7287,10 +7285,10 @@ class admin
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
                             if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
-                                $remark .= ' Left tint: Sample color send by mail.';
+                                $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteG)) {
-                                $remark .= ' Left tint: ' . $teinteG . '.';
+                                $remark .= $teinteG . '.';
                             }
                         }
                     }
@@ -7769,8 +7767,7 @@ class admin
                             }
                         }
 
-                        if ($commande->tarif_express !=
-                            "0") {
+                        if ($commande->is_express) {
                             $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -7962,8 +7959,7 @@ class admin
                             }
                         }
 
-                        if ($commande->tarif_express !=
-                            "0") {
+                        if ($commande->is_express) {
                             $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -8513,10 +8509,38 @@ class admin
                         $prix_commande .
                         "</b>";
 
-                    if ($commande->tarif_express !=
-                        '0') {
+                    if ($commande->is_express) {
                         $infos .= "<br><b>EXPRESS</b><br>";
+                        if ($commande->tarif_express == 25) {
+                            $factureChecked = 'checked';
+                        }
+                        else {
+                            $factureChecked = '';
+                        }
+                        $expressChecked = 'checked';
+                        $displayFacture = '';
                     }
+                    else {
+                        $factureChecked = 'checked';
+                        $expressChecked = '';
+                        $displayFacture = 'display: none;';
+                    }
+
+                    $express = '<div id = "div_express_' . $commande->id_commande . '" style="text-align: center;">
+                                        <h5>Express</h5>
+                                        <label class="switch">
+                                          <input id="express_' . $commande->id_commande . '" class="express" type="checkbox" ' . $expressChecked . '>
+                                          <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div id = "div_facture_express_' . $commande->id_commande . '" style="text-align: center; ' . $displayFacture . '">
+                                        <h5>Facturé 25€</h5>
+                                        <label class="switch">
+                                          <input id="facture_express_' . $commande->id_commande . '" class="facture_express" type="checkbox" 
+                                          ' . $factureChecked . '>
+                                          <span class="slider round"></span>
+                                        </label>
+                                    </div>';
 
                     if ($commande->commentaire !=
                         "") {
@@ -8567,7 +8591,6 @@ class admin
                     }
 
 //                    var_dump($xml);die;
-
                     $CommandeOmega =
                         $this->m_commande->getTextCommandeOmega($commande->id_commande,
                             $textarea,
@@ -8618,12 +8641,14 @@ class admin
                             $infos,
                             $detail,
                             $c_omega,
+                            $express,
                             $checkbox_omega,
                         );
 
                     $compteur++;
                 }
             }
+//            print_r($data);die;
             die(json_encode($data));
         } else {
             $this->redirect("/index");
@@ -8743,9 +8768,9 @@ class admin
                         !empty($information_commande->verre->correction_droit->traitement)) {
                         $traitementD =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                        $detail .= "<br>Traitement: " .
+                        $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                             $traitementD .
-                            "";
+                            "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->teinte)) {
                         $teinteD =
@@ -8832,9 +8857,9 @@ class admin
 
                         $traitementG =
                             $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                        $detail .= "<br>Traitement: " .
+                        $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
                             $traitementG .
-                            "";
+                            "</span>";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->teinte)) {
@@ -9026,8 +9051,7 @@ class admin
                     "</b><br>Tarif HT: <b>" .
                     $prix_commande .
                     "</b>";
-                if ($commande->tarif_express !=
-                    '0') {
+                if ($commande->is_express) {
                     $infos .= "<br><b>EXPRESS</b>";
                 }
 
@@ -9164,8 +9188,7 @@ class admin
             $textarea .= "<br><br>Optical Index: " .
                 $data['indices'];
 
-            if ($commande_origine->tarif_express !=
-                '0') {
+            if ($commande_origine->is_express) {
                 $textarea .= "<br><b>EXPRESS</b>";
             }
 
@@ -9239,11 +9262,11 @@ class admin
                         )))
                 {
 
-                    $textarea .= "<br>Coating code: " .
+                    $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                         $data['traitementD'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementD']) .
-                        ")";
+                        ")</span>";
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -9339,11 +9362,11 @@ class admin
                                         'Xtractive') !== false))
                         ))) {
 
-                    $textarea .= "<br>Coating code: " .
+                    $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
                         $data['traitementG'] .
                         "(" .
                         $this->m_commande->getTraitementNameByCode($data['traitementG']) .
-                        ")";
+                        ")</span>";
                 }
 
                 if (isset($data["teinteG"]) &&
@@ -9368,6 +9391,14 @@ class admin
                         $data['diametreG'];
                 }
             }
+            date_default_timezone_set('Europe/Paris');
+            setlocale(LC_TIME,
+                'fr_FR.UTF8',
+                'fra');
+            $time = date('Y-m-d H:i:s');
+            $date = strftime( "%d/%m/%Y" , strtotime( $time ));
+            $hour = strftime( "%H:%M:%S" , strtotime( $time ));
+            $textarea .= "<br><br><span style='background-color: #e96154; color: #fff; font-weight: bold'>Changement par l'admin le " . $date . " à " . $hour . "</span>";
 
             $precal = 0;
 
@@ -9498,8 +9529,7 @@ class admin
                 !empty($data["teinteD"])) {
                 if ($teinteD ==
                     "") {
-                    $remark .= 'Right tint: ' .
-                        $data["teinteD"] .
+                    $remark .= $data["teinteD"] .
                         '.';
                 }
                 if (strpos($data["teinteD"],
@@ -9508,19 +9538,18 @@ class admin
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
                     if ($data["teinteD"] == 'CUST_24') {
-                        $remark .= 'Right tint: Sample color send by mail.';
+                        $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteD)) {
-                        $remark .= 'Right tint: ' . $teinteD . '.';
+                        $remark .= $teinteD . '.';
                     }
                 }
             }
-            if (isset($data["teinteG"]) &&
+            else if (isset($data["teinteG"]) &&
                 !empty($data["teinteG"])) {
                 if ($teinteG ==
                     "") {
-                    $remark .= ' Left tint: ' .
-                        $data["teinteG"] .
+                    $remark .= $data["teinteG"] .
                         '.';
                 }
                 if (strpos($data["teinteG"],
@@ -9529,11 +9558,10 @@ class admin
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
                     if ($data["teinteG"] == 'CUST_24') {
-                        $remark .= ' Left tint: Sample color send by mail.';
+                        $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteG)) {
-                        $remark .= ' Left tint: ' .
-                            $teinteG .
+                        $remark .= $teinteG .
                             '.';
                     }
                 }
@@ -9978,8 +10006,7 @@ class admin
                     }
                 }
 
-                if ($commande_origine->tarif_express !=
-                    "0") {
+                if ($commande_origine->is_express) {
                     $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -10167,8 +10194,7 @@ class admin
                     }
                 }
 
-                if ($commande_origine->tarif_express !=
-                    "0") {
+                if ($commande_origine->is_express) {
                     $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
@@ -12489,7 +12515,6 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
-
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {
@@ -15385,6 +15410,7 @@ class admin
             $total_ht = 0;
             $total_ht_liv = 0;
             $lastkey = 0;
+
             if ($facture_client !==
                 false) {
                 foreach ($facture_client
@@ -15395,6 +15421,7 @@ class admin
                 {
                     $facture_cli->date_commande = $facture_cli->y_m_commande;
 
+                    $tva = $this->m_users->getTva($facture_cli->id_users);
                     /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
 
                     if($shippings) {
@@ -15429,6 +15456,14 @@ class admin
                             number_format($facture_cli->total +
                                 $this->m_commande->getPackagingByMonth($date,
                                     $facture_cli->id_users),
+                                2,
+                                '.',
+                                ' ') .
+                            '</span> €',
+                            '<span>' .
+                            number_format(($facture_cli->total +
+                                $this->m_commande->getPackagingByMonth($date,
+                                    $facture_cli->id_users)) * (1 + $tva / 100),
                                 2,
                                 '.',
                                 ' ') .

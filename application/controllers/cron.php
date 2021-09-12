@@ -101,7 +101,8 @@ class cron extends MY_Controller {
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
-            //$date = date('m-Y', time());
+            $date = date('m-Y', time());
+        //echo $date;die;
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
@@ -145,9 +146,8 @@ class cron extends MY_Controller {
 
                     $info_user = $this->m_users->getUserById($facture_cli->id_users);
 
-
                     $facture = array(
-                        'montant' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
                         'id_user' => $facture_cli->id_users,
                         'jour_prelevement' => $info_user[0]->jour_prelevement,
                         'id_mandat' => $id_mandat,
@@ -256,7 +256,7 @@ class cron extends MY_Controller {
 
 
                     $facture = array(
-                        'montant' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
                         'id_user' => $facture_cli->id_users,
                         'jour_prelevement' => $info_user[0]->jour_prelevement,
                         'id_mandat' => $id_mandat,

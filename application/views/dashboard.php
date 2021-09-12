@@ -4739,11 +4739,11 @@ if (is_object($pair_order)) {
                         </div>
 
                         <div class="modal-body">
-                            <p id="text_cylindre_negative">Merci de bien vouloir saisir vos corrections en cylindre positif</p>
+                            <p id="text_cylindre_negative">Les corrections saisies en cylindre négatif ont été transposées en cylindre positif.</p>
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-warning waves-effect waves-light"
+                            <button id="cylindre_negative_ok" class="btn btn-warning waves-effect waves-light"
                                     data-dismiss="modal">Ok</button>
                         </div>
 
@@ -4752,6 +4752,7 @@ if (is_object($pair_order)) {
                 </div>
             </div>
         </div>
+
         <div id="axe_between_0_180" class="modal fade" tabindex="-1" role="dialog"
              aria-hidden="true" style="display: none;">
             <div class="modal-dialog" style="width: 90%; max-width: 400px;">
@@ -6731,38 +6732,79 @@ if (is_object($pair_order)) {
             });
         });
 
-        $('#cylindreD').on('change', function(event)
-        {
-            var str = $('#cylindreD').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreD').val('+0.00');
-                $('#sphereD').val('+0.00');
-            }
-        });
+        // $('#cylindreD').on('change', function(event)
+        // {
+        //     var str = $('#cylindreD').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         let cylindreD = $('#cylindreD').val();
+        //         let sphereD = $('#sphereD').val();
+        //         cylindreD = -cylindreD
+        //         sphereD = parseFloat(sphereD) - parseFloat(cylindreD)
+        //         sphereD = sphereD.toFixed(2);
+        //         if (sphereD >= 0) {
+        //             sphereD = "+" + sphereD;
+        //         }
+        //         $('#cylindreD').val(cylindreD);
+        //         $('#sphereD').val(sphereD);
+        //
+        //         let axeD = parseInt($('#axeD').val());
+        //         if (axeD >= 90) {
+        //             axeD -= 90;
+        //         }
+        //         else {
+        //             axeD += 90;
+        //         }
+        //         $('#axeD').val(axeD);
+        //
+        //         //$('#cylindre_negative').modal('show');
+        //         // $('#cylindreD').val('+0.00');
+        //         // $('#sphereD').val('+0.00');
+        //     }
+        // });
 
-        $('#cylindreG').on('change', function(event)
-        {
-            var str = $('#cylindreG').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreG').val('+0.00');
-                $('#sphereG').val('+0.00');
-            }
-        });
+        // $('#cylindreG').on('change', function(event)
+        // {
+        //     var str = $('#cylindreG').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         let cylindreG = $('#cylindreG').val();
+        //         let sphereG = $('#sphereG').val();
+        //         cylindreG = -cylindreG.toFixed
+        //         sphereG = parseFloat(sphereG) - parseFloat(cylindreG)
+        //         sphereG = sphereG.toFixed(2);
+        //         $('#cylindreG').val(-cylindreG);
+        //         $('#sphereG').val(cylindreG + sphereG);
+        //         // $('#cylindre_negative').modal('show');
+        //         // $('#cylindreG').val('+0.00');
+        //         // $('#sphereG').val('+0.00');
+        //         // if (sphereG >= 0) {
+        //         //     sphereG = "+" + sphereG;
+        //         // }
+        //         $('#cylindreG').val(cylindreG);
+        //         $('#sphereG').val(sphereG);
+        //
+        //         let axeG = parseInt($('#axeG').val());
+        //         if (axeG >= 90) {
+        //             axeG -= 90;
+        //         }
+        //         else {
+        //             axeG += 90;
+        //         }
+        //         $('#axeG').val(axeG);
+        //     }
+        // });
 
-        $('#cylindreD').on('change', function(event)
-        {
-            var str = $('#cylindreD').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreD').val('+0.00');
-                $('#sphereD').val('+0.00');
-            }
-        });
+        // $('#cylindreD').on('change', function(event)
+        // {
+        //     var str = $('#cylindreD').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         $('#cylindre_negative').modal('show');
+        //         $('#cylindreD').val('+0.00');
+        //         $('#sphereD').val('+0.00');
+        //     }
+        // });
 
         $('#axeD').on('change', function(event)
         {

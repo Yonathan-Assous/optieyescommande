@@ -539,7 +539,6 @@ class m_passer_commande_verre extends CI_Model
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
                      $panierA, $type = "1")
     {
-
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -575,18 +574,18 @@ class m_passer_commande_verre extends CI_Model
         if ($sphereD != "-"
             && $cylindreD != "-") {
 
+            $sumSphereCylindre = floatval($sphereD + $cylindreD);
 
             if ($additionD == '-') {
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->orderBy('id', 'ASC')->get();*/
                 $sql = "SELECT * FROM " . $this->table_Refractions . " 
-									   WHERE maxMeridian_from<=" . $sphereD . "
+									   WHERE maxMeridian_from<=" . $sumSphereCylindre . "
 									   AND maxMeridian_to>=" . $sphereD . "
 									   AND cylinder_from <=" . $cylindreD . "
 									   AND cylinder_to >=" . $cylindreD . "
 									   ORDER BY id ASC";
                 $sphereD_res = $this->db->query($sql);
             } else {
-
                 /*$sphereD_res = DB::table("Refractions")->where('maxMeridian_from', '<=', $sphereD)->where('maxMeridian_to', '>=', $sphereD)->where('cylinder_from', '<=', $cylindreD)->where('cylinder_to', '>=', $cylindreD)->where('addition_from', '<=', $additionD)->where('addition_to', '>=', $additionD)->orderBy('id', 'ASC')->get();*/
 
                 if ($lensFocalGroup == '4'
@@ -598,7 +597,7 @@ class m_passer_commande_verre extends CI_Model
                 } else {
                     $sphereD_res = $this->db->query("SELECT * 
 									   FROM " . $this->table_Refractions . " 
-									   WHERE maxMeridian_from<=" . $sphereD . "
+									   WHERE maxMeridian_from<=" . $sumSphereCylindre . "
 									   AND maxMeridian_to>=" . $sphereD . "
 									   AND cylinder_from <=" . $cylindreD . "
 									   AND cylinder_to >=" . $cylindreD . "
@@ -788,11 +787,21 @@ class m_passer_commande_verre extends CI_Model
                     }
 
                     $n_code = 0;
-
+//                    print_r($sphereD);
+//                    print_r($cylindreD);die;
+//                    print_r($codes_res);
                     foreach ($codes_res as $code) {
-                        $codes_f .= "L.code = '" . $code->code . "' OR ";
-                        $n_code++;
+                        $diametre = $this->getDiametres($code->code, $sphereD, $cylindreD);
+//                        if (!$diametre) {
+//                            echo $code->code;
+//                            var_dump(' ');
+//                        }
+                        if (!empty($diametre)) {
+                            $codes_f .= "L.code = '" . $code->code . "' OR ";
+                            $n_code++;
+                        }
                     }
+//                    print_r($codes_f);die;
 
                     if ($generation == "T-One") {
                         /*$res_f = $this->db->query("SELECT L.code,L.id, L.name, L.trad_fr, L.prix, ppc.prix as prix_perso , L.sorting
@@ -857,6 +866,7 @@ class m_passer_commande_verre extends CI_Model
 														LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=".$user_id.")
 											   WHERE (".$codes_f." L.code = '0') ".$P_A."  ORDER BY sorting,trad_fr,prix");
 						*/
+                        //echo ($codes_f);die;
 
                         if ($n_code > 2) {
                             $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
@@ -871,13 +881,14 @@ class m_passer_commande_verre extends CI_Model
 											   WHERE (" . $codes_f . " L.code = '0') " . $P_A
                                 . "  ORDER BY sorting,trad_fr,prix";
                         }
+//                        print_r($sql);die;
 
                         $res_f = $this->db->query($sql);
 
 
 
                     }
-
+                    //print_r('gdsggfdf');die;
                     return $res_f->result();
                 } else {
                     return "";
@@ -1664,7 +1675,97 @@ class m_passer_commande_verre extends CI_Model
 
         $res = $this->db->query($sql);
         $r = $res->result()[0]->ranges;
+        $ranges_list = array();
 
+        $rList = json_decode($r);
+        //return $rList;
+
+        for ($i = 0; $i < sizeof($rList); $i++) {
+
+            foreach ($rList[$i]->rangeId as $result) {
+                $ranges_list[] = $result;
+            }
+        }
+        $ranges_listF = implode(",", $ranges_list);
+
+        $sql = "SELECT * FROM lensRanges WHERE id IN (" . $ranges_listF
+            . ") ORDER BY diameter_physical ASC ";
+
+        $res_ranges = $this->db->query($sql);
+
+        $ranges = $res_ranges->result();
+        //var_dump($ranges);
+
+        foreach ($ranges as $range) {
+            $refractions = $range->refractions;
+            $steps = $range->refract_steps_sphere;
+            //echo $refractions."<br>";
+            $refr = explode(",", $refractions);
+            for ($i = 0; $i < sizeof($refr) - 1; $i++) {
+
+                //echo "SELECT * FROM Refractions WHERE id = $refr[$i] AND maxMeridian_from <= $sphere  AND maxMeridian_to >= $sphere AND cylinder_from <= $cylindre AND cylinder_to >= $cylindre AND cylinderPart_from = '0'";
+//                $sql = "SELECT * FROM Refractions WHERE id = $refr[$i]
+//                                    AND maxMeridian_from <= $sphere
+//                                    AND maxMeridian_to >= $sphere
+//                                    AND cylinder_from <= $cylindre
+//                                    AND cylinder_to >= $cylindre
+//                                    AND cylinderPart_from = '0'";
+                $sumSphereCylindre = floatval($sphere + $cylindre);
+                $sql = "SELECT * FROM Refractions WHERE id = $refr[$i] AND cylinder_from <= $cylindre AND cylinder_to >= $cylindre AND
+                ((maxMeridian_from <= $sphere AND maxMeridian_to >= $sphere AND cylinderPart_from = '0' AND cylinderPart_to = '0')
+                    OR
+                    (maxMeridian_from <= $sphere AND maxMeridian_to >= $sumSphereCylindre AND cylinderPart_from = '0' AND cylinderPart_to = '100')
+                    OR
+                    (maxMeridian_from <= $sumSphereCylindre AND maxMeridian_to >= $sphere AND cylinderPart_from = '100' AND cylinderPart_to = '0')
+                    OR
+                    (maxMeridian_from <= $sumSphereCylindre AND maxMeridian_to >= $sumSphereCylindre AND cylinderPart_from = '100' AND cylinderPart_to = '100'))";
+
+                $query =
+                    $this->db->query($sql);
+                if ($query->num_rows() > 0) {
+                    $rangesids .= "id='" . $range->id . "' OR ";
+                }
+
+            }
+        }
+
+        $rangesids = rtrim($rangesids, " OR ");
+
+        if ($rangesids != "") {
+            $rangesids = "(" . $rangesids . ")";
+
+            //	echo $rangesids."<br>";
+            /*$rangesFDiameters = DB::table('lensRanges')
+						 ->whereRaw(\DB::raw($rangesids))
+						 ->orderBy('diameter_physical', 'ASC')->groupBy('diameter_physical')->get();
+						 */
+            //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
+            $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
+                . "  GROUP BY diameter_physical ORDER BY diameter_physical";
+
+            $resultats = $this->db->query($sql);
+            //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";
+            $rangesFDiameters = $resultats->result();
+        }
+
+        return $rangesFDiameters;
+
+    }
+    public
+    function oldGetDiametres($lens, $sphere, $cylindre)
+    {
+        $sphere = str_replace("+", "", $sphere);
+        $cylindre = str_replace("+", "", $cylindre);
+
+        $sphere = str_replace(",", ".", $sphere);
+        $cylindre = str_replace(",", ".", $cylindre);
+
+        $rangesFDiameters = array();
+        $rangesids = "";
+        $sql = "SELECT * FROM " . $this->table_lenses . " WHERE code = '" . $lens . "'";
+
+        $res = $this->db->query($sql);
+        $r = $res->result()[0]->ranges;
         $ranges_list = array();
 
         $rList = json_decode($r);
@@ -1768,7 +1869,6 @@ class m_passer_commande_verre extends CI_Model
 
                 $refrc_100 = $res_100->result();
 
-
                 foreach ($refrc_100 as $ref100) {
 
                     $from = $ref100->cylinderPart_from;
@@ -1812,7 +1912,8 @@ class m_passer_commande_verre extends CI_Model
                         //	echo "###".$range->diameter_physical.": Max to:".$ref100->maxMeridian_to." - Max from:".$ref100->maxMeridian_from." ";
                         for ($v = $ref100->maxMeridian_to; $v >= $ref100->maxMeridian_from; $v -= 0.25) {
                             //	echo " // ".$v."==".$sphere." : ".$c."<=".$ref100->cylinder_to;
-
+                            //print_r($v);
+                            //echo(' ');
                             if ($c <= $ref100->cylinder_to) {
 
                                 if ($v == $sphere) {
@@ -1837,7 +1938,6 @@ class m_passer_commande_verre extends CI_Model
                                     //	echo " ??".$range->diameter_physical." - Rangesids: ".$rangesids." ";
                                 }
                             }
-
                         }
 
 
@@ -1872,10 +1972,13 @@ class m_passer_commande_verre extends CI_Model
 
                     }
                 }
-
+//                die;
             }
 
         }
+//        echo '\n';
+//        print_r($rangesids);
+//        die;
 
 
         //echo "Rangesids: ".$rangesids."<br>";

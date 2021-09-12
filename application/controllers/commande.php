@@ -26,4 +26,12 @@ class commande extends MY_Controller {
         echo $query->result()[0]->num_commentaire;
 //        return $query->result()[0]->num_commentaire;
     }
+
+    public function setExpress() {
+        $data = $this->input->post();
+//        print_r($data);die;
+        $isExpress = $data['is_express'] == 'true' ? 1 : 0;
+        $isFacture = $data['is_facture'] == 'true' ? 1 : 0;
+        $this->m_commande->setExpress($data['commande_id'], $isExpress, $isFacture);
+    }
 }

@@ -57,22 +57,14 @@ class index extends MY_Controller {
 	public function verifyCheckedCondition() {
 //        print_r($this->data['user_info']);die;
         $userId = $this->data['user_info']->id_users;
-<<<<<<< HEAD
         $user = $this->m_users->getUserById($userId)[0];
         $acceptCondition = $user->accept_conditions;
-=======
->>>>>>> 3e921ca7630d4d5fe5d6357c80e6920e576480fc
         $this->m_users->acceptConditions($userId);
         $data = [];
         $data['email'] = $this->data['user_info']->email;
 //        $data['email'] = "yonathan.optieyes@gmail.com";
-<<<<<<< HEAD
         $data['email_cc'] = 'optieyescommande@gmail.com';
         $data['email_cci'] = 'yonathan.optieyes@gmail.com';
-=======
-//        $data['email_cc'] = 'optieyescommande@gmail.com';
-//        $data['email_cci'] = 'yonathanassous@gmail.com';
->>>>>>> 3e921ca7630d4d5fe5d6357c80e6920e576480fc
         setlocale(LC_TIME,
             'fr_FR.utf8',
             'fra');

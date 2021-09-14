@@ -86,66 +86,175 @@ include_once('header.php');
                         </form>
 
                         <form id="registerForm" class="form-horizontal m-t-10" style="display: none">
-
-                            <div class="form-group ">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_nom_societe">Nom de la société</label>
-                                    <input class="form-control" type="text" name="inscription[nom_societe]" id="inscription_nom_societe" required="">
+                            <div id="inscription">
+                                <div class="form-group ">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_nom_societe">Nom de la société</label>
+                                        <input class="form-control" type="text" name="inscription[nom_societe]" id="inscription_nom_societe" required="">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6"">
+                                        <label for="inscription_nom_magasin">Nom du magasin</label>
+                                        <input class="form-control" type="text" name="inscription[nom_magasin]" id="inscription_nom_magasin" required="">
+                                    </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6"">
-                                    <label for="inscription_nom_magasin">Nom du magasin</label>
-                                    <input class="form-control" type="text" name="inscription[nom_magasin]" id="inscription_nom_magasin" required="">
+
+                                <div class="form-group ">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_adresse">Adresse magasin</label>
+                                        <input class="form-control" type="text" name="inscription[adresse]" id="inscription_adresse" required="">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_cp">Code Postal</label>
+                                        <input class="form-control" type="text" name="inscription[cp]" id="inscription_cp" required="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_ville">Ville</label>
+                                        <input class="form-control" type="text" name="inscription[ville]" id="inscription_ville" required="">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_tel_fixe">Téléphone Fixe</label>
+                                        <input class="form-control" type="text" name="inscription[tel_fixe]" id="inscription_tel_fixe" required="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_numero_siret">Numéro SIRET</label>
+                                        <input class="form-control" type="text" name="inscription_numero_siret" id="inscription_numero_siret" required data-error="#error-siret">
+                                        <p class="error error-siret" id="error-siret"></p>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_num_finess">Numéro Finess</label>
+                                        <input class="form-control" type="text" name="inscription[num_finess]" id="inscription_num_finess" required="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_email">Email</label>
+                                        <input class="form-control" type="text" name="inscription[email]" id="inscription_email" required="">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="inscription_nom_responsable">Nom du responsable du magasin</label>
+                                        <input class="form-control" type="text" name="inscription[nom_responsable]" id="inscription_nom_responsable" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group text-center m-t-30">
+                                    <div class="col-xs-12">
+                                        <button id="accept_register" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="button" name="register_btn">Passer au Sepa</button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group ">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_adresse">Adresse magasin</label>
-                                    <input class="form-control" type="text" name="inscription[adresse]" id="inscription_adresse" required="">
+                            <div id="sepa" style="display: none">
+                                <h4 class="header-title m-b-5" style="margin-top: -40px">Vos informations de paiement</h4>
+                                <p> Avant de pouvoir passer vos commandes sur OptiEyes, veuillez
+                                    renseigner les informations de prélèvement ci-dessous, vous serez amenné à
+                                    valider votre mandat par siangature éléctronique avant de pouvoir commander.</p>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label for="companyName">Société</label>
+                                        <input id="companyName" name="companyName" type="text"
+                                               class="required form-control" value="<?php
+                                        //echo $user_info->nom_magasin ?>"/>
+                                        <div class="validator"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6" style="text-align: center">
+                                        <label class="control-label" for="honorificPrefix" style="display: flex">Civilité du gérant</label>
+                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
+                                            <input type="radio" id="civilite_1" value="1" name="honorificPrefix"
+                                                   class="required" checked>
+                                            <label for="civilite_1"> M. </label>
+                                        </div>
+                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
+                                            <input type="radio" id="civilite_2" value="2" name="honorificPrefix"
+                                                   class="required">
+                                            <label for="civilite_2"> Mme </label>
+                                        </div>
+                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
+                                            <input type="radio" id="civilite_3" value="3" name="honorificPrefix"
+                                                   class="required">
+                                            <label for="civilite_3"> Mlle </label>
+                                        </div>
+                                        <div class="validator"></div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_cp">Code Postal</label>
-                                    <input class="form-control" type="text" name="inscription[cp]" id="inscription_cp" required="">
-                                </div>
-                            </div>
 
-                            <div class="form-group ">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_ville">Ville</label>
-                                    <input class="form-control" type="text" name="inscription[ville]" id="inscription_ville" required="">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6">
+                                    <label class="control-label" for="familyName">Nom du gérant</label>
+                                        <input id="familyName" name="familyName" type="text"
+                                               class="required form-control"/>
+                                        <div class="validator"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="givenName">Prénom du
+                                            gérant</label>
+                                        <input id="givenName" name="givenName" type="text"
+                                               class="required form-control"/>
+                                        <div class="validator"></div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_tel_fixe">Téléphone Fixe</label>
-                                    <input class="form-control" type="text" name="inscription[tel_fixe]" id="inscription_tel_fixe" required="">
-                                </div>
-                            </div>
 
-                            <div class="form-group ">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_numero_siret">Numéro SIRET</label>
-                                    <input class="form-control" type="text" name="inscription[numero_siret]" id="inscription_numero_siret" required="">
-                                    <p class="error error-siret"></p>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="street1">Adresse de la
+                                            société</label>
+                                        <input id="street1" name="street1" type="text"
+                                               class="required form-control" value="<?php
+                                        //echo $user_info->adresse ?>"/>
+                                        <div class="validator"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="street2">Complément</label>
+                                        <input id="street2" name="street2" type="text"
+                                               class="required form-control"/>
+                                        <div class="validator"></div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_num_finess">Numéro Finess</label>
-                                    <input class="form-control" type="text" name="inscription[num_finess]" id="inscription_num_finess" required="">
-                                </div>
-                            </div>
 
-                            <div class="form-group ">
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_email">Email</label>
-                                    <input class="form-control" type="text" name="inscription[email]" id="inscription_email" required="">
+                                <div class="form-group clearfix m-b-15">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="city">Ville</label>
+                                        <input id="city" name="city" type="text" class="required form-control"
+                                               value="<?php
+                                               //echo $user_info->ville ?>"/>
+                                        <div class="validator"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="postalCode">Code Postal</label>
+                                        <input id="postalCode" name="postalCode" type="text"
+                                               class="required form-control" value="<?php
+                                        //echo $user_info->cp ?>"/>
+                                        <div class="validator"></div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6">
-                                    <label for="inscription_nom_responsable">Nom du responsable du magasin</label>
-                                    <input class="form-control" type="text" name="inscription[nom_responsable]" id="inscription_nom_responsable" required="">
-                                </div>
-                            </div>
 
-                            <div class="form-group text-center m-t-30">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="submit" name="register_btn">Inscription</button>
+                                <div class="form-group clearfix m-b-15">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="pays">Code Postal</label>
+                                        <input id="pays" name="pays" type="text" class="required form-control"
+                                               value="France" disabled/>
+                                        <div class="validator"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="control-label" for="iban">IBAN</label>
+                                        <input id="iban" name="iban" type="text" class="required form-control"/>
+                                        <div class="validator"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-center m-t-30">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <button id="previous_register" class="btn btn-bordred btn-block waves-effect waves-light text-uppercase"
+                                                type="button" name="previous_register" style="background-color: lightgrey">Précédent</button>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <button class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="submit" name="register_btn">Inscription</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -253,11 +362,10 @@ include_once('header.php');
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title">Siret existant</h4>
-                            <div>Ce numéro de siret existe déjà</div>
                         </div>
 
                         <div class="modal-body">
-                            <p id="text_siret_exist"></p>
+                            <p id="text_siret_exist">Ce numéro de siret existe déjà</p>
                         </div>
 
                         <div class="modal-footer">
@@ -270,6 +378,8 @@ include_once('header.php');
                 </div>
             </div>
         </div>
+        <script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 
         <script>
             $(document).ready(function() {
@@ -304,6 +414,92 @@ include_once('header.php');
 
             $('#submit_change_mdp').on('click', function(e) {
                 $('#password-reset').modal('show');
+            });
+
+            // $.extend($.validator.messages, {
+            //     required: "Ce champ est obligatoire",
+            //     number: "Veuillez indiquer un nombre",
+            //     digits: "Veuillez indiquer des numéros",
+            //     maxlength: jQuery.validator.format("Limite à {0} caractères."),
+            //     minlength: jQuery.validator.format("Veuillez indiquer au moins {0} caractères."),
+            //     rangelength: jQuery.validator.format("Veuillez indiquer entre {0} et {1} caractères."),
+            //     range: jQuery.validator.format("Veuillez indiquer une valeur entre {0} et {1}."),
+            //     max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
+            //     min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}.")
+            // });
+
+            $("#registerForm").validate({
+                rules: {
+                    inscription_numero_siret: {
+                        required: true,
+                        digits: true,
+                        bon_number_siret: true
+                    },
+                    "inscription[num_finess]": {
+                        required: true,
+                        digits: true
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                messages: {
+                    required: "Ce champ est obligatoire",
+                    number: "Veuillez indiquer un nombre",
+                    digits: "Veuillez indiquer des numéros",
+                    maxlength: jQuery.validator.format("Limite à {0} caractères."),
+                    minlength: jQuery.validator.format("Veuillez indiquer au moins {0} caractères."),
+                    rangelength: jQuery.validator.format("Veuillez indiquer entre {0} et {1} caractères."),
+                    range: jQuery.validator.format("Veuillez indiquer une valeur entre {0} et {1}."),
+                    max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
+                    min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}."),
+                    bon_number_siret: "good"
+                }
+            });
+
+
+            jQuery.validator.addMethod("bon_number_siret", function(value, element) {
+                let valueArray = value.split('');
+                let sum = 0;
+                let x;
+                for (let i = 1; i <= valueArray.length; i++) {
+                    let num = parseInt(valueArray[valueArray.length - i]);
+                    if (i%2 == 1) {
+                        sum += num;
+                    }
+                    else {
+                        x = num * 2;
+                        if (x >= 10) {
+                            sum += (x%10) + 1
+                        }
+                        else {
+                            sum += x
+                        }
+                    }
+                }
+                if(sum % 10 != 0) {
+                    $.validator.messages.bon_number_siret = "Votre numéro SIRET n'est pas aux normes";
+                    return false;
+                }
+                else return true;
+            });
+
+            $('#accept_register').on('click', function(e) {
+                if($("#registerForm").valid()) {
+                    $('#sepa').show();
+                    $('#inscription').hide();
+                }
+
+            });
+
+            $('#previous_register').on('click', function(e) {
+                $('#sepa').hide();
+                $('#inscription').show();
             });
 
             $('#password_reset').on('submit', function(e) {

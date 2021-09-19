@@ -4094,6 +4094,86 @@ class index extends MY_Controller {
         }
     }
 
+    public function submit_sepa($infos_user, $sepa) {
+        $insert_id = $this->db->insert_id();
+        if(isset($insert_id) && $this->input->is_ajax_request()) {
+
+            //$infos_user = $this->m_users->getUserById($this->data['user_info']->id_users);
+
+            $this->load->helper('slimpay');
+
+            $errors = '';
+
+            $iban_info['email'] = $infos_user['email'];
+            $iban_info['client_ref'] = 'OPTC'.$insert_id;
+            $iban_info['slm_ref'] = 'OPTR'.$insert_id."BIS";
+            $iban_info['familyName'] = $sepa['familyName'];
+            $iban_info['givenName'] = $sepa['givenName'];
+            $iban_info['companyName'] = $sepa['companyName'];
+
+            switch($sepa['honorificPrefix']) {
+                case 1:
+                    $iban_info['honorificPrefix'] = 'Mr';
+                    break;
+                case 2:
+                    $iban_info['honorificPrefix'] = 'Mrs';
+                    break;
+                case 3:
+                    $iban_info['honorificPrefix'] = 'Miss';
+            }
+
+            $iban_info['iban'] = str_replace(' ', '', $sepa['iban']);
+            $iban_info['city'] = $sepa['city'];
+            $iban_info['postalCode'] = $sepa['postalCode'];
+            $iban_info['street1'] = $sepa['street1'];
+            $iban_info['street2'] = $sepa['street2'];
+
+            //var_dump($iban_info);
+
+
+            foreach($iban_info as $k => $v) {
+                $value = trim($v);
+                if($k != 'street2') {
+                    if (empty($value)) {
+                        $errors[$k] = 1;
+                    }
+                    else {
+                        if($k == 'postalCode') {
+                            if(!is_numeric($value)) {
+                                $errors[$k] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if($sepa['iban'] != '') {
+                if (!checkIBAN($sepa['iban'])) {
+                    $errors['iban'] = 2;
+                }
+            }
+            else {
+                $errors['iban'] = 1;
+            }
+
+
+            if(!empty($errors)) {
+                echo json_encode($errors);
+            }
+            else {
+                $state = createMandat($iban_info);
+                echo json_encode($state);
+            }
+
+
+
+        }
+        else {
+            $this->redirect();
+        }
+
+    }
+
     public function submit_mandat() {
 
         if($this->session->userdata('logged_in') === true && $this->input->is_ajax_request()) {
@@ -4912,14 +4992,17 @@ class index extends MY_Controller {
 
     public function subscribe(){
         if($this->input->is_ajax_request()){
-            $data = $this->input->post('inscription');
-            if($this->checkSiret($data['numero_siret'])){
+            $data = $this->input->post();
+            $inscription = $data['inscription'];
+            $sepa = $data['sepa'];
+//            print_r($data);die;
+            if($this->checkSiret($inscription['numero_siret'])){
                 //if($this->checkTvaIntraComm($data['numero_siret']) == $data['tva_intracom']){
                     $passAleatoire = $this->CarAleatoire(8);
-                    $data['email'] = strtolower($data['email']);
-                    $data['pass'] = md5($data['email'].'&&'.$passAleatoire);
-                    $data['date_inscription'] = date("Y-m-d H:i:s");
-                    if(($return = $this->m_users->addUser($data))!=""){
+                    $inscription['email'] = strtolower($inscription['email']);
+                    $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+                    $inscription['date_inscription'] = date("Y-m-d H:i:s");
+                    if(($return = $this->m_users->addUser($inscription))!=""){
                         if ($return->error == "DUPLICATE_SIRET") {
                             echo json_encode(array('status'=> 'error', 'error' => 'duplicate_siret',
                                 'magasin' => $return->id_users));
@@ -4947,7 +5030,8 @@ class index extends MY_Controller {
 
                         $subjet_txt = "Vos informations de connexion";
 
-                        $this->mail($data,$mess_txt,true,$subjet_txt);
+                        $this->mail($inscription,$mess_txt,true,$subjet_txt);
+                        $this->submit_sepa($inscription, $sepa);
                         // 'static/download/optimize.txt'
                     }
                 /*}

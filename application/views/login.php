@@ -123,7 +123,7 @@ include_once('header.php');
                                 <div class="form-group ">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_numero_siret">Numéro SIRET</label>
-                                        <input class="form-control" type="text" name="inscription_numero_siret" id="inscription_numero_siret" required data-error="#error-siret">
+                                        <input class="form-control" type="text" name="inscription[numero_siret]" id="inscription_numero_siret" required data-error="#error-siret">
                                         <p class="error error-siret" id="error-siret"></p>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
@@ -144,7 +144,7 @@ include_once('header.php');
                                 </div>
                                 <div class="form-group text-center m-t-30">
                                     <div class="col-xs-12">
-                                        <button id="accept_register" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="button" name="register_btn">Passer au Sepa</button>
+                                        <button id="accept_register" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase" type="button" name="accept_register">Passer au Sepa</button>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ include_once('header.php');
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="companyName">Société</label>
-                                        <input id="companyName" name="companyName" type="text"
+                                        <input id="companyName" name="sepa[companyName]" type="text"
                                                class="required form-control" value="<?php
                                         //echo $user_info->nom_magasin ?>"/>
                                         <div class="validator"></div>
@@ -165,17 +165,17 @@ include_once('header.php');
                                     <div class="col-xs-12 col-sm-6" style="text-align: center">
                                         <label class="control-label" for="honorificPrefix" style="display: flex">Civilité du gérant</label>
                                         <div class="radio radio-warning radio-inline" style="width: 30%;">
-                                            <input type="radio" id="civilite_1" value="1" name="honorificPrefix"
+                                            <input type="radio" id="civilite_1" value="1" name="sepa[honorificPrefix]"
                                                    class="required" checked>
                                             <label for="civilite_1"> M. </label>
                                         </div>
                                         <div class="radio radio-warning radio-inline" style="width: 30%;">
-                                            <input type="radio" id="civilite_2" value="2" name="honorificPrefix"
+                                            <input type="radio" id="civilite_2" value="2" name="sepa[honorificPrefix]"
                                                    class="required">
                                             <label for="civilite_2"> Mme </label>
                                         </div>
                                         <div class="radio radio-warning radio-inline" style="width: 30%;">
-                                            <input type="radio" id="civilite_3" value="3" name="honorificPrefix"
+                                            <input type="radio" id="civilite_3" value="3" name="sepa[honorificPrefix]"
                                                    class="required">
                                             <label for="civilite_3"> Mlle </label>
                                         </div>
@@ -186,14 +186,14 @@ include_once('header.php');
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6">
                                     <label class="control-label" for="familyName">Nom du gérant</label>
-                                        <input id="familyName" name="familyName" type="text"
+                                        <input id="familyName" name="sepa[familyName]" type="text"
                                                class="required form-control"/>
                                         <div class="validator"></div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="givenName">Prénom du
                                             gérant</label>
-                                        <input id="givenName" name="givenName" type="text"
+                                        <input id="givenName" name="sepa[givenName]" type="text"
                                                class="required form-control"/>
                                         <div class="validator"></div>
                                     </div>
@@ -203,14 +203,14 @@ include_once('header.php');
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="street1">Adresse de la
                                             société</label>
-                                        <input id="street1" name="street1" type="text"
+                                        <input id="street1" name="sepa[street1]" type="text"
                                                class="required form-control" value="<?php
                                         //echo $user_info->adresse ?>"/>
                                         <div class="validator"></div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="street2">Complément</label>
-                                        <input id="street2" name="street2" type="text"
+                                        <input id="street2" name="sepa[street2]" type="text"
                                                class="required form-control"/>
                                         <div class="validator"></div>
                                     </div>
@@ -219,14 +219,14 @@ include_once('header.php');
                                 <div class="form-group clearfix m-b-15">
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="city">Ville</label>
-                                        <input id="city" name="city" type="text" class="required form-control"
+                                        <input id="city" name="sepa[city]" type="text" class="required form-control"
                                                value="<?php
                                                //echo $user_info->ville ?>"/>
                                         <div class="validator"></div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="postalCode">Code Postal</label>
-                                        <input id="postalCode" name="postalCode" type="text"
+                                        <input id="postalCode" name="sepa[postalCode]" type="text"
                                                class="required form-control" value="<?php
                                         //echo $user_info->cp ?>"/>
                                         <div class="validator"></div>
@@ -235,14 +235,14 @@ include_once('header.php');
 
                                 <div class="form-group clearfix m-b-15">
                                     <div class="col-xs-12 col-sm-6">
-                                        <label class="control-label" for="pays">Code Postal</label>
-                                        <input id="pays" name="pays" type="text" class="required form-control"
+                                        <label class="control-label" for="pays">Pays</label>
+                                        <input id="pays" name="sepa[pays]" type="text" class="required form-control"
                                                value="France" disabled/>
                                         <div class="validator"></div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="iban">IBAN</label>
-                                        <input id="iban" name="iban" type="text" class="required form-control"/>
+                                        <input id="iban" name="sepa[iban]" type="text" class="required form-control"/>
                                         <div class="validator"></div>
                                     </div>
                                 </div>
@@ -416,21 +416,21 @@ include_once('header.php');
                 $('#password-reset').modal('show');
             });
 
-            // $.extend($.validator.messages, {
-            //     required: "Ce champ est obligatoire",
-            //     number: "Veuillez indiquer un nombre",
-            //     digits: "Veuillez indiquer des numéros",
-            //     maxlength: jQuery.validator.format("Limite à {0} caractères."),
-            //     minlength: jQuery.validator.format("Veuillez indiquer au moins {0} caractères."),
-            //     rangelength: jQuery.validator.format("Veuillez indiquer entre {0} et {1} caractères."),
-            //     range: jQuery.validator.format("Veuillez indiquer une valeur entre {0} et {1}."),
-            //     max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
-            //     min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}.")
-            // });
+            $.extend($.validator.messages, {
+                required: "Ce champ est obligatoire",
+                number: "Veuillez indiquer un nombre",
+                digits: "Veuillez indiquer des numéros",
+                maxlength: jQuery.validator.format("Limite à {0} caractères."),
+                minlength: jQuery.validator.format("Veuillez indiquer au moins {0} caractères."),
+                rangelength: jQuery.validator.format("Veuillez indiquer entre {0} et {1} caractères."),
+                range: jQuery.validator.format("Veuillez indiquer une valeur entre {0} et {1}."),
+                max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
+                min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}.")
+            });
 
             $("#registerForm").validate({
                 rules: {
-                    inscription_numero_siret: {
+                    "inscription[numero_siret]": {
                         required: true,
                         digits: true,
                         bon_number_siret: true
@@ -438,7 +438,21 @@ include_once('header.php');
                     "inscription[num_finess]": {
                         required: true,
                         digits: true
-                    }
+                    },
+                    "inscription[cp]": {
+                        required: true,
+                        digits: true,
+                        maxlength: 5
+                    },
+                    "sepa[companyName]": {
+                        required: true,
+                    },
+                    "sepa[honorificPrefix": {
+                        required: true,
+                    },
+                    "sepa[familyName": {
+                        required: true,
+                    },
                 },
                 errorPlacement: function(error, element) {
                     var placement = $(element).data('error');
@@ -447,18 +461,6 @@ include_once('header.php');
                     } else {
                         error.insertAfter(element);
                     }
-                },
-                messages: {
-                    required: "Ce champ est obligatoire",
-                    number: "Veuillez indiquer un nombre",
-                    digits: "Veuillez indiquer des numéros",
-                    maxlength: jQuery.validator.format("Limite à {0} caractères."),
-                    minlength: jQuery.validator.format("Veuillez indiquer au moins {0} caractères."),
-                    rangelength: jQuery.validator.format("Veuillez indiquer entre {0} et {1} caractères."),
-                    range: jQuery.validator.format("Veuillez indiquer une valeur entre {0} et {1}."),
-                    max: jQuery.validator.format("Veuillez indiquer une valeur inferieure à {0}."),
-                    min: jQuery.validator.format("Veuillez indiquer une valeur supérieure à {0}."),
-                    bon_number_siret: "good"
                 }
             });
 
@@ -493,6 +495,10 @@ include_once('header.php');
                 if($("#registerForm").valid()) {
                     $('#sepa').show();
                     $('#inscription').hide();
+                    $('#companyName').val($('#inscription_nom_magasin').val());
+                    $('#street1').val($('#inscription_adresse').val());
+                    $('#city').val($('#inscription_ville').val());
+                    $('#postalCode').val($('#inscription_cp').val());
                 }
 
             });
@@ -572,35 +578,38 @@ include_once('header.php');
             $('#registerForm').on('submit', function(e) {
                 e.preventDefault();
                 $('.error').text('');
-                $.ajax({
-                    type: "POST",
-                    url: "/index/subscribe",
-                    data: $("#registerForm").serialize(),
-                    success: function(data){
-                        var res = $.parseJSON(data);
-                        console.log(res);
-                        if(res.status == 'ok') {
-                            $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
-                        }
-                        else if(res.status == 'exists') {
-                            $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
-                                ' adresse mail le ' + res.date +
-                                '. <br>Voulez vous régénérer un ' +
-                                'nouveau mot de passe ?');
-                            $('#password_exist').modal('show');
-                        }
-                        else if(res.status == 'error') {
-                            if (res.error == 'duplicate_siret') {
-                                $('#text_siret_exist').html('Veuillez noter que ce numéro de SIRET existe déjà pour le ' +
-                                    'numéro de magasin ' + res.magasin + ' en interne');
-                                $('#siret_exist').modal('show');
+                if($("#registerForm").valid()) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/index/subscribe",
+                        data: $("#registerForm").serialize(),
+                        success: function(data){
+                            var res = $.parseJSON(data);
+                            console.log(res);
+                            if(res.status == 'ok') {
+                                $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
                             }
-                            else if(res.error !== undefined) {
-                                $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
+                            else if(res.status == 'exists') {
+                                $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
+                                    ' adresse mail le ' + res.date +
+                                    '. <br>Voulez vous régénérer un ' +
+                                    'nouveau mot de passe ?');
+                                $('#password_exist').modal('show');
+                            }
+                            else if(res.status == 'error') {
+                                if (res.error == 'duplicate_siret') {
+                                    $('#text_siret_exist').html('Veuillez noter que ce numéro de SIRET existe déjà pour le ' +
+                                        'numéro de magasin ' + res.magasin + ' en interne');
+                                    $('#siret_exist').modal('show');
+                                }
+                                else if(res.error !== undefined) {
+                                    $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
+                                }
                             }
                         }
-                    }
-                });
+                    });
+
+                }
             });
 
             $(document).on('click', '#register_link', function() {

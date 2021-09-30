@@ -91,6 +91,7 @@ class m_users extends CI_Model {
             return $error;
         }
         else{
+            print_r($data);die;
 			$this->db->insert($this->table, $data);
         }
     }

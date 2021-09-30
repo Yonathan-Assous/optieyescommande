@@ -207,7 +207,7 @@
 
                 $express = 0;
 
-                if($recap_commande[0]->tarif_express > 0) {
+                if($recap_commande[0]->is_express) {
 
                     $express = (int) $recap_commande[0]->tarif_express;
 

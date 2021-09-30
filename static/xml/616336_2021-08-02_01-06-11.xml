@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-08-02T13:05:19+0200</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>616336-78</referenceNo>
+         <manufacturer />
+			 <secondPair>true</secondPair>
+			 <multiplePair>
+				<referenceNo>616332-78</referenceNo>
+			 </multiplePair>
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>S2UH60</commercialCode>
+               <rxData>
+                  <sphere>-3.75</sphere>
+                  <cylinder>
+                      <power>1.50</power>
+                      <axis>125</axis>
+                  </cylinder><addition>1.50</addition>
+						  </rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700100</commercialCode>
+					   </coating>
+						   <coating coatingType="COLOR">
+							  <commercialCode>582</commercialCode>
+						   </coating><coating coatingType="OTHER">
+					<commercialCode>EXP24</commercialCode>
+					</coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>75</physical>
+                     <optical>80</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>S2UH60</commercialCode>
+               <rxData>
+                  <sphere>-4.25</sphere>
+                  <cylinder>
+                      <power>2.00</power>
+                      <axis>45</axis>
+                  </cylinder><addition>1.50</addition>
+						  </rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700100</commercialCode>
+					   </coating>
+						   <coating coatingType="COLOR">
+							  <commercialCode>582</commercialCode>
+						   </coating><coating coatingType="OTHER">
+					<commercialCode>EXP24</commercialCode>
+					</coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>75</physical>
+                     <optical>80</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+            	</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

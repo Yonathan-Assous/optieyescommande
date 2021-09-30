@@ -177,7 +177,7 @@ include_once('menu.php');
                     },
                     dataType: "html",
                     success: function(data){
-                        document.location.reload();
+                        //document.location.reload();
                     },
                     error: function(data) {
                         console.log('pas cool');

@@ -336,7 +336,7 @@ include_once('header.php');
                         </div>
 
                         <div class="modal-body">
-                            <p id="text_password_exist"></p>
+                            <p id="text_password_exist" class="new-design"></p>
                         </div>
 
                         <div class="modal-footer">
@@ -433,13 +433,18 @@ include_once('header.php');
                     "inscription[numero_siret]": {
                         required: true,
                         digits: true,
-                        bon_number_siret: true
+                        check_number_siret: true
                     },
                     "inscription[num_finess]": {
                         required: true,
                         digits: true
                     },
                     "inscription[cp]": {
+                        required: true,
+                        digits: true,
+                        maxlength: 5
+                    },
+                    "sepa[cp]": {
                         required: true,
                         digits: true,
                         maxlength: 5
@@ -453,6 +458,10 @@ include_once('header.php');
                     "sepa[familyName": {
                         required: true,
                     },
+                    "sepa[iban]": {
+                        required: true,
+                        check_iban: true
+                    }
                 },
                 errorPlacement: function(error, element) {
                     var placement = $(element).data('error');
@@ -465,7 +474,7 @@ include_once('header.php');
             });
 
 
-            jQuery.validator.addMethod("bon_number_siret", function(value, element) {
+            jQuery.validator.addMethod("check_number_siret", function(value, element) {
                 let valueArray = value.split('');
                 let sum = 0;
                 let x;
@@ -485,12 +494,48 @@ include_once('header.php');
                     }
                 }
                 if(sum % 10 != 0) {
-                    $.validator.messages.bon_number_siret = "Votre numéro SIRET n'est pas aux normes";
+                    $.validator.messages.check_number_siret = "Votre numéro SIRET n'est pas aux normes";
                     return false;
                 }
                 else return true;
             });
 
+            jQuery.validator.addMethod("check_iban", function(iban, element) {
+                iban = iban.toLowerCase();
+                iban = iban.replace(' ', '');
+                let countries = {'al':28, 'ad':24, 'at':20, 'az':28, 'bh':22, 'be':16, 'ba':20, 'br':29, 'bg':22, 'cr':21, 'hr':21, 'cy':28, 'cz':24, 'dk':18, 'do':28, 'ee':20, 'fo':18, 'fi':18,
+                                 'fr':27, 'ge':22, 'de':22, 'gi':23, 'gr':27, 'gl':18, 'gt':28, 'hu':28, 'is':26, 'ie':22, 'il':23, 'it':27, 'jo':30, 'kz':20, 'kw':30, 'lv':21, 'lb':28, 'li':21,
+                                 'lt':20, 'lu':20, 'mk':19, 'mt':31, 'mr':27, 'mu':30, 'mc':27, 'md':24, 'me':22, 'nl':18, 'no':15, 'pk':24, 'ps':29, 'pl':28, 'pt':25, 'qa':29, 'ro':24, 'sm':27,
+                                 'sa':24, 'rs':22, 'sk':24, 'si':19, 'es':24, 'se':24, 'ch':21, 'tn':24, 'tr':26, 'ae':23, 'gb':22, 'vg':24};
+                let chars = {'a':10,'b':11,'c':12,'d':13,'e':14,'f':15,'g':16,'h':17,'i':18,'j':19,'k':20,'l':21,'m':22,'n':23,'o':24,'p':25,'q':26,'r':27,'s':28,'t':29,'u':30,'v':31,'w':32,'x':33,'y':34,'z':35};
+                let country = iban.substring(0,2);
+                let result = 0;
+                if (iban.length == countries[country]) {
+                    let movedChar = iban.substring(4) + iban.substring(0,4)
+                    let movedCharArray = movedChar.split('');
+                    let divident = "";
+
+                    for (let i = 0; i < movedCharArray.length; i++) {
+                        if (!$.isNumeric(movedCharArray[i])) {
+                            movedCharArray[i] = chars[movedCharArray[i]];
+                        }
+                        divident += movedCharArray[i];
+                    }
+                    const divisor = 97;
+                    while (divident.length > 10) {
+                        let part = divident.substring(0, 10);
+                        divident = (part % divisor) + divident.substring(10);
+                    }
+                    result = divident % divisor;
+                }
+
+                if(result != 1) {
+                    $.validator.messages.check_iban = "Votre Iban n'est pas aux normes";
+                    return false;
+                }
+                else return true;
+            });
+            
             $('#accept_register').on('click', function(e) {
                 if($("#registerForm").valid()) {
                     $('#sepa').show();

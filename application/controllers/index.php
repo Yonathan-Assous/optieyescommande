@@ -4096,6 +4096,8 @@ class index extends MY_Controller {
 
     public function submit_sepa($infos_user, $sepa) {
         $insert_id = $this->db->insert_id();
+//        print_r($this->db->last_query());die;
+//        print_r($insert_id);die;
         if(isset($insert_id) && $this->input->is_ajax_request()) {
 
             //$infos_user = $this->m_users->getUserById($this->data['user_info']->id_users);
@@ -4139,6 +4141,7 @@ class index extends MY_Controller {
                     }
                     else {
                         if($k == 'postalCode') {
+//                            print_r($value);
                             if(!is_numeric($value)) {
                                 $errors[$k] = 2;
                             }
@@ -4146,7 +4149,8 @@ class index extends MY_Controller {
                     }
                 }
             }
-
+//            print_r($errors);die;
+//            print_r(!checkIBAN($sepa['iban']));die;
             if($sepa['iban'] != '') {
                 if (!checkIBAN($sepa['iban'])) {
                     $errors['iban'] = 2;
@@ -4161,16 +4165,38 @@ class index extends MY_Controller {
                 echo json_encode($errors);
             }
             else {
-                $state = createMandat($iban_info);
-                echo json_encode($state);
+//                $state = createMandat($iban_info);
+//                echo json_encode($state);
+//                if ($state['status'] == 1) {
+                    $this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+//                }
+//                if($this->data['infos_user'][0]->valid_mandat != 1) {
+//
+//                    $checkMandat = getMandat('OPTR' . $this->data['user_info']->id_users."BIS");
+//
+//                    if ($checkMandat['state'] == 'active') {
+//
+//                        $this->m_users->updateUser(array('id_users' => $this->data['user_info']->id_users, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+//
+//                        $this->email->from('noreply@optieyescommande.com', 'Optieyes Commande');
+//                        $this->email->to('optieyescommande@gmail.com');
+//                        $this->email->cc('testproxicom@gmail.com');
+//
+//                        $this->email->subject('Client n°' . $this->data['user_info']->id_users . ' a validé son RIB.');
+//
+//                        $this->email->send();
+//
+//                    }
+//
+//                }
             }
 
 
 
         }
-        else {
-            $this->redirect();
-        }
+//        else {
+//            $this->redirect();
+//        }
 
     }
 
@@ -5014,6 +5040,7 @@ class index extends MY_Controller {
                         }
                     }
                     else{
+
                         echo json_encode(array('status'=> 'ok'));
 
 

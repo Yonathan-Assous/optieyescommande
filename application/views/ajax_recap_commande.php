@@ -627,9 +627,9 @@ $panierA = get_cookie("panierA");
 
                 echo '</tr>';
             }
-
             if(($type_commande_verre == 1  || (isset($type_commande_verreG) && $type_commande_verreG == 1 && $type_commande_verre == 4)
                 || $k == 'pair_order')
+                && isset($recap_commande['recap_commande'])
                 && strpos(strtolower($recap_commande['recap_commande']['nomverreDH']),
                     'miroir') === false
                 && strpos(strtolower($recap_commande['recap_commande']['nomverreGH']),

@@ -46,6 +46,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_config');
 		$this->load->model('m_passer_commande_verre');
         $this->load->model('m_traitement');
+        $this->load->model('m_log');
         $this->load->model('m_teinte');
         $this->load->model('m_type_verre_solaire');
         $this->load->model('m_lenses');

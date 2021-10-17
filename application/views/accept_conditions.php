@@ -83,7 +83,7 @@ include_once('header.php');
             data: {},
             dataType: "json",
             success: function (data) {
-                window.location.href = window.location.href;
+                location.href = window.location.href;
             }
         });
     });

@@ -4170,11 +4170,26 @@ class index extends MY_Controller {
                 echo json_encode($errors);
             }
             else {
-//                $state = createMandat($iban_info);
+                switch($this->config->item('opti_env')) {
+
+                    case 'prod':
+
+                        $state = createMandat($iban_info);
+                        break;
+
+                    case 'dev':
+                        $state = [];
+                        $state['status'] = 1;
+                        break;
+                    default:
+                        $state = [];
+                        $state['status'] = 0;
+                        break;
+                }
 //                echo json_encode($state);
-//                if ($state['status'] == 1) {
+                if ($state['status'] == 1) {
                     $this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
-//                }
+                }
 //                if($this->data['infos_user'][0]->valid_mandat != 1) {
 //
 //                    $checkMandat = getMandat('OPTR' . $this->data['user_info']->id_users."BIS");

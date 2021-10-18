@@ -432,7 +432,17 @@ class m_passer_commande_verre extends CI_Model
     function getstocklens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock,
                           $user_id, $panierA, $type = "1")
     {
-
+//        echo ('$indice: ' . $indice . "<br>");
+//        echo('$lensFocalGroup: ' . $lensFocalGroup . "<br>");
+//        echo('$generation: ' . $generation . "<br>");
+//        echo('$sphereD: ' . $sphereD . "<br>");
+//        echo('$cylindreD: ' . $cylindreD . "<br>");
+//        echo('$axeD: ' . $axeD . "<br>");
+//        echo('$additionD: ' . $additionD . "<br>");
+//        echo('$stock: ' . $stock . "<br>");
+//        echo('$user_id: ' . $user_id . "<br>");
+//        echo('$panierA: ' . $panierA . "<br>");
+//        echo('$type: ' . $type . "<br>");die;
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -528,7 +538,7 @@ class m_passer_commande_verre extends CI_Model
                     }
                 }
             }
-//            var_dump($resultat);die;
+            //var_dump($resultat);die;
             return $resultat;
 
         }
@@ -620,11 +630,11 @@ class m_passer_commande_verre extends CI_Model
                     $tab_ranges = explode(",", $lensRanges);
                     for ($i = 0; $i < sizeof($tab_ranges); $i++) {
                         if ($tab_ranges[$i] != "") {
-
-                            $ranges_res = $this->db->query("SELECT * 
+                            $sql = "SELECT * 
 													FROM " . $this->table_lensRanges . " 
 										   WHERE id=" . $tab_ranges[$i] . "
-										   AND " . $stockLens . "");
+										   AND " . $stockLens . "";
+                            $ranges_res = $this->db->query($sql);
 
                             /*$ranges_res = $this->db->query("SELECT *
 													FROM ".$this->table_lensRanges."
@@ -789,16 +799,22 @@ class m_passer_commande_verre extends CI_Model
                     $n_code = 0;
 //                    print_r($sphereD);
 //                    print_r($cylindreD);die;
-//                    print_r($codes_res);
-                    foreach ($codes_res as $code) {
-                        $diametre = $this->getDiametres($code->code, $sphereD, $cylindreD);
+//                    print_r($codes_res);die;
+                    if ($codes_res) {
+                        foreach ($codes_res as $code) {
+                            $diametre = $this->getDiametres($code->code, $sphereD, $cylindreD);
+//                        print_r($code->code);
+//                        print_r($sphereD);
+//                        print_r($cylindreD);
+//                        print_r($diametre);
 //                        if (!$diametre) {
 //                            echo $code->code;
 //                            var_dump(' ');
 //                        }
-                        if (!empty($diametre)) {
-                            $codes_f .= "L.code = '" . $code->code . "' OR ";
-                            $n_code++;
+                            if (!empty($diametre)) {
+                                $codes_f .= "L.code = '" . $code->code . "' OR ";
+                                $n_code++;
+                            }
                         }
                     }
 //                    print_r($codes_f);die;
@@ -867,12 +883,12 @@ class m_passer_commande_verre extends CI_Model
 											   WHERE (".$codes_f." L.code = '0') ".$P_A."  ORDER BY sorting,trad_fr,prix");
 						*/
                         //echo ($codes_f);die;
-
+                        //print_r($n_code);die;
                         if ($n_code > 2) {
                             $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting
-                                    FROM lenses L LEFT JOIN lenses l2
-                                    ON (L.trad_fr = l2.trad_fr AND L.sorting > l2.sorting)
-                                    WHERE l2.sorting IS NULL AND  (" . $codes_f . " L.code = '0') " . $P_A . " ORDER BY sorting,trad_fr";
+                                    FROM lenses L 
+                                    WHERE (" . $codes_f . " L.code = '0') " . $P_A . " ORDER BY sorting,trad_fr";
+//                            print_r($sql);die;
                         } else {
                             $sql = "SELECT L.code,L.id, L.name, L.trad_fr, L.prix, ppc.prix as prix_perso, L.sorting 
 														FROM " . $this->table_lenses . " L 
@@ -880,6 +896,8 @@ class m_passer_commande_verre extends CI_Model
                                 . $user_id . ")
 											   WHERE (" . $codes_f . " L.code = '0') " . $P_A
                                 . "  ORDER BY sorting,trad_fr,prix";
+//                            print_r($sql);die;
+
                         }
 //                        print_r($sql);die;
 

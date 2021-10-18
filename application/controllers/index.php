@@ -3539,11 +3539,15 @@ class index extends MY_Controller {
 				if(isset($data['photocromie']) && !empty($data['photocromie']))
 					$data_commande['verre']['photocromie']= $data['photocromie'];
 
-				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
-					$data_commande['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit'])) {
+                    $data_commande['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+                    $data_commandeD['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+                }
 
-				if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche']))
-					$data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+				if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                    $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+                    $data_commandeG['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+                }
 
 				if(isset($data['angle_pantoscopique']) && !empty($data['angle_pantoscopique']))
 					$data_commande['verre']['angle_pantoscopique'] = $data['angle_pantoscopique'];
@@ -3795,6 +3799,7 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
+
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);

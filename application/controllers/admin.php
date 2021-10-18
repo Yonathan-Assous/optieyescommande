@@ -10678,6 +10678,7 @@ class admin
         $this->load->helper('file');
         $data_commande =
             $this->m_commande->getAllCommandesCheckedOmega();
+
         if ($data_commande !==
             false) {
             foreach ($data_commande
@@ -10690,33 +10691,71 @@ class admin
                     $commande->id_commande .
                     "_" . $d .
                     ".xml";
+                switch($this->config->item('opti_env')) {
 
-                if (!write_file('/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
-                    $filename,
-                    $commande->xml)) {
-                    echo $filename .
-                        'ERROR - ';
-                } else {
-                    //echo $filename.'OK - ';
-                    //	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
-                    if ($this->uploadFTP("ftpserver.omega-optix.cz",
-                        "optieyes",
-                        "OptiEyes-2020",
-                        '/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
-                        $filename,
-                        "/Orders/" .
-                        $filename)) {
-                        echo $filename .
-                            'OK - ';
-                        $s =
-                            $this->m_commande->updateEdiStatus($commande->id_commande,
-                                "2",
-                                $filename);
-                    } else {
-                        echo $filename .
-                            'ERROR - ';
-                    }
+                    case 'prod':
+                        if (!write_file('/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
+                            $filename,
+                            $commande->xml)) {
+                            $this->m_log->setToLog(false, "sendToOmega", "fichier non créé");
+                            echo $filename .
+                                'ERROR - ';
+                        } else {
+                            //echo $filename.'OK - ';
+                            //	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
+                            if ($this->uploadFTP("ftpserver.omega-optix.cz",
+                                "optieyes",
+                                "OptiEyes-2020",
+                                '/var/www/vhosts/optieyescommande.com/httpdocs_new/static/xml/' .
+                                $filename,
+                                "/Orders/" .
+                                $filename)) {
+                                echo $filename .
+                                    'OK - ';
+                                $this->m_commande->updateEdiStatus($commande->id_commande,
+                                        "2",
+                                        $filename);
+                                $this->m_log->setToLog(true, "sendToOmega");
+                            } else {
+                                $this->m_log->setToLog(false, "sendToOmega", "n'est pas entré chez oméga");
+                                echo $filename .
+                                    'ERROR - ';
+                            }
+                        }
+                        break;
+
+                    case 'dev':
+                        $chemin_fichier = "C:\wamp64\www\optieyescommande\static\xml\\";
+
+                        if (!write_file($chemin_fichier .
+                            $filename,
+                            $commande->xml)) {
+                            echo $filename .
+                                'ERROR - ';
+                            $this->m_log->setToLog(false, "sendToOmega", "test comment");
+
+                        } else {
+                            //echo $filename.'OK - ';
+                            //	$s = $this->m_commande->updateEdiStatus($commande->id_commande,"2",$filename);
+                                $s =
+                                    $this->m_commande->updateEdiStatus($commande->id_commande,
+                                        "2",
+                                        $filename);
+                            $this->m_log->setToLog(true, "sendToOmega");
+                        }
+//                        $chemin_fichier = "C:\wamp64\www\optieyescommande\static\xml\\";
+//                        write_file($chemin_fichier .
+//                            $filename,
+//                            $commande->xml);
+                        //print_r('bla');die;
+                        break;
+                    default:
+                        print_r('default');die;
+
+
+
                 }
+
             }
         }
     }

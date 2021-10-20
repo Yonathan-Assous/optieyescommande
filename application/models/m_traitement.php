@@ -577,7 +577,7 @@ class m_traitement extends CI_Model
                 AND id_user = $userId
                 ORDER BY `id_user` DESC";
         }
-        print_r($sql);die;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
         //var_dump($query->num_rows());die;
         if ($query->num_rows() == 0) {

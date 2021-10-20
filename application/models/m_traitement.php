@@ -10,7 +10,7 @@ class m_traitement extends CI_Model
 
     public function insertPrixTraitementNew() {
         $sqlLenses = "SELECT * FROM `lenses` WHERE
-                id >= 2796 AND id <= 2799
+                id >= 2852 AND id <= 2855
                 ORDER BY `lenses`.`name`  DESC";
         $query = $this->db->query($sqlLenses);
         if ($query->num_rows() > 0)
@@ -577,7 +577,7 @@ class m_traitement extends CI_Model
                 AND id_user = $userId
                 ORDER BY `id_user` DESC";
         }
-//        print_r($sql);die;
+        print_r($sql);die;
         $query = $this->db->query($sql);
         //var_dump($query->num_rows());die;
         if ($query->num_rows() == 0) {

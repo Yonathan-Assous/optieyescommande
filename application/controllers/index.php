@@ -4157,7 +4157,13 @@ class index extends MY_Controller {
 //            print_r($errors);die;
 //            print_r(!checkIBAN($sepa['iban']));die;
             if($sepa['iban'] != '') {
-                if (!checkIBAN($sepa['iban'])) {
+                if (isset($sepa['country'])) {
+                    $iban = $sepa['country'] . $sepa['iban'];
+                }
+                else {
+                    $iban = $sepa['iban'];
+                }
+                if (!checkIBAN($iban)) {
                     $errors['iban'] = 2;
                 }
             }
@@ -4170,21 +4176,21 @@ class index extends MY_Controller {
                 echo json_encode($errors);
             }
             else {
-                switch($this->config->item('opti_env')) {
+                     switch($this->config->item('opti_env')) {
 
-                    case 'prod':
+                            case 'prod':
 
-                        $state = createMandat($iban_info);
-                        break;
+                                $state = createMandat($iban_info);
+                                break;
 
-                    case 'dev':
-                        $state = [];
-                        $state['status'] = 1;
-                        break;
-                    default:
-                        $state = [];
-                        $state['status'] = 0;
-                        break;
+                            case 'dev':
+                                $state = [];
+                                $state['status'] = 1;
+                                break;
+                            default:
+                                $state = [];
+                                $state['status'] = 0;
+                                break;
                 }
 //                echo json_encode($state);
                 if ($state['status'] == 1) {

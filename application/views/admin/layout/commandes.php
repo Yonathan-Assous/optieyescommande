@@ -870,4 +870,3 @@ console.log(data);
         return false;
     });
 </script>
-</script>

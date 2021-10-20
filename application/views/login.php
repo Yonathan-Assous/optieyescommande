@@ -15,7 +15,7 @@ include_once('header.php');
                     <div class="login-description" style="font-weight: bold;">
                         Connectez-vous à votre espace client optieyes.com
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="panel-body">
 
                     <?php if(isset($recovery) && $recovery) { ?>
 
@@ -90,33 +90,39 @@ include_once('header.php');
                                 <div class="form-group ">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_nom_societe">Nom de la société</label>
-                                        <input class="form-control" type="text" name="inscription[nom_societe]" id="inscription_nom_societe" required="">
+                                        <input class="form-control" type="text" name="inscription[nom_societe]" id="inscription_nom_societe" required data-error="#error-nom_societe">
+                                        <p class="error error-nom_societe" id="error-nom_societe"></p>
                                     </div>
                                     <div class="col-xs-12 col-sm-6"">
                                         <label for="inscription_nom_magasin">Nom du magasin</label>
-                                        <input class="form-control" type="text" name="inscription[nom_magasin]" id="inscription_nom_magasin" required="">
+                                        <input class="form-control" type="text" name="inscription[nom_magasin]" id="inscription_nom_magasin" required data-error="#error-nom_magasin">
+                                        <p class="error error-nom_magasin" id="error-nom_magasin"></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_adresse">Adresse magasin</label>
-                                        <input class="form-control" type="text" name="inscription[adresse]" id="inscription_adresse" required="">
+                                        <input class="form-control" type="text" name="inscription[adresse]" id="inscription_adresse" required data-error="#error-adresse">
+                                        <p class="error error-adresse" id="error-adresse"></p>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_cp">Code Postal</label>
-                                        <input class="form-control" type="text" name="inscription[cp]" id="inscription_cp" required="">
+                                        <input class="form-control" type="text" name="inscription[cp]" id="inscription_cp" required data-error="#error-cp">
+                                        <p class="error error-cp" id="error-cp"></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_ville">Ville</label>
-                                        <input class="form-control" type="text" name="inscription[ville]" id="inscription_ville" required="">
+                                        <input class="form-control" type="text" name="inscription[ville]" id="inscription_ville" required data-error="#error-ville">
+                                        <p class="error error-ville" id="error-ville"></p>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_tel_fixe">Téléphone Fixe</label>
-                                        <input class="form-control" type="text" name="inscription[tel_fixe]" id="inscription_tel_fixe" required="">
+                                        <input class="form-control" type="text" name="inscription[tel_fixe]" id="inscription_tel_fixe" required="" data-error="#error-tel_fixe">
+                                        <p class="error error-tel_fixe" id="error-tel_fixe"></p>
                                     </div>
                                 </div>
 
@@ -128,18 +134,21 @@ include_once('header.php');
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_num_finess">Numéro Finess</label>
-                                        <input class="form-control" type="text" name="inscription[num_finess]" id="inscription_num_finess" required="">
+                                        <input class="form-control" type="text" name="inscription[num_finess]" id="inscription_num_finess" required data-error="#error-num_finess">
+                                        <p class="error error-num_finess" id="error-num_finess"></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_email">Email</label>
-                                        <input class="form-control" type="text" name="inscription[email]" id="inscription_email" required="">
+                                        <input class="form-control" type="text" name="inscription[email]" id="inscription_email" required data-error="#error-email">
+                                        <p class="error error-email" id="error-email"></p>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="inscription_nom_responsable">Nom du responsable du magasin</label>
-                                        <input class="form-control" type="text" name="inscription[nom_responsable]" id="inscription_nom_responsable" required="">
+                                        <input class="form-control" type="text" name="inscription[nom_responsable]" id="inscription_nom_responsable" required="" data-error="#error-nom_responsable">
+                                        <p class="error error-nom_responsable" id="error-nom_responsable"></p>
                                     </div>
                                 </div>
                                 <div class="form-group text-center m-t-30">
@@ -164,21 +173,21 @@ include_once('header.php');
                                     </div>
                                     <div class="col-xs-12 col-sm-6" style="text-align: center">
                                         <label class="control-label" for="honorificPrefix" style="display: flex">Civilité du gérant</label>
-                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
+                                        <div class="radio radio-warning radio-inline" style="width: 45%;">
                                             <input type="radio" id="civilite_1" value="1" name="sepa[honorificPrefix]"
                                                    class="required" checked>
                                             <label for="civilite_1"> M. </label>
                                         </div>
-                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
+                                        <div class="radio radio-warning radio-inline" style="width: 45%;">
                                             <input type="radio" id="civilite_2" value="2" name="sepa[honorificPrefix]"
                                                    class="required">
                                             <label for="civilite_2"> Mme </label>
                                         </div>
-                                        <div class="radio radio-warning radio-inline" style="width: 30%;">
-                                            <input type="radio" id="civilite_3" value="3" name="sepa[honorificPrefix]"
-                                                   class="required">
-                                            <label for="civilite_3"> Mlle </label>
-                                        </div>
+<!--                                        <div class="radio radio-warning radio-inline" style="width: 30%;">-->
+<!--                                            <input type="radio" id="civilite_3" value="3" name="sepa[honorificPrefix]"-->
+<!--                                                   class="required">-->
+<!--                                            <label for="civilite_3"> Mlle </label>-->
+<!--                                        </div>-->
                                         <div class="validator"></div>
                                     </div>
                                 </div>
@@ -211,7 +220,7 @@ include_once('header.php');
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="street2">Complément</label>
                                         <input id="street2" name="sepa[street2]" type="text"
-                                               class="required form-control"/>
+                                               class="form-control"/>
                                         <div class="validator"></div>
                                     </div>
                                 </div>
@@ -242,7 +251,79 @@ include_once('header.php');
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <label class="control-label" for="iban">IBAN</label>
-                                        <input id="iban" name="sepa[iban]" type="text" class="required form-control"/>
+                                        <div style="display: flex">
+                                            <div class="col-sm-2" style="padding-left: 0px; padding-right: 1px;">
+                                                <select name="sepa[country]" id="country" class="form-control" style="padding: 0px; text-align: center; font-weight: bold">
+                                                    <option value="ad">ad</option>
+                                                    <option value="ae">ae</option>
+                                                    <option value="al">al</option>
+                                                    <option value="at">at</option>
+                                                    <option value="az">az</option>
+                                                    <option value="bh">bh</option>
+                                                    <option value="be">be</option>
+                                                    <option value="ba">ba</option>
+                                                    <option value="br">br</option>
+                                                    <option value="bg">bg</option>
+                                                    <option value="cr">cr</option>
+                                                    <option value="cy">cy</option>
+                                                    <option value="cz">cz</option>
+                                                    <option value="de">de</option>
+                                                    <option value="dk">dk</option>
+                                                    <option value="do">do</option>
+                                                    <option value="ee">ee</option>
+                                                    <option value="es">es</option>
+                                                    <option value="fi">fi</option>
+                                                    <option value="fr" selected>fr</option>
+                                                    <option value="gb">gb</option>
+                                                    <option value="ge">ge</option>
+                                                    <option value="gi">gi</option>
+                                                    <option value="gl">gl</option>
+                                                    <option value="gr">gr</option>
+                                                    <option value="gt">gt</option>
+                                                    <option value="hr">hr</option>
+                                                    <option value="hu">hu</option>
+                                                    <option value="ie">ie</option>
+                                                    <option value="il">il</option>
+                                                    <option value="is">is</option>
+                                                    <option value="it">it</option>
+                                                    <option value="jo">jo</option>
+                                                    <option value="kw">kw</option>
+                                                    <option value="kz">kz</option>
+                                                    <option value="lb">lb</option>
+                                                    <option value="li">li</option>
+                                                    <option value="lt">lt</option>
+                                                    <option value="lu">lu</option>
+                                                    <option value="lv">lv</option>
+                                                    <option value="mc">mc</option>
+                                                    <option value="md">md</option>
+                                                    <option value="me">me</option>
+                                                    <option value="mk">mk</option>
+                                                    <option value="mr">mr</option>
+                                                    <option value="mt">mt</option>
+                                                    <option value="mu">mu</option>
+                                                    <option value="nl">nl</option>
+                                                    <option value="no">no</option>
+                                                    <option value="pk">pk</option>
+                                                    <option value="pl">pl</option>
+                                                    <option value="ps">ps</option>
+                                                    <option value="pt">pt</option>
+                                                    <option value="qa">qa</option>
+                                                    <option value="ro">ro</option>
+                                                    <option value="rs">rs</option>
+                                                    <option value="sa">sa</option>
+                                                    <option value="se">se</option>
+                                                    <option value="sk">sk</option>
+                                                    <option value="si">si</option>
+                                                    <option value="sm">sm</option>
+                                                    <option value="tn">tn</option>
+                                                    <option value="tr">tr</option>
+                                                    <option value="tg">vg</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-10" style="padding-left: 1px; padding-right: 0px;">
+                                                <input id="iban" name="sepa[iban]" type="text" class="required form-control"/>
+                                            </div>
+                                        </div>
                                         <div class="validator"></div>
                                     </div>
                                 </div>
@@ -429,6 +510,7 @@ include_once('header.php');
             });
 
             $("#registerForm").validate({
+                errorClass: 'jqInvalid',
                 rules: {
                     "inscription[numero_siret]": {
                         required: true,
@@ -501,14 +583,18 @@ include_once('header.php');
             });
 
             jQuery.validator.addMethod("check_iban", function(iban, element) {
-                iban = iban.toLowerCase();
-                iban = iban.replace(' ', '');
+                let country = $('#country').val();
+                console.log("country" + country);
+
+                iban = country + iban.toLowerCase();
+                iban = iban.replace(/ /g, '');
+                console.log("iban" + iban);
                 let countries = {'al':28, 'ad':24, 'at':20, 'az':28, 'bh':22, 'be':16, 'ba':20, 'br':29, 'bg':22, 'cr':21, 'hr':21, 'cy':28, 'cz':24, 'dk':18, 'do':28, 'ee':20, 'fo':18, 'fi':18,
                                  'fr':27, 'ge':22, 'de':22, 'gi':23, 'gr':27, 'gl':18, 'gt':28, 'hu':28, 'is':26, 'ie':22, 'il':23, 'it':27, 'jo':30, 'kz':20, 'kw':30, 'lv':21, 'lb':28, 'li':21,
                                  'lt':20, 'lu':20, 'mk':19, 'mt':31, 'mr':27, 'mu':30, 'mc':27, 'md':24, 'me':22, 'nl':18, 'no':15, 'pk':24, 'ps':29, 'pl':28, 'pt':25, 'qa':29, 'ro':24, 'sm':27,
                                  'sa':24, 'rs':22, 'sk':24, 'si':19, 'es':24, 'se':24, 'ch':21, 'tn':24, 'tr':26, 'ae':23, 'gb':22, 'vg':24};
                 let chars = {'a':10,'b':11,'c':12,'d':13,'e':14,'f':15,'g':16,'h':17,'i':18,'j':19,'k':20,'l':21,'m':22,'n':23,'o':24,'p':25,'q':26,'r':27,'s':28,'t':29,'u':30,'v':31,'w':32,'x':33,'y':34,'z':35};
-                let country = iban.substring(0,2);
+                //let country = iban.substring(0,2);
                 let result = 0;
                 if (iban.length == countries[country]) {
                     let movedChar = iban.substring(4) + iban.substring(0,4)
@@ -539,18 +625,73 @@ include_once('header.php');
             $('#accept_register').on('click', function(e) {
                 if($("#registerForm").valid()) {
                     $('#sepa').show();
-                    $('#inscription').hide();
+                    // $('#inscription').hide();
+                    let panelWidth = document.getElementById('panel-body').offsetWidth;
+                    let screenWidth = screen.width;
+                    console.log(panelWidth);
+                    console.log(screenWidth);
+                    let marginRight = (screenWidth - panelWidth) / 2 + 20;
+                    let marginLeft = "calc(-100% - " + marginRight + "px)";
+                    console.log(marginLeft);
+                    $("#inscription").css("margin-left", marginLeft);
                     $('#companyName').val($('#inscription_nom_magasin').val());
                     $('#street1').val($('#inscription_adresse').val());
                     $('#city').val($('#inscription_ville').val());
                     $('#postalCode').val($('#inscription_cp').val());
                 }
-
             });
 
             $('#previous_register').on('click', function(e) {
-                $('#sepa').hide();
-                $('#inscription').show();
+                // $('#inscription').show();
+                $("#inscription").css("margin-left", "0px");
+                setTimeout(function(){ $('#sepa').hide(); }, 2000);
+
+
+            });
+
+            $('#iban').on("keyup change", function() {
+
+//                 document.getElementById('iban').selectionStart = 5;
+//                 document.getElementById('iban').selectionEnd = 5
+// return;
+                let ibanElement = document.getElementById('iban')
+                let selectionStart = ibanElement.selectionStart;
+                console.log(selectionStart);
+                let beforePress = ($('#iban').val()).length;
+                console.log(beforePress);
+                let ibanValue = $('#iban').val();
+                ibanValue = ibanValue.replace(/ /g, '');
+                console.log(ibanValue);
+                let x = "";
+                for (let i = 0; i < ibanValue.length; i++) {
+                    x += ibanValue[i];
+                    if ((i+1) % 4 == 0) {
+                        x += " ";
+                    }
+                }
+                let afterPress = ($('#iban').val()).length;
+                console.log(afterPress);
+
+                if (beforePress % 5 == 0 && afterPress % 5 == 0) {
+                    x.substring(0, x.length - 1);
+                }
+
+                $('#iban').val($.trim(x));
+                afterPress = ($('#iban').val()).length;
+                console.log(afterPress);
+
+                if (afterPress > beforePress) {
+                    ibanElement.selectionStart = selectionStart + 1;
+                    ibanElement.selectionEnd = selectionStart + 1;
+                }
+                else {
+                    ibanElement.selectionStart = selectionStart;
+                    ibanElement.selectionEnd = selectionStart;
+                }
+
+                //$('#iban').val($.trim(ibanValue.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ")));
+
+
             });
 
             $('#password_reset').on('submit', function(e) {
@@ -674,6 +815,14 @@ include_once('header.php');
                         document.getElementById("div-image").style.width = "100%";
                         document.getElementById("logo-optieyes").style.width = "18%";
                     }
+                    let panelWidth = document.getElementById('panel-body').offsetWidth;
+                    let screenWidth = screen.width;
+                    let marginRight = (screenWidth - panelWidth) / 2 + 20;
+                    marginRight += "px";
+                    console.log(panelWidth);
+                    console.log(screenWidth);
+                    console.log(marginRight);
+                    $("#inscription").css("margin-right", marginRight);
                 }
                 else {
                     $('#registerForm').slideUp(100);
@@ -768,7 +917,34 @@ include_once('header.php');
                 padding-left: 10px;
             }
 
+            input.jqInvalid {
+                background-color: #f5dcdc !important;
+            }
 
+            #inscription {
+                animation-duration: 3s;
+                animation-name: slidein;
+                animation-iteration-count: infinite;
+            }
+
+            #registerForm {
+                display: flex;
+                width: 100%;
+            }
+
+            #inscription {
+                /*border: 1px solid green;*/
+                margin-right: 300px;
+                transition: all 2s;
+                width: 100%;
+                min-width: 100%;
+            }
+
+            #sepa {
+                /*border: 1px solid red;*/
+                min-width: 100%;
+                width: 100%;
+            }
         </style>
 
 

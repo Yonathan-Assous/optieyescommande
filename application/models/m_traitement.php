@@ -10,7 +10,7 @@ class m_traitement extends CI_Model
 
     public function insertPrixTraitementNew() {
         $sqlLenses = "SELECT * FROM `lenses` WHERE
-                id >= 2852 AND id <= 2855
+                id IN (SELECT DISTINCT(id_lenses) FROM `traitement_prix` WHERE `id_type_verre_solaire` = 1 ORDER BY `traitement_prix`.`id_lenses` ASC)
                 ORDER BY `lenses`.`name`  DESC";
         $query = $this->db->query($sqlLenses);
         if ($query->num_rows() > 0)

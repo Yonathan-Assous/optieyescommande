@@ -4184,8 +4184,8 @@ class index extends MY_Controller {
                                 break;
 
                             case 'dev':
-                                $state = [];
-                                $state['status'] = 1;
+                                $state = createMandatTest($iban_info);
+                                //$state['status'] = 1;
                                 break;
                             default:
                                 $state = [];
@@ -4195,6 +4195,14 @@ class index extends MY_Controller {
 //                echo json_encode($state);
                 if ($state['status'] == 1) {
                     $this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+                    return true;
+                }
+                else {
+                    $this->db->delete("users", array('id_users' => $insert_id));
+                    $sql = "ALTER TABLE `users` AUTO_INCREMENT $insert_id";
+                    $this->db->query($sql);
+//                    $this->m_users->updateUser(array('id_users' => $insert_id, 'active' => 0));
+                    return false;
                 }
 //                if($this->data['infos_user'][0]->valid_mandat != 1) {
 //
@@ -5067,24 +5075,29 @@ class index extends MY_Controller {
                     }
                     else{
 
-                        echo json_encode(array('status'=> 'ok'));
-
-
                         //<br><br>
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
 
-                        $mess_txt = "<html>
+
+                        $submitSepa = $this->submit_sepa($inscription, $sepa);
+                        if (!$submitSepa) {
+                            echo json_encode(array('status'=> 'error', 'error' => 'iban'));
+                        }
+                        else {
+                            $mess_txt = "<html>
 										<head></head>
 										<body><b>Bonjour</b>!
 										<br><br> 
 										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
 										</body>
-									</html>";
+									    </html>";
 
-                        $subjet_txt = "Vos informations de connexion";
+                            $subjet_txt = "Vos informations de connexion";
 
-                        $this->mail($inscription,$mess_txt,true,$subjet_txt);
-                        $this->submit_sepa($inscription, $sepa);
+                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
+                            echo json_encode(array('status'=> 'ok'));
+
+                        }
                         // 'static/download/optimize.txt'
                     }
                 /*}

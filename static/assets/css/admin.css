@@ -366,3 +366,15 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child, table.dataTable.dt
 table.variation_factures td {
     font-weight: bold;
 }
+
+.hidetd {
+    display: none;
+}
+
+.sub_title {
+    /*background-color: #ebbaba !important;*/
+    background-color: #fde6a2 !important;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+}

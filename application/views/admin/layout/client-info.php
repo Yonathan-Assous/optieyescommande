@@ -301,6 +301,11 @@
                                 <span>Historique teintes</span>
                             </a>
                         </li>
+                        <li id="catalogue">
+                            <a href="#modal-catalogue" data-toggle="tab" aria-expanded="false">
+                                <span>Catalogue</span>
+                            </a>
+                        </li>
 <!--                        <li id="nav-history-teintes">-->
 <!--                            <a href="#modal-history-teintes-test" data-toggle="tab" aria-expanded="false">-->
 <!--                                <span>Historique teintes test</span>-->
@@ -351,14 +356,42 @@
                             <table id="tableCustomPrixTeintes"
                                    class="table table-striped dt-responsive nowrap">
                                 <thead>
-                                <tr>
-                                    <th>Code Verre / Teinte</th>
-                                    <th>Verre</th>
-                                    <th>Teinte</th>
-                                    <th>Prix (Prix initial)</th>
-                                    <th>Date</th>
-                                    <th>Désactivation</th>
-                                </tr>
+                                    <tr>
+                                        <th>Code Verre / Teinte</th>
+                                        <th>Verre</th>
+                                        <th>Teinte</th>
+                                        <th>Prix (Prix initial)</th>
+                                        <th>Date</th>
+                                        <th>Désactivation</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-catalogue">
+                            <h5>Catalogue</h5>
+                            <table id="tableCustomCatalogue"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Verre</th>
+                                        <th>Prix</th>
+                                        <th>Order</th>
+                                        <th>HMC</th>
+                                        <th>HMC Face Interne</th>
+                                        <th>Satin</th>
+                                        <th>Satin Face Interne</th>
+                                        <th>Satin UV</th>
+                                        <th>Satin UV Face Interne</th>
+                                        <th>Achromatique</th>
+                                        <th>Achromatique Face Interne</th>
+                                        <th>BlueCoat</th>
+                                        <th>Spectrum</th>
+                                        <th>Satin Max</th>
+                                        <th>Satin Max Face Interne</th>
+                                        <th>Satin Drive Or</th>
+                                        <th>Miroir</th>
+                                        <th>Teinte</th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -595,7 +628,7 @@ $(document).ready(function(){
                     }
                 }
             });
-    var table = $('#tableCustomPrixTraitements').DataTable({
+    $('#tableCustomPrixTraitements').DataTable({
         aLengthMenu: [
             [10, 25, 50, 100, 200, -1],
             [10, 25, 50, 100, 200, "Tout"]
@@ -642,8 +675,33 @@ $(document).ready(function(){
         }
     });
 
-    getTraitementPriceList()
-    getTeintePriceList()
+    var tableCatalogue = $('#tableCustomCatalogue').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, 200, -1],
+            [10, 25, 50, 100, 200, "Tout"]
+        ],
+        deferRender: true,
+        order: [1, 'desc'],
+        bPaginate: true,
+        bProcessing:true,
+        language: {
+            "lengthMenu": "Afficher _MENU_ traitements par page",
+            "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+            "infoFiltered": "(Filtrat de _MAX_ entrées)",
+            "search": "Recherche",
+            "paginate": {
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            }
+        }
+    });
+
+    getTraitementPriceList();
+    getTeintePriceList();
+    getCatalogue();
+    console.log('test');
     // getTeintePriceListTest()
         $.ajax({
             type: "POST",
@@ -881,6 +939,10 @@ $(document).ready(function(){
             dataType: "json",
         }).done( function(data) {
             $('#tableCustomPrixTraitements').dataTable( {
+                aLengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    [10, 25, 50, 100, 200, "Tout"]
+                ],
                 "destroy": true,
                 "aaData": data,
                 "columns": [
@@ -892,6 +954,28 @@ $(document).ready(function(){
                     { "data": "action" }
                 ],
                 "displayStart" : displayStart,
+                dom: 'Blfrtip',
+                "buttons": ['copy','csv','excel',
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        title: 'Historique des traitements du client ' + <?php echo $info_user[0]->id_users ?>,
+                        exportOptions: {
+                            columns: [0,1,2,3]
+                        },
+                    },'print'],
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ traitements par page",
+                    "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+                    "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                    "search": "Recherche",
+                    "paginate": {
+                        "first":      "Première",
+                        "last":       "Dernière",
+                        "next":       "Suivant",
+                        "previous":   "Précédent"
+                    }
+                },
                 "createdRow": function (row, data, index) {
                     // console.log(data['active']);
                     // console.log('active');
@@ -907,6 +991,152 @@ $(document).ready(function(){
                 "order": [[ 4, "desc" ]]
             });
             traitementTeinteActiveInactive();
+        });
+    }
+
+
+    function getCatalogue() {
+        let displayStart = $('#tableCustomCatalogue').DataTable().page.info().page * 10;
+        $.ajax({
+            type: "POST",
+            url: "/admin/getPricesByUser",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#tableCustomCatalogue').dataTable( {
+                aLengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    [10, 25, 50, 100, 200, "Tout"]
+                ],
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "verre" },
+                    { "data": "prix" },
+                    { "data": "order" },
+                    { "data": "HMC" },
+                    { "data": "HMC Face Interne" },
+                    { "data": "Satin" },
+                    { "data": "Satin Face Interne" },
+                    { "data": "Satin UV" },
+                    { "data": "Satin UV Face Interne" },
+                    { "data": "Achromatique" },
+                    { "data": "Achromatique Face Interne" },
+                    { "data": "BlueCoat" },
+                    { "data": "Spectrum" },
+                    { "data": "Satin Max" },
+                    { "data": "Satin Max Face Interne" },
+                    { "data": "Satin Drive Or" },
+                    { "data": "Miroir" },
+                    { "data": "teinte" },
+                ],
+                "columnDefs": [
+                    {
+                        "targets": [2,4,6,7,8,9,10,12,13,14,15,16 ],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
+                "displayStart" : displayStart,
+                dom: 'Blfrtip',
+                "buttons": [ {
+                    backgroundColor: "red",
+                    extend: 'excel',
+                    text: 'Excel',
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    title: 'Catalogue du magasin ' + <?php echo $info_user[0]->id_users ?>,
+                    filename: 'catalogue_magasin_' + <?php echo $info_user[0]->id_users ?>,
+                    exportOptions: {
+                        columns: [0,1,3,5,7,9,11,12,13,15,16,17]
+                    },
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    alignment: 'center',
+                    styles: {
+                        tableHeader: {
+                            alignment: 'center'
+                        }
+                    },
+                    customize: function(doc) {
+                        doc.content[1].margin = [ 100, 0, 100, 0 ] //left, top, right, bottom
+                        doc.defaultStyle.alignment = 'center';
+                        doc.defaultStyle.fontSize = 9;
+                        doc.defaultStyle.width = "auto";
+                        doc.defaultStyle.height = 30;
+                        // doc.styles.tableHeader.fontSize = 9;
+                        doc.styles.tableHeader.fillColor = '#fbca35';
+                        // doc.styles.tableBodyOdd.fillColor = 'blue';
+                        doc.styles.tableBodyEven.fillColor = '#fde6a2';
+                        //doc.defaultStyle.fillColor  = 'red';
+                        // let price = doc.table.column(1).data().toArray();
+                        // for (let i = 0; i < price.length; i++) {
+                        //     if (price[i] == "") {
+                        //         doc.content[1].table.body[i+1][3].backgroundColor = 'blue';
+                        //     }
+                        // }
+                        let rowCount = doc.content[1].table.body.length;
+                        console.log(doc.content);
+                        console.log('dddddddddddddddddddddddddddddddd');
+                        console.log(doc.content[1].table.body);
+                        let columnCount = doc.content[1].table.body[1].length;
+                        for (let i = 1; i < rowCount; i++) {
+                            //doc.content[0].table.body.fillColor[i] = 'red';
+                            // console.log(doc.content[1].table.body[i]);
+                            // console.log(doc.content[1].table.body[i].length);
+
+                            if (doc.content[1].table.body[i][1].text == "") {
+                                // doc.content[1].table.body[i][6].text = doc.content[1].table.body[i][0].text;
+                                for (let j = 0; j < columnCount; j++) {
+                                    doc.content[1].table.body[i][j].fillColor = '#f0ad4e';
+                                    doc.content[1].table.body[i][j].fontSize = '16';
+                                    if (j != 0) {
+                                        doc.content[1].table.body[i][j].hide = true;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                },'print'],
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ traitements par page",
+                    "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+                    "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                    "search": "Recherche",
+                    "paginate": {
+                        "first":      "Première",
+                        "last":       "Dernière",
+                        "next":       "Suivant",
+                        "previous":   "Précédent"
+                    }
+                },
+                "createdRow": function (row, data, index) {
+                    console.log(data);
+                    // console.log(index);
+                    // console.log(row);
+                    // console.log(row);
+                    if (data['prix'] == 'NULL') {
+                        data['prix'] = ''
+                        $('td:eq(0)', row).attr('colspan', 6);
+                        $('td:eq(0)', row).css('text-align', 'center');
+                        // $('td:eq(1)', row).css('display', 'none');
+                        $('td', row).eq(1).addClass("hidetd");
+                        $('td', row).eq(2).addClass("hidetd");
+                        $('td', row).eq(3).addClass("hidetd");
+                        $('td', row).eq(4).addClass("hidetd");
+                        $('td', row).eq(5).addClass("hidetd");
+
+                        $(row).addClass('sub_title')
+                    }
+                    //$('td', row).eq(3).addClass("hidetd");
+                },
+                "order": [[ 2, "asc" ]]
+            });
+            //traitementTeinteActiveInactive();
         });
     }
 
@@ -1255,3 +1485,9 @@ $(document).ready(function(){
         }
     }
 </script>
+
+<style>
+    div.dataTables_filter {
+        text-align: center;
+    }
+</style>

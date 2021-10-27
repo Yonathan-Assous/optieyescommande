@@ -279,4 +279,131 @@ class m_users extends CI_Model {
         $user = $this->getUserById($userId)[0];
         return $user->tarif_packaging;
     }
+
+    public function getPriceByUserId($user_id) {
+        $tab = array();
+        $i = 0;
+        $sql = "SELECT *, ppc.prix as prix_perso  
+												FROM verres_stock 
+									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre
+                                       LEFT JOIN prix_par_client ppc ON (ppc.code = verres_stock.id_verre AND id_client="
+            . $user_id . ")
+									   WHERE grille_tarifaire.id_grille_tarifaire = 1";
+        $query = $this->db->query($sql);
+        $unifocaux = $query->result();
+
+        $sqlTraitements = "SELECT * FROM `traitements` WHERE id<=15 AND id > 1 ORDER BY id";
+        $queryTraitements = $this->db->query($sqlTraitements);
+        $result =  $queryTraitements->result();
+        $traitementList = [];
+        foreach ($result as $item) {
+            if (strpos($item->name, 'Miroir') !== false) {
+                $item->name = 'Miroir';
+            }
+            $traitementList[$item->name] = $item->id;
+        }
+
+        $sqlTeintes = "SELECT * FROM `teinte_prix` WHERE id_teinte = 1 ORDER BY id, id_user";
+        $queryTeintes = $this->db->query($sqlTeintes);
+        $result =  $queryTeintes->result();
+        $teinteList = [];
+        foreach ($result as $item) {
+            $teinteList[$item->id_lenses] = $item->price;
+        }
+
+        $tab[$i]['verre'] = "Unifocaux stock";
+        $tab[$i]['prix'] = "NULL";
+        $tab[$i]['teinte'] = "";
+        $tab[$i]['order'] = $i;
+        foreach ($traitementList as $traitement_name => $traitement_id) {
+            $tab[$i][$traitement_name] = '';
+        }
+        $i++;
+        $sorting = [
+            'bifocaux' => 10000,
+            'trifocaux' => 20000,
+            'freestyle' => 30000,
+            't-one' => 40000,
+            'e-space' => 50000,
+            'platinium' => 60000,
+            'omega' => 70000,
+            'elysium' => 80000,
+            'eyefatigue' => 90000,
+            'top-office' => 100000,
+            'progressif mineral' => 110000,
+            'Panier A' => 120000,
+            'mineral' => 130000
+        ];
+        foreach ($sorting as $key => $value) {
+            $tab[$i]['verre'] = strtoupper($key);
+            $tab[$i]['prix'] = "NULL";
+            $tab[$i]['teinte'] = "";
+            $tab[$i]['order'] = $value;
+            foreach ($traitementList as $traitement_name => $traitement_id) {
+                $tab[$i][$traitement_name] = '';
+            }
+            $i++;
+        }
+
+        foreach ($unifocaux as $unifocal) {
+            $tab[$i]['verre'] = $unifocal->libelle_verre;
+            $tab[$i]['prix'] = $unifocal->prix_perso ? $unifocal->prix_perso : $unifocal->prix_verre;
+            $tab[$i]['teinte'] = "";
+            $tab[$i]['order'] = $i;
+            foreach ($traitementList as $traitement_name => $traitement_id) {
+                $tab[$i][$traitement_name] = '';
+            }
+            $i++;
+        }
+
+        $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, verre_type 
+                FROM lenses L 
+                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=130) WHERE display = 'X' ORDER BY verre_type";
+        $query = $this->db->query($sql);
+        $verres = $query->result();
+
+        $sql = "SELECT traitements.*, traitement_prix.price, traitement_prix.id_lenses, traitement_prix.id_user, traitement_prix.id_traitement
+                FROM `traitements` 
+                INNER JOIN traitement_prix 
+                WHERE traitement_prix.id_traitement = traitements.id 
+                AND traitement_prix.is_active = 1
+				AND (id_user = $user_id OR id_user IS NULL)
+                ORDER BY id, id_user ASC";
+//        print_r($sql);die;
+
+        $query = $this->db->query($sql);
+        $traitements =  $query->result();
+        $traitementArray = [];
+        foreach ($traitements as $traitement) {
+            $traitementArray[$traitement->id_lenses][$traitement->id_traitement] = $traitement->price;
+        }
+
+        foreach ($verres as $verre) {
+            if (strpos($verre->trad_fr, 'Long') !== false || strpos($verre->trad_fr, 'Court') === false && strpos($verre->trad_fr, 'Moyen') === false) {
+                $j = isset($sorting[$verre->verre_type]) ? $i + $sorting[$verre->verre_type] : $i;
+                if (strpos($verre->trad_fr, 'Long') !== false) {
+                    $tab[$i]['verre'] = str_replace(" Long", "", $verre->trad_fr);
+                }
+                else {
+                    $tab[$i]['verre'] = $verre->trad_fr;
+                }
+                $prix = $verre->prix_perso ? $verre->prix_perso : $verre->prix;
+                $tab[$i]['prix'] = number_format($prix, 2, '.', ',');
+                $tab[$i]['teinte'] = isset($teinteList[$verre->lens_id]) ? $teinteList[$verre->lens_id] : "";
+                //$tab[$i]['lensId'] = $verre->lens_id;
+                $tab[$i]['order'] = $j;
+                foreach ($traitementList as $traitement_name => $traitement_id) {
+                    if (isset($traitementArray[$verre->lens_id][$traitement_id])) {
+                        $prix = $tab[$i]['prix'] + $traitementArray[$verre->lens_id][$traitement_id];
+                        $tab[$i][$traitement_name] = number_format($prix, 2, '.', ',');
+                    }
+                    else {
+                        $tab[$i][$traitement_name] = '';
+                    }
+                }
+                $i++;
+            }
+        }
+        return $tab;
+    }
 }

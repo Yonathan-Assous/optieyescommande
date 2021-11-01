@@ -54,7 +54,7 @@ function createMandat($infos = null)
                 new Http\Auth\Oauth2BasicAuthentication(
                     '/oauth/token',
                     'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
 
@@ -135,16 +135,15 @@ function createMandatTest($infos = null)
     if($infos) {
 
         try {
-
             // The HAPI Client
             $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net', //https://api.preprod.slimpay.com/
+                'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
                 '/',
                 'https://api.slimpay.net/alps/v1',
                 new Http\Auth\Oauth2BasicAuthentication(
                     '/oauth/token', //https://api.preprod.slimpay.net/oauth/token
-                    'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                    'optimizefrance',
+                    'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
                 )
             );
 
@@ -199,7 +198,6 @@ function createMandatTest($infos = null)
             ));
 
             $res = $hapiClient->sendFollow($follow);
-
             // The Resource's state
 
             $res = [
@@ -233,7 +231,7 @@ function getMandat($ref)
             new Http\Auth\Oauth2BasicAuthentication(
                 '/oauth/token',
                 'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
             )
         );
 
@@ -272,7 +270,7 @@ function createDebit($data) {
                 new Http\Auth\Oauth2BasicAuthentication(
                     '/oauth/token',
                     'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
 
@@ -335,7 +333,7 @@ function getDebitStatus($id = null) {
             new Http\Auth\Oauth2BasicAuthentication(
                 '/oauth/token',
                 'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
             )
         );
 

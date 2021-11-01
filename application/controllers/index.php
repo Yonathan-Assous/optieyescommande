@@ -4154,15 +4154,11 @@ class index extends MY_Controller {
                     }
                 }
             }
-//            print_r($errors);die;
 //            print_r(!checkIBAN($sepa['iban']));die;
-            if($sepa['iban'] != '') {
-                if (isset($sepa['country'])) {
-                    $iban = $sepa['country'] . $sepa['iban'];
-                }
-                else {
-                    $iban = $sepa['iban'];
-                }
+            $iban = $sepa['country'] . str_replace(" ", "", $sepa['iban']);
+            $iban_info['iban'] = $iban;
+
+            if($iban != '') {
                 if (!checkIBAN($iban)) {
                     $errors['iban'] = 2;
                 }
@@ -4171,7 +4167,6 @@ class index extends MY_Controller {
                 $errors['iban'] = 1;
             }
 
-
             if(!empty($errors)) {
                 echo json_encode($errors);
             }
@@ -4179,11 +4174,11 @@ class index extends MY_Controller {
                      switch($this->config->item('opti_env')) {
 
                             case 'prod':
-
                                 $state = createMandat($iban_info);
                                 break;
 
                             case 'dev':
+//                                $state = createMandat($iban_info);
                                 $state = createMandatTest($iban_info);
                                 //$state['status'] = 1;
                                 break;
@@ -4195,7 +4190,7 @@ class index extends MY_Controller {
 //                echo json_encode($state);
                 if ($state['status'] == 1) {
                     $this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
-                    return true;
+                    return json_encode($state);
                 }
                 else {
                     $this->db->delete("users", array('id_users' => $insert_id));
@@ -4287,7 +4282,6 @@ class index extends MY_Controller {
                     }
                 }
             }
-
             if($_POST['iban'] != '') {
                 if (!checkIBAN($_POST['iban'])) {
                     $errors['iban'] = 2;
@@ -4296,7 +4290,6 @@ class index extends MY_Controller {
             else {
                 $errors['iban'] = 1;
             }
-
 
             if(!empty($errors)) {
                 echo json_encode($errors);
@@ -5084,18 +5077,18 @@ class index extends MY_Controller {
                             echo json_encode(array('status'=> 'error', 'error' => 'iban'));
                         }
                         else {
-                            $mess_txt = "<html>
-										<head></head>
-										<body><b>Bonjour</b>!
-										<br><br> 
-										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
-										</body>
-									    </html>";
-
-                            $subjet_txt = "Vos informations de connexion";
-
-                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
-                            echo json_encode(array('status'=> 'ok'));
+//                            $mess_txt = "<html>
+//										<head></head>
+//										<body><b>Bonjour</b>!
+//										<br><br>
+//										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
+//										</body>
+//									    </html>";
+//
+//                            $subjet_txt = "Vos informations de connexion";
+//
+//                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
+                            echo $submitSepa;
 
                         }
                         // 'static/download/optimize.txt'

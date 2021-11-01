@@ -770,35 +770,47 @@ include_once('header.php');
                         url: "/index/subscribe",
                         data: $("#registerForm").serialize(),
                         success: function(data){
-                            var res = $.parseJSON(data);
-                            console.log(res);
-                            if(res.status == 'ok') {
-                                $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
-                            }
-                            else if(res.status == 'exists') {
-                                $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
-                                    ' adresse mail le ' + res.date +
-                                    '. <br>Voulez vous régénérer un ' +
-                                    'nouveau mot de passe ?');
-                                $('#password_exist').modal('show');
-                            }
-                            else if(res.status == 'error') {
-                                if (res.error == 'duplicate_siret') {
-                                    $('#text_error_message').html('Veuillez noter que ce numéro de SIRET existe déjà pour le ' +
-                                        'numéro de magasin ' + res.magasin + ' en interne');
-                                    $('#title_error_message').html('Siret existant');
+                            if(data!="" && data == "not_logged") {
+                                window.location.reload();
+                            } else {
+                                console.log(data);
+                                let res = $.parseJSON(data);
+                                console.log(res);
+                                if(res.status == 1) {
+                                    window.location.href = res.link;
+                                }
+                                // if(res.status == 'ok') {
+                                //     $('#registerForm').html('<p>Votre inscription a bien été prise en compte, vos informations de connexion vous ont été transmises par mail</p>');
+                                // }
+                                else {
+                                    if(res.status == 'exists') {
+                                        $('#text_password_exist').html('Vous avez déjà ouvert un compte avec cette' +
+                                            ' adresse mail le ' + res.date +
+                                            '. <br>Voulez vous régénérer un ' +
+                                            'nouveau mot de passe ?');
+                                        $('#password_exist').modal('show');
+                                    }
+                                    else if(res.status == 'error') {
+                                        if (res.error == 'duplicate_siret') {
+                                            $('#text_error_message').html('Veuillez noter que ce numéro de SIRET existe déjà pour le ' +
+                                                'numéro de magasin ' + res.magasin + ' en interne');
+                                            $('#title_error_message').html('Siret existant');
 
-                                    $('#error_message').modal('show');
+                                            $('#error_message').modal('show');
+                                        }
+                                        else if(res.error == 'iban') {
+                                            $('#text_error_message').html('Votre IBAN n\'est pas passé, veuillez rééssayer s\'il vous plaît');
+                                            $('#title_error_message').html('Erreur Iban');
+                                            $('#error_message').modal('show');
+                                        }
+                                        else if(res.error !== undefined) {
+                                            $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
+                                        }
+                                    }
                                 }
-                                else if(res.error == 'iban') {
-                                    $('#text_error_message').html('Votre IBAN n\'est pas passé, veuillez rééssayer s\'il vous plaît');
-                                    $('#title_error_message').html('Erreur Iban');
-                                    $('#error_message').modal('show');
-                                }
-                                else if(res.error !== undefined) {
-                                    $('.error-'+res.error).text('Veuillez indiquer un numéro valide');
-                                }
+
                             }
+
                         }
                     });
 

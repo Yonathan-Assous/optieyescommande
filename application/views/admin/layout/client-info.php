@@ -27,6 +27,10 @@
 
 ?>
 
+<div id="loading-overlay" style="display:none;"></div>
+<div id="loading" style="display:none;">
+    <span id="text_loading">Chargement...</span>
+</div>
 <h4 class="modal-title">Client #<?php echo $info_user[0]->id_users ?> - <span class="text-muted"><?php echo $info_user[0]->nom_societe; ?></span></h4>
 
 <form id="updateUser" class="form-edit-add" role="form" action="#" method="POST">
@@ -428,7 +432,7 @@
 <script>
 	$(document).ready(function(){
 
-	<?php 
+	<?php
 	$noPass = get_cookie("noPass");
 	if($noPass=='1')
 	{?>
@@ -701,7 +705,7 @@ $(document).ready(function(){
     getTraitementPriceList();
     getTeintePriceList();
     getCatalogue();
-    console.log('test');
+    // console.log('test');
     // getTeintePriceListTest()
         $.ajax({
             type: "POST",
@@ -734,7 +738,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data){
-				console.log(data)
+				// console.log(data)
 				//alert("HHHH");
 				if(data[0])
 				{
@@ -758,8 +762,8 @@ $(document).ready(function(){
         });
 
     });
-    
-    
+
+
 });
 
 	$('body').on('click', '#btn_submit_prix', function(event){ 
@@ -1005,7 +1009,7 @@ $(document).ready(function(){
             },
             dataType: "json",
         }).done( function(data) {
-            $('#tableCustomCatalogue').dataTable( {
+            let table = $('#tableCustomCatalogue').dataTable( {
                 aLengthMenu: [
                     [10, 25, 50, 100, 200, -1],
                     [10, 25, 50, 100, 200, "Tout"]
@@ -1034,7 +1038,7 @@ $(document).ready(function(){
                 ],
                 "columnDefs": [
                     {
-                        "targets": [2,4,6,7,8,9,10,12,13,14,15,16 ],
+                        "targets": [2,4,6,7,8,9,10,12,13,14,15,16],
                         "visible": false,
                         "searchable": false
                     }
@@ -1045,12 +1049,37 @@ $(document).ready(function(){
                     backgroundColor: "red",
                     extend: 'excel',
                     text: 'Excel',
+                    title: 'Catalogue du magasin ' + <?php echo $info_user[0]->id_users ?>,
+                    filename: 'catalogue_magasin_' + <?php echo $info_user[0]->id_users ?>,
+                    action: function(e, dt, node, config) {
+                        var that = this;
+                        isLoading('Chargement du Excel'); // function to show a loading spin
+
+                        setTimeout(function() { // it will download and hide the loading spin when excel is ready
+                            //exportExtension = 'PDF';
+                            $.fn.DataTable.ext.buttons.excelHtml5.action.call(that, e, dt, node, config);
+                            $("#loading-overlay,#loading").hide();// close spin
+                        }, 1000);
+
+                    },
                 },
                 {
                     extend: 'pdfHtml5',
                     text: 'PDF',
                     title: 'Catalogue du magasin ' + <?php echo $info_user[0]->id_users ?>,
                     filename: 'catalogue_magasin_' + <?php echo $info_user[0]->id_users ?>,
+                    processing: "true",
+
+                    action: function(e, dt, node, config) {
+                        let that = this;
+                        isLoading('Chargement du PDF'); // function to show a loading spin
+
+                        setTimeout(function() { // it will download and hide the loading spin when excel is ready
+                            //exportExtension = 'PDF';
+                            $.fn.DataTable.ext.buttons.pdfHtml5.action.call(that, e, dt, node, config);
+                            $("#loading-overlay,#loading").hide();// close spin
+                        }, 50);
+                    },
                     exportOptions: {
                         columns: [0,1,3,5,7,9,11,12,13,15,16,17]
                     },
@@ -1062,6 +1091,11 @@ $(document).ready(function(){
                             alignment: 'center'
                         }
                     },
+                    // pageBreakBefore: function(currentNode, nodesObject) {
+                    //     console.log(nodesObject.getFollowingNodesOnPage());
+                    //     console.log(nodesObject.getNodesOnNextPage());
+                    //     console.log(nodesObject.getPreviousNodesOnPage());
+                    // },
                     customize: function(doc) {
                         doc.content[1].margin = [ 100, 0, 100, 0 ] //left, top, right, bottom
                         doc.defaultStyle.alignment = 'center';
@@ -1080,26 +1114,73 @@ $(document).ready(function(){
                         //     }
                         // }
                         let rowCount = doc.content[1].table.body.length;
-                        console.log(doc.content);
-                        console.log('dddddddddddddddddddddddddddddddd');
-                        console.log(doc.content[1].table.body);
                         let columnCount = doc.content[1].table.body[1].length;
+                        let subtitle = doc.content[1].table.body[1];
+                        let counter = 0;
+                        //headerText[1] = 'gddfgfd';
+
                         for (let i = 1; i < rowCount; i++) {
+                            counter++;
                             //doc.content[0].table.body.fillColor[i] = 'red';
                             // console.log(doc.content[1].table.body[i]);
                             // console.log(doc.content[1].table.body[i].length);
-
-                            if (doc.content[1].table.body[i][1].text == "") {
-                                // doc.content[1].table.body[i][6].text = doc.content[1].table.body[i][0].text;
-                                for (let j = 0; j < columnCount; j++) {
-                                    doc.content[1].table.body[i][j].fillColor = '#f0ad4e';
-                                    doc.content[1].table.body[i][j].fontSize = '16';
-                                    if (j != 0) {
-                                        doc.content[1].table.body[i][j].hide = true;
+                            // console.log(doc.content[1].positions);
+                            // if (doc.content[1].positions[i].pageNumber > pageNumber && i > 1) {
+                            //     doc.content[1].table.body.splice(1, 0, headerText);
+                            //     pageNumber++;
+                            // }
+                            if (doc.content[1].table.body[i][1].text == "" || counter == 25 && i > 26 || counter == 26) {
+                                if (doc.content[1].table.body[i][1].text == "") {
+                                    subtitle = doc.content[1].table.body[i];
+                                    for (let j = 0; j < columnCount; j++) {
+                                        doc.content[1].table.body[i][j].fillColor = '#f0ad4e';
+                                        doc.content[1].table.body[i][j].fontSize = '16';
+                                        doc.content[1].table.body[i][j].style = "tableHeader";
+                                        // if (j != 0) {
+                                        //     doc.content[1].table.body[i][j].hide = true;
+                                        // }
                                     }
                                 }
+                                // else if (counter == 25) {
+                                //     doc.content[1].table.body.splice(i, 0, subtitle);
+                                //     //doc.content[1].table.body[i][0].text = headerText[0].text;
+                                //     //console.log(doc.content[1].table.body[i]);
+                                // }
+                                // doc.content[1].table.body[i][6].text = doc.content[1].table.body[i][0].text;
+                                if (i > 1) {
+                                    for (let j = 0; j < columnCount; j++) {
+                                        doc.content[1].table.body[i][j].pageBreak = 'before';
+                                    }
+                                    counter = 0;
+                                }
+
+
+                                // doc['header'] = (function(currentPage, pages) {
+                                //     for (let t = 1; t < pages; t++) {
+                                //         if (currentPage == t) {
+                                //             console.log(headerText);
+                                //             console.log(t);
+                                //             return { text: headerText[t] }
+                                //         }
+                                //     }
+                                // });
                             }
                         }
+
+                        doc['footer'] = (function(page, pages) {
+                            return {
+                                columns: [
+                                    {
+                                        alignment: 'center',
+                                        text: [
+                                            { text: page.toString(), italics: true },
+                                            ' of ',
+                                            { text: pages.toString(), italics: true }
+                                        ]
+                                    }],
+                                margin: [10, 0]
+                            }
+                        });
                     },
                 },'print'],
                 "language": {
@@ -1115,11 +1196,10 @@ $(document).ready(function(){
                     }
                 },
                 "createdRow": function (row, data, index) {
-                    console.log(data);
+                    // console.log(data);
                     // console.log(index);
                     // console.log(row);
-                    // console.log(row);
-                    if (data['prix'] == 'NULL') {
+                    if (data['prix'] == 'NULL' || data['prix'] == 'hide') {
                         data['prix'] = ''
                         $('td:eq(0)', row).attr('colspan', 6);
                         $('td:eq(0)', row).css('text-align', 'center');
@@ -1129,13 +1209,37 @@ $(document).ready(function(){
                         $('td', row).eq(3).addClass("hidetd");
                         $('td', row).eq(4).addClass("hidetd");
                         $('td', row).eq(5).addClass("hidetd");
+                        //$(row).addClass("hidetd");
 
                         $(row).addClass('sub_title')
+                    }
+                    else if (data['prix'] == 'hide') {
+                        // data['prix'] = ''
+                        // $('td:eq(0)', row).attr('colspan', 6);
+                        // $('td:eq(0)', row).css('text-align', 'center');
+                        // // $('td:eq(1)', row).css('display', 'none');
+                        // $('td', row).eq(1).addClass("hidetd");
+                        // $('td', row).eq(2).addClass("hidetd");
+                        // $('td', row).eq(3).addClass("hidetd");
+                        // $('td', row).eq(4).addClass("hidetd");
+                        // $('td', row).eq(5).addClass("hidetd");
+                        $(row).addClass("hidetd");
+
+                        // $(row).addClass('sub_title')
                     }
                     //$('td', row).eq(3).addClass("hidetd");
                 },
                 "order": [[ 2, "asc" ]]
             });
+            //console.log(table);
+            table.on( 'buttons-processing', function ( e, indicator ) {
+                if ( indicator ) {
+                    console.log('exporting data');
+                }
+                else {
+                    console.log('export complete');
+                }
+            } );
             //traitementTeinteActiveInactive();
         });
     }
@@ -1143,6 +1247,7 @@ $(document).ready(function(){
     $('#tableCustomPrixTraitements').on( 'draw.dt', function () {
         addClickEventDesactivePrixTraitement();
     } );
+
 
     function addClickEventDesactivePrixTraitement() {
         $('.desactive_prix_traitement').click(function(e) {
@@ -1168,6 +1273,11 @@ $(document).ready(function(){
             var teinte_id = teinte[1];
             desactiveTeintePrice(lens_id, teinte_id);
         });
+    }
+
+    function isLoading(text) {
+        $("#text_loading").text(text) ;
+        $("#loading-overlay,#loading").show();
     }
 
     function desactiveTraitementPrice (lens_id, traitement_id) {

@@ -218,9 +218,43 @@ function createMandatTest($infos = null)
 
 }
 
+function getOrderTest($ref)
+{
+    try {
+
+        // The HAPI Client
+        $hapiClient = new Http\HapiClient(
+            'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
+            '/',
+            'https://api.slimpay.net/alps/v1',
+            new Http\Auth\Oauth2BasicAuthentication(
+                '/oauth/token',
+                'optimizefrance',
+                'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
+            )
+        );
+
+        // The Relations Namespace
+        $relNs = 'https://api.slimpay.net/alps#';
+
+        // Follow get-mandates
+        $rel = new Hal\CustomRel($relNs . 'get-signatory');
+        $follow = new Http\Follow($rel, 'GET', [
+            'creditorReference' => 'optimizefrance',
+            'reference' => $ref,
+        ]);
+        $res = $hapiClient->sendFollow($follow);
+
+        return $res->getState();
+
+    } catch (Exception $e) {
+        return false;
+    }
+
+}
+
 function getMandat($ref)
 {
-
     try {
 
         // The HAPI Client

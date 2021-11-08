@@ -3866,7 +3866,12 @@ class index extends MY_Controller {
     }
 
     public function login($recovery=false){
-
+//        echo 'daadssa';die;
+        $this->load->helper('slimpay');
+        $x = getOrderTest('01e9eeff-3d57-11ec-a985-000000000000');
+        echo '<pre>';
+        print_r($x);
+        echo '</pre>';die;
         $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
         $data['page'] = "Connexion";
         $data['recovery'] = $recovery;

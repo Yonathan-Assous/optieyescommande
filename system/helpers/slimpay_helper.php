@@ -238,14 +238,22 @@ function getOrderTest($ref)
         $relNs = 'https://api.slimpay.net/alps#';
 
         // Follow get-mandates
-        $rel = new Hal\CustomRel($relNs . 'get-signatory');
+        $rel = new Hal\CustomRel($relNs . 'get-orders');
         $follow = new Http\Follow($rel, 'GET', [
             'creditorReference' => 'optimizefrance',
             'reference' => $ref,
         ]);
         $res = $hapiClient->sendFollow($follow);
 
-        return $res->getState();
+        $rel2 = new Hal\CustomRel($relNs.'get-mandate');
+        $follow2 = new Http\Follow($rel2, 'GET');
+        $res2 = $hapiClient->sendFollow($follow2, $res);
+
+        // GEt the signatory informations
+        $rel3 = new Hal\CustomRel($relNs.'get-signatory');
+        $follow3 = new Http\Follow($rel3, 'GET');
+        $res3 = $hapiClient->sendFollow($follow3, $res2);
+        return $res3->getState();
 
     } catch (Exception $e) {
         return false;

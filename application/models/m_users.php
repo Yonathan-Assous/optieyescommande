@@ -290,10 +290,9 @@ class m_users extends CI_Model {
 									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre
                                        LEFT JOIN prix_par_client ppc ON (ppc.code = verres_stock.id_verre AND id_client="
             . $user_id . ")
-									   WHERE grille_tarifaire.id_grille_tarifaire = 1";
+									   WHERE grille_tarifaire.id_grille_tarifaire = 1 AND verres_stock.active = 1 ORDER BY ordre_verre";
         $query = $this->db->query($sql);
         $unifocaux = $query->result();
-
         $sqlTraitements = "SELECT * FROM `traitements` WHERE id<=15 AND id > 1 ORDER BY id";
         $queryTraitements = $this->db->query($sqlTraitements);
         $result =  $queryTraitements->result();
@@ -352,6 +351,7 @@ class m_users extends CI_Model {
             $i++;
         }
 
+        $verre_existant = [];
         foreach ($unifocaux as $unifocal) {
             if (($i - $totalVerreType) % $before == 0 && $i % 10000 != 0) {
                 $tab[$i]['verre'] = "UNIFOCAUX STOCK";
@@ -363,7 +363,90 @@ class m_users extends CI_Model {
                 }
                 $i++;
             }
-            $tab[$i]['verre'] = $unifocal->libelle_verre;
+            if (strpos($unifocal->libelle_verre, 'Organique 1,5 Miroir') !== false) {
+                if (!in_array('Organique 1,5 Miroir', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 Miroir';
+                    array_push($verre_existant, 'Organique 1,5 Miroir');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'SugarGlasses 1,5') !== false) {
+                if (!in_array('SugarGlasses 1,5', $verre_existant)) {
+                    $tab[$i]['verre'] = 'SugarGlasses 1,5';
+                    array_push($verre_existant, 'SugarGlasses 1,5');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'AB Dégradé Miroir Doré Galbe 2') !== false) {
+                if (!in_array('Organique 1,5 AB Dégradé Miroir Doré Galbe 2', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 AB Dégradé Miroir Doré Galbe 2';
+                    array_push($verre_existant, 'Organique 1,5 AB Dégradé Miroir Doré Galbe 2');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'C Dégradé Plan') !== false) {
+                if (!in_array('Organique 1,5 C Dégradé Plan', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 C Dégradé Plan';
+                    array_push($verre_existant, 'Organique 1,5 C Dégradé Plan');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'C Polarisé Durci Galbe 6') !== false) {
+                if (!in_array('Organique 1,5 C Polarisé Durci Galbe 6', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 C Polarisé Durci Galbe 6';
+                    array_push($verre_existant, 'Organique 1,5 C Polarisé Durci Galbe 6');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'C Polarisé Durci Galbe 8') !== false) {
+                if (!in_array('Organique 1,5 C Polarisé Durci Galbe 8', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 C Polarisé Durci Galbe 8';
+                    array_push($verre_existant, 'Organique 1,5 C Polarisé Durci Galbe 8');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5 Bicolore') !== false) {
+                if (!in_array('Organique 1,5 Bicolore', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 Bicolore';
+                    array_push($verre_existant, 'Organique 1,5 Bicolore');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'C') !== false) {
+                if (!in_array('Organique 1,5 C', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 C';
+                    array_push($verre_existant, 'Organique 1,5 C');
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,6 HMC') !== false && strpos($unifocal->libelle_verre, 'Non Perçable') !== false) {
+                if (!in_array('Organique 1,6 HMC Non Perçable', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,6 HMC Non Perçable';
+                    array_push($verre_existant, 'Organique 1,6 HMC Non Perçable');
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                $tab[$i]['verre'] = $unifocal->libelle_verre;
+            }
             $tab[$i]['prix'] = $unifocal->prix_perso ? $unifocal->prix_perso : $unifocal->prix_verre;
             $tab[$i]['teinte'] = "";
             $tab[$i]['order'] = $i;
@@ -373,12 +456,13 @@ class m_users extends CI_Model {
             $i++;
         }
 
-        $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, verre_type 
+        $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, generation, verre_type 
                 FROM lenses L 
-                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=130) WHERE display = 'X' ORDER BY verre_type";
+                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=130) WHERE display = 'X' 
+                AND ( generation IS NULL OR generation = 'E-space' AND verre_type = 'e-space' OR generation = 'T-one' AND verre_type = 't-one')
+                ORDER BY verre_type, L.sorting";
         $query = $this->db->query($sql);
         $verres = $query->result();
-//        print_r($verres);die;
         $sql = "SELECT traitements.*, traitement_prix.price, traitement_prix.id_lenses, traitement_prix.id_user, traitement_prix.id_traitement
                 FROM `traitements` 
                 INNER JOIN traitement_prix 
@@ -408,6 +492,7 @@ class m_users extends CI_Model {
 //                print_r($verre->verre_type);
 //                print_r($count);die;
                 if (isset($verre->verre_type)) {
+                    $is_lens = true;
                     if (isset($sorting[$verre->verre_type])) {
                         if (($count[$verre->verre_type] % 10000) % $before == 0) {
                             $tab[$i]['verre'] = strtoupper($verre->verre_type);
@@ -420,14 +505,13 @@ class m_users extends CI_Model {
                             $i++;
                             $count[$verre->verre_type]++;
                         }
-                        $tab[$i]['order'] = $count[$verre->verre_type];
-                        $count[$verre->verre_type]++;
                     }
                     else {
                         continue;
                     }
                 }
                 else {
+                    $is_lens = false;
                     if (($i - $totalVerreType) % $before == 0) {
                         $tab[$i]['verre'] = "UNIFOCAUX STOCK";
                         $tab[$i]['order'] = $i;
@@ -442,7 +526,142 @@ class m_users extends CI_Model {
                     $tab[$i]['order'] = $i;
                 }
 
-                if (strpos($verre->trad_fr, 'Long') !== false) {
+                if (strpos($verre->trad_fr, 'Organique 1,6') !== false && strpos($verre->trad_fr, 'C HMC Face Interne') !== false) {
+                    if (!in_array('Organique 1,6 C HMC Face Interne', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,6 C HMC Face Interne';
+                        array_push($verre_existant, 'Organique 1,6 C HMC Face Interne');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Organique 1,56 Superchromique') !== false) {
+                    if (!in_array('Organique 1,56 Superchromique HMC', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,56 Superchromique HMC';
+                        array_push($verre_existant, 'Organique 1,56 Superchromique HMC');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Organique 1,5 Transition') !== false && strpos($unifocal->libelle_verre, 'G15') === false) {
+                    if (!in_array('Organique 1,5 Transition Satin', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,5 Transition Satin';
+                        array_push($verre_existant, 'Organique 1,5 Transition Satin');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'C Miroir') !== false) {
+                    if (!in_array('Organique 1,5 C Miroir Face Interne', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,5 C Miroir Face Interne';
+                        array_push($verre_existant, 'Organique 1,5 C Miroir Face Interne');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Organique 1,67 Asphérique Transition') !== false) {
+                    if (!in_array('Organique 1,67 Asphérique Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,67 Asphérique Transition';
+                        array_push($verre_existant, 'Organique 1,67 Asphérique Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Organique 1,5') !== false && strpos($verre->trad_fr, 'C Polarisé HMC Face Interne Galbe 6') !== false) {
+                    if (!in_array('Organique 1,5 C Polarisé HMC Face Interne Galbe 6', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Organique 1,5 C Polarisé HMC Face Interne Galbe 6';
+                        array_push($verre_existant, 'Organique 1,5 C Polarisé HMC Face Interne Galbe 6');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Segment Plat 28 Polarisé') !== false) {
+                    if (!in_array('Bifocal 1,5 Segment Plat 28 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Segment Plat 28 Polarisé';
+                        array_push($verre_existant, 'Bifocal 1,5 Segment Plat 28 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C Segment Plat 28') !== false) {
+                    if (!in_array('Bifocal 1,59 Polarisé C Segment Plat 28', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,59 Polarisé C Segment Plat 28';
+                        array_push($verre_existant, 'Bifocal 1,59 Polarisé C Segment Plat 28');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,53 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
+                    if (!in_array('Bifocal 1,53 Transition Segment Plat 28', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,53 Transition Segment Plat 28';
+                        array_push($verre_existant, 'Bifocal 1,53 Transition Segment Plat 28');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Courbe 28') !== false) {
+                    if (!in_array('Bifocal 1,5 Transition Segment Courbe 28', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Courbe 28';
+                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Courbe 28');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
+                    if (!in_array('Bifocal 1,5 Transition Segment Plat 28', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Plat 28';
+                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Plat 28');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal Mineral 1,5 Segment Courbe 28') !== false) {
+                    if (!in_array('Bifocal Mineral 1,5 Segment Courbe', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal Mineral 1,5 Segment Courbe';
+                        array_push($verre_existant, 'Bifocal Mineral 1,5 Segment Courbe');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal Mineral 1,5 Segment Rond') !== false) {
+                    if (!in_array('Bifocal Mineral 1,5 Segment Rond', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal Mineral 1,5 Segment Rond';
+                        array_push($verre_existant, 'Bifocal Mineral 1,5 Segment Rond');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Xtractive') !== false  && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
+                    if (!in_array('Bifocal 1,5 Xtractive Segment Plat 28', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Xtractive Segment Plat 28';
+                        array_push($verre_existant, 'Bifocal 1,5 Xtractive Segment Plat 28');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Segment Plat') !== false) {
+                    if (!in_array('Bifocal 1,5 Segment Plat', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Segment Plat';
+                        array_push($verre_existant, 'Bifocal 1,5 Segment Plat');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Long') !== false) {
                     $tab[$i]['verre'] = str_replace(" Long", "", $verre->trad_fr);
                 }
                 else {
@@ -451,6 +670,10 @@ class m_users extends CI_Model {
                 $prix = $verre->prix_perso ? $verre->prix_perso : $verre->prix;
                 $tab[$i]['prix'] = number_format($prix, 2, '.', ',');
                 $tab[$i]['teinte'] = isset($teinteList[$verre->lens_id]) ? $teinteList[$verre->lens_id] : "";
+                if ($is_lens) {
+                    $tab[$i]['order'] = $count[$verre->verre_type];
+                    $count[$verre->verre_type]++;
+                }
 
                 foreach ($traitementList as $traitement_name => $traitement_id) {
                     if (isset($traitementArray[$verre->lens_id][$traitement_id])) {

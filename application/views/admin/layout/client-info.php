@@ -1100,8 +1100,9 @@ $(document).ready(function(){
                         doc.content[1].margin = [ 100, 0, 100, 0 ] //left, top, right, bottom
                         doc.defaultStyle.alignment = 'center';
                         doc.defaultStyle.fontSize = 9;
-                        doc.defaultStyle.width = "auto";
-                        doc.defaultStyle.height = 30;
+                        //doc.defaultStyle.width = "auto";
+                        doc.content[1].table.widths = [ 'auto', '*', '*', '*', '*', 'auto', '*', '*', '*', 'auto', '*', '*' ]
+                            doc.defaultStyle.height = 30;
                         // doc.styles.tableHeader.fontSize = 9;
                         doc.styles.tableHeader.fillColor = '#fbca35';
                         // doc.styles.tableBodyOdd.fillColor = 'blue';
@@ -1129,7 +1130,7 @@ $(document).ready(function(){
                             //     doc.content[1].table.body.splice(1, 0, headerText);
                             //     pageNumber++;
                             // }
-                            if (doc.content[1].table.body[i][1].text == "" || counter == 25 && i > 26 || counter == 26) {
+                            if (doc.content[1].table.body[i][1].text == "" || counter == 27 && i > 28 || counter == 28) {
                                 if (doc.content[1].table.body[i][1].text == "") {
                                     subtitle = doc.content[1].table.body[i];
                                     for (let j = 0; j < columnCount; j++) {

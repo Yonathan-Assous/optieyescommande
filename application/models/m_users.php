@@ -281,7 +281,7 @@ class m_users extends CI_Model {
     }
 
     public function getPriceByUserId($user_id) {
-        $before = 25;
+        $before = 27;
         $tab = array();
         $i = 0;
         $count = [];
@@ -458,7 +458,7 @@ class m_users extends CI_Model {
 
         $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, generation, verre_type 
                 FROM lenses L 
-                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=130) WHERE display = 'X' 
+                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id) WHERE display = 'X' 
                 AND ( generation IS NULL OR generation = 'E-space' AND verre_type = 'e-space' OR generation = 'T-one' AND verre_type = 't-one')
                 ORDER BY verre_type, L.sorting";
         $query = $this->db->query($sql);
@@ -589,43 +589,43 @@ class m_users extends CI_Model {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C Segment Plat 28') !== false) {
-                    if (!in_array('Bifocal 1,59 Polarisé C Segment Plat 28', $verre_existant)) {
-                        $tab[$i]['verre'] = 'Bifocal 1,59 Polarisé C Segment Plat 28';
-                        array_push($verre_existant, 'Bifocal 1,59 Polarisé C Segment Plat 28');
+                else if (strpos($verre->trad_fr, 'Bifocal 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C Segment Plat') !== false) {
+                    if (!in_array('Bifocal 1,59 Polarisé C Segment Plat', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,59 Polarisé C Segment Plat';
+                        array_push($verre_existant, 'Bifocal 1,59 Polarisé C Segment Plat');
                     }
                     else {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal 1,53 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
-                    if (!in_array('Bifocal 1,53 Transition Segment Plat 28', $verre_existant)) {
-                        $tab[$i]['verre'] = 'Bifocal 1,53 Transition Segment Plat 28';
-                        array_push($verre_existant, 'Bifocal 1,53 Transition Segment Plat 28');
+                else if (strpos($verre->trad_fr, 'Bifocal 1,53 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat') !== false) {
+                    if (!in_array('Bifocal 1,53 Transition Segment Plat', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,53 Transition Segment Plat';
+                        array_push($verre_existant, 'Bifocal 1,53 Transition Segment Plat');
                     }
                     else {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Courbe 28') !== false) {
-                    if (!in_array('Bifocal 1,5 Transition Segment Courbe 28', $verre_existant)) {
-                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Courbe 28';
-                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Courbe 28');
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Courbe') !== false) {
+                    if (!in_array('Bifocal 1,5 Transition Segment Courbe', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Courbe';
+                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Courbe');
                     }
                     else {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
-                    if (!in_array('Bifocal 1,5 Transition Segment Plat 28', $verre_existant)) {
-                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Plat 28';
-                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Plat 28');
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Transition') !== false && strpos($verre->trad_fr, 'Segment Plat') !== false) {
+                    if (!in_array('Bifocal 1,5 Transition Segment Plat', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Transition Segment Plat';
+                        array_push($verre_existant, 'Bifocal 1,5 Transition Segment Plat');
                     }
                     else {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal Mineral 1,5 Segment Courbe 28') !== false) {
+                else if (strpos($verre->trad_fr, 'Bifocal Mineral 1,5 Segment Courbe') !== false) {
                     if (!in_array('Bifocal Mineral 1,5 Segment Courbe', $verre_existant)) {
                         $tab[$i]['verre'] = 'Bifocal Mineral 1,5 Segment Courbe';
                         array_push($verre_existant, 'Bifocal Mineral 1,5 Segment Courbe');
@@ -643,10 +643,10 @@ class m_users extends CI_Model {
                         continue;
                     }
                 }
-                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Xtractive') !== false  && strpos($verre->trad_fr, 'Segment Plat 28') !== false) {
-                    if (!in_array('Bifocal 1,5 Xtractive Segment Plat 28', $verre_existant)) {
-                        $tab[$i]['verre'] = 'Bifocal 1,5 Xtractive Segment Plat 28';
-                        array_push($verre_existant, 'Bifocal 1,5 Xtractive Segment Plat 28');
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Xtractive') !== false && strpos($verre->trad_fr, 'Segment Plat') !== false) {
+                    if (!in_array('Bifocal 1,5 Xtractive Segment Plat', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Xtractive Segment Plat';
+                        array_push($verre_existant, 'Bifocal 1,5 Xtractive Segment Plat');
                     }
                     else {
                         continue;
@@ -656,6 +656,1176 @@ class m_users extends CI_Model {
                     if (!in_array('Bifocal 1,5 Segment Plat', $verre_existant)) {
                         $tab[$i]['verre'] = 'Bifocal 1,5 Segment Plat';
                         array_push($verre_existant, 'Bifocal 1,5 Segment Plat');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Bifocal 1,5 Segment Rond') !== false) {
+                    if (!in_array('Bifocal 1,5 Segment Rond', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Bifocal 1,5 Segment Rond';
+                        array_push($verre_existant, 'Bifocal 1,5 Segment Rond');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Trifocal 1,5 Transition') !== false) {
+                    if (!in_array('Trifocal 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Trifocal 1,5 Transition';
+                        array_push($verre_existant, 'Trifocal 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,5 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Freestyle SV 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,5 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,5 Xtractive') !== false) {
+                    if (!in_array('Freestyle SV 1,5 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,5 Xtractive';
+                        array_push($verre_existant, 'Freestyle SV 1,5 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,5 Polarisé') !== false) {
+                    if (!in_array('Freestyle SV 1,5 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,5 Polarisé';
+                        array_push($verre_existant, 'Freestyle SV 1,5 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,53 Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,53 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,53 Xtractive') !== false) {
+                    if (!in_array('Freestyle SV 1,53 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,53 Xtractive';
+                        array_push($verre_existant, 'Freestyle SV 1,53 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,53') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Freestyle SV 1,53 C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,53 C';
+                        array_push($verre_existant, 'Freestyle SV 1,53 C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,59 Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,59 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,59 Asphérique Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,59 Asphérique Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,59 Asphérique Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,59 Asphérique Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,59 Xtractive') !== false) {
+                    if (!in_array('Freestyle SV 1,59 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,59 Xtractive';
+                        array_push($verre_existant, 'Freestyle SV 1,59 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Freestyle SV 1,59 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,59 Polarisé C';
+                        array_push($verre_existant, 'Freestyle SV 1,59 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,6 Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,6 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,6 Asphérique Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,6 Asphérique Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,6 Asphérique Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,6 Asphérique Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,6 Xtractive') !== false) {
+                    if (!in_array('Freestyle SV 1,6 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,6 Xtractive';
+                        array_push($verre_existant, 'Freestyle SV 1,6 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,6 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Freestyle SV 1,6 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,6 Polarisé C';
+                        array_push($verre_existant, 'Freestyle SV 1,6 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,67 Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,67 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,67 Asphérique Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,67 Asphérique Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,67 Asphérique Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,67 Asphérique Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,67 Xtractive') !== false) {
+                    if (!in_array('Freestyle SV 1,67 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,67 Xtractive';
+                        array_push($verre_existant, 'Freestyle SV 1,67 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,67 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Freestyle SV 1,67 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,67 Polarisé C';
+                        array_push($verre_existant, 'Freestyle SV 1,67 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,67 Asphérique Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Freestyle SV 1,67 Asphérique Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,67 Asphérique Polarisé C';
+                        array_push($verre_existant, 'Freestyle SV 1,67 Asphérique Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Freestyle SV 1,74 Transition') !== false) {
+                    if (!in_array('Freestyle SV 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Freestyle SV 1,74 Transition';
+                        array_push($verre_existant, 'Freestyle SV 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 18 1,74 Transition') !== false) {
+                    if (!in_array('T-One 18 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 18 1,74 Transition';
+                        array_push($verre_existant, 'T-One 18 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,5 Transition') !== false && (strpos($verre->trad_fr, 'Gris') !== false || strpos($verre->trad_fr, 'Brun') !== false)) {
+                    if (!in_array('T-One 1,5 Transition (Brun/Gris)', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,5 Transition (Brun/Gris)';
+                        array_push($verre_existant, 'T-One 1,5 Transition (Brun/Gris)');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,5 Transition') !== false && (strpos($verre->trad_fr, 'Gris') === false && strpos($verre->trad_fr, 'Brun') === false)) {
+                    if (!in_array('T-One 1,5 Transition (Ni Brun ni Gris)', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,5 Transition (Ni Brun ni Gris)';
+                        array_push($verre_existant, 'T-One 1,5 Transition (Ni Brun ni Gris)');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,5 Xtractive') !== false) {
+                    if (!in_array('T-One 1,5 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,5 Xtractive';
+                        array_push($verre_existant, 'T-One 1,5 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,5 Polarisé') !== false) {
+                    if (!in_array('T-One 1,5 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,5 Polarisé C';
+                        array_push($verre_existant, 'T-One 1,5 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,53 Transition') !== false) {
+                    if (!in_array('T-One 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,53 Transition';
+                        array_push($verre_existant, 'T-One 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,53 Xtractive') !== false) {
+                    if (!in_array('T-One 1,53 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,53 Xtractive';
+                        array_push($verre_existant, 'T-One 1,53 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,53 Polarisé') !== false) {
+                    if (!in_array('T-One 1,53 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,53 Polarisé C';
+                        array_push($verre_existant, 'T-One 1,53 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,59 Transition') !== false) {
+                    if (!in_array('T-One 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,59 Transition';
+                        array_push($verre_existant, 'T-One 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,59 Xtractive') !== false) {
+                    if (!in_array('T-One 1,59 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,59 Xtractive';
+                        array_push($verre_existant, 'T-One 1,59 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,59 Polarisé') !== false) {
+                    if (!in_array('T-One 1,59 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,59 Polarisé C';
+                        array_push($verre_existant, 'T-One 1,59 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,6 Transition') !== false) {
+                    if (!in_array('T-One 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,6 Transition';
+                        array_push($verre_existant, 'T-One 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,6 Xtractive') !== false) {
+                    if (!in_array('T-One 1,6 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,6 Xtractive';
+                        array_push($verre_existant, 'T-One 1,6 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,6 Polarisé') !== false) {
+                    if (!in_array('T-One 1,6 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,6 Polarisé C';
+                        array_push($verre_existant, 'T-One 1,6 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,67 Transition') !== false) {
+                    if (!in_array('T-One 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,67 Transition';
+                        array_push($verre_existant, 'T-One 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,67 Xtractive') !== false) {
+                    if (!in_array('T-One 1,67 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,67 Xtractive';
+                        array_push($verre_existant, 'T-One 1,67 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 1,67 Polarisé') !== false) {
+                    if (!in_array('T-One 1,67 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 1,67 Polarisé C';
+                        array_push($verre_existant, 'T-One 1,67 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 18 1,74 Transition') !== false) {
+                    if (!in_array('T-One 18 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 18 1,74 Transition';
+                        array_push($verre_existant, 'T-One 18 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'T-One 18 1,74 Transition') !== false) {
+                    if (!in_array('T-One 18 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'T-One 18 1,74 Transition';
+                        array_push($verre_existant, 'T-One 18 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,5 Transition') !== false && (strpos($verre->trad_fr, 'Gris') !== false || strpos($verre->trad_fr, 'Brun') !== false)) {
+                    if (!in_array('E-Space 1,5 Transition (Brun/Gris)', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,5 Transition (Brun/Gris)';
+                        array_push($verre_existant, 'E-Space 1,5 Transition (Brun/Gris)');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,5 Transition') !== false && (strpos($verre->trad_fr, 'Gris') === false && strpos($verre->trad_fr, 'Brun') === false)) {
+                    if (!in_array('E-Space 1,5 Transition (Ni Brun ni Gris)', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,5 Transition (Ni Brun ni Gris)';
+                        array_push($verre_existant, 'E-Space 1,5 Transition (Ni Brun ni Gris)');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,5 Xtractive') !== false) {
+                    if (!in_array('E-Space 1,5 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,5 Xtractive';
+                        array_push($verre_existant, 'E-Space 1,5 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,5 Polarisé') !== false) {
+                    if (!in_array('E-Space 1,5 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,5 Polarisé C';
+                        array_push($verre_existant, 'E-Space 1,5 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,53 Transition') !== false) {
+                    if (!in_array('E-Space 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,53 Transition';
+                        array_push($verre_existant, 'E-Space 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,53 Xtractive') !== false) {
+                    if (!in_array('E-Space 1,53 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,53 Xtractive';
+                        array_push($verre_existant, 'E-Space 1,53 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,53 Polarisé') !== false) {
+                    if (!in_array('E-Space 1,53 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,53 Polarisé C';
+                        array_push($verre_existant, 'E-Space 1,53 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,59 Transition') !== false) {
+                    if (!in_array('E-Space 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,59 Transition';
+                        array_push($verre_existant, 'E-Space 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,59 Xtractive') !== false) {
+                    if (!in_array('E-Space 1,59 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,59 Xtractive';
+                        array_push($verre_existant, 'E-Space 1,59 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,59 Polarisé') !== false) {
+                    if (!in_array('E-Space 1,59 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,59 Polarisé C';
+                        array_push($verre_existant, 'E-Space 1,59 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,6 Transition') !== false) {
+                    if (!in_array('E-Space 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,6 Transition';
+                        array_push($verre_existant, 'E-Space 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,6 Xtractive') !== false) {
+                    if (!in_array('E-Space 1,6 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,6 Xtractive';
+                        array_push($verre_existant, 'E-Space 1,6 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,6 Polarisé') !== false) {
+                    if (!in_array('E-Space 1,6 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,6 Polarisé C';
+                        array_push($verre_existant, 'E-Space 1,6 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,67 Transition') !== false) {
+                    if (!in_array('E-Space 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,67 Transition';
+                        array_push($verre_existant, 'E-Space 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,67 Xtractive') !== false) {
+                    if (!in_array('E-Space 1,67 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,67 Xtractive';
+                        array_push($verre_existant, 'E-Space 1,67 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 1,67 Polarisé') !== false) {
+                    if (!in_array('E-Space 1,67 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 1,67 Polarisé C';
+                        array_push($verre_existant, 'E-Space 1,67 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'E-Space 18 1,74 Transition') !== false) {
+                    if (!in_array('E-Space 18 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'E-Space 18 1,74 Transition';
+                        array_push($verre_existant, 'E-Space 18 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,5 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Platinium 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,5 Transition';
+                        array_push($verre_existant, 'Platinium 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+//                else if (strpos($verre->trad_fr, 'Platinium 1,5 Xtractive') !== false) {
+//                    if (!in_array('Platinium 1,5 Xtractive', $verre_existant)) {
+//                        $tab[$i]['verre'] = 'Platinium 1,5 Xtractive';
+//                        array_push($verre_existant, 'Platinium 1,5 Xtractive');
+//                    }
+//                    else {
+//                        continue;
+//                    }
+//                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,5 Polarisé') !== false) {
+                    if (!in_array('Platinium 1,5 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,5 Polarisé';
+                        array_push($verre_existant, 'Platinium 1,5 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,53 Transition') !== false) {
+                    if (!in_array('Platinium 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,53 Transition';
+                        array_push($verre_existant, 'Platinium 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+//                else if (strpos($verre->trad_fr, 'Platinium 1,53 Xtractive') !== false) {
+//                    if (!in_array('Platinium 1,53 Xtractive', $verre_existant)) {
+//                        $tab[$i]['verre'] = 'Platinium 1,53 Xtractive';
+//                        array_push($verre_existant, 'Platinium 1,53 Xtractive');
+//                    }
+//                    else {
+//                        continue;
+//                    }
+//                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,53 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Platinium 1,53 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,53 Polarisé C';
+                        array_push($verre_existant, 'Platinium 1,53 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,53') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Platinium 1,53 C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,53 C';
+                        array_push($verre_existant, 'Platinium 1,53 C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,59 Transition') !== false) {
+                    if (!in_array('Platinium 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,59 Transition';
+                        array_push($verre_existant, 'Platinium 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+//                else if (strpos($verre->trad_fr, 'Platinium 1,59 Xtractive') !== false) {
+//                    if (!in_array('Platinium 1,59 Xtractive', $verre_existant)) {
+//                        $tab[$i]['verre'] = 'Platinium 1,59 Xtractive';
+//                        array_push($verre_existant, 'Platinium 1,59 Xtractive');
+//                    }
+//                    else {
+//                        continue;
+//                    }
+//                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Platinium 1,59 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,59 Polarisé C';
+                        array_push($verre_existant, 'Platinium 1,59 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,6 Transition') !== false) {
+                    if (!in_array('Platinium 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,6 Transition';
+                        array_push($verre_existant, 'Platinium 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+//                else if (strpos($verre->trad_fr, 'Platinium 1,6 Xtractive') !== false) {
+//                    if (!in_array('Platinium 1,6 Xtractive', $verre_existant)) {
+//                        $tab[$i]['verre'] = 'Platinium 1,6 Xtractive';
+//                        array_push($verre_existant, 'Platinium 1,6 Xtractive');
+//                    }
+//                    else {
+//                        continue;
+//                    }
+//                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,6 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Platinium 1,6 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,6 Polarisé C';
+                        array_push($verre_existant, 'Platinium 1,6 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,67 Transition') !== false) {
+                    if (!in_array('Platinium 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,67 Transition';
+                        array_push($verre_existant, 'Platinium 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+//                else if (strpos($verre->trad_fr, 'Platinium 1,67 Xtractive') !== false) {
+//                    if (!in_array('Platinium 1,67 Xtractive', $verre_existant)) {
+//                        $tab[$i]['verre'] = 'Platinium 1,67 Xtractive';
+//                        array_push($verre_existant, 'Platinium 1,67 Xtractive');
+//                    }
+//                    else {
+//                        continue;
+//                    }
+//                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,67 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Platinium 1,67 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,67 Polarisé C';
+                        array_push($verre_existant, 'Platinium 1,67 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,74 Transition') !== false) {
+                    if (!in_array('Platinium 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,74 Transition';
+                        array_push($verre_existant, 'Platinium 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,5 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Omega 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,5 Transition';
+                        array_push($verre_existant, 'Omega 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,5 Xtractive') !== false) {
+                    if (!in_array('Omega 1,5 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,5 Xtractive';
+                        array_push($verre_existant, 'Omega 1,5 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,5 Polarisé') !== false) {
+                    if (!in_array('Omega 1,5 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,5 Polarisé';
+                        array_push($verre_existant, 'Omega 1,5 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,53 Transition') !== false) {
+                    if (!in_array('Omega 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,53 Transition';
+                        array_push($verre_existant, 'Omega 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,53 Xtractive') !== false) {
+                    if (!in_array('Omega 1,53 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,53 Xtractive';
+                        array_push($verre_existant, 'Omega 1,53 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,53') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Omega 1,53 C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,53 C';
+                        array_push($verre_existant, 'Omega 1,53 C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,59 Transition') !== false) {
+                    if (!in_array('Omega 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,59 Transition';
+                        array_push($verre_existant, 'Omega 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Platinium 1,59 Xtractive') !== false) {
+                    if (!in_array('Platinium 1,59 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Platinium 1,59 Xtractive';
+                        array_push($verre_existant, 'Platinium 1,59 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,59 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Omega 1,59 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,59 Polarisé C';
+                        array_push($verre_existant, 'Omega 1,59 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,6 Transition') !== false) {
+                    if (!in_array('Omega 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,6 Transition';
+                        array_push($verre_existant, 'Omega 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,6 Xtractive') !== false) {
+                    if (!in_array('Omega 1,6 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,6 Xtractive';
+                        array_push($verre_existant, 'Omega 1,6 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,6 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Omega 1,6 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,6 Polarisé C';
+                        array_push($verre_existant, 'Omega 1,6 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,67 Transition') !== false) {
+                    if (!in_array('Omega 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,67 Transition';
+                        array_push($verre_existant, 'Omega 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,67 Xtractive') !== false) {
+                    if (!in_array('Omega 1,67 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,67 Xtractive';
+                        array_push($verre_existant, 'Omega 1,67 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,67 Polarisé') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Omega 1,67 Polarisé C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,67 Polarisé C';
+                        array_push($verre_existant, 'Omega 1,67 Polarisé C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Omega 1,74 Transition') !== false) {
+                    if (!in_array('Omega 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Omega 1,74 Transition';
+                        array_push($verre_existant, 'Omega 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,5 Polarisé') !== false) {
+                    if (!in_array('Elysium 1,5 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,5 Polarisé';
+                        array_push($verre_existant, 'Elysium 1,5 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,53 Transition') !== false) {
+                    if (!in_array('Elysium 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,53 Transition';
+                        array_push($verre_existant, 'Elysium 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,59 Transition') !== false) {
+                    if (!in_array('Elysium 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,59 Transition';
+                        array_push($verre_existant, 'Elysium 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,6 Transition') !== false) {
+                    if (!in_array('Elysium 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,6 Transition';
+                        array_push($verre_existant, 'Elysium 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,6 Polarisé') !== false) {
+                    if (!in_array('Elysium 1,6 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,6 Polarisé';
+                        array_push($verre_existant, 'Elysium 1,6 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,67 Transition') !== false) {
+                    if (!in_array('Elysium 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,67 Transition';
+                        array_push($verre_existant, 'Elysium 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,67 Polarisé') !== false) {
+                    if (!in_array('Elysium 1,67 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,67 Polarisé';
+                        array_push($verre_existant, 'Elysium 1,67 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Elysium 1,74 Transition') !== false) {
+                    if (!in_array('Elysium 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Elysium 1,74 Transition';
+                        array_push($verre_existant, 'Elysium 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 HMC') !== false) {
+                    if (!in_array('Eyefatigue 1,5 HMC', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5 HMC';
+                        array_push($verre_existant, 'Eyefatigue 1,5 HMC');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 Defender') !== false) {
+                    if (!in_array('Eyefatigue 1,5 Defender', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5 Defender';
+                        array_push($verre_existant, 'Eyefatigue 1,5 Defender');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Eyefatigue 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 Xtractive') !== false) {
+                    if (!in_array('Eyefatigue 1,5 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5 Xtractive';
+                        array_push($verre_existant, 'Eyefatigue 1,5 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 Polarisé') !== false) {
+                    if (!in_array('Eyefatigue 1,5 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,5 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,5 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,5 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,5 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,5', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,5';
+                        array_push($verre_existant, 'Eyefatigue 1,5');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,53 Polarisé') !== false) {
+                    if (!in_array('Eyefatigue 1,53 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,53 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,53 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,53') !== false && strpos($verre->trad_fr, 'C') !== false) {
+                    if (!in_array('Eyefatigue 1,53 C', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,53 C';
+                        array_push($verre_existant, 'Eyefatigue 1,53 C');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,53 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Eyefatigue 1,53 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,53 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,53 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,53 Xtractive') !== false) {
+                    if (!in_array('Eyefatigue 1,53 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,53 Xtractive';
+                        array_push($verre_existant, 'Eyefatigue 1,53 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,53 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,53 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,53 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,53', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,53';
+                        array_push($verre_existant, 'Eyefatigue 1,53');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,59 Polarisé') !== false) {
+                    if (!in_array('Eyefatigue 1,59 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,59 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,59 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,59 Transition') !== false && strpos($verre->trad_fr, 'Vantage') === false) {
+                    if (!in_array('Eyefatigue 1,59 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,59 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,59 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,59 Xtractive') !== false) {
+                    if (!in_array('Eyefatigue 1,59 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,59 Xtractive';
+                        array_push($verre_existant, 'Eyefatigue 1,59 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,59 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,59 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,59 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,59', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,59';
+                        array_push($verre_existant, 'Eyefatigue 1,59');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,6 Defender') !== false) {
+                    if (!in_array('Eyefatigue 1,6 Defender', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,6 Defender';
+                        array_push($verre_existant, 'Eyefatigue 1,6 Defender');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,6 Transition') !== false) {
+                    if (!in_array('Eyefatigue 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,6 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,6 Xtractive') !== false) {
+                    if (!in_array('Eyefatigue 1,6 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,6 Xtractive';
+                        array_push($verre_existant, 'Eyefatigue 1,6 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,6 Polarisé') !== false) {
+                    if (!in_array('Eyefatigue 1,6 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,6 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,6 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,6 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,6 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,6 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,6', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,6';
+                        array_push($verre_existant, 'Eyefatigue 1,6');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,67 Defender') !== false) {
+                    if (!in_array('Eyefatigue 1,67 Defender', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,67 Defender';
+                        array_push($verre_existant, 'Eyefatigue 1,67 Defender');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,67 Transition') !== false) {
+                    if (!in_array('Eyefatigue 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,67 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,67 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,67 Xtractive') !== false) {
+                    if (!in_array('Eyefatigue 1,67 Xtractive', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,67 Xtractive';
+                        array_push($verre_existant, 'Eyefatigue 1,67 Xtractive');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,67 Polarisé') !== false) {
+                    if (!in_array('Eyefatigue 1,67 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,67 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,67 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,67 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,67 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,67 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,67', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,67';
+                        array_push($verre_existant, 'Eyefatigue 1,67');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,74 Transition') !== false) {
+                    if (!in_array('Eyefatigue 1,74 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,74 Transition';
+                        array_push($verre_existant, 'Eyefatigue 1,74 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Eyefatigue 1,74 0,5') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,74 0,75') !== false || strpos($verre->trad_fr, 'Eyefatigue 1,74 1,00') !== false) {
+                    if (!in_array('Eyefatigue 1,74 Polarisé', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Eyefatigue 1,74 Polarisé';
+                        array_push($verre_existant, 'Eyefatigue 1,74 Polarisé');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Top Office 1,5 HMC') !== false) {
+                    if (!in_array('Top Office 1,5 HMC', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Top Office 1,5 HMC';
+                        array_push($verre_existant, 'Top Office 1,5 HMC');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Top Office 1,5 Transition') !== false) {
+                    if (!in_array('Top Office 1,5 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Top Office 1,5 Transition';
+                        array_push($verre_existant, 'Top Office 1,5 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Top Office 1,6 Transition') !== false) {
+                    if (!in_array('Top Office 1,6 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Top Office 1,6 Transition';
+                        array_push($verre_existant, 'Top Office 1,6 Transition');
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else if (strpos($verre->trad_fr, 'Top Office 1,67 Transition') !== false) {
+                    if (!in_array('Top Office 1,67 Transition', $verre_existant)) {
+                        $tab[$i]['verre'] = 'Top Office 1,67 Transition';
+                        array_push($verre_existant, 'Top Office 1,67 Transition');
                     }
                     else {
                         continue;

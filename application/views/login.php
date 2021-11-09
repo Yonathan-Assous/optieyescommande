@@ -773,9 +773,9 @@ include_once('header.php');
                             if(data!="" && data == "not_logged") {
                                 window.location.reload();
                             } else {
-                                console.log(data);
+                                //console.log(data);
                                 let res = $.parseJSON(data);
-                                console.log(res);
+                                //console.log(res);
                                 if(res.status == 1) {
                                     window.location.href = res.link;
                                 }

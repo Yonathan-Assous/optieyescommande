@@ -3865,13 +3865,55 @@ class index extends MY_Controller {
             $this->redirect();
     }
 
+    public function accept_simplay() {
+//        print_r($_GET);die;
+        $orderReference = $_GET['order_reference'];
+        $this->load->helper('slimpay');
+        $userInformation = getOrderTest($orderReference);
+//        echo '<pre>';
+//        print_r($userInformation);
+//        echo '</pre>';die;
+
+        $passAleatoire = $this->CarAleatoire(8);
+        $email = strtolower($userInformation['email']);
+        $password = md5($email.'&&'.$passAleatoire);
+        $date_inscription = date("Y-m-d H:i:s");
+        $sql = "UPDATE users SET 
+                 pass = '$password', 
+                 document_rib = 'ok', 
+                 valid_document_rib = 1,
+                 valid_mandat = 1,
+                 date_inscription = $date_inscription
+                WHERE email = '$email'";
+        //print_r($sql);die;
+        //var_dump($sql);die;
+        $this->db->query($sql);
+        $mess_txt = "<html>
+										<head></head>
+										<body><b>Bonjour</b>!
+										<br><br>
+										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
+										</body>
+									    </html>";
+
+                            $subjet_txt = "Vos informations de connexion";
+
+                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
+        $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
+        $data['page'] = "Connexion";
+        $data['recovery'] = false;
+
+        $data['modules'] = array('sweetalert' => true);
+        $this->load->view('registration_accepted', $data);
+    }
+
     public function login($recovery=false){
 //        echo 'daadssa';die;
-        $this->load->helper('slimpay');
-        $x = getOrderTest('01e9eeff-3d57-11ec-a985-000000000000');
-        echo '<pre>';
-        print_r($x);
-        echo '</pre>';die;
+//        $this->load->helper('slimpay');
+//        $x = getOrderTest('01e9eeff-3d57-11ec-a985-000000000000');
+//        echo '<pre>';
+//        print_r($x);
+//        echo '</pre>';die;
         $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
         $data['page'] = "Connexion";
         $data['recovery'] = $recovery;
@@ -5052,6 +5094,7 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()){
             $data = $this->input->post();
             $inscription = $data['inscription'];
+            print_r($inscription);die;
             $sepa = $data['sepa'];
 //            print_r($data);die;
             if($this->checkSiret($inscription['numero_siret'])){

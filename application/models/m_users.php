@@ -459,7 +459,7 @@ class m_users extends CI_Model {
         $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, generation, verre_type 
                 FROM lenses L 
                 LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id) WHERE display = 'X' 
-                AND ( generation IS NULL OR generation = 'E-space' AND verre_type = 'e-space' OR generation = 'T-one' AND verre_type = 't-one')
+                AND ( generation IS NULL OR generation = '' OR generation = 'E-space' AND verre_type = 'e-space' OR generation = 'T-one' AND verre_type = 't-one')
                 ORDER BY verre_type, L.sorting";
         $query = $this->db->query($sql);
         $verres = $query->result();

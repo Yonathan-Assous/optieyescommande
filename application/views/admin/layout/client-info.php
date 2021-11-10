@@ -1101,7 +1101,7 @@ $(document).ready(function(){
                         doc.defaultStyle.alignment = 'center';
                         doc.defaultStyle.fontSize = 9;
                         //doc.defaultStyle.width = "auto";
-                        doc.content[1].table.widths = [ 'auto', '*', '*', '*', '*', 'auto', '*', '*', '*', 'auto', '*', '*' ]
+                        //doc.content[1].table.widths = [ '*', '100', '50', '80', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto' ]
                             doc.defaultStyle.height = 30;
                         // doc.styles.tableHeader.fontSize = 9;
                         doc.styles.tableHeader.fillColor = '#fbca35';

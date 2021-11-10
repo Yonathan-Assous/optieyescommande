@@ -170,6 +170,7 @@ File: Components
 .open > .dropdown-toggle.btn-danger {
   background-color: #e64c3d !important;
   border: 1px solid #e64c3d !important;
+  box-shadow: 0 4px 18px #d9405f !important;
 }
 .btn-inverse {
   background-color: #60667a !important;

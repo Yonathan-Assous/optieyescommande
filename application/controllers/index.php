@@ -3866,39 +3866,39 @@ class index extends MY_Controller {
     }
 
     public function accept_simplay() {
-//        print_r($_GET);die;
         $orderReference = $_GET['order_reference'];
         $this->load->helper('slimpay');
         $userInformation = getOrderTest($orderReference);
-//        echo '<pre>';
-//        print_r($userInformation);
-//        echo '</pre>';die;
 
         $passAleatoire = $this->CarAleatoire(8);
-        $email = strtolower($userInformation['email']);
-        $password = md5($email.'&&'.$passAleatoire);
-        $date_inscription = date("Y-m-d H:i:s");
+        $inscription['email'] = strtolower($userInformation['email']);
+        $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+        $inscription['date_inscription'] = date("Y-m-d H:i:s");
+
         $sql = "UPDATE users SET 
-                 pass = '$password', 
+                 pass = '" . $inscription['pass'] . "', 
                  document_rib = 'ok', 
                  valid_document_rib = 1,
                  valid_mandat = 1,
-                 date_inscription = $date_inscription
-                WHERE email = '$email'";
+                 date_inscription = '" . $inscription['date_inscription'] . "'
+                WHERE email = '" . $inscription['email'] . "'";
+//        echo '<pre>';
+//        print_r($sql);
+//        echo '</pre>';die;
         //print_r($sql);die;
         //var_dump($sql);die;
         $this->db->query($sql);
         $mess_txt = "<html>
-										<head></head>
-										<body><b>Bonjour</b>!
-										<br><br>
-										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
-										</body>
-									    </html>";
+					 <head></head>
+					 <body><b>Bonjour</b>!
+                     <br><br>Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.</body></html>";
 
-                            $subjet_txt = "Vos informations de connexion";
+        $subject_txt = "Vos informations de connexion";
+//        print_r($inscription);
+//        print_r($mess_txt);
+//        print_r($subject_txt);die;
+        $this->mail($inscription,$mess_txt,true,$subject_txt);
 
-                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
         $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
         $data['page'] = "Connexion";
         $data['recovery'] = false;
@@ -4236,13 +4236,13 @@ class index extends MY_Controller {
                 }
 //                echo json_encode($state);
                 if ($state['status'] == 1) {
-                    $this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+                    //$this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
                     return json_encode($state);
                 }
                 else {
-                    $this->db->delete("users", array('id_users' => $insert_id));
-                    $sql = "ALTER TABLE `users` AUTO_INCREMENT $insert_id";
-                    $this->db->query($sql);
+//                    $this->db->delete("users", array('id_users' => $insert_id));
+//                    $sql = "ALTER TABLE `users` AUTO_INCREMENT $insert_id";
+//                    $this->db->query($sql);
 //                    $this->m_users->updateUser(array('id_users' => $insert_id, 'active' => 0));
                     return false;
                 }
@@ -5094,7 +5094,7 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()){
             $data = $this->input->post();
             $inscription = $data['inscription'];
-            print_r($inscription);die;
+            //print_r($inscription);die;
             $sepa = $data['sepa'];
 //            print_r($data);die;
             if($this->checkSiret($inscription['numero_siret'])){
@@ -5133,9 +5133,14 @@ class index extends MY_Controller {
 //										</body>
 //									    </html>";
 //
-//                            $subjet_txt = "Vos informations de connexion";
+//                            $subject_txt = "Vos informations de connexion";
+//                            print_r($inscription);
+//                            print_r($mess_txt);
+//                            print_r($subject_txt);die;
+//                            $plouf = [];
+//                            $plouf['email'] = $inscription['email'];
 //
-//                            $this->mail($inscription,$mess_txt,true,$subjet_txt);
+//                            $this->mail($plouf,$mess_txt,true,$subject_txt);
                             echo $submitSepa;
 
                         }

@@ -159,10 +159,10 @@ include_once('header.php');
                             </div>
 
                             <div id="sepa" style="display: none">
-                                <h4 class="header-title m-b-5" style="margin-top: -40px">Vos informations de paiement</h4>
-                                <p> Avant de pouvoir passer vos commandes sur OptiEyes, veuillez
-                                    renseigner les informations de prélèvement ci-dessous, vous serez amenné à
-                                    valider votre mandat par siangature éléctronique avant de pouvoir commander.</p>
+<!--                                <h4 class="header-title m-b-5" style="margin-top: -40px">Vos informations de paiement</h4>-->
+<!--                                <p> Avant de pouvoir passer vos commandes sur OptiEyes, veuillez-->
+<!--                                    renseigner les informations de prélèvement ci-dessous, vous serez amenné à-->
+<!--                                    valider votre mandat par siangature éléctronique avant de pouvoir commander.</p>-->
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6">
                                         <label for="companyName">Société</label>
@@ -253,71 +253,71 @@ include_once('header.php');
                                         <label class="control-label" for="iban">IBAN</label>
                                         <div style="display: flex">
                                             <div class="col-sm-2" style="padding-left: 0px; padding-right: 1px;">
-                                                <select name="sepa[country]" id="country" class="form-control" style="padding: 0px; text-align: center; font-weight: bold">
-                                                    <option value="ad">ad</option>
-                                                    <option value="ae">ae</option>
-                                                    <option value="al">al</option>
-                                                    <option value="at">at</option>
-                                                    <option value="az">az</option>
-                                                    <option value="bh">bh</option>
-                                                    <option value="be">be</option>
-                                                    <option value="ba">ba</option>
-                                                    <option value="br">br</option>
-                                                    <option value="bg">bg</option>
-                                                    <option value="cr">cr</option>
-                                                    <option value="cy">cy</option>
-                                                    <option value="cz">cz</option>
-                                                    <option value="de">de</option>
-                                                    <option value="dk">dk</option>
-                                                    <option value="do">do</option>
-                                                    <option value="ee">ee</option>
-                                                    <option value="es">es</option>
-                                                    <option value="fi">fi</option>
+                                                <select disabled name="sepa[country]" id="country" class="form-control" style="padding: 0px; text-align: center; font-weight: bold">
+<!--                                                    <option value="ad">ad</option>-->
+<!--                                                    <option value="ae">ae</option>-->
+<!--                                                    <option value="al">al</option>-->
+<!--                                                    <option value="at">at</option>-->
+<!--                                                    <option value="az">az</option>-->
+<!--                                                    <option value="bh">bh</option>-->
+<!--                                                    <option value="be">be</option>-->
+<!--                                                    <option value="ba">ba</option>-->
+<!--                                                    <option value="br">br</option>-->
+<!--                                                    <option value="bg">bg</option>-->
+<!--                                                    <option value="cr">cr</option>-->
+<!--                                                    <option value="cy">cy</option>-->
+<!--                                                    <option value="cz">cz</option>-->
+<!--                                                    <option value="de">de</option>-->
+<!--                                                    <option value="dk">dk</option>-->
+<!--                                                    <option value="do">do</option>-->
+<!--                                                    <option value="ee">ee</option>-->
+<!--                                                    <option value="es">es</option>-->
+<!--                                                    <option value="fi">fi</option>-->
                                                     <option value="fr" selected>fr</option>
-                                                    <option value="gb">gb</option>
-                                                    <option value="ge">ge</option>
-                                                    <option value="gi">gi</option>
-                                                    <option value="gl">gl</option>
-                                                    <option value="gr">gr</option>
-                                                    <option value="gt">gt</option>
-                                                    <option value="hr">hr</option>
-                                                    <option value="hu">hu</option>
-                                                    <option value="ie">ie</option>
-                                                    <option value="il">il</option>
-                                                    <option value="is">is</option>
-                                                    <option value="it">it</option>
-                                                    <option value="jo">jo</option>
-                                                    <option value="kw">kw</option>
-                                                    <option value="kz">kz</option>
-                                                    <option value="lb">lb</option>
-                                                    <option value="li">li</option>
-                                                    <option value="lt">lt</option>
-                                                    <option value="lu">lu</option>
-                                                    <option value="lv">lv</option>
-                                                    <option value="mc">mc</option>
-                                                    <option value="md">md</option>
-                                                    <option value="me">me</option>
-                                                    <option value="mk">mk</option>
-                                                    <option value="mr">mr</option>
-                                                    <option value="mt">mt</option>
-                                                    <option value="mu">mu</option>
-                                                    <option value="nl">nl</option>
-                                                    <option value="no">no</option>
-                                                    <option value="pk">pk</option>
-                                                    <option value="pl">pl</option>
-                                                    <option value="ps">ps</option>
-                                                    <option value="pt">pt</option>
-                                                    <option value="qa">qa</option>
-                                                    <option value="ro">ro</option>
-                                                    <option value="rs">rs</option>
-                                                    <option value="sa">sa</option>
-                                                    <option value="se">se</option>
-                                                    <option value="sk">sk</option>
-                                                    <option value="si">si</option>
-                                                    <option value="sm">sm</option>
-                                                    <option value="tn">tn</option>
-                                                    <option value="tr">tr</option>
-                                                    <option value="tg">vg</option>
+<!--                                                    <option value="gb">gb</option>-->
+<!--                                                    <option value="ge">ge</option>-->
+<!--                                                    <option value="gi">gi</option>-->
+<!--                                                    <option value="gl">gl</option>-->
+<!--                                                    <option value="gr">gr</option>-->
+<!--                                                    <option value="gt">gt</option>-->
+<!--                                                    <option value="hr">hr</option>-->
+<!--                                                    <option value="hu">hu</option>-->
+<!--                                                    <option value="ie">ie</option>-->
+<!--                                                    <option value="il">il</option>-->
+<!--                                                    <option value="is">is</option>-->
+<!--                                                    <option value="it">it</option>-->
+<!--                                                    <option value="jo">jo</option>-->
+<!--                                                    <option value="kw">kw</option>-->
+<!--                                                    <option value="kz">kz</option>-->
+<!--                                                    <option value="lb">lb</option>-->
+<!--                                                    <option value="li">li</option>-->
+<!--                                                    <option value="lt">lt</option>-->
+<!--                                                    <option value="lu">lu</option>-->
+<!--                                                    <option value="lv">lv</option>-->
+<!--                                                    <option value="mc">mc</option>-->
+<!--                                                    <option value="md">md</option>-->
+<!--                                                    <option value="me">me</option>-->
+<!--                                                    <option value="mk">mk</option>-->
+<!--                                                    <option value="mr">mr</option>-->
+<!--                                                    <option value="mt">mt</option>-->
+<!--                                                    <option value="mu">mu</option>-->
+<!--                                                    <option value="nl">nl</option>-->
+<!--                                                    <option value="no">no</option>-->
+<!--                                                    <option value="pk">pk</option>-->
+<!--                                                    <option value="pl">pl</option>-->
+<!--                                                    <option value="ps">ps</option>-->
+<!--                                                    <option value="pt">pt</option>-->
+<!--                                                    <option value="qa">qa</option>-->
+<!--                                                    <option value="ro">ro</option>-->
+<!--                                                    <option value="rs">rs</option>-->
+<!--                                                    <option value="sa">sa</option>-->
+<!--                                                    <option value="se">se</option>-->
+<!--                                                    <option value="sk">sk</option>-->
+<!--                                                    <option value="si">si</option>-->
+<!--                                                    <option value="sm">sm</option>-->
+<!--                                                    <option value="tn">tn</option>-->
+<!--                                                    <option value="tr">tr</option>-->
+<!--                                                    <option value="tg">vg</option>-->
                                                 </select>
                                             </div>
                                             <div class="col-sm-10" style="padding-left: 1px; padding-right: 0px;">
@@ -330,7 +330,7 @@ include_once('header.php');
 
                                 <div class="form-group text-center m-t-30">
                                     <div class="col-xs-12 col-sm-6">
-                                        <button id="previous_register" class="btn btn-bordred btn-block waves-effect waves-light text-uppercase"
+                                        <button id="previous_register" class="btn btn-danger btn-bordred btn-block waves-effect waves-light text-uppercase"
                                                 type="button" name="previous_register" style="background-color: lightgrey">Précédent</button>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
@@ -964,6 +964,13 @@ include_once('header.php');
                 min-width: 100%;
                 width: 100%;
             }
+
+            #country {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
         </style>
 
 

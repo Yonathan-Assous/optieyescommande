@@ -21939,5 +21939,11 @@ class admin
         }
     }
 
+    public function getPricesByUser() {
+        $data =
+            $this->input->post();
+        $tab = $this->m_users->getPriceByUserId($data['user_id']);
+        echo json_encode($tab);
 
+    }
 }

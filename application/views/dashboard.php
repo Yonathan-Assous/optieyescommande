@@ -164,7 +164,7 @@ if (is_object($pair_order)) {
                                         </div>
 
                                         <div class="form-group clearfix m-b-15">
-                                            <label class="col-lg-2 control-label" for="pays">Code Postal</label>
+                                            <label class="col-lg-2 control-label" for="pays">Pays</label>
                                             <div class="col-lg-10">
                                                 <input id="pays" name="pays" type="text" class="required form-control"
                                                        value="France" disabled/>

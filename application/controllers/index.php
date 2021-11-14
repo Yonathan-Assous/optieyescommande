@@ -3865,8 +3865,59 @@ class index extends MY_Controller {
             $this->redirect();
     }
 
-    public function login($recovery=false){
+    public function accept_simplay() {
+        $orderReference = $_GET['order_reference'];
+        $this->load->helper('slimpay');
+        $userInformation = getUserInformation($orderReference);
+        if (!$userInformation) {
+            $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
+            $data['page'] = "Connexion";
+            $data['recovery'] = false;
 
+            $data['modules'] = array('sweetalert' => true);
+            $this->load->view('registration_rejected', $data);
+        }
+        else {
+            $passAleatoire = $this->CarAleatoire(8);
+            $inscription['email'] = strtolower($userInformation['email']);
+            $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+            $inscription['date_inscription'] = date("Y-m-d H:i:s");
+
+            $sql = "UPDATE users SET 
+                 pass = '" . $inscription['pass'] . "', 
+                 document_rib = 'ok', 
+                 valid_document_rib = 1,
+                 valid_mandat = 1,
+                 date_inscription = '" . $inscription['date_inscription'] . "'
+                WHERE email = '" . $inscription['email'] . "'";
+
+            $this->db->query($sql);
+            $mess_txt = "<html>
+					 <head></head>
+					 <body><b>Bonjour</b>!
+                     <br><br>Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.</body></html>";
+
+            $subject_txt = "Vos informations de connexion";
+
+            $this->mail($inscription,$mess_txt,true,$subject_txt);
+
+            $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
+            $data['page'] = "Connexion";
+            $data['recovery'] = false;
+
+            $data['modules'] = array('sweetalert' => true);
+            $this->load->view('registration_accepted', $data);
+        }
+
+    }
+
+    public function login($recovery=false){
+//        echo 'daadssa';die;
+//        $this->load->helper('slimpay');
+//        $x = getOrderTest('01e9eeff-3d57-11ec-a985-000000000000');
+//        echo '<pre>';
+//        print_r($x);
+//        echo '</pre>';die;
         $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
         $data['page'] = "Connexion";
         $data['recovery'] = $recovery;
@@ -4099,6 +4150,136 @@ class index extends MY_Controller {
         }
     }
 
+    public function submit_sepa($infos_user, $sepa) {
+        $insert_id = $this->db->insert_id();
+//        print_r($this->db->last_query());die;
+//        print_r($insert_id);die;
+        if(isset($insert_id) && $this->input->is_ajax_request()) {
+
+            //$infos_user = $this->m_users->getUserById($this->data['user_info']->id_users);
+
+            $this->load->helper('slimpay');
+
+            $errors = '';
+
+            $iban_info['email'] = $infos_user['email'];
+            $iban_info['client_ref'] = 'OPTC'.$insert_id;
+            $iban_info['slm_ref'] = 'OPTR'.$insert_id."BIS";
+            $iban_info['familyName'] = $sepa['familyName'];
+            $iban_info['givenName'] = $sepa['givenName'];
+            $iban_info['companyName'] = $sepa['companyName'];
+
+            switch($sepa['honorificPrefix']) {
+                case 1:
+                    $iban_info['honorificPrefix'] = 'Mr';
+                    break;
+                case 2:
+                    $iban_info['honorificPrefix'] = 'Mrs';
+                    break;
+                case 3:
+                    $iban_info['honorificPrefix'] = 'Miss';
+            }
+
+            $iban_info['iban'] = str_replace(' ', '', $sepa['iban']);
+            $iban_info['city'] = $sepa['city'];
+            $iban_info['postalCode'] = $sepa['postalCode'];
+            $iban_info['street1'] = $sepa['street1'];
+            $iban_info['street2'] = $sepa['street2'];
+
+            //var_dump($iban_info);
+
+
+            foreach($iban_info as $k => $v) {
+                $value = trim($v);
+                if($k != 'street2') {
+                    if (empty($value)) {
+                        $errors[$k] = 1;
+                    }
+                    else {
+                        if($k == 'postalCode') {
+//                            print_r($value);
+                            if(!is_numeric($value)) {
+                                $errors[$k] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+//            print_r(!checkIBAN($sepa['iban']));die;
+            $iban = $sepa['country'] . str_replace(" ", "", $sepa['iban']);
+            $iban_info['iban'] = $iban;
+
+            if($iban != '') {
+                if (!checkIBAN($iban)) {
+                    $errors['iban'] = 2;
+                }
+            }
+            else {
+                $errors['iban'] = 1;
+            }
+            if(!empty($errors)) {
+                echo json_encode($errors);
+            }
+            else {
+                $state = createMandat($iban_info);
+//                     switch($this->config->item('opti_env')) {
+//
+//                            case 'prod':
+//                                $state = createMandat($iban_info);
+//                                break;
+//
+//                            case 'dev':
+////                                $state = createMandat($iban_info);
+//                                $state = createMandatTest($iban_info);
+//                                //$state['status'] = 1;
+//                                break;
+//                            default:
+//                                $state = [];
+//                                $state['status'] = 0;
+//                                break;
+//                }
+//                echo json_encode($state);
+                if ($state['status'] == 1) {
+                    //$this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+                    return json_encode($state);
+                }
+                else {
+//                    $this->db->delete("users", array('id_users' => $insert_id));
+//                    $sql = "ALTER TABLE `users` AUTO_INCREMENT $insert_id";
+//                    $this->db->query($sql);
+//                    $this->m_users->updateUser(array('id_users' => $insert_id, 'active' => 0));
+                    return false;
+                }
+//                if($this->data['infos_user'][0]->valid_mandat != 1) {
+//
+//                    $checkMandat = getMandat('OPTR' . $this->data['user_info']->id_users."BIS");
+//
+//                    if ($checkMandat['state'] == 'active') {
+//
+//                        $this->m_users->updateUser(array('id_users' => $this->data['user_info']->id_users, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+//
+//                        $this->email->from('noreply@optieyescommande.com', 'Optieyes Commande');
+//                        $this->email->to('optieyescommande@gmail.com');
+//                        $this->email->cc('testproxicom@gmail.com');
+//
+//                        $this->email->subject('Client n°' . $this->data['user_info']->id_users . ' a validé son RIB.');
+//
+//                        $this->email->send();
+//
+//                    }
+//
+//                }
+            }
+
+
+
+        }
+//        else {
+//            $this->redirect();
+//        }
+
+    }
+
     public function submit_mandat() {
 
         if($this->session->userdata('logged_in') === true && $this->input->is_ajax_request()) {
@@ -4152,7 +4333,6 @@ class index extends MY_Controller {
                     }
                 }
             }
-
             if($_POST['iban'] != '') {
                 if (!checkIBAN($_POST['iban'])) {
                     $errors['iban'] = 2;
@@ -4161,7 +4341,6 @@ class index extends MY_Controller {
             else {
                 $errors['iban'] = 1;
             }
-
 
             if(!empty($errors)) {
                 echo json_encode($errors);
@@ -4536,55 +4715,61 @@ class index extends MY_Controller {
 		    $data['email'] = trim($data['email']);
 //		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
-                   if(($data_user = $this->m_users->check($data)) !== false){
-                       $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
+			       if ($this->m_users->checkMail($data)) {
+                       if(($data_user = $this->m_users->check($data)) !== false){
+                           $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
-					   $data_user['user_info'] = $data_user[0];
-					   unset($data_user[0]);
+                           $data_user['user_info'] = $data_user[0];
+                           unset($data_user[0]);
 
-					   $data_admin = $this->m_users->getUserById(1);
-					   $data_admin['admin_info'] = $data_admin[0];
-					   unset($data_admin[0]);
+                           $data_admin = $this->m_users->getUserById(1);
+                           $data_admin['admin_info'] = $data_admin[0];
+                           unset($data_admin[0]);
 
-					   $numero_siret = $tva_intracomm = "ok";
+                           $numero_siret = $tva_intracomm = "ok";
 
-					   if($data_user['user_info']->id_users != 2){ //id 2 is user test
-						   if(!$this->checkSiret($data_user['user_info']->numero_siret)){
-							   $numero_siret = "nok";
-						   }
+                           if($data_user['user_info']->id_users != 2){ //id 2 is user test
+                               if(!$this->checkSiret($data_user['user_info']->numero_siret)){
+                                   $numero_siret = "nok";
+                               }
 
-						   /*if($this->checkTvaIntraComm($data_user['user_info']->numero_siret) != $data_user['user_info']->tva_intracom){
-							   $tva_intracomm = "nok";
-						   }*/
-					   }
+                               /*if($this->checkTvaIntraComm($data_user['user_info']->numero_siret) != $data_user['user_info']->tva_intracom){
+                                   $tva_intracomm = "nok";
+                               }*/
+                           }
 
-					   $session = array(
-						   'logged_in'  => true,
-						   'data_user'  => $data_user,
-						   'data_admin' => $data_admin,
-						   'pass_user'  => $data['pass'],
-						   'numero_siret' => $numero_siret,
-						   'tva_intracomm'=> $tva_intracomm
-					   );
+                           $session = array(
+                               'logged_in'  => true,
+                               'data_user'  => $data_user,
+                               'data_admin' => $data_admin,
+                               'pass_user'  => $data['pass'],
+                               'numero_siret' => $numero_siret,
+                               'tva_intracomm'=> $tva_intracomm
+                           );
 
-                       $this->m_users->updateLastLogin($data_user['user_info']->id_users);
+                           $this->m_users->updateLastLogin($data_user['user_info']->id_users);
 
-                       if($data_user['user_info']->login_notification == 1) {
-                           $message = '';
-                           $data['email'] = 'optieyescommande@gmail.com';
-                           $title = 'Le client n° '.$data_user['user_info']->id_users.' s\'est connecté';
-                           $this->mail($data, $message, true, $title);
-                       }
+                           if($data_user['user_info']->login_notification == 1) {
+                               $message = '';
+                               $data['email'] = 'optieyescommande@gmail.com';
+                               $title = 'Le client n° '.$data_user['user_info']->id_users.' s\'est connecté';
+                               $this->mail($data, $message, true, $title);
+                           }
 
-					   $this->session->set_userdata($session);
-					   $this->session->unset_userdata("is_admin");
+                           $this->session->set_userdata($session);
+                           $this->session->unset_userdata("is_admin");
 
-					   echo json_encode(array('status'=> 'ok'));
-				   }else
-					   echo json_encode(array('status'=> 'error_log'));
+                           echo json_encode(array('status'=> 'ok'));
+                       }else
+                           echo json_encode(array('status'=> 'error_log'));
+                   }
+			       else {
+                       echo json_encode(array('status'=> 'mail_not_valide'));
+                   }
+
 			   }
 			   else
-					echo json_encode(array('status'=> 'error_log'));
+					echo json_encode(array('status'=> 'error_mail'));
 			}else
 				echo json_encode(array('status'=> 'error_log'));
         }
@@ -4917,14 +5102,18 @@ class index extends MY_Controller {
 
     public function subscribe(){
         if($this->input->is_ajax_request()){
-            $data = $this->input->post('inscription');
-            if($this->checkSiret($data['numero_siret'])){
+            $data = $this->input->post();
+            $inscription = $data['inscription'];
+            //print_r($inscription);die;
+            $sepa = $data['sepa'];
+//            print_r($data);die;
+            if($this->checkSiret($inscription['numero_siret'])){
                 //if($this->checkTvaIntraComm($data['numero_siret']) == $data['tva_intracom']){
                     $passAleatoire = $this->CarAleatoire(8);
-                    $data['email'] = strtolower($data['email']);
-                    $data['pass'] = md5($data['email'].'&&'.$passAleatoire);
-                    $data['date_inscription'] = date("Y-m-d H:i:s");
-                    if(($return = $this->m_users->addUser($data))!=""){
+                    $inscription['email'] = strtolower($inscription['email']);
+                    $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+                    $inscription['date_inscription'] = date("Y-m-d H:i:s");
+                    if(($return = $this->m_users->addUser($inscription))!=""){
                         if ($return->error == "DUPLICATE_SIRET") {
                             echo json_encode(array('status'=> 'error', 'error' => 'duplicate_siret',
                                 'magasin' => $return->id_users));
@@ -4936,23 +5125,34 @@ class index extends MY_Controller {
                         }
                     }
                     else{
-                        echo json_encode(array('status'=> 'ok'));
-
 
                         //<br><br>
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
 
-                        $mess_txt = "<html>
-										<head></head>
-										<body><b>Bonjour</b>!
-										<br><br> 
-										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
-										</body>
-									</html>";
+                        $submitSepa = $this->submit_sepa($inscription, $sepa);
+                        if (!$submitSepa) {
+                            echo json_encode(array('status'=> 'error', 'error' => 'iban'));
+                        }
+                        else {
+//                            $mess_txt = "<html>
+//										<head></head>
+//										<body><b>Bonjour</b>!
+//										<br><br>
+//										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
+//										</body>
+//									    </html>";
+//
+//                            $subject_txt = "Vos informations de connexion";
+//                            print_r($inscription);
+//                            print_r($mess_txt);
+//                            print_r($subject_txt);die;
+//                            $plouf = [];
+//                            $plouf['email'] = $inscription['email'];
+//
+//                            $this->mail($plouf,$mess_txt,true,$subject_txt);
+                            echo $submitSepa;
 
-                        $subjet_txt = "Vos informations de connexion";
-
-                        $this->mail($data,$mess_txt,true,$subjet_txt);
+                        }
                         // 'static/download/optimize.txt'
                     }
                 /*}

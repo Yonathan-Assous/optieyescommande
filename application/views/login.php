@@ -253,7 +253,7 @@ include_once('header.php');
                                         <label class="control-label" for="iban">IBAN</label>
                                         <div style="display: flex">
                                             <div class="col-sm-2" style="padding-left: 0px; padding-right: 1px;">
-                                                <select disabled name="sepa[country]" id="country" class="form-control" style="padding: 0px; text-align: center; font-weight: bold">
+                                                <select name="sepa[country]" id="country" class="form-control" style="padding: 0px; text-align: center; font-weight: bold">
 <!--                                                    <option value="ad">ad</option>-->
 <!--                                                    <option value="ae">ae</option>-->
 <!--                                                    <option value="al">al</option>-->
@@ -489,6 +489,12 @@ include_once('header.php');
                     }
                     if(res.status == 'error_log') {
                         $('p.error-login').text('Le mot de passe que vous avez saisi est incorrect.');
+                    }
+                    if(res.status == 'error_mail') {
+                        $('p.error-login').text('Le mail que vous avez saisi n\'est pas aux normes.');
+                    }
+                    if(res.status == 'mail_not_valide') {
+                        $('p.error-login').text('Ce compte n\existe pas.');
                     }
                 });
             });

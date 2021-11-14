@@ -47,7 +47,177 @@ function createMandat($infos = null)
         try {
 
             // The HAPI Client
-            $hapiClient = new Http\HapiClient(
+            $hapiClient = getHapiClient();
+
+
+            // The Relations Namespace
+            $relNs = 'https://api.slimpay.net/alps#';
+
+            // Follow create-orders
+            $rel = new Hal\CustomRel($relNs . 'create-orders');
+            $follow = new Http\Follow($rel, 'POST', ['user-approval'], new Http\JsonBody(
+                [
+                    'locale' => 'fr',
+                    'reference' => null,
+                    'started' => true,
+                    'creditor' => [
+                        'reference' => 'optimizefrance'
+                    ],
+                    'subscriber' => [
+                        'reference' => $infos['client_ref']
+                    ],
+                    'items' => [
+                        [
+                            'type' => 'signMandate',
+                            'mandate' => [
+                                'createSequenceType' => null,
+                                'dateSigned' => null,
+                                'reference' => $infos['slm_ref'],
+                                'standard' => 'SEPA',
+                                'signatory' => [
+                                    'companyName' => $infos['companyName'],
+                                    'email' => $infos['email'],
+                                    'familyName' => $infos['familyName'],
+                                    'givenName' => $infos['givenName'],
+                                    'honorificPrefix' => $infos['honorificPrefix'],
+                                    'organizationName' => null,
+                                    'telephone' => null,
+                                    'bankAccount' => [
+                                        'bic' => null,
+                                        'iban' => $infos['iban']
+                                    ],
+                                    'billingAddress' => [
+                                        'city' => $infos['city'],
+                                        'country' => 'FR',
+                                        'postalCode' => $infos['postalCode'],
+                                        'street1' => $infos['street1'],
+                                        'street2' => $infos['street2']
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ));
+
+            $res = $hapiClient->sendFollow($follow);
+            // The Resource's state
+
+            $res = [
+                'state' => $res->getState(),
+                'links' => $res->getAllLinks($relNs . 'user-approval')
+            ];
+
+            return array('status' => 1, 'link' => $res['links'][$relNs.'user-approval']->href);
+
+        } catch (Exception $e) {
+            return array('status' => $e->getMessage());
+        }
+
+    }
+    else {
+        return false;
+    }
+
+}
+
+//function createMandatTest($infos = null)
+//{
+//    if($infos) {
+//
+//        try {
+//            $hapiClient = getHapiClient();
+////            $hapiClient2 = static::getHapiClient();
+////            print_r($hapiClient);die;
+////            echo '2:<br>';
+////            //print_r($hapiClient2);die;
+////            // The HAPI Client
+////            $hapiClient = new Http\HapiClient(
+////                'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
+////                '/',
+////                'https://api.slimpay.net/alps/v1',
+////                new Http\Auth\Oauth2BasicAuthentication(
+////                    '/oauth/token', //https://api.preprod.slimpay.net/oauth/token
+////                    'optimizefrance',
+////                    'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
+////                )
+////            );
+//
+//            // The Relations Namespace
+//            $relNs = 'https://api.slimpay.net/alps#';
+//
+//            // Follow create-orders
+//            $rel = new Hal\CustomRel($relNs . 'create-orders');
+//            $follow = new Http\Follow($rel, 'POST', ['user-approval'], new Http\JsonBody(
+//                [
+//                    'locale' => 'fr',
+//                    'reference' => null,
+//                    'started' => true,
+//                    'creditor' => [
+//                        'reference' => 'optimizefrance'
+//                    ],
+//                    'subscriber' => [
+//                        'reference' => $infos['client_ref']
+//                    ],
+//                    'items' => [
+//                        [
+//                            'type' => 'signMandate',
+//                            'mandate' => [
+//                                'createSequenceType' => null,
+//                                'dateSigned' => null,
+//                                'reference' => $infos['slm_ref'],
+//                                'standard' => 'SEPA',
+//                                'signatory' => [
+//                                    'companyName' => $infos['companyName'],
+//                                    'email' => $infos['email'],
+//                                    'familyName' => $infos['familyName'],
+//                                    'givenName' => $infos['givenName'],
+//                                    'honorificPrefix' => $infos['honorificPrefix'],
+//                                    'organizationName' => null,
+//                                    'telephone' => null,
+//                                    'bankAccount' => [
+//                                        'bic' => null,
+//                                        'iban' => $infos['iban']
+//                                    ],
+//                                    'billingAddress' => [
+//                                        'city' => $infos['city'],
+//                                        'country' => 'FR',
+//                                        'postalCode' => $infos['postalCode'],
+//                                        'street1' => $infos['street1'],
+//                                        'street2' => $infos['street2']
+//                                    ]
+//                                ]
+//                            ]
+//                        ]
+//                    ]
+//                ]
+//            ));
+//            $res = $hapiClient->sendFollow($follow);
+//            // The Resource's state
+//
+//            $res = [
+//                'state' => $res->getState(),
+//                'links' => $res->getAllLinks($relNs . 'user-approval')
+//            ];
+//
+//            return array('status' => 1, 'link' => $res['links'][$relNs.'user-approval']->href);
+//
+//        } catch (Exception $e) {
+//            return array('status' => $e->getMessage());
+//        }
+//
+//    }
+//    else {
+//        return false;
+//    }
+//
+//}
+
+function getHapiClient() {
+    $CI = & get_instance();
+    switch($CI->config->item('opti_env')) {
+        case 'prod': case 'dev':
+            return new Http\HapiClient(
                 'https://api.slimpay.net',
                 '/',
                 'https://api.slimpay.net/alps/v1',
@@ -57,184 +227,28 @@ function createMandat($infos = null)
                     'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
-
-            // The Relations Namespace
-            $relNs = 'https://api.slimpay.net/alps#';
-
-            // Follow create-orders
-            $rel = new Hal\CustomRel($relNs . 'create-orders');
-            $follow = new Http\Follow($rel, 'POST', ['user-approval'], new Http\JsonBody(
-                [
-                    'locale' => 'fr',
-                    'reference' => null,
-                    'started' => true,
-                    'creditor' => [
-                        'reference' => 'optimizefrance'
-                    ],
-                    'subscriber' => [
-                        'reference' => $infos['client_ref']
-                    ],
-                    'items' => [
-                        [
-                            'type' => 'signMandate',
-                            'mandate' => [
-                                'createSequenceType' => null,
-                                'dateSigned' => null,
-                                'reference' => $infos['slm_ref'],
-                                'standard' => 'SEPA',
-                                'signatory' => [
-                                    'companyName' => $infos['companyName'],
-                                    'email' => $infos['email'],
-                                    'familyName' => $infos['familyName'],
-                                    'givenName' => $infos['givenName'],
-                                    'honorificPrefix' => $infos['honorificPrefix'],
-                                    'organizationName' => null,
-                                    'telephone' => null,
-                                    'bankAccount' => [
-                                        'bic' => null,
-                                        'iban' => $infos['iban']
-                                    ],
-                                    'billingAddress' => [
-                                        'city' => $infos['city'],
-                                        'country' => 'FR',
-                                        'postalCode' => $infos['postalCode'],
-                                        'street1' => $infos['street1'],
-                                        'street2' => $infos['street2']
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ));
-
-            $res = $hapiClient->sendFollow($follow);
-
-            // The Resource's state
-
-            $res = [
-                'state' => $res->getState(),
-                'links' => $res->getAllLinks($relNs . 'user-approval')
-            ];
-
-            return array('status' => 1, 'link' => $res['links'][$relNs.'user-approval']->href);
-
-        } catch (Exception $e) {
-            return array('status' => $e->getMessage());
-        }
-
-    }
-    else {
-        return false;
-    }
-
-}
-
-function createMandatTest($infos = null)
-{
-    if($infos) {
-
-        try {
-            // The HAPI Client
-            $hapiClient = new Http\HapiClient(
+        case 'local':
+            return new Http\HapiClient(
                 'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
                 '/',
                 'https://api.slimpay.net/alps/v1',
                 new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token', //https://api.preprod.slimpay.net/oauth/token
+                    '/oauth/token',
                     'optimizefrance',
                     'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
                 )
             );
-
-            // The Relations Namespace
-            $relNs = 'https://api.slimpay.net/alps#';
-
-            // Follow create-orders
-            $rel = new Hal\CustomRel($relNs . 'create-orders');
-            $follow = new Http\Follow($rel, 'POST', ['user-approval'], new Http\JsonBody(
-                [
-                    'locale' => 'fr',
-                    'reference' => null,
-                    'started' => true,
-                    'creditor' => [
-                        'reference' => 'optimizefrance'
-                    ],
-                    'subscriber' => [
-                        'reference' => $infos['client_ref']
-                    ],
-                    'items' => [
-                        [
-                            'type' => 'signMandate',
-                            'mandate' => [
-                                'createSequenceType' => null,
-                                'dateSigned' => null,
-                                'reference' => $infos['slm_ref'],
-                                'standard' => 'SEPA',
-                                'signatory' => [
-                                    'companyName' => $infos['companyName'],
-                                    'email' => $infos['email'],
-                                    'familyName' => $infos['familyName'],
-                                    'givenName' => $infos['givenName'],
-                                    'honorificPrefix' => $infos['honorificPrefix'],
-                                    'organizationName' => null,
-                                    'telephone' => null,
-                                    'bankAccount' => [
-                                        'bic' => null,
-                                        'iban' => $infos['iban']
-                                    ],
-                                    'billingAddress' => [
-                                        'city' => $infos['city'],
-                                        'country' => 'FR',
-                                        'postalCode' => $infos['postalCode'],
-                                        'street1' => $infos['street1'],
-                                        'street2' => $infos['street2']
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ));
-
-            $res = $hapiClient->sendFollow($follow);
-            // The Resource's state
-
-            $res = [
-                'state' => $res->getState(),
-                'links' => $res->getAllLinks($relNs . 'user-approval')
-            ];
-
-            return array('status' => 1, 'link' => $res['links'][$relNs.'user-approval']->href);
-
-        } catch (Exception $e) {
-            return array('status' => $e->getMessage());
-        }
-
+        default:
+            echo 'error';
+            die;
     }
-    else {
-        return false;
-    }
-
 }
 
-function getOrderTest($ref)
+function getUserInformation($ref)
 {
     try {
+        $hapiClient = getHapiClient();
 
-        // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimizefrance',
-                'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
-            )
-        );
-
-        // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';
 
         // Follow get-mandates
@@ -305,16 +319,8 @@ function createDebit($data) {
         try {
 
             // The HAPI Client
-            $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net',
-                '/',
-                'https://api.slimpay.net/alps/v1',
-                new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token',
-                    'optimeyes01 ',
-                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-                )
-            );
+            $hapiClient = getHapiClient();
+
 
 
             if($data['jour_prelevement'] != 0) {
@@ -368,16 +374,8 @@ function getDebitStatus($id = null) {
     if($id) {
 
         // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-            )
-        );
+        $hapiClient = getHapiClient();
+
 
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';

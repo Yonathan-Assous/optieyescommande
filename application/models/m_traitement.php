@@ -10,7 +10,7 @@ class m_traitement extends CI_Model
 
     public function insertPrixTraitementNew() {
         $sqlLenses = "SELECT * FROM `lenses` WHERE
-                id >= 3153
+                id IN (SELECT DISTINCT(id_lenses) FROM `traitement_prix` WHERE `id_type_verre_solaire` = 1 ORDER BY `traitement_prix`.`id_lenses` ASC)
                 ORDER BY `lenses`.`name`  DESC";
         $query = $this->db->query($sqlLenses);
         if ($query->num_rows() > 0)
@@ -532,7 +532,8 @@ class m_traitement extends CI_Model
     }
 
     public function calculPrice($nom_du_verre, $code, $userId) {
-//        var_dump($code);die;
+//        var_dump($code);
+//        var_dump($nom_du_verre);die;
 
         $num = strpos($nom_du_verre, " - Stock");
         if ($num !== false) {
@@ -576,7 +577,7 @@ class m_traitement extends CI_Model
                 AND id_user = $userId
                 ORDER BY `id_user` DESC";
         }
-
+//        print_r($sql);die;
         $query = $this->db->query($sql);
         //var_dump($query->num_rows());die;
         if ($query->num_rows() == 0) {

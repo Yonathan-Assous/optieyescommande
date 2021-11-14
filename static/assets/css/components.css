@@ -1170,7 +1170,7 @@ div.dataTables_info {
   padding-top: 38px;
 }
 .dt-buttons {
-  float: left;
+  float: right;
 }
 div#datatable-buttons_info {
   float: left;
@@ -1362,3 +1362,35 @@ input.new-design:focus {
   cursor: pointer;
 }
 
+.buttons-pdf {
+  background-color: #fde6a2;
+  border: 1px solid #fde6a2 !important
+}
+
+.buttons-pdf:hover {
+  background-color: #fbc31c !important;
+  border: 1px solid #fbc31c !important;
+  box-shadow: 0 4px 18px #f8bc06 !important;
+}
+
+.buttons-excel {
+  background-color: #a6d9a1;
+  border: 1px solid #a6d9a1 !important
+}
+
+.buttons-excel:hover {
+  background-color: #71cd68 !important;
+  border: 1px solid #71cd68 !important;
+  box-shadow: 0 4px 18px #2ebb20 !important;
+}
+
+.buttons-print {
+  background-color: #9fbaf3;
+  border: 1px solid #9fbaf3 !important
+}
+
+.buttons-print:hover {
+  background-color: #6392bb !important;
+  border: 1px solid #6392bb !important;
+  box-shadow: 0 4px 18px #6384bf !important;
+}

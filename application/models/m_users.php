@@ -110,10 +110,12 @@ class m_users extends CI_Model {
         else{
             if (!$update) {
                 $this->db->insert($this->table, $data);
+                return $this->db->insert_id();
             }
             else {
                 $this->db->where('email', $data['email']);
                 $this->db->update($this->table, $data);
+                return ($result->id_users);
             }
         }
     }

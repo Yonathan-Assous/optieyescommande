@@ -4151,10 +4151,12 @@ class index extends MY_Controller {
     }
 
     public function submit_sepa($infos_user, $sepa) {
-        $insert_id = $this->db->insert_id();
-//        print_r($this->db->last_query());die;
+//        $insert_id = $this->db->insert_id();
+//        $update_id = $this->db->affected_rows();
+        //print_r($this->db->last_query());die;
 //        print_r($insert_id);die;
-        if(isset($insert_id) && $this->input->is_ajax_request()) {
+        $userId = $infos_user['user_id'];
+        if(isset($userId) && $this->input->is_ajax_request()) {
 
             //$infos_user = $this->m_users->getUserById($this->data['user_info']->id_users);
 
@@ -4163,8 +4165,8 @@ class index extends MY_Controller {
             $errors = '';
 
             $iban_info['email'] = $infos_user['email'];
-            $iban_info['client_ref'] = 'OPTC'.$insert_id;
-            $iban_info['slm_ref'] = 'OPTR'.$insert_id."BIS";
+            $iban_info['client_ref'] = 'OPTC'.$userId;
+            $iban_info['slm_ref'] = 'OPTR'.$userId."BIS";
             $iban_info['familyName'] = $sepa['familyName'];
             $iban_info['givenName'] = $sepa['givenName'];
             $iban_info['companyName'] = $sepa['companyName'];
@@ -4187,7 +4189,6 @@ class index extends MY_Controller {
             $iban_info['street2'] = $sepa['street2'];
 
             //var_dump($iban_info);
-
 
             foreach($iban_info as $k => $v) {
                 $value = trim($v);
@@ -5113,14 +5114,15 @@ class index extends MY_Controller {
                     $inscription['email'] = strtolower($inscription['email']);
                     $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
                     $inscription['date_inscription'] = date("Y-m-d H:i:s");
-                    if(($return = $this->m_users->addUser($inscription))!=""){
-                        if ($return->error == "DUPLICATE_SIRET") {
+                    $userId = $this->m_users->addUser($inscription);
+                    if(isset($userId->error)){
+                        if ($userId->error == "DUPLICATE_SIRET") {
                             echo json_encode(array('status'=> 'error', 'error' => 'duplicate_siret',
-                                'magasin' => $return->id_users));
+                                'magasin' => $userId->id_users));
                         }
-                        else if ($return->error == "DUPLICATE_EMAIL") {
+                        else if ($userId->error == "DUPLICATE_EMAIL") {
                             setlocale(LC_TIME, "fr_FR");
-                            $date = utf8_encode(strftime('%A %d %B %Y', strtotime($return->date_inscription)));
+                            $date = utf8_encode(strftime('%A %d %B %Y', strtotime($userId->date_inscription)));
                             echo json_encode(array('status'=> 'exists', 'date' => $date));
                         }
                     }
@@ -5128,7 +5130,7 @@ class index extends MY_Controller {
 
                         //<br><br>
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
-
+                        $inscription['user_id'] = $userId;
                         $submitSepa = $this->submit_sepa($inscription, $sepa);
                         if (!$submitSepa) {
                             echo json_encode(array('status'=> 'error', 'error' => 'iban'));

@@ -213,7 +213,7 @@ function createMandat($infos = null)
 function getHapiClient() {
     $CI = & get_instance();
     switch($CI->config->item('opti_env')) {
-        case 'prod':
+        case 'prod': case 'dev':
             return new Http\HapiClient(
                 'https://api.slimpay.net',
                 '/',
@@ -224,7 +224,7 @@ function getHapiClient() {
                     'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
-        case 'dev': case 'local':
+        case 'local':
             return new Http\HapiClient(
                 'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
                 '/',

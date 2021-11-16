@@ -48,7 +48,6 @@ function createMandat($infos = null)
 
             // The HAPI Client
             $hapiClient = getHapiClient();
-            print_r($hapiClient);die;
             // The Relations Namespace
             $relNs = 'https://api.slimpay.net/alps#';
 

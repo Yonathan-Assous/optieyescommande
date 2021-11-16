@@ -4847,10 +4847,10 @@ class admin
 
                     if (strpos($information_commande->verre->correction_droit->teinte,
                             'CUST_') !==
-                        false) {
+                        false || $information_commande->verre->correction_droit->teinte == 576) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
-                        if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
+                        if ($information_commande->verre->correction_droit->teinte == '576') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
@@ -4868,10 +4868,10 @@ class admin
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                             'CUST_') !==
-                        false) {
+                        false || $information_commande->verre->correction_gauche->teinte == 576) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
-                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                        if ($information_commande->verre->correction_gauche->teinte == '576') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else  if (isset($teinteG)) {
@@ -5383,14 +5383,19 @@ class admin
                         !empty($information_commande->verre->correction_droit->teinte)) {
                         if (isset($information_commande->verre->correction_droit->teinte) &&
                             $information_commande->verre->correction_droit->teinte !=
-                            "" &&
-                            strpos($information_commande->verre->correction_droit->teinte,
-                                'CUST_') ===
-                            false) {
+                            "") {
+                            if (strpos($information_commande->verre->correction_droit->teinte,
+                                    'CUST_') ===
+                                false) {
+                                $codeTeinte = $information_commande->verre->correction_droit->teinte;
+                            }
+                            else {
+                                $codeTeinte = '576';
+                            }
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                $codeTeinte  . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5575,14 +5580,19 @@ class admin
                         !empty($information_commande->verre->correction_gauche->teinte)) {
                         if (isset($information_commande->verre->correction_gauche->teinte) &&
                             $information_commande->verre->correction_gauche->teinte !=
-                            "" &&
-                            strpos($information_commande->verre->correction_gauche->teinte,
-                                'CUST_') ===
-                            false) {
+                            "") {
+                            if (strpos($information_commande->verre->correction_gauche->teinte,
+                                    'CUST_') ===
+                                false) {
+                                $codeTeinte = $information_commande->verre->correction_gauche->teinte;
+                            }
+                            else {
+                                $codeTeinte = '576';
+                            }
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                $codeTeinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -6128,7 +6138,6 @@ class admin
     public
     function edi_omega_expedie_ajax()
     {
-
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
@@ -7261,10 +7270,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                 'CUST_') !==
-                            false) {
+                            false || $information_commande->verre->correction_droit->teinte == 576) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
-                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_droit->teinte == '576') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
@@ -7281,10 +7290,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                 'CUST_') !==
-                            false) {
+                            false || $information_commande->verre->correction_gauche->teinte == 576) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
-                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_gauche->teinte == '576') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteG)) {
@@ -7755,14 +7764,19 @@ class admin
                         if (isset($information_commande->verre->correction_droit->teinte) &&
                             !empty($information_commande->verre->correction_droit->teinte)) {
                             if ($teinteD !=
-                                "" &&
-                                strpos($information_commande->verre->correction_droit->teinte,
-                                    'CUST_') ===
-                                false) {
+                                "") {
+                                if (strpos($information_commande->verre->correction_droit->teinte,
+                                        'CUST_') ===
+                                    false) {
+                                    $codeTeinte = $information_commande->verre->correction_droit->teinte;
+                                }
+                                else {
+                                    $codeTeinte = '576';
+                                }
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                    $codeTeinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7947,14 +7961,19 @@ class admin
                         if (isset($information_commande->verre->correction_gauche->teinte) &&
                             !empty($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
-                                "" &&
-                                strpos($information_commande->verre->correction_gauche->teinte,
-                                    'CUST_') ===
-                                false) {
+                                "") {
+                                if (strpos($information_commande->verre->correction_gauche->teinte,
+                                        'CUST_') ===
+                                    false) {
+                                    $codeTeinte = $information_commande->verre->correction_gauche->teinte;
+                                }
+                                else {
+                                    $codeTeinte = '576';
+                                }
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                    $codeTeinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -9534,10 +9553,10 @@ class admin
                 }
                 if (strpos($data["teinteD"],
                         'CUST_') !==
-                    false) {
+                    false || $data["teinteD"] == 576) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
-                    if ($data["teinteD"] == 'CUST_24') {
+                    if ($data["teinteD"] == '576') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteD)) {
@@ -9554,10 +9573,10 @@ class admin
                 }
                 if (strpos($data["teinteG"],
                         'CUST_') !==
-                    false) {
+                    false || $data["teinteG"] == 576) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
-                    if ($data["teinteG"] == 'CUST_24') {
+                    if ($data["teinteG"] == '576') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteG)) {
@@ -9994,14 +10013,19 @@ class admin
                     !empty($data["teinteD"])) {
 
                     if ($teinteD !=
-                        "" &&
-                        strpos($data["teinteD"],
-                            'CUST_') ===
-                        false) {
+                        "") {
+                        if (strpos($data["teinteD"],
+                                'CUST_') ===
+                            false) {
+                            $codeTeinte = $data["teinteD"];
+                        }
+                        else {
+                            $codeTeinte = '576';
+                        }
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteD"] . '</commercialCode>
+                            $codeTeinte . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -10182,14 +10206,19 @@ class admin
                     !empty($data["teinteG"])) {
 
                     if ($teinteG !=
-                        "" &&
-                        strpos($data["teinteG"],
-                            'CUST_') ===
-                        false) {
+                        "") {
+                        if (strpos($data["teinteG"],
+                                'CUST_') ===
+                            false) {
+                            $codeTeinte = $data["teinteG"];
+                        }
+                        else {
+                            $codeTeinte = '576';
+                        }
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteG"] . '</commercialCode>
+                            $codeTeinte . '</commercialCode>
 						   </coating>';
                     }
                 }

@@ -86,7 +86,7 @@ class m_users extends CI_Model {
             ($data['email']);
 
         $query = $this->db->query($sql);
-
+        $update = false;
         if ($query->num_rows() > 0) {
             $result = $query->result()[0];
             if ($result->valid_mandat) {

@@ -48,8 +48,7 @@ function createMandat($infos = null)
 
             // The HAPI Client
             $hapiClient = getHapiClient();
-
-
+            print_r($hapiClient);die;
             // The Relations Namespace
             $relNs = 'https://api.slimpay.net/alps#';
 
@@ -102,7 +101,6 @@ function createMandat($infos = null)
 
             $res = $hapiClient->sendFollow($follow);
             // The Resource's state
-
             $res = [
                 'state' => $res->getState(),
                 'links' => $res->getAllLinks($relNs . 'user-approval')
@@ -216,7 +214,7 @@ function createMandat($infos = null)
 function getHapiClient() {
     $CI = & get_instance();
     switch($CI->config->item('opti_env')) {
-        case 'prod': case 'dev':
+        case 'prod':
             return new Http\HapiClient(
                 'https://api.slimpay.net',
                 '/',
@@ -227,7 +225,7 @@ function getHapiClient() {
                     'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
-        case 'local':
+        case 'dev': case 'local':
             return new Http\HapiClient(
                 'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
                 '/',

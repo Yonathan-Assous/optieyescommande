@@ -145,31 +145,24 @@ class MY_Controller extends CI_Controller {
           $this->email->from($data['email_from'], 'Crystal Commande');
       }
         switch($this->config->item('opti_env')) {
-
             case 'prod':
+                $this->email->to($data['email']);
 
-            $this->email->to($data['email']);
-
-            if(isset($data['email_cc'])) {
-                $this->email->cc($data['email_cc']);
-            }
-
-            if(isset($data['email_cci'])) {
-                $this->email->bcc($data['email_cci']);
-            }
-
-            break;
-
+                if(isset($data['email_cc'])) {
+                    $this->email->cc($data['email_cc']);
+                }
+                if(isset($data['email_cci'])) {
+                    $this->email->bcc($data['email_cci']);
+                }
+                break;
             case 'dev': case 'local':
                 $this->email->to('yonathan.optieyes@gmail.com');
                 $this->email->from('yonathan.optieyes@gmail.com', 'Crystal Commande');
                 //$this->email->cc('testproxicom@gmail.com');
                 break;
             default:
-                $this->email->to('optieyescommande@gmail.com');
-                $this->email->cc('testproxicom@gmail.com');
-
-
+                $this->email->to('yonathan.optieyes@gmail.com');
+                $this->email->from('yonathan.optieyes@gmail.com', 'Crystal Commande');
         }
 
 

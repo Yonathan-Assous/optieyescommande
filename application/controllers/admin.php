@@ -10781,7 +10781,7 @@ class admin
                         }
                         break;
 
-                    case 'dev':
+                    case 'dev': case 'local':
                         $chemin_fichier = "C:\wamp64\www\optieyescommande\static\xml\\";
 
                         if (!write_file($chemin_fichier .

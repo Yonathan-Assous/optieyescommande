@@ -3994,7 +3994,9 @@ class admin
                     $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
                     if (!$typeDeVerre) {
                         $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);
-                        $typeDeVerre = $typeDeVerre->libelle_verre;
+                        if ($typeDeVerre) {
+                            $typeDeVerre = $typeDeVerre->libelle_verre;
+                        }
                     }
                     else {
                         $typeDeVerre = $typeDeVerre->trad_fr;

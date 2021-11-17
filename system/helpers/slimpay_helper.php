@@ -55,7 +55,7 @@ function createMandat($infos = null)
                 new Http\Auth\Oauth2BasicAuthentication(
                     '/oauth/token',
                     'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
 
@@ -145,7 +145,7 @@ function getMandat($ref)
             new Http\Auth\Oauth2BasicAuthentication(
                 '/oauth/token',
                 'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
             )
         );
 
@@ -184,7 +184,7 @@ function createDebit($data) {
                 new Http\Auth\Oauth2BasicAuthentication(
                     '/oauth/token',
                     'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
                 )
             );
 
@@ -247,7 +247,7 @@ function getDebitStatus($id = null) {
             new Http\Auth\Oauth2BasicAuthentication(
                 '/oauth/token',
                 'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
             )
         );
 

@@ -4805,11 +4805,10 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getAllCommandeBySixMonthLastAndUser($data){
+    public function getAllCommandeByLastSixMonthAndUser($user_id){
         $sql_add = "c.id_users <> 2";
-
-        if($data['numero_magasin'] != ""){
-            $sql_add = "c.id_users = ".$data['numero_magasin'];
+        if($user_id != ""){
+            $sql_add = "c.id_users = ".$user_id;
         }
 
         $now = date('Y-m-d');

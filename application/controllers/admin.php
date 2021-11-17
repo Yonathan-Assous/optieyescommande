@@ -4091,7 +4091,34 @@ class admin
                                 ' €<br />Erreur ophta';
                             break;
                     }
+                    //print_r($commande);die;
+                    $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+                    //print_r($result);die;
+                   // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
+                    setlocale(LC_TIME,
+                        'fr_FR.utf8',
+                        'fra');
 
+                    $lastSixMonths = '';
+                    $x = 0;
+                    foreach ($lastSixMonthByUser as $value) {
+
+                        $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $value->mois))));
+                        if ($x % 2 == 0) {
+                            $lastSixMonthByUser .= '<div>';
+                        }
+                        $lastSixMonthByUser .= $monthName . ":" . $value->total;
+                        if ($x % 2 == 1) {
+                            $lastSixMonthByUser .= '</div>';
+                        }
+                        else {
+                            $lastSixMonthByUser .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+                        }
+                        $x++;
+                    }
+                    if ($x % 2 == 0) {
+                        $lastSixMonthByUser .= '</div>';
+                    }
                     if ($commande->type_commande >
                         1) {
 
@@ -4168,9 +4195,10 @@ class admin
                             '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
-                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-                            $commande->id_users .
-                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            $lastSixMonthByUser,
+//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+//                            $commande->id_users .
+//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,

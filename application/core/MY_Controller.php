@@ -145,7 +145,7 @@ class MY_Controller extends CI_Controller {
           $this->email->from($data['email_from'], 'Crystal Commande');
       }
         switch($this->config->item('opti_env')) {
-            case 'prod': case 'dev':
+            case 'prod':
                 $this->email->to($data['email']);
 
                 if(isset($data['email_cc'])) {
@@ -155,7 +155,7 @@ class MY_Controller extends CI_Controller {
                     $this->email->bcc($data['email_cci']);
                 }
                 break;
-            case 'local':
+            case 'local': case 'dev':
                 $this->email->to('yonathan.optieyes@gmail.com');
                 $this->email->from('yonathan.optieyes@gmail.com', 'Crystal Commande');
                 //$this->email->cc('testproxicom@gmail.com');

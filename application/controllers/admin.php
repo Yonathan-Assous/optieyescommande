@@ -3990,6 +3990,21 @@ class admin
                          $key
                 => $commande)
                 {
+                    //print_r($commande);die;
+                    $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
+                    if (!$typeDeVerre) {
+                        $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);
+                        if ($typeDeVerre) {
+                            $typeDeVerre = $typeDeVerre->libelle_verre;
+                        }
+                        else {
+                            $typeDeVerre = $this->m_lens->getLens($commande->id_verre);
+                        }
+                    }
+                    else {
+                        $typeDeVerre = $typeDeVerre->trad_fr;
+                    }
+                    //print_r($typeDeVerre);die;
                     $d1 =
                         new DateTime(date("Y-m-d H:i:s"));
                     $d2 =
@@ -4091,7 +4106,35 @@ class admin
                                 ' €<br />Erreur ophta';
                             break;
                     }
+                    //print_r($commande);die;
+                    $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+//                    //print_r($result);die;
+                   // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
+                    setlocale(LC_TIME,
+                        'fr_FR.utf8',
+                        'fra');
 
+                    $lastSixMonths = '<table>';
+                    $x = 0;
+                    foreach ($lastSixMonthByUser as $month => $total) {
+
+                        $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
+                        if ($x % 2 == 0) {
+                            $lastSixMonths .= '<tr>';
+                        }
+                        $lastSixMonths .= '<td style="padding: 0 5px 0 0 !important; ">' . $monthName . ":" . $total . '</td>';
+                        if ($x % 2 == 1) {
+                            $lastSixMonths .= '</tr>';
+                        }
+//                        else {
+//                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+//                        }
+                        $x++;
+                    }
+                    if ($x % 2 == 0) {
+                        $lastSixMonths .= '</tr>';
+                    }
+                    $lastSixMonths .= '</table>';
                     if ($commande->type_commande >
                         1) {
 
@@ -4168,9 +4211,11 @@ class admin
                             '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
-                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-                            $commande->id_users .
-                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            $typeDeVerre,
+                            $lastSixMonths,
+//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+//                            $commande->id_users .
+//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,
@@ -4847,10 +4892,10 @@ class admin
 
                     if (strpos($information_commande->verre->correction_droit->teinte,
                             'CUST_') !==
-                        false) {
+                        false || $information_commande->verre->correction_droit->teinte == 576) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
-                        if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
+                        if ($information_commande->verre->correction_droit->teinte == '576') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
@@ -4868,10 +4913,10 @@ class admin
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                             'CUST_') !==
-                        false) {
+                        false || $information_commande->verre->correction_gauche->teinte == 576) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
-                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                        if ($information_commande->verre->correction_gauche->teinte == '576') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else  if (isset($teinteG)) {
@@ -5383,14 +5428,19 @@ class admin
                         !empty($information_commande->verre->correction_droit->teinte)) {
                         if (isset($information_commande->verre->correction_droit->teinte) &&
                             $information_commande->verre->correction_droit->teinte !=
-                            "" &&
-                            strpos($information_commande->verre->correction_droit->teinte,
-                                'CUST_') ===
-                            false) {
+                            "") {
+                            if (strpos($information_commande->verre->correction_droit->teinte,
+                                    'CUST_') ===
+                                false) {
+                                $codeTeinte = $information_commande->verre->correction_droit->teinte;
+                            }
+                            else {
+                                $codeTeinte = '576';
+                            }
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                $codeTeinte  . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -5575,14 +5625,19 @@ class admin
                         !empty($information_commande->verre->correction_gauche->teinte)) {
                         if (isset($information_commande->verre->correction_gauche->teinte) &&
                             $information_commande->verre->correction_gauche->teinte !=
-                            "" &&
-                            strpos($information_commande->verre->correction_gauche->teinte,
-                                'CUST_') ===
-                            false) {
+                            "") {
+                            if (strpos($information_commande->verre->correction_gauche->teinte,
+                                    'CUST_') ===
+                                false) {
+                                $codeTeinte = $information_commande->verre->correction_gauche->teinte;
+                            }
+                            else {
+                                $codeTeinte = '576';
+                            }
                             $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                $codeTeinte . '</commercialCode>
 						   </coating>';
                         }
                     }
@@ -6128,7 +6183,6 @@ class admin
     public
     function edi_omega_expedie_ajax()
     {
-
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =
@@ -7261,10 +7315,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                 'CUST_') !==
-                            false) {
+                            false || $information_commande->verre->correction_droit->teinte == 576) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
-                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_droit->teinte == '576') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
@@ -7281,10 +7335,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                 'CUST_') !==
-                            false) {
+                            false || $information_commande->verre->correction_gauche->teinte == 576) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
-                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                            if ($information_commande->verre->correction_gauche->teinte == '576') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteG)) {
@@ -7755,14 +7809,19 @@ class admin
                         if (isset($information_commande->verre->correction_droit->teinte) &&
                             !empty($information_commande->verre->correction_droit->teinte)) {
                             if ($teinteD !=
-                                "" &&
-                                strpos($information_commande->verre->correction_droit->teinte,
-                                    'CUST_') ===
-                                false) {
+                                "") {
+                                if (strpos($information_commande->verre->correction_droit->teinte,
+                                        'CUST_') ===
+                                    false) {
+                                    $codeTeinte = $information_commande->verre->correction_droit->teinte;
+                                }
+                                else {
+                                    $codeTeinte = '576';
+                                }
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->teinte . '</commercialCode>
+                                    $codeTeinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -7947,14 +8006,19 @@ class admin
                         if (isset($information_commande->verre->correction_gauche->teinte) &&
                             !empty($information_commande->verre->correction_gauche->teinte)) {
                             if ($teinteG !=
-                                "" &&
-                                strpos($information_commande->verre->correction_gauche->teinte,
-                                    'CUST_') ===
-                                false) {
+                                "") {
+                                if (strpos($information_commande->verre->correction_gauche->teinte,
+                                        'CUST_') ===
+                                    false) {
+                                    $codeTeinte = $information_commande->verre->correction_gauche->teinte;
+                                }
+                                else {
+                                    $codeTeinte = '576';
+                                }
                                 $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->teinte . '</commercialCode>
+                                    $codeTeinte . '</commercialCode>
 						   </coating>';
                             }
                         }
@@ -9534,10 +9598,10 @@ class admin
                 }
                 if (strpos($data["teinteD"],
                         'CUST_') !==
-                    false) {
+                    false || $data["teinteD"] == 576) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
-                    if ($data["teinteD"] == 'CUST_24') {
+                    if ($data["teinteD"] == '576') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteD)) {
@@ -9554,10 +9618,10 @@ class admin
                 }
                 if (strpos($data["teinteG"],
                         'CUST_') !==
-                    false) {
+                    false || $data["teinteG"] == 576) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
-                    if ($data["teinteG"] == 'CUST_24') {
+                    if ($data["teinteG"] == '576') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteG)) {
@@ -9994,14 +10058,19 @@ class admin
                     !empty($data["teinteD"])) {
 
                     if ($teinteD !=
-                        "" &&
-                        strpos($data["teinteD"],
-                            'CUST_') ===
-                        false) {
+                        "") {
+                        if (strpos($data["teinteD"],
+                                'CUST_') ===
+                            false) {
+                            $codeTeinte = $data["teinteD"];
+                        }
+                        else {
+                            $codeTeinte = '576';
+                        }
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteD"] . '</commercialCode>
+                            $codeTeinte . '</commercialCode>
 						   </coating>';
                     }
                 }
@@ -10182,14 +10251,19 @@ class admin
                     !empty($data["teinteG"])) {
 
                     if ($teinteG !=
-                        "" &&
-                        strpos($data["teinteG"],
-                            'CUST_') ===
-                        false) {
+                        "") {
+                        if (strpos($data["teinteG"],
+                                'CUST_') ===
+                            false) {
+                            $codeTeinte = $data["teinteG"];
+                        }
+                        else {
+                            $codeTeinte = '576';
+                        }
                         $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                            $data["teinteG"] . '</commercialCode>
+                            $codeTeinte . '</commercialCode>
 						   </coating>';
                     }
                 }

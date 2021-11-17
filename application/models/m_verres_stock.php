@@ -16,4 +16,13 @@ class m_verres_stock extends CI_Model
         }
         return false;
     }
+
+    public function getByIdVerre($idVerre) {
+        $sql = "SELECT * FROM `" . $this->table . "` WHERE id_verre = '" . $idVerre . "'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return $query->result()[0];
+        }
+        return false;
+    }
 }

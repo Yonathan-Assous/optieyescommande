@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-10-14T15:54:11+0200</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>641642-222</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>203451</commercialCode>
+               <rxData>
+                  <sphere>1.00</sphere>
+                  <cylinder>
+                      <power>0.00</power>
+                      <axis>0</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700104</commercialCode>
+					   </coating>
+               <centration>
+					  <height reference="NEAR" referenceHeight="OVERBOX">24</height>
+               </centration>
+				   <geometry>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1"><material>METAL</material>
+				   <boxWidth>50</boxWidth>
+				   <boxHeight>44</boxHeight>
+				   <distanceBetweenLenses>18</distanceBetweenLenses>
+				   <shape>
+						  <tracerData>
+							 <tracerType>Unknown</tracerType>
+							 <tracerVersion>TBLNAT</tracerVersion>
+							 <binaries format="NIDEK">24942532257026092654270727612814283728082770273126782624257125212476243123862351231722832254223422152195219021902190219021902190219022012213222422342242225122592273228723012320235123822413244624802514254425642584260326162624263326412649265826662670266726602653264226292616260325972592258725832578257325732583259225982579255425292503246624272387235323312309228622692253223822222219221722162214221222112213221922252231223322362238224022402240224222452249225122532255225722592270228422982313233223512371239624282460</binaries>
+						  </tracerData>
+					   </shape>
+				</frame>
+						<edging edgingType="NONE">
+						   <bevel>
+							  <type>BEVEL</type>
+							  <position posType="AUTO">0</position>
+						  </bevel>
+						  <polish>false</polish>
+						</edging> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

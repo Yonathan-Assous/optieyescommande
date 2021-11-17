@@ -47,6 +47,7 @@ function createMandat($infos = null)
         try {
 
             // The HAPI Client
+
             $hapiClient = getHapiClient();
             // The Relations Namespace
             $relNs = 'https://api.slimpay.net/alps#';
@@ -316,9 +317,8 @@ function createDebit($data) {
         try {
 
             // The HAPI Client
+
             $hapiClient = getHapiClient();
-
-
 
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
@@ -372,7 +372,6 @@ function getDebitStatus($id = null) {
 
         // The HAPI Client
         $hapiClient = getHapiClient();
-
 
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';

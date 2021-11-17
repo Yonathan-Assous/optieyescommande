@@ -694,6 +694,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
                                    WHERE status_omega!=0 AND status = 2" . $addDate_start . " ORDER BY date_omega DESC,id_commande DESC";
+        //print_r($sql);die;
         $query = $this->db->query($sql);
 
 
@@ -1958,7 +1959,7 @@ class m_commande extends CI_Model {
             ".$user."
             GROUP BY c.id_users,date(date_update_commande), TarifLivraison, idCommande  
             ORDER BY c.id_users ASC";
-        //var_dump($sql);die;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         $tarif_appoint = array();
@@ -4804,6 +4805,101 @@ class m_commande extends CI_Model {
         return false;
     }
 
+    public function getAllCommandeByLastSixMonthAndUser($user_id){
+        $sql_add = "c.id_users <> 2";
+        if($user_id != ""){
+            $sql_add = "c.id_users = ".$user_id;
+        }
+
+        $now = date('Y-m-d');
+        $date = date('Y-m', strtotime($now. ' - 5 months')); // On ajoute 1 jour
+        $sql = "SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, c.id_users, DATE_FORMAT(c.date_commande, '%c') as mois, nom_societe, nom_magasin
+                                   FROM commande c
+                                   LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
+                                   INNER JOIN users u ON u.id_users = c.id_users
+                                   LEFT JOIN
+                                    (SELECT
+                                        SUM(reduction) AS total_reductions,
+                                        id_users as idusers,
+                                        date_remise
+                                    FROM
+                                        facture_reduction
+                                    WHERE DATE_FORMAT(date_remise, '%Y-%m') >= '".$date."'
+                                    GROUP BY id_users,DATE_FORMAT(date_remise, '%m-%Y')) AS reductions
+                                   ON (
+                                    c.id_users = idusers AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(date_remise, '%Y-%m')
+                                   )
+                                   LEFT JOIN 
+                                  (SELECT 
+                                    SUM(total_commande) as total_stock,id_users as idusersstock,date_commande
+                                    FROM commande c
+                                    WHERE (id_type_generation_verre = 5 OR id_type_generation_verre = 23 OR origine_commande=2)
+                                    AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
+                                    AND commande_monture = 0
+            						AND id_verre IS NOT NULL
+                                    GROUP BY idusersstock,DATE_FORMAT(date_commande, '%m-%Y')) as commande_stock
+                                  ON (
+                                      c.id_users = idusersstock AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_stock.date_commande, '%Y-%m')
+                                  )
+                                  LEFT JOIN 
+                                  (SELECT 
+                                    SUM(total_commande) as total_fabrique,id_users as idusersfabrique,date_commande
+                                    FROM commande c
+                                    WHERE ( origine_commande=1)
+                                    AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND commande_monture = 0
+            						AND id_verre IS NOT NULL
+                                    AND DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
+                                    GROUP BY idusersfabrique,DATE_FORMAT(date_commande, '%m-%Y')) as commande_fabrique
+                                  ON (
+                                      c.id_users = idusersfabrique AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_fabrique.date_commande, '%Y-%m')
+                                  )
+                                   LEFT JOIN 
+                                  (SELECT 
+                                    SUM(total_commande) as total_lentilles,id_users as iduserslentilles,date_commande
+                                    FROM commande c
+                                     WHERE lens_id > 0
+                                    AND id_verre IS NULL
+                                    AND commande_monture = 0
+                                    AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
+                                    GROUP BY iduserslentilles,DATE_FORMAT(date_commande, '%m-%Y')) as commande_lentilles
+                                  ON (
+                                      c.id_users = iduserslentilles AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_lentilles.date_commande, '%Y-%m')
+                                  )
+								  LEFT JOIN 
+                                  (SELECT 
+                                    SUM(total_commande) as total_montures,id_users as idusersmontures,date_commande
+                                    FROM commande c
+                                     WHERE  id_verre IS NULL
+									AND commande_monture = 1
+                                    AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
+                                    GROUP BY idusersmontures,DATE_FORMAT(date_commande, '%m-%Y')) as commande_montures
+                                  ON (
+                                      c.id_users = idusersmontures AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_montures.date_commande, '%Y-%m')
+                                  )
+                                   LEFT JOIN 
+                                  (SELECT 
+                                    SUM(tarif_express) as total_express,id_users as idusersexpress,date_commande
+                                    FROM commande c
+                                    WHERE type_commande > 1 AND penalty != 1
+                                    AND DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
+                                    GROUP BY idusersexpress,DATE_FORMAT(date_commande, '%m-%Y')) as commande_express
+                                  ON (
+                                      c.id_users = idusersexpress AND DATE_FORMAT(c.date_commande, '%Y-%m') = DATE_FORMAT(commande_express.date_commande, '%Y-%m')
+                                  )
+                                  WHERE DATE_FORMAT(c.date_commande, '%Y-%m') >= '".$date."'
+                                  AND ".$sql_add."
+                                  GROUP BY c.id_users,DATE_FORMAT(c.date_commande, '%m-%Y')
+                                  ORDER BY c.id_users";
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;
+    }
 
     public function getAllCommandeByYearAndUser($data){
 
@@ -4931,7 +5027,7 @@ class m_commande extends CI_Model {
             $sql_add = "c.id_users = ".$data['numero_magasin'];
         }
 
-        $query = $this->db->query("SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, c.id_users, DATE_FORMAT(c.date_commande, '%c') as mois, nom_societe, nom_magasin
+        $sql = "SELECT COALESCE(total_stock, 0) + COALESCE(total_fabrique, 0) + COALESCE(total_lentilles, 0) + COALESCE(total_montures, 0) + COALESCE(total_express, 0) - COALESCE(total_reductions, 0) as total,total_stock,total_fabrique,total_lentilles,total_montures, c.id_users, DATE_FORMAT(c.date_commande, '%c') as mois, nom_societe, nom_magasin
                                    FROM commande c
                                    LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
                                    INNER JOIN users u ON u.id_users = c.id_users
@@ -5011,7 +5107,8 @@ class m_commande extends CI_Model {
                                   WHERE DATE_FORMAT(c.date_commande, '%Y') = '".$data['annee']."'
                                   AND ".$sql_add."
                                   GROUP BY c.id_users,DATE_FORMAT(c.date_commande, '%m-%Y')
-                                  ORDER BY c.id_users");
+                                  ORDER BY c.id_users";
+        $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }

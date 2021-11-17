@@ -5,7 +5,10 @@ include_once('header.php');
     <!-- Start content -->
     <div class="content">
         <div class="container">
-
+            <div id="loading-overlay" style="display:none;"></div>
+            <div id="loading" style="display:none;">
+                <span id="text_loading">Chargement...</span>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <h4 class="page-title m-b-10">CGV</h4>
@@ -77,6 +80,7 @@ include_once('header.php');
     });
 
     $('#accept_conditions').on('click', function() {
+        isLoading('Veuillez patienter');
         $.ajax({
             type: "POST",
             url: "/index/verifyCheckedCondition",
@@ -87,6 +91,11 @@ include_once('header.php');
             }
         });
     });
+
+    function isLoading(text) {
+        $("#text_loading").text(text) ;
+        $("#loading-overlay,#loading").show();
+    }
 </script>
 <?php
 die;

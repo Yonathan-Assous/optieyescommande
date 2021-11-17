@@ -97,13 +97,14 @@ class cron extends MY_Controller {
 	
 	public function payment_test(){
 
-            $this->load->model('m_commande');
+        $this->load->helper('slimpay');
+        $this->load->model('m_commande');
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
-            $date = date('m-Y', time());
+            $date = '05-2021';
+           // $date = date('m-Y', time());
         //echo $date;die;
-
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
             $current = array();
@@ -120,6 +121,7 @@ class cron extends MY_Controller {
             $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, $current);
 //            var_dump($facture_client);die;
            // var_dump($facture_client);
+
            $data = array();
 
             $data['status'] = $current;
@@ -166,9 +168,18 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                   // $mandat = getMandat('OPTR' . $id_mandat);
+                    if ($id_mandat >= 555) {
+                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                    }
+                    else {
+                        $mandat = getMandat('OPTR' . $id_mandat);
+                        if (!$mandat) {
+                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                        }
+                    }
 
                     $paiement = array(
+                        'mandat_status' => $mandat,
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
                         'magasin' => $facture_cli->id_users,
                         'mandat' => $id_mandat,
@@ -178,6 +189,7 @@ class cron extends MY_Controller {
                     // Affichage
                     $data['total'] += $facture_cli->total + ($facture_cli->total * 0.2);
                     $data['paiement'][$key] = $paiement;
+
 
                 }
 
@@ -194,6 +206,9 @@ class cron extends MY_Controller {
                     var_dump($paiement);
                     echo '</pre>';
             */
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';die;
         $this->load->view('admin/payment_process', $data);
 //			echo '--------------------------------
 //			<pre>';
@@ -275,7 +290,15 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                    $mandat = getMandat('OPTR' . $id_mandat);
+                    if ($id_mandat >= 555) {
+                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                    }
+                    else {
+                        $mandat = getMandat('OPTR' . $id_mandat);
+                        if (!$mandat) {
+                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                        }
+                    }
 
                     $paiement = array(
                         'mandat_status' => $mandat,

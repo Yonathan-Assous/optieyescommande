@@ -51,9 +51,8 @@ class m_users extends CI_Model {
         parent::__construct();
     }
 
-	public function check($data){
-        $mail = trim($data['email']);
-        $sql = "SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0";
+	public function checkMail($data){
+        $sql = "SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND valid_mandat = 1 AND active = 1 AND deleted = 0";
         $query = $this->db->query($sql);
 
         if ($query->num_rows() > 0)
@@ -61,6 +60,17 @@ class m_users extends CI_Model {
 
        return false;
 	}
+
+    public function check($data){
+        $mail = trim($data['email']);
+        $sql = "SELECT * FROM ".$this->table." WHERE email='".$data['email']."' AND pass='".md5($mail.'&&'.$data['pass'])."' AND active = 1 AND deleted = 0";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0)
+            return $query->result();
+
+        return false;
+    }
   
   public function getMaxUser(){
      $query = $this->db->query("SELECT MAX(id_users) as maxUser FROM ".$this->table);
@@ -74,14 +84,21 @@ class m_users extends CI_Model {
     public function addUser($data){
         $sql = "SELECT * FROM ".$this->table." WHERE email=".$this->db->escape
             ($data['email']);
-        $query = $this->db->query($sql);
 
+        $query = $this->db->query($sql);
+        $update = false;
         if ($query->num_rows() > 0) {
-            $error = $query->result()[0];
-            $error->error = "DUPLICATE_EMAIL";
-            return $error;
+            $result = $query->result()[0];
+            if ($result->valid_mandat) {
+                $result->error = "DUPLICATE_EMAIL";
+                return $result;
+            }
+            else {
+                $update = true;
+            }
         }
-        $sql = "SELECT id_users ,numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']);
+
+        $sql = "SELECT id_users ,numero_siret FROM ".$this->table." WHERE numero_siret=".$this->db->escape($data['numero_siret']) . "AND email <> " . $this->db->escape($data['email']) ;
 
         $query = $this->db->query($sql);
 
@@ -91,7 +108,15 @@ class m_users extends CI_Model {
             return $error;
         }
         else{
-			$this->db->insert($this->table, $data);
+            if (!$update) {
+                $this->db->insert($this->table, $data);
+                return $this->db->insert_id();
+            }
+            else {
+                $this->db->where('email', $data['email']);
+                $this->db->update($this->table, $data);
+                return ($result->id_users);
+            }
         }
     }
 
@@ -129,11 +154,11 @@ class m_users extends CI_Model {
         $this->db->where('document_rib IS NOT NULL', NULL,false);
         $this->updateUser($data);
     }
-	
+
 	public function updatePassUser($data){
 		$this->db->set('pass', $data['new_pass']);
 		$this->db->where('pass', $data['old_pass']);
-		
+
 		$this->updateUser($data);
 	}
 
@@ -157,12 +182,12 @@ class m_users extends CI_Model {
 
         return false;
     }
-	
+
 	public function getAllUser($id_users = false, $rib = false, $deleted = 0){
-  
+
      $sql_add = "id_users <> 1";
      $sql_rib = "";
-     
+
      if($id_users !== false)
         $sql_add = "id_users=".$id_users;
 
@@ -173,7 +198,7 @@ class m_users extends CI_Model {
     elseif($rib == 2) {
         $sql_rib = "AND valid_mandat = 1";
     }
-     
+
 		$query = $this->db->query("SELECT id_users,nom_societe,email,date_inscription,document_rib,valid_mandat,id_grille_tarifaire,commande_suspendue,pass,grille_telechargeable,nom_magasin,tarif_livraison,cp,ville,show_commentaire,Samuel,Daniel,Gregory,Glenn
                                    FROM ".$this->table." 
                                    WHERE  ".$sql_add."
@@ -186,7 +211,7 @@ class m_users extends CI_Model {
 
         return false;
 	}
-	
+
 	public function getUserMail(){
 		$query = $this->db->query("SELECT id_users,email
 								   FROM ".$this->table." WHERE id_users > 2 
@@ -229,7 +254,7 @@ class m_users extends CI_Model {
 
         return false;
     }
-	
+
 	public function getUserByNumeroFiness($numeroFiness){
         $query = $this->db->query("SELECT id_users,numero_siret,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,tva_intracom,num_finess,email,pass,document_rib,valid_document_rib,users_last_connexion
                                    FROM ".$this->table."

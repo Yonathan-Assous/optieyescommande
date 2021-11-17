@@ -4893,7 +4893,7 @@ class m_commande extends CI_Model {
                                   WHERE DATE_FORMAT(c.date_commande, '%Y-%m') >= '".$date."'
                                   AND ".$sql_add."
                                   GROUP BY c.id_users,DATE_FORMAT(c.date_commande, '%m-%Y')
-                                  ORDER BY c.id_users";
+                                  ORDER BY c.id_users, length(mois), mois";
         $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();

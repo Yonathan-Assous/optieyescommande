@@ -47,7 +47,8 @@ else
                                 <th>Détails</th>
                                 <th>Référence</th>
                                 <th>Bon de livraison</th>
-                                <th>Tableau de bord</th>
+                                <th>Type de verre</th>
+                                <th>Dernières factures</th>
                                 <th>Date</th>
                                 <th style="max-width: 140px">Ref Client</th>
                                 <th>Validation</th>

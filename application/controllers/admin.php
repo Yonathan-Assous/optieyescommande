@@ -3990,6 +3990,16 @@ class admin
                          $key
                 => $commande)
                 {
+                    //print_r($commande);die;
+                    $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
+                    if (!$typeDeVerre) {
+                        $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);
+                        $typeDeVerre = $typeDeVerre->libelle_verre;
+                    }
+                    else {
+                        $typeDeVerre = $typeDeVerre->trad_fr;
+                    }
+                    //print_r($typeDeVerre);die;
                     $d1 =
                         new DateTime(date("Y-m-d H:i:s"));
                     $d2 =
@@ -4099,26 +4109,27 @@ class admin
                         'fr_FR.utf8',
                         'fra');
 
-                    $lastSixMonths = '';
+                    $lastSixMonths = '<table>';
                     $x = 0;
                     foreach ($lastSixMonthByUser as $value) {
 
                         $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $value->mois))));
                         if ($x % 2 == 0) {
-                            $lastSixMonths .= '<div>';
+                            $lastSixMonths .= '<tr>';
                         }
-                        $lastSixMonths .= $monthName . ":" . $value->total;
+                        $lastSixMonths .= '<td style="padding: 0 5px 0 0 !important; ">' . $monthName . ":" . $value->total . '</td>';
                         if ($x % 2 == 1) {
-                            $lastSixMonths .= '</div>';
+                            $lastSixMonths .= '</tr>';
                         }
-                        else {
-                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
-                        }
+//                        else {
+//                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+//                        }
                         $x++;
                     }
                     if ($x % 2 == 0) {
-                        $lastSixMonths .= '</div>';
+                        $lastSixMonths .= '</tr>';
                     }
+                    $lastSixMonths .= '</table>';
                     if ($commande->type_commande >
                         1) {
 
@@ -4195,6 +4206,7 @@ class admin
                             '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
+                            $typeDeVerre,
                             $lastSixMonths,
 //                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
 //                            $commande->id_users .

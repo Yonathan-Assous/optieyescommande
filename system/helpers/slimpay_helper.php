@@ -47,21 +47,8 @@ function createMandat($infos = null)
         try {
 
             // The HAPI Client
-<<<<<<< HEAD
-            $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net',
-                '/',
-                'https://api.slimpay.net/alps/v1',
-                new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token',
-                    'optimeyes01 ',
-                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-                )
-            );
 
-=======
             $hapiClient = getHapiClient();
->>>>>>> e8319882a215d7669578afed79eeb9c171885689
             // The Relations Namespace
             $relNs = 'https://api.slimpay.net/alps#';
 
@@ -330,22 +317,8 @@ function createDebit($data) {
         try {
 
             // The HAPI Client
-<<<<<<< HEAD
-            $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net',
-                '/',
-                'https://api.slimpay.net/alps/v1',
-                new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token',
-                    'optimeyes01 ',
-                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-                )
-            );
-=======
+
             $hapiClient = getHapiClient();
-
->>>>>>> e8319882a215d7669578afed79eeb9c171885689
-
 
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
@@ -398,21 +371,7 @@ function getDebitStatus($id = null) {
     if($id) {
 
         // The HAPI Client
-<<<<<<< HEAD
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-            )
-        );
-=======
         $hapiClient = getHapiClient();
-
->>>>>>> e8319882a215d7669578afed79eeb9c171885689
 
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';

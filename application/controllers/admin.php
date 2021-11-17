@@ -4104,34 +4104,34 @@ class admin
                             break;
                     }
                     //print_r($commande);die;
-                    $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
-                    //print_r($result);die;
-                   // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
-                    setlocale(LC_TIME,
-                        'fr_FR.utf8',
-                        'fra');
-
-                    $lastSixMonths = '<table>';
-                    $x = 0;
-                    foreach ($lastSixMonthByUser as $value) {
-
-                        $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $value->mois))));
-                        if ($x % 2 == 0) {
-                            $lastSixMonths .= '<tr>';
-                        }
-                        $lastSixMonths .= '<td style="padding: 0 5px 0 0 !important; ">' . $monthName . ":" . $value->total . '</td>';
-                        if ($x % 2 == 1) {
-                            $lastSixMonths .= '</tr>';
-                        }
-//                        else {
-//                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+//                    $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+//                    //print_r($result);die;
+//                   // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
+//                    setlocale(LC_TIME,
+//                        'fr_FR.utf8',
+//                        'fra');
+//
+//                    $lastSixMonths = '<table>';
+//                    $x = 0;
+//                    foreach ($lastSixMonthByUser as $value) {
+//
+//                        $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $value->mois))));
+//                        if ($x % 2 == 0) {
+//                            $lastSixMonths .= '<tr>';
 //                        }
-                        $x++;
-                    }
-                    if ($x % 2 == 0) {
-                        $lastSixMonths .= '</tr>';
-                    }
-                    $lastSixMonths .= '</table>';
+//                        $lastSixMonths .= '<td style="padding: 0 5px 0 0 !important; ">' . $monthName . ":" . $value->total . '</td>';
+//                        if ($x % 2 == 1) {
+//                            $lastSixMonths .= '</tr>';
+//                        }
+////                        else {
+////                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+////                        }
+//                        $x++;
+//                    }
+//                    if ($x % 2 == 0) {
+//                        $lastSixMonths .= '</tr>';
+//                    }
+//                    $lastSixMonths .= '</table>';
                     if ($commande->type_commande >
                         1) {
 
@@ -4209,10 +4209,10 @@ class admin
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             $typeDeVerre,
-                            $lastSixMonths,
-//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-//                            $commande->id_users .
-//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+//                            $lastSixMonths,
+                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+                            $commande->id_users .
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,

@@ -4105,19 +4105,19 @@ class admin
 
                         $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $value->mois))));
                         if ($x % 2 == 0) {
-                            $lastSixMonthByUser .= '<div>';
+                            $lastSixMonths .= '<div>';
                         }
-                        $lastSixMonthByUser .= $monthName . ":" . $value->total;
+                        $lastSixMonths .= $monthName . ":" . $value->total;
                         if ($x % 2 == 1) {
-                            $lastSixMonthByUser .= '</div>';
+                            $lastSixMonths .= '</div>';
                         }
                         else {
-                            $lastSixMonthByUser .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
+                            $lastSixMonths .= '&nbsp&nbsp&nbsp&nbsp&nbsp';
                         }
                         $x++;
                     }
                     if ($x % 2 == 0) {
-                        $lastSixMonthByUser .= '</div>';
+                        $lastSixMonths .= '</div>';
                     }
                     if ($commande->type_commande >
                         1) {
@@ -4195,7 +4195,7 @@ class admin
                             '" data-toggle="modal" data-target="#edit-bl" rel="' . $rel . '"><i class="zmdi zmdi-edit"></i></a> <a href="/admin/generer_pdf/bon_livraison/' .
                             $commande->id_commande .
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
-                            $lastSixMonthByUser,
+                            $lastSixMonths,
 //                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
 //                            $commande->id_users .
 //                            '"><i class="zmdi zmdi-search"></i> Voir</a>',

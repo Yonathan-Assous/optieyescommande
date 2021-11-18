@@ -4117,7 +4117,8 @@ class admin
                     $lastSixMonths = '<table>';
                     $x = 0;
                     foreach ($lastSixMonthByUser as $month => $total) {
-                        $time = date('Y-m-d H:i:s');
+                        $month = '08';
+                        $time = date('Y-8-d H:i:s');
                         $date = strftime( "%A %d %B %Y" , strtotime( $time ));
                         print_r($date);
                         echo '<br>';

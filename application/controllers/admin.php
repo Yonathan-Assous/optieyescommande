@@ -4118,8 +4118,24 @@ class admin
 
                     $lastSixMonths = '<table>';
                     $x = 0;
+                    switch($this->config->item('opti_env')) {
+
+                        case 'prod':
+                        case 'dev':
+                            $formatDate = "prod";
+                            break;
+                        case 'local':
+                            $formatDate = "local";
+                            break;
+                    }
                     foreach ($lastSixMonthByUser as $month => $total) {
-                        $monthName = ucfirst(strftime('%B', mktime(0, 0, 0, $month)));
+                        if ($formatDate == "local") {
+                            $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
+                        }
+                        else {
+                            $monthName = ucfirst(strftime('%B', mktime(0, 0, 0, $month)));
+
+                        }
                         if ($x % 2 == 0) {
                             $lastSixMonths .= '<tr>';
                         }
@@ -4261,7 +4277,7 @@ class admin
 //                    var_dump($data);die;
                 }
             }
-            print_r($data);die;
+//            print_r($data);die;
 //            var_dump($data);die;
             die(json_encode($data));
         } else {

@@ -4000,6 +4000,7 @@ class admin
                         else {
                             //print_r($commande->id_verre);die;
                             $typeDeVerre = $this->m_lens->getLens($commande->lens_id);
+                            print_r($typeDeVerre);die;
                         }
                     }
                     else {

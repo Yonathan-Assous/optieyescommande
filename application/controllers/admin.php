@@ -4117,7 +4117,15 @@ class admin
                     $lastSixMonths = '<table>';
                     $x = 0;
                     foreach ($lastSixMonthByUser as $month => $total) {
-
+                        $time = date('Y-m-d H:i:s');
+                        $date = strftime( "%A %d %B %Y" , strtotime( $time ));
+                        print_r($date);
+                        echo '<br>';
+                        print_r(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
+                        echo '<br>';
+                        print_r(strftime('%B', mktime(0, 0, 0, $month)));
+                        echo '<br>';
+                        die;
                         $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
                         if ($x % 2 == 0) {
                             $lastSixMonths .= '<tr>';

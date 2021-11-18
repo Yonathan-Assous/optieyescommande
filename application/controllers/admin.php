@@ -3998,6 +3998,7 @@ class admin
                             $typeDeVerre = $typeDeVerre->libelle_verre;
                         }
                         else {
+                            print_r($commande->id_verre);die;
                             $typeDeVerre = $this->m_lens->getLens($commande->id_verre);
                         }
                     }
@@ -4117,17 +4118,7 @@ class admin
                     $lastSixMonths = '<table>';
                     $x = 0;
                     foreach ($lastSixMonthByUser as $month => $total) {
-                        $month = '08';
-                        $time = date('Y-8-d H:i:s');
-                        $date = strftime( "%A %d %B %Y" , strtotime( $time ));
-                        print_r($date);
-                        echo '<br>';
-                        print_r(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
-                        echo '<br>';
-                        print_r(strftime('%B', mktime(0, 0, 0, $month)));
-                        echo '<br>';
-                        die;
-                        $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
+                        $monthName = ucfirst(strftime('%B', mktime(0, 0, 0, $month)));
                         if ($x % 2 == 0) {
                             $lastSixMonths .= '<tr>';
                         }

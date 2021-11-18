@@ -3990,7 +3990,7 @@ class admin
                          $key
                 => $commande)
                 {
-                    print_r($commande);
+                    //print_r($commande);die;
                     $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
                     if (!$typeDeVerre) {
                         $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);
@@ -3999,7 +3999,7 @@ class admin
                         }
                         else {
                             //print_r($commande->id_verre);die;
-                            $typeDeVerre = $this->m_lens->getLens($commande->id_verre);
+                            $typeDeVerre = $this->m_lens->getLens($commande->lens_id);
                         }
                     }
                     else {
@@ -4259,7 +4259,6 @@ class admin
 
 //                    var_dump($data);die;
                 }
-                die;
             }
 //            var_dump($data);die;
             die(json_encode($data));

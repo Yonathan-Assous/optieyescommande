@@ -3990,7 +3990,7 @@ class admin
                          $key
                 => $commande)
                 {
-                    //print_r($commande);die;
+                    print_r($commande);die;
                     $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
                     if (!$typeDeVerre) {
                         $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);

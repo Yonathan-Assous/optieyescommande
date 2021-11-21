@@ -49,6 +49,9 @@ else
                                 <th>Bon de livraison</th>
                                 <th>Type de verre</th>
                                 <th>Dernières factures</th>
+<!--                                <th>J-10</th>-->
+                                <th>J-30</th>
+<!--                                <th>J-90</th>-->
                                 <th>Date</th>
                                 <th style="max-width: 140px">Ref Client</th>
                                 <th>Validation</th>

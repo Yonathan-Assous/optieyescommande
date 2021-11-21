@@ -4110,6 +4110,15 @@ class admin
                     }
                     //print_r($commande);die;
                     $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+                    $blAfterThirtyDays = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
+//                    $blAfterTenDays = $blAfterXDays[0]->count;
+//                    $blAfterThirtyDays = $blAfterXDays[1]->count;
+//                    $blAfterNinetyDays = $blAfterXDays[2]->count;
+
+//                    print_r($blAfterXDays);die;
+//                    print_r($blAfterMonth);
+//                    print_r($blAfterTwoMonth);
+//                    print_r($blAfterThreeMonth);die;
 //                    //print_r($result);die;
                    // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
                     setlocale(LC_TIME,
@@ -4230,6 +4239,10 @@ class admin
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             $typeDeVerre,
                             $lastSixMonths,
+                            $blAfterThirtyDays,
+//                            $blAfterTenDays,
+//                            $blAfterThirtyDays,
+//                            $blAfterNinetyDays,
 //                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
 //                            $commande->id_users .
 //                            '"><i class="zmdi zmdi-search"></i> Voir</a>',

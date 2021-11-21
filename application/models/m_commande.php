@@ -4748,7 +4748,7 @@ class m_commande extends CI_Model {
     }
 
     public function nouvelle_date_bl($data){
-        $this->db->query("INSERT INTO intitule_bl (id_commande,date_bl,intitule_bl) VALUES (".$data['id_commande'].", '".$data['date_bl']."','".$data['intitule_bl']."') ON DUPLICATE KEY UPDATE date_bl='".$data['date_bl']."', intitule_bl='".$data['intitule_bl']."'");
+        $this->db->query("INSERT INTO intitule_bl (id_user,id_commande,date_bl,intitule_bl) VALUES (".$data['id_users'].", '".$data['id_commande']."', '".$data['date_bl']."','".$data['intitule_bl']."') ON DUPLICATE KEY UPDATE date_bl='".$data['date_bl']."', intitule_bl='".$data['intitule_bl']."'");
     }
 
     public function checkIntituleBl($intitule_bl, $new_id){

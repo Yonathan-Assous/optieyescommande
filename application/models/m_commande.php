@@ -4748,7 +4748,7 @@ class m_commande extends CI_Model {
     }
 
     public function nouvelle_date_bl($data){
-        $this->db->query("INSERT INTO intitule_bl (id_commande,date_bl,intitule_bl) VALUES (".$data['id_commande'].", '".$data['date_bl']."','".$data['intitule_bl']."') ON DUPLICATE KEY UPDATE date_bl='".$data['date_bl']."', intitule_bl='".$data['intitule_bl']."'");
+        $this->db->query("INSERT INTO intitule_bl (id_user,id_commande,date_bl,intitule_bl) VALUES (".$data['id_users'].", '".$data['id_commande']."', '".$data['date_bl']."','".$data['intitule_bl']."') ON DUPLICATE KEY UPDATE date_bl='".$data['date_bl']."', intitule_bl='".$data['intitule_bl']."'");
     }
 
     public function checkIntituleBl($intitule_bl, $new_id){
@@ -4818,7 +4818,7 @@ class m_commande extends CI_Model {
             $factures[$date] = 0;
         }
         $date = date('Y-m', strtotime($now. ' - 5 months')); // On ajoute 1 jour
-        $sql = "SELECT SUM(total_commande) as total,SUM(tarif_express) as total_express,DATE_FORMAT(date_commande, '%m') as date_c
+        $sql = "SELECT SUM(total_commande) as total, DATE_FORMAT(date_commande, '%m') as date_c
                 FROM commande c
                 WHERE DATE_FORMAT(date_commande, '%Y-%m') >= '".$date."'
                 AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
@@ -4829,7 +4829,7 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0){
             $result = $query->result();
             foreach ($result as $total) {
-                $factures[$total->date_c] += $total->total + $total->total_express;
+                $factures[$total->date_c] += $total->total;
             }
         }
 

@@ -4110,6 +4110,15 @@ class admin
                     }
                     //print_r($commande);die;
                     $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+                    $blAfterThirtyDays = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
+//                    $blAfterTenDays = $blAfterXDays[0]->count;
+//                    $blAfterThirtyDays = $blAfterXDays[1]->count;
+//                    $blAfterNinetyDays = $blAfterXDays[2]->count;
+
+//                    print_r($blAfterXDays);die;
+//                    print_r($blAfterMonth);
+//                    print_r($blAfterTwoMonth);
+//                    print_r($blAfterThreeMonth);die;
 //                    //print_r($result);die;
                    // setlocale(LC_ALL, 'fr_FR@euro', 'fr_FR', 'fra_fra');
                     setlocale(LC_TIME,
@@ -4118,8 +4127,24 @@ class admin
 
                     $lastSixMonths = '<table>';
                     $x = 0;
+                    switch($this->config->item('opti_env')) {
+
+                        case 'prod':
+                        case 'dev':
+                            $formatDate = "prod";
+                            break;
+                        case 'local':
+                            $formatDate = "local";
+                            break;
+                    }
                     foreach ($lastSixMonthByUser as $month => $total) {
-                        $monthName = ucfirst(strftime('%B', mktime(0, 0, 0, $month)));
+                        if ($formatDate == "local") {
+                            $monthName = ucfirst(utf8_encode(strftime('%B', mktime(0, 0, 0, $month))));
+                        }
+                        else {
+                            $monthName = ucfirst(strftime('%B', mktime(0, 0, 0, $month)));
+
+                        }
                         if ($x % 2 == 0) {
                             $lastSixMonths .= '<tr>';
                         }
@@ -4214,6 +4239,10 @@ class admin
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             $typeDeVerre,
                             $lastSixMonths,
+                            $blAfterThirtyDays,
+//                            $blAfterTenDays,
+//                            $blAfterThirtyDays,
+//                            $blAfterNinetyDays,
 //                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
 //                            $commande->id_users .
 //                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
@@ -4261,7 +4290,7 @@ class admin
 //                    var_dump($data);die;
                 }
             }
-            print_r($data);die;
+//            print_r($data);die;
 //            var_dump($data);die;
             die(json_encode($data));
         } else {

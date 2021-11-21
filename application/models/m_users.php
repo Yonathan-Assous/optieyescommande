@@ -451,6 +451,15 @@ class m_users extends CI_Model {
                     continue;
                 }
             }
+            else if (strpos($unifocal->libelle_verre, 'Organique 1,5 HMC') !== false) {
+                if (!in_array('Organique 1,5 HMC', $verre_existant)) {
+                    $tab[$i]['verre'] = 'Organique 1,5 HMC';
+                    array_push($verre_existant, 'Organique 1,5 HMC');
+                }
+                else {
+                    continue;
+                }
+            }
             else if (strpos($unifocal->libelle_verre, 'Organique 1,5') !== false && strpos($unifocal->libelle_verre, 'C') !== false) {
                 if (!in_array('Organique 1,5 C', $verre_existant)) {
                     $tab[$i]['verre'] = 'Organique 1,5 C';

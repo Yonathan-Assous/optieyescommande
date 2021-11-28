@@ -9783,8 +9783,8 @@ $(document).ready(function() {
 			{
 				$("#detailG").css("display", "block");
 			}
-			$('#additionD').val("+0.75");
-			$('#additionG').val("+0.75");
+			// $('#additionD').val("+0.75");
+			// $('#additionG').val("+0.75");
 		  }
 		  else
 		  {

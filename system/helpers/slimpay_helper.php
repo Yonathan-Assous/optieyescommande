@@ -332,7 +332,15 @@ function createDebit($data) {
 
             // Follow create-direct-debits
             $rel = new Hal\CustomRel($relNs . 'create-direct-debits');
-
+            if ($data['id_mandat'] >= 555) {
+                $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+            }
+            else {
+                $mandat = getMandat('OPTR' . $data['id_mandat']);
+                if (!$mandat) {
+                    $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+                }
+            }
            $follow = new Http\Follow($rel, 'POST', null, new Http\JsonBody(
                 [
                     'amount' => $data['montant'],
@@ -344,10 +352,10 @@ function createDebit($data) {
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => 'OPTR'.$data['id_mandat'],
+                        'reference' => $mandat,
                     ],
                     'subscriber' => [
-                        'reference' => 'OPTC'.$data['id_mandat']
+                        'reference' => $mandat
                     ]
                 ]
             ));

@@ -6265,7 +6265,7 @@ class admin
                         $detail .= "<br><b>Panier A</b>";
                     }
 
-                    $detail .= "<br>Nom du verresssss: <b>" .
+                    $detail .= "<br>Nom du verres: <b>" .
                         $commande->trad_fr .
                         "</b>";
                     $detail .= "<br>Indice: " .

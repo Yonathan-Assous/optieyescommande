@@ -661,6 +661,9 @@ File: Components
   box-shadow: none;
   background-color: #ffffff;
 }
+.panel-intro {
+  height: 151px;
+}
 .panel .panel-body {
   padding: 20px;
 }
@@ -1297,6 +1300,29 @@ div.DTS tbody tr.even {
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
+}
+
+.slider_format {
+  background-color: #f8bc06;
+}
+input:checked + .slider_format {
+  background-color: #2196F3;
+}
+
+.color-sample-standard {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  background-color: #f8bc05;
+}
+
+.color-sample-teledetourage {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  background-color: #2196f3;
 }
 
 .slider:before {

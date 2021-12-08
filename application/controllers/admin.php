@@ -3530,8 +3530,19 @@ class admin
                 ))) {
                     ++$errors;
                 }
+//                else {
+//                    echo ($this->db->last_query()) . '<br>';
+//                }
             }
 
+            $teledetourageFormats = $this->m_teledetourage->getFormats();
+            foreach ($teledetourageFormats as $teledetourageFormat) {
+                $teledetourageName = 'teledetourage_' . $teledetourageFormat->name;
+                $sql = "UPDATE `teledetourage_format_user` SET `price` = " . $info[$teledetourageName] . "
+                                  WHERE id_user = " . $info['user'] . "
+                                  AND id_teledetourage_format = " . $teledetourageFormat->id;
+                $this->db->query($sql);
+            }
             if ($this->input->post('withPass') ==
                 '1') {
                 if ($this->input->post('Samuel') ==
@@ -3617,7 +3628,6 @@ class admin
             }
 
 //            $this->m_commande->updateBillsForMonth($user);
-
             echo $errors;
 
             exit;
@@ -18632,6 +18642,12 @@ class admin
             $data['info_user'] =
                 $this->m_users->getUserById($idUser);
 
+            $info_teledetourage_user = $this->m_teledetourage->getPriceByUserId($idUser);
+            $info_teledetourage_array = [];
+            foreach($info_teledetourage_user as $value) {
+                $info_teledetourage_array[$value->name] = $value->price;
+            }
+            $data['price_teledetourage_user'] = $info_teledetourage_array;
             $dep =
                 substr($data['info_user'][0]->cp,
                     0, -3);

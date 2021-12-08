@@ -107,7 +107,7 @@ $('#additionG').on('keydown keyup', function(e) {
     });    
     
 	$("#generation_progressif").css("display", "none");
-	$("#Teledetourage").attr('disabled', true);
+	// $("#Teledetourage").attr('disabled', true);
 	$("#div_prismes").css("display", "none");
 	
 	$("#Stock_1").prop("checked", true);
@@ -646,6 +646,12 @@ $('input[name=additionG]').focus(function() {
 	$('#additional_info').addClass('hide');
 });
 
+$('#type_format').change(function() {
+	$('#produit').addClass('hide');
+	$('#div_refraction').addClass('hide');
+	$('#type_produit').addClass('hide');
+	$('#generation_progressif').addClass('hide');
+});
 
 $('input[name=sphereD]').change(function() {
     var indiceId = $('#indices').val();
@@ -1391,7 +1397,8 @@ $("input[name='dispoD']").change(function(){
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
+    var teledetourage = $('#type_format').is(':checked');
+
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
     
@@ -1468,7 +1475,7 @@ $("input[name='dispoD']").change(function(){
     
      
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 	   
 	} 
 });
@@ -1485,8 +1492,9 @@ $('#progressionD').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
-    var droite = $('#droit').is(':checked');
+	var teledetourage = $('#type_format').is(':checked');
+
+	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
     
     var stockD = $('input[name="dispoD"]:checked').val()
@@ -1542,7 +1550,7 @@ $('#progressionD').on('change', function() {
 	}
      
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 	   
 	} 
 	
@@ -1560,8 +1568,9 @@ $('#progressionG').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
-    var stockD = $('input[name="dispoD"]:checked').val()
+	var teledetourage = $('#type_format').is(':checked');
+
+	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
 	
 	if(stockG == "StockG")
@@ -1606,7 +1615,7 @@ $('#progressionG').on('change', function() {
     $('#galbeG option[value="Standard"]').prop('selected', true);
      
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 	   
 	} 
 });
@@ -4723,8 +4732,9 @@ function afficherV() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    
-    var stockD = $('input[name="dispoD"]:checked').val()
+	var teledetourage = $('#type_format').is(':checked');
+
+	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
 	
 	if(stockG == "StockG")
@@ -4907,7 +4917,7 @@ function afficherV() {
      
     if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
     	  // alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-    	   	getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+    	   	getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
     	   
     } 
     
@@ -5005,7 +5015,7 @@ $('#VersDroit').on('click', function() {
 
 
 
-function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire)
+function getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire)
 {
 	var type = $('#type_commande').val();
 	console.log("type_commande_verre : "+type);
@@ -5241,7 +5251,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				if(generation == "Progressif de stock")
 				{
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
-					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionD == 'Short' || progressionD == 'Tous') && (stockD == 'StockD' || stockD == 'ToutD'))
+					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionD == 'Short' || progressionD == 'Tous') && (stockD == 'StockD' || stockD == 'ToutD') && !teledetourage)
 					{
 						console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 
@@ -5272,7 +5282,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				$.ajax({
 						type: "POST",
 						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm,"type" : type},
+						data: {"teledetourage" : teledetourage ,"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm,"type" : type},
 						dataType: "json",
 						beforeSend: function () {
 							//$(".loading").show();
@@ -5619,7 +5629,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
 
 				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67" || indiceId == "1.74") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
+				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67" || indiceId == "1.74") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD') && !teledetourage)
 				{
 					console.log("PanierA:"+panierAm+"AAAAA");
 					console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
@@ -5671,7 +5681,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				$.ajax({
 						type: "POST",
 						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm,"type" : type},
+						data: {"teledetourage" : teledetourage ,"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereD,"cylindreD" : cylindreD,"axeD" : axeD,"additionD" : additionD,"stockD" : stockD,"panierA" : panierAm,"type" : type},
 						dataType: "json",
 						async: false,
 						beforeSend: function () {
@@ -5775,7 +5785,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				if(generation == "Progressif de stock")
 				{
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
-					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
+					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD') && !teledetourage)
 					{
 						console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
 
@@ -5810,14 +5820,15 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				$.ajax({
 						type: "POST",
 						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+						data: {"teledetourage" : teledetourage, "indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
 						dataType: "json",
 						beforeSend: function () {
 						//	$(".loading").show();
 						},
 						success: function (data) {	
-						console.log("Gauche1:");	
-						console.log(data);	
+						console.log("Gauche1:");
+						console.log(data);
+						console.log(generation);
 						if(data != "")
 						{
 							$.each(data, function(key, value){
@@ -5837,6 +5848,9 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 						
 							if((progressionG == '' || progressionG == 'Tous') && lensFocalGroup == '3')
 							{
+								console.log('111');
+								console.log(value.trad_fr);
+
 								if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
 								{
 									if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
@@ -5852,6 +5866,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										{
 											if(value.trad_fr.indexOf("T-One") >= 0)
 											{
+												console.log('777');
+												console.log(value);
 												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
 											}
 										}
@@ -5875,6 +5891,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										{
 											if(value.trad_fr.indexOf("T-One") >= 0)
 											{
+												console.log('123456');
+												console.log(value);
 												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
 											}
 										}
@@ -5886,6 +5904,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							}
 							else if(progressionG == 'Regular' && lensFocalGroup == '3')
 							{
+								console.log('222');
+
 								if ((value.name.indexOf(" R ") >= 0 || (value.name.indexOf("T-One 18 ") >= 0) || (value.name.indexOf("Panier A Initial 18 ") >= 0)))
 								{
 									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -5937,6 +5957,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							}
 							else if(progressionG == 'Short' && lensFocalGroup == '3')
 							{
+								console.log('333');
 								if ((value.name.indexOf(" S ") >= 0 || (value.name.indexOf("T-One 17 ") >= 0) || (value.name.indexOf("Panier A Initial 17 ") >= 0)))
 								{
 									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -5988,6 +6009,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							}
 							else if(progressionG == 'Extra Short' && lensFocalGroup == '3')
 							{
+								console.log('444');
 								if ((value.name.indexOf(" E ") >= 0 || (value.name.indexOf("T-One 16 ") >= 0) || (value.name.indexOf("Panier A Initial 16 ") >= 0)))
 								{
 									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -6039,6 +6061,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							}
 							else if(progressionG == 'Ultra Short' && lensFocalGroup == '3')
 							{
+								console.log('555');
 								if ((value.name.indexOf(" U ") >= 0 || (value.name.indexOf("T-One 15 ") >= 0) || (value.name.indexOf("Panier A Initial 15 ") >= 0)))
 								{
 									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
@@ -6090,6 +6113,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							}	
 							else
 							{
+								console.log('666666666');
 								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
 								{
 									$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
@@ -6122,6 +6146,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 									}
 									else
 									{
+										console.log('888');
 										if(generation == "E-Space")
 										{
 											if(value.trad_fr.indexOf("E-Space") >= 0)
@@ -6133,6 +6158,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 										{
 											if(value.trad_fr.indexOf("T-One") >= 0)
 											{
+												console.log('999');
+												console.log(value);
 												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
 											}
 										}
@@ -6159,7 +6186,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 
 				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
+				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD') && !teledetourage)
 				{
 					console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
 
@@ -6218,7 +6245,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				$.ajax({
 						type: "POST",
 						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+						data: {"teledetourage" : teledetourage, "indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
 						dataType: "json",
 						async: false,
 						beforeSend: function () {
@@ -6440,545 +6467,545 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 		}
 		
 		
-		if(cylindreG != '-' && gauche)
-		{
-			
-			$('#type_de_verreG').empty();
-			$('#type_de_verreG').append('<option value="" rel="">-- Choisir --</option>');
-			setTimeout(function(){
-				$('#type_de_verreG').trigger('change');
-			},300);
-			console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-
-			if(lensFocalGroup == "3")
-			{
-				if(progressionG == '')
-				{
-					progressionG = 'Tous';
-				}
-				if(generation == "Progressif de stock")
-				{
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
-					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
-					{
-						console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
-
-						$.ajax({
-							type: "POST",
-							url: "/index/getStockTypeDeVerre",
-							data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
-							dataType: "json",
-							success: function (data) {	
-							//alert(data);
-							console.log("Prog !!!");
-							console.log(data);	
-							if(data != "")
-							{
-								$.each(data, function(key, value){
-								
-									$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+ value.name + ' (13.00&euro;)</option>');
-									
-								})
-							}
-						  }
-						})
-					}
-				}
-				else
-				{
-					//alert("progressionD:"+progressionD);
-				$.ajax({
-						type: "POST",
-						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
-						dataType: "json",
-						beforeSend: function () {
-							//$(".loading").show();
-						},
-						success: function (data) {	
-						console.log("Gauche1:");	
-						console.log(data);	
-						if(data != "")
-						{
-							$.each(data, function(key, value){
-
-							if(value.trad_fr == "")
-							{
-								value.trad_fr = value.name;
-							}
-					
-							if(generation == "E-Space")
-							{
-								var n_T_ONE = value.trad_fr; 
-								value.trad_fr = n_T_ONE.replace("T-One", "E-Space");
-							}
-						
-							//alert("Name:"+value.name+" - progressionD:"+progressionD+" - lensFocalGroup:"+lensFocalGroup);
-						
-							if((progressionG == '' || progressionG == 'Tous') && lensFocalGroup == '3')
-							{
-								if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-								{
-									if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										console.log(value.trad_fr);
-									}
-								}
-								else
-								{
-									if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}								
-								}
-							}
-							else if(progressionG == 'Regular' && lensFocalGroup == '3')
-							{
-								if ((value.name.indexOf(" R ") >= 0 || (value.name.indexOf("T-One 18 ") >= 0) || (value.name.indexOf("Panier A Initial 18 ") >= 0)))
-								{
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										}
-									}
-									else
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-									}
-								}
-							}
-							else if(progressionG == 'Short' && lensFocalGroup == '3')
-							{
-								if ((value.name.indexOf(" S ") >= 0 || (value.name.indexOf("T-One 17 ") >= 0) || (value.name.indexOf("Panier A Initial 17 ") >= 0)))
-								{
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										}
-									}
-									else
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-									}
-								}
-							}
-							else if(progressionG == 'Extra Short' && lensFocalGroup == '3')
-							{
-								if ((value.name.indexOf(" E ") >= 0 || (value.name.indexOf("T-One 16 ") >= 0) || (value.name.indexOf("Panier A Initial 16 ") >= 0)))
-								{
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										}
-									}
-									else
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-									}
-								}
-							}
-							else if(progressionG == 'Ultra Short' && lensFocalGroup == '3')
-							{
-								if ((value.name.indexOf(" U ") >= 0 || (value.name.indexOf("T-One 15 ") >= 0) || (value.name.indexOf("Panier A Initial 15 ") >= 0)))
-								{
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										}
-									}
-									else
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-									}
-								}
-							}	
-							else
-							{
-								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
-								{
-									$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
-								}
-								else
-								{
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-										}
-									}
-									else
-									{
-										if(generation == "E-Space")
-										{
-											if(value.trad_fr.indexOf("E-Space") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else if(generation == "T-One")
-										{
-											if(value.trad_fr.indexOf("T-One") >= 0)
-											{
-												$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-											}
-										}
-										else
-										{
-											$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-										}
-									}
-								}
-							}
-							});	
-						//	$('#type_de_verreG').trigger('change');
-							
-						}
-						//$(".loading").hide();
-						}
-					});
-				}
-			}
-			else
-			{
-				var tab_verres_stockG = {};
-				var tab_verresG = {};
-				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
-
-				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
-				{
-					console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
-
-					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
-					$.ajax({
-						type: "POST",
-						url: "/index/getStockTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
-						dataType: "json",
-						async: false,
-						success: function (data) {	
-						//alert(data);
-						console.log("Gauche2:");
-						console.log(data);
-						if(data != "")
-						{	
-							$.each(data, function(key, value){
-						
-								if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
-								{
-							
-								}
-								else
-								{
-									if((value.name.indexOf("Panier A ") >= 0))
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											tab_verres_stockG[value.sorting] = {};
-											tab_verres_stockG[value.sorting]['id'] = value.id_verre;
-											tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
-											tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
-										}
-									}
-									else
-									{
-										tab_verres_stockG[value.sorting] = {};
-										tab_verres_stockG[value.sorting]['id'] = value.id_verre;
-										tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
-										tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
-									}
-									
-								}
-							
-								//$('#type_de_verreD').append('<option value="]'+ value.id_verre +'*'+value.diametre+'">'+ value.name + ' - Stock</option>');
-							})
-						}
-					  }
-					})
-					//return false;
-				}
-			
-				if(lensFocalGroup != "3" && lensFocalGroup !="-" && lensFocalGroup !="")
-				{
-					//alert("progressionD:"+progressionD);
-				$.ajax({
-						type: "POST",
-						url: "/index/getTypeDeVerre",
-						data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
-						dataType: "json",
-						async: false,
-						beforeSend: function () {
-							//$(".loading").show();
-						},
-						success: function (data) {	
-							console.log("Gauche3:");
-							console.log(data);
-							if(data != "")
-							{
-								
-							$.each(data, function(key, value){
-						
-							if(value.trad_fr == "")
-							{
-								value.trad_fr = value.name;
-							}
-							
-							
-							if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
-							{
-							
-							}
-							else
-							{
-							
-								if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
-								{
-									//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
-									tab_verres_stockG[value.sorting] = {};
-									tab_verres_stockG[value.sorting]['id'] = value.code;
-									tab_verres_stockG[value.sorting]['code'] = value.code;
-									tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';							
-								}
-								else
-								{
-									//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
-									if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
-									{
-										if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
-										{
-											tab_verresG[value.sorting] = {};
-											tab_verresG[value.sorting]['id'] = value.code;
-											tab_verresG[value.sorting]['code'] = value.code;
-											tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
-										}
-									}
-									else
-									{
-										tab_verresG[value.sorting] = {};
-										tab_verresG[value.sorting]['id'] = value.code;
-										tab_verresG[value.sorting]['code'] = value.code;
-										tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
-									}	
-								}
-							}
-							
-							});	
-						
-							}
-							//$(".loading").hide();
-						}
-					});
-					}
-					
-					$.each(tab_verres_stockG, function(key, value){
-							//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
-							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
-					});
-					
-					$.each(tab_verresG, function(key, value){
-							//console.log(key+" - "+value);
-							$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
-					});
-					
-				}
-				setTimeout(function(){
-					$('#type_de_verreG').trigger('change');
-				},500);
-			}
+		// if(cylindreG != '-' && gauche)
+		// {
+		//
+		// 	$('#type_de_verreG').empty();
+		// 	$('#type_de_verreG').append('<option value="" rel="">-- Choisir --</option>');
+		// 	setTimeout(function(){
+		// 		$('#type_de_verreG').trigger('change');
+		// 	},300);
+		// 	console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+		//
+		// 	if(lensFocalGroup == "3")
+		// 	{
+		// 		if(progressionG == '')
+		// 		{
+		// 			progressionG = 'Tous';
+		// 		}
+		// 		if(generation == "Progressif de stock")
+		// 		{
+		// 			//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);
+		// 			if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
+		// 			{
+		// 				console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+		//
+		// 				$.ajax({
+		// 					type: "POST",
+		// 					url: "/index/getStockTypeDeVerre",
+		// 					data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+		// 					dataType: "json",
+		// 					success: function (data) {
+		// 					//alert(data);
+		// 					console.log("Prog !!!");
+		// 					console.log(data);
+		// 					if(data != "")
+		// 					{
+		// 						$.each(data, function(key, value){
+		//
+		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+ value.name + ' (13.00&euro;)</option>');
+		//
+		// 						})
+		// 					}
+		// 				  }
+		// 				})
+		// 			}
+		// 		}
+		// 		else
+		// 		{
+		// 			// alert("progressionD:"+progressionD);
+		// 		// $.ajax({
+		// 		// 		type: "POST",
+		// 		// 		url: "/index/getTypeDeVerre",
+		// 		// 		data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+		// 		// 		dataType: "json",
+		// 		// 		beforeSend: function () {
+		// 		// 			//$(".loading").show();
+		// 		// 		},
+		// 		// 		success: function (data) {
+		// 		// 		console.log("Gauche1:");
+		// 		// 		console.log(data);
+		// 		// 		if(data != "")
+		// 		// 		{
+		// 		// 			$.each(data, function(key, value){
+		// 		//
+		// 		// 			if(value.trad_fr == "")
+		// 		// 			{
+		// 		// 				value.trad_fr = value.name;
+		// 		// 			}
+		// 		//
+		// 		// 			if(generation == "E-Space")
+		// 		// 			{
+		// 		// 				var n_T_ONE = value.trad_fr;
+		// 		// 				value.trad_fr = n_T_ONE.replace("T-One", "E-Space");
+		// 		// 			}
+		// 		//
+		// 		// 			//alert("Name:"+value.name+" - progressionD:"+progressionD+" - lensFocalGroup:"+lensFocalGroup);
+		// 		//
+		// 		// 			if((progressionG == '' || progressionG == 'Tous') && lensFocalGroup == '3')
+		// 		// 			{
+		// 		// 				if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 				{
+		// 		// 					if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						console.log(value.trad_fr);
+		// 		// 					}
+		// 		// 				}
+		// 		// 				else
+		// 		// 				{
+		// 		// 					if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			else if(progressionG == 'Regular' && lensFocalGroup == '3')
+		// 		// 			{
+		// 		// 				if ((value.name.indexOf(" R ") >= 0 || (value.name.indexOf("T-One 18 ") >= 0) || (value.name.indexOf("Panier A Initial 18 ") >= 0)))
+		// 		// 				{
+		// 		// 					if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 					{
+		// 		// 						if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 						{
+		// 		// 							if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						}
+		// 		// 					}
+		// 		// 					else
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 					}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			else if(progressionG == 'Short' && lensFocalGroup == '3')
+		// 		// 			{
+		// 		// 				if ((value.name.indexOf(" S ") >= 0 || (value.name.indexOf("T-One 17 ") >= 0) || (value.name.indexOf("Panier A Initial 17 ") >= 0)))
+		// 		// 				{
+		// 		// 					if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 					{
+		// 		// 						if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 						{
+		// 		// 							if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						}
+		// 		// 					}
+		// 		// 					else
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 					}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			else if(progressionG == 'Extra Short' && lensFocalGroup == '3')
+		// 		// 			{
+		// 		// 				if ((value.name.indexOf(" E ") >= 0 || (value.name.indexOf("T-One 16 ") >= 0) || (value.name.indexOf("Panier A Initial 16 ") >= 0)))
+		// 		// 				{
+		// 		// 					if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 					{
+		// 		// 						if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 						{
+		// 		// 							if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						}
+		// 		// 					}
+		// 		// 					else
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 					}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			else if(progressionG == 'Ultra Short' && lensFocalGroup == '3')
+		// 		// 			{
+		// 		// 				if ((value.name.indexOf(" U ") >= 0 || (value.name.indexOf("T-One 15 ") >= 0) || (value.name.indexOf("Panier A Initial 15 ") >= 0)))
+		// 		// 				{
+		// 		// 					if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 					{
+		// 		// 						if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 						{
+		// 		// 							if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						}
+		// 		// 					}
+		// 		// 					else
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 					}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			else
+		// 		// 			{
+		// 		// 				if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
+		// 		// 				{
+		// 		// 					$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
+		// 		// 				}
+		// 		// 				else
+		// 		// 				{
+		// 		// 					if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 		// 					{
+		// 		// 						if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 		// 						{
+		// 		// 							if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 						}
+		// 		// 					}
+		// 		// 					else
+		// 		// 					{
+		// 		// 						if(generation == "E-Space")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("E-Space") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else if(generation == "T-One")
+		// 		// 						{
+		// 		// 							if(value.trad_fr.indexOf("T-One") >= 0)
+		// 		// 							{
+		// 		// 								$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 							}
+		// 		// 						}
+		// 		// 						else
+		// 		// 						{
+		// 		// 							$('#type_de_verreG').append('<option value="'+ value.code +'" rel="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 		// 						}
+		// 		// 					}
+		// 		// 				}
+		// 		// 			}
+		// 		// 			});
+		// 		// 		//	$('#type_de_verreG').trigger('change');
+		// 		//
+		// 		// 		}
+		// 		// 		//$(".loading").hide();
+		// 		// 		}
+		// 		// 	});
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		var tab_verres_stockG = {};
+		// 		var tab_verresG = {};
+		// 		console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+		//
+		// 		//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+		// 		if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
+		// 		{
+		// 			console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+		//
+		// 			//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+		// 			$.ajax({
+		// 				type: "POST",
+		// 				url: "/index/getStockTypeDeVerre",
+		// 				data: {"indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+		// 				dataType: "json",
+		// 				async: false,
+		// 				success: function (data) {
+		// 				//alert(data);
+		// 				console.log("Gauche2:");
+		// 				console.log(data);
+		// 				if(data != "")
+		// 				{
+		// 					$.each(data, function(key, value){
+		//
+		// 						if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
+		// 						{
+		//
+		// 						}
+		// 						else
+		// 						{
+		// 							if((value.name.indexOf("Panier A ") >= 0))
+		// 							{
+		// 								if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 								{
+		// 									tab_verres_stockG[value.sorting] = {};
+		// 									tab_verres_stockG[value.sorting]['id'] = value.id_verre;
+		// 									tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
+		// 									tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
+		// 								}
+		// 							}
+		// 							else
+		// 							{
+		// 								tab_verres_stockG[value.sorting] = {};
+		// 								tab_verres_stockG[value.sorting]['id'] = value.id_verre;
+		// 								tab_verres_stockG[value.sorting]['code'] = ']'+ value.id_verre +'*'+value.diametre;
+		// 								tab_verres_stockG[value.sorting]['name'] = value.name + ' - Stock';
+		// 							}
+		//
+		// 						}
+		//
+		// 						//$('#type_de_verreD').append('<option value="]'+ value.id_verre +'*'+value.diametre+'">'+ value.name + ' - Stock</option>');
+		// 					})
+		// 				}
+		// 			  }
+		// 			})
+		// 			//return false;
+		// 		}
+		//
+		// 		if(lensFocalGroup != "3" && lensFocalGroup !="-" && lensFocalGroup !="")
+		// 		{
+		// 			//alert("progressionD:"+progressionD);
+		// 		$.ajax({
+		// 				type: "POST",
+		// 				url: "/index/getTypeDeVerre",
+		// 				data: {"teledetourage" : teledetourage, "indiceId" : indiceId, "lensFocalGroup" : lensFocalGroup, "generation" : generation,"sphereD" : sphereG,"cylindreD" : cylindreG,"axeD" : axeG,"additionD" : additionG,"stockD" : stockG,"panierA" : panierAm,"type" : type},
+		// 				dataType: "json",
+		// 				async: false,
+		// 				beforeSend: function () {
+		// 					//$(".loading").show();
+		// 				},
+		// 				success: function (data) {
+		// 					console.log("Gauche3:");
+		// 					console.log(data);
+		// 					if(data != "")
+		// 					{
+		//
+		// 					$.each(data, function(key, value){
+		//
+		// 					if(value.trad_fr == "")
+		// 					{
+		// 						value.trad_fr = value.name;
+		// 					}
+		//
+		//
+		// 					if(deuxiemepaire == "1" && value.name.indexOf("Panier A ") >= 0)
+		// 					{
+		//
+		// 					}
+		// 					else
+		// 					{
+		//
+		// 						if ((value.name.indexOf("-stock") >= 0) || (value.name.indexOf("-stock") >= 0) || (value.name.indexOf("- stock") >= 0) || (value.name.indexOf("-Stock") >= 0) )
+		// 						{
+		// 							//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté</option>');
+		// 							tab_verres_stockG[value.sorting] = {};
+		// 							tab_verres_stockG[value.sorting]['id'] = value.code;
+		// 							tab_verres_stockG[value.sorting]['code'] = value.code;
+		// 							tab_verres_stockG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + ' - Stock déporté';
+		// 						}
+		// 						else
+		// 						{
+		// 							//$('#type_de_verreD').append('<option value="'+ value.code +'">'+  decodeURIComponent(unescape(value.trad_fr)) + '</option>');
+		// 							if((value.name.indexOf("Panier A ") >= 0) && deuxiemepaire == 0)
+		// 							{
+		// 								if(((parseFloat(cylindreG)+parseFloat(sphereG)) >= -2 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 2 && indiceId == "1.5") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.59") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -4 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 4 && indiceId == "1.6") || ((parseFloat(cylindreG)+parseFloat(sphereG)) >= -8 && (parseFloat(cylindreG)+parseFloat(sphereG)) <= 8 && indiceId == "1.67") || (indiceId == "1.74") )
+		// 								{
+		// 									tab_verresG[value.sorting] = {};
+		// 									tab_verresG[value.sorting]['id'] = value.code;
+		// 									tab_verresG[value.sorting]['code'] = value.code;
+		// 									tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
+		// 								}
+		// 							}
+		// 							else
+		// 							{
+		// 								tab_verresG[value.sorting] = {};
+		// 								tab_verresG[value.sorting]['id'] = value.code;
+		// 								tab_verresG[value.sorting]['code'] = value.code;
+		// 								tab_verresG[value.sorting]['name'] = decodeURIComponent(unescape(value.trad_fr)) + '';
+		// 							}
+		// 						}
+		// 					}
+		//
+		// 					});
+		//
+		// 					}
+		// 					//$(".loading").hide();
+		// 				}
+		// 			});
+		// 			}
+		//
+		// 			$.each(tab_verres_stockG, function(key, value){
+		// 					//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
+		// 					$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
+		// 			});
+		//
+		// 			$.each(tab_verresG, function(key, value){
+		// 					//console.log(key+" - "+value);
+		// 					$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
+		// 			});
+		//
+		// 		}
+		// 		setTimeout(function(){
+		// 			$('#type_de_verreG').trigger('change');
+		// 		},500);
+		// 	}
 				
 				
         }

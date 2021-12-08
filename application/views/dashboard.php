@@ -387,40 +387,65 @@ if (is_object($pair_order)) {
                                                                         echo 'hide';
                                                                     } ?>" id="caracteristique_verre">
                                                                         <div class="col-xs-12 col-md-3">
-                                                                            <div class="panel panel-default">
+                                                                            <div class="panel panel-default panel-intro">
                                                                                 <div class="panel-heading "><h5>
                                                                                         Format</h5></div>
                                                                                 <div class="panel-body text-center"
-                                                                                     style="padding-top: 25px;padding-bottom: 26px;">
-                                                                                    <div class="radio radio-warning radio-inline">
-                                                                                        <input type="radio"
-                                                                                               id="Standard"
-                                                                                               value="Standard"
-                                                                                               name="format"
-                                                                                               class="required"
-                                                                                               aria-required="true"
-                                                                                               checked>
-                                                                                        <label for="Standard">
-                                                                                            Standard </label>
+                                                                                     style="padding-top: 0px;padding-bottom: 0px;">
+                                                                                    <div id="div_type_format" style="text-align: center;">
+                                                                                        <h5 style="text-align: left;"><span class="color-sample-standard"></span>&nbsp;Standard<br>
+                                                                                            <span class="color-sample-teledetourage"></span>&nbsp;Télédétourage</h5>
+                                                                                        <label class="switch">
+                                                                                            <input id="type_format" class="type_format" type="checkbox"
+                                                                                            <?php
+                                                                                                if (!$user_info->is_teledetourable) {
+                                                                                                    echo 'disabled';
+                                                                                                }
+                                                                                            ?>
+                                                                                            >
+                                                                                            <span id='slider_format' class="slider slider_format round"
+                                                                                            <?php
+                                                                                            if (!$user_info->is_teledetourable) {
+                                                                                                echo 'style = "cursor: no-drop"';
+                                                                                            }
+                                                                                            ?>
+                                                                                            ></span>
+                                                                                        </label>
                                                                                     </div>
-
-                                                                                    <div class="radio radio-warning radio-inline">
-                                                                                        <input type="radio"
-                                                                                               id="Teledetourage"
-                                                                                               value="Teledetourage"
-                                                                                               name="format"
-                                                                                               class="required"
-                                                                                               aria-required="true">
-                                                                                        <label for="Teledetourage">
-                                                                                            Teledetourage </label>
-
-                                                                                    </div>
+<!--                                                                                    <div class="radio radio-warning radio-inline">-->
+<!--                                                                                        <input type="radio"-->
+<!--                                                                                               id="Standard"-->
+<!--                                                                                               value="Standard"-->
+<!--                                                                                               name="format"-->
+<!--                                                                                               class="required"-->
+<!--                                                                                               aria-required="true"-->
+<!--                                                                                               checked>-->
+<!--                                                                                        <label for="Standard">-->
+<!--                                                                                            Standard </label>-->
+<!--                                                                                    </div>-->
+<!---->
+<!--                                                                                    <div class="radio radio-warning radio-inline">-->
+<!--                                                                                        <input type="radio"-->
+<!--                                                                                               id="Teledetourage"-->
+<!--                                                                                               value="Teledetourage"-->
+<!--                                                                                               name="format"-->
+<!--                                                                                               class="required"-->
+<!--                                                                                               aria-required="true"-->
+<!--                                                                                            --><?php
+//                                                                                            if (!$user_info->is_teledetourable) {
+//                                                                                                echo 'disabled';
+//                                                                                            } ?>
+<!--                                                                                        >-->
+<!--                                                                                        <label for="Teledetourage">-->
+<!--                                                                                            Teledetourage </label>-->
+<!---->
+<!--                                                                                    </div>-->
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-xs-12 col-md-3">
-                                                                            <div class="panel panel-default focus_panel"
+                                                                            <div class="panel panel-default focus_panel panel-intro"
                                                                                  id="indices_panel">
                                                                                 <div class="panel-heading"><h5>
                                                                                         Indice</h5></div>
@@ -452,7 +477,7 @@ if (is_object($pair_order)) {
                                                                         </div>
                                                                         <div class="col-xs-12 col-md-3 hide"
                                                                              id="type_produit">
-                                                                            <div class="panel panel-default"
+                                                                            <div class="panel panel-default panel-intro"
                                                                                  id="lensFocalGroup_panel">
                                                                                 <div
                                                                                         class="panel-heading"><h5>Type de
@@ -525,7 +550,7 @@ if (is_object($pair_order)) {
                                                                         </div>
                                                                         <div class="col-xs-12 col-md-3 hide"
                                                                              id="generation_progressif">
-                                                                            <div class="panel panel-default"
+                                                                            <div class="panel panel-default panel-intro"
                                                                                  id="generation_panel">
                                                                                 <div class="panel-heading"><h5>
                                                                                         Génération</h5></div>
@@ -5146,6 +5171,7 @@ if (is_object($pair_order)) {
                 });
             }
 
+
             $('#back_calibre').on('click', function () {
                 $("#big_img").hide();
                 $("#mini_calibres").show();
@@ -6814,6 +6840,8 @@ if (is_object($pair_order)) {
                 $('#axeD').val('');
             }
         });
+
+
     </script>
 
 

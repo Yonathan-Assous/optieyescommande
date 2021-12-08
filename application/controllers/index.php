@@ -131,7 +131,7 @@ class index extends MY_Controller {
 			$axeD = $_POST['axeD'];
 			$additionD = $_POST['additionD'];
 			$stock = $_POST['stockD'];
-
+            $teledetourage = $_POST['teledetourage'];
 			$panierA = $_POST['panierA'];
 
 			if(isset($_POST['type']))
@@ -141,7 +141,7 @@ class index extends MY_Controller {
 
 			$user_id = $this->data['user_info']->id_users;
 
-			$res = $this->m_passer_commande_verre->getlens($indice,$lensFocalGroup,$generation,$sphereD,$cylindreD,$axeD,$additionD,$stock,$user_id,$panierA,$type);
+			$res = $this->m_passer_commande_verre->getlens($indice,$lensFocalGroup,$generation,$sphereD,$cylindreD,$axeD,$additionD,$stock,$user_id,$panierA,$type,$teledetourage);
 			echo json_encode($res);
 		}
 		else

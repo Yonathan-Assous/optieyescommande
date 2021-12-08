@@ -35,6 +35,7 @@ class m_users extends CI_Model {
             'tarif_packaging'            => 'tarif_packaging',
             'tarif_supplement'           => 'tarif_supplement',
             'percent_tva'                => 'percent_tva',
+            'is_teledetourable'          => 'is_teledetourable',
             'nom_responsable'            => 'nom_responsable',
             'deleted'                    => 'deleted',
             'show_commentaire'           => 'show_commentaire',

@@ -63,6 +63,11 @@
                 <span>Prix&nbsp;Verres</span>
             </a>
         </li>
+        <li class="">
+            <a href="#user-modal-remises" data-toggle="tab" aria-expanded="false">
+                <span>Remises</span>
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
 
@@ -131,6 +136,19 @@
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
 
+                <div class="form-group m-b-10 col-sm-4">
+                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
+                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastique'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-4">
+                    <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>
+                    <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="<?php echo $price_teledetourage_user['metal'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-4">
+                    <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>
+                    <input type="text" id="teledetourage_nylor" name="teledetourage_nylor"  class="form-control" value="<?php echo $price_teledetourage_user['nylor'] ?>" />
+                </div>
+
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="tarif_supplement" class="control-label">Supplément sur les verres</label>
                     <input type="text" id="tarif_supplement" name="tarif_supplement"  class="form-control" value="<?php echo $info_user[0]->tarif_supplement ?>" />
@@ -171,6 +189,14 @@
                     <select id="show_commentaire" name="show_commentaire" class="form-control">
                         <option value="1" <?php echo ($info_user[0]->show_commentaire == 1 ? 'selected="selected"' : '') ?>>Oui</option>
                         <option value="0" <?php echo ($info_user[0]->show_commentaire == 0 ? 'selected="selected"' : '') ?>>Non</option>
+                    </select>
+                </div>
+
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="is_teledetourable" class="control-label">Activer le télédétourage</label>
+                    <select id="is_teledetourable" name="is_teledetourable" class="form-control">
+                        <option value="1" <?php echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?>>Oui</option>
+                        <option value="0" <?php echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?>>Non</option>
                     </select>
                 </div>
 
@@ -415,6 +441,222 @@
 <!--                                </thead>-->
 <!--                            </table>-->
 <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="user-modal-remises">
+            <div class="form-group row">
+                <h5 style="margin-bottom: 0px;">Cloner les prix d'un client</h5>
+                (Attention cette operation supprimera les prix deja saisi pour ce client)
+                <br><br>
+                Client a dupliquer :<br><select class="form-control select-search"  id="listeClients" style="max-width: 400px;display: inline-block;">
+                    <option value="">-- Choisir --</option>
+                </select> <a href="#" id="btn_dupliquer" class="btn btn-warning waves-effect waves-light">Dupliquer</a>
+                <br><br>
+                <h5>Ajouter un nouveau prix special</h5>
+                <input type="text" value="" id="recherche_verre" name="recherche_verre" style="height: 35px;"> <a href="#" id="btn_recherche_verre" class="btn btn-warning waves-effect waves-light">Rechercher</a>
+                <div id="divNouveauVerres" class="hide"><br><br>
+                </div>
+                <div id="divlisteVerres" class="form-group row hide"><br>
+                    <h5>Selectionnez un verre :</h5>
+                    <select class="form-control select-search"  id="listeVerres">
+                        <option value="">-- Choisir --</option>
+                    </select><br>
+                </div>
+                <div id="choice_change_price" class="form-group row hide">
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                        <li id="nav-prix-verre" class="active">
+                            <a href="#modal-prix-verres" data-toggle="tab" aria-expanded="false">
+                                <span>Prix verres</span>
+                            </a>
+                        </li>
+                        <li id="nav-prix-traitement" >
+                            <a href="#modal-prix-traitements" data-toggle="tab" aria-expanded="false">
+                                <span>Prix traitements</span>
+                            </a>
+                        </li>
+                        <li id="nav-prix-teinte" >
+                            <a href="#modal-prix-teintes" data-toggle="tab" aria-expanded="false">
+                                <span>Prix teintes</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="modal-prix-verres">
+                            <div>
+                                Nouveau prix Verre: <input type="text" value="" id="nouveau_prix"
+                                                           name="nouveau_prix" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                <a href="#" style="margin-left:20px"
+                                   id="btn_submit_prix"
+                                   class="btn btn-warning waves-effect waves-light">OK</a>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="modal-prix-traitements">
+                            <div id="divlisteTraitements" class="form-group row hide"><br>
+                                <h5>Selectionnez un traitement :</h5>
+                                <select class="form-control select-search"  id="listeTraitements">
+                                    <option value="">-- Choisir --</option>
+                                </select><br>
+                                <div id="div_nouveau_prix_traitement" class="hide">
+                                    Nouveau prix Traitement : <input type="text" value=""
+                                                                     id="nouveau_prix_traitement"
+                                                                     name="nouveau_prix_traitement" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                    <a href="#" style="margin-left:20px"
+                                       id="btn_submit_prix_traitement"
+                                       class="btn btn-warning waves-effect waves-light">OK</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="modal-prix-teintes">
+                            <div id="divlisteTeintes" class="form-group row hide"><br>
+                                <h5>Selectionnez une teinte :</h5>
+                                <select class="form-control select-search"  id="listeTeintes">
+                                    <option value="">-- Choisir --</option>
+                                </select><br>
+                                <div id="div_nouveau_prix_teinte" class="hide">
+                                    Nouveau prix Teinte : <input type="text" value=""
+                                                                 id="nouveau_prix_teinte"
+                                                                 name="nouveau_prix_teinte" style="text-align: right; width: 78px; height: 35px; padding-right: 5px;"> &euro;
+                                    <!--                                    <a href="#" style="margin-left:20px"-->
+                                    <!--                                       id="btn_submit_prix_teinte"-->
+                                    <!--                                       class="btn btn-warning waves-effect waves-light">OK</a>-->
+                                    <button style="margin-left:20px"
+                                            type = "button"
+                                            id="btn_submit_prix_teinte"
+                                            class="btn btn-warning waves-effect waves-light">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="history_price" class="form-group row">
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                        <li id="nav-history-verres" class="active">
+                            <a href="#modal-history-verres" data-toggle="tab" aria-expanded="false">
+                                <span>Historique verres</span>
+                            </a>
+                        </li>
+                        <li id="nav-history-traitements">
+                            <a href="#modal-history-traitements" data-toggle="tab" aria-expanded="false">
+                                <span>Historique traitements</span>
+                            </a>
+                        </li>
+                        <li id="nav-history-teintes">
+                            <a href="#modal-history-teintes" data-toggle="tab" aria-expanded="false">
+                                <span>Historique teintes</span>
+                            </a>
+                        </li>
+                        <li id="catalogue">
+                            <a href="#modal-catalogue" data-toggle="tab" aria-expanded="false">
+                                <span>Catalogue</span>
+                            </a>
+                        </li>
+                        <!--                        <li id="nav-history-teintes">-->
+                        <!--                            <a href="#modal-history-teintes-test" data-toggle="tab" aria-expanded="false">-->
+                        <!--                                <span>Historique teintes test</span>-->
+                        <!--                            </a>-->
+                        <!--                        </li>-->
+                    </ul>
+                    <div class="tab-content">
+                        <div style="text-align: center">
+                            Actifs / Tous
+                        </div>
+                        <div class="material-switch pull-right">
+                            <input id="checkboxActive" name="checkboxActive" type="checkbox" checked/>
+                            <label for="checkboxActive" class="label-warning"></label>
+                        </div>
+                        <div class="tab-pane active" id="modal-history-verres">
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrix"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Ref.</th>
+                                    <th>Nom</th>
+                                    <th>Prix</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-history-traitements">
+
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrixTraitements"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Code Verre / Traitement</th>
+                                    <th>Verre</th>
+                                    <th>Traitement</th>
+                                    <th>Prix (Prix initial)</th>
+                                    <th>Date</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-history-teintes">
+                            <h5>Table des Prix modifiés</h5>
+                            <table id="tableCustomPrixTeintes"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Code Verre / Teinte</th>
+                                    <th>Verre</th>
+                                    <th>Teinte</th>
+                                    <th>Prix (Prix initial)</th>
+                                    <th>Date</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="modal-catalogue">
+                            <h5>Catalogue</h5>
+                            <table id="tableCustomCatalogue"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Verre</th>
+                                    <th>Prix</th>
+                                    <th>Order</th>
+                                    <th>HMC</th>
+                                    <th>HMC Face Interne</th>
+                                    <th>Satin</th>
+                                    <th>Satin Face Interne</th>
+                                    <th>Satin UV</th>
+                                    <th>Satin UV Face Interne</th>
+                                    <th>Achromatique</th>
+                                    <th>Achromatique Face Interne</th>
+                                    <th>BlueCoat</th>
+                                    <th>Spectrum</th>
+                                    <th>Satin Max</th>
+                                    <th>Satin Max Face Interne</th>
+                                    <th>Satin Drive Or</th>
+                                    <th>Miroir</th>
+                                    <th>Teinte</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <!--                        <div class="tab-pane" id="modal-history-teintes-test">-->
+                        <!--                            <h5>Table des Prix modifiés</h5>-->
+                        <!--                            <table id="tableCustomPrixTeintesTest"-->
+                        <!--                                   class="table table-striped dt-responsive nowrap">-->
+                        <!--                                <thead>-->
+                        <!--                                <tr>-->
+                        <!--                                    <th>Code Verre / Teinte</th>-->
+                        <!--                                    <th>Verre</th>-->
+                        <!--                                    <th>Teinte</th>-->
+                        <!--                                    <th>Prix (Prix initial)</th>-->
+                        <!--                                    <th>Date</th>-->
+                        <!--                                    <th>Désactivation</th>-->
+                        <!--                                </tr>-->
+                        <!--                                </thead>-->
+                        <!--                            </table>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>

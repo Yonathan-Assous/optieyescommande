@@ -8317,7 +8317,7 @@ $(document).ready(function() {
 															<div class="panel panel-default focus_panel" id="div2_type_commande">
 																<div class="panel-heading"><h5 >Type de commande</h5></div>
 																<div class="panel-body" style="padding-top: 15px">
-																	<div class="col-lg-10 card-tabs">
+																	<div class="col-lg-12 card-tabs">
 																			<ul class="nav nav-pills type_commande_verre">
 																				<li><a href="#" data-toggle="tab" aria-expanded="true" id="commande_ferme">Commande ferme</a>
 																				</li>

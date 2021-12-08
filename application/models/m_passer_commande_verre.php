@@ -547,8 +547,9 @@ class m_passer_commande_verre extends CI_Model
 
     public
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
-                     $panierA, $type = "1")
+                     $panierA, $type = "1", $isTeledetourage = false)
     {
+        $isTeledetourage = $isTeledetourage == 'true' ? true : false;
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -662,7 +663,7 @@ class m_passer_commande_verre extends CI_Model
                 }
                 $conditions = rtrim($conditions, " OR ");
                 $conditions .= ")";
-
+                $teledetourageCondition = $isTeledetourage ? "AND is_teledetourable = true" : "AND display = 'X'";
                 //echo "Conditions:".$conditions." - Generation:".$generation." - Indice:".$indice;
                 if ($conditions != "()") {
                     if ($generation == '-') {
@@ -673,7 +674,7 @@ class m_passer_commande_verre extends CI_Model
                                         WHERE focalGroupId=" . $lensFocalGroup . "
 										AND " . $conditions . "
 										AND is_mineral = 1 
-										AND display = 'X'
+										$teledetourageCondition
 										ORDER BY sorting,trad_fr";
 
                                 $res = $this->db->query($sql);
@@ -688,7 +689,7 @@ class m_passer_commande_verre extends CI_Model
 													FROM " . $this->table_lenses . " 
 										   WHERE focalGroupId=" . $lensFocalGroup . "
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
                                 } else {
@@ -697,7 +698,7 @@ class m_passer_commande_verre extends CI_Model
                                     $res = $this->db->query("SELECT * 
 													FROM " . $this->table_lenses . " 
 										   WHERE " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
 
@@ -712,7 +713,7 @@ class m_passer_commande_verre extends CI_Model
                                     . "' OR name LIKE '%" . $indice . "-%' OR name LIKE '%"
                                     . $indice . "0%')
 										   AND name NOT LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr";
                                 $res = $this->db->query($sql);
                                 /*echo "SELECT *
@@ -731,7 +732,7 @@ class m_passer_commande_verre extends CI_Model
 													FROM " . $this->table_lenses . " 
 										   WHERE focalGroupId=" . $lensFocalGroup . "
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             } else {
                                 //$res = DB::table("lenses")->whereRaw(\DB::raw($conditions))->orderBy('name', 'ASC')->pluck("id","name");
@@ -739,7 +740,7 @@ class m_passer_commande_verre extends CI_Model
                                 $res = $this->db->query("SELECT * 
 													FROM " . $this->table_lenses . " 
 										   WHERE " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             }
                         }
@@ -752,7 +753,7 @@ class m_passer_commande_verre extends CI_Model
 										   AND focalGroupId='3'
 										   AND " . $conditions . "
 										   AND name LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
                             } elseif ($indice == "all") {
@@ -762,7 +763,7 @@ class m_passer_commande_verre extends CI_Model
 										   WHERE trad_fr LIKE '%" . $generation . "%'
 										   AND focalGroupId='3'
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             } else {
                                 $sql = "SELECT * 
@@ -772,7 +773,7 @@ class m_passer_commande_verre extends CI_Model
 										   AND " . $conditions . "
 										   AND (name LIKE '%" . $indice . " %' OR name LIKE '%" . $indice . "')
 										   AND name NOT LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr";
                                 $res = $this->db->query($sql);
 
@@ -784,7 +785,7 @@ class m_passer_commande_verre extends CI_Model
 										   WHERE trad_fr LIKE '%" . $generation . "%'
 										   focalGroupId='3'
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                         }
                     }
@@ -906,7 +907,7 @@ class m_passer_commande_verre extends CI_Model
 
 
                     }
-                    //print_r('gdsggfdf');die;
+                    //print_r($res_f->result());
                     return $res_f->result();
                 } else {
                     return "";

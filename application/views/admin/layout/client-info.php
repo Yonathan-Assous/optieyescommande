@@ -447,16 +447,22 @@
         </div>
         <div class="tab-pane" id="user-modal-remises">
             <div class="form-group row">
-                <h5 style="margin-bottom: 0px;">Cloner les prix d'un client</h5>
-                (Attention cette operation supprimera les prix deja saisi pour ce client)
-                <br><br>
-                Client a dupliquer :<br><select class="form-control select-search"  id="listeClients" style="max-width: 400px;display: inline-block;">
-                    <option value="">-- Choisir --</option>
-                </select> <a href="#" id="btn_dupliquer" class="btn btn-warning waves-effect waves-light">Dupliquer</a>
-                <br><br>
-                <h5>Ajouter un nouveau prix special</h5>
-                <input type="text" value="" id="recherche_verre" name="recherche_verre" style="height: 35px;"> <a href="#" id="btn_recherche_verre" class="btn btn-warning waves-effect waves-light">Rechercher</a>
-                <div id="divNouveauVerres" class="hide"><br><br>
+                <h5 style="margin-bottom: 0px;">Ajout d'une remise</h5>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_remise" class="control-label">Remise</label>
+                    <input type="text" id="teledetourage_remise" name="teledetourage_remise" class="form-control" value="" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_remise_start_montant" class="control-label">Montant (à partir de)</label>
+                    <input type="text" id="teledetourage_remise_start_montant" name="teledetourage_remise_start_montant" class="form-control" value="" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_remise_start_date" class="control-label">Date de début</label>
+                    <input type="date" id="teledetourage_remise_start_date" name="teledetourage_remise_start_date" min="2021-09-12" class="form-control teledetourage_date" value="" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_remise_end_date" class="control-label">Date de fin</label>
+                    <input type="date" id="teledetourage_remise_end_date" name="teledetourage_remise_end_date" min="2021-09-12" class="form-control teledetourage_date" value="" />
                 </div>
                 <div id="divlisteVerres" class="form-group row hide"><br>
                     <h5>Selectionnez un verre :</h5>
@@ -674,6 +680,22 @@
 <script>
 	$(document).ready(function(){
 
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+        let yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+
+        today = yyyy+'-'+mm+'-'+dd;
+        let list = document.getElementsByClassName("teledetourage_date");
+        for (let index = 0; index < list.length; ++index) {
+            list[index].setAttribute("min", today);
+        }
 	<?php
 	$noPass = get_cookie("noPass");
 	if($noPass=='1')

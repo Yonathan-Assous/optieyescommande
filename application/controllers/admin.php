@@ -5479,16 +5479,31 @@ class admin
                                 if ((strpos($commande->lensname,
                                             '1.67') !== false) || (strpos($commande->lensname,
                                             '1.74') !== false)) {
-                                    $codeTeinte = '869';
+                                    if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '870';
+                                    }
+                                    else {
+                                        $codeTeinte = '869';
+                                    }
                                 }
                                 else if ((strpos($commande->lensname,
                                             '1.56') !== false) || (strpos($commande->lensname,
                                             '1.6') !== false)) {
-                                    $codeTeinte = '575';
+                                    if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '576';
+                                    }
+                                    else {
+                                        $codeTeinte = '575';
+                                    }
                                 }
                                 else if ((strpos($commande->lensname,
                                         '1.5') !== false)) {
-                                    $codeTeinte = '740';
+                                    if (strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '741';
+                                    }
+                                    else {
+                                        $codeTeinte = '740';
+                                    }
                                 }
                             }
                             $xml .= '
@@ -7873,16 +7888,31 @@ class admin
                                     if ((strpos($commande->lensname,
                                             '1.67') !== false) || (strpos($commande->lensname,
                                                 '1.74') !== false)) {
-                                        $codeTeinte = '869';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '870';
+                                        }
+                                        else {
+                                            $codeTeinte = '869';
+                                        }
                                     }
                                     else if ((strpos($commande->lensname,
                                                 '1.56') !== false) || (strpos($commande->lensname,
                                                 '1.6') !== false)) {
-                                        $codeTeinte = '575';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '576';
+                                        }
+                                        else {
+                                            $codeTeinte = '575';
+                                        }
                                     }
                                     else if ((strpos($commande->lensname,
                                             '1.5') !== false)) {
-                                        $codeTeinte = '740';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '741';
+                                        }
+                                        else {
+                                            $codeTeinte = '740';
+                                        }
                                     }
                                 }
                                 $xml .= '
@@ -8083,16 +8113,31 @@ class admin
                                     if ((strpos($commande->lensname,
                                                 '1.67') !== false) || (strpos($commande->lensname,
                                                 '1.74') !== false)) {
-                                        $codeTeinte = '869';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '870';
+                                        }
+                                        else {
+                                            $codeTeinte = '869';
+                                        }
                                     }
                                     else if ((strpos($commande->lensname,
                                                 '1.56') !== false) || (strpos($commande->lensname,
                                                 '1.6') !== false)) {
-                                        $codeTeinte = '575';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '576';
+                                        }
+                                        else {
+                                            $codeTeinte = '575';
+                                        }
                                     }
                                     else if ((strpos($commande->lensname,
                                             '1.5') !== false)) {
-                                        $codeTeinte = '740';
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '741';
+                                        }
+                                        else {
+                                            $codeTeinte = '740';
+                                        }
                                     }
                                 }
                                 $xml .= '
@@ -10148,16 +10193,31 @@ class admin
                             if ((strpos($data['nomverreDH'],
                                         '1.67') !== false) || (strpos($data['nomverreDH'],
                                         '1.74') !== false)) {
-                                $codeTeinte = '869';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '870';
+                                }
+                                else {
+                                    $codeTeinte = '869';
+                                }
                             }
                             else if ((strpos($data['nomverreDH'],
                                         '1.56') !== false) || (strpos($data['nomverreDH'],
                                         '1.6') !== false)) {
-                                $codeTeinte = '575';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '576';
+                                }
+                                else {
+                                    $codeTeinte = '575';
+                                }
                             }
                             else if ((strpos($data['nomverreDH'],
                                     '1.5') !== false)) {
-                                $codeTeinte = '740';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '741';
+                                }
+                                else {
+                                    $codeTeinte = '740';
+                                }
                             }
                         }
                         $xml .= '
@@ -10354,16 +10414,31 @@ class admin
                             if ((strpos($data['nomverreGH'],
                                         '1.67') !== false) || (strpos($data['nomverreGH'],
                                         '1.74') !== false)) {
-                                $codeTeinte = '869';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '870';
+                                }
+                                else {
+                                    $codeTeinte = '869';
+                                }
                             }
                             else if ((strpos($data['nomverreGH'],
                                         '1.56') !== false) || (strpos($data['nomverreGH'],
                                         '1.6') !== false)) {
-                                $codeTeinte = '575';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '576';
+                                }
+                                else {
+                                    $codeTeinte = '575';
+                                }
                             }
                             else if ((strpos($data['nomverreGH'],
                                     '1.5') !== false)) {
-                                $codeTeinte = '740';
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '741';
+                                }
+                                else {
+                                    $codeTeinte = '740';
+                                }
                             }
                         }
                         $xml .= '

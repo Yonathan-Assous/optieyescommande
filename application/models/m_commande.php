@@ -865,7 +865,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre IS NULL) ".$sql_order . " LIMIT 5";
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre IS NULL) ".$sql_order . " LIMIT 10";
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)

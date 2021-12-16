@@ -52,9 +52,10 @@ class m_teledetourage extends CI_Model
         }
         $sql = "SELECT * FROM `teledetourage_remise` 
                 WHERE `id_user` = $userId 
-                AND (`from_amount` <= $fromAmount AND `remise` >= $remise)
-                OR (`from_amount` >= $fromAmount AND `remise` <= $remise)
-                AND (`until_date` >= '$sinceDate' $sqlUntilDate)";
+                AND (`from_amount` <= $fromAmount AND `remise` >= $remise
+                OR `from_amount` >= $fromAmount AND `remise` <= $remise)
+                AND (`until_date` >= '$sinceDate' $sqlUntilDate)
+                AND `is_active = 1`";
         $query = $this->db->query($sql);
         return $query->num_rows();
     }
@@ -77,6 +78,7 @@ class m_teledetourage extends CI_Model
         $now = date('Y-m-d');
         $remises = $this->getRemisesByUsers($userId);
         $i = 0;
+        $tab = [];
         foreach ($remises as $remise) {
             $tab[$i]['montant'] = $remise->from_amount;
             $tab[$i]['remise'] = $remise->remise;
@@ -100,8 +102,12 @@ class m_teledetourage extends CI_Model
                         '<a class="desactive_remise_teledetourage btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="remise_'
                         . $remise->id . '" original-title="Désactiver" title="Désactiver" >' . $textAction . '</a>';
                 }
-                else {
+                else if ($remise->is_active == 0)
+                {
                     $tab[$i]['action'] = $remise->desactived_at;
+                }
+                else {
+                    $tab[$i]['action'] = '';
                 }
             $i++;
         }
@@ -125,27 +131,30 @@ class m_teledetourage extends CI_Model
         $now = date('Y-m-d');
         $sql = "UPDATE `teledetourage_remise` SET `is_active` = 0, `desactived_at` = '$now'
                 WHERE `id_user` = $userId 
-                AND (`from_amount` <= $fromAmount AND `remise` >= $remise)
-                OR (`from_amount` >= $fromAmount AND `remise` <= $remise)
-                AND (`since_date` >= '$sinceDate' $sqlUntilDate)";
+                AND (`from_amount` <= $fromAmount AND `remise` >= $remise
+                OR `from_amount` >= $fromAmount AND `remise` <= $remise)
+                AND (`since_date` >= '$sinceDate' $sqlUntilDate)
+                AND is_active = 1";
         //print_r($sql);die;
         $this->db->query($sql);
         if (!empty($untilDate)) {
             $dateChange = date('Y-m-d', strtotime($untilDate. ' + 1 day'));
             $sql = "UPDATE `teledetourage_remise` SET `since_date` = '$dateChange'
                 WHERE `id_user` = $userId 
-                AND ((`from_amount` <= $fromAmount AND `remise` >= $remise)
-                OR (`from_amount` >= $fromAmount AND `remise` <= $remise))
+                AND (`from_amount` <= $fromAmount AND `remise` >= $remise
+                OR `from_amount` >= $fromAmount AND `remise` <= $remise)
                 AND (`since_date` >= '$sinceDate' AND `since_date` <= '$untilDate' 
-                                                  AND (`until_date` >= '$untilDate' OR `until_date` IS NULL))";
+                                                  AND (`until_date` >= '$untilDate' OR `until_date` IS NULL))
+                AND is_active = 1";
             $this->db->query($sql);
         }
         $dateChange = date('Y-m-d', strtotime($sinceDate. ' - 1 day'));
         $sql = "UPDATE `teledetourage_remise` SET `until_date` = '$dateChange'
                 WHERE `id_user` = $userId 
-                AND ((`from_amount` <= $fromAmount AND `remise` >= $remise)
-                OR (`from_amount` >= $fromAmount AND `remise` <= $remise))
-                AND (`since_date` < '$sinceDate' AND (`until_date` >= '$sinceDate' OR `until_date` IS NULL))";
+                AND (`from_amount` <= $fromAmount AND `remise` >= $remise
+                OR `from_amount` >= $fromAmount AND `remise` <= $remise)
+                AND (`since_date` < '$sinceDate' AND (`until_date` >= '$sinceDate' OR `until_date` IS NULL))
+                AND is_active = 1";
         $this->db->query($sql);
     }
 

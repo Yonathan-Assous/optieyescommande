@@ -22207,4 +22207,26 @@ class admin
         echo json_encode($tab);
 
     }
+
+    public function addBlConditions() {
+        $userId = $_POST['user_id'];
+        $montantFrom = $_POST['montant'];
+        $sinceDate = $_POST['since_date'];
+        $this->m_bl_conditions->addBlConditions($userId, $montantFrom, $sinceDate);
+        echo json_encode(array('status' => 'ok'));
+    }
+
+    public function getBlConditions() {
+        $userId = $_POST['user_id'];
+        $tab = $this->m_bl_conditions->getBlConditions($userId);
+        echo json_encode($tab);
+    }
+
+    public function desactiveBlConditions() {
+        $data = $this->input->post();
+        $result = $this->m_bl_conditions->desactiveBlConditions(
+            $data['bl_condition_id']
+        );
+        echo $result;
+    }
 }

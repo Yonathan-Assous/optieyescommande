@@ -68,6 +68,11 @@
                 <span>Remises</span>
             </a>
         </li>
+        <li class="">
+            <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
+                <span>BL Conditions</span>
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
 
@@ -118,14 +123,14 @@
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="jour_prelevement" class="control-label">Jour de prélèvement</label>
                     <select id="jour_prelevement" name="jour_prelevement"  class="form-control">
-                        <?php 
+                        <?php
                             for($i=1;$i<29;++$i) {
                                 echo '<option value="'.$i.'" '.($info_user[0]->jour_prelevement == $i ? 'selected="selected"' : '').'>'.$i.'</option>';
                             }
                         ?>
                     </select>
                 </div>
-                
+
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="tarif_livraison" class="control-label">Tarif livraison</label>
                     <select id="tarif_livraison" name="tarif_livraison"  class="form-control"><?php echo $optionTarif ?></select>
@@ -228,7 +233,7 @@
 				<div id="passok"></div>
             </div>
         </div>
-        
+
         <div class="tab-pane" id="user-modal-prix">
             <div class="form-group row">
             	<h5 style="margin-bottom: 0px;">Cloner les prix d'un client</h5>
@@ -458,12 +463,12 @@
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_remise_start_date" class="control-label">Date de début <span class="obligatoire">*</span></label>
-                    <input type="date" id="teledetourage_remise_start_date" name="teledetourage_remise_start_date" min="2021-09-12" class="form-control teledetourage_date" value="" />
-                    <p id="error_teledetourage_start_date" class="error reset-error"></p>
+                    <input type="date" id="teledetourage_remise_start_date" name="teledetourage_remise_start_date" min="2021-09-12" class="form-control teledetourage_date checkbox_date" value="" />
+                    <p id="error_teledetourage_remise_start_date" class="error reset-error error_date"></p>
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_remise_end_date" class="control-label">Date de fin (facultatif)</label>
-                    <input type="date" id="teledetourage_remise_end_date" name="teledetourage_remise_end_date" min="2021-09-12" class="form-control teledetourage_date" value="" />
+                    <input type="date" id="teledetourage_remise_end_date" name="teledetourage_remise_end_date" min="2021-09-12" class="form-control teledetourage_date checkbox_date" value="" />
                 </div>
                 <div class="form-group text-center m-t-30">
                     <div class="col-xs-12">
@@ -472,7 +477,7 @@
                 </div>
                 <div id="modal_remise" class="modal modal_remise fade" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" style="width: 90%; max-width: 700px;">
-                        <div id="modal-remise-content">
+                        <div id="modal-remise-content" class="modal-content-new">
                             <div class="modal-header">
                                 <button type="button" class="close_modal_remise" aria-hidden="true">×</button>
                                 <h4 class="modal-title">Acceptation des remises</h4>
@@ -491,18 +496,18 @@
                         </div>
                     </div>
                 </div>
-                <div id="history_price" class="form-group row">
+                <div id="history_remise" class="form-group row">
                     <div class="tab-content">
                         <p>
-                            <input type="checkbox" id="checkbox-remise-past" class="checkbox-remise"/>
+                            <input type="checkbox" id="checkbox-remise-past" class="checkbox-remise checkbox-design checkbox-design-past"/>
                             <label for="checkbox-remise-past" aria-describedby="label">Passé</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="checkbox-remise-present" class="checkbox-remise" checked="checked" />
+                            <input type="checkbox" id="checkbox-remise-present" class="checkbox-remise checkbox-design checkbox-design-present" checked="checked" />
                             <label for="checkbox-remise-present" aria-describedby="label">Présent</label>
                         </p>
                         <p>
-                            <input type="checkbox" id="checkbox-remise-future" class="checkbox-remise" />
+                            <input type="checkbox" id="checkbox-remise-future" class="checkbox-remise checkbox-design checkbox-design-future" />
                             <label for="checkbox-remise-future" aria-describedby="label">Futur</label>
                         </p>
                         <div class="tab-pane active" id="modal-history-remise">
@@ -515,6 +520,49 @@
                                     <th>Remise</th>
                                     <th>Date début</th>
                                     <th>Date Fin</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="user-modal-bl">
+            <div class="form-group row">
+                <div class="form-group m-b-10 col-sm-6">
+                    <label for="bl_conditions_start_montant" class="control-label">Montant (à partir de) <span class="obligatoire">*</span></label>
+                    <input type="text" id="bl_conditions_start_montant" name="bl_conditions_start_montant" class="form-control" value="" />
+                    <p class="error reset-error"></p>
+                </div>
+                <div class="form-group m-b-10 col-sm-6">
+                    <label for="bl_conditions_start_date" class="control-label">Date de début <span class="obligatoire">*</span></label>
+                    <input type="date" id="bl_conditions_start_date" name="bl_conditions_start_date" min="2021-09-12" class="form-control checkbox_date" value="" />
+                    <p id="error_bl_conditions_start_date" class="error reset-error error_date"></p>
+                </div>
+                <div class="form-group text-center m-t-30">
+                    <div class="col-xs-12">
+                        <button id="add_bl_conditions" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase m-b-30" type="button" name="add_bl_conditions">Accepter conditions</button>
+                    </div>
+                </div>
+                <div id="history_bl_conditions" class="form-group row">
+                    <div class="tab-content">
+                        <div style="text-align: center">
+                            Actifs / Tous
+                        </div>
+                        <div class="material-switch pull-right">
+                            <input id="checkbox_active_bl_conditions" name="checkbox_active_bl_conditions" type="checkbox" checked/>
+                            <label for="checkbox_active_bl_conditions" class="label-warning"></label>
+                        </div>
+                        <div class="tab-pane active" id="modal-history-bl">
+                            <h5>Table des Remises</h5>
+                            <table id="table_bl_conditions"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Montant (à partir de)</th>
+                                    <th>Date début</th>
                                     <th>Désactivation</th>
                                 </tr>
                                 </thead>
@@ -551,7 +599,7 @@
         }
 
         today = yyyy+'-'+mm+'-'+dd;
-        let list = document.getElementsByClassName("teledetourage_date");
+        let list = document.getElementsByClassName("checkbox_date");
         for (let index = 0; index < list.length; ++index) {
             list[index].setAttribute("min", today);
         }
@@ -574,25 +622,25 @@
                 if(res.status == 'ok') {
 						//$("#err").text("Password OK");
 					$('#passprotect').hide();
-					
+
 					$('#passok').html(res.DataCom);
 					$(function(){ $('#Samuel').bootstrapToggle() });
 					$(function(){ $('#Daniel').bootstrapToggle() });
 					$(function(){ $('#Gregory').bootstrapToggle() });
                     $(function(){ $('#Glenn').bootstrapToggle() });
 					$(function(){ $('#Optical_Service').bootstrapToggle() });
-					
+
 					$( "#passok" ).append( "<input type='hidden' name='withPass' value='1'>" );
-                    
+
                 }
 				if(res.status == 'error') {
 						$("#err").text("Incorrect password");
-                    
+
                 }
 
             }
         });
-	
+
 		<?php
 	}
 	else
@@ -632,6 +680,13 @@
                 "teledetourage_remise_start_date": {
                     required: true,
                 },
+                "bl_conditions_start_montant": {
+                    required: true,
+                    number: true,
+                },
+                "bl_conditions_start_date": {
+                    required: true,
+                },
             },
             messages: {
                 "teledetourage_remise": {
@@ -643,6 +698,13 @@
                     number: "Veuillez indiquer un nombre",
                 },
                 "teledetourage_remise_start_date" : {
+                    required: "Veuillez indiquer une date",
+                },
+                "bl_conditions_start_montant": {
+                    required: "Ce champ est obligatoire",
+                    number: "Veuillez indiquer un nombre",
+                },
+                "bl_conditions_start_date" : {
                     required: "Veuillez indiquer une date",
                 }
             },
@@ -664,25 +726,48 @@
                     document.getElementById("teledetourage_remise_start_date-error").innerText = '';
                 }
                 // document.getElementById("teledetourage_remise_start_date-error").innerText = '';
-                document.getElementById("error_teledetourage_start_date").innerText = '';
+                document.getElementById("error_teledetourage_remise_start_date").innerText = '';
             }
             else {
                 document.getElementById("teledetourage_remise_start_date").style.setProperty('background-color', '#f5dcdc ', 'important');
                 var myEle = document.getElementById("teledetourage_remise_start_date-error");
                 if(myEle){
                     document.getElementById("teledetourage_remise_start_date-error").innerText = 'Veuillez indiquer une date';
-                    document.getElementById("error_teledetourage_start_date").innerText = '';
+                    document.getElementById("error_teledetourage_remise_start_date").innerText = '';
                 }
                 else {
-                    document.getElementById("error_teledetourage_start_date").innerText = 'Veuillez indiquer une date';
+                    document.getElementById("error_teledetourage_remise_start_date").innerText = 'Veuillez indiquer une date';
                 }
-                // document.getElementById("error_teledetourage_start_date").innerText = 'Veuillez indiquer une date';
+            }
+        });
+
+        $('#bl_conditions_start_date').on('change', function(e) {
+            if ($('#bl_conditions_start_date').val()) {
+                document.getElementById("bl_conditions_start_date").style.setProperty('background-color', 'white', 'important');
+                var myEle = document.getElementById("bl_conditions_start_date-error");
+                if(myEle){
+                    document.getElementById("bl_conditions_start_date-error").innerText = '';
+                }
+                // document.getElementById("teledetourage_remise_start_date-error").innerText = '';
+                document.getElementById("error_bl_conditions_start_date").innerText = '';
+            }
+            else {
+                document.getElementById("bl_conditions_start_date").style.setProperty('background-color', '#f5dcdc ', 'important');
+                var myEle = document.getElementById("bl_conditions_start_date-error");
+                if(myEle){
+                    document.getElementById("bl_conditions_start_date-error").innerText = 'Veuillez indiquer une date';
+                    document.getElementById("error_bl_conditions_start_date").innerText = '';
+                }
+                else {
+                    document.getElementById("error_bl_conditions_start_date").innerText = 'Veuillez indiquer une date';
+                }
             }
         });
 
 
+
         $('#check_remises').on('click', function(e) {
-            document.getElementById("error_teledetourage_start_date").innerText = '';
+            document.getElementById("error_teledetourage_remise_start_date").innerText = '';
             if ($("#updateUser").valid()) {
                 $.ajax({
                     type: "POST",
@@ -712,9 +797,12 @@
                 });
             }
         });
-
         $('.close_modal_remise').click(function() {
             $('#modal_remise').modal('hide');
+        })
+
+        $('.close_modal_bl').click(function() {
+            $('#modal_bl').modal('hide');
         })
 
         $('#accept_remise').click(function() {
@@ -737,6 +825,26 @@
             }
         })
 
+        $('#add_bl_conditions').click(function() {
+            if ($("#updateUser").valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/addBlConditions",
+                    data: {
+                        'user_id' : <?php echo $info_user[0]->id_users ?>,
+                        'montant' : $('#bl_conditions_start_montant').val(),
+                        'since_date' : $('#bl_conditions_start_date').val(),
+                    },
+                    success: function(data){
+                        get_bl_conditions()
+                        // get_remises_teledetourage()
+                        //let res = $.parseJSON(data);
+                    }
+                });
+            }
+        })
+
+
         $("#login").click(function() {
 	        $.ajax({
             type: "POST",
@@ -753,20 +861,20 @@
                 if(res.status == 'ok') {
 						//$("#err").text("Password OK");
 					$('#passprotect').hide();
-					
+
 					$('#passok').html(res.DataCom);
 					$(function(){ $('#Samuel').bootstrapToggle() });
 					$(function(){ $('#Daniel').bootstrapToggle() });
 					$(function(){ $('#Gregory').bootstrapToggle() });
                     $(function(){ $('#Glenn').bootstrapToggle() });
 					$(function(){ $('#Optical_Service').bootstrapToggle() });
-					
+
 					$( "#passok" ).append( "<input type='hidden' name='withPass' value='1'>" );
-                    
+
                 }
 				if(res.status == 'error') {
 						$("#err").text("Incorrect password");
-                    
+
                 }
 
             }
@@ -818,14 +926,14 @@ $(document).ready(function(){
 					});
 				}
 			}
-                
+
         });
-        
+
     $('#btn_dupliquer').on('click', function() {
-    
+
     		if($('#listeClients').val() != "")
     		{
-	
+
                $.ajax({
 					type: "POST",
 					url: "/admin/duplicatePriceTab",
@@ -835,7 +943,7 @@ $(document).ready(function(){
 					},
 					dataType: "html",
 					success: function(data){
-				
+
 						if(data=="OK")
 						{
 							$('#tableCustomPrix').DataTable().clear();
@@ -857,21 +965,42 @@ $(document).ready(function(){
 										{ "data": "action" }
 									]
 									})
-									
+
 								});
                             recreateDatatableTeinte();
                             getTraitementPriceList();
-								
+
 						}
-						
+
 					}
-				
+
 				});
 			}
-               
+
     });
 
     $('#table_remises_teledetourage').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, 200, -1],
+            [10, 25, 50, 100, 200, "Tout"]
+        ],
+        deferRender: true,
+        order: [1, 'desc'],
+        language: {
+            "lengthMenu": "Afficher _MENU_ verres par page",
+            "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+            "infoFiltered": "(Filtrat de _MAX_ entrées)",
+            "search": "Recherche",
+            "paginate": {
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            }
+        }
+    });
+
+    $('#table_bl_conditions').DataTable({
         aLengthMenu: [
             [10, 25, 50, 100, 200, -1],
             [10, 25, 50, 100, 200, "Tout"]
@@ -986,6 +1115,8 @@ $(document).ready(function(){
     getTeintePriceList();
     getCatalogue();
     get_remises_teledetourage();
+    get_bl_conditions()
+
     // console.log('test');
     // getTeintePriceListTest()
         $.ajax({
@@ -1009,7 +1140,7 @@ $(document).ready(function(){
         })
 
 	$('#btn_recherche_verre').on('click', function() {
-	
+
         $.ajax({
             type: "POST",
             url: "/admin/getAllVerres",
@@ -1026,20 +1157,20 @@ $(document).ready(function(){
 					$('#listeVerres').empty();
             		$('#listeVerres').append('<option value="">-- Choisir --</option>');
             		$('#divlisteVerres').removeClass('hide');
-            		
+
 					//console.log(data);
-					
+
 					$.each(data, function(key, value){
 						$('#listeVerres').append('<option value="'+ value.verre_or_lens_id +'">'+ value.libelle + ' ('+value.prix+' &euro;)</option>');
 					});
-				
+
 				}
 				else
 				{
 					$('#divlisteVerres').addClass('hide');
 				}
 			}
-                
+
         });
 
     });
@@ -1047,8 +1178,8 @@ $(document).ready(function(){
 
 });
 
-	$('body').on('click', '#btn_submit_prix', function(event){ 
-		
+	$('body').on('click', '#btn_submit_prix', function(event){
+
 		if($('#nouveau_prix').val() != "" && $('#listeVerres').val() != "")
 		{
 			var name_verre = $("#listeVerres option:selected").text();
@@ -1064,15 +1195,15 @@ $(document).ready(function(){
 				},
 				dataType: "html",
 				success: function(data){
-				
+
 					if(data=="OK")
 						{
 							$('#nouveau_prix').val('');
 							$('#listeVerres').empty();
             				$('#listeVerres').append('<option value="">-- Choisir --</option>');
-            				
+
 							$('#divlisteVerres').addClass('hide');
-				
+
 							$('#tableCustomPrix').DataTable().clear();
 							$.ajax({
 								type: "POST",
@@ -1092,21 +1223,21 @@ $(document).ready(function(){
 										{ "data": "action" }
 									]
 									})
-						
+
 								})
-					
+
 						}
-						
+
 				}
-				
+
 			});
 		}
 
     });
-	
-	
- 	$('body').on('click', 'a.supprimer_prix', function(event){ 
-	
+
+
+ 	$('body').on('click', 'a.supprimer_prix', function(event){
+
                $.ajax({
 					type: "POST",
 					url: "/admin/delCustomPrice",
@@ -1116,7 +1247,7 @@ $(document).ready(function(){
 					},
 					dataType: "html",
 					success: function(data){
-				
+
 						if(data=="OK")
 						{
 							$('#tableCustomPrix').DataTable().clear();
@@ -1138,34 +1269,34 @@ $(document).ready(function(){
 										{ "data": "action" }
 									]
 									})
-									
+
 								})
-								
+
 						}
-						
+
 					}
-				
+
 				});
-               
+
     });
-    
-    
-    $('body').on('click', 'a.modifier_prix', function(event){ 
-    
+
+
+    $('body').on('click', 'a.modifier_prix', function(event){
+
     	$('#divNouveauVerres').html('');
     	var s = $(this).attr('rel').split('*');
     	var id_prix = s[0];
     	var old_prix = s[1];
-		
+
 		$('#divNouveauVerres').removeClass('hide');
 		$('#divNouveauVerres').append('<h3>Nouveau prix :</h3><input type="text" style="height: 35px;" id="newPrice" value="'+old_prix+'"><a href="#" rel="'+id_prix+'" id="changePrice" class="btn btn-warning waves-effect waves-light">OK</a>');
-		
-               
+
+
     });
-    
-    
-    $('body').on('click', '#changePrice', function(event){ 
-		
+
+
+    $('body').on('click', '#changePrice', function(event){
+
 		if($('#newPrice').val() != "")
 		{
 			$.ajax({
@@ -1178,11 +1309,11 @@ $(document).ready(function(){
 				},
 				dataType: "html",
 				success: function(data){
-				
+
 					if(data=="OK")
 						{
 							$('#divNouveauVerres').addClass('hide');
-							
+
 							$('#tableCustomPrix').DataTable().clear();
 							$.ajax({
 								type: "POST",
@@ -1202,12 +1333,12 @@ $(document).ready(function(){
 										{ "data": "action" }
 									]
 									})
-									
+
 								})
-								
+
 						}
 				}
-				
+
 			});
 		}
 
@@ -1237,16 +1368,7 @@ $(document).ready(function(){
                     { "data": "action" },
                 ],
                 "displayStart" : displayStart,
-                //dom: 'Blfrtip',
-                //"buttons": ['copy','csv','excel',
-                //    {
-                //        extend: 'pdf',
-                //        text: 'PDF',
-                //        title: 'Historique des traitements du client ' + <?php //echo $info_user[0]->id_users ?>//,
-                //        exportOptions: {
-                //            columns: [0,1,2,3]
-                //        },
-                //    },'print'],
+
                 "language": {
                     "lengthMenu": "Afficher _MENU_ traitements par page",
                     "info": "Affichage de la page page _PAGE_ sur _PAGES_",
@@ -1260,10 +1382,6 @@ $(document).ready(function(){
                     }
                 },
                 "createdRow": function (row, data, index) {
-                    // console.log(data['active']);
-                    // console.log('active');
-                    // console.log(data);
-                    // console.log(row);
                     if (data['status'] == 'past') {
                         $(row).addClass('remise_past');
                     }
@@ -1277,6 +1395,56 @@ $(document).ready(function(){
                 "order": [[ 3, "asc" ]]
             });
             remiseActiveInactive();
+        });
+    }
+
+    function get_bl_conditions() {
+        let displayStart = $('#table_bl_conditions').DataTable().page.info().page * 10;
+        $.ajax({
+            type: "POST",
+            url: "/admin/getBlConditions",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#table_bl_conditions').dataTable( {
+                aLengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    [10, 25, 50, 100, 200, "Tout"]
+                ],
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "montant" },
+                    { "data": "date_start" },
+                    { "data": "action" },
+                ],
+                "displayStart" : displayStart,
+
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ traitements par page",
+                    "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+                    "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                    "search": "Recherche",
+                    "paginate": {
+                        "first":      "Première",
+                        "last":       "Dernière",
+                        "next":       "Suivant",
+                        "previous":   "Précédent"
+                    }
+                },
+                "createdRow": function (row, data, index) {
+                    if (data['active'] == false) {
+                        $(row).addClass('bl_conditions_inactive');
+                    }
+                    else {
+                        $(row).addClass('bl_conditions_active');
+                    }
+                },
+                "order": [[ 0, "asc" ]]
+            });
+            blCOnditionsActiveInactive();
         });
     }
 
@@ -1601,6 +1769,9 @@ $(document).ready(function(){
         addClickEventDesactiveRemiseTeledetourage();
     } );
 
+    $('#table_bl_conditions').on( 'draw.dt', function () {
+        addClickEventDesactiveBlConditions();
+    } );
 
     function addClickEventDesactivePrixTraitement() {
         $('.desactive_prix_traitement').click(function(e) {
@@ -1639,6 +1810,17 @@ $(document).ready(function(){
         });
     }
 
+    function addClickEventDesactiveBlConditions() {
+        $('.desactive_bl_conditions').click(function(e) {
+            // e.stopPropagation();
+            e.preventDefault() ;
+        }) ;
+        $('.desactive_bl_conditions').click(function () {
+            let bl_conditions = $(this).attr('rel').replace('bl_conditions_', '');
+            desactiveBlCOnditions(bl_conditions);
+        });
+    }
+
     function isLoading(text) {
         $("#text_loading").text(text) ;
         $("#loading-overlay,#loading").show();
@@ -1672,6 +1854,21 @@ $(document).ready(function(){
             success: function(data){
                     //$('#tableCustomPrixTraitements').DataTable().clear();
                 get_remises_teledetourage();
+            }
+        });
+    }
+
+    function desactiveBlCOnditions (bl_condition_id) {
+        $.ajax({
+            type: "POST",
+            url: "/admin/desactiveBlConditions",
+            data: {
+                'bl_condition_id': bl_condition_id,
+            },
+            dataType: "html",
+            success: function(data){
+                //$('#tableCustomPrixTraitements').DataTable().clear();
+                get_bl_conditions();
             }
         });
     }
@@ -1937,6 +2134,10 @@ $(document).ready(function(){
         traitementTeinteActiveInactive();
     });
 
+    $('#checkbox_active_bl_conditions').click(function(){
+        blCOnditionsActiveInactive();
+    });
+
     $('.checkbox-remise').click(function(){
         remiseActiveInactive()
     });
@@ -1977,6 +2178,15 @@ $(document).ready(function(){
         else {
             $('.prix_traitement_inactive').removeClass('hide');
             $('.prix_teinte_inactive').removeClass('hide');
+        }
+    }
+
+    function blCOnditionsActiveInactive() {
+        if ($('#checkbox_active_bl_conditions').is(":checked") == false) {
+            $('.bl_conditions_inactive').addClass('hide');
+        }
+        else {
+            $('.bl_conditions_inactive').removeClass('hide');
         }
     }
 
@@ -2023,8 +2233,8 @@ $(document).ready(function(){
         position: relative;
     }
 
-    .checkbox-remise:not(:checked),
-    .checkbox-remise:checked {
+    .checkbox-design:not(:checked),
+    .checkbox-design:checked {
         /* Cache la checkbox sans
            la rendre invisible aux
            lecteurs d'écran */
@@ -2034,8 +2244,8 @@ $(document).ready(function(){
     }
 
     /* Preparer le label */
-    .checkbox-remise:not(:checked) + label,
-    .checkbox-remise:checked + label {
+    .checkbox-design:not(:checked) + label,
+    .checkbox-design:checked + label {
         position: relative; /* permet de positionner la checkbox */
         padding-left: 2.3em; /* place pour la box */
         font-size: 1.05em;
@@ -2043,8 +2253,8 @@ $(document).ready(function(){
         cursor: pointer;
     }
 
-    .checkbox-remise:not(:checked) + label::before,
-    .checkbox-remise:checked + label::before {
+    .checkbox-design:not(:checked) + label::before,
+    .checkbox-design:checked + label::before {
         content: '';
         position: absolute;
         left: 0;
@@ -2059,8 +2269,8 @@ $(document).ready(function(){
     }
 
     /* Aspect de la coche */
-    .checkbox-remise + label::after,
-    .checkbox-remise + label::after {
+    .checkbox-design + label::after,
+    .checkbox-design + label::after {
         /*content: '✕';*/
         speak: never; /* Pour être sûr que le lecteur d'écran ne lira pas "fois" */
         position: absolute;
@@ -2075,36 +2285,36 @@ $(document).ready(function(){
         transition: all .2s; /* Petite transition */
     }
 
-    #checkbox-remise-past:checked + label::before {
+    .checkbox-design-past:checked + label::before {
         background-color: #e78f8f
     }
 
-    #checkbox-remise-present:checked + label::before {
+    .checkbox-design-present:checked + label::before {
         background-color: #a6d9a1;
     }
 
-    #checkbox-remise-future:checked + label::before {
+    .checkbox-design-future:checked + label::before {
         background-color: #9fbaf3 ;
     }
     /* Aspect non cochée */
-    [type="checkbox"]:not(:checked) + label::after {
+    .checkbox-design:not(:checked) + label::after {
         opacity: 0;
         transform: scale(0) rotate(45deg);
     }
 
     /* Aspect cochée */
-    .checkbox-remise:checked + label::after {
+    .checkbox-design:checked + label::after {
         opacity: 1;
         transform: scale(1) rotate(0);
     }
 
-    #error_teledetourage_start_date {
+    .error_date {
         color: #e96154;
         font-size: 14px;
         font-weight: 700;
     }
 
-    #modal-remise-content {
+    .modal-content-new {
         border-color: #DDDDDD;
         border-radius: 2px;
         box-shadow: none;
@@ -2115,7 +2325,7 @@ $(document).ready(function(){
         padding: 0 0 10px 0;
     }
 
-    .close_modal_remise {
+    .close_modal_remise, .close_modal_bl {
         float: right;
         border: 0px;
     }
@@ -2130,5 +2340,22 @@ $(document).ready(function(){
 
     .remise_past {
         background-color: #e78f8f !important;
+    }
+
+    /*input::-webkit-calendar-picker-indicator {*/
+    /*    cursor: pointer;*/
+    /*}*/
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
     }
 </style>

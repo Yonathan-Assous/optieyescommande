@@ -4025,34 +4025,34 @@ class admin
                                 ' + 6 days')));
                     $diff =
                         $d1->diff($d2);
-                    $color =
-                        "ff3237"; //rouge
-
-                    if ($diff->invert ==
-                        0) {
-                        if ($diff->d >=
-                            5) {
-                            $color =
-                                "80c3cb";
-                        } //bleu
-                        elseif ($diff->d ==
-                            4) {
-                            $color =
-                                "019e59";
-                        } //vert
-                        elseif ($diff->d ==
-                            3 ||
-                            $diff->d ==
-                            2) {
-                            $color =
-                                "ffcc01";
-                        } //jaune
-                        elseif ($diff->d ==
-                            1) {
-                            $color =
-                                "ff7638";
-                        } //orange
-                    }
+//                    $color =
+//                        "ff3237"; //rouge
+//
+//                    if ($diff->invert ==
+//                        0) {
+//                        if ($diff->d >=
+//                            5) {
+//                            $color =
+//                                "80c3cb";
+//                        } //bleu
+//                        elseif ($diff->d ==
+//                            4) {
+//                            $color =
+//                                "019e59";
+//                        } //vert
+//                        elseif ($diff->d ==
+//                            3 ||
+//                            $diff->d ==
+//                            2) {
+//                            $color =
+//                                "ffcc01";
+//                        } //jaune
+//                        elseif ($diff->d ==
+//                            1) {
+//                            $color =
+//                                "ff7638";
+//                        } //orange
+//                    }
 
 
                     $correction =
@@ -4121,6 +4121,8 @@ class admin
                     //print_r($commande);die;
                     $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
                     $blAfterThirtyDays = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
+                    $conditionBl = $this->m_bl_conditions->getBlConditionMet($commande->id_users);
+//                    print_r($conditionBl);die;
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
 //                    $blAfterThirtyDays = $blAfterXDays[1]->count;
 //                    $blAfterNinetyDays = $blAfterXDays[2]->count;
@@ -4294,7 +4296,8 @@ class admin
                         ($commande->date_annule !==
                         null ?
                             1 :
-                            0)
+                            0),
+                        $conditionBl
                     );
 
 //                    var_dump($data);die;

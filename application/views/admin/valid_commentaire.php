@@ -99,6 +99,15 @@ else
     #datatable {
         width: 100% !important;
     }
+    .bl_conditions_remplies {
+        background-color: #95de97a3 !important;
+    }
+    .bl_conditions_non_remplies {
+        background-color: #de9595a3 !important;
+    }
+    .bl_conditions_new {
+        background-color: #ffe1a9 !important;
+    }
 </style>
 
 <script>
@@ -166,7 +175,9 @@ else
                     if ( data[6]=='Panier A' ) {
                         $('td', row).addClass('highlight-blue');
                     }
-
+                    if (data[11]) {
+                        $(row).addClass(data[11]);
+                    }
                 },
                 language: {
                     "lengthMenu": "Afficher _MENU_ commandes par page",

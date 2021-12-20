@@ -4923,10 +4923,10 @@ class admin
 
                     if (strpos($information_commande->verre->correction_droit->teinte,
                             'CUST_') !==
-                        false || $information_commande->verre->correction_droit->teinte == 576) {
+                        false) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                         $teinteD = $lensOption->name;
-                        if ($information_commande->verre->correction_droit->teinte == '576') {
+                        if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else if (isset($teinteD)) {
@@ -4944,10 +4944,10 @@ class admin
                     }
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                             'CUST_') !==
-                        false || $information_commande->verre->correction_gauche->teinte == 576) {
+                        false) {
                         $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                         $teinteG = $lensOption->name;
-                        if ($information_commande->verre->correction_gauche->teinte == '576') {
+                        if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
                         else  if (isset($teinteG)) {
@@ -5466,7 +5466,35 @@ class admin
                                 $codeTeinte = $information_commande->verre->correction_droit->teinte;
                             }
                             else {
-                                $codeTeinte = '576';
+                                if ((strpos($commande->lensname,
+                                            '1.67') !== false) || (strpos($commande->lensname,
+                                            '1.74') !== false)) {
+                                    if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '870';
+                                    }
+                                    else {
+                                        $codeTeinte = '869';
+                                    }
+                                }
+                                else if ((strpos($commande->lensname,
+                                            '1.56') !== false) || (strpos($commande->lensname,
+                                            '1.6') !== false)) {
+                                    if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '576';
+                                    }
+                                    else {
+                                        $codeTeinte = '575';
+                                    }
+                                }
+                                else if ((strpos($commande->lensname,
+                                        '1.5') !== false)) {
+                                    if (strpos($teinteD, 'Gradient') !== false) {
+                                        $codeTeinte = '741';
+                                    }
+                                    else {
+                                        $codeTeinte = '740';
+                                    }
+                                }
                             }
                             $xml .= '
 						   <coating coatingType="COLOR">
@@ -6252,7 +6280,7 @@ class admin
                         $detail .= "<br><b>Panier A</b>";
                     }
 
-                    $detail .= "<br>Nom du verresssss: <b>" .
+                    $detail .= "<br>Nom du verres: <b>" .
                         $commande->trad_fr .
                         "</b>";
                     $detail .= "<br>Indice: " .
@@ -7346,10 +7374,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_droit->teinte,
                                 'CUST_') !==
-                            false || $information_commande->verre->correction_droit->teinte == 576) {
+                            false) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
                             $teinteD = $lensOption->name;
-                            if ($information_commande->verre->correction_droit->teinte == '576') {
+                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteD)) {
@@ -7366,10 +7394,10 @@ class admin
                         }
                         if (strpos($information_commande->verre->correction_gauche->teinte,
                                 'CUST_') !==
-                            false || $information_commande->verre->correction_gauche->teinte == 576) {
+                            false) {
                             $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
                             $teinteG = $lensOption->name;
-                            if ($information_commande->verre->correction_gauche->teinte == '576') {
+                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                                 $remark .= 'Sample color send by mail.';
                             }
                             else  if (isset($teinteG)) {
@@ -7847,7 +7875,35 @@ class admin
                                     $codeTeinte = $information_commande->verre->correction_droit->teinte;
                                 }
                                 else {
-                                    $codeTeinte = '576';
+                                    if ((strpos($commande->lensname,
+                                            '1.67') !== false) || (strpos($commande->lensname,
+                                                '1.74') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '870';
+                                        }
+                                        else {
+                                            $codeTeinte = '869';
+                                        }
+                                    }
+                                    else if ((strpos($commande->lensname,
+                                                '1.56') !== false) || (strpos($commande->lensname,
+                                                '1.6') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '576';
+                                        }
+                                        else {
+                                            $codeTeinte = '575';
+                                        }
+                                    }
+                                    else if ((strpos($commande->lensname,
+                                            '1.5') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '741';
+                                        }
+                                        else {
+                                            $codeTeinte = '740';
+                                        }
+                                    }
                                 }
                                 $xml .= '
 						   <coating coatingType="COLOR">
@@ -8044,7 +8100,35 @@ class admin
                                     $codeTeinte = $information_commande->verre->correction_gauche->teinte;
                                 }
                                 else {
-                                    $codeTeinte = '576';
+                                    if ((strpos($commande->lensname,
+                                                '1.67') !== false) || (strpos($commande->lensname,
+                                                '1.74') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '870';
+                                        }
+                                        else {
+                                            $codeTeinte = '869';
+                                        }
+                                    }
+                                    else if ((strpos($commande->lensname,
+                                                '1.56') !== false) || (strpos($commande->lensname,
+                                                '1.6') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '576';
+                                        }
+                                        else {
+                                            $codeTeinte = '575';
+                                        }
+                                    }
+                                    else if ((strpos($commande->lensname,
+                                            '1.5') !== false)) {
+                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                            $codeTeinte = '741';
+                                        }
+                                        else {
+                                            $codeTeinte = '740';
+                                        }
+                                    }
                                 }
                                 $xml .= '
 						   <coating coatingType="COLOR">
@@ -9629,10 +9713,10 @@ class admin
                 }
                 if (strpos($data["teinteD"],
                         'CUST_') !==
-                    false || $data["teinteD"] == 576) {
+                    false) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
                     $teinteD = $lensOption->name;
-                    if ($data["teinteD"] == '576') {
+                    if ($data["teinteD"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteD)) {
@@ -9649,10 +9733,10 @@ class admin
                 }
                 if (strpos($data["teinteG"],
                         'CUST_') !==
-                    false || $data["teinteG"] == 576) {
+                    false) {
                     $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
                     $teinteG = $lensOption->name;
-                    if ($data["teinteG"] == '576') {
+                    if ($data["teinteG"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }
                     else  if (isset($teinteG)) {
@@ -10096,7 +10180,35 @@ class admin
                             $codeTeinte = $data["teinteD"];
                         }
                         else {
-                            $codeTeinte = '576';
+                            if ((strpos($data['nomverreDH'],
+                                        '1.67') !== false) || (strpos($data['nomverreDH'],
+                                        '1.74') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '870';
+                                }
+                                else {
+                                    $codeTeinte = '869';
+                                }
+                            }
+                            else if ((strpos($data['nomverreDH'],
+                                        '1.56') !== false) || (strpos($data['nomverreDH'],
+                                        '1.6') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '576';
+                                }
+                                else {
+                                    $codeTeinte = '575';
+                                }
+                            }
+                            else if ((strpos($data['nomverreDH'],
+                                    '1.5') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '741';
+                                }
+                                else {
+                                    $codeTeinte = '740';
+                                }
+                            }
                         }
                         $xml .= '
 						   <coating coatingType="COLOR">
@@ -10289,7 +10401,35 @@ class admin
                             $codeTeinte = $data["teinteG"];
                         }
                         else {
-                            $codeTeinte = '576';
+                            if ((strpos($data['nomverreGH'],
+                                        '1.67') !== false) || (strpos($data['nomverreGH'],
+                                        '1.74') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '870';
+                                }
+                                else {
+                                    $codeTeinte = '869';
+                                }
+                            }
+                            else if ((strpos($data['nomverreGH'],
+                                        '1.56') !== false) || (strpos($data['nomverreGH'],
+                                        '1.6') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '576';
+                                }
+                                else {
+                                    $codeTeinte = '575';
+                                }
+                            }
+                            else if ((strpos($data['nomverreGH'],
+                                    '1.5') !== false)) {
+                                if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                    $codeTeinte = '741';
+                                }
+                                else {
+                                    $codeTeinte = '740';
+                                }
+                            }
                         }
                         $xml .= '
 						   <coating coatingType="COLOR">

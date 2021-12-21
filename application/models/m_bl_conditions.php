@@ -84,11 +84,22 @@ class m_bl_conditions extends CI_Model
 //                print_r($sql);die;
                 $query = $this->db->query($sql);
                 $result = $query->result()[0];
+                $sql = "SELECT
+                SUM(reduction) AS total_reductions,
+                id_users as idusers
+                FROM
+                facture_reduction
+                WHERE DATE_FORMAT(date_remise, '%Y-%m') >= '".$dateStart."'
+                AND DATE_FORMAT(date_remise, '%Y-%m') < '$now'
+                AND id_users = $userId";
+                $query = $this->db->query($sql);
+                $totalReduction = $query->result()[0];
+//                print_r($sql);die;
                 $firstDate  = new DateTime($dateStart);
                 $secondDate = new DateTime($now);
                 $intvl = $firstDate->diff($secondDate);
                 $numberMonths = $intvl->y * 12 + $intvl->m;
-                $averageAmount = $result->total / $numberMonths;
+                $averageAmount = ($result->total - $totalReduction->total_reductions) / $numberMonths;
                 if ($averageAmount >= $blConditions->average_amount) {
                     return 'bl_conditions_remplies';
                 }

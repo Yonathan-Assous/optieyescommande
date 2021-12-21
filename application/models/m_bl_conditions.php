@@ -71,8 +71,8 @@ class m_bl_conditions extends CI_Model
             $blConditions = $query->result()[0];
             $dateStart = $blConditions->date_start;
             $dateStart = date('Y-m',strtotime('+0 day',strtotime($dateStart)));
-            $now = date('Y-m-10');
-            $newDateStart = date('Y-m-02',strtotime('+1 month',strtotime($dateStart)));
+            $now = date('Y-m');
+            $newDateStart = date('Y-m',strtotime('+1 month',strtotime($dateStart)));
 //            print_r($newDateStart);die;
             if($newDateStart > $now) {
                 return 'bl_conditions_new';
@@ -95,8 +95,8 @@ class m_bl_conditions extends CI_Model
                 $query = $this->db->query($sql);
                 $totalReduction = $query->result()[0];
 //                print_r($sql);die;
-                $firstDate  = new DateTime($dateStart);
-                $secondDate = new DateTime($now);
+                $firstDate  = new DateTime($dateStart . '-01');
+                $secondDate = new DateTime($now . '10');
                 $intvl = $firstDate->diff($secondDate);
                 $numberMonths = $intvl->y * 12 + $intvl->m;
                 $averageAmount = ($result->total - $totalReduction->total_reductions) / $numberMonths;

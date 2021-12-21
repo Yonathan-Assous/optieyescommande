@@ -81,7 +81,6 @@ class m_bl_conditions extends CI_Model
                 $sql = "SELECT id_users, SUM(total_commande) as total FROM commande c 
                 WHERE DATE_FORMAT(date_commande, '%Y-%m') >= '$dateStart' AND DATE_FORMAT(date_commande, '%Y-%m') < '$now'
                 AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND id_users = $userId";
-//                print_r($sql);die;
                 $query = $this->db->query($sql);
                 $result = $query->result()[0];
                 $sql = "SELECT
@@ -96,10 +95,11 @@ class m_bl_conditions extends CI_Model
                 $totalReduction = $query->result()[0];
 //                print_r($sql);die;
                 $firstDate  = new DateTime($dateStart . '-01');
-                $secondDate = new DateTime($now . '10');
+                $secondDate = new DateTime($now . '-10');
                 $intvl = $firstDate->diff($secondDate);
                 $numberMonths = $intvl->y * 12 + $intvl->m;
                 $averageAmount = ($result->total - $totalReduction->total_reductions) / $numberMonths;
+               
                 if ($averageAmount >= $blConditions->average_amount) {
                     return 'bl_conditions_remplies';
                 }

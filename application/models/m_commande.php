@@ -847,7 +847,7 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getCommandeWithCommentaireNotConfirmed($id_etat_commande=false,$origine_commande=false)
+    public function getCommandeWithCommentaireNotConfirmed($number_commentaire = false, $id_etat_commande=false,$origine_commande=false)
     {
         $sql_order = "";
         $sql_add = "WHERE is_confirmed = 0";
@@ -860,12 +860,23 @@ class m_commande extends CI_Model {
 
         $sql_order = "ORDER BY date_commande DESC";
 
+        if (!empty($number_commentaire)) {
+            if ($number_commentaire != 'all') {
+                $limit = 'LIMIT ' . $number_commentaire;
+            }
+            else {
+                $limit = '';
+            }
+        }
+        else {
+            $limit = 'LIMIT 10';
+        }
         $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.lens_id, c.penalty, c.id_generation_verre, c.id_type_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,c.id_verre,status_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
-                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre IS NULL) ".$sql_order . " LIMIT 10";
+                                   ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre IS NULL) ".$sql_order . " " . $limit;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)

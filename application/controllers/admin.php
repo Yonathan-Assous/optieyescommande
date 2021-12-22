@@ -3970,15 +3970,20 @@ class admin
     function valid_commentaire_ajax()
     {
         if ($this->input->is_ajax_request()) {
-
-
+            if (isset($_GET['number_commentaires'])) {
+                $numberCommentaire = $_GET['number_commentaires'];
+            }
+            else {
+                $numberCommentaire = false;
+            }
+//            print_r($_GET);die;
             $data = array();
             $data['aaData'] =
                 array();
 //            $data_commandeOld =
 //                $this->m_commande->getAllCommande();
             $data_commande =
-                $this->m_commande->getCommandeWithCommentaireNotConfirmed();
+                $this->m_commande->getCommandeWithCommentaireNotConfirmed($numberCommentaire);
 
 //            $data_etiquette =
 //                $this->m_commande->getEtiquetteAlreadySet();

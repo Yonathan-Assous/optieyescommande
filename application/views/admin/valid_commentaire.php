@@ -40,7 +40,16 @@ else
 
 
                         <h4 class="header-title m-t-0 m-b-30">Liste des commandes</h4>
-
+                        <div class="col-sm-2" style="float: initial; margin-bottom: 22px">
+                            <label class="m-b-10" for="number_commentaires"> Nombre de commentaires </label>
+                            <select id="number_commentaires" class="form-control">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="all">Tous</option>
+                            </select>
+                        </div>
                         <table id="datatable" class="table table-striped table-admin-commandes dt-responsive nowrap">
                             <thead>
                             <tr>
@@ -142,6 +151,7 @@ else
         // $('body').on("click", function() {
         //     getCommande();
         // });
+        let table;
         getCommande();
         let commandeId = 0;
         $(".content").on("click",".valid_commentaire",function() {
@@ -150,7 +160,7 @@ else
         });
 
         function getCommande() {
-            $('#datatable').DataTable({
+            table = $('#datatable').DataTable({
                 ajax: { url: "/admin/valid_commentaire_ajax", dataSrc: 'aaData' },
                 aLengthMenu: [
                     [10, 25, 50, 100, 200, -1],
@@ -168,7 +178,7 @@ else
                 "createdRow": function ( row, data, index ) {
                     if ( data[1].length > 20 ) {
                         $('td', row).eq(1).addClass('highlight-ref');
-                        if($('td', row).eq(1).find('.reject_ec').length == 0) {
+                        if($('td', row).eq(1).find('.reject_ec').length == 0) {
                             $('td', row).eq(1).addClass('rejected');
                         }
                     }
@@ -197,6 +207,16 @@ else
 
         }
 
+        $(document).on("change", "#number_commentaires", function(){
+            getNumberCommentaire();
+        });
+
+        function getNumberCommentaire() {
+            let numberCommentaire = $("#number_commentaires").val();
+            table.ajax.url('/admin/valid_commentaire_ajax?' +
+                'number_commentaires=' + numberCommentaire
+            ).load();
+        }
 
         $('#confirm_commande').on('click', function(e) {
             $.ajax({

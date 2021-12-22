@@ -70,7 +70,7 @@
 <!--        </li>-->
         <li class="">
             <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
-                <span>BL Conditions</span>
+                <span>Conditions</span>
             </a>
         </li>
     </ul>
@@ -563,7 +563,9 @@
                                 <tr>
                                     <th>Montant (à partir de)</th>
                                     <th>Date début</th>
+                                    <th>Date d'activation</th>
                                     <th>Désactivation</th>
+                                    <th>Moyenne</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -1418,7 +1420,9 @@ $(document).ready(function(){
                 "columns": [
                     { "data": "montant" },
                     { "data": "date_start" },
+                    { "data": "date_activation" },
                     { "data": "action" },
+                    { "data": "average_amount" },
                 ],
                 "displayStart" : displayStart,
 

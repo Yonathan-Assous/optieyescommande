@@ -186,8 +186,8 @@ else
                     if ( data[6]=='Panier A' ) {
                         $('td', row).addClass('highlight-blue');
                     }
-                    if (data[11]) {
-                        $(row).addClass(data[11]);
+                    if (data[12]) {
+                        $(row).addClass(data[12]);
                     }
                 },
                 language: {

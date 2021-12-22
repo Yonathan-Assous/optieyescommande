@@ -4250,9 +4250,9 @@ class admin
 //                            $blAfterTenDays,
 //                            $blAfterThirtyDays,
 //                            $blAfterNinetyDays,
-//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-//                            $commande->id_users .
-//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+                            $commande->id_users .
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,

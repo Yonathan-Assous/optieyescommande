@@ -651,6 +651,7 @@ $('#type_format').change(function() {
 	$('#div_refraction').addClass('hide');
 	$('#type_produit').addClass('hide');
 	$('#generation_progressif').addClass('hide');
+	$('#indices').val('');
 });
 
 $('input[name=sphereD]').change(function() {

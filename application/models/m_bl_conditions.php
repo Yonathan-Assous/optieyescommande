@@ -38,14 +38,16 @@ class m_bl_conditions extends CI_Model
         foreach ($blConditions as $blCondition) {
             $tab[$i]['montant'] = $blCondition->average_amount;
             $tab[$i]['date_start'] = $blCondition->date_start;
-
+            $tab[$i]['date_activation'] = $blCondition->actived_at;
             if ($blCondition->is_active) {
+                $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $blCondition->date_start);
                 $tab[$i]['active'] = true;
                 $tab[$i]['action'] =
                     '<a class="desactive_bl_conditions btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="bl_conditions_'
                     . $blCondition->id . '" original-title="Désactiver" title="Désactiver" >Désactiver</a>';
             }
             else {
+                $tab[$i]['average_amount'] = '';
                 $tab[$i]['active'] = false;
                 $tab[$i]['action'] = $blCondition->desactived_at;
             }
@@ -78,28 +80,7 @@ class m_bl_conditions extends CI_Model
                 return 'bl_conditions_new';
             }
             else {
-                $sql = "SELECT id_users, SUM(total_commande) as total FROM commande c 
-                WHERE DATE_FORMAT(date_commande, '%Y-%m') >= '$dateStart' AND DATE_FORMAT(date_commande, '%Y-%m') < '$now'
-                AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND id_users = $userId";
-//                print_r($sql);die;
-                $query = $this->db->query($sql);
-                $result = $query->result()[0];
-                $sql = "SELECT
-                SUM(reduction) AS total_reductions,
-                id_users as idusers
-                FROM
-                facture_reduction
-                WHERE DATE_FORMAT(date_remise, '%Y-%m') >= '".$dateStart."'
-                AND DATE_FORMAT(date_remise, '%Y-%m') < '$now'
-                AND id_users = $userId";
-                $query = $this->db->query($sql);
-                $totalReduction = $query->result()[0];
-//                print_r($sql);die;
-                $firstDate  = new DateTime($dateStart);
-                $secondDate = new DateTime($now);
-                $intvl = $firstDate->diff($secondDate);
-                $numberMonths = $intvl->y * 12 + $intvl->m;
-                $averageAmount = ($result->total - $totalReduction->total_reductions) / $numberMonths;
+                $averageAmount = $this->getAverageAmount($userId, $dateStart);
                 if ($averageAmount >= $blConditions->average_amount) {
                     return 'bl_conditions_remplies';
                 }
@@ -112,5 +93,38 @@ class m_bl_conditions extends CI_Model
         else {
             return false;
         }
+    }
+
+    private function getAverageAmount($userId, $dateStart) {
+        $now = date('Y-m');
+        $firstDate  = new DateTime($dateStart . '-01');
+        $secondDate = new DateTime($now . '-10');
+        $intvl = $firstDate->diff($secondDate);
+        $numberMonths = $intvl->y * 12 + $intvl->m;
+
+        if ($numberMonths > 0) {
+            $sql = "SELECT id_users, SUM(total_commande) as total FROM commande c 
+                WHERE DATE_FORMAT(date_commande, '%Y-%m') >= '$dateStart' AND DATE_FORMAT(date_commande, '%Y-%m') < '$now'
+                AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND id_users = $userId";
+            $query = $this->db->query($sql);
+            $result = $query->result()[0];
+            $sql = "SELECT
+                SUM(reduction) AS total_reductions,
+                id_users as idusers
+                FROM
+                facture_reduction
+                WHERE DATE_FORMAT(date_remise, '%Y-%m') >= '" . $dateStart . "'
+                AND DATE_FORMAT(date_remise, '%Y-%m') < '$now'
+                AND id_users = $userId";
+            $query = $this->db->query($sql);
+            $totalReduction = $query->result()[0];
+            return ($result->total - $totalReduction->total_reductions) / $numberMonths;
+        }
+        else {
+            return 0;
+        }
+
+//                print_r($sql);die;
+
     }
 }

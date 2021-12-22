@@ -71,6 +71,9 @@
         <li class="">
             <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
                 <span>BL Conditions</span>
+        <li class="">
+            <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
+                <span>Conditions</span>
             </a>
         </li>
     </ul>
@@ -140,6 +143,19 @@
                     <label for="tarif_packaging" class="control-label">Tarif packaging</label>
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
+<!---->
+<!--                <div class="form-group m-b-10 col-sm-4">-->
+<!--                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>-->
+<!--                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="--><?php //echo $price_teledetourage_user['plastique'] ?><!--" />-->
+<!--                </div>-->
+<!--                <div class="form-group m-b-10 col-sm-4">-->
+<!--                    <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>-->
+<!--                    <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="--><?php //echo $price_teledetourage_user['metal'] ?><!--" />-->
+<!--                </div>-->
+<!--                <div class="form-group m-b-10 col-sm-4">-->
+<!--                    <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>-->
+<!--                    <input type="text" id="teledetourage_nylor" name="teledetourage_nylor"  class="form-control" value="--><?php //echo $price_teledetourage_user['nylor'] ?><!--" />-->
+<!--                </div>-->
 
                 <div class="form-group m-b-10 col-sm-4">
                     <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
@@ -196,6 +212,14 @@
                         <option value="0" <?php echo ($info_user[0]->show_commentaire == 0 ? 'selected="selected"' : '') ?>>Non</option>
                     </select>
                 </div>
+
+<!--                <div class="form-group m-b-10 col-sm-12">-->
+<!--                    <label for="is_teledetourable" class="control-label">Activer le télédétourage</label>-->
+<!--                    <select id="is_teledetourable" name="is_teledetourable" class="form-control">-->
+<!--                        <option value="1" --><?php //echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?><!-->Oui</option>-->
+<!--                        <option value="0" --><?php //echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?><!-->Non</option>-->
+<!--                    </select>-->
+<!--                </div>-->
 
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="is_teledetourable" class="control-label">Activer le télédétourage</label>
@@ -529,6 +553,7 @@
                 </div>
             </div>
         </div>
+
         <div class="tab-pane" id="user-modal-bl">
             <div class="form-group row">
                 <div class="form-group m-b-10 col-sm-6">
@@ -563,7 +588,9 @@
                                 <tr>
                                     <th>Montant (à partir de)</th>
                                     <th>Date début</th>
+                                    <th>Date d'activation</th>
                                     <th>Désactivation</th>
+                                    <th>Moyenne</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -1115,6 +1142,7 @@ $(document).ready(function(){
     getTeintePriceList();
     getCatalogue();
     get_remises_teledetourage();
+
     get_bl_conditions()
 
     // console.log('test');
@@ -1418,7 +1446,9 @@ $(document).ready(function(){
                 "columns": [
                     { "data": "montant" },
                     { "data": "date_start" },
+                    { "data": "date_activation" },
                     { "data": "action" },
+                    { "data": "average_amount" },
                 ],
                 "displayStart" : displayStart,
 
@@ -2142,7 +2172,6 @@ $(document).ready(function(){
         remiseActiveInactive()
     });
 
-
     $('#nav-prix-verre').click(function(){
         $('#nav-history-verres').addClass('active');
         $('#modal-history-verres').addClass('active');
@@ -2210,6 +2239,7 @@ $(document).ready(function(){
             $('.remise_past').removeClass('hide');
         }
     }
+
 </script>
 
 <style>

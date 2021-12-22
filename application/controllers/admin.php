@@ -3980,15 +3980,20 @@ class admin
     function valid_commentaire_ajax()
     {
         if ($this->input->is_ajax_request()) {
-
-
+            if (isset($_GET['number_commentaires'])) {
+                $numberCommentaire = $_GET['number_commentaires'];
+            }
+            else {
+                $numberCommentaire = false;
+            }
+//            print_r($_GET);die;
             $data = array();
             $data['aaData'] =
                 array();
 //            $data_commandeOld =
 //                $this->m_commande->getAllCommande();
             $data_commande =
-                $this->m_commande->getCommandeWithCommentaireNotConfirmed();
+                $this->m_commande->getCommandeWithCommentaireNotConfirmed($numberCommentaire);
 
 //            $data_etiquette =
 //                $this->m_commande->getEtiquetteAlreadySet();
@@ -4255,9 +4260,9 @@ class admin
 //                            $blAfterTenDays,
 //                            $blAfterThirtyDays,
 //                            $blAfterNinetyDays,
-//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-//                            $commande->id_users .
-//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+                            $commande->id_users .
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,

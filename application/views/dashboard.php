@@ -389,21 +389,20 @@ if (is_object($pair_order)) {
                                                                         <div class="col-xs-12 col-md-3">
                                                                             <div class="panel panel-default panel-intro">
                                                                                 <div class="panel-heading "><h5>
-                                                                                        Format</h5></div>
-                                                                                <div class="panel-body text-center"
-                                                                                     style="padding-top: 0px;padding-bottom: 0px;">
-                                                                                    <div id="div_type_format" style="text-align: center;">
-                                                                                        <h5 style="text-align: left;"><span class="color-sample-standard"></span>&nbsp;Standard<br>
-                                                                                            <span class="color-sample-teledetourage"></span>&nbsp;Télédétourage</h5>
+                                                                                        Télédétourage</h5></div>
+                                                                                <div class="panel-body text-center">
+                                                                                    <div id="div_is_teledetourage" style="text-align: center;">
+<!--                                                                                        <h5 style="text-align: left;"><span class="color-sample-standard"></span>&nbsp;Standard<br>-->
+<!--                                                                                            <span class="color-sample-teledetourage"></span>&nbsp;Télédétourage</h5>-->
                                                                                         <label class="switch">
-                                                                                            <input id="type_format" class="type_format" type="checkbox"
+                                                                                            <input id="is_teledetourage" class="is_teledetourage" type="checkbox"
                                                                                             <?php
                                                                                                 if (!$user_info->is_teledetourable) {
                                                                                                     echo 'disabled';
                                                                                                 }
                                                                                             ?>
                                                                                             >
-                                                                                            <span id='slider_format' class="slider slider_format round"
+                                                                                            <span id='slider_teledetourage' class="slider slider_teledetourage round"
                                                                                             <?php
                                                                                             if (!$user_info->is_teledetourable) {
                                                                                                 echo 'style = "cursor: no-drop"';

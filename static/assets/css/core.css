@@ -457,7 +457,10 @@ a:focus {
 .col-sm-6,
 .col-sm-7,
 .col-sm-8,
-.col-sm-9
+.col-sm-9,
+.div-lg-5,
+.div-md-5,
+.div-sm-5
  {
   padding-left: 10px;
   padding-right: 10px;
@@ -474,7 +477,8 @@ a:focus {
 .col-xs-6,
 .col-xs-7,
 .col-xs-8,
-.col-xs-9 {
+.col-xs-9,
+.div-xs-5 {
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -1308,5 +1312,45 @@ input:-webkit-autofill:active  {
 
   #div-video {
     display: none;
+  }
+
+  .div-md-5 {
+    float: left;
+  }
+
+  .div-md-5 {
+    width: 20%;
+  }
+}
+.div-lg-5, .div-md-5, .div-sm-5 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.div-xs-5 {
+  width: 20%;
+}
+
+.div-xs-5 {
+  float: left;
+}
+
+@media screen and (max-width: 1200px) {
+  .div-lg-5 {
+    float: left;
+  }
+  .div-lg-5 {
+    width: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .div-sm-5 {
+    float: left;
+  }
+  .div-sm-5 {
+    width: 20%;
   }
 }

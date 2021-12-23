@@ -1302,11 +1302,11 @@ div.DTS tbody tr.even {
   transition: .4s;
 }
 
-.slider_format {
-  background-color: #f8bc06;
+.slider_teledetourage {
+  background-color: #fb2b54;
 }
-input:checked + .slider_format {
-  background-color: #2196F3;
+input:checked + #slider_teledetourage {
+  background-color: #64bd63;
 }
 
 .color-sample-standard {

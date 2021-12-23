@@ -646,7 +646,7 @@ $('input[name=additionG]').focus(function() {
 	$('#additional_info').addClass('hide');
 });
 
-$('#type_format').change(function() {
+$('#is_teledetourage').change(function() {
 	$('#produit').addClass('hide');
 	$('#div_refraction').addClass('hide');
 	$('#type_produit').addClass('hide');
@@ -1398,7 +1398,7 @@ $("input[name='dispoD']").change(function(){
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    var teledetourage = $('#type_format').is(':checked');
+    var teledetourage = $('#is_teledetourage').is(':checked');
 
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
@@ -1493,7 +1493,7 @@ $('#progressionD').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-	var teledetourage = $('#type_format').is(':checked');
+	var teledetourage = $('#is_teledetourage').is(':checked');
 
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
@@ -1569,7 +1569,7 @@ $('#progressionG').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-	var teledetourage = $('#type_format').is(':checked');
+	var teledetourage = $('#is_teledetourage').is(':checked');
 
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
@@ -4733,7 +4733,7 @@ function afficherV() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-	var teledetourage = $('#type_format').is(':checked');
+	var teledetourage = $('#is_teledetourage').is(':checked');
 
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()

@@ -70,9 +70,6 @@
         </li>
         <li class="">
             <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
-                <span>BL Conditions</span>
-        <li class="">
-            <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
                 <span>Conditions</span>
             </a>
         </li>
@@ -216,8 +213,8 @@
 <!--                <div class="form-group m-b-10 col-sm-12">-->
 <!--                    <label for="is_teledetourable" class="control-label">Activer le télédétourage</label>-->
 <!--                    <select id="is_teledetourable" name="is_teledetourable" class="form-control">-->
-<!--                        <option value="1" --><?php //echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?><!-->Oui</option>-->
-<!--                        <option value="0" --><?php //echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?><!-->Non</option>-->
+<!--                        <option value="1" --><?php //echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?><!--Oui</option>-->
+<!--                        <option value="0" --><?php //echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?><!--Non</option>-->
 <!--                    </select>-->
 <!--                </div>-->
 

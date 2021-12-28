@@ -61,8 +61,9 @@ class m_remise extends CI_Model
                 $tab[$i]['status'] = 'future';
                 $textAction = 'Annuler';
             }
-            else if ($remise->until_date < $now) {
+            else if ($remise->until_date < $now && !empty($remise->until_date)) {
                 $tab[$i]['status'] = 'past';
+                $textAction = '';
             }
             else {
                 $tab[$i]['status'] = 'present';
@@ -158,6 +159,27 @@ class m_remise extends CI_Model
             $result = $query->result()[0];
             return $result->total_remise;
         }
-        return false;
+        return 0;
+    }
+
+    public function getTotalRemisesPerUserByMonth($date) {
+        $sql = "SELECT id_users, SUM(`total_commande`) as total FROM `commande` 
+                WHERE `date_commande` >= '$date'
+                AND (type_commande = 1 
+                OR (type_commande > 1 AND penalty = 1)) 
+                GROUP BY id_users";
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0)
+        {
+            $result = $query->result();
+        }
+        else {
+            return 0;
+        }
+        $totalRemise = 0;
+        foreach ($result as $value) {
+            $totalRemise += $this->getTotalRemisesByUser($value->id_users, $value->total);
+        }
+        return $totalRemise;
     }
 }

@@ -1832,8 +1832,9 @@ class m_commande extends CI_Model {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
 
-        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande WHERE date_commande >= "' .
-               $date . '" AND date_commande <= "' . $date_end . '"';
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
+                        SELECT DISTINCT(id_users) FROM `commande` WHERE date_commande >= "' .
+               $date . '" AND date_commande <= "' . $date_end . '")';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
         //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
         //        var_dump($sql);die;
@@ -1925,7 +1926,6 @@ class m_commande extends CI_Model {
 
 
     public function getAllCommandeByMonthAndUser($date, $excl = null, $user = null){
-
         if($excl) {
             $excl = 'AND c.id_users NOT IN('.implode(',', $excl).')';
         }
@@ -4001,7 +4001,7 @@ class m_commande extends CI_Model {
                     $TarifLivraison += $value->TarifLivraison;
                 }
 
-            $query = $this->db->query("SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
+            $sql = "SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -4035,7 +4035,9 @@ class m_commande extends CI_Model {
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime(date('Y-m').'-01 -1 month'))."'
-                                     GROUP BY id_users, TarifLivraison, date_update_commande");
+                                     GROUP BY id_users, TarifLivraison, date_update_commande";
+
+            $query = $this->db->query($sql);
 
 
 
@@ -4067,8 +4069,7 @@ class m_commande extends CI_Model {
 
         }
 
-
-        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
+        $sql = "SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND type_commande = 1 AND penalty != 1
@@ -4089,7 +4090,9 @@ class m_commande extends CI_Model {
                                    (".$TarifLivraison.")
                                    -
 								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier");
+								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier";
+
+        $query = $this->db->query($sql);
 
 
         if ($query && $query->num_rows() > 0) {
@@ -4105,13 +4108,14 @@ class m_commande extends CI_Model {
         $TabHoraireTarifLiv = array();
 
         $tarif = 0;
-        $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
+        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
                                    AND id_etat_commande = 6
                                    AND ( DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND ((date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
-                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day");
+                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day";
+        $query = $this->db->query($sql);
 
         $TarifLivraisonTab = array();
 
@@ -4133,14 +4137,14 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-
-        $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
+        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
                                    AND id_etat_commande = 6
                                    AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
-                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day");
+                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day";
+        $query = $this->db->query($sql);
 
         if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
@@ -4162,7 +4166,7 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
+        $sql = "SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -4195,7 +4199,8 @@ class m_commande extends CI_Model {
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($date.'-01 -1 month'))."'
-                                     GROUP BY id_users,date(date_update_commande), day");
+                                     GROUP BY id_users,date(date_update_commande), day";
+        $query = $this->db->query($sql);
 
         if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
@@ -4256,7 +4261,8 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ttc'] = round($data[$day]['total_ht'] * 1.2 ,2);
                 }
         }
-        $query = $this->db->query("SELECT
+
+        $sql = "SELECT
                                       SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
                                       taux_tva,
                                       DATE_FORMAT(date_commande, '%e') AS day,
@@ -4274,9 +4280,12 @@ class m_commande extends CI_Model {
                                           DATE_FORMAT(date_commande, '%Y-%m-%d') = date_remise
                                         )
                                     WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
-                                    AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND (type_commande = 1 AND penalty != 1 OR (type_commande > 1 AND penalty = 1))
+                                    AND is_confirmed = 1
                                     GROUP BY day
-                                    ORDER BY day ASC");
+                                    ORDER BY day ASC";
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             foreach($query->result() as $value){
@@ -4310,7 +4319,7 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ht'] += $tarif;
                     $data[$day]['total_ttc'] += round($data[$day]['total_ht'] * 1.2 ,2);
                 }
-
+//print_r($data);die;
             return $data;
         }
 
@@ -5354,5 +5363,18 @@ class m_commande extends CI_Model {
                     total_commande = ' . ($tarifCommande + $tarifExpress - $oldTarifExpress) . '
                     WHERE id_commande = ' . $commandeId;
         $this->db->query($sql);
+    }
+
+    public function getTotalCommandePerUSersByMonth() {
+        $sql = "SELECT id_users, SUM(`total_commande`) as total FROM `commande` 
+                WHERE `date_commande` >= '2021-12' 
+                AND (type_commande = 1 
+                OR (type_commande > 1 AND penalty = 1)) 
+                GROUP BY id_users";
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0)
+        {
+            return $query->result();
+        }
     }
 }

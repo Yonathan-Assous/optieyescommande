@@ -3176,6 +3176,8 @@ class admin
 
         $ca_mensuel =
             $this->m_commande->CAMensuel(date("m-Y"));
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
+//        print_r($ca_mensuel);die;
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
@@ -3194,7 +3196,7 @@ class admin
             // $this->m_commande->getSupplementByDay()
         $data['ca_mensuel'] =
             $ca_mensuel +
-                $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
+                $data['packaging_mois'] - $remises; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
 //var_dump($data['packaging_mois']);die;
         //var_dump($ca_mensuel);
 //var_dump($data['packaging_mois']);die;
@@ -3211,7 +3213,7 @@ class admin
         $supplementByMonth = $this->m_commande->getSupplementByMonth(date("m-Y"));
         //var_dump($supplementByMonth);die;
         $data['ca_mensuel_sans_livraison'] =
-            $ca_mensuel_sans_livraison - $supplementByMonth
+            $ca_mensuel_sans_livraison - $supplementByMonth - $remises
             ;
 
         $data['firstorder'] =
@@ -3264,6 +3266,7 @@ class admin
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
 
+        print_r($data);die;
         $this->load->view('admin/dashboard',
             $data);
     }
@@ -15705,7 +15708,6 @@ class admin
                 $this->m_commande->getAllCommandeByMonthAndUser($date,
                     null,
                     $user);
-//            var_dump($facture_client);die;
             $data = array();
             $data['aaData'] =
                 array();
@@ -15722,7 +15724,11 @@ class admin
                          $facture_cli)
                 {
                     $facture_cli->date_commande = $facture_cli->y_m_commande;
-
+                    $facture_ht = $facture_cli->total +
+                        $this->m_commande->getPackagingByMonth($date,
+                            $facture_cli->id_users);
+                    $remise_special = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_ht + $facture_cli->reduction);
+                    $facture_ht -= $remise_special;
                     $tva = $this->m_users->getTva($facture_cli->id_users);
                     /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
 
@@ -15755,17 +15761,18 @@ class admin
                             '_' .
                             $facture_cli->id_users .
                             '">' .
-                            number_format($facture_cli->total +
-                                $this->m_commande->getPackagingByMonth($date,
-                                    $facture_cli->id_users),
+                            number_format($facture_ht,
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
-                            number_format(($facture_cli->total +
-                                $this->m_commande->getPackagingByMonth($date,
-                                    $facture_cli->id_users)) * (1 + $tva / 100),
+                            '<span id="totalFactureHt_' .
+                            date("Y-m",
+                                strtotime($facture_cli->date_commande)) .
+                            '_' .
+                            $facture_cli->id_users .
+                            '">' .
+                            number_format($facture_ht * (1 + $tva / 100),
                                 2,
                                 '.',
                                 ' ') .
@@ -15791,6 +15798,12 @@ class admin
                             '<span>' .
                             number_format(($facture_cli->total_fabrique +
                                 $facture_cli->total_express),
+                                2,
+                                '.',
+                                ' ') .
+                            '</span> €',
+                            '<span>' .
+                            number_format($remise_special,
                                 2,
                                 '.',
                                 ' ') .

@@ -3275,6 +3275,7 @@ class admin
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
+//        print_r($data);die;
 
         $this->load->view('admin/dashboard',
             $data);

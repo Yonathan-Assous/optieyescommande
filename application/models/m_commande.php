@@ -4225,36 +4225,39 @@ class m_commande extends CI_Model {
                 }
             }
 
-
-        $query = $this->db->query("SELECT SUM(tarif_express) AS total_ht, taux_tva, DATE_FORMAT(date_commande, '%e') AS day, date_commande
-            FROM commande
-            WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
-            AND type_commande > 1
-            GROUP BY day
-            ORDER BY day ASC");
-
-        if ($query && $query->num_rows() > 0){
-            foreach($query->result() as $value){
-                if(!isset($data[$value->day])){
-                    $data[$value->day] = array();
-                }
-                $data[$value->day]['total_ht'] = $value->total_ht;
-
-                if(isset($TarifLivraisonTab[$value->day])){
-                    $data[$value->day]['total_ht'] += $TarifLivraisonTab[$value->day];
-
-                    unset($TarifLivraisonTab[$value->day]);
-                }
-
-                $data[$value->day]['total_ttc']= round($data[$value->day]['total_ht'] * $value->taux_tva,2);
-            }
-
-            if(count($TarifLivraisonTab) > 0)
-                foreach($TarifLivraisonTab as $day => $tarif){
-                    $data[$day]['total_ht'] = $tarif;
-                    $data[$day]['total_ttc'] = round($data[$day]['total_ht'] * 1.2 ,2);
-                }
-        }
+//        $sql = "SELECT SUM(tarif_express) AS total_ht, taux_tva, DATE_FORMAT(date_commande, '%e') AS day, date_commande
+//            FROM commande
+//            WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
+//            AND type_commande > 1
+//            GROUP BY day
+//            ORDER BY day ASC";
+////        print_r($sql);die;
+//
+//        $query = $this->db->query($sql);
+//
+//
+//        if ($query && $query->num_rows() > 0){
+//            foreach($query->result() as $value){
+//                if(!isset($data[$value->day])){
+//                    $data[$value->day] = array();
+//                }
+//                $data[$value->day]['total_ht'] = $value->total_ht;
+//
+//                if(isset($TarifLivraisonTab[$value->day])){
+//                    $data[$value->day]['total_ht'] += $TarifLivraisonTab[$value->day];
+//
+//                    unset($TarifLivraisonTab[$value->day]);
+//                }
+//
+//                $data[$value->day]['total_ttc']= round($data[$value->day]['total_ht'] * $value->taux_tva,2);
+//            }
+//
+//            if(count($TarifLivraisonTab) > 0)
+//                foreach($TarifLivraisonTab as $day => $tarif){
+//                    $data[$day]['total_ht'] = $tarif;
+//                    $data[$day]['total_ttc'] = round($data[$day]['total_ht'] * 1.2 ,2);
+//                }
+//        }
 
         $sql = "SELECT SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
                         taux_tva,
@@ -4274,11 +4277,11 @@ class m_commande extends CI_Model {
                         )
                         WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
                         AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                        AND is_confirmed = 1
                         GROUP BY day
                         ORDER BY day ASC";
 //        print_r($sql);die;
         $query = $this->db->query($sql);
-
 
         if ($query && $query->num_rows() > 0){
             foreach($query->result() as $value){
@@ -4312,7 +4315,6 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ht'] += $tarif;
                     $data[$day]['total_ttc'] += round($data[$day]['total_ht'] * 1.2 ,2);
                 }
-//            print_r($data);die;
             return $data;
         }
 

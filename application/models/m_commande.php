@@ -1758,7 +1758,6 @@ class m_commande extends CI_Model {
 
 
         }
-
 //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
 //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
 //        var_dump($sql);die;
@@ -1832,13 +1831,16 @@ class m_commande extends CI_Model {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
 
-        $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
-                        SELECT DISTINCT(id_users) FROM `commande` WHERE date_commande >= "' .
+
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM users 
+                WHERE id_users IN ( SELECT DISTINCT(id_users) FROM `commande` 
+                WHERE date_commande >= "' .
                $date . '" AND date_commande <= "' . $date_end . '")';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
         //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
         //        var_dump($sql);die;
         //return $sql;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
         $total = 0;
 
@@ -2563,12 +2565,9 @@ class m_commande extends CI_Model {
                 }
         }
 
-        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM commande
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1
-                                   AND is_confirmed = 1)
-                                   +
-                                  (SELECT IFNULL(SUM(total_commande),0) as ca_journalier_penalty FROM commande
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1
+        $sql = "SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM commande
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1
+                                   OR type_commande > 1 AND penalty = 1)
                                    AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM commande
@@ -2579,7 +2578,9 @@ class m_commande extends CI_Model {
                                    (".$TarifLivraison.")
 								   -
 								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."') as ca");
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."') as ca";
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
 
         $total = 0;
 
@@ -4039,6 +4040,7 @@ class m_commande extends CI_Model {
 
             $query = $this->db->query($sql);
 
+//            print_r($sql);
 
 
             if($query && $query->num_rows() > 0)
@@ -4072,13 +4074,7 @@ class m_commande extends CI_Model {
         $sql = "SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
-                                   AND type_commande = 1 AND penalty != 1
-                                   AND is_confirmed = 1)
-                                   + 
-                                   (SELECT IFNULL(SUM(total_commande),0) as ca_journalier_penalty FROM ".$this->table."
-                                   WHERE date_commande>='".date("Y-m-d 00:00:00")."'
-                                   AND date_commande<='".date("Y-m-d 23:59:59")."'
-                                   AND type_commande > 1 AND penalty = 1
+                                   AND (type_commande = 1 OR type_commande > 1 AND penalty = 1)
                                    AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM ".$this->table."
@@ -4091,6 +4087,9 @@ class m_commande extends CI_Model {
                                    -
 								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
 								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier";
+
+//        print_r($sql);
+
 
         $query = $this->db->query($sql);
 
@@ -4262,28 +4261,27 @@ class m_commande extends CI_Model {
                 }
         }
 
-        $sql = "SELECT
-                                      SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
-                                      taux_tva,
-                                      DATE_FORMAT(date_commande, '%e') AS day,
-                                      date_commande
-                                    FROM
-                                      commande
-                                      LEFT JOIN
-                                        (SELECT
-                                          SUM(reduction) AS total_reductions,
-                                          date_remise
-                                        FROM
-                                          facture_reduction
-                                        GROUP BY date_remise) AS reductions
-                                        ON (
-                                          DATE_FORMAT(date_commande, '%Y-%m-%d') = date_remise
-                                        )
-                                    WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
-                                    AND (type_commande = 1 AND penalty != 1 OR (type_commande > 1 AND penalty = 1))
-                                    AND is_confirmed = 1
-                                    GROUP BY day
-                                    ORDER BY day ASC";
+        $sql = "SELECT SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
+                        taux_tva,
+                        DATE_FORMAT(date_commande, '%e') AS day,
+                        date_commande
+                        FROM
+                        commande
+                        LEFT JOIN
+                        (SELECT
+                        SUM(reduction) AS total_reductions,
+                        date_remise
+                        FROM
+                        facture_reduction
+                        GROUP BY date_remise) AS reductions
+                        ON (
+                        DATE_FORMAT(date_commande, '%Y-%m-%d') = date_remise
+                        )
+                        WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."'
+                        AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
+                        AND is_confirmed = 1
+                        GROUP BY day
+                        ORDER BY day ASC";
 //        print_r($sql);die;
         $query = $this->db->query($sql);
 
@@ -4320,6 +4318,7 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ttc'] += round($data[$day]['total_ht'] * 1.2 ,2);
                 }
 //print_r($data);die;
+
             return $data;
         }
 

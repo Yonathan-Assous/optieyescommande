@@ -3173,11 +3173,12 @@ class admin
             $this->m_commande->getCaJournalier();
         $ca_journalier_sans_livraison =
             $this->m_commande->getCaJournalier(false);
+//        echo '<br/>----------------------------<br/>';
 
         $ca_mensuel =
             $this->m_commande->CAMensuel(date("m-Y"));
         $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
-//        print_r($ca_mensuel);die;
+
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
@@ -3190,10 +3191,20 @@ class admin
 //        var_dump($ca_mensuel_sans_livraison);die;
         $data['packaging_mois'] =
             $this->m_commande->getPackagingByMonth(date("m-Y"));
+        $data['packaging_jour'] =
+            $this->m_commande->getPackagingByDay();
+
         $data['ca_journalier'] = $ca_journalier ?
             $ca_journalier[0]->ca_journalier +
-            $this->m_commande->getPackagingByDay() : 0;              //  -
+            $data['packaging_jour'] : 0;
+//        print_r($ca_journalier);die;
+
+        //  -
             // $this->m_commande->getSupplementByDay()
+//        echo '<pre>';
+//        print_r($data);
+//        echo '</pre>';
+//        die;
         $data['ca_mensuel'] =
             $ca_mensuel +
                 $data['packaging_mois'] - $remises; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
@@ -3266,7 +3277,6 @@ class admin
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
 
-        print_r($data);die;
         $this->load->view('admin/dashboard',
             $data);
     }

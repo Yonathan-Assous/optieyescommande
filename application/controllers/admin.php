@@ -3177,8 +3177,8 @@ class admin
 
         $ca_mensuel =
             $this->m_commande->CAMensuel(date("m-Y"));
+//        print_r($ca_mensuel);
         $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
-
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
@@ -3193,6 +3193,7 @@ class admin
             $this->m_commande->getPackagingByMonth(date("m-Y"));
         $data['packaging_jour'] =
             $this->m_commande->getPackagingByDay();
+//        print_r($data['packaging_mois']);die;
 
         $data['ca_journalier'] = $ca_journalier ?
             $ca_journalier[0]->ca_journalier +
@@ -3207,7 +3208,9 @@ class admin
 //        die;
         $data['ca_mensuel'] =
             $ca_mensuel +
-                $data['packaging_mois'] - $remises; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
+                $data['packaging_mois'] - $remises;
+        //print_r($data['ca_mensuel']);die;
+        //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
 //var_dump($data['packaging_mois']);die;
         //var_dump($ca_mensuel);
 //var_dump($data['packaging_mois']);die;
@@ -3276,6 +3279,7 @@ class admin
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
+//        print_r($data);die;
 
         $this->load->view('admin/dashboard',
             $data);
@@ -15636,7 +15640,7 @@ class admin
     function generer_pdf_ca_journalier($nom_fichier_pdf,
                                        $date)
     {
-
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
         $ndate =
             DateTime::createFromFormat('m-Y',
                 $date);
@@ -15648,13 +15652,13 @@ class admin
         $ca_mensuel =
             $this->m_commande->CAMensuel($date);
         $data['ca_mensuel'] =
-            $ca_mensuel;
+            $ca_mensuel - $remises;
 
         $ca_mensuel_hors_livraison =
             $this->m_commande->CAMensuel($date,
                 false);
         $data['ca_mensuel_hors_livraison'] =
-            $ca_mensuel_hors_livraison;
+            $ca_mensuel_hors_livraison - $remises;
 
         $data['taux_tva'] =
             $this->session->userdata('taux_tva');
@@ -15670,6 +15674,7 @@ class admin
                 true);
         //echo $html;
         //var_dump()
+//        print_r($data);die;
         $this->pdf($nom_fichier_pdf,
             $data,
             $data_custom_file,
@@ -15737,7 +15742,7 @@ class admin
                     $facture_ht = $facture_cli->total +
                         $this->m_commande->getPackagingByMonth($date,
                             $facture_cli->id_users);
-                    $remise_special = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_ht + $facture_cli->reduction);
+                    $remise_special = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
                     $facture_ht -= $remise_special;
                     $tva = $this->m_users->getTva($facture_cli->id_users);
                     /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
@@ -15849,7 +15854,7 @@ class admin
 
                     $total_ht += $facture_cli->total;
                     $total_ht_liv += ($facture_cli->total -
-                        $facture_cli->tarif_liv);
+                        $facture_cli->tarif_liv - $remise_special);
 
 
                     /*if($facture_cli->total_express > 0) {
@@ -15865,9 +15870,7 @@ class admin
 
             $data['totals'] =
                 array(
-                    'ht' => number_format($total_ht +
-                        $this->m_commande->getPackagingByMonth($date,
-                            $user),
+                    'ht' => number_format($facture_ht,
                         2,
                         '.',
                         ' '),

@@ -383,7 +383,6 @@
 
 							$total_facture_ht -= $reduc->reduction;
 						}
-
                         $remiseSpecial = $this->m_remise->getTotalRemisesByUser($id_users, $total_facture_ht + $reduc->reduction);
 
                         $total_facture_ht -= $remiseSpecial;

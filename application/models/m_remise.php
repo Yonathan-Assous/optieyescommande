@@ -72,7 +72,7 @@ class m_remise extends CI_Model
 
             if ($remise->is_active && (empty($remise->until_date) || $remise->until_date >= $now)) {
                 $tab[$i]['action'] =
-                    '<a class="desactive_remise_teledetourage btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="remise_'
+                    '<a class="desactive_remise btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="remise_'
                     . $remise->id . '" original-title="Désactiver" title="Désactiver" >' . $textAction . '</a>';
             }
             else if ($remise->is_active == 0)
@@ -163,10 +163,22 @@ class m_remise extends CI_Model
     }
 
     public function getTotalRemisesPerUserByMonth($date) {
-        $sql = "SELECT id_users, SUM(`total_commande`) as total FROM `commande` 
+        return $this->getTotalRemisesPerUserByMonthAndByCommercial($date);
+    }
+
+    public function getTotalRemisesPerUserByMonthAndByCommercial($date, $nameCommercial = null) {
+        $addCondition = '';
+        $leftJoin = '';
+        if (!empty($nameCommercial)) {
+            $addCondition = "AND `$nameCommercial` = 100";
+            $leftJoin = 'LEFT JOIN `users` ON commande.id_users = users.id_users';
+        }
+        $sql = "SELECT commande.id_users, SUM(`total_commande`) as total FROM `commande`
+                $leftJoin
                 WHERE `date_commande` >= '$date'
                 AND (type_commande = 1 
                 OR (type_commande > 1 AND penalty = 1)) 
+                $addCondition
                 GROUP BY id_users";
         $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0)

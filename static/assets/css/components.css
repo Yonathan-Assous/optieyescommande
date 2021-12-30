@@ -1337,6 +1337,14 @@ input:checked + #slider_teledetourage {
   transition: .4s;
 }
 
+#slider_teledetourage {
+  background-color: #fb2b54;
+}
+
+input:checked + #slider_teledetourage {
+  background-color: #64bd63;
+}
+
 input:checked + .slider {
   background-color: #2196F3;
 }

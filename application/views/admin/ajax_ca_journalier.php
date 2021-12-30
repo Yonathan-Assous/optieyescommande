@@ -35,13 +35,13 @@
 			
             $total_ttc = $total_ht + ($total_ht*0.2);
 			
-			$tot_packaging = number_format($this->m_commande->getPackagingByDay($currentdate) ,2,'.',' ');
+			$tot_packaging = number_format($packaging_day ,2,'.',' ');
 			$tot_lentille_day = (0 !== $lens_day->total_commande ? number_format($lens_day->total_commande ,2,'.',' ') : number_format(0 ,2,'.',' '));
 			$tot_montures_day = (0 !== $montures_day->total_commande ? number_format($montures_day->total_commande ,2,'.',' ') : number_format(0 ,2,'.',' '));
 			
 			$tot_ht = number_format($total_ht ,2,'.',' ');
 			$tot_sup = $this->m_commande->getSupplementByDay($currentdate);
-			$tot_verres = $total_ht-$this->m_commande->getPackagingByDay($currentdate) -$lens_day->total_commande-$montures_day->total_commande-$tot_sup;
+			$tot_verres = $total_ht - $packaging_day -$lens_day->total_commande-$montures_day->total_commande-$tot_sup;
 			$tot_verres = number_format($tot_verres ,2,'.',' ');
 
             echo ' <td class="fc-widget-content'.($jourEnCours == $jour ? ' fc-state-highlight' : '').'" style="width:133px;">

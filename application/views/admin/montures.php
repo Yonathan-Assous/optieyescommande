@@ -181,7 +181,7 @@ include_once('menu.php');
                 type: "POST",
                 url: "/admin/add_montures_to_order",
                 data: { 'id': el.attr('rel'),
-                      'qty': $('#qty_monture').val(),
+                      'qty': $('#qty_monture_' + el.attr('rel')).val(),
 					  'user_id':<?php echo $user_id;?>}
             }).done(function (data) {
 				swal({

@@ -535,7 +535,7 @@ $panierA = get_cookie("panierA");
 									$total_commande += round(floatval($recap_commande['prix_discount']), 2);
 								}
 								else {
-									echo (($recap_commande['prixGH']));
+									echo ($recap_commande['prixGH']);
 									$total_commande += round(floatval($recap_commande['prixGH']), 2);
 								}
 							}
@@ -578,7 +578,7 @@ $panierA = get_cookie("panierA");
             }
 		
 
-            if($type_commande_verre == 1  || $k == 'pair_order' ) {
+            if($type_commande_verre == 1  || ($type_commande_verreG == 1 && $type_commande_verre == 4) || $k == 'pair_order' ) {
 
             if($k == 'pair_order') {
                 $express_id = 'express_pair';

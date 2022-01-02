@@ -3,7 +3,6 @@
 $prefix = '';
 //$prefix = '../../../../../';
 
-
 $info_commande = json_decode($bon_livraison[0]->information_commande,true);
 $correction_droit = $correction_gauche = $info_c = $option = $prisme_droit = $prisme_gauche = $mesure_freeform_opt = $sphere_droit = $sphere_gauche = "";
 $options_miroir = array(1 => 'Miroir Bleu', 2 => 'Miroir Argent', 3 => 'Miroir Dor&eacute;', 4 => 'Miroir Vert', 5 => 'Miroir Rouge', 6 => 'Miroir Orange', 7 => 'Miroir Rose' ,8 => 'Miroir Violet', 9 => 'Miroir Jaune', 10 => 'Miroir Flash');
@@ -184,11 +183,13 @@ if($bon_livraison[0]->type_optique != "lentille") {
     if (isset($info_commande['verre']['hauteur'])) {
 
         if(isset($info_commande['verre']['correction_droit'])) {
+            $correction_droit .= ' Écart pupillaire: ' . $info_commande['verre']['ecart_puppillaire']['droit'] . '<br>';
             $correction_droit .= ' Hauteur : ' . $info_commande['verre']['hauteur'] . '<br>';
         }
 
         if(isset($info_commande['verre']['correction_gauche'])) {
-            $correction_gauche .= ' Hauteur : ' . $info_commande['verre']['hauteur'] . '<br>';
+            $correction_gauche .= ' Écart pupillaire : ' . $info_commande['verre']['ecart_puppillaire']['gauche'] . '<br>';
+            $correction_gauche .= ' Hauteur : ' . $info_commande['verre']['hauteur_gauche'] . '<br>';
         }
 
     }
@@ -211,7 +212,45 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
 			$correction_droit .= 'Diametre : ' . $info_commande['verre']['diametre'];
 			$correction_gauche .= 'Diametre : ' . $info_commande['verre']['diametre_gauche'];
 		}
+
+
 	}
+
+    if(isset($bon_livraison[0]->ecart_pup_D)) {
+        $correction_droit .= '<br>Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_D;
+    }
+    if(isset($bon_livraison[0]->angle_galbe_D)) {
+        $correction_droit .= '<br>Angle de galbe : ' . $bon_livraison[0]->angle_galbe_D;
+    }
+    if(isset($bon_livraison[0]->distance_verre_oeil_D)) {
+        $correction_droit .= '<br>Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_D;
+    }
+    if(isset($bon_livraison[0]->angle_pantoscopique_D)) {
+        $correction_droit .= '<br>Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_D;
+    }
+    if(isset($bon_livraison[0]->hauteur_montage_D)) {
+        $correction_droit .= '<br>Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_D;
+    }
+
+    if(isset($bon_livraison[0]->ecart_pup_G)) {
+        $correction_gauche .= '<br>Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_G;
+    }
+    if(isset($bon_livraison[0]->angle_galbe_G)) {
+        $correction_gauche .= '<br>Angle de galbe : ' . $bon_livraison[0]->angle_galbe_G;
+    }
+    if(isset($bon_livraison[0]->distance_verre_oeil_G)) {
+        $correction_gauche .= '<br>Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_G;
+    }
+    if(isset($bon_livraison[0]->angle_pantoscopique_G)) {
+        $correction_gauche .= '<br>Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_G;
+    }
+    if(isset($bon_livraison[0]->hauteur_montage_G)) {
+        $correction_gauche .= '<br>Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_G;
+    }
+
+//    if(isset($info_commande['precalibrage']['calibre'])) {
+//        $correction_droit .= '<br><img src="/static/img/calibre/' . $info_commande['precalibrage']['calibre'] . '.jpg" width="150" heigth="70" />';
+//    }
 
  /*   if(isset($info_commande['verre']['ecart_puppillaire']['droit'])) {
         $correction_droit .= ' Ecart pupillaire : ' . $info_commande['verre']['ecart_puppillaire']['droit'];
@@ -453,11 +492,16 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
                 <tbody>
 
                 <?php
-				
+//				var_dump($bon_livraison[0]);die;
 				if($bon_livraison[0]->generation ==  "T-One")
 				{
 					$bon_livraison[0]->libelle_verre = str_replace("E-Space","T-One",$bon_livraison[0]->libelle_verre);
 				}
+
+                if($bon_livraison[0]->generation ==  "Elysium")
+                {
+                    $bon_livraison[0]->libelle_verre = str_replace("Platinium","Elysium",$bon_livraison[0]->libelle_verre);
+                }
 				
 				$gtin = "";
 				if($bon_livraison[0]->gtin_stock != "")

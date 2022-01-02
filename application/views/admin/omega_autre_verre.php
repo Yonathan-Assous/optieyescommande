@@ -3787,43 +3787,58 @@ $(document).ready(function() {
         }
         return number;
     }
-	let sphereD = document.getElementById('spanSphereD').innerText;
+	if (document.getElementById('spanSphereD')) {
+        let sphereD = document.getElementById('spanSphereD').innerText;
         sphereD = addPlus(sphereD)
-	let cylindreD = document.getElementById('spanCylindreD').innerText;
+        let cylindreD = document.getElementById('spanCylindreD').innerText;
         cylindreD = addPlus(cylindreD);
-    let axeD = 0;
-    if (document.getElementById("spanAxeD")) {
-        axeD = document.getElementById('spanAxeD').innerText;
-    }
-    let additionD = "+0.75";
-    if (document.getElementById("spanAdditionD")) {
-        additionD = document.getElementById('spanAdditionD').innerText;
-        additionD = addPlus(additionD);
-    }
+        let axeD = 0;
+        if (document.getElementById("spanAxeD")) {
+            axeD = document.getElementById('spanAxeD').innerText;
+        }
+        let additionD = "+0.75";
+        if (document.getElementById("spanAdditionD")) {
+            additionD = document.getElementById('spanAdditionD').innerText;
+            additionD = addPlus(additionD);
+        }
 
         $('#sphereD').val(sphereD);
-    $('#cylindreD').val(cylindreD);
-    $('#axeD').val(axeD);
-    $('#additionD').val(additionD);
+        $('#cylindreD').val(cylindreD);
+        $('#axeD').val(axeD);
+        $('#additionD').val(additionD);
+    }
+	else {
+        $('#droit').prop('checked', false);
+    }
 
-    let sphereG = document.getElementById('spanSphereG').innerText;
+
+
+
+
+    if (document.getElementById('spanSphereG')) {
+        let sphereG = document.getElementById('spanSphereG').innerText;
         sphereG = addPlus(sphereG)
-    let cylindreG = document.getElementById('spanCylindreG').innerText;
+        let cylindreG = document.getElementById('spanCylindreG').innerText;
         cylindreG = addPlus(cylindreG);
-    let axeG = 0;
-    if (document.getElementById("spanAxeG")) {
-        axeG = document.getElementById('spanAxeG').innerText;
+        let axeG = 0;
+        if (document.getElementById("spanAxeG")) {
+            axeG = document.getElementById('spanAxeG').innerText;
+        }
+        let additionG = "+0.75";
+        if (document.getElementById("spanAdditionG")) {
+            additionG = document.getElementById('spanAdditionG').innerText;
+            additionG = addPlus(additionG);
+        }
+        $('#sphereG').val(sphereG);
+        $('#cylindreG').val(cylindreG);
+        $('#axeG').val(axeG);
+        $('#additionG').val(additionG);
     }
-    let additionG = "+0.75";
-    if (document.getElementById("spanAdditionG")) {
-        additionG = document.getElementById('spanAdditionG').innerText;
-        additionG = addPlus(additionG);
+    else {
+        $('#gauche').prop('checked', false);
     }
 
-    $('#sphereG').val(sphereG);
-    $('#cylindreG').val(cylindreG);
-    $('#axeG').val(axeG);
-    $('#additionG').val(additionG);
+
  	
     
     var lensFocalGroup = $(this).val();

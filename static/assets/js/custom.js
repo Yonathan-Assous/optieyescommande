@@ -249,14 +249,13 @@ $('#reference_client').keyup(function() {
 
 
 $('#indices').on('change', function() {
-
 	$('#div_refraction').addClass('hide');
     $('#generation').val("").change();
     $('#lensFocalGroup').val("").change();
     $("#generation_progressif").css("display", "none");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-    
+	$('#additional_info').addClass('hide');
     $('#droit').prop('checked', true);
     $('#gauche').prop('checked', true);
 	
@@ -331,11 +330,25 @@ $('#indices').on('change', function() {
 	else if(indiceId=='mineral')
 	{
 		$("#id_indice_verre").val("9");
-	}	
+	}
 	else
 	{
 	
 	}
+	let sel = document.getElementById("lensFocalGroup");
+	let op = sel.getElementsByTagName("option")
+	if(indiceId=='mineral') {
+		op[3].hidden = true;
+		op[4].hidden = true;
+		op[6].hidden = true;
+	}
+	else {
+		op[3].hidden = false;
+		op[4].hidden = false;
+		op[6].hidden = false;
+	}
+
+
 
 	if(lensFocalGroup == '3')
 	{
@@ -377,7 +390,7 @@ $('#generation').on('change', function() {
   var generation = $(this).val();
   $('#precalibrage').addClass('hide');
   $('#certif').addClass('hide');
-  
+  $('#additional_info').addClass('hide');
   $('#progressionD').prop('disabled', false);
   $('#progressionG').prop('disabled', false);
   
@@ -535,7 +548,7 @@ $("#checkbox_prismes").click(function() {
    
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     if($(this).is(":checked")) 
     {
         $("#select_prisme").css("display", "none");
@@ -552,7 +565,7 @@ $("#checkbox_prismes_extend").click(function() {
    
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     if($(this).is(":checked")) 
     {
        
@@ -574,6 +587,7 @@ $('input[name=sphereD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=cylindreD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -581,6 +595,7 @@ $('input[name=cylindreD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=axeD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -588,6 +603,7 @@ $('input[name=axeD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=additionD]').focus(function() { 
     $('#produit').addClass('hide');
@@ -595,6 +611,7 @@ $('input[name=additionD]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=sphereG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -602,6 +619,7 @@ $('input[name=sphereG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=cylindreG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -609,6 +627,7 @@ $('input[name=cylindreG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=axeG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -616,6 +635,7 @@ $('input[name=axeG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 $('input[name=additionG]').focus(function() { 
     $('#produit').addClass('hide');
@@ -623,6 +643,7 @@ $('input[name=additionG]').focus(function() {
     $("#afficherV").css("display", "inline-block");
     $('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
+	$('#additional_info').addClass('hide');
 });
 
 
@@ -683,8 +704,12 @@ $('input[name=sphereD]').change(function() {
     		sphereD = sphereD+".00";
     		//alert(sphereD);
     		$("#sphereD").val(sphereD);
-    	}
-    		
+		}
+		if(isNaN(sphereD) == true)
+		{
+			sphereD = "0.00"
+		}
+
     	if (sphereD.indexOf("+") >= 0)
     	{
     		sphereD = sphereD.replace('+', '');
@@ -788,7 +813,10 @@ $('input[name=sphereG]').change(function() {
     		//alert(sphereD);
     		$("#sphereG").val(sphereG);
     	}
-    		
+		if(isNaN(sphereG) == true)
+		{
+			sphereG = "0.00"
+		}
     	if (sphereG.indexOf("+") >= 0)
     	{
     		sphereG = sphereG.replace('+', '');
@@ -890,7 +918,10 @@ $('input[name=cylindreD]').change(function() {
     		//alert(sphereD);
     		$("#cylindreD").val(cylindreD);
     	}
-    		
+		if(isNaN(cylindreD) == true)
+		{
+			cylindreD = "0.00"
+		}
     	if (cylindreD.indexOf("+") >= 0)
     	{
     		cylindreD = cylindreD.replace('+', '');
@@ -1017,7 +1048,12 @@ $('input[name=cylindreG]').change(function() {
     		//alert(sphereD);
     		$("#cylindreG").val(cylindreG);
     	}
-    		
+
+		if(isNaN(cylindreG) == true)
+		{
+			cylindreG = "0.00"
+		}
+
     	if (cylindreG.indexOf("+") >= 0)
     	{
     		cylindreG = cylindreG.replace('+', '');
@@ -1164,7 +1200,7 @@ $('#gauche').on('change', function() {
 
 	$('#precalibrage').addClass('hide');
 	$('#certif').addClass('hide');
-
+	$('#additional_info').addClass('hide');
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
 	
@@ -1217,7 +1253,7 @@ $('#droit').on('change', function() {
 		
 	$('#precalibrage').addClass('hide');
 	$('#certif').addClass('hide');
-	
+	$('#additional_info').addClass('hide');
 	$('#produit').addClass('hide');
 	$("#afficherV").css("display", "inline-block");
 	
@@ -1273,7 +1309,7 @@ $("input[name='dispoG']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1342,7 +1378,8 @@ $("input[name='dispoD']").change(function(){
 
 	$('#precalibrage').addClass('hide');
   	$('#certif').addClass('hide');
-  	
+	$('#additional_info').addClass('hide');
+
     var indiceId = $('#indices').val();
     var generation = $('#generation').val();
     var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1378,7 +1415,9 @@ $("input[name='dispoD']").change(function(){
 	
 	var progressionD = $('#progressionD').val();
     var progressionG = $('#progressionG').val();
-    
+
+    console.log('teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest');
+    console.log(stockD);
     if(stockD == "FabricationD")
     {
     	$('.display_fabrication').removeClass('hide');
@@ -1676,9 +1715,42 @@ $('#type_de_verreD').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-	
+
+	if( (selectedTextG.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
+	if( (selectedTextG.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextG.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
     if(selectedTextG.indexOf("- Stock") >= 0 || type_de_verreG == "")
     {
+
     	if(panierA == 0)
 		{
     		$('#certif').addClass('hide');
@@ -1702,6 +1774,7 @@ $('#type_de_verreD').on('change', function() {
 
 		if (rel.indexOf("]") >= 0)
 		{
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			$('#quantiteD').prop('disabled', false);
 			type_commande_verre = 2;
 		
@@ -1776,6 +1849,7 @@ $('#type_de_verreD').on('change', function() {
 									console.log("PrixD1")
 									$('#prixD').val(value.prix+"€");
     								$('#prixDH').val(value.prix);
+
 								});
 							}
 					});
@@ -1802,29 +1876,68 @@ $('#type_de_verreD').on('change', function() {
 		}
 		else
 		{
-		if(type_de_verreD != "") {
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+			if(type_de_verreD != "") {
 		//console.log(generation);
-			$.ajax({
-							type: "POST",
-							url: "/index/getPrix",
-							data: {"lens" : type_de_verreD,
-							"typedelens" : "fab",
-							"generation" : generation},
-							dataType: "json",
-							success: function (data) {	
-						//console.log(data);
-							$.each(data, function(key, value){
-									$('#prixVerreD').val(value.prix);
-									console.log("PrixD2")
-									$('#prixD').val(value.prix+"€");
-    								$('#prixDH').val(value.prix);
-							});	
-								
-							}
-					});
-			
+
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
+					$.ajax({
+						type: "POST",
+						url: "/index/getPrix",
+						data: {"lens" : type_de_verreD,
+							"typedelens" : "fab",
+							"generation" : generation},
+						dataType: "json",
+						success: function (data) {
+							//console.log(data);
+							$.each(data, function(key, value){
+								$('#prixVerreD').val(value.prix);
+								console.log("PrixD2")
+								$('#prixD').val(value.prix+"€");
+								$('#prixDH').val(value.prix);
+								var indice = $('#indices').val();
+								// var generation = $('#generation').val();
+								// var nomtraitement = $("#traitementD option:selected").html();
+								var nomverre = $("#type_de_verreD option:selected").html();
+								var traitementD = $('#traitementD').val();
+								var prixverre = $('#prixVerreD').val();
+
+
+								if (!traitementD) {
+									traitementD = "700100";
+								}
+
+								$.ajax({
+									type: "POST",
+									url: "/index/getOptions_price",
+									data: {"code" : traitementD,
+										"nom_du_verre" : nomverre,
+										"indice": indice,
+										"generation": generation
+									},
+									dataType: "json",
+									success: function (data) {
+										console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+
+										setTimeout(function(){
+											let prixteinte = $('#prixTeinteD').val();
+											$.each(data, function(key, value){
+												$('#prixTraitementD').val(value.prix);
+												var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+												console.log("PrixD5")
+												$('#prixD').val(tot+"€");
+												$('#prixDH').val(tot+"€");
+											});
+										},1000);
+									}
+
+								});
+							});
+
+						}
+					});
+
 					type_commande_verre = 2;
 					$('#teinteD').append('<option value="">----</option>');
 					$('#teinteD option:eq(0)').prop('selected', true);
@@ -1858,15 +1971,15 @@ $('#type_de_verreD').on('change', function() {
 					{
 						$('#teinteD').prop('disabled', false);
 					}
-					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementD').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementD').prop('disabled', false);
-					}
+					$('#traitementD').prop('disabled', false);
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementD').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementD').prop('disabled', false);
+					// }
 					
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
@@ -1883,6 +1996,7 @@ $('#type_de_verreD').on('change', function() {
 				
 					$('#quantiteD').prop('disabled', true);
 
+					console.log('22222222222222222222222222222222222222222222222222222222222222222')
 
 					$.ajax({
 							type: "POST",
@@ -1901,10 +2015,68 @@ $('#type_de_verreD').on('change', function() {
 							});
 							var selectedText = $("#traitementD option:selected").html();
 							$('#traitementDH').val(selectedText);
-						}
+								$.ajax({
+									type: "POST",
+									url: "/index/getPrix",
+									data: {"lens" : type_de_verreD,
+										"typedelens" : "fab",
+										"generation" : generation},
+									dataType: "json",
+									success: function (data) {
+										//console.log(data);
+										$.each(data, function(key, value){
+											$('#prixVerreD').val(value.prix);
+											console.log("PrixD2")
+											$('#prixD').val(value.prix+"€");
+											$('#prixDH').val(value.prix);
+											var indice = $('#indices').val();
+											// var generation = $('#generation').val();
+											// var nomtraitement = $("#traitementD option:selected").html();
+											var nomverre = $("#type_de_verreD option:selected").html();
+											var traitementD = $('#traitementD').val();
+											var prixverre = $('#prixVerreD').val();
+
+											console.log('saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+											console.log($('#traitementD').val())
+											if (!traitementD) {
+												traitementD = "700100";
+											}
+
+											$.ajax({
+												type: "POST",
+												url: "/index/getOptions_price",
+												data: {"code" : traitementD,
+													"nom_du_verre" : nomverre,
+													"indice": indice,
+													"generation": generation
+												},
+												dataType: "json",
+												success: function (data) {
+													setTimeout(function(){
+														let prixteinte = $('#prixTeinteD').val();
+														$.each(data, function(key, value){
+															$('#prixTraitementD').val(value.prix);
+															var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
+															console.log("PrixD5")
+															$('#prixD').val(tot+"€");
+															$('#prixDH').val(tot+"€");
+														});
+													},1000);
+												}
+
+											});
+										});
+
+									}
+								});
+
+							}
 			
 					});
-				
+
+
+
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
@@ -1930,7 +2102,8 @@ $('#type_de_verreD').on('change', function() {
 						url: "/index/get_Diametre",
 						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
 						dataType: "json",
-						success: function (data) {	
+						success: function (data) {
+						console.log(data);
 						$('#diametreD').empty();
 						$('#diametreD').append('<option value="">-- Choisir --</option>');
 					
@@ -2063,7 +2236,8 @@ $('#type_de_verreD').on('change', function() {
 
 
 $('#type_de_verreG').on('change', function() {
-
+	// console.log('44444444444444444444444444444444444444444444444444444');
+	// console.log($('#traitementG').val());
 	$('#precalibrage').addClass('hide');
 	var indiceId = $('#indices').val();
     var generation = $('#generation').val();
@@ -2179,7 +2353,23 @@ $('#type_de_verreG').on('change', function() {
 		$('#civilite_client').css("display", "block");
 		$('#to_etape2').addClass('disabled');
 	}
-    
+
+	if( (selectedTextD.toLowerCase()).indexOf("t-one") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("e-space") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("elysium") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("platinium") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("omega") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("eyefatigue") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("top office") != -1 ||
+		(selectedTextD.toLowerCase()).indexOf("freestyle") != -1
+	)
+	{
+		$('#additional_info').removeClass('hide');
+	}
+	else {
+		$('#additional_info').addClass('hide');
+	}
+
     if(selectedTextD.indexOf("- Stock") >= 0 || type_de_verreD == "")
     {
     	if(panierA == 0)
@@ -2197,8 +2387,8 @@ $('#type_de_verreG').on('change', function() {
 	$('#to_etape2').addClass('disabled');
     
     
-    $('#teinteG').empty();
-    $('#traitementG').empty();    
+    // $('#teinteG').empty();
+    // $('#traitementG').empty();
     
     if(type_de_verreG != "")
     {
@@ -2295,25 +2485,74 @@ $('#type_de_verreG').on('change', function() {
 		}
 		else
 		{
+
 			if(type_de_verreG != "") {
-				$.ajax({
-							type: "POST",
-							url: "/index/getPrix",
-							data: {"lens" : type_de_verreG,
-							"typedelens" : "fab",
-							"generation" : generation},
-							dataType: "json",
-							success: function (data) {	
-								$.each(data, function(key, value){
-									$('#prixVerreG').val(value.prix);
-									calculPriceG();
-									// $('#prixG').val(value.prix+"€");
-    								$('#prixGH').val(value.prix);
-								});
-							}
-					});
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
+					$.ajax({
+						type: "POST",
+						url: "/index/getPrix",
+						data: {"lens" : type_de_verreG,
+							"typedelens" : "fab",
+							"generation" : generation},
+						dataType: "json",
+						success: function (data) {
+							$.each(data, function(key, value){
+								$('#prixVerreG').val(value.prix);
+								//calculPriceG();
+								// $('#prixG').val(value.prix+"€");
+								//$('#prixGH').val(value.prix);
+								var indice = $('#indices').val();
+								var generation = $('#generation').val();
+								var nomtraitement = $("#traitementD option:selected").html();
+								var nomverre = $("#type_de_verreG option:selected").html();
+								var traitementG = $('#traitementG').val();
+								var prixverre = $('#prixVerreG').val();
+								var quantity = $('#quantiteD').val();
+								console.log('test6')
+								console.log(indice)
+								console.log(generation)
+								console.log(nomtraitement)
+								console.log(nomverre)
+								console.log(traitementG)
+								console.log(prixverre)
+								if (!nomtraitement) {
+									nomtraitement = "Durci";
+								}
+								if (!traitementG) {
+									traitementG = "700100";
+								}
+								console.log('ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc')
+
+								$.ajax({
+									type: "POST",
+									url: "/index/getOptions_price",
+									data: {"code" : traitementG,
+										"name" : nomtraitement,
+										"nom_du_verre" : nomverre,
+										"indice": indice,
+										"generation": generation
+									},
+									dataType: "json",
+									success: function (data) {
+										setTimeout(function(){
+											var prixteinte = $('#prixTeinteG').val();
+											$.each(data, function(key, value){
+												$('#prixTraitementG').val(value.prix);
+												var tot =  ((parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche())*quantity).toFixed(2);
+												console.log("PrixG5")
+												console.log(tot)
+												$('#prixG').val(tot+"€");
+												$('#prixGH').val(tot+"€");
+											});
+										},1000);
+									}
+
+								});
+							});
+						}
+					});
+
 					type_commande_verre = 2;
 					$('#teinteG').append('<option value="">----</option>');
 					$('#teinteG option:eq(0)').prop('selected', true);
@@ -2346,15 +2585,16 @@ $('#type_de_verreG').on('change', function() {
 						$('#teinteG').prop('disabled', false);
 					}
 					
-					if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
-					{
-						$('#traitementG').prop('disabled', true);
-					}
-					else
-					{
-						$('#traitementG').prop('disabled', false);
-					}
-					
+					// if((selectedText.indexOf("Mineral") >= 0 && selectedText.indexOf("Photo") >= 0) || (selectedText.indexOf("Minéral") >= 0 && selectedText.indexOf("Photo") >= 0))
+					// {
+					// 	$('#traitementG').prop('disabled', true);
+					// }
+					// else
+					// {
+					// 	$('#traitementG').prop('disabled', false);
+					// }
+					$('#traitementG').prop('disabled', false);
+
 					if(selectedText.indexOf("Mineral") >= 0 || selectedText.indexOf("Minéral") >= 0  || selectedText.indexOf("Panier") >= 0 )
 					{
 						$('#galbeG').prop('disabled', true);
@@ -2369,8 +2609,8 @@ $('#type_de_verreG').on('change', function() {
 					type_commande_verre = 1;
 				
 					$('#quantiteG').prop('disabled', true);
-			
-			
+					// console.log($('#traitementG').val());
+					// console.log('11111111111111111111111111111111111111111111111111111')
 					var k = "";
 					$.ajax({
 							type: "POST",
@@ -2378,19 +2618,95 @@ $('#type_de_verreG').on('change', function() {
 							data: {"lens" : type_de_verreG},
 							dataType: "json",
 							success: function (data) {
-								//console.log('OPTIOOOOOOOOOOOOOOOOOOOOON');
+								// console.log('OPTIOOOOOOOOOOOOOOOOOOOOON');
+								// console.log('77777777777777777777777777777777777777777777777777777777777');
+								// console.log($('#traitementG').val());
+								var traitementG = $('#traitementG').val();
 							$('#traitementG option:eq(0)').prop('selected', true);
+								// console.log('888888888888888888888888888888888888888888888888');
+								// console.log($('#traitementG').val());
+								$('#traitementG').val(traitementG);
 							// $('#traitementGH').val("Durci");
+							$("#traitementG").empty();
+
 							$.each(data, function(key, value){
 								if(value.name != "Express 24" && value.name != "Second pair")
 									$('#traitementG').append('<option value="'+ value.code +'">' + decodeURIComponent(escape(value.trad_fr)) + '</option>');
-
 							});
 							var selectedText = $("#traitementG option:selected").html();
 							$('#traitementGH').val(selectedText);
-						}
+							console.log('traitementG TEST:' + $('#traitementG').val());
+							console.log(selectedText);
+							$.ajax({
+									type: "POST",
+									url: "/index/getPrix",
+									data: {"lens" : type_de_verreG,
+										"typedelens" : "fab",
+										"generation" : generation},
+									dataType: "json",
+									success: function (data) {
+										$.each(data, function(key, value){
+											$('#prixVerreG').val(value.prix);
+											//calculPriceG();
+											// $('#prixG').val(value.prix+"€");
+											//$('#prixGH').val(value.prix);
+											var indice = $('#indices').val();
+											var generation = $('#generation').val();
+											var nomtraitement = $("#traitementG option:selected").html();
+											var nomverre = $("#type_de_verreG option:selected").html();
+											traitementG = $('#traitementG').val();
+											var prixverre = $('#prixVerreG').val();
+											console.log('test11')
+											console.log(indice)
+											console.log(generation)
+											console.log(nomtraitement)
+											console.log(nomverre)
+											console.log(traitementG)
+											console.log(prixverre)
+											if (!nomtraitement) {
+												nomtraitement = "Durci";
+											}
+											if (!traitementG) {
+												traitementG = "700100";
+											}
+											console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+
+											$.ajax({
+												type: "POST",
+												url: "/index/getOptions_price",
+												data: {"code" : traitementG,
+													"name" : nomtraitement,
+													"nom_du_verre" : nomverre,
+													"indice": indice,
+													"generation": generation
+												},
+												dataType: "json",
+												success: function (data) {
+													setTimeout(function(){
+														var prixteinte = $('#prixTeinteG').val();
+														$.each(data, function(key, value){
+															$('#prixTraitementG').val(value.prix);
+															console.log(value.prix);
+															console.log('testtttttttttttttttttt');
+															var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeGauche()).toFixed(2);
+															console.log("PrixG5")
+															console.log(tot);
+															$('#prixG').val(tot+"€");
+															$('#prixGH').val(tot+"€");
+														});
+													},1000);
+												}
+
+											});
+										});
+									}
+								});
+
+							}
 					});
-				
+
+
+
 					if(indiceId != "1.53" && indiceId != "1.59")
 					{
 						var c = "";
@@ -2408,7 +2724,8 @@ $('#type_de_verreG').on('change', function() {
 									var x = a.prix, y = b.prix;
 									return x < y ? -1 : x > y ? 1 : 0;
 								});*/
-
+								$("#teinteG").empty();
+								$('#teinteG').append('<option value>Aucune</option>');
 								$.each(data, function(key, value){
 									$('#teinteG').append('<option value="'+ value.code +'">' + value.trad_fr + '</option>');
 						
@@ -2492,7 +2809,7 @@ $('#type_de_verreG').on('change', function() {
     
 	if(panierA == 1)
 	{
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 }); 
 
@@ -2517,7 +2834,7 @@ $('#quantiteD').on('change', function() {
 	calculPriceD();
 	
 	
-	//var qty = $('#quantiteD').val();
+	var qty = $('#quantiteD').val();
 	//var prixf = prix*qty;
 	//console.log("PrixD3")
 	//$('#prixD').val(prixf.toFixed(2)+'€');
@@ -2554,16 +2871,16 @@ $('#quantiteG').on('change', function() {
 	//
 	// var prix = (prixverre+prixteinte+prixtraitement).toFixed(2);
 	//
-	// var qty = $('#quantiteG').val();
+	var qty = $('#quantiteG').val();
 	// var prixf = prix*qty;
 	// $('#prixG').val(prixf.toFixed(2)+'€');
 	calculPriceG();
-	$('#prixGH').val(prixf.toFixed(2)+'€');	
-	
+	$('#prixGH').val(prixf.toFixed(2)+'€');
+	$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 	if(($("#type_de_verreD").val() == $("#type_de_verreG").val()) && (type_commande_verre == 2))
 	{
-		$('#quantiteG').val(qty);
-		$('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
+
+		// $('#quantiteD option[value="'+ qty +'"]').prop('selected', true);
 		console.log("PrixD4")
 		calculPriceG();
 		//$('#prixD').val($('#prixG').val());
@@ -2616,7 +2933,7 @@ $('#teinteG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
    
    $("#teintepersoG").val("");
@@ -2720,6 +3037,7 @@ $('#diametreD').on('change', function() {
     {
 		if(selectedTextD.indexOf(" - Stock") >= 0)
 		{
+			$('#additional_info').addClass('hide');
 			if(selectedTextG.indexOf(" - Stock") == -1 || $('#diametreG').val() == "")
 			{
 				$('#certif').addClass('hide');
@@ -2741,6 +3059,7 @@ $('#diametreD').on('change', function() {
 		}
 		else
 		{
+			$('#additional_info').removeClass('hide');
 			$('#certif').removeClass('hide');
 			
 			if((droite && type_de_verreD != "" && optionType_de_verreD.indexOf(" - Stock") == -1) || (droite && type_de_verreD != "" && optionType_de_verreD.indexOf("Panier") >= 0))
@@ -2861,7 +3180,7 @@ $('#diametreD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if (String(sphereD).indexOf("+") >= 0)
@@ -2969,6 +3288,15 @@ $('#diametreD').on('change', function() {
     
 });
 
+$('#ecart_puppillaire_droit').on('change', function() {
+	$('#ecart_puppillaire_gauche').val($('#ecart_puppillaire_droit').val())
+});
+
+$('#hauteur').on('change', function() {
+	$('#hauteur_gauche').val($('#hauteur').val())
+});
+
+
 $('#diametreG').on('change', function() {
 	var diametreG = $(this).val();
 	var diametreD = $('#diametreD').val();
@@ -3032,6 +3360,7 @@ $('#diametreG').on('change', function() {
     {
         if(selectedTextG.indexOf(" - Stock") >= 0)
 		{
+			$('#additional_info').addClass('hide');
 			if(selectedTextD.indexOf(" - Stock") == -1 || $('#diametreD').val() == "")
 			{
 				$('#certif').addClass('hide');
@@ -3052,6 +3381,7 @@ $('#diametreG').on('change', function() {
 		}
 		else
 		{
+			$('#additional_info').removeClass('hide');
 			$('#certif').removeClass('hide');
 			
 			if((gauche && type_de_verreG != "" && optionType_de_verreG.indexOf(" - Stock") == -1) || (gauche && type_de_verreG != "" && optionType_de_verreG.indexOf("Panier") >= 0))
@@ -3157,7 +3487,7 @@ $('#diametreG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	
 	if(diametreG=="precalibrage")
@@ -3259,7 +3589,7 @@ $('#teinteD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     $("#teinteDH").val(selectedText);
@@ -3359,7 +3689,10 @@ $('#teinteD').on('change', function() {
 				}
 		
 			});
-			
+			// console.log(nomtraitement);
+			// console.log('55555555555555555555555555555555555555555555555555555555555555')
+			console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3409,7 +3742,9 @@ $('#teinteD').on('change', function() {
 			var nomverre = $("#type_de_verreD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
-			
+			console.log(nomtraitement);
+			console.log('8888888888888888888888888888888888888888888888888888888888')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3536,7 +3871,9 @@ $('#teinteG').on('change', function() {
 				}
 		
 			});
-			
+			console.log(nomtraitement);
+			console.log('777777777777777777777777777777777777777777777777')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3586,7 +3923,10 @@ $('#teinteG').on('change', function() {
 			var nomverre = $("#type_de_verreG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
-			
+			// console.log(nomtraitement);
+			// console.log('6666666666666666666666666666666666666666666666666666')
+			console.log('uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
+
 			if(nomtraitement != "----" && nomtraitement != "Aucun")
 			{
 				var indice = $('#indices').val();
@@ -3730,7 +4070,7 @@ $('#galbeD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	
 /*	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && traitementD==traitementG && teinteD==teinteG && diametreD==diametreG && ((galbeG=="Standard" || galbeD==galbeG) && galbeD!="Standard"))
@@ -3841,7 +4181,7 @@ $('#traitementD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if(traitementD == "0")
@@ -3857,6 +4197,8 @@ $('#traitementD').on('change', function() {
 			var nomteinte = $("#teinteD option:selected").html();
 			var nomtraitement = $("#traitementD option:selected").html();
 			$('#divprixD').removeClass('hide');
+
+			console.log('4444444444444444444444444444444444444444444444444444444444444444')
 
 			var indice = $('#indices').val();
 			var generation = $('#generation').val();
@@ -4119,7 +4461,7 @@ $('#traitementG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
     
     if(type_de_verreG != "")
@@ -4130,6 +4472,7 @@ $('#traitementG').on('change', function() {
 			var nomteinte = $("#teinteG option:selected").html();
 			var nomtraitement = $("#traitementG option:selected").html();
 			$('#divprixG').removeClass('hide');
+			console.log('333333333333333333333333333333333333333333333333333333333333333333333333333')
 
 			var indice = $('#indices').val();
 			var generation = $('#generation').val();
@@ -4302,14 +4645,70 @@ var galbeG = $('#galbeG').val();
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		$('#to_etape2').addClass('disabled');
+		// $('#to_etape2').addClass('disabled');
 	}
 	calculPrice();
 
 });
 
 $('#afficherV').on('click', function() {
+	var cylindreD = $('#cylindreD').val()
+	let index = cylindreD.indexOf("-");
+	let isCylinderNegative = false;
+	if(index !== -1){
+		let sphereD = $('#sphereD').val();
+		cylindreD = (-cylindreD).toFixed(2);
+		sphereD = parseFloat(sphereD) - parseFloat(cylindreD)
+		sphereD = sphereD.toFixed(2);
+		$('#cylindreD').val(cylindreD);
+		$('#sphereD').val(sphereD);
 
+		let axeD = parseInt($('#axeD').val());
+		if (axeD >= 90) {
+			axeD -= 90;
+		}
+		else {
+			axeD += 90;
+		}
+		$('#axeD').val(axeD);
+		isCylinderNegative = true;
+	}
+	var cylindreG = $('#cylindreG').val()
+	index = cylindreG.indexOf("-");
+	if(index !== -1){
+		let cylindreG = $('#cylindreG').val();
+		let sphereG = $('#sphereG').val();
+		cylindreG = -cylindreG
+		sphereG = parseFloat(sphereG) - parseFloat(cylindreG)
+		sphereG = sphereG.toFixed(2);
+		$('#cylindreG').val(-cylindreG);
+		$('#sphereG').val(cylindreG + sphereG);
+		$('#cylindreG').val(cylindreG);
+		$('#sphereG').val(sphereG);
+
+		let axeG = parseInt($('#axeG').val());
+		if (axeG >= 90) {
+			axeG -= 90;
+		}
+		else {
+			axeG += 90;
+		}
+		$('#axeG').val(axeG);
+		isCylinderNegative = true;
+	}
+	if (isCylinderNegative) {
+		$('#cylindre_negative').modal('show');
+	}
+	else {
+		afficherV();
+	}
+});
+
+$('#cylindre_negative_ok').on('click', function() {
+	afficherV()
+});
+
+function afficherV() {
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
 	
@@ -4367,8 +4766,7 @@ $('#afficherV').on('click', function() {
 		$('#progressionD').prop('disabled', true);
 		$('#progressionG').prop('disabled', true);
 	}
-    
-    
+
     
     var forceSphStep = true;
     
@@ -4393,18 +4791,17 @@ $('#afficherV').on('click', function() {
     	{
     		checkG = checkG.replace('+', '');
     	}
-    
-		if( ((Number(checkD) > 0) != (Number(checkG) > 0)) && checkD != 0) {
 
+		if( ((Number(checkD) > 0) != (Number(checkG) > 0)) && checkD != 0) {
+			console.log('test');
 			swal({
 				title: "Signes contraires confirmés ?",
 				text: "",
 				type: "warning",
 				showCancelButton: true,
-				confirmButtonText: "Oui",
+				confirmButtonText: "ok",
 				cancelButtonText: "Modifier",
 				closeOnConfirm: true,
-				closeOnCancel: true
 			}, function(isConfirm){
 				if (isConfirm) {
 					forceSphStep = true;
@@ -4416,6 +4813,7 @@ $('#afficherV').on('click', function() {
 					$("#afficherV").css("display", "inline-block");
 					$('#precalibrage').addClass('hide');
 					$('#certif').addClass('hide');
+					$('#additional_info').addClass('hide');
 				}
 			});
 
@@ -4591,7 +4989,7 @@ $('#afficherV').on('click', function() {
 	
 	}
 	
-});
+}
 
 $('#VersGauche').on('click', function() {
 
@@ -4833,6 +5231,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 				console.log("getTypedeVerre Empty type_de_verreD");
 				$('#type_de_verreD').trigger('change');
 			},300);
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			if(lensFocalGroup == "3")
 			{
 				if(progressionD == '')
@@ -4844,6 +5243,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionD == 'Short' || progressionD == 'Tous') && (stockD == 'StockD' || stockD == 'ToutD'))
 					{
+						console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -4851,7 +5252,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							dataType: "json",
 							success: function (data) {	
 							//alert(data);
-							if(data != "")
+							if(data)
 							{
 								console.log(data);	
 								$.each(data, function(key, value){
@@ -5215,11 +5616,14 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stock = {};
 				var tab_verres = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
-				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
+				console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67" || indiceId == "1.74") && (lensFocalGroup == "1") && (stockD == 'StockD' || stockD == 'ToutD'))
 				{
 					console.log("PanierA:"+panierAm+"AAAAA");
+					console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -5360,8 +5764,9 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
-			if(lensFocalGroup == "3")
+				console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+
+				if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
 				{
@@ -5372,6 +5777,8 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
+						console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -5381,7 +5788,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 							//alert(data);
 							//console.log(data);
 							//console.log("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereG+" ,cylindreD:"+cylindreG+" ,axeD:"+axeG+" ,additionD:"+additionG+" ,stockD:"+stockG+" ,panierA:"+panierAm);	
-							if(data != "")
+							if(data)
 							{
 								$.each(data, function(key, value){
 									setTimeout(function(){
@@ -5749,10 +6156,13 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
+					console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -6038,7 +6448,8 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			setTimeout(function(){
 				$('#type_de_verreG').trigger('change');
 			},300);
-			
+			console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+
 			if(lensFocalGroup == "3")
 			{
 				if(progressionG == '')
@@ -6050,6 +6461,8 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereG:"+sphereG+" ,sphereG:"+sphereG+" ,cylindreG:"+cylindreG+" ,cylindreG:"+cylindreG+" ,axeG:"+axeG+" ,axeG:"+axeG+" ,additionG:"+additionG+" ,additionG:"+additionG+" ,stockG:"+stockG+" ,stockG:"+stockG+" ,progressionG:"+progressionG+" ,progressionG:"+progressionG);	
 					if((indiceId == "1.5" || indiceId == "1.6" || indiceId == "1.59" || indiceId == "1.67") &&  (progressionG == 'Short' || progressionG == 'Tous') && (stockG == 'StockD' || stockG == 'ToutD'))
 					{
+						console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+
 						$.ajax({
 							type: "POST",
 							url: "/index/getStockTypeDeVerre",
@@ -6423,10 +6836,13 @@ function getTypedeVerreG(indiceId,lensFocalGroup,generation,sphereD,sphereG,cyli
 			{
 				var tab_verres_stockG = {};
 				var tab_verresG = {};
-				
-			//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
+				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+
+				//	alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);
 				if((lensFocalGroup == "1") && (stockG == 'StockD' || stockG == 'ToutD'))
 				{
+					console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+
 					//alert("indiceId:"+indiceId+" ,lensFocalGroup:"+lensFocalGroup+" ,generation:"+generation+" ,sphereD:"+sphereD+" ,sphereG:"+sphereG+" ,cylindreD:"+cylindreD+" ,cylindreG:"+cylindreG+" ,axeD:"+axeD+" ,axeG:"+axeG+" ,additionD:"+additionD+" ,additionG:"+additionG+" ,stockD:"+stockD+" ,stockG:"+stockG+" ,progressionD:"+progressionD+" ,progressionG:"+progressionG);	
 					$.ajax({
 						type: "POST",
@@ -6677,8 +7093,8 @@ function copyVersDroit()
 	
 		$('#progressionD option').clone().appendTo('#progressionG');
 		$('#type_de_verreD option').clone().appendTo('#type_de_verreG');
-		$('#teinteD option').clone().appendTo('#teinteG');
-		$('#traitementD option').clone().appendTo('#traitementG');
+		$('#traitementG').html($('#traitementD').html());
+		$('#teinteG').html($('#teinteD').html());
 		$('#diametreD option').clone().appendTo('#diametreG');
 		$('#galbeD option').clone().appendTo('#galbeG');
 	
@@ -6686,6 +7102,8 @@ function copyVersDroit()
 		$('#type_de_verreG').val(type_de_verreD);
 		$('#teinteG').val(teinteD);
 		$('#traitementG').val(traitementD);
+		// console.log('22222222222222222222222222222222222222222');
+		// console.log($('#traitementG').val());
 		$('#diametreG').val(diametreD);
 		$('#galbeG').val(galbeD);
 	
@@ -6773,9 +7191,10 @@ function copyVersDroit()
 				$('#traitementGH').val($('#traitementDH').val());
 
 		},600);
-	
-		
-		
+
+
+		// console.log('333333333333333333333333333333333333333333333333333333333');
+		// console.log($('#traitementG').val());
 	}
 	else
 	{
@@ -6882,6 +7301,21 @@ function copyVersDroit()
 			$('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
+		if((selectedText.toLowerCase()).indexOf("t-one") != -1 ||
+			(selectedText.toLowerCase()).indexOf("e-space") != -1 ||
+			(selectedText.toLowerCase()).indexOf("elysium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("platinium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("omega") != -1 ||
+			(selectedText.toLowerCase()).indexOf("eyefatigue") != -1 ||
+			(selectedText.toLowerCase()).indexOf("top office") != -1 ||
+			(selectedText.toLowerCase()).indexOf("freestyle") != -1
+		)
+		{
+			$('#additional_info').removeClass('hide');
+		}
+		else {
+			$('#additional_info').addClass('hide');
+		}
 		if(selectedText.indexOf(" - Stock") == -1 || selectedText.indexOf("Panier") >= 0)
 		{
 			$('#certif').removeClass('hide');
@@ -6908,6 +7342,8 @@ function copyVersDroit()
 			$('#to_etape2').removeClass('disabled');
 		}
 	}
+	console.log('55555555555555555555555555555555555555555555555555555');
+	console.log($('#traitementG').val());
 	calculPrice();
 }
 
@@ -7117,9 +7553,25 @@ function copyVersGauche()
 		$('#to_etape2').removeClass('disabled');
 		if(panierA == 1)
 		{
-			$('#to_etape2').addClass('disabled');
+			// $('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
+		if( (selectedText.toLowerCase()).indexOf("t-one") != -1 ||
+		    (selectedText.toLowerCase()).indexOf("e-space") != -1 ||
+			(selectedText.toLowerCase()).indexOf("elysium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("platinium") != -1 ||
+			(selectedText.toLowerCase()).indexOf("omega") != -1 ||
+			(selectedText.toLowerCase()).indexOf("eyefatigue") != -1 ||
+			(selectedText.toLowerCase()).indexOf("top office") != -1 ||
+			(selectedText.toLowerCase()).indexOf("freestyle") != -1
+		)
+		{
+			$('#additional_info').removeClass('hide');
+		}
+		else {
+			$('#additional_info').addClass('hide');
+		}
+
 		if(selectedText.indexOf(" - Stock") == -1 || selectedText.indexOf("Panier") >= 0)
 		{
 			$('#certif').removeClass('hide');
@@ -7227,8 +7679,7 @@ var forceAddStep = false;
 var forceSphStep = false;
 
 $(document).ready(function() {
-
-	$('.order-form-container').fadeIn(60);
+		$('.order-form-container').fadeIn(60);
 	$(".select-search").select2();
 
 	$('.referenceClient').on('keyup', 'input', function() {
@@ -7288,7 +7739,7 @@ $(document).ready(function() {
 	
 	if(panierA == 1)
 	{
-		$('#to_etape2').removeClass('disabled');
+		// $('#to_etape2').removeClass('disabled');
 	
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
@@ -8262,17 +8713,6 @@ $(document).ready(function() {
 });
 
 
-function addPrismeGalbeGauche() {
-	var prixPrisme = 0;
-	var prixGalbe = 0;
-	if ($('#PrismeSphereG').val()) {
-		prixPrisme = 3.9;
-	}
-	if ($('#galbeG').val() != 'Standard') {
-		prixGalbe = 3.9;
-	}
-	return parseFloat(prixPrisme) + parseFloat(prixGalbe);
-}
 
 function addPrismeGalbeDroit() {
 	var prixPrisme = 0;
@@ -8301,6 +8741,8 @@ function addPrismeGalbeGauche() {
 function calculPrice() {
 	calculPriceD();
 	calculPriceG();
+	console.log('66666666666666666666666666666666666666666666666666666');
+	console.log($('#traitementG').val());
 }
 function calculPriceD() {
 	var droit = $('#droit').is(':checked');

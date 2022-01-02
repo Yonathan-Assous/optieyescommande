@@ -33,10 +33,50 @@ include_once('menu.php');
                             </select>
                         </div>
 
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_reference_optieyes"> Référence optieyes</label>
+                            <input type="number" id="recherche_reference_optieyes" class="form-control">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_reference_client"> Référence Client</label>
+                            <input type="text" id="recherche_reference_client" class="form-control">
+                        </div>
+
+
+<!--                        <div class="col-sm-2">-->
+<!--                            <label class="m-b-10" for="date_start"> Depuis </label>-->
+<!--                            <select id="date_start" class="form-control">-->
+<!--                                <option value="1 month" selected>1 mois</option>-->
+<!--                                <option value="3 months">3 mois</option>-->
+<!--                                <option value="6 months">6 mois</option>-->
+<!--                                <option value="1 year">1 an</option>-->
+<!--                                <option value="all">Toujours</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_sphere"> Sphère </label>
+                            <input type="text" id="recherche_sphere" class="form-control">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_cylindre"> Cylindre </label>
+                            <input type="text" id="recherche_cylindre" class="form-control">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="recherche_axe"> Axe </label>
+                            <input type="text" id="recherche_axe" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12">
+                            <label class="m-b-10" for="search">&nbsp;</label>
+                            <button id="search" type="button" class="btn btn-warning form-control waves-effect waves-light" style="display: block">Rechercher</button>
+                        </div>
                     </div>
-
-
                 </div>
+
 
 
                 <div class="col-sm-12">
@@ -108,12 +148,16 @@ include_once('menu.php');
 
 <script>
     $(document).ready(function() {
-
-        var table = $('#datatable').DataTable({
-            ajax: { url: "/admin/ancienne_commande_ajax", dataSrc: 'aaData' },
+        //var dateStart = $("#date_start").val();
+        var x = 500;
+            var table = $('#datatable').DataTable({
+            ajax: { url: "/admin/ancienne_commande_ajax"
+                    //+ "?date_start="+dateStart
+                , dataSrc: 'aaData' },
             deferRender: true,
             ordering: false,
             serverSide: true,
+            bFilter: false,
             columnDefs: [{
                 "targets": 9,
                 "createdCell": function (td, cellData, rowData, row, col) {
@@ -137,7 +181,7 @@ include_once('menu.php');
                 "zeroRecords": "Aucune commande trouvée",
                 "info": "Affichage de la page page _PAGE_ sur _PAGES_",
                 "infoEmpty": "Aucune commande à afficher",
-                "infoFiltered": "(Filtrat de _MAX_ entrées)",
+               // "infoFiltered": "(Filtrat de _MAX_ entrées)",
                 "search": "Recherche",
                 "paginate": {
                     "first":      "Première",
@@ -148,17 +192,62 @@ include_once('menu.php');
             }
         });
 
-        $(document).on("change", "#recherche_num_magasin", function(){
-            var value = $(this).val();
 
-            if(value != '') {
-                table.ajax.url('/admin/ancienne_commande_ajax?id_users='+value).load();
+
+
+        $(document).on("change", "#recherche_num_magasin", function(){
+            search();
+        });
+
+        // $(document).on("change", "#date_start", function(){
+        //     search();
+        // });
+        //
+        // $("input").on('input', function() {
+        //     search();
+        // });
+        // $(document).on("change", "#recherche_reference_optieyes", function(){
+        //     search();
+        // });
+
+        // $(document).on("change", "#recherche_reference_optieyes", function(){
+        //     console.log('a');
+        //     search();
+        //
+        // });
+
+        $('#search').click(function () {
+            search();
+        });
+
+        function search() {
+            var magasin = $("#recherche_num_magasin").val();
+            var reference_optieyes = $("#recherche_reference_optieyes").val();
+            var reference_client = $("#recherche_reference_client").val();
+            // var dateStart = $("#date_start").val();
+            var recherche_sphere = $("#recherche_sphere").val();
+            var recherche_cylindre = $("#recherche_cylindre").val();
+            var recherche_axe = $("#recherche_axe").val();
+
+            if(magasin != '' || reference_optieyes != '' || reference_client != '') {
+                table.ajax.url('/admin/ancienne_commande_ajax?id_users='+magasin +
+                    '&reference_optieyes=' + reference_optieyes +
+                    '&reference_client=' + reference_client +
+                    // '&date_start=' + dateStart +
+                    '&recherche_sphere=' + recherche_sphere +
+                    '&recherche_cylindre=' + recherche_cylindre +
+                    '&recherche_axe=' + recherche_axe
+                ).load();
             }
             else {
-                table.ajax.url('/admin/ancienne_commande_ajax').load();
+                table.ajax.url('/admin/ancienne_commande_ajax?' +
+                // 'date_start=' + dateStart +
+                '&recherche_sphere=' + recherche_sphere +
+                '&recherche_cylindre=' + recherche_cylindre +
+                '&recherche_axe=' + recherche_axe
+                ).load();
             }
-
-        });
+        }
 
         $(document).on("click", "button[id^=annule_envoi_]", function(){
             var num_commande = $(this).attr('id').split('_')[2];

@@ -174,21 +174,16 @@
                     $nb_page = 1;
                     $ajoutUneFois = true;
 					$onlyTarifLivraison = false;
-                    $tarifPackaging = 0;
-                    $i = 0;
+//                    $tarifPackaging = 0;
+                    //$i = 0;
 
                     foreach($facture as $key => $facture) {
 
-                        if($i == 0) {
-                            if(isset($facture->tarif_packaging)) {
-                                $tarifPackaging = $facture->tarif_packaging;
-                            }
-                            else {
-                                $tarifPackaging = 0;
-                            }
-                        }
-
-                        ++$i;
+//                        if($i == 0 && isset($facture->tarif_packaging) && $facture->tarif_packaging > 0) {
+//                                $tarifPackaging = $facture->tarif_packaging;
+//                                $i = 1;
+//                        }
+                        //++$i;
 					
                         if($nbMaxElementParPage == $MaxElement){
                             echo '</tbody></table>

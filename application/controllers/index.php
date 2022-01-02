@@ -4,13 +4,26 @@ class index extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-
+//        echo '<pre>';
+//        print_r($this->session->userdata());
+//        echo '</pre>';die;
         if($this->session->userdata('data_user') !== false && !isset($this->data['data_user'])){
             $this->data = $this->session->userdata('data_user');
             $this->data['data_admin'] = $this->session->userdata('data_admin');
             $this->data['parametre_lang_datable'] = $this->config->item('parametre_lang_datable');
             $this->data['parametre_export_datable'] = $this->config->item('parametre_export_datable');
             $this->data['taux_tva'] = $this->session->userdata('taux_tva') ;
+        }
+
+        if (isset($this->session->userdata('data_user')['user_info'])) {
+            $user = $this->getUserById($this->session->userdata('data_user')['user_info']->id_users);
+        }
+        $function = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+        if($this->session->userdata('data_user') !== false
+            && $user->accept_conditions == false && $function != 'logout' && $function != 'verifyCheckedCondition') {
+//            var_dump($this->data);die;
+            $this->data['page'] = $this->data['title'] = "CGV";
+            $this->load->view('accept_conditions', $this->data);
         }
 
         if($this->session->userdata('is_admin')){
@@ -24,17 +37,77 @@ class index extends MY_Controller {
 		$this->load->helper(array('cookie', 'url'));
     }
 
+    private function test2() {
+        $this->load->view('accept_conditions');
+    }
+
+    private function getUserById($id) {
+        $query = $this->db->where('id_users', $id)->get('users');
+        $user = $query->result();
+        return $user[0];
+    }
 
 	public function index(){
-
         if($this->session->userdata('logged_in') === true)
            $this->commande();
         else
 		    $this->login();
 	}
 
+	public function verifyCheckedCondition() {
+//        print_r($this->data['user_info']);die;
+        $userId = $this->data['user_info']->id_users;
+        $user = $this->m_users->getUserById($userId)[0];
+        $acceptCondition = $user->accept_conditions;
+        $this->m_users->acceptConditions($userId);
+        $data = [];
+        $data['email'] = $this->data['user_info']->email;
+//        $data['email'] = "yonathan.optieyes@gmail.com";
+        $data['email_cc'] = 'optieyescommande@gmail.com';
+        $data['email_cci'] = 'yonathan.optieyes@gmail.com';
+        setlocale(LC_TIME,
+            'fr_FR.utf8',
+            'fra');
+        $time = date('Y-m-d H:i:s');
+        $date = strftime( "%A %d %B %Y" , strtotime( $time ));
+        //print_r($date);die;
+        $hour = strftime( "%H:%M:%S" , strtotime( $time ));
+        $msgTxt = "Madame, Monsieur,<br><br>Ci joint les conditions générales de ventes que vous venez d’accepter.<br><br>Merci de votre confiance !<br><br><br>L’équipe Optieyes.";
+        $subject = "CGV Optieyes acceptées par le magasin $userId le $date à $hour";
+        if (!$acceptCondition) {
+            $this->mail($data, $msgTxt, true, $subject, 'CGV_Optieyes_24062021_clean.pdf');
+        }
+        echo 'true';
+    }
+
+	public function test() {
+        $data['certificat'] = $this->m_commande->getCertificatStock('565817');
+
+        $data['control'] = array(
+            'certificat' => bin2hex(openssl_random_pseudo_bytes(10))
+        );
+
+        /*$this->db->insert('controle', array(
+            'id' => $data['control']['certificat'],
+            'control' => count($data['certificat'])
+        ));
+        */
+
+//        $this->db->insert('controle_test', array(
+//            'v' => $data['control']['certificat'],
+//            'control' => count($data['certificat'])
+//        ));
+
+        //$message = json_encode($data);
+
+
+        // Génération des PDF
+        $docs = array(
+            'certificat' => $this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, 565817, false, 'paysage', $customsize = array(0,0,243,153))
+        );
+    }
+
     public function export_verre_csv() {
-        //var_dump('dddd');die;
         $sql = "SELECT id_grille_tarifaire, libelle_verre, prix_verre 
                 FROM `grille_tarifaire` AS gt 
                 INNER JOIN `verres` as v ON v.id_verre = gt.id_verre 
@@ -124,6 +197,7 @@ class index extends MY_Controller {
 			$idlens = $_POST['lens'];
 			$typedelens = $_POST['typedelens'];
 
+//            var_dump($idlens);
 
 			$idlens = str_replace("]","",$idlens);
 
@@ -136,6 +210,7 @@ class index extends MY_Controller {
 			else
 			{
 				$generation = $_POST['generation'];
+//                var_dump($generation);
 				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation);
 			}
 			echo json_encode($res);
@@ -1634,7 +1709,6 @@ class index extends MY_Controller {
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
-
 					$this->load->view('layout/commande-detail-new', $data);
 				}
         		else
@@ -1683,37 +1757,46 @@ class index extends MY_Controller {
             $data_commande = $this->m_commande->getCommandeByUserLight($dataOrder);
 
             if($data_commande !== false)
-                foreach($data_commande as $key => $commande){
+                foreach($data_commande as $key => $commande) {
 
-                    switch($commande->type_commande) {
+                    switch ($commande->type_commande) {
 
                         case 1:
-                            $prix_commande = $commande->total_commande.' €';
+                            $prix_commande = $commande->total_commande . ' €';
                             break;
 
                         case 2:
-                            $prix_commande = '<del>'.$commande->total_commande.'</del> '.($commande->tarif_express > 0 ? $commande->tarif_express : '0').' €<br />Casse atelier';
+                            $prix_commande = '<del>' . $commande->total_commande . '</del> ' . ($commande->tarif_express > 0 ? $commande->tarif_express : '0') . ' €<br />Casse atelier';
                             break;
 
                         case 3:
-                            $prix_commande = '<del>'.$commande->total_commande.'</del> '.($commande->tarif_express > 0 ? $commande->tarif_express : '0').' €<br />Erreur ophta';
+                            $prix_commande = '<del>' . $commande->total_commande . '</del> ' . ($commande->tarif_express > 0 ? $commande->tarif_express : '0') . ' €<br />Erreur ophta';
                             break;
 
                     }
 
-                    if($commande->ancienne_commande != '') {
-                        $ancienne_ref = 'CR'.$commande->ancienne_commande.'-'.$this->data['user_info']->id_users;
-                    }
-                    else {
+                    if ($commande->ancienne_commande != '') {
+                        $ancienne_ref = 'CR' . $commande->ancienne_commande . '-' . $this->data['user_info']->id_users;
+                    } else {
                         $ancienne_ref = '-';
                     }
 
-					if($commande->origine_commande == "1" )//$commande->id_type_generation_verre != 5 && $commande->id_type_generation_verre != 23)
-						$etat_commande = $commande->libelle_etat_commande.($commande->id_etat_commande == 6 ? ' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)) : '').' ('.$commande->id_etat_commande.'/6)';
-					else
-						$etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
+                    if ($commande->origine_commande == "1") {//$commande->id_type_generation_verre != 5 && $commande->id_type_generation_verre != 23)
+                        $etat_commande = $commande->libelle_etat_commande.($commande->id_etat_commande == 6 ? ' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)) : '').' ('.$commande->id_etat_commande.'/6)';
+                    }
+					else {
+                        $etat_commande = $commande->id_etat_commande == 1 ? "En cours de préparation (".$commande->id_etat_commande."/2)" : $commande->libelle_etat_commande.' le '.date('d/m/Y H:i', strtotime($commande->date_update_commande)).' (2/2)';
+					}
+                    if ($commande->id_etat_commande == 1) {
+                        $bl = '';
+                    }
+                    else {
+                        $bl = '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>';
+                    }
 
-					//$commande->commentaire = "";
+                    $bc = '<a href="/index/generer_pdf/bon_commande/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> Bon de commande</a>';
+
+                    //$commande->commentaire = "";
 
                     if($type == 'ec') {
 
@@ -1722,7 +1805,8 @@ class index extends MY_Controller {
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
                                 $ancienne_ref,
-                                '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+                                $bl,
+//                                $bc,
                                 '<del>'.$commande->total_commande.'€ </del> <b>'.number_format(($commande->tarif_express > 0 ? $commande->tarif_express : 0),2,'.',' ').'  €</b>',
                                 $commande->reference_client,
                                 $commande->generation_verre,
@@ -1743,7 +1827,8 @@ class index extends MY_Controller {
 								array(
 									'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
 									date('d/m/Y H:i:s', strtotime($commande->date_commande)),
-									'<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+									$bl,
+//                                    $bc,
 									$commande->reference_client,
 									$commande->generation_verre,
 									$etat_commande,
@@ -1761,7 +1846,8 @@ class index extends MY_Controller {
                             array(
                                 'CR' . $commande->id_commande . '-' . $this->data['user_info']->id_users,
                                 date('d/m/Y H:i:s', strtotime($commande->date_commande)),
-                                '<a href="/index/generer_pdf/bon_livraison/' . $commande->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $commande->intitule_bl.'</a>',
+                                $bl,
+//                                $bc,
                                 $commande->reference_client,
                                 $commande->generation_verre,
                                 $etat_commande,
@@ -1810,13 +1896,13 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
-
+                    $bl = $order->id_etat_commande == 1 ? '' : '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
                     $data['aaData'][] = array(
                         'CR'.$order->id_commande.'-'.$order->id_users,
 						$order->reference_client,
                         date('d/m/Y H:i', strtotime($order->date_commande)),
-                        '<a href="/index/generer_pdf/bon_livraison_montures/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>',
+                        $bl,
                         //
 						$details,
                         $etat_commande,
@@ -1850,12 +1936,13 @@ class index extends MY_Controller {
 
 
                     $etat_commande = $order->id_etat_commande == 1 ? "En cours de préparation (".$order->id_etat_commande."/2)" : 'Expediée le '.date('d/m/Y H:i', strtotime($order->date_update_commande)).' (2/2)';
+                    $bl = $order->id_etat_commande == 1 ? '' : '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>';
 
 
                     $data['aaData'][] = array(
                         'CR'.$order->id_commande.'-'.$order->id_users,
                         date('d/m/Y H:i', strtotime($order->date_commande)),
-                        '<a href="/index/generer_pdf/bon_livraison_lentille/' . $order->id_commande . '" class="btn btn-sm btn-warning"><i class="zmdi zmdi-download"></i> '. $order->intitule_bl.'</a>',
+                        $bl,
                         $order->reference_client,
                         $order->name,
                         $etat_commande,
@@ -1881,7 +1968,6 @@ class index extends MY_Controller {
                 $data = $this->input->post();
 
                 if($order_data = $this->m_commande->getCommandeById($data['order_id'], $this->data['user_info']->id_users, false)[0]) {
-
                     $order_data = (array) $order_data;
 
                     $data_corrections = json_decode($order_data['information_commande'], true);
@@ -1929,6 +2015,7 @@ class index extends MY_Controller {
                     $order_data['total_commande'] = $total_commande;
                     $order_data['total_remise_paire'] = 0;
 
+
                     if ($order = $this->m_commande->addOrder($order_data)) {
                         $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                         $this->db->where(array('user_id' => $order_data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
@@ -1956,8 +2043,40 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
-            $add = $this->input->post();
 
+            $add = $this->input->post();
+//
+//            $verreName = stristr($data['nomverreDH'], ' -', true);
+//            $userId = $data['id_users'];
+//            $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockD) {
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+//                    $data['type_de_verreD'], $data['generation'], $data['traitementD'], $data['galbeD'],
+//                    $data['PrismeSphereD'], $teinteCode);
+//            }
+//            $verreName = stristr($data['nomverreGH'], ' -', true);
+//            $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+//            if ($verreStockG) {
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId);
+//            }
+//            else {
+//                $teinteCode = NULL;
+//                if(isset($data['teinteD'])) {
+//                    $teinteCode = $data['teinteD'];
+//                }
+//                $data['prixGH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreGH'],
+//                    $data['type_de_verreG'], $data['generation'], $data['traitementG'], $data['galbeG'],
+//                    $data['PrismeSphereG'], $teinteCode);
+//            }
+//
+//            var_dump($data['prixDH']);die;
             $data['commentaire'] = "";
             if(isset($add['commentaire']))
 				$data['commentaire'] = $add['commentaire'];
@@ -1971,6 +2090,7 @@ class index extends MY_Controller {
             }
 
             $errors = 0;
+
             for ($i = 1; $i <= $data['nb_multi_commande']; $i++) {
 
                 if(isset($data['discount'])) {
@@ -2064,9 +2184,8 @@ class index extends MY_Controller {
 
 
                 }
-			//	var_dump($data);
-                if ($order = $this->m_commande->addOrder($data)) {
 
+                if ($order = $this->m_commande->addOrder($data)) {
                     //echo " - here 2 !";
                     $day = mktime(0,0,0, date('m'), date('d'), date('Y'));
                     $this->db->where(array('user_id' => $data['id_users'], 'day' => $day))->update('user_sessions', array('has_order' => 1));
@@ -2082,6 +2201,8 @@ class index extends MY_Controller {
                     ++$errors;
                 }
             }
+//            var_dump('oops');die;
+
             if($errors == 0) {
 
 
@@ -2108,12 +2229,13 @@ class index extends MY_Controller {
 
 
 						// Génération des PDF
+//                        var_dump($data);
+//                        var_dump($order);
 						$docs = array(
 							'certificat' => $this->config->item('directory_pdf').'/'.$this->pdf('certificat_authenticite', $data, $order['id'], false, 'paysage', $customsize = array(0,0,243,153))
 						);
 
 					}
-
 				set_cookie('panierA_sans_monture','0','1800');
 				set_cookie('typecommande','fab','1800');
 
@@ -2159,7 +2281,7 @@ class index extends MY_Controller {
 							'id_users' => $data['id_users'],
 							'total_commande' => $total_order,
 							'tarif_livraison' => $userdata->tarif_livraison,
-							'tarif_packaging' => $userdata->tarif_packaging,
+							'tarif_packaging' => $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 							'commande_monture' => 1
 						);
 
@@ -2420,7 +2542,7 @@ class index extends MY_Controller {
                 $data['ancienne_commande'] = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['taux_tva'] = $this->m_taux_tva->get_tva();
                 $data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
                 $prix_miroir = 7;
 
                 $pair_order = false;
@@ -2715,7 +2837,6 @@ class index extends MY_Controller {
 						//set_cookie('flag_monture','1','180000');
 					}
 
-
 					echo $this->load->view('ajax_recap_commande',$data);
 				}else{
 					 echo "error";
@@ -2728,6 +2849,36 @@ class index extends MY_Controller {
             $this->redirect();
     }
 
+    private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
+                                         $generation = NULL, $traitementCode = NULL, $galbe = NULL,
+                                         $prisme = NULL, $teinteCode = NULL) {
+//        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
+        if ($verreStock) {
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+        }
+        else {
+            $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
+            $teintePrice = 0;
+            if(!empty($teinteCode)) {
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+            }
+            $galbePrice = 0;
+            if (!empty($galbe) && $galbe != "Standard") {
+                $galbePrice = 3.9;
+            }
+            $prismePrice = 0;
+            if (!empty($prisme)) {
+                $prismePrice = 3.9;
+            }
+            return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
+        }
+    }
+
     public function setOrderRecapNew(){
 
 		if($this->input->is_ajax_request()){
@@ -2735,7 +2886,73 @@ class index extends MY_Controller {
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
+//                var_dump($data['prixDH']);die;
+
                 $user = $this->session->userdata('data_user');
+                $userId = $user['user_info']->id_users;
+                $data['prixDH'] = 0;
+                $data['prixGH'] = 0;
+//                var_dump($data);die;
+                if (isset($data['droit'])) {
+                    $verreName = stristr($data['nomverreDH'], ' -', true);
+
+                    $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                    $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
+
+                    if ($verreStockD) {
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
+                    }
+                    else {
+                        $teinteCode = NULL;
+                        if(isset($data['teinteD'])) {
+                            $teinteCode = $data['teinteD'];
+                        }
+                        $traitementCode = NULL;
+                        if(isset($data['traitementD'])) {
+                            $traitementCode = $data['traitementD'];
+                        }
+                        $galbe = NULL;
+                        if(isset($data['galbeD'])) {
+                            $galbe = $data['galbeD'];
+                        }
+                        $prisme = NULL;
+                        if(isset($data['PrismeSphereD'])) {
+                            $prisme = $data['PrismeSphereD'];
+                        }
+
+                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+                            $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode) * $quantiteD;;
+                    }
+                }
+                if (isset($data['gauche'])) {
+                    $verreName = stristr($data['nomverreGH'], ' -', true);
+                    $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+                    $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
+                    if ($verreStockG) {
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
+                    } else {
+                        $teinteCode = NULL;
+                        if (isset($data['teinteG'])) {
+                            $teinteCode = $data['teinteG'];
+                        }
+                        $traitementCode = NULL;
+                        if (isset($data['traitementG'])) {
+                            $traitementCode = $data['traitementG'];
+                        }
+                        $galbe = NULL;
+                        if (isset($data['galbeG'])) {
+                            $galbe = $data['galbeG'];
+                        }
+                        $prisme = NULL;
+                        if (isset($data['PrismeSphereG'])) {
+                            $prisme = $data['PrismeSphereG'];
+                        }
+                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
+                            $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode) * $quantiteG;;
+                    }
+                }
 
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];
 
@@ -2766,7 +2983,7 @@ class index extends MY_Controller {
 				$data['panierA'] = 0;
 				$data['tarif_supplement'] = 0;
 
-				if($data['type_de_verreD']!=$data['type_de_verreG'])
+				if($data['type_de_verreD']!=$data['type_de_verreG'] || !isset($data['gauche']) || !isset($data['droit']))
 				{
 					//$data['type_commande'] = 4;
 					$data['type_commande_verre'] = 4;
@@ -2782,6 +2999,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 2;
 							$data['type_commande_verreD'] = 2;
+							//$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeD'] = 2;
 						}
@@ -2789,13 +3007,15 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeD'] = 1;
 							$data['type_commande_verreD'] = 1;
+							//$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
                         	$data['tarif_supplement'] = $supplement;
 						}
 					}
-					if($data['nomverreGH']!="")
+
+                    if($data['nomverreGH']!="")
 					{
 
 						if(strpos($data['nomverreGH'], "Panier A") !== false)
@@ -2807,6 +3027,7 @@ class index extends MY_Controller {
 						{
 						//	$data['type_commandeG'] = 2;
 							$data['type_commande_verreG'] = 2;
+							//$data['type_commande_verre'] = 2;
 							$data['origine_commande'] = 2;
 							$data['origine_commandeG'] = 2;
 						}
@@ -2814,12 +3035,14 @@ class index extends MY_Controller {
 						{
 							//$data['type_commandeG'] = 1;
 							$data['type_commande_verreG'] = 1;
+							//$data['type_commande_verre'] = 1;
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
 							$data['tarif_supplement'] = $supplement;
 						}
-					}
+
+                    }
 				}
 				else
 				{
@@ -2864,18 +3087,19 @@ class index extends MY_Controller {
 				$data['ancienne_commande'] = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
 				$data['taux_tva'] = $this->m_taux_tva->get_tva();
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
-				$data['tarif_packaging'] = $userdata->tarif_packaging;
+
+				$data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
 				$prix_miroir = 7;
 
 				$pair_order = false;
-				if(isset($data['pair_order'])) {
+
+                if(isset($data['pair_order'])) {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
 					$data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
-
 				if($data['diametreD'] == 'precalibrage')
 				{
 					if(isset($data['calibre']) && !empty($data['calibre']))
@@ -2895,18 +3119,25 @@ class index extends MY_Controller {
 					if(isset($data['coted']) && !empty($data['coted']))
 						$data_commandeD['mesure_freeform']['diametre_utile'] = $data['coted'];
 
-					if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
-						$data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+					if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit'])) {
+                        $data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+                        $data_commandeD['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
+                    }
 
-					if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche']))
-						$data_commande['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+					if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                        $data_commande['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                        $data_commandeG['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                    }
 
 
 					if(isset($data['hauteur']) && !empty($data['hauteur']))
 						$data_commande['mesure_freeform']['hauteur'] = $data['hauteur'];
+						$data_commandeD['mesure_freeform']['hauteur'] = $data['hauteur'];
 
-					if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche']))
-						$data_commande['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+					if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche'])) {
+                        $data_commande['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                        $data_commandeG['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                    }
 
 					//if(isset($data['diametreD']) && !empty($data['diametreD']))
 					//	$data_commande['diametreD'] = $data['diametreD'];
@@ -2943,6 +3174,13 @@ class index extends MY_Controller {
 					if(isset($data['coted']) && !empty($data['coted']))
 						$data_commandeG['mesure_freeform']['diametre_utile'] = $data['coted'];
 
+                    if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                        $data_commandeG['mesure_freeform']['ecart_puppillaire_gauche'] = $data['ecart_puppillaire_gauche'];
+                    }
+
+                    if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche'])) {
+                        $data_commandeG['mesure_freeform']['hauteur_gauche'] = $data['hauteur_gauche'];
+                    }
 					//if(isset($data['diametreD']) && !empty($data['diametreD']))
 					//	$data_commande['diametreD'] = $data['diametreD'];
 
@@ -3064,6 +3302,10 @@ class index extends MY_Controller {
 
 					$data['id_verre'] = $data['id_verreG'];
 				}
+
+                if($data['quantiteG'] != $data['quantiteD']) {
+                    $prix_double = false;
+                }
 
 				$data['prixDH'] = str_replace("€","",$data['prixDH']);
 				$data['prixGH'] = str_replace("€","",$data['prixGH']);
@@ -3297,11 +3539,15 @@ class index extends MY_Controller {
 				if(isset($data['photocromie']) && !empty($data['photocromie']))
 					$data_commande['verre']['photocromie']= $data['photocromie'];
 
-				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
-					$data_commande['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit'])) {
+                    $data_commande['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+                    $data_commandeD['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
+                }
 
-				if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche']))
-					$data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+				if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
+                    $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+                    $data_commandeG['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+                }
 
 				if(isset($data['angle_pantoscopique']) && !empty($data['angle_pantoscopique']))
 					$data_commande['verre']['angle_pantoscopique'] = $data['angle_pantoscopique'];
@@ -3378,7 +3624,7 @@ class index extends MY_Controller {
 				}
 				elseif($unVerreG==1)
 				{
-					$data['prix_verre'] = $data['prixUnitaireG'];
+					$data['prix_verre'] = 0;
 				}
 				else
 				{
@@ -3554,8 +3800,9 @@ class index extends MY_Controller {
 					*/
 				}
 
-
-				echo $this->load->view('ajax_recap_commande',$data);
+//                var_dump($data['recap_commande']);die;
+//                print_r($data['recap_commande']['recap_commande']['indices']);die;
+                echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
 			}
@@ -3618,8 +3865,59 @@ class index extends MY_Controller {
             $this->redirect();
     }
 
-    public function login($recovery=false){
+    public function accept_simplay() {
+        $orderReference = $_GET['order_reference'];
+        $this->load->helper('slimpay');
+        $userInformation = getUserInformation($orderReference);
+        if (!$userInformation) {
+            $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
+            $data['page'] = "Connexion";
+            $data['recovery'] = false;
 
+            $data['modules'] = array('sweetalert' => true);
+            $this->load->view('registration_rejected', $data);
+        }
+        else {
+            $passAleatoire = $this->CarAleatoire(8);
+            $inscription['email'] = strtolower($userInformation['email']);
+            $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+            $inscription['date_inscription'] = date("Y-m-d H:i:s");
+
+            $sql = "UPDATE users SET 
+                 pass = '" . $inscription['pass'] . "', 
+                 document_rib = 'ok', 
+                 valid_document_rib = 1,
+                 valid_mandat = 1,
+                 date_inscription = '" . $inscription['date_inscription'] . "'
+                WHERE email = '" . $inscription['email'] . "'";
+
+            $this->db->query($sql);
+            $mess_txt = "<html>
+					 <head></head>
+					 <body><b>Bonjour</b>!
+                     <br><br>Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.</body></html>";
+
+            $subject_txt = "Vos informations de connexion";
+
+            $this->mail($inscription,$mess_txt,true,$subject_txt);
+
+            $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
+            $data['page'] = "Connexion";
+            $data['recovery'] = false;
+
+            $data['modules'] = array('sweetalert' => true);
+            $this->load->view('registration_accepted', $data);
+        }
+
+    }
+
+    public function login($recovery=false){
+//        echo 'daadssa';die;
+//        $this->load->helper('slimpay');
+//        $x = getOrderTest('01e9eeff-3d57-11ec-a985-000000000000');
+//        echo '<pre>';
+//        print_r($x);
+//        echo '</pre>';die;
         $data['title'] = "Optieyescommande : commande de verres de lunettes pour les professionnels de l'optique";
         $data['page'] = "Connexion";
         $data['recovery'] = $recovery;
@@ -3632,6 +3930,7 @@ class index extends MY_Controller {
         }
 
         $this->load->view('login',$data);
+//        $this->load->view('login',$data);
     }
 
     public function profile(){
@@ -3851,6 +4150,137 @@ class index extends MY_Controller {
         }
     }
 
+    public function submit_sepa($infos_user, $sepa) {
+//        $insert_id = $this->db->insert_id();
+//        $update_id = $this->db->affected_rows();
+        //print_r($this->db->last_query());die;
+//        print_r($insert_id);die;
+        $userId = $infos_user['user_id'];
+        if(isset($userId) && $this->input->is_ajax_request()) {
+
+            //$infos_user = $this->m_users->getUserById($this->data['user_info']->id_users);
+
+            $this->load->helper('slimpay');
+
+            $errors = '';
+
+            $iban_info['email'] = $infos_user['email'];
+            $iban_info['client_ref'] = 'OPTC'.$userId;
+            $iban_info['slm_ref'] = 'OPTR'.$userId."BIS";
+            $iban_info['familyName'] = $sepa['familyName'];
+            $iban_info['givenName'] = $sepa['givenName'];
+            $iban_info['companyName'] = $sepa['companyName'];
+
+            switch($sepa['honorificPrefix']) {
+                case 1:
+                    $iban_info['honorificPrefix'] = 'Mr';
+                    break;
+                case 2:
+                    $iban_info['honorificPrefix'] = 'Mrs';
+                    break;
+                case 3:
+                    $iban_info['honorificPrefix'] = 'Miss';
+            }
+
+            $iban_info['iban'] = str_replace(' ', '', $sepa['iban']);
+            $iban_info['city'] = $sepa['city'];
+            $iban_info['postalCode'] = $sepa['postalCode'];
+            $iban_info['street1'] = $sepa['street1'];
+            $iban_info['street2'] = $sepa['street2'];
+
+            //var_dump($iban_info);
+
+            foreach($iban_info as $k => $v) {
+                $value = trim($v);
+                if($k != 'street2') {
+                    if (empty($value)) {
+                        $errors[$k] = 1;
+                    }
+                    else {
+                        if($k == 'postalCode') {
+//                            print_r($value);
+                            if(!is_numeric($value)) {
+                                $errors[$k] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+//            print_r(!checkIBAN($sepa['iban']));die;
+            $iban = $sepa['country'] . str_replace(" ", "", $sepa['iban']);
+            $iban_info['iban'] = $iban;
+
+            if($iban != '') {
+                if (!checkIBAN($iban)) {
+                    $errors['iban'] = 2;
+                }
+            }
+            else {
+                $errors['iban'] = 1;
+            }
+            if(!empty($errors)) {
+                echo json_encode($errors);
+            }
+            else {
+                $state = createMandat($iban_info);
+//                     switch($this->config->item('opti_env')) {
+//
+//                            case 'prod':
+//                                $state = createMandat($iban_info);
+//                                break;
+//
+//                            case 'dev':
+////                                $state = createMandat($iban_info);
+//                                $state = createMandatTest($iban_info);
+//                                //$state['status'] = 1;
+//                                break;
+//                            default:
+//                                $state = [];
+//                                $state['status'] = 0;
+//                                break;
+//                }
+//                echo json_encode($state);
+                if ($state['status'] == 1) {
+                    //$this->m_users->updateUser(array('id_users' => $insert_id, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+                    return json_encode($state);
+                }
+                else {
+//                    $this->db->delete("users", array('id_users' => $insert_id));
+//                    $sql = "ALTER TABLE `users` AUTO_INCREMENT $insert_id";
+//                    $this->db->query($sql);
+//                    $this->m_users->updateUser(array('id_users' => $insert_id, 'active' => 0));
+                    return false;
+                }
+//                if($this->data['infos_user'][0]->valid_mandat != 1) {
+//
+//                    $checkMandat = getMandat('OPTR' . $this->data['user_info']->id_users."BIS");
+//
+//                    if ($checkMandat['state'] == 'active') {
+//
+//                        $this->m_users->updateUser(array('id_users' => $this->data['user_info']->id_users, 'valid_mandat' => 1, 'document_rib' => 'ok', 'valid_document_rib' => 1));
+//
+//                        $this->email->from('noreply@optieyescommande.com', 'Optieyes Commande');
+//                        $this->email->to('optieyescommande@gmail.com');
+//                        $this->email->cc('testproxicom@gmail.com');
+//
+//                        $this->email->subject('Client n°' . $this->data['user_info']->id_users . ' a validé son RIB.');
+//
+//                        $this->email->send();
+//
+//                    }
+//
+//                }
+            }
+
+
+
+        }
+//        else {
+//            $this->redirect();
+//        }
+
+    }
+
     public function submit_mandat() {
 
         if($this->session->userdata('logged_in') === true && $this->input->is_ajax_request()) {
@@ -3904,7 +4334,6 @@ class index extends MY_Controller {
                     }
                 }
             }
-
             if($_POST['iban'] != '') {
                 if (!checkIBAN($_POST['iban'])) {
                     $errors['iban'] = 2;
@@ -3913,7 +4342,6 @@ class index extends MY_Controller {
             else {
                 $errors['iban'] = 1;
             }
-
 
             if(!empty($errors)) {
                 echo json_encode($errors);
@@ -4288,56 +4716,61 @@ class index extends MY_Controller {
 		    $data['email'] = trim($data['email']);
 //		    $data['pass'] = trim($data['pass']);
 			   if(valid_email($data['email'])){
-                   if(($data_user = $this->m_users->check($data)) !== false){
+			       if ($this->m_users->checkMail($data)) {
+                       if(($data_user = $this->m_users->check($data)) !== false){
+                           $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
 
-                       $this->m_users->updateUser(array('id_users' =>$data_user[0]->id_users, 'users_last_connexion' => date("Y-m-d H:i:s")));
+                           $data_user['user_info'] = $data_user[0];
+                           unset($data_user[0]);
 
-					   $data_user['user_info'] = $data_user[0];
-					   unset($data_user[0]);
+                           $data_admin = $this->m_users->getUserById(1);
+                           $data_admin['admin_info'] = $data_admin[0];
+                           unset($data_admin[0]);
 
-					   $data_admin = $this->m_users->getUserById(1);
-					   $data_admin['admin_info'] = $data_admin[0];
-					   unset($data_admin[0]);
+                           $numero_siret = $tva_intracomm = "ok";
 
-					   $numero_siret = $tva_intracomm = "ok";
+                           if($data_user['user_info']->id_users != 2){ //id 2 is user test
+                               if(!$this->checkSiret($data_user['user_info']->numero_siret)){
+                                   $numero_siret = "nok";
+                               }
 
-					   if($data_user['user_info']->id_users != 2){ //id 2 is user test
-						   if(!$this->checkSiret($data_user['user_info']->numero_siret)){
-							   $numero_siret = "nok";
-						   }
+                               /*if($this->checkTvaIntraComm($data_user['user_info']->numero_siret) != $data_user['user_info']->tva_intracom){
+                                   $tva_intracomm = "nok";
+                               }*/
+                           }
 
-						   /*if($this->checkTvaIntraComm($data_user['user_info']->numero_siret) != $data_user['user_info']->tva_intracom){
-							   $tva_intracomm = "nok";
-						   }*/
-					   }
+                           $session = array(
+                               'logged_in'  => true,
+                               'data_user'  => $data_user,
+                               'data_admin' => $data_admin,
+                               'pass_user'  => $data['pass'],
+                               'numero_siret' => $numero_siret,
+                               'tva_intracomm'=> $tva_intracomm
+                           );
 
-					   $session = array(
-						   'logged_in'  => true,
-						   'data_user'  => $data_user,
-						   'data_admin' => $data_admin,
-						   'pass_user'  => $data['pass'],
-						   'numero_siret' => $numero_siret,
-						   'tva_intracomm'=> $tva_intracomm
-					   );
+                           $this->m_users->updateLastLogin($data_user['user_info']->id_users);
 
-                       $this->m_users->updateLastLogin($data_user['user_info']->id_users);
+                           if($data_user['user_info']->login_notification == 1) {
+                               $message = '';
+                               $data['email'] = 'optieyescommande@gmail.com';
+                               $title = 'Le client n° '.$data_user['user_info']->id_users.' s\'est connecté';
+                               $this->mail($data, $message, true, $title);
+                           }
 
-                       if($data_user['user_info']->login_notification == 1) {
-                           $message = '';
-                           $data['email'] = 'optieyescommande@gmail.com';
-                           $title = 'Le client n° '.$data_user['user_info']->id_users.' s\'est connecté';
-                           $this->mail($data, $message, true, $title);
-                       }
+                           $this->session->set_userdata($session);
+                           $this->session->unset_userdata("is_admin");
 
-					   $this->session->set_userdata($session);
-					   $this->session->unset_userdata("is_admin");
+                           echo json_encode(array('status'=> 'ok'));
+                       }else
+                           echo json_encode(array('status'=> 'error_log'));
+                   }
+			       else {
+                       echo json_encode(array('status'=> 'mail_not_valide'));
+                   }
 
-					   echo json_encode(array('status'=> 'ok'));
-				   }else
-					   echo json_encode(array('status'=> 'error_log'));
 			   }
 			   else
-					echo json_encode(array('status'=> 'error_log'));
+					echo json_encode(array('status'=> 'error_mail'));
 			}else
 				echo json_encode(array('status'=> 'error_log'));
         }
@@ -4670,38 +5103,58 @@ class index extends MY_Controller {
 
     public function subscribe(){
         if($this->input->is_ajax_request()){
-            $data = $this->input->post('inscription');
-
-            if($this->checkSiret($data['numero_siret'])){
+            $data = $this->input->post();
+            $inscription = $data['inscription'];
+            //print_r($inscription);die;
+            $sepa = $data['sepa'];
+//            print_r($data);die;
+            if($this->checkSiret($inscription['numero_siret'])){
                 //if($this->checkTvaIntraComm($data['numero_siret']) == $data['tva_intracom']){
                     $passAleatoire = $this->CarAleatoire(8);
-                    $data['email'] = strtolower($data['email']);
-                    $data['pass'] = md5($data['email'].'&&'.$passAleatoire);
-                    $data['date_inscription'] = date("Y-m-d H:i:s");
-
-                    if(($return = $this->m_users->addUser($data))!=""){
-                        setlocale(LC_TIME, "fr_FR");
-                        $date = strftime("%A %d %B %Y", strtotime($return->date_inscription));
-                        echo json_encode(array('status'=> 'exists', 'date' => $date));
+                    $inscription['email'] = strtolower($inscription['email']);
+                    $inscription['pass'] = md5($inscription['email'].'&&'.$passAleatoire);
+                    $inscription['date_inscription'] = date("Y-m-d H:i:s");
+                    $userId = $this->m_users->addUser($inscription);
+                    if(isset($userId->error)){
+                        if ($userId->error == "DUPLICATE_SIRET") {
+                            echo json_encode(array('status'=> 'error', 'error' => 'duplicate_siret',
+                                'magasin' => $userId->id_users));
+                        }
+                        else if ($userId->error == "DUPLICATE_EMAIL") {
+                            setlocale(LC_TIME, "fr_FR");
+                            $date = utf8_encode(strftime('%A %d %B %Y', strtotime($userId->date_inscription)));
+                            echo json_encode(array('status'=> 'exists', 'date' => $date));
+                        }
                     }
                     else{
-                        echo json_encode(array('status'=> 'ok'));
-
 
                         //<br><br>
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
+                        $inscription['user_id'] = $userId;
+                        $submitSepa = $this->submit_sepa($inscription, $sepa);
+                        if (!$submitSepa) {
+                            echo json_encode(array('status'=> 'error', 'error' => 'iban'));
+                        }
+                        else {
+//                            $mess_txt = "<html>
+//										<head></head>
+//										<body><b>Bonjour</b>!
+//										<br><br>
+//										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, conservez le précieusement.
+//										</body>
+//									    </html>";
+//
+//                            $subject_txt = "Vos informations de connexion";
+//                            print_r($inscription);
+//                            print_r($mess_txt);
+//                            print_r($subject_txt);die;
+//                            $plouf = [];
+//                            $plouf['email'] = $inscription['email'];
+//
+//                            $this->mail($plouf,$mess_txt,true,$subject_txt);
+                            echo $submitSepa;
 
-                        $mess_txt = "<html>
-										<head></head>
-										<body><b>Bonjour</b>!
-										<br><br> 
-										Cet email fait suite à votre inscription. Voici votre mot de passe : ".$passAleatoire.", il vous permet de vous connecter au site, converservez le précieusement.
-										</body>
-									</html>";
-
-                        $subjet_txt = "Vos informations de connexion";
-
-                        $this->mail($data,$mess_txt,true,$subjet_txt);
+                        }
                         // 'static/download/optimize.txt'
                     }
                 /*}
@@ -5109,7 +5562,7 @@ class index extends MY_Controller {
                 'information_commande' => json_encode($data['build']),
                 'commentaire' => $data['commentaire'],
                 'id_users' => (int) $data['user_id'],
-				'tarif_packaging' => $userdata->tarif_packaging,
+                'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
                 'tarif_livraison' => $userdata->tarif_livraison,
                 'total_commande' => $total_order
             );
@@ -5138,7 +5591,6 @@ class index extends MY_Controller {
 			$user_id = $this->data['user_info']->id_users;
 
             $data = $this->session->userdata('order');
-            //var_dump($data['montures']);die;
 			$total_order = 0;
 
 			//echo json_encode($data['montures']);
@@ -5223,7 +5675,7 @@ class index extends MY_Controller {
                 'id_users' => $user_id,
                 'total_commande' => $total_order,
 				'tarif_livraison' => $userdata->tarif_livraison,
-				'tarif_packaging' => $userdata->tarif_packaging,
+				'tarif_packaging' => $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging),
 				'commande_monture' => 1
             );
 
@@ -5586,7 +6038,7 @@ class index extends MY_Controller {
 						echo 'Taille: '.$monture->size.'<br />';
 						echo 'Couleur: '.$monture->couleur.'<br />';
 						echo 'Prix: '.$monture->prix_vente.'&#8364;<br />';
-						echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
+						echo '<div><label style="float: left" for="qty_monture_'.$monture->id.'">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture_'.$monture->id.'" name="qty_monture_'.$monture->id.'" class="form-control" value="1" /></span></div><br />';
 						echo '<a class="btn btn-warning monture-select" rel="'.$monture->id.'">Ajouter à mon panier</a>';
 						echo '</div>';
 					}
@@ -5708,7 +6160,7 @@ class index extends MY_Controller {
 				$data['data_admin']['admin_info'] = $this->m_users->getUserById(1)[0];
 				$userdata = $this->m_users->getUserById($id_user)[0];
 				$data['tarif_livraison'] = $userdata->tarif_livraison;
-                $data['tarif_packaging'] = $userdata->tarif_packaging;
+                $data['tarif_packaging'] = $this->m_commande->getTarifPackaging($userdata->id_users, $userdata->tarif_packaging);
 				$this->session->set_userdata('order', $data);
                 echo $this->load->view('ajax_show_montures_order',$data);
 			}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-07-19T11:41:21+0200</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>609567-305</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>S1UW50</commercialCode>
+               <rxData>
+                  <sphere>1.50</sphere>
+                  <cylinder>
+                      <power>0.50</power>
+                      <axis>144</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+						   <coating coatingType="COLOR">
+							  <commercialCode>587</commercialCode>
+						   </coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>70</physical>
+                     <optical>75</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+                  <curve>
+                      <baseCurve>4</baseCurve>
+                  </curve>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>S1UW50</commercialCode>
+               <rxData>
+                  <sphere>1.00</sphere>
+                  <cylinder>
+                      <power>0.75</power>
+                      <axis>23</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+						   <coating coatingType="COLOR">
+							  <commercialCode>587</commercialCode>
+						   </coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>70</physical>
+                     <optical>75</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+                  <curve>
+                      <baseCurve>4</baseCurve>
+                  </curve>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+				</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

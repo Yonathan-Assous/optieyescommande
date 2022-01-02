@@ -16,6 +16,11 @@ class traitement extends MY_Controller {
         $this->m_traitement->insertPrixTraitement();
     }
 
+    public function setNewTraitementsInDatabase() {
+//        var_dump('die');die;
+        $this->m_traitement->insertPrixTraitementNew();
+    }
+
     public function getTraitementPriceList()
     {
         $data =
@@ -56,8 +61,10 @@ class traitement extends MY_Controller {
     {
         $data =
             $this->input->post();
+        $lensesId = $data['idLenses'];
+        $userId = $data['user_id'];
         $tab =
-            $this->m_traitement->getAllTraitementsWithPrice($data['idLenses']);
+            $this->m_traitement->getAllTraitementsWithPrice($lensesId, $userId);
 
         //var_dump($tab);
 

@@ -42,23 +42,13 @@ use \HapiClient\Hal;
 
 function createMandat($infos = null)
 {
-
     if($infos) {
 
         try {
 
             // The HAPI Client
-            $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net',
-                '/',
-                'https://api.slimpay.net/alps/v1',
-                new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token',
-                    'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
-                )
-            );
 
+            $hapiClient = getHapiClient();
             // The Relations Namespace
             $relNs = 'https://api.slimpay.net/alps#';
 
@@ -110,9 +100,7 @@ function createMandat($infos = null)
             ));
 
             $res = $hapiClient->sendFollow($follow);
-
             // The Resource's state
-
             $res = [
                 'state' => $res->getState(),
                 'links' => $res->getAllLinks($relNs . 'user-approval')
@@ -131,10 +119,162 @@ function createMandat($infos = null)
 
 }
 
+//function createMandatTest($infos = null)
+//{
+//    if($infos) {
+//
+//        try {
+//            $hapiClient = getHapiClient();
+////            $hapiClient2 = static::getHapiClient();
+////            print_r($hapiClient);die;
+////            echo '2:<br>';
+////            //print_r($hapiClient2);die;
+////            // The HAPI Client
+////            $hapiClient = new Http\HapiClient(
+////                'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
+////                '/',
+////                'https://api.slimpay.net/alps/v1',
+////                new Http\Auth\Oauth2BasicAuthentication(
+////                    '/oauth/token', //https://api.preprod.slimpay.net/oauth/token
+////                    'optimizefrance',
+////                    'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
+////                )
+////            );
+//
+//            // The Relations Namespace
+//            $relNs = 'https://api.slimpay.net/alps#';
+//
+//            // Follow create-orders
+//            $rel = new Hal\CustomRel($relNs . 'create-orders');
+//            $follow = new Http\Follow($rel, 'POST', ['user-approval'], new Http\JsonBody(
+//                [
+//                    'locale' => 'fr',
+//                    'reference' => null,
+//                    'started' => true,
+//                    'creditor' => [
+//                        'reference' => 'optimizefrance'
+//                    ],
+//                    'subscriber' => [
+//                        'reference' => $infos['client_ref']
+//                    ],
+//                    'items' => [
+//                        [
+//                            'type' => 'signMandate',
+//                            'mandate' => [
+//                                'createSequenceType' => null,
+//                                'dateSigned' => null,
+//                                'reference' => $infos['slm_ref'],
+//                                'standard' => 'SEPA',
+//                                'signatory' => [
+//                                    'companyName' => $infos['companyName'],
+//                                    'email' => $infos['email'],
+//                                    'familyName' => $infos['familyName'],
+//                                    'givenName' => $infos['givenName'],
+//                                    'honorificPrefix' => $infos['honorificPrefix'],
+//                                    'organizationName' => null,
+//                                    'telephone' => null,
+//                                    'bankAccount' => [
+//                                        'bic' => null,
+//                                        'iban' => $infos['iban']
+//                                    ],
+//                                    'billingAddress' => [
+//                                        'city' => $infos['city'],
+//                                        'country' => 'FR',
+//                                        'postalCode' => $infos['postalCode'],
+//                                        'street1' => $infos['street1'],
+//                                        'street2' => $infos['street2']
+//                                    ]
+//                                ]
+//                            ]
+//                        ]
+//                    ]
+//                ]
+//            ));
+//            $res = $hapiClient->sendFollow($follow);
+//            // The Resource's state
+//
+//            $res = [
+//                'state' => $res->getState(),
+//                'links' => $res->getAllLinks($relNs . 'user-approval')
+//            ];
+//
+//            return array('status' => 1, 'link' => $res['links'][$relNs.'user-approval']->href);
+//
+//        } catch (Exception $e) {
+//            return array('status' => $e->getMessage());
+//        }
+//
+//    }
+//    else {
+//        return false;
+//    }
+//
+//}
+
+function getHapiClient() {
+    $CI = & get_instance();
+    switch($CI->config->item('opti_env')) {
+        case 'prod': case 'dev':
+            return new Http\HapiClient(
+                'https://api.slimpay.net',
+                '/',
+                'https://api.slimpay.net/alps/v1',
+                new Http\Auth\Oauth2BasicAuthentication(
+                    '/oauth/token',
+                    'optimeyes01 ',
+                    'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
+                )
+            );
+        case 'local':
+            return new Http\HapiClient(
+                'https://api.preprod.slimpay.com', //https://api.preprod.slimpay.com/
+                '/',
+                'https://api.slimpay.net/alps/v1',
+                new Http\Auth\Oauth2BasicAuthentication(
+                    '/oauth/token',
+                    'optimizefrance',
+                    'u1mvXVFTEJSzu4ehDk3vR76sRjjoe52PPq8hDdyX'
+                )
+            );
+        default:
+            echo 'error';
+            die;
+    }
+}
+
+function getUserInformation($ref)
+{
+    try {
+        $hapiClient = getHapiClient();
+
+        $relNs = 'https://api.slimpay.net/alps#';
+
+        // Follow get-mandates
+        $rel = new Hal\CustomRel($relNs . 'get-orders');
+        $follow = new Http\Follow($rel, 'GET', [
+            'creditorReference' => 'optimizefrance',
+            'reference' => $ref,
+        ]);
+        $res = $hapiClient->sendFollow($follow);
+
+        $rel2 = new Hal\CustomRel($relNs.'get-mandate');
+        $follow2 = new Http\Follow($rel2, 'GET');
+        $res2 = $hapiClient->sendFollow($follow2, $res);
+
+        // GEt the signatory informations
+        $rel3 = new Hal\CustomRel($relNs.'get-signatory');
+        $follow3 = new Http\Follow($rel3, 'GET');
+        $res3 = $hapiClient->sendFollow($follow3, $res2);
+        return $res3->getState();
+
+    } catch (Exception $e) {
+        return false;
+    }
+
+}
 
 function getMandat($ref)
 {
-
     try {
 
         // The HAPI Client
@@ -145,7 +285,7 @@ function getMandat($ref)
             new Http\Auth\Oauth2BasicAuthentication(
                 '/oauth/token',
                 'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
             )
         );
 
@@ -177,17 +317,8 @@ function createDebit($data) {
         try {
 
             // The HAPI Client
-            $hapiClient = new Http\HapiClient(
-                'https://api.slimpay.net',
-                '/',
-                'https://api.slimpay.net/alps/v1',
-                new Http\Auth\Oauth2BasicAuthentication(
-                    '/oauth/token',
-                    'optimeyes01 ',
-                    'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
-                )
-            );
 
+            $hapiClient = getHapiClient();
 
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
@@ -201,7 +332,15 @@ function createDebit($data) {
 
             // Follow create-direct-debits
             $rel = new Hal\CustomRel($relNs . 'create-direct-debits');
-
+            if ($data['id_mandat'] >= 555) {
+                $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+            }
+            else {
+                $mandat = getMandat('OPTR' . $data['id_mandat']);
+                if (!$mandat) {
+                    $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+                }
+            }
            $follow = new Http\Follow($rel, 'POST', null, new Http\JsonBody(
                 [
                     'amount' => $data['montant'],
@@ -213,10 +352,10 @@ function createDebit($data) {
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => 'OPTR'.$data['id_mandat'],
+                        'reference' => $mandat,
                     ],
                     'subscriber' => [
-                        'reference' => 'OPTC'.$data['id_mandat']
+                        'reference' => $mandat
                     ]
                 ]
             ));
@@ -240,16 +379,7 @@ function getDebitStatus($id = null) {
     if($id) {
 
         // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'ix9J690T8qnMTy9glvHeZCSIUzsCswEG5lHLQMhO'
-            )
-        );
+        $hapiClient = getHapiClient();
 
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';

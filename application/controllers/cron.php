@@ -97,13 +97,14 @@ class cron extends MY_Controller {
 	
 	public function payment_test(){
 
-        
-            $this->load->model('m_commande');
+        $this->load->helper('slimpay');
+        $this->load->model('m_commande');
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
-            $date = date('m-Y', time());
-
+            $date = '05-2021';
+           // $date = date('m-Y', time());
+        //echo $date;die;
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
             $current = array();
@@ -118,8 +119,9 @@ class cron extends MY_Controller {
 
 
             $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, $current);
-            
+//            var_dump($facture_client);die;
            // var_dump($facture_client);
+
            $data = array();
 
             $data['status'] = $current;
@@ -128,9 +130,11 @@ class cron extends MY_Controller {
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
 
-                    $get_packaging = $this->db->query('SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate');
+                    $facture_cli->date_commande = $facture_cli->y_m_commande;
+                    $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
+                    $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
-
+                    //var_dump($packaging);die;
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();
                     $id_mandat = $id_mandat[0]->id_mandat;
 
@@ -144,9 +148,8 @@ class cron extends MY_Controller {
 
                     $info_user = $this->m_users->getUserById($facture_cli->id_users);
 
-
                     $facture = array(
-                        'montant' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
                         'id_user' => $facture_cli->id_users,
                         'jour_prelevement' => $info_user[0]->jour_prelevement,
                         'id_mandat' => $id_mandat,
@@ -165,9 +168,18 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                   // $mandat = getMandat('OPTR' . $id_mandat);
+                    if ($id_mandat >= 555) {
+                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                    }
+                    else {
+                        $mandat = getMandat('OPTR' . $id_mandat);
+                        if (!$mandat) {
+                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                        }
+                    }
 
                     $paiement = array(
+                        'mandat_status' => $mandat,
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
                         'magasin' => $facture_cli->id_users,
                         'mandat' => $id_mandat,
@@ -178,27 +190,34 @@ class cron extends MY_Controller {
                     $data['total'] += $facture_cli->total + ($facture_cli->total * 0.2);
                     $data['paiement'][$key] = $paiement;
 
-                }
-/*
-			echo '<pre>';
-			var_dump($facture_client);
-			echo '</pre>';
-			
-            echo '<pre>';
-			var_dump($facture);
-			echo '</pre>';
 
-			echo '<pre>';
-			var_dump($paiement);
-			echo '</pre>';
-	*/		
-			echo '--------------------------------
-			<pre>';
-			var_dump($data);
-			echo '</pre>';
+                }
+
+        /*
+                    echo '<pre>';
+                    var_dump($facture_client);
+                    echo '</pre>';
+
+                    echo '<pre>';
+                    var_dump($facture);
+                    echo '</pre>';
+
+                    echo '<pre>';
+                    var_dump($paiement);
+                    echo '</pre>';
+            */
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';die;
+        $this->load->view('admin/payment_process', $data);
+//			echo '--------------------------------
+//			<pre>';
+//			var_dump($data);
+//			echo '</pre>';
             
         }
-	
+
+
     public function payment_process(){
 
         if(date('j') == 1) {
@@ -233,8 +252,8 @@ class cron extends MY_Controller {
 
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
-
-                    $get_packaging = $this->db->query('SELECT c.tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande WHERE DATE_FORMAT(date_commande, "%m-%Y") = "' . $date . '" AND id_users = ' . $facture_cli->id_users . ') AS t WHERE c.date_commande = t.maxDate');
+                    $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
+                    $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
 
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();
@@ -252,7 +271,7 @@ class cron extends MY_Controller {
 
 
                     $facture = array(
-                        'montant' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
                         'id_user' => $facture_cli->id_users,
                         'jour_prelevement' => $info_user[0]->jour_prelevement,
                         'id_mandat' => $id_mandat,
@@ -271,7 +290,15 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                    $mandat = getMandat('OPTR' . $id_mandat);
+                    if ($id_mandat >= 555) {
+                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                    }
+                    else {
+                        $mandat = getMandat('OPTR' . $id_mandat);
+                        if (!$mandat) {
+                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                        }
+                    }
 
                     $paiement = array(
                         'mandat_status' => $mandat,

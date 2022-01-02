@@ -23,7 +23,7 @@ class m_verres extends CI_Model {
     public function getVerre($data){
 
         $sql ='1=1';
-		$groupBy = "GROUP BY id_verre";
+		$groupBy = "GROUP BY id_verre,libelle_verre,id_generation_verre,id_grille_tarifaire,prix_verre,indice_verre,order_verre, supplement";
     
         $orderBy = "id_verre, id_grille_tarifaire";
     
@@ -41,16 +41,17 @@ class m_verres extends CI_Model {
         if(isset($data['grille']))
             $sql .= ' AND id_grille_tarifaire = '.$data['grille'];
 		
-
-
-        $query = $this->db->query('SELECT v.id_verre,libelle_verre,id_generation_verre,id_grille_tarifaire,prix_verre,indice_verre,order_verre, supplement
+        $sqlResult = 'SELECT v.id_verre,libelle_verre,id_generation_verre,id_grille_tarifaire,prix_verre,indice_verre,order_verre, supplement
                                    FROM '.$this->table.' v
                                    INNER JOIN grille_tarifaire gt ON v.id_verre=gt.id_verre
                                    INNER JOIN indice_verre iv ON v.id_indice_verre=iv.id_indice_verre
                                    WHERE '.$sql.'
                                    AND v.active = 1
+                                   AND id_grille_tarifaire = 1
 								   '.$groupBy.'
-                                   ORDER BY '.$orderBy);
+                                   ORDER BY '.$orderBy;
+        //var_dump($sqlResult);die;
+        $query = $this->db->query($sqlResult);
 		
 		
         if ($query->num_rows() > 0)

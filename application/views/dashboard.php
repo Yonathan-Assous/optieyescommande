@@ -18,6 +18,10 @@ if (is_object($pair_order)) {
             white-space: break-spaces;
             height: auto;
         }
+
+        .text_info_comp {
+            transform: translateY(25%);
+        }
     </style>
     <script>
         var panierA       = <?php if ($panierA == 1) {
@@ -160,7 +164,7 @@ if (is_object($pair_order)) {
                                         </div>
 
                                         <div class="form-group clearfix m-b-15">
-                                            <label class="col-lg-2 control-label" for="pays">Code Postal</label>
+                                            <label class="col-lg-2 control-label" for="pays">Pays</label>
                                             <div class="col-lg-10">
                                                 <input id="pays" name="pays" type="text" class="required form-control"
                                                        value="France" disabled/>
@@ -3763,6 +3767,474 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div id="additional_info" class="form-group row hide">
+                                                                        <div class="col-xs-12">
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-heading"><h5>
+                                                                                        Informations complémentaires facultatives</h5></div>
+                                                                                <div class="panel-body "
+                                                                                     style="padding-top: 15px; text-align: center">
+                                                                                    <div class="row">
+                                                                                        <div class="col-xs-2"></div>
+                                                                                        <div class="col-xs-8">
+                                                                                            <table id="tab_info_comp" class="table table-factures table-striped dt-responsive nowrap" style="display: none;">
+                                                                                                <thead>
+                                                                                                    <tr style="background-color: #f8bc06">
+                                                                                                        <th></th>
+                                                                                                        <th style="color: #fff">Oeil droit</th>
+                                                                                                        <th style="color: #fff">Oeil gauche</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr id="tr_ecart_pup">
+                                                                                                        <th>Écart pupillaire vision de près</th>
+                                                                                                        <td id="tab_ecart_pup_D"></td>
+                                                                                                        <td id="tab_ecart_pup_G"></td>
+                                                                                                    </tr>
+                                                                                                    <tr id="tr_angle_galbe">
+                                                                                                        <th>Angle de galbe</th>
+                                                                                                        <td id="tab_angle_galbe_D"></td>
+                                                                                                        <td id="tab_angle_galbe_G"></td>
+                                                                                                    </tr>
+                                                                                                    <tr id="tr_distance_verre_oeil">
+                                                                                                        <th>Distance verre oeil</th>
+                                                                                                        <td id="tab_distance_verre_oeil_D"></td>
+                                                                                                        <td id="tab_distance_verre_oeil_G"></td>
+                                                                                                    </tr>
+                                                                                                    <tr id="tr_angle_pantoscopique">
+                                                                                                        <th>Angle pantoscopique</th>
+                                                                                                        <td id="tab_angle_pantoscopique_D"></td>
+                                                                                                        <td id="tab_angle_pantoscopique_G"></td>
+                                                                                                    </tr>
+                                                                                                    <tr id="tr_hauteur_montage">
+                                                                                                        <th>Hauteur de montage</th>
+                                                                                                        <td id="tab_hauteur_montage_D"></td>
+                                                                                                        <td id="tab_hauteur_montage_G"></td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <button type="button" id="btn_add_info_sup" class="btn btn-warning waves-effect waves-light">
+                                                                                                Insérer mes informations complémentaires facultatives
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="col-xs-2"></div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div id="add_info_sup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                                                    <div class="modal-dialog" style="width: 90%; max-width: 700px;">
+                                                                                        <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                                    <h4 class="modal-title">informations complémentaires facultatives</h4>
+                                                                                                </div>
+
+                                                                                                <div class="modal-body">
+                                                                                                    <div class="panel-body"
+                                                                                                         style="padding-top: 15px">
+                                                                                                        <div class="col-xs-12">
+                                                                                                            <div class="form-group row">
+
+                                                                                                                <div class="col-xs-12 col-md-4"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>oeil droit</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>oeil gauche</strong>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Écart pupillaire vision de près</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="ecart_pup_D"
+                                                                                                                           id="ecart_pup_D"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_ecart_pup_D' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="ecart_pup_G"
+                                                                                                                           id="ecart_pup_G"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_ecart_pup_G' class="error error_info_comp"></p>
+
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Angle de galbe</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="angle_galbe_D"
+                                                                                                                           id="angle_galbe_D"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_angle_galbe_D' class="error error_info_comp"></p>
+
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="angle_galbe_G"
+                                                                                                                           id="angle_galbe_G"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_angle_galbe_G' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Distance verre oeil</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="distance_verre_oeil_D"
+                                                                                                                           id="distance_verre_oeil_D"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_distance_verre_oeil_D' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="distance_verre_oeil_G"
+                                                                                                                           id="distance_verre_oeil_G"
+                                                                                                                           value="">
+                                                                                                                    <p id="error_distance_verre_oeil_G" class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Angle pantoscopique</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="angle_pantoscopique_D"
+                                                                                                                           id="angle_pantoscopique_D"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_angle_pantoscopique_D' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="angle_pantoscopique_G"
+                                                                                                                           id="angle_pantoscopique_G"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_angle_pantoscopique_G' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Hauteur de montage</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="hauteur_montage_D"
+                                                                                                                           id="hauteur_montage_D"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_hauteur_montage_D' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-4">
+                                                                                                                    <input type="text"
+                                                                                                                           class="form-control info_comp"
+                                                                                                                           name="hauteur_montage_G"
+                                                                                                                           id="hauteur_montage_G"
+                                                                                                                           value="">
+                                                                                                                    <p id='error_hauteur_montage_G' class="error error_info_comp"></p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+
+                                                                                                <div class="modal-footer">
+                                                                                                    <button class="btn btn-default waves-effect" data-dismiss="modal">Annuler</button>
+                                                                                                    <button id="submit_info_comp" class="btn btn-warning waves-effect waves-light" data-dismiss="modal">Valider les informations</button>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div id="preview_carte"
+                                                                                     class="form-group clearfix auth_fields"
+                                                                                     style="display:none; margin-top:20px">
+
+
+                                                                                    <div class="col-lg-12" id="carte_1">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div id="carte">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card"
+                                                                                                     style="float:left">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="d"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OD:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                            <tr class="g"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OG:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img"
+                                                                                                     style="float:right">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-12" id="cartesGD"
+                                                                                         style="display:none">
+                                                                                        <div class="sub-auth"
+                                                                                             id="prev_auth">
+                                                                                            <div id="carteD"
+                                                                                                 style="width:100%; float:left">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="d"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OD:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div id="carteG"
+                                                                                                 style="width:100%; float:left">
+                                                                                                <?php
+                                                                                                setlocale(LC_TIME,
+                                                                                                    "fr_FR.UTF-8"); ?>
+
+                                                                                                <div id="preview_auth_card">
+
+                                                                                                    <span class="titre optieyes"></span>
+                                                                                                    <?php
+                                                                                                    if (isset($logo)) {
+                                                                                                        echo '<img class="card_logo" src="/static/img/logo.png" />';
+                                                                                                    } ?>
+
+                                                                                                    <div class="info">
+                                                                                                        <span class="ref">REF OPTIEYES</span>
+                                                                                                        <span class="date"><?php
+                                                                                                            echo strftime('%d %B %Y',
+                                                                                                                time()) ?></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="client">
+                                                                                                        <span class="civilite">M.</span>
+                                                                                                        <span class="nom_client"><b
+                                                                                                                    class="nom">Dupont</b> <b
+                                                                                                                    class="prenom">Jean</b></span>
+                                                                                                    </div>
+
+                                                                                                    <div class="corrections">
+
+                                                                                                        <table>
+                                                                                                            <tr class="g"
+                                                                                                                style="display: none;">
+                                                                                                                <td class="correct">
+                                                                                                                    OG:
+                                                                                                                    <span class="correction"></span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span class="add"></span>
+                                                                                                                </td>
+                                                                                                                <td class="prism">
+                                                                                                                    <span class="diopt"></span><span
+                                                                                                                            class="base"></span>
+                                                                                                                </td>
+                                                                                                            </tr>
+
+                                                                                                        </table>
+
+                                                                                                    </div>
+
+                                                                                                    <div class="verres">
+                                                                                                        <span class="nom_verre"></span>
+                                                                                                        <span class="diam_verre"></span>
+                                                                                                        <div class="options">
+                                                                                                            <span class="miroir"></span>
+                                                                                                            <span class="galbe"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="opticien">
+                                                                                                        <span class="titre"><?php
+                                                                                                            echo $user_info->nom_magasin; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->adresse; ?></span>
+                                                                                                        <span><?php
+                                                                                                            echo $user_info->cp; ?><?php
+                                                                                                            echo $user_info->ville; ?></span>
+                                                                                                        <span class="tel">Tél: <?php
+                                                                                                            echo $user_info->tel_fixe; ?></span>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+
+                                                                                                <div id="preview_auth_img">
+                                                                                                    <img src="/static/img/auth_back.jpg"/>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     <div id="certif" class="form-group row hide">
                                                                         <div class="col-xs-12">
                                                                             <div class="panel panel-default">
@@ -4267,11 +4739,11 @@ if (is_object($pair_order)) {
                         </div>
 
                         <div class="modal-body">
-                            <p id="text_cylindre_negative">Merci de bien vouloir saisir vos corrections en cylindre positif</p>
+                            <p id="text_cylindre_negative">Les corrections saisies en cylindre négatif ont été transposées en cylindre positif.</p>
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-warning waves-effect waves-light"
+                            <button id="cylindre_negative_ok" class="btn btn-warning waves-effect waves-light"
                                     data-dismiss="modal">Ok</button>
                         </div>
 
@@ -4280,6 +4752,7 @@ if (is_object($pair_order)) {
                 </div>
             </div>
         </div>
+
         <div id="axe_between_0_180" class="modal fade" tabindex="-1" role="dialog"
              aria-hidden="true" style="display: none;">
             <div class="modal-dialog" style="width: 90%; max-width: 400px;">
@@ -4474,6 +4947,155 @@ if (is_object($pair_order)) {
             $('#type_commande').val('3');
         })
 
+        $('#btn_add_info_sup').click(function () {
+            $('#add_info_sup').modal('show');
+        })
+
+        $('.info_comp').on('input', function() {
+            let number = this.value;
+            console.log('#error_' + this.id);
+            console.log(number);
+            if ((isNaN(parseFloat(number)) || !isFinite(number)) && number != "") {
+                $('#error_' + this.id).html('la valeur doit être un nombre');
+                $("#submit_info_comp").prop("disabled", true);
+                // $('#submit_info_comp').addClass('disabled');
+            }
+            else if (!isNaN(parseFloat(number)) && isFinite(number) && number >= 0 || number == ""){
+                let str = this.id;
+                let lastC = (str).substr(str.length-1);
+                let nameD;
+                let nameG;
+                if (lastC == 'D') {
+                    nameD = str;
+                    nameG = str.substr(0, str.length-1) + "G";
+                }
+                else {
+                    nameG = str;
+                    nameD = str.substr(0, str.length-1) + "D";
+                }
+                let valueD = document.getElementById(nameD).value;
+                let valueG = document.getElementById(nameG).value;
+                $('#error_' + this.id).html('');
+                if (number > 20) {
+                    $('#error_' + this.id).html('la valeur doit être inférieur à 21');
+                    $("#submit_info_comp").prop("disabled", true);
+                }
+                if (valueD != "" && valueG == "") {
+                    $('#error_' + nameG).html('Vous devez remplir l\'oeil gauche');
+                    $("#submit_info_comp").prop("disabled", true);
+                }
+                else if (valueD == "" && valueG != "") {
+                    $('#error_' + nameD).html('Vous devez remplir l\'oeil droit');
+                    $("#submit_info_comp").prop("disabled", true);
+                }
+                else {
+                    if ($('#error_' + nameD).html() == 'Vous devez remplir l\'oeil droit') {
+                        $('#error_' + nameD).html('');
+                    }
+                    if ($('#error_' + nameG).html() == 'Vous devez remplir l\'oeil gauche') {
+                        $('#error_' + nameG).html('');
+                    }
+                    let text;
+                    let errors = document.getElementsByClassName('error');
+                    let disable = false;
+                    $(errors).each(function( index ) {
+                        text = $( this ).text();
+                        if (text) {
+                            disable = true
+                        }
+                    });
+                    if (!disable) {
+                        $("#submit_info_comp").prop("disabled", false);
+                    }
+                }
+            }
+            else {
+                $('#error_' + this.id).html('la valeur doit être positive');
+                $("#submit_info_comp").prop("disabled", true);
+            }
+        });
+
+        $('#submit_info_comp').click(function() {
+            let disable_table = true;
+
+            $('#tab_ecart_pup_D').html($('#ecart_pup_D').val());
+            $('#tab_ecart_pup_G').html($('#ecart_pup_G').val());
+            if ($('#ecart_pup_D').val()) {
+                disable_table = false;
+                $("#tr_ecart_pup").show();
+            }
+            else {
+                $("#tr_ecart_pup").hide();
+            }
+
+            $('#tab_angle_galbe_D').html($('#angle_galbe_D').val());
+            $('#tab_angle_galbe_G').html($('#angle_galbe_G').val());
+            if ($('#angle_galbe_D').val()) {
+                disable_table = false;
+                $("#tr_angle_galbe").show();
+            }
+            else {
+                $("#tr_angle_galbe").hide();
+            }
+
+            $('#tab_distance_verre_oeil_D').html($('#distance_verre_oeil_D').val());
+            $('#tab_distance_verre_oeil_G').html($('#distance_verre_oeil_G').val());
+            if ($('#distance_verre_oeil_D').val()) {
+                disable_table = false;
+                $("#tr_distance_verre_oeil").show();
+            }
+            else {
+                $("#tr_distance_verre_oeil").hide();
+            }
+
+            $('#tab_angle_pantoscopique_D').html($('#angle_pantoscopique_D').val());
+            $('#tab_angle_pantoscopique_G').html($('#angle_pantoscopique_G').val());
+            if ($('#angle_pantoscopique_D').val()) {
+                disable_table = false;
+                $("#tr_angle_pantoscopique").show();
+            }
+            else {
+                $("#tr_angle_pantoscopique").hide();
+            }
+
+            $('#tab_hauteur_montage_D').html($('#hauteur_montage_D').val());
+            $('#tab_hauteur_montage_G').html($('#hauteur_montage_G').val());
+            if ($('#hauteur_montage_D').val()) {
+                disable_table = false;
+                $("#tr_hauteur_montage").show();
+            }
+            else {
+                $("#tr_hauteur_montage").hide();
+            }
+            if (disable_table) {
+                $("#tab_info_comp").hide();
+                document.getElementById('btn_add_info_sup').innerHTML = "Insérer mes informations complémentaires facultatives ";
+            }
+            else {
+                $("#tab_info_comp").show();
+                document.getElementById('btn_add_info_sup').innerHTML = "Changer mes informations complémentaires facultatives ";
+            }
+
+            let table = document.getElementById("tab_info_comp");
+
+            let bascule = 0;
+            for (var i = 1, row; row = table.rows[i]; i++) {
+                if ($(row).is(':visible')) {
+                    if (bascule == 0) {
+                        row.style.background = '#fff';
+                        bascule = 1;
+                    }
+                    else {
+                        row.style.background = '#f8bc0626'
+                        bascule = 0;
+                    }
+                }
+
+
+            }
+
+        });
+
         function show_pic(img) {
             $("#big_img").show();
             $("#mini_calibres").hide();
@@ -4534,7 +5156,6 @@ if (is_object($pair_order)) {
 
 
             $('#lensFocalGroup').on('change', function () {
-
                 $('#div_refraction').addClass('hide');
                 $('#progression_D').addClass('hide');
                 $('#progression_G').addClass('hide');
@@ -4726,8 +5347,8 @@ if (is_object($pair_order)) {
                         $(".addition").html("<b>Addition</b>");
                     }
 
-
-                    if (this.value == '3') {
+                    console.log($('#indices').val());
+                    if (this.value == '3' && $('#indices').val() != "mineral") {
                         $("#generation_progressif").css("display", "block");
                         $('#lensFocalGroup_panel').removeClass('focus_panel')
                         $('#generation_panel').addClass('focus_panel');
@@ -4766,7 +5387,7 @@ if (is_object($pair_order)) {
                         $(".addition").css("display", "block");
                     }
 
-                    if (lensFocalGroup != "3") {
+                    if (lensFocalGroup != "3" || $('#indices').val() == "mineral") {
                         $('#div_refraction').removeClass('hide')
                         $('#progression_D').addClass('hide')
                         $('#progression_G').addClass('hide')
@@ -5122,6 +5743,8 @@ if (is_object($pair_order)) {
                 var diametreG = $('#diametreG').val();
                 var dCheck    = $('#droit').is(':checked');
                 var diametreD = $('#diametreD').val();
+                var verreG = $('#type_de_verreG').val();
+                var verreD = $('#type_de_verreD').val();
 
                 var nameD = $("#type_de_verreD option:selected").html();
                 var nameG = $("#type_de_verreG option:selected").html();
@@ -5223,6 +5846,45 @@ if (is_object($pair_order)) {
 			});
         }
     */
+                let nameVerreD = $('#type_de_verreD').find(":selected").text();
+                let nameVerreG = $('#type_de_verreG').find(":selected").text();
+                console.log("$nameVerreD" + nameVerreD);
+                console.log("$nameVerreG" + nameVerreG);
+                let valueD =  document.getElementById('type_de_verreD').options[document.getElementById('type_de_verreD').selectedIndex].value
+                let valueG =  document.getElementById('type_de_verreG').options[document.getElementById('type_de_verreG').selectedIndex].value
+                if (nameVerreD.indexOf("Panier A") !== -1 && nameVerreD.indexOf("Stock") !== -1
+                    && (nameVerreG.indexOf("Panier A") === -1 || nameVerreG.indexOf("Stock") === -1)
+                    && valueG != ''
+                    ||
+                    (nameVerreG.indexOf("Panier A") !== -1 && nameVerreG.indexOf("Stock") !== -1
+                        && (nameVerreD.indexOf("Panier A") === -1 || nameVerreD.indexOf("Stock") === -1)
+                        && valueD != ''
+                    )
+                ) {
+                    g = 1;
+                    swal({
+                        title: "Erreur",
+                        text: "Un panier A de stock peut uniquement être associé à un autre panier A de stock. Merci de bien vouloir corriger votre commande",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+                }
+
+                if (gauche && verreG == "") {
+                    g = 1;
+                    swal({
+                        title: "Erreur",
+                        text: "Verre gauche non disponible dans cette dioptrie",
+                        type: "warning",
+                        showCancelButton: false,
+                        confirmButtonText: "OK",
+                        closeOnConfirm: true
+                    });
+
+                }
+
                 if (gauche && diametreG == "") {
                     g = 1;
                     swal({
@@ -6070,38 +6732,79 @@ if (is_object($pair_order)) {
             });
         });
 
-        $('#cylindreD').on('change', function(event)
-        {
-            var str = $('#cylindreD').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreD').val('+0.00');
-                $('#sphereD').val('+0.00');
-            }
-        });
+        // $('#cylindreD').on('change', function(event)
+        // {
+        //     var str = $('#cylindreD').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         let cylindreD = $('#cylindreD').val();
+        //         let sphereD = $('#sphereD').val();
+        //         cylindreD = -cylindreD
+        //         sphereD = parseFloat(sphereD) - parseFloat(cylindreD)
+        //         sphereD = sphereD.toFixed(2);
+        //         if (sphereD >= 0) {
+        //             sphereD = "+" + sphereD;
+        //         }
+        //         $('#cylindreD').val(cylindreD);
+        //         $('#sphereD').val(sphereD);
+        //
+        //         let axeD = parseInt($('#axeD').val());
+        //         if (axeD >= 90) {
+        //             axeD -= 90;
+        //         }
+        //         else {
+        //             axeD += 90;
+        //         }
+        //         $('#axeD').val(axeD);
+        //
+        //         //$('#cylindre_negative').modal('show');
+        //         // $('#cylindreD').val('+0.00');
+        //         // $('#sphereD').val('+0.00');
+        //     }
+        // });
 
-        $('#cylindreG').on('change', function(event)
-        {
-            var str = $('#cylindreG').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreG').val('+0.00');
-                $('#sphereG').val('+0.00');
-            }
-        });
+        // $('#cylindreG').on('change', function(event)
+        // {
+        //     var str = $('#cylindreG').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         let cylindreG = $('#cylindreG').val();
+        //         let sphereG = $('#sphereG').val();
+        //         cylindreG = -cylindreG.toFixed
+        //         sphereG = parseFloat(sphereG) - parseFloat(cylindreG)
+        //         sphereG = sphereG.toFixed(2);
+        //         $('#cylindreG').val(-cylindreG);
+        //         $('#sphereG').val(cylindreG + sphereG);
+        //         // $('#cylindre_negative').modal('show');
+        //         // $('#cylindreG').val('+0.00');
+        //         // $('#sphereG').val('+0.00');
+        //         // if (sphereG >= 0) {
+        //         //     sphereG = "+" + sphereG;
+        //         // }
+        //         $('#cylindreG').val(cylindreG);
+        //         $('#sphereG').val(sphereG);
+        //
+        //         let axeG = parseInt($('#axeG').val());
+        //         if (axeG >= 90) {
+        //             axeG -= 90;
+        //         }
+        //         else {
+        //             axeG += 90;
+        //         }
+        //         $('#axeG').val(axeG);
+        //     }
+        // });
 
-        $('#cylindreD').on('change', function(event)
-        {
-            var str = $('#cylindreD').val()
-            var index = str.indexOf("-");
-            if(index !== -1){
-                $('#cylindre_negative').modal('show');
-                $('#cylindreD').val('+0.00');
-                $('#sphereD').val('+0.00');
-            }
-        });
+        // $('#cylindreD').on('change', function(event)
+        // {
+        //     var str = $('#cylindreD').val()
+        //     var index = str.indexOf("-");
+        //     if(index !== -1){
+        //         $('#cylindre_negative').modal('show');
+        //         $('#cylindreD').val('+0.00');
+        //         $('#sphereD').val('+0.00');
+        //     }
+        // });
 
         $('#axeD').on('change', function(event)
         {

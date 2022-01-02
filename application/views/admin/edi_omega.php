@@ -28,6 +28,7 @@ include_once('menu.php');
                             	<th>Infos</th>
                                 <th>Commande opticien</th>
                                 <th>Commande Omega</th>
+                                <th>Express</th>
                                 <th>Envoyer</th>
                             </tr>
                             </thead>
@@ -131,6 +132,60 @@ include_once('menu.php');
                 }
             }
         });
+        $('#datatable').on( 'draw.dt', function () {
+            $('.express').click(function () {
+                console.log(this.id);
+
+                let isExpressChecked = document.getElementById(this.id).checked;
+                let isFactureExpressChecked = document.getElementById('facture_' + this.id).checked;
+                if (isExpressChecked) {
+                    $('#div_facture_' + this.id).show();
+                }
+                else {
+                    $('#div_facture_' + this.id).hide();
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/commande/setExpress",
+                    data: {
+                        'commande_id' : (this.id).replace('express_', ''),
+                        'is_express' : isExpressChecked,
+                        'is_facture' : isFactureExpressChecked,
+                    },
+                    dataType: "html",
+                    success: function(data){
+                        console.log('cool');
+                    },
+                    error: function(data) {
+                        console.log('pas cool');
+                    }
+
+                });
+                console.log(isExpressChecked);
+                // alert('test')})
+            });
+            $('.facture_express').click(function () {
+                let isExpressChecked = document.getElementById((this.id).replace('facture_', '')).checked;
+                let isFactureExpressChecked = document.getElementById(this.id).checked;
+                $.ajax({
+                    type: "POST",
+                    url: "/commande/setExpress",
+                    data: {
+                        'commande_id' : (this.id).replace('facture_express_', ''),
+                        'is_express' : isExpressChecked,
+                        'is_facture' : isFactureExpressChecked,
+                    },
+                    dataType: "html",
+                    success: function(data){
+                        //document.location.reload();
+                    },
+                    error: function(data) {
+                        console.log('pas cool');
+                    }
+
+                });
+            });
+        });
 		<?php
 		if(isset($_GET['id']))
 		{?>
@@ -144,7 +199,7 @@ include_once('menu.php');
 		}
     });
     TableManageButtons.init();
-    
+
     $(document).on('click', '.delete-order-edi', function() {
 
         var order_id = $(this).attr('rel');
@@ -195,7 +250,7 @@ include_once('menu.php');
 
 
     });
-	
+
 </script>
 
 <?php include_once('footer.php'); ?>

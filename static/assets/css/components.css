@@ -153,6 +153,7 @@ File: Components
 .open > .dropdown-toggle.btn-warning {
   background-color: #fbc31c !important;
   border: 1px solid #fbc31c !important;
+  box-shadow: 0 4px 18px #f8bc06 !important;
 }
 .btn-danger {
   background-color: #e96154 !important;
@@ -169,6 +170,7 @@ File: Components
 .open > .dropdown-toggle.btn-danger {
   background-color: #e64c3d !important;
   border: 1px solid #e64c3d !important;
+  box-shadow: 0 4px 18px #d9405f !important;
 }
 .btn-inverse {
   background-color: #60667a !important;
@@ -227,7 +229,7 @@ File: Components
   border-bottom: 2px solid #26a3dd !important;
 }
 .btn-bordred.btn-warning {
-  border-bottom: 2px solid #f8bc05 !important;
+  /*border-bottom: 2px solid #f8bc05 !important;*/
 }
 .btn-bordred.btn-danger {
   border-bottom: 2px solid #e33727 !important;
@@ -1169,7 +1171,7 @@ div.dataTables_info {
   padding-top: 38px;
 }
 .dt-buttons {
-  float: left;
+  float: right;
 }
 div#datatable-buttons_info {
   float: left;
@@ -1264,4 +1266,132 @@ div.DTS tbody tr.even {
 .irs-to,
 .irs-single {
   background-color: #57c5a5;
+}
+
+/* Le tableau des infos complémentaires */
+#tab_info_comp th, #tab_info_comp td {
+  text-align: center;
+}
+
+/* switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#optieyes_video::-webkit-media-controls {
+  display:none !important;
+}
+
+input.new-design {
+  background: transparent;
+  transition: all 0.2s;
+}
+
+input.new-design:focus {
+  border-color: #fbca35;
+}
+
+.password-icon {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 20px;
+  color: #000;
+  transition: all 0.2s;
+}
+
+.iconify {
+  cursor: pointer;
+}
+
+.buttons-pdf {
+  background-color: #fde6a2;
+  border: 1px solid #fde6a2 !important
+}
+
+.buttons-pdf:hover {
+  background-color: #fbc31c !important;
+  border: 1px solid #fbc31c !important;
+  box-shadow: 0 4px 18px #f8bc06 !important;
+}
+
+.buttons-excel {
+  background-color: #a6d9a1;
+  border: 1px solid #a6d9a1 !important
+}
+
+.buttons-excel:hover {
+  background-color: #71cd68 !important;
+  border: 1px solid #71cd68 !important;
+  box-shadow: 0 4px 18px #2ebb20 !important;
+}
+
+.buttons-print {
+  background-color: #9fbaf3;
+  border: 1px solid #9fbaf3 !important
+}
+
+.buttons-print:hover {
+  background-color: #6392bb !important;
+  border: 1px solid #6392bb !important;
+  box-shadow: 0 4px 18px #6384bf !important;
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2021-05-28T13:05:01+0200</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>584223-249</referenceNo>
+         <manufacturer />
+			 <secondPair>true</secondPair>
+			 <multiplePair>
+				<referenceNo>584225-249</referenceNo>
+			 </multiplePair>
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>201496</commercialCode>
+               <rxData>
+                  <sphere>-9.25</sphere>
+                  <cylinder>
+                      <power>2.75</power>
+                      <axis>80</axis>
+                  </cylinder><addition>2.25</addition>
+						  </rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700102</commercialCode>
+					   </coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>75</physical>
+                     <optical>80</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>201496</commercialCode>
+               <rxData>
+                  <sphere>-12.75</sphere>
+                  <cylinder>
+                      <power>3.25</power>
+                      <axis>70</axis>
+                  </cylinder><addition>2.50</addition>
+						  </rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700102</commercialCode>
+					   </coating>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>75</physical>
+                     <optical>80</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+            	</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

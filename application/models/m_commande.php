@@ -4822,7 +4822,7 @@ class m_commande extends CI_Model {
             $sql_add = "c.id_users = ".$user_id;
         }
 
-        $now = date('Y-m-d');
+        $now = date('Y-m');
         for ($i = 5; $i >= 0; $i--) {
             $date = date('m', strtotime($now. ' - ' . $i . ' months'));
             $factures[$date] = 0;

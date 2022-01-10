@@ -319,7 +319,6 @@ function createDebit($data) {
             // The HAPI Client
 
             $hapiClient = getHapiClient();
-            $data['jour_prelevement'] = 29;
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
             }

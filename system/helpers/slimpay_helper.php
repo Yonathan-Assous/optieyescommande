@@ -278,17 +278,17 @@ function getMandat($ref)
     try {
 
         // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-            )
-        );
-
+//        $hapiClient = new Http\HapiClient(
+//            'https://api.slimpay.net',
+//            '/',
+//            'https://api.slimpay.net/alps/v1',
+//            new Http\Auth\Oauth2BasicAuthentication(
+//                '/oauth/token',
+//                'optimeyes01 ',
+//                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
+//            )
+//        );
+        $hapiClient = getHapiClient();
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';
 

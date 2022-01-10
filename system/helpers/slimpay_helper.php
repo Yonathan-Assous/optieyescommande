@@ -278,17 +278,17 @@ function getMandat($ref)
     try {
 
         // The HAPI Client
-//        $hapiClient = new Http\HapiClient(
-//            'https://api.slimpay.net',
-//            '/',
-//            'https://api.slimpay.net/alps/v1',
-//            new Http\Auth\Oauth2BasicAuthentication(
-//                '/oauth/token',
-//                'optimeyes01 ',
-//                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-//            )
-//        );
-        $hapiClient = getHapiClient();
+        $hapiClient = new Http\HapiClient(
+            'https://api.slimpay.net',
+            '/',
+            'https://api.slimpay.net/alps/v1',
+            new Http\Auth\Oauth2BasicAuthentication(
+                '/oauth/token',
+                'optimeyes01 ',
+                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
+            )
+        );
+
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';
 
@@ -332,19 +332,7 @@ function createDebit($data) {
 
             // Follow create-direct-debits
             $rel = new Hal\CustomRel($relNs . 'create-direct-debits');
-            if ($data['id_mandat'] >= 555) {
-                $mandat = 'OPTR' . $data['id_mandat'] . 'BIS';
-            }
-            else {
-                $getMandat = getMandat('OPTR' . $data['id_mandat']);
-                if (!$getMandat) {
-                    $mandat = 'OPTR' . $data['id_mandat'] . 'BIS';
-                }
-                else {
-                    $mandat = 'OPTR' . $data['id_mandat'];
-                }
-            }
-//            print_r($data);die;
+
            $follow = new Http\Follow($rel, 'POST', null, new Http\JsonBody(
                 [
                     'amount' => $data['montant'],
@@ -356,10 +344,10 @@ function createDebit($data) {
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => $mandat
+                        'reference' => 'OPTR'.$data['id_mandat'],
                     ],
                     'subscriber' => [
-                        'reference' => $mandat
+                        'reference' => 'OPTC'.$data['id_mandat']
                     ]
                 ]
             ));

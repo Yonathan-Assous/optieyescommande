@@ -2140,7 +2140,7 @@ class m_commande extends CI_Model {
           WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '".$date."'
           ".$excl."
           ".$user."
-          AND c.id_users = 46
+          AND c.id_users = 575
           GROUP BY c.id_users, y_m_commande, commande_stock.total_stock, commande_fabrique.total_fabrique, commande_lentilles.total_lentilles, commande_montures.total_montures, commande_express.total_express, total, reduction, commande_stock.exp_stock, commande_fabrique.exp_fabric
           ORDER BY c.id_users";
         $query = $this->db->query($sql);
@@ -2187,7 +2187,7 @@ class m_commande extends CI_Model {
                 WHERE DATE_FORMAT(c.date_commande, '%m-%Y') = '".date('m-Y',strtotime("01-".$date  . ' -1 month'))."' 
                 AND DATE_FORMAT(c.date_update_commande, '%m-%Y') = '".$date."' 
                 AND id_etat_commande = 6
-                AND c.id_users = 46
+                AND c.id_users = 575
                 ".$excl."
                 ".$user."
                 AND c.id_users NOT IN(SELECT id_users as iduser2 

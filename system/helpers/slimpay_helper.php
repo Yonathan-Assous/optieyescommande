@@ -319,7 +319,7 @@ function createDebit($data) {
             // The HAPI Client
 
             $hapiClient = getHapiClient();
-
+            $data['jour_prelevement'] = 29;
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
             }
@@ -337,14 +337,14 @@ function createDebit($data) {
                 [
                     'amount' => $data['montant'],
                     'currency' => 'EUR',
-                    'executionDate' => 29,
+                    'executionDate' => $executionDate,
                     'label' => 'Facture OptiEyes '.$data['date'],
                     'paymentReference' => 'OPTIEYES-'.$data['id_user'].'-'.$data['date'],
                     'creditor' => [
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => 'OPTR'.$data['id_mandat'],
+                        'reference' => $data['reference_mandat']
                     ],
                     'subscriber' => [
                         'reference' => 'OPTC'.$data['id_mandat']

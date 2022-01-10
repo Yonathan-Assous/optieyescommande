@@ -301,7 +301,7 @@ class cron extends MY_Controller {
                             $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
                         }
                     }
-
+                    $facture['reference_mandat'] = $mandat['reference'];
                     $paiement = array(
                         'mandat_status' => $mandat,
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
@@ -317,8 +317,7 @@ class cron extends MY_Controller {
 
                     // Mandat consultable chez Slimpay
                     if ($mandat != false) {
-//                        print_r($mandat);die;
-                        // Mandat activé
+                        // Mandat activ é
                         if ($mandat['state'] == 'active') {
 
                             // Ordre de prélèvement créé

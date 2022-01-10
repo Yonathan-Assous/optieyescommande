@@ -278,17 +278,17 @@ function getMandat($ref)
     try {
 
         // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-            )
-        );
-
+//        $hapiClient = new Http\HapiClient(
+//            'https://api.slimpay.net',
+//            '/',
+//            'https://api.slimpay.net/alps/v1',
+//            new Http\Auth\Oauth2BasicAuthentication(
+//                '/oauth/token',
+//                'optimeyes01 ',
+//                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
+//            )
+//        );
+        $hapiClient = getHapiClient();
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';
 
@@ -333,26 +333,30 @@ function createDebit($data) {
             // Follow create-direct-debits
             $rel = new Hal\CustomRel($relNs . 'create-direct-debits');
             if ($data['id_mandat'] >= 555) {
-                $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+                $mandat = 'OPTR' . $data['id_mandat'] . 'BIS';
             }
             else {
-                $mandat = getMandat('OPTR' . $data['id_mandat']);
-                if (!$mandat) {
-                    $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
+                $getMandat = getMandat('OPTR' . $data['id_mandat']);
+                if (!$getMandat) {
+                    $mandat = 'OPTR' . $data['id_mandat'] . 'BIS';
+                }
+                else {
+                    $mandat = 'OPTR' . $data['id_mandat'];
                 }
             }
+//            print_r($data);die;
            $follow = new Http\Follow($rel, 'POST', null, new Http\JsonBody(
                 [
                     'amount' => $data['montant'],
                     'currency' => 'EUR',
-                    'executionDate' => $executionDate,
+                    'executionDate' => 29,
                     'label' => 'Facture OptiEyes '.$data['date'],
                     'paymentReference' => 'OPTIEYES-'.$data['id_user'].'-'.$data['date'],
                     'creditor' => [
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => $mandat,
+                        'reference' => $mandat
                     ],
                     'subscriber' => [
                         'reference' => $mandat

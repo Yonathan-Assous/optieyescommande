@@ -1828,13 +1828,16 @@ class m_commande extends CI_Model {
             $date_end = date('Y-m-d H:i:s', mktime(23,59,59));
         }
         else {
+            //$date = date('Y-m-d 00:00:00', strtotime($date));
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
 
-        $sql = 'SELECT SUM(tarif_packaging) as total FROM users 
+        $sql = 'SELECT SUM(tarif_packaging) as total FROM commande 
                 WHERE id_users IN ( SELECT DISTINCT(id_users) FROM `commande` 
                 WHERE date_commande >= "' .
-               $date . '" AND date_commande <= "' . $date_end . '")';
+                $date . '" AND date_commande <= "' . $date_end . '")
+                AND date_commande >= "' .
+                $date . '" AND date_commande <= "' . $date_end . '"';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
         //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
         //        var_dump($sql);die;

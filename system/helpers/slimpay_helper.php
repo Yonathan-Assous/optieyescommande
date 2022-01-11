@@ -278,17 +278,17 @@ function getMandat($ref)
     try {
 
         // The HAPI Client
-        $hapiClient = new Http\HapiClient(
-            'https://api.slimpay.net',
-            '/',
-            'https://api.slimpay.net/alps/v1',
-            new Http\Auth\Oauth2BasicAuthentication(
-                '/oauth/token',
-                'optimeyes01 ',
-                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
-            )
-        );
-
+//        $hapiClient = new Http\HapiClient(
+//            'https://api.slimpay.net',
+//            '/',
+//            'https://api.slimpay.net/alps/v1',
+//            new Http\Auth\Oauth2BasicAuthentication(
+//                '/oauth/token',
+//                'optimeyes01 ',
+//                'oB8aXWkxONHMSm3OprdvEXaSC9UgpQoCeAEz5iYa'
+//            )
+//        );
+        $hapiClient = getHapiClient();
         // The Relations Namespace
         $relNs = 'https://api.slimpay.net/alps#';
 
@@ -319,7 +319,6 @@ function createDebit($data) {
             // The HAPI Client
 
             $hapiClient = getHapiClient();
-
             if($data['jour_prelevement'] != 0) {
                 $executionDate = date('Y-m').'-'.str_pad($data['jour_prelevement'], 2, 0, STR_PAD_LEFT).'T08:00:00.000+0000';
             }
@@ -332,15 +331,7 @@ function createDebit($data) {
 
             // Follow create-direct-debits
             $rel = new Hal\CustomRel($relNs . 'create-direct-debits');
-            if ($data['id_mandat'] >= 555) {
-                $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
-            }
-            else {
-                $mandat = getMandat('OPTR' . $data['id_mandat']);
-                if (!$mandat) {
-                    $mandat = getMandat('OPTR' . $data['id_mandat'] . 'BIS');
-                }
-            }
+
            $follow = new Http\Follow($rel, 'POST', null, new Http\JsonBody(
                 [
                     'amount' => $data['montant'],
@@ -352,10 +343,10 @@ function createDebit($data) {
                         'reference' => 'optimizefrance'
                     ],
                     'mandate' => [
-                        'reference' => $mandat,
+                        'reference' => $data['reference_mandat']
                     ],
                     'subscriber' => [
-                        'reference' => $mandat
+                        'reference' => 'OPTC'.$data['id_mandat']
                     ]
                 ]
             ));

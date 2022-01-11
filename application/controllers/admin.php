@@ -3173,9 +3173,11 @@ class admin
             $this->m_commande->getCaJournalier();
         $ca_journalier_sans_livraison =
             $this->m_commande->getCaJournalier(false);
+//        echo '<br/>----------------------------<br/>';
 
         $ca_mensuel =
             $this->m_commande->CAMensuel(date("m-Y"));
+//        print_r($ca_mensuel);
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel(date("m-Y"),
                 false);
@@ -3188,10 +3190,20 @@ class admin
 //        var_dump($ca_mensuel_sans_livraison);die;
         $data['packaging_mois'] =
             $this->m_commande->getPackagingByMonth(date("m-Y"));
+        $data['packaging_jour'] =
+            $this->m_commande->getPackagingByDay();
+
         $data['ca_journalier'] = $ca_journalier ?
             $ca_journalier[0]->ca_journalier +
-            $this->m_commande->getPackagingByDay() : 0;              //  -
+            $data['packaging_jour'] : 0;
+//        print_r($ca_journalier);die;
+
+        //  -
             // $this->m_commande->getSupplementByDay()
+//        echo '<pre>';
+//        print_r($data);
+//        echo '</pre>';
+//        die;
         $data['ca_mensuel'] =
             $ca_mensuel +
                 $data['packaging_mois']; //  - $this->m_commande->getSupplementByMonth(date("m-Y"))
@@ -3263,6 +3275,7 @@ class admin
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
+//        print_r($data);die;
 
         $this->load->view('admin/dashboard',
             $data);
@@ -3970,15 +3983,20 @@ class admin
     function valid_commentaire_ajax()
     {
         if ($this->input->is_ajax_request()) {
-
-
+            if (isset($_GET['number_commentaires'])) {
+                $numberCommentaire = $_GET['number_commentaires'];
+            }
+            else {
+                $numberCommentaire = false;
+            }
+//            print_r($_GET);die;
             $data = array();
             $data['aaData'] =
                 array();
 //            $data_commandeOld =
 //                $this->m_commande->getAllCommande();
             $data_commande =
-                $this->m_commande->getCommandeWithCommentaireNotConfirmed();
+                $this->m_commande->getCommandeWithCommentaireNotConfirmed($numberCommentaire);
 
 //            $data_etiquette =
 //                $this->m_commande->getEtiquetteAlreadySet();
@@ -4245,9 +4263,9 @@ class admin
 //                            $blAfterTenDays,
 //                            $blAfterThirtyDays,
 //                            $blAfterNinetyDays,
-//                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
-//                            $commande->id_users .
-//                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
+                            '<a class="btn btn-inverse get-userdashboard" data-toggle="modal" data-target="#user-unlock" data-user="' .
+                            $commande->id_users .
+                            '"><i class="zmdi zmdi-search"></i> Voir</a>',
                             date('d/m/Y H:i',
                                 strtotime($commande->date_commande)),
                             $commande->reference_client,
@@ -20950,7 +20968,7 @@ class admin
                             echo 'Prix: ' .
                                 $monture->prix_vente .
                                 '&#8364;<br />';
-                            echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
+                            echo '<div><label style="float: left" for="qty_monture_'.$monture->id.'">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture_'.$monture->id.'" name="qty_monture_'.$monture->id.'" class="form-control" value="1" /></span></div><br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
                                 $monture->id .
                                 '">Ajouter à mon panier</a>';

@@ -220,7 +220,7 @@ class cron extends MY_Controller {
 
     public function payment_process(){
 
-        if(date('j') == 1) {
+        if(date('j') == 10) {
 
 
             $this->load->helper('slimpay');
@@ -244,14 +244,16 @@ class cron extends MY_Controller {
 
 
             $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, $current);
+//            echo '<pre>';
+            //print_r($facture_client);die;
 
             $data = array();
 
             $data['status'] = $current;
             $data['total'] = 0;
-
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
+                    $facture_cli->date_commande = $facture_cli->y_m_commande;
                     $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
                     $get_packaging = $this->db->query($sql);
                     $packaging = $get_packaging->result();
@@ -299,7 +301,7 @@ class cron extends MY_Controller {
                             $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
                         }
                     }
-
+                    $facture['reference_mandat'] = $mandat['reference'];
                     $paiement = array(
                         'mandat_status' => $mandat,
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
@@ -315,8 +317,7 @@ class cron extends MY_Controller {
 
                     // Mandat consultable chez Slimpay
                     if ($mandat != false) {
-
-                        // Mandat activé
+                        // Mandat activ é
                         if ($mandat['state'] == 'active') {
 
                             // Ordre de prélèvement créé
@@ -347,7 +348,6 @@ class cron extends MY_Controller {
                  //   $this->db->insert('paiements', $paiement);
 
                 }
-
             $this->load->view('admin/payment_process', $data);
 
         }

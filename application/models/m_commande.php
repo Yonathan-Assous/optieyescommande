@@ -1754,7 +1754,7 @@ class m_commande extends CI_Model {
         else {
             $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
                         SELECT DISTINCT(id_users) FROM `commande` 
-                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'")';
+                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.' AND is_confirmed = 1" )';
 
 
         }
@@ -1799,7 +1799,7 @@ class m_commande extends CI_Model {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
 
-        $query = $this->db->query('SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'"');
+        $query = $this->db->query('SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND is_confirmed = 1 AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'"');
         $total = 0;
 
         if ($query && $query->num_rows() > 0) {
@@ -1835,7 +1835,7 @@ class m_commande extends CI_Model {
         $sql = 'SELECT SUM(tarif_packaging) as total FROM commande 
                 WHERE id_users IN ( SELECT DISTINCT(id_users) FROM `commande` 
                 WHERE date_commande >= "' .
-                $date . '" AND date_commande <= "' . $date_end . '")
+                $date . '" AND date_commande <= "' . $date_end . ' AND is_confirmed = 1")
                 AND date_commande >= "' .
                 $date . '" AND date_commande <= "' . $date_end . '"';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
@@ -2603,7 +2603,7 @@ class m_commande extends CI_Model {
 
         $sql = 'SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00';
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Samuel = 100.00 AND is_confirmed = 1';
         //var_dump($sql);
 
         $query = $this->db->query($sql);
@@ -2622,16 +2622,16 @@ class m_commande extends CI_Model {
 
         $sql = "SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1 AND penalty != 1) AND Samuel = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1 AND penalty != 1) AND Samuel = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Samuel = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Samuel = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND (type_commande > 1 AND penalty != 1) AND Samuel = 100.00) 
+                                   AND (type_commande > 1 AND penalty != 1) AND Samuel = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2655,7 +2655,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND  DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Daniel = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND  DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Daniel = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2672,16 +2672,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Daniel = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Daniel = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND type_commande > 1 AND penalty != 1 AND Daniel = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Daniel = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2704,7 +2704,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Gregory = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Gregory = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2723,23 +2723,23 @@ class m_commande extends CI_Model {
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
-                                   AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00)
+                                   AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
-                                   AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00)
+                                   AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND type_commande > 1 AND penalty != 1 AND Gregory = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Gregory = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Gregory = 100.00) as ca");
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Gregory = 100.00 ) as ca");
 
         $total = 0;
 
@@ -2761,7 +2761,7 @@ class m_commande extends CI_Model {
 		                           JOIN users ON commande.id_users = users.id_users
 		                           WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
 		                           AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" 
-		                           AND Glenn = 100.00');
+		                           AND Glenn = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2780,19 +2780,19 @@ class m_commande extends CI_Model {
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
-                                   AND type_commande = 1 AND penalty != 1 AND Glenn = 100.00)
+                                   AND type_commande = 1 AND penalty != 1 AND Glenn = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
-                                   AND type_commande > 1 AND penalty = 1 AND Glenn = 100.00)
+                                   AND type_commande > 1 AND penalty = 1 AND Glenn = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND type_commande > 1 AND penalty != 1 AND Glenn = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Glenn = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2815,7 +2815,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Optical_Service = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Optical_Service = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2832,16 +2832,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Optical_Service = 100.00)
+                                   WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND type_commande > 1 AND penalty = 1 AND Optical_Service = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
-                                   AND type_commande > 1 AND penalty != 1 AND Optical_Service = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Optical_Service = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2866,7 +2866,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Samuel = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Samuel = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2883,16 +2883,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1  AND Samuel = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1  AND Samuel = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Samuel = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Samuel = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."')
-                                   AND type_commande > 1 AND penalty != 1 AND Samuel = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Samuel = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2917,7 +2917,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Daniel = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Daniel = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2933,16 +2933,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Daniel = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Daniel = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Daniel = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."')
-                                   AND type_commande > 1 AND penalty != 1 AND Daniel = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Daniel = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -2967,7 +2967,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Gregory = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Gregory = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2984,16 +2984,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Gregory = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Gregory = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."')
-                                   AND type_commande > 1 AND penalty != 1 AND Gregory = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Gregory = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -3022,7 +3022,7 @@ class m_commande extends CI_Model {
 		                           WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
 		                           AND (commande.date_commande > "'.$date.'" 
 		                           AND commande.date_commande < "'.$date_end.'") 
-		                           AND Glenn = 100.00');
+		                           AND Glenn = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -3044,7 +3044,7 @@ class m_commande extends CI_Model {
                                    AND commande.date_commande < '".$date_end."') 
                                    AND type_commande = 1 
                                    AND penalty != 1 
-                                   AND Glenn = 100.00)
+                                   AND Glenn = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty
                                    FROM commande
@@ -3053,7 +3053,7 @@ class m_commande extends CI_Model {
                                    AND commande.date_commande < '".$date_end."') 
                                    AND type_commande > 1 
                                    AND penalty = 1 
-                                   AND Glenn = 100.00)
+                                   AND Glenn = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express 
                                     FROM commande
@@ -3062,7 +3062,7 @@ class m_commande extends CI_Model {
                                     AND commande.date_commande < '".$date_end."')
                                     AND type_commande > 1 
                                     AND penalty != 1 
-                                    AND Glenn = 100.00) 
+                                    AND Glenn = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction 
 								   FROM facture_reduction fr
@@ -3090,7 +3090,7 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Optical_Service = 100.00');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND (commande.date_commande > "'.$date.'" AND commande.date_commande < "'.$date_end.'") AND Optical_Service = 100.00 AND is_confirmed = 1');
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -3107,16 +3107,16 @@ class m_commande extends CI_Model {
 
         $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande = 1 AND penalty != 1 AND Optical_Service = 100.00 AND is_confirmed = 1)
                                    +
                                   (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier_penalty FROM commande
 								   JOIN users ON commande.id_users = users.id_users
-                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Optical_Service = 100.00)
+                                   WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."') AND type_commande > 1 AND penalty = 1 AND Optical_Service = 100.00 AND is_confirmed = 1)
                                    +
                                    (SELECT IFNULL(SUM(commande.tarif_express),0) as tarif_express FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE (commande.date_commande > '".$date."' AND commande.date_commande < '".$date_end."')
-                                   AND type_commande > 1 AND penalty != 1 AND Optical_Service = 100.00) 
+                                   AND type_commande > 1 AND penalty != 1 AND Optical_Service = 100.00 AND is_confirmed = 1) 
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
@@ -4283,7 +4283,6 @@ class m_commande extends CI_Model {
                         AND is_confirmed = 1
                         GROUP BY day
                         ORDER BY day ASC";
-//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){

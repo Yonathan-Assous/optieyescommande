@@ -1754,7 +1754,7 @@ class m_commande extends CI_Model {
         else {
             $sql = 'SELECT SUM(tarif_packaging) as total FROM users WHERE id_users IN (
                         SELECT DISTINCT(id_users) FROM `commande` 
-                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.' AND is_confirmed = 1" )';
+                        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND is_confirmed = 1 )';
 
 
         }
@@ -1835,7 +1835,7 @@ class m_commande extends CI_Model {
         $sql = 'SELECT SUM(tarif_packaging) as total FROM commande 
                 WHERE id_users IN ( SELECT DISTINCT(id_users) FROM `commande` 
                 WHERE date_commande >= "' .
-                $date . '" AND date_commande <= "' . $date_end . ' AND is_confirmed = 1")
+                $date . '" AND date_commande <= "' . $date_end . '" AND is_confirmed = 1)
                 AND date_commande >= "' .
                 $date . '" AND date_commande <= "' . $date_end . '"';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande

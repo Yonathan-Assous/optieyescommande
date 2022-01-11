@@ -694,7 +694,7 @@ class m_commande extends CI_Model {
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
                                    WHERE status_omega!=0 AND status = 2" . $addDate_start . " ORDER BY date_omega DESC,id_commande DESC";
-        //print_r($sql);die;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
 
 
@@ -1834,7 +1834,9 @@ class m_commande extends CI_Model {
         $sql = 'SELECT SUM(tarif_packaging) as total FROM users 
                 WHERE id_users IN ( SELECT DISTINCT(id_users) FROM `commande` 
                 WHERE date_commande >= "' .
-               $date . '" AND date_commande <= "' . $date_end . '")';
+                $date . '" AND date_commande <= "' . $date_end . '")
+                AND date_commande >= "' .
+                $date . '" AND date_commande <= "' . $date_end . '"';
         //        $sql = 'SELECT id_users, tarif_packaging FROM commande c INNER JOIN (SELECT MAX(date_commande) as maxDate FROM commande
         //        WHERE DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add.' GROUP BY id_users) AS t WHERE c.date_commande = t.maxDate '.$add.' GROUP BY id_users, tarif_packaging ';
         //        var_dump($sql);die;

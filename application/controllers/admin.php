@@ -3157,9 +3157,9 @@ class admin
     public
     function index()
     {
-        $data['caByDay'] =
-            $this->m_commande->getCaByDayOfMonth(date("Y-m"));
-        //var_dump($data);die;
+//        echo '<pre>';
+//        $data['caByDay'] =
+//            $this->m_commande->getCaByDayOfMonth(date("Y-m"));
         $data =
             $this->session->userdata('data_admin');
         $data['newUser'] =
@@ -3279,7 +3279,6 @@ class admin
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
-//        print_r($data);die;
 
         $this->load->view('admin/dashboard',
             $data);
@@ -20997,7 +20996,7 @@ class admin
                             echo 'Prix: ' .
                                 $monture->prix_vente .
                                 '&#8364;<br />';
-                            echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
+                            echo '<div><label style="float: left" for="qty_monture_'.$monture->id.'">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture_'.$monture->id.'" name="qty_monture_'.$monture->id.'" class="form-control" value="1" /></span></div><br />';
                             echo '<a class="btn btn-warning monture-select" rel="' .
                                 $monture->id .
                                 '">Ajouter à mon panier</a>';

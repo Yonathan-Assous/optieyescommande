@@ -6038,7 +6038,7 @@ class index extends MY_Controller {
 						echo 'Taille: '.$monture->size.'<br />';
 						echo 'Couleur: '.$monture->couleur.'<br />';
 						echo 'Prix: '.$monture->prix_vente.'&#8364;<br />';
-						echo '<div><label style="float: left" for="qty_monture">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture" name="qty_monture" class="form-control" value="1" /></span></div><br />';
+						echo '<div><label style="float: left" for="qty_monture_'.$monture->id.'">Quantité: </label><span style="display: block; overflow: hidden; padding: 0 4px 0 6px;" ><input style="width:61px; border=2px solid black; text-align: center" type="number" id="qty_monture_'.$monture->id.'" name="qty_monture_'.$monture->id.'" class="form-control" value="1" /></span></div><br />';
 						echo '<a class="btn btn-warning monture-select" rel="'.$monture->id.'">Ajouter à mon panier</a>';
 						echo '</div>';
 					}

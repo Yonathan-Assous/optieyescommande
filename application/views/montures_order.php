@@ -179,12 +179,12 @@ include_once('menu.php');
             step.nextAll('.step').addClass('hidden');
             step.next('.step').removeClass('hidden').find('li').removeClass('active');
 
-			
+
 			$.ajax({
                 type: "POST",
                 url: "/index/add_montures_to_order",
                 data: { 'id': el.attr('rel'),
-                        'qty': $('#qty_monture').val()
+                        'qty': $('#qty_monture_' + el.attr('rel')).val()
                 }
             }).done(function (data) {
 				swal({

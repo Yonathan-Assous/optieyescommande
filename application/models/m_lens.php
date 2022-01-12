@@ -474,6 +474,7 @@ class m_lens extends CI_Model
         $this->db->where('lens_id >', 0);
         $this->db->where('date_commande >', $date);
         $this->db->where('date_commande <', $date_end);
+        $this->db->where('is_confirmed =', 1);
 
         $query = $this->db->get();
 
@@ -495,6 +496,7 @@ class m_lens extends CI_Model
         $this->db->from('commande');
         $this->db->where('lens_id >', 0);
         $this->db->where('DATE_FORMAT(date_commande, "%Y-%m") =', $date);
+        $this->db->where('is_confirmed =', 1);
 
 
         $query = $this->db->get();

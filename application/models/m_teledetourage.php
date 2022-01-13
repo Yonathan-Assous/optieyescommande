@@ -29,6 +29,20 @@ class m_teledetourage extends CI_Model
         $this->db->query($sql);
     }
 
+    public function addTeledetourageFormat($userId) {
+        $formats = $this->getFormats();
+        $sql = "REPLACE INTO $this->table (`id_user`, `id_teledetourage_format`, `price`) VALUES ";
+        foreach ($formats as $format) {
+            $price = 0;
+            if ($format->id == 3) {
+                $price = 5;
+            }
+            $sql .= "('$userId', '$format->id', $price),";
+        }
+        $sql = rtrim($sql, ',');
+        $this->db->query($sql);
+    }
+
     public function getPriceByUserId($userId) {
         $sqlPrice = "SELECT `name`, `price` FROM $this->table as tfu
                     INNER JOIN `teledetourage_format` as tf ON tfu.id_teledetourage_format = tf.id

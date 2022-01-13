@@ -81,6 +81,8 @@ class index extends MY_Controller {
     }
 
 	public function test() {
+        $this->m_teledetourage->addTeledetourageFormat('619');
+        die;
         $data['certificat'] = $this->m_commande->getCertificatStock('565817');
 
         $data['control'] = array(
@@ -5132,6 +5134,7 @@ class index extends MY_Controller {
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
                         $inscription['user_id'] = $userId;
                         $submitSepa = $this->submit_sepa($inscription, $sepa);
+                        $this->m_teledetourage->addTeledetourageFormat($userId);
                         if (!$submitSepa) {
                             echo json_encode(array('status'=> 'error', 'error' => 'iban'));
                         }

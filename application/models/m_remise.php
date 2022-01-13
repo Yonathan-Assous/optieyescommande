@@ -2,7 +2,7 @@
 
 class m_remise extends CI_Model
 {
-    var $table = 'teledetourage_format_user';
+    var $table = 'remise';
 
     public function __construct()
     {

@@ -29,6 +29,7 @@
 <!--                --><?php
 //                $dCust=explode("-",$date);
 //                $dEnd=$dCust[1].'-'.$dCust[0];
+
 //
 //                $maxJour = date("t",strtotime($date));
 //                $maxJourParLigne = 7;

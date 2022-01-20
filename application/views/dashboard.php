@@ -332,8 +332,6 @@ if (is_object($pair_order)) {
                                                                                         <select name="ancienne_commande"
                                                                                                 id="stock_ancienne_commande"
                                                                                                 class="form-control select-search">
-                                                                                            <option>Sélectionner
-                                                                                            </option>
                                                                                             <?php
                                                                                             echo $id_commandes; ?>
                                                                                         </select>

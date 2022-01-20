@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <?php
     if($order_id !== false) {
-        echo '<h4 class="modal-title">Commande N°'.$order_id.'</h4>';
+        echo '<h4 class="modal-title">'.$order_id.'</h4>';
     }
     else {
         echo '<h4 class="modal-title">Erreur</h4>';

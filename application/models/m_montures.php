@@ -311,7 +311,7 @@ class m_montures extends CI_Model
      * @param $args
      * @return mixed
      */
-    public function addMonturesOrder($args) {
+    public function addMonturesOrder($args, $byAdmin = 0) {
 
         $CI =& get_instance();
         $CI->load->model('m_commande');
@@ -330,8 +330,8 @@ class m_montures extends CI_Model
             'tarif_supplement' => 0,
             'tarif_packaging' => 0,
             'id_etat_commande' => 1,
-            'taux_tva' => 1.196
-
+            'taux_tva' => 1.196,
+            'by_admin' => $byAdmin
         );
 
         $params = array_merge($defaults, $args);

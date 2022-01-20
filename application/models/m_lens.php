@@ -178,7 +178,7 @@ class m_lens extends CI_Model
      * @param $args
      * @return mixed
      */
-    public function addLensOrder($args) {
+    public function addLensOrder($args, $byAdmin = 0) {
 
         $CI =& get_instance();
         $CI->load->model('m_commande');
@@ -197,7 +197,8 @@ class m_lens extends CI_Model
             'tarif_supplement' => 0,
             'tarif_packaging' => 0,
             'id_etat_commande' => 1,
-            'taux_tva' => 1.196
+            'taux_tva' => 1.196,
+            'by_admin' => $byAdmin
 
         );
 
@@ -222,7 +223,6 @@ class m_lens extends CI_Model
         if(!empty($commentaire)){
             $params['is_confirmed'] = 0;
         }
-
         if($this->db->insert('commande', $params)) {
 
             if(!empty($commentaire)){

@@ -3174,14 +3174,17 @@ class admin
         $ca_journalier_sans_livraison =
             $this->m_commande->getCaJournalier(false);
 //        echo '<br/>----------------------------<br/>';
-
+        $date_M_Y = date("m-Y");
+        $date_Y_M = date("Y-m");
+        $date_Y_M_D = date("Y-m-d");
         $ca_mensuel =
-            $this->m_commande->CAMensuel(date("m-Y"));
+            $this->m_commande->CAMensuel($date_M_Y);
 //        print_r($ca_mensuel);
         $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
         $ca_mensuel_sans_livraison =
-            $this->m_commande->CAMensuel(date("m-Y"),
+            $this->m_commande->CAMensuel($date_M_Y,
                 false);
+
 //        var_dump(
 //            $ca_journalier
 //        );die;
@@ -3190,7 +3193,7 @@ class admin
 //        var_dump($ca_mensuel);
 //        var_dump($ca_mensuel_sans_livraison);die;
         $data['packaging_mois'] =
-            $this->m_commande->getPackagingByMonth(date("m-Y"));
+            $this->m_commande->getPackagingByMonth($date_M_Y);
         $data['packaging_jour'] =
             $this->m_commande->getPackagingByDay();
 //        print_r($data['packaging_mois']);die;
@@ -3218,51 +3221,53 @@ class admin
 //        var_dump($ca_mensuel_sans_livraison);
 //        var_dump($data['packaging_mois']);
 //        die;
+
         $supplementByDay = $this->m_commande->getSupplementByDay();
         $data['ca_journalier_sans_livraison'] = $ca_journalier_sans_livraison ?
             $ca_journalier_sans_livraison[0]->ca_journalier -
             $supplementByDay : 0;
         $data['supplement_jour'] =
             $supplementByDay;
-        $supplementByMonth = $this->m_commande->getSupplementByMonth(date("m-Y"));
+        $supplementByMonth = $this->m_commande->getSupplementByMonth($date_M_Y);
         //var_dump($supplementByMonth);die;
         $data['ca_mensuel_sans_livraison'] =
             $ca_mensuel_sans_livraison - $supplementByMonth - $remises
             ;
-
+//        echo '<pre>';
+//        print_r($data);die;
         $data['firstorder'] =
             $this->m_commande->getCommandeById(1);
 
         $data['caByDay'] =
-            $this->m_commande->getCaByDayOfMonth(date("Y-m"));
+            $this->m_commande->getCaByDayOfMonth($date_Y_M);
         $data['taux_tva'] =
             $this->session->userdata('taux_tva');
 
         $data['lens_month'] =
-            $this->m_lens->getLensIncomesByMonth(date("Y-m"));
+            $this->m_lens->getLensIncomesByMonth($date_Y_M);
         $data['lens_day'] =
-            $this->m_lens->getLensIncomesByDay(date("Y-m-d"));
+            $this->m_lens->getLensIncomesByDay($date_Y_M_D);
         $data['montures_month'] =
-            $this->m_montures->getMonturesIncomesByMonth(date("Y-m"));
+            $this->m_montures->getMonturesIncomesByMonth($date_Y_M);
         $data['montures_day'] =
-            $this->m_montures->getMonturesIncomesByDay(date("Y-m-d"));
+            $this->m_montures->getMonturesIncomesByDay($date_Y_M_D);
 
         //var_dump($data);die;
         $data['CAmonth_Samuel'] =
-            $this->m_commande->getCAmonth_Samuel(date("m-Y")) -
-            $this->m_commande->getCAmonthSupplement_Samuel(date("m-Y"));
+            $this->m_commande->getCAmonth_Samuel($date_M_Y) -
+            $this->m_commande->getCAmonthSupplement_Samuel($date_M_Y);
         $data['CAmonth_Daniel'] =
-            $this->m_commande->getCAmonth_Daniel(date("m-Y")) -
-            $this->m_commande->getCAmonthSupplement_Daniel(date("m-Y"));
+            $this->m_commande->getCAmonth_Daniel($date_M_Y) -
+            $this->m_commande->getCAmonthSupplement_Daniel($date_M_Y);
         $data['CAmonth_Gregory'] =
-            $this->m_commande->getCAmonth_Gregory(date("m-Y")) -
-            $this->m_commande->getCAmonthSupplement_Gregory(date("m-Y"));
+            $this->m_commande->getCAmonth_Gregory($date_M_Y) -
+            $this->m_commande->getCAmonthSupplement_Gregory($date_M_Y);
         $data['CAmonth_Glenn'] =
-            $this->m_commande->getCAmonth_Glenn(date("m-Y")) -
-            $this->m_commande->getCAmonthSupplement_Glenn(date("m-Y"));
+            $this->m_commande->getCAmonth_Glenn($date_M_Y) -
+            $this->m_commande->getCAmonthSupplement_Glenn($date_M_Y);
         $data['CAmonth_Optical_Service'] =
-            $this->m_commande->getCAmonth_Optical_Service(date("m-Y")) -
-            $this->m_commande->getCAmonthSupplement_Optical_Service(date("m-Y"));
+            $this->m_commande->getCAmonth_Optical_Service($date_M_Y) -
+            $this->m_commande->getCAmonthSupplement_Optical_Service($date_M_Y);
 
         $data['CAday_Samuel'] =
             $this->m_commande->getCAday_Samuel() -
@@ -3279,7 +3284,8 @@ class admin
         $data['CAday_Optical_Service'] =
             $this->m_commande->getCAday_Optical_Service() -
             $this->m_commande->getCAdaySupplement_Optical_Service();
-
+//        echo '<pre>';
+//        print_r($data);die;
         $this->load->view('admin/dashboard',
             $data);
     }
@@ -12833,6 +12839,7 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
+//                print_r($data);die;
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {
@@ -12885,6 +12892,7 @@ class admin
         $data['build'] =
             json_decode($order[0]->information_commande,
                 true);
+        $data['by_admin'] = $order[0]->by_admin;
 
         echo $this->load->view('ajax_view_lens_order',
             $data);
@@ -12900,7 +12908,6 @@ class admin
 
         $order =
             $this->m_montures->getOrderById($id);
-
         $data['user_info'] =
             $this->m_users->getUserById($order[0]->id_users)[0];
         $data['data_admin']['admin_info'] =
@@ -12915,7 +12922,7 @@ class admin
         $data['montures'] =
             json_decode($order[0]->information_commande,
                 true);
-
+        $data['by_admin'] = $order[0]->by_admin;
         echo $this->load->view('ajax_view_montures_order',
             $data);
     }
@@ -17542,7 +17549,7 @@ class admin
 
                     if (
                     $pair_order_id =
-                        $this->m_commande->addOrder($pair_order_data)) {
+                        $this->m_commande->addOrder($pair_order_data, true)) {
 
                         if (!isset($pair_order_id['id'])) {
                             echo json_encode(array(
@@ -17568,7 +17575,7 @@ class admin
                 // FUCK
 
                 if ($order =
-                    $this->m_commande->addOrder($data)) {
+                    $this->m_commande->addOrder($data, true)) {
                     if ($data['pair'] ==
                         true) {
                         $message =
@@ -20618,7 +20625,7 @@ class admin
             );
 
 
-            if ($this->m_lens->addLensOrder($args)) {
+            if ($this->m_lens->addLensOrder($args, true)) {
                 echo 'ok';
             } else {
                 echo 'error';
@@ -21767,7 +21774,7 @@ class admin
                 '" AND status=0');
 
 
-            if ($this->m_montures->addMonturesOrder($args)) {
+            if ($this->m_montures->addMonturesOrder($args, true)) {
                 echo 'ok';
             } else {
                 echo 'error';

@@ -53,7 +53,8 @@ class m_commande extends CI_Model {
         'angle_pantoscopique_D' 		 => 'angle_pantoscopique_D',
         'angle_pantoscopique_G' 		 => 'angle_pantoscopique_G',
         'hauteur_montage_D' 			 => 'hauteur_montage_D',
-        'hauteur_montage_G' 			 => 'hauteur_montage_G'
+        'hauteur_montage_G' 			 => 'hauteur_montage_G',
+        'by_admin' 			             => 'by_admin'
     );
 
     public function __construct() {
@@ -3162,12 +3163,12 @@ class m_commande extends CI_Model {
         $this->db->update($this->table);
     }
 
-    public function addOrder($data){
+    public function addOrder($data, $byAdmin = 0){
         if(is_array($data)){
 
             $pair = $data['pair'];
             unset($data['discount']);
-
+            $data['by_admin'] = $byAdmin;
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3412,6 +3413,7 @@ class m_commande extends CI_Model {
 
                 if($type_commande_verre!=4)
                 {
+
                     $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
                     if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
@@ -3508,7 +3510,6 @@ class m_commande extends CI_Model {
                 }
                 else
                 {
-
                     $ok = 0;
                     if($id_verreD!="" && $verreDroit)
                     {

@@ -84,6 +84,15 @@ class m_teinte extends CI_Model
         return $teinte[0];
     }
 
+    public function getNameByCode($code) {
+        if (!empty($code)) {
+            $teinte = $this->getTeinteByCode($code);
+            return $teinte->name;
+        }
+        else
+            return '';
+    }
+
     public function calculPrice($nom_du_verre, $code, $userId)
     {
         $lens = $this->m_lenses->getLensesByTradFr($nom_du_verre);

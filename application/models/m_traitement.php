@@ -527,8 +527,17 @@ class m_traitement extends CI_Model
         $sql = "SELECT * FROM `traitements` 
                 WHERE `code` = '$code'";
         $query = $this->db->query($sql);
-        $traitement =  $query->result();
+        $traitement = $query->result();
         return $traitement[0];
+    }
+
+    public function getNameByCode($code) {
+        if (!empty($code)) {
+            $traitement = $this->getTraitementByCode($code);
+            return $traitement->name;
+        }
+        else
+            return '';
     }
 
     public function calculPrice($nom_du_verre, $code, $userId) {

@@ -12825,6 +12825,7 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
+//                print_r($data);die;
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {
@@ -12877,6 +12878,7 @@ class admin
         $data['build'] =
             json_decode($order[0]->information_commande,
                 true);
+        $data['by_admin'] = $order[0]->by_admin;
 
         echo $this->load->view('ajax_view_lens_order',
             $data);
@@ -12892,7 +12894,6 @@ class admin
 
         $order =
             $this->m_montures->getOrderById($id);
-
         $data['user_info'] =
             $this->m_users->getUserById($order[0]->id_users)[0];
         $data['data_admin']['admin_info'] =
@@ -12907,7 +12908,7 @@ class admin
         $data['montures'] =
             json_decode($order[0]->information_commande,
                 true);
-
+        $data['by_admin'] = $order[0]->by_admin;
         echo $this->load->view('ajax_view_montures_order',
             $data);
     }
@@ -17524,7 +17525,7 @@ class admin
 
                     if (
                     $pair_order_id =
-                        $this->m_commande->addOrder($pair_order_data)) {
+                        $this->m_commande->addOrder($pair_order_data, true)) {
 
                         if (!isset($pair_order_id['id'])) {
                             echo json_encode(array(
@@ -17550,7 +17551,7 @@ class admin
                 // FUCK
 
                 if ($order =
-                    $this->m_commande->addOrder($data)) {
+                    $this->m_commande->addOrder($data, true)) {
                     if ($data['pair'] ==
                         true) {
                         $message =
@@ -20594,7 +20595,7 @@ class admin
             );
 
 
-            if ($this->m_lens->addLensOrder($args)) {
+            if ($this->m_lens->addLensOrder($args, true)) {
                 echo 'ok';
             } else {
                 echo 'error';
@@ -21743,7 +21744,7 @@ class admin
                 '" AND status=0');
 
 
-            if ($this->m_montures->addMonturesOrder($args)) {
+            if ($this->m_montures->addMonturesOrder($args, true)) {
                 echo 'ok';
             } else {
                 echo 'error';

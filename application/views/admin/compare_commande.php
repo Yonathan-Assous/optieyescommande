@@ -78,13 +78,13 @@
                             }
                             $additionNew = isset($info_commande['verre']['correction_droit']['addition']) ? $info_commande['verre']['correction_droit']['addition'] : '';
                             $additionOld = isset($info_nouvelle_commande['verre']['correction_droit']['addition']) ? $info_nouvelle_commande['verre']['correction_droit']['addition'] : '';
-                            if ($additionOld != $additionNew) {
-                                $correction_gauche .= '<span style="background-color: #00a2e8; color: white">Addition: <strong>'.$additionOld.'</strong></span></br>';
-                            }
-                            else if ($additionNew != ''){
-                                $correction_gauche .= 'Addition: <strong style="color: #00a2e8">'.$additionOld.'</strong></br>';
-                            }
-
+//                            if ($additionOld != $additionNew) {
+//                                $correction_gauche .= '<span style="background-color: #00a2e8; color: white">Addition: <strong>'.$additionNew.'</strong></span></br>';
+//                            }
+//                            else if ($additionNew != ''){
+//                                $correction_gauche .= 'Addition: <strong style="color: #00a2e8">'.$additionNew.'</strong></br>';
+//                            }
+                            $correction_gauche .= '<span style="background-color: #00a2e8; color: white">Addition: <strong>'.$additionNew.'////'.$additionOld.'</strong></span></br>';
                             $correction_droit = 'Correction: ' . $correction_droit;
                         }
 

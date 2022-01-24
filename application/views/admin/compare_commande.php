@@ -756,8 +756,8 @@
 //                            if (isset($info_nouvelle_commande['verre']['correction_droit']['diametre']))
 //                                $correction_droit .= 'Diametre: ' . $info_nouvelle_commande['verre']['diametre'] . '<br>';
 
-                            $oldDiametre = isset($info_nouvelle_commande['verre']['correction_gauche']['diametre']) ? $info_nouvelle_commande['verre']['correction_gauche']['diametre'] : '';
-                            $newDiametre = isset($info_commande['verre']['correction_gauche']['diametre']) ? $info_commande['verre']['correction_gauche']['diametre'] : '';
+                            $oldDiametre = isset($info_nouvelle_commande['verre']['correction_droit']['diametre']) ? $info_nouvelle_commande['verre']['correction_droit']['diametre'] : '';
+                            $newDiametre = isset($info_commande['verre']['correction_droit']['diametre']) ? $info_commande['verre']['correction_droit']['diametre'] : '';
 
                             if ($oldDiametre != $newDiametre) {
                                 $correction_droit .= '<strong style="background-color: #2691a7; color: white"> Diamètre: ' . $oldDiametre . '</strong><br>';

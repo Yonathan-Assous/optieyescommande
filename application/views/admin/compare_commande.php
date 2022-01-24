@@ -68,13 +68,13 @@
                                 $correction_droit .= '<span style="background-color: #22b14c; color: white">Cylindre: <strong>'.$info_commande['verre']['correction_droit']['cylindre'].'</strong></span>, ';
                             }
                             else {
-                                $correction_droit .= 'Cylindre: <strong style="color: #22b14c">'.$info_commande['verre']['correction_gauche']['cylindre'].'</strong>, ';
+                                $correction_droit .= 'Cylindre: <strong style="color: #22b14c">'.$info_commande['verre']['correction_droit']['cylindre'].'</strong>, ';
                             }
                             if (!isset($info_nouvelle_commande['verre']['correction_droit']) || $info_commande['verre']['correction_droit']['axe'] != $info_nouvelle_commande['verre']['correction_droit']['axe']) {
                                 $correction_droit .= '<span style="background-color: #ffaec9; color: #333">Axe: <strong>'.$info_commande['verre']['correction_droit']['axe'].'</strong></span>, ';
                             }
                             else {
-                                $correction_droit .= 'Axe: <strong style="color: #ffaec9">'.$info_commande['verre']['correction_gauche']['axe'].'</strong>, ';
+                                $correction_droit .= 'Axe: <strong style="color: #ffaec9">'.$info_commande['verre']['correction_droit']['axe'].'</strong>, ';
                             }
                             $additionNew = isset($info_commande['verre']['correction_droit']['addition']) ? $info_commande['verre']['correction_droit']['addition'] : '';
                             $additionOld = isset($info_nouvelle_commande['verre']['correction_droit']['addition']) ? $info_nouvelle_commande['verre']['correction_droit']['addition'] : '';

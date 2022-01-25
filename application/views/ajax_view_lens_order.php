@@ -1,8 +1,15 @@
 ﻿<div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <?php
+    $commande_by = '';
+    if ($by_admin == 0 && !is_null($by_admin)) {
+        $commande_by = 'passé par client';
+    }
+    else if ($by_admin == 1) {
+        $commande_by = 'passé par OptiEyes';
+    }
     if($order_id !== false) {
-        echo '<h4 class="modal-title">Commande N°'.$order_id.'</h4>';
+        echo '<h4 class="modal-title">Commande N°'.$order_id.' ' . $commande_by . '</h4>';
     }
     else {
         echo '<h4 class="modal-title">Erreur</h4>';

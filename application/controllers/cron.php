@@ -102,7 +102,6 @@ class cron extends MY_Controller {
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
-            $date = '05-2021';
            // $date = date('m-Y', time());
         //echo $date;die;
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();

@@ -220,7 +220,7 @@ class cron extends MY_Controller {
 
     public function payment_process(){
 
-        if(date('j') == 10) {
+        if(date('j') == 1) {
 
 
             $this->load->helper('slimpay');

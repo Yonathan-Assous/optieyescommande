@@ -2043,7 +2043,6 @@ class index extends MY_Controller {
 
     public function addOrder($relance=false,$id_commande=""){
         if($this->input->is_ajax_request()) {
-
             $data = $this->session->userdata('order');
 
             $add = $this->input->post();
@@ -2751,7 +2750,6 @@ class index extends MY_Controller {
                 $id_grille_tarifaire = $this->m_users->getGrilleTarifaire($data['id_users']);
 
                 $prix_verre = $this->m_verres->getPrixVerre($data['id_verre'],$id_grille_tarifaire,$data['id_users']);
-
 				if($prix_verre !== false){
 
                     $supplement = 0;
@@ -2768,17 +2766,17 @@ class index extends MY_Controller {
 					$data['total_commande'] = $data['prix_verre'] =  $prix_verre[0]->prix_verre+$supplement;
 
                     if($data['type_commande'] == 1) {
-                        $data['tarif_supplement'] = $supplement;
+//                        $data['tarif_supplement'] = $supplement;
                     }
                     else {
-                        $data['tarif_supplement'] = 0;
+//                        $data['tarif_supplement'] = 0;
                     }
 
 					$data['libelle_verre'] =   $prix_verre[0]->libelle_verre;
 
                     if($prix_double) {
                         $data['total_commande'] *= 2;
-                        $data['tarif_supplement'] *= 2;
+//                        $data['tarif_supplement'] *= 2;
                     }
 
 					if(isset($data['miroir']) && $data['miroir'] != 0)
@@ -2889,22 +2887,25 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
 //                var_dump($data['prixDH']);die;
-
+//                print_r($data);die;
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
                 $data['prixGH'] = 0;
+                $data['supplementD'] = 0;
+                $data['supplementG'] = 0;
 //                var_dump($data);die;
                 if (isset($data['droit'])) {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
 
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
-
                     if ($verreStockD) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
+                        $data['supplementD'] = $verreStockD->supplement * $quantiteD;
                     }
                     else {
+
                         $teinteCode = NULL;
                         if(isset($data['teinteD'])) {
                             $teinteCode = $data['teinteD'];
@@ -2921,18 +2922,24 @@ class index extends MY_Controller {
                         if(isset($data['PrismeSphereD'])) {
                             $prisme = $data['PrismeSphereD'];
                         }
-
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteD;;
+                            $prisme, $teinteCode) * $quantiteD;
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH']);
+                        $data['supplementD'] = $lenses->supplement;
+                        if (strpos($data['nomverreDH'], 'T-One') !== false && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+                            $data['supplementD'] -= 1;
+                        }
                     }
                 }
+
                 if (isset($data['gauche'])) {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
+                        $data['supplementG'] = $verreStockG->supplement * $quantiteG;
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -2952,7 +2959,12 @@ class index extends MY_Controller {
                         }
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteG;;
+                            $prisme, $teinteCode) * $quantiteG;
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH']);
+                        $data['supplementG'] = $lenses->supplement;
+                        if (strpos($data['nomverreGH'], 'T-One') !== false && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+                            $data['supplementG'] -= 1;
+                        }
                     }
                 }
 
@@ -2962,12 +2974,12 @@ class index extends MY_Controller {
                 $data['id_users'] = $user['user_info']->id_users;
                 $data['data_admin'] = $this->session->userdata('data_admin');
 
-                $supplement = 0;
 
-                if($data['user_info']->tarif_supplement > 0) {
-					$supplement = $data['user_info']->tarif_supplement;
-				}
+//                $supplement = 0;
 
+//                if($data['user_info']->tarif_supplement > 0) {
+//					$supplement = $data['user_info']->tarif_supplement;
+//				}
 				$result = $this->m_config->getConfig(array('nom_config' => 'commentaire'));
                 $data['commentaire_actif'] = json_decode($result[0]->param_config);
 
@@ -2983,7 +2995,7 @@ class index extends MY_Controller {
 				//$data['true_type_commande'] = $data['type_commande'];
 
 				$data['panierA'] = 0;
-				$data['tarif_supplement'] = 0;
+//				$data['tarif_supplement'] = 0;
 
 				if($data['type_de_verreD']!=$data['type_de_verreG'] || !isset($data['gauche']) || !isset($data['droit']))
 				{
@@ -3013,7 +3025,7 @@ class index extends MY_Controller {
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
-                        	$data['tarif_supplement'] = $supplement;
+//                        	$data['tarif_supplement'] = $supplement;
 						}
 					}
 
@@ -3041,7 +3053,7 @@ class index extends MY_Controller {
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
-							$data['tarif_supplement'] = $supplement;
+//							$data['tarif_supplement'] = $supplement;
 						}
 
                     }
@@ -3077,7 +3089,7 @@ class index extends MY_Controller {
 						$data['origine_commandeD'] = 1;
 						$data['origine_commandeG'] = 1;
 
-						$data['tarif_supplement'] = $supplement;
+//						$data['tarif_supplement'] = $supplement;
 					}
 				}
 
@@ -3642,10 +3654,12 @@ class index extends MY_Controller {
 
 				if($prix_double) {
 					$data['total_commande'] *= 2;
-					$data['tarif_supplement'] *= 2;
+//					$data['tarif_supplement'] *= 2;
 				}
 
-				$data['recap_commande'] = $data;
+                $data['tarif_supplement'] = $data['supplementG'] + $data['supplementD'];
+
+                $data['recap_commande'] = $data;
 				if(isset($data['pair_order_recap'])) {
 					$info_commande_pair = json_decode($pair_order->information_commande,true);
 //                    var_dump($info_commande_pair["verre"]["correction_droit"]["traitement"]);
@@ -3801,7 +3815,6 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
-
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);

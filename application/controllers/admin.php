@@ -1052,6 +1052,80 @@ class admin
                     1;
             }
 
+            if (isset($data['droit'])) {
+                $verreName = stristr($data['nomverreDH'], ' -', true);
+
+                $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
+                if ($verreStockD) {
+                    $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $user_id) * $quantiteD;
+                    $data['supplementD'] = $verreStockD->supplement;
+                }
+                else {
+
+                    $teinteCode = NULL;
+                    if(isset($data['teinteD'])) {
+                        $teinteCode = $data['teinteD'];
+                    }
+                    $traitementCode = NULL;
+                    if(isset($data['traitementD'])) {
+                        $traitementCode = $data['traitementD'];
+                    }
+                    $galbe = NULL;
+                    if(isset($data['galbeD'])) {
+                        $galbe = $data['galbeD'];
+                    }
+                    $prisme = NULL;
+                    if(isset($data['PrismeSphereD'])) {
+                        $prisme = $data['PrismeSphereD'];
+                    }
+                    $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $user_id, $data['nomverreDH'],
+                            $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode) * $quantiteD;
+                    $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH']);
+                    $data['supplementD'] = $lenses->supplement;
+                    if (strpos($data['nomverreDH'], 'T-One') !== false && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+                        $data['supplementD'] -= 1;
+                    }
+                }
+            }
+
+            if (isset($data['gauche'])) {
+                $verreName = stristr($data['nomverreGH'], ' -', true);
+                $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+                $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
+                if ($verreStockG) {
+                    $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $user_id) * $quantiteG;
+                    $data['supplementG'] = $verreStockG->supplement;
+                } else {
+                    $teinteCode = NULL;
+                    if (isset($data['teinteG'])) {
+                        $teinteCode = $data['teinteG'];
+                    }
+                    $traitementCode = NULL;
+                    if (isset($data['traitementG'])) {
+                        $traitementCode = $data['traitementG'];
+                    }
+                    $galbe = NULL;
+                    if (isset($data['galbeG'])) {
+                        $galbe = $data['galbeG'];
+                    }
+                    $prisme = NULL;
+                    if (isset($data['PrismeSphereG'])) {
+                        $prisme = $data['PrismeSphereG'];
+                    }
+                    $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $user_id, $data['nomverreGH'],
+                            $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode) * $quantiteG;
+                    $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH']);
+                    $data['supplementG'] = $lenses->supplement;
+                    if (strpos($data['nomverreGH'], 'T-One') !== false && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+                        $data['supplementG'] -= 1;
+                    }
+                }
+            }
+//            print_r($data);die;
+
             //$data['true_type_commande'] = $data['type_commande'];
 
             $data['panierA'] =
@@ -1909,7 +1983,7 @@ class admin
                 $data['prixDH'] +
                 $data['prixGH'];
 
-            $data['tarif_supplement'] =
+//            $data['tarif_supplement'] =
                 0;
 
             $data['libelle_verre'] =
@@ -1917,8 +1991,10 @@ class admin
 
             if ($prix_double) {
                 $data['total_commande'] *= 2;
-                $data['tarif_supplement'] *= 2;
+//                $data['tarif_supplement'] *= 2;
             }
+
+            $data['tarif_supplement'] = $data['supplementG'] + $data['supplementD'];
 
             $data['recap_commande'] =
                 $data;
@@ -3152,6 +3228,36 @@ class admin
             }
         }
 
+    }
+
+    private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
+                                         $generation = NULL, $traitementCode = NULL, $galbe = NULL,
+                                         $prisme = NULL, $teinteCode = NULL) {
+//        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
+        if ($verreStock) {
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+        }
+        else {
+            $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
+            $teintePrice = 0;
+            if(!empty($teinteCode)) {
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+            }
+            $galbePrice = 0;
+            if (!empty($galbe) && $galbe != "Standard") {
+                $galbePrice = 3.9;
+            }
+            $prismePrice = 0;
+            if (!empty($prisme)) {
+                $prismePrice = 3.9;
+            }
+            return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
+        }
     }
 
     public
@@ -15647,6 +15753,8 @@ class admin
                                        $date)
     {
         $remises = $this->m_remise->getTotalRemisesPerUserByMonth(date("Y-m"));
+//        print_r($date);die;
+//        print_r($this->m_commande->getDifferenceTvaByUsersWithPercentTvaDifferentWithTwenty($date));die;
         $ndate =
             DateTime::createFromFormat('m-Y',
                 $date);

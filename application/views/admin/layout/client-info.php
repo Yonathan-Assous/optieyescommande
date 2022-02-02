@@ -140,15 +140,19 @@
                     <label for="tarif_packaging" class="control-label">Tarif packaging</label>
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
-                <div class="form-group m-b-10 col-sm-4">
+                <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
-                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastique'] ?>" />
+                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
                 </div>
-                <div class="form-group m-b-10 col-sm-4">
+                <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>
                     <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="<?php echo $price_teledetourage_user['metal'] ?>" />
                 </div>
-                <div class="form-group m-b-10 col-sm-4">
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_rimless" class="control-label">Télédétourage Percés</label>
+                    <input type="text" id="teledetourage_rimless" name="teledetourage_rimless"  class="form-control" value="<?php echo $price_teledetourage_user['rimless'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>
                     <input type="text" id="teledetourage_nylor" name="teledetourage_nylor"  class="form-control" value="<?php echo $price_teledetourage_user['nylor'] ?>" />
                 </div>

@@ -19,7 +19,7 @@ class m_teledetourage extends CI_Model
         foreach ($users as $user) {
             foreach ($formats as $format) {
                 $price = 0;
-                if ($format->id == 3) {
+                if ($format->id == 4) {
                     $price = 5;
                 }
                 $sql .= "('$user->id_users', '$format->id', $price),";

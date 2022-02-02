@@ -3280,9 +3280,9 @@ class admin
         $ca_journalier_sans_livraison =
             $this->m_commande->getCaJournalier(false);
 //        echo '<br/>----------------------------<br/>';
-        $date_M_Y = date("01-Y");
-        $date_Y_M = date("Y-01");
-        $date_Y_M_D = date("Y-01-d");
+        $date_M_Y = date("m-Y");
+        $date_Y_M = date("Y-m");
+        $date_Y_M_D = date("Y-m-d");
         $ca_mensuel =
             $this->m_commande->CAMensuel($date_M_Y);
 //        print_r($ca_mensuel);
@@ -15739,8 +15739,7 @@ class admin
                                        $date)
     {
 //        print_r($date);die;
-        $date = '01-2022';
-        print_r($this->m_commande->getAllCommandeByMonthAndUser($date, null, 389));die;
+//        print_r($this->m_commande->getDifferenceTvaByUsersWithPercentTvaDifferentWithTwenty($date));die;
         $ndate =
             DateTime::createFromFormat('m-Y',
                 $date);

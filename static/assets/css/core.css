@@ -1337,6 +1337,57 @@ input:-webkit-autofill:active  {
   float: left;
 }
 
+.note {
+  padding:10px;border-left:6px solid;border-radius:5px
+}
+
+.note strong {
+  font-weight:600
+}
+.note p {
+  font-weight:500
+}
+
+.note-primary {
+  background-color:#dfeefd;border-color:#176ac4
+}
+
+.note-secondary {
+  background-color:#e2e3e5;border-color:#58595a
+}
+
+.note-success {
+  background-color:#e2f0e5;border-color:#49a75f
+}
+
+.note-danger {
+  background-color:#fae7e8;border-color:#e45460
+}
+
+.note-warning {
+  background-color:#faf4e0;border-color:#c2a442
+}
+
+.note-info {
+  background-color:#e4f2f5;border-color:#2492a5
+}
+
+.note-light {
+  background-color:#fefefe;border-color:#0f0f0f
+}
+
+.btn-md {
+  height: 140px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 1200px) {
   .div-lg-5 {
     float: left;

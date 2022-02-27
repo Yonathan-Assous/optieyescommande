@@ -2887,7 +2887,8 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
 //                var_dump($data['prixDH']);die;
-//                print_r($data);die;
+//                print_r($data['txtOmaImageIn']);die;
+//                print_r(bin2hex($data['txtOmaImageIn']));die;
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;

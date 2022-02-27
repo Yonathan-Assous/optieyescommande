@@ -13,6 +13,7 @@ if (is_object($pair_order)) {
 
 
 ?>
+
     <style>
         .select2-container .select2-choice > .select2-chosen {
             white-space: break-spaces;
@@ -21,6 +22,94 @@ if (is_object($pair_order)) {
 
         .text_info_comp {
             transform: translateY(25%);
+        }
+
+        #text_teledetourage_not_connected {
+            text-align: justify;
+        }
+        #divOmaImageOut {
+            max-height: 500px;
+            max-width: 1000px;
+            margin-top: 25px;
+        }
+
+        #btnSetOmaCode {
+            padding: 4px;
+        }
+
+        .btn-md {
+            width: 140px;
+        }
+        #divSaveOmaToFile {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="number"] {
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .number-input {
+            border: 2px solid #ddd;
+            display: inline-flex;
+        }
+
+        .number-input,
+        .number-input * {
+            box-sizing: border-box;
+        }
+
+        .number-input button {
+            outline:none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+        }
+
+        .number-input button:before,
+        .number-input button:after {
+            display: inline-block;
+            position: absolute;
+            content: '';
+            width: 1rem;
+            height: 2px;
+            background-color: #212121;
+            transform: translate(-50%, -50%);
+        }
+        .number-input button.plus:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .number-input input[type=number] {
+            font-family: sans-serif;
+            max-width: 7rem;
+            padding: .5rem;
+            border: solid #ddd;
+            border-width: 0 2px;
+            font-size: 2rem;
+            height: 3rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .cote_image {
+            height: 77px;
+        }
+        
+        .divOmaImageData {
+            margin-bottom: 30px;
         }
     </style>
     <script>
@@ -43,6 +132,14 @@ if (is_object($pair_order)) {
 
             return (Math.round(numToRound * numToRoundTo) / numToRoundTo).toFixed(2);
         }
+
+        // $('.btn-plus, .btn-minus').on('click', function(e) {
+        //     const isNegative = $(e.target).closest('.btn-minus').is('.btn-minus');
+        //     const input = $(e.target).closest('.input-group').find('input');
+        //     if (input.is('input')) {
+        //         input[0][isNegative ? 'stepDown' : 'stepUp']()
+        //     }
+        // })
     </script>
     <div class="loading style-2">
         <div class="loading-wheel"></div>
@@ -51,12 +148,14 @@ if (is_object($pair_order)) {
         <!-- Start content -->
         <div class="content">
             <div class="container">
-
+                <div id="loading-overlay" style="display:none;"></div>
+                <div id="loading" style="display:none;">
+                    <span id="text_loading">Chargement...</span>
+                </div>
+                <input type="text" id="user_id" class="form-control" style="display: none;" maxlength="15" value="<?php echo $user_info->id_users ?>"/>
                 <?php
                 if ($user_info->valid_mandat != 1 || $user_info->commande_suspendue == 1) { ?>
                     <div class="row">
-
-
                         <div class="col-sm-12">
 
                             <?php
@@ -597,6 +696,214 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row hide"
+                                                                         id="div_teledetourage">
+                                                                        <div class="col-xs-12" id="tab_teledetourage">
+                                                                            <div class="panel panel-default"
+                                                                                 id="refraction_panel">
+                                                                                <div class="panel-heading"><h5>
+                                                                                        Télédétourage</h5></div>
+                                                                                <div class="panel-body"
+                                                                                     style="padding-top: 15px">
+                                                                                    <div class="row">
+                                                                                        <div class="col-12 note note-warning">
+<!--                                                                                            <h3>I-  Connexion</h3>-->
+<!--                                                                                            <p class="dark-grey-text font-weight-normal font-small">-->
+<!--                                                                                                Pour se connecter, il suffit de renseigner le code du client. Le code client doit être identique à celui renseigné dans le composant de traçage.-->
+<!--                                                                                            </p>-->
+<!--                                                                                            <div class="md-form input-group">-->
+                                                                                                <input type="text" id="txtCustomerCode" class="form-control" style="display: none;" maxlength="15" />
+<!--                                                                                                <label for="txtCustomerCode">Code client</label>-->
+<!--                                                                                                <div class="input-group-append">-->
+<!--                                                                                                    <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnConnect" onclick="Connect();">Se connecter</button>-->
+<!--                                                                                                </div>-->
+<!--                                                                                            </div>-->
+                                                                                            <div class="w-100" id="divDevices" style="display:none">
+<!--                                                                                                <p class="dark-grey-text font-weight-normal font-small">-->
+<!--                                                                                                    Une fois connecté, on affiche ici la liste des machines connectées ayant le même code client (code magasin).-->
+<!--                                                                                                    <br />Il faut ensuite sélectionner la machine depuis laquelle l'opticien veut faire l'acquisition de la forme.-->
+<!--                                                                                                </p>-->
+                                                                                                <div id="choice_machine">
+                                                                                                    <label class="w-100 text-muted">Veuillez choisir la machine connectée</label>
+                                                                                                    <select class="form-control" id="ddlDevices" style="max-width:200px">
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                    <div class="md-form input-group flex flex-space-between">
+<!--                                                                                                        <div>-->
+<!--                                                                                                            <textarea id="txtOmaTracerOut" class="md-textarea form-control hide" rows="5"></textarea>-->
+<!--                                                                                                            <label class="hide" for="txtOmaTracerOut">Forme OMA reçue depuis le Traceur</label>-->
+<!--                                                                                                        </div>-->
+                                                                                                        <div class="input-group-append">
+                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTracer" onclick="LaunchTracer();">Lancer le Traceur</button>
+                                                                                                        </div>
+                                                                                                        <div class="input-group-append">
+                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Lancer la Tablette</button>
+                                                                                                        </div>
+                                                                                                        <div class="input-group-append">
+                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnSetOmaCode" onclick="SetCodeOma();">Récupérer <br>d'un fichier OMA</button>
+                                                                                                        </div>
+                                                                                                        <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+<!--                                                                                                    <h4>Débogage</h4>-->
+<!--                                                                                                    <p class="dark-grey-text font-weight-normal font-small">-->
+<!--                                                                                                        Dans cette zone, on affiche le détail de l'échange entre le composant de traçage et l'équipement de traçage de l'opticien.-->
+<!--                                                                                                    </p>-->
+                                                                                                    <div class="w-100 w-100 border rounded p-2" id="divDebug">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-12" id="omaImageDatas" style="display: none">
+                                                                                                    <div class="md-form input-group hide">
+                                                                                                        <textarea id="txtOmaImageIn" name="txtOmaImageIn" class="md-textarea form-control" rows="5"></textarea>
+                                                                                                        <label for="txtOmaImageIn">Forme OMA</label>
+                                                                                                        <div class="input-group-append">
+                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" onclick="GetImageFromOma();">Récupérer l'image</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div id="divOmaImageOut">
+                                                                                                        <img id="imgOmaImageOut" />
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12 divOmaImageData">
+                                                                                                        <div class="col-md-6">
+                                                                                                            <div style="text-align:center;padding-bottom:10px">
+                                                                                                                Ecarts
+                                                                                                                pupillaire
+                                                                                                            </div>
+                                                                                                            <div style="text-align: center">
+                                                                                                            <img alt="Ecart pupillaire"
+                                                                                                                 class="hep-image"
+                                                                                                                 src="/static/img/mesure_freeform/ecart_pup.jpg"
+                                                                                                                 style="margin-bottom: 18px;">
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6" style="text-align: center">
+                                                                                                                <div>
+                                                                                                                    <label>DROITE</label>
+                                                                                                                </div>
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>
+                                                                                                                    <input id="teledetourage_ecart_puppillaire_droit" class="quantity teledetourage_ecart_puppillaire" min="15" max=55 name="quantity" value="27" type="number" step="0.1">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6" style="text-align: center">
+                                                                                                                <div>
+                                                                                                                    <label>GAUCHE</label>
+                                                                                                                </div>
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>
+                                                                                                                    <input id="teledetourage_ecart_puppillaire_gauche" class="quantity" min="15" max="55" name="quantity" value="27" type="number" step="0.1">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6">
+                                                                                                            <div style="text-align:center;padding-bottom:10px">
+                                                                                                                Hauteur de
+                                                                                                                montage
+                                                                                                            </div>
+                                                                                                            <div style="text-align: center">
+                                                                                                                <img alt="Hauteur"
+                                                                                                                     class="hep-image"
+                                                                                                                     src="/static/img/mesure_freeform/Hauteur.jpg"
+                                                                                                                     style="margin-bottom: 18px;">
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6" style="text-align: center">
+                                                                                                                <div>
+                                                                                                                    <label>DROITE</label>
+                                                                                                                </div>
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>
+                                                                                                                    <input id="hauteur_montage_droit" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6" style="text-align: center">
+                                                                                                                <div>
+                                                                                                                    <label>GAUCHE</label>
+                                                                                                                </div>
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>
+                                                                                                                    <input id="hauteur_montage_gauche" class="quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="col-md-12 divOmaImageData">
+                                                                                                        <div class="col-md-4">
+                                                                                                            <div style="text-align:center;padding-bottom:10px">
+                                                                                                                Largeur boxing
+                                                                                                            </div>
+                                                                                                            <div style="text-align: center" class="cote_image">
+                                                                                                                <img alt="Largeur boxing"
+                                                                                                                     class="hep-image"
+                                                                                                                     src="/static/img/mesure_freeform/cote_a.jpg"
+                                                                                                                     style="margin-bottom: 18px;">
+                                                                                                            </div>
+                                                                                                            <div class="col-md-12" style="text-align: center">
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_largeur_boxing"></button>
+                                                                                                                    <input id="largeur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_largeur_boxing" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-4">
+                                                                                                            <div style="text-align:center;padding-bottom:10px">
+                                                                                                                Hauteur boxing
+                                                                                                            </div>
+                                                                                                            <div style="text-align: center" class="cote_image">
+                                                                                                                <img alt="Hauteur boxing"
+                                                                                                                     class="hep-image"7rem
+                                                                                                                     src="/static/img/mesure_freeform/cote_b.jpg"
+                                                                                                                     style="margin-bottom: 18px;">
+                                                                                                            </div>
+                                                                                                            <div class="col-md-12" style="text-align: center">
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_boxing"></button>
+                                                                                                                    <input id="hauteur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_boxing" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-4">
+                                                                                                            <div style="text-align:center;padding-bottom:10px">
+                                                                                                                Taille du pont
+                                                                                                            </div>
+                                                                                                            <div style="text-align: center" class="cote_image">
+                                                                                                                <img alt="Taille du pont"
+                                                                                                                     class="hep-image"
+                                                                                                                     src="/static/img/mesure_freeform/cote_c.jpg"
+                                                                                                                     style="margin-bottom: 18px;">
+                                                                                                            </div>
+                                                                                                            <div class="col-md-12" style="text-align: center">
+                                                                                                                <div class="number-input">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_taille_du_pont"></button>
+                                                                                                                    <input id="taille_du_pont" class="quantity" min="0" max="50" name="quantity" value="18" type="number" step="0.1">
+                                                                                                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_taille_du_pont" type="button"></button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                                <div id="divOmaImageError hide">
+
+                                                                                                </div>
+                                                                                                <div class="input-group-append" id="divSaveOmaToFile">
+                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnSaveOmaToFile" onclick="saveOmaToFile();">Sauvegarder le code OMA<br>dans un fichier</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
 
                                                                     <div class="form-group row hide"
                                                                          id="div_refraction">
@@ -604,7 +911,7 @@ if (is_object($pair_order)) {
                                                                             <div class="panel panel-default"
                                                                                  id="refraction_panel">
                                                                                 <div class="panel-heading"><h5>
-                                                                                        Refraction</h5></div>
+                                                                                        Réfraction</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
                                                                                     <div class="col-xs-12">
@@ -4802,13 +5109,49 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
+        <div id="teledetourage_not_connected" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="teledetourage_not_connected_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Machine non connectée</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_teledetourage_not_connected">Votre machine n'est pas connectée, veuillez la connecter et appuyez sur le bouton <strong>"CONNECT".</strong></br>
+                                Si vous voulez passer une commande standard appuyez sur <strong>"RETOUR"</strong>.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger waves-effect return_to_commande_standard" data-dismiss="modal">RETOUR</button>
+                            <button id="connect_machine_modal" class="btn btn-warning waves-effect waves-light connect_machine" data-dismiss="modal">CONNECT</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div> <!-- content -->
 
     <!-- Form wizard -->
     <script src="/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
     <script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/static/assets/mdb/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/fileSaver.min.js"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>-->
 
+<!--    <script type="text/javascript" src="/static/assets/mdb/js/mdb.min.js"></script>-->
+    <!-- MDB - Only for documentation -->
+    <!-- SignalR - Required -->
+    <script src="/static/assets/js/jquery.signalR-2.4.1.min.js"></script>
+    <script src="https://tracerserver.edieyes.net/signalrserver/signalr/hubs"></script>
+
+    <script src="/static/assets/js/ediEyes.js"></script>
     <script type="text/javascript">
+
         $('#commande_ferme').click(function () {
 
             $('#produit').addClass('hide');
@@ -4842,7 +5185,6 @@ if (is_object($pair_order)) {
         if($type_commande == '2') {
         ?>
         $(document).ready(function ($) {
-
             $('#produit').addClass('hide');
             $("#detailD").css("display", "none");
             $("#afficherV").css("display", "inline-block");
@@ -5180,6 +5522,7 @@ if (is_object($pair_order)) {
 
             $('#lensFocalGroup').on('change', function () {
                 $('#div_refraction').addClass('hide');
+                $('#div_teledetourage').addClass('hide');
                 $('#progression_D').addClass('hide');
                 $('#progression_G').addClass('hide');
 
@@ -5411,7 +5754,15 @@ if (is_object($pair_order)) {
                     }
 
                     if (lensFocalGroup != "3" || $('#indices').val() == "mineral") {
-                        $('#div_refraction').removeClass('hide')
+                        if ($('#is_teledetourage').is(':checked') == false) {
+                            $('#div_refraction').removeClass('hide')
+                        }
+                        else {
+                            $('#div_teledetourage').removeClass('hide');
+                            let user_id = $('#user_id').val();
+                            $('#txtCustomerCode').val(user_id);
+                            Connect();
+                        }
                         $('#progression_D').addClass('hide')
                         $('#progression_G').addClass('hide')
                     } else {
@@ -6838,7 +7189,50 @@ if (is_object($pair_order)) {
             }
         });
 
+        $('.connect_machine').click(function () {
+            Connect();
+        })
 
+        $('.return_to_commande_standard').click(function () {
+            document.getElementById("is_teledetourage").checked = false;
+            hideAll();
+        })
+
+        function hideAll() {
+            $('#produit').addClass('hide');
+            $('#div_refraction').addClass('hide');
+            $('#div_teledetourage').addClass('hide');
+            $('#type_produit').addClass('hide');
+            $('#generation_progressif').addClass('hide');
+            $('#indices').val('');
+        }
+
+        function widthImageOma () {
+            let divDevices = document.getElementById('divDevices');
+            document.getElementById('divOmaImageOut').setAttribute("style","height:" + divDevices.offsetWidth / 2 + "px");
+        }
+
+        String.prototype.hexEncode = function(){
+            var hex, i;
+
+            var result = "";
+            for (i=0; i<this.length; i++) {
+                hex = this.charCodeAt(i).toString(16);
+                result += ("000"+hex).slice(-4);
+            }
+            return result
+        }
+
+        String.prototype.hexDecode = function(){
+            var j;
+            var hexes = this.match(/.{1,4}/g) || [];
+            var back = "";
+            for(j = 0; j<hexes.length; j++) {
+                back += String.fromCharCode(parseInt(hexes[j], 16));
+            }
+
+            return back;
+        }
     </script>
 
 

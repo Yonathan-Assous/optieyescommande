@@ -16,4 +16,8 @@ class teledetourage extends MY_Controller
     public function insertPrice() {
         $this->m_teledetourage->insertPrice();
     }
+
+    public function testTracerEdiEyes() {
+        $this->load->view('test_teledetourage');
+    }
 }

@@ -1170,7 +1170,7 @@ class m_commande extends CI_Model {
 
     public function getTotalCommandeByMonth($id_users){
 
-        $query = $this->db->query("SELECT sum(total_commande) + COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) - COALESCE(total_reductions, 0) as total, date_commande, DATE(date_commande), date_remise, total_reductions
+        $sql = "SELECT sum(total_commande) + COALESCE(SUM(TarifLivraison), 0) + COALESCE(SUM(TarifLivraison2), 0) - COALESCE(total_reductions, 0) as total, date_commande, DATE(date_commande), date_remise, total_reductions
                                    FROM ".$this->table." c
                                    LEFT JOIN
                                     (SELECT
@@ -1209,7 +1209,8 @@ class m_commande extends CI_Model {
                                    )
                                    WHERE c.id_users=".$id_users."
                                    GROUP BY DATE_FORMAT(date_commande, '%m-%Y')
-                                   ORDER BY date_commande DESC");
+                                   ORDER BY date_commande DESC";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
             return $query->result();
@@ -2147,7 +2148,6 @@ class m_commande extends CI_Model {
           ".$user."
           GROUP BY c.id_users, y_m_commande, commande_stock.total_stock, commande_fabrique.total_fabrique, commande_lentilles.total_lentilles, commande_montures.total_montures, commande_express.total_express, total, reduction, commande_stock.exp_stock, commande_fabrique.exp_fabric
           ORDER BY c.id_users";
-
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
@@ -5361,5 +5361,58 @@ class m_commande extends CI_Model {
                     total_commande = ' . ($tarifCommande + $tarifExpress - $oldTarifExpress) . '
                     WHERE id_commande = ' . $commandeId;
         $this->db->query($sql);
+    }
+
+    /** La date est sous forme m-Y */
+    public function getTotalCommandeWithAndWithoutTvaByuserAndDate($userId, $date = NULL){
+
+        if (!$date) {
+            $date = date('m-Y');
+        }
+        $sql = "SELECT sum(total_commande) - COALESCE(total_reductions, 0) + u.tarif_packaging as total,
+                total_reductions,
+                u.tarif_packaging,
+                (sum(total_commande) - COALESCE(total_reductions, 0) + u.tarif_packaging) * u.percent_tva / 100 as TVA,
+                (sum(total_commande) - COALESCE(total_reductions, 0) + u.tarif_packaging) * (1 + u.percent_tva / 100) as total_ttc
+                FROM commande c LEFT JOIN 
+                    (SELECT SUM(reduction) AS total_reductions,
+                    date_remise FROM facture_reduction WHERE id_users = $userId 
+                    AND DATE_FORMAT(date_remise, '%m-%Y') = '$date') AS reductions ON ( DATE_FORMAT(date_commande, '%m-%Y') = DATE_FORMAT(date_remise, '%m-%Y') ) 
+                LEFT JOIN users as u ON u.id_users = c.id_users WHERE c.id_users = $userId AND DATE_FORMAT(date_commande, '%m-%Y') = '$date' 
+                                                                AND is_confirmed = 1 
+                                                                AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) 
+                ORDER BY date_commande DESC";
+        $query = $this->db->query($sql);
+
+        if ($query && $query->num_rows() > 0)
+            return $query->result();
+
+        return false;
+    }
+
+    public function getTotalTvaByUser($userId) {
+
+    }
+
+    /** La date est sous forme m-Y */
+    public function getDifferenceTvaByUsersWithPercentTvaDifferentWithTwenty($date = NULL) {
+        if (!$date) {
+            $date = date('m-Y');
+        }
+        $sql = "SELECT id_users FROM `users` WHERE percent_tva <> 20";
+        $query = $this->db->query($sql);
+
+        if ($query && $query->num_rows() > 0)
+            $userIds = $query->result();
+        else
+            return 0;
+        $total = 0;
+//        print_r($userIds);die;
+        foreach ($userIds as $userId) {
+            if ($totalCommande = $this->getTotalCommandeWithAndWithoutTvaByuserAndDate($userId->id_users, $date)[0]) {
+                $total += $totalCommande->total * 1.2 - $totalCommande->total_ttc;
+            }
+        }
+        return $total;
     }
 }

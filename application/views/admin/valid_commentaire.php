@@ -59,6 +59,7 @@ else
                                 <th>Type de verre</th>
                                 <th>Dernières factures</th>
                                 <!--<th>J-10</th>-->
+                                <th>Deal</th>
                                 <th>J-30</th>
                                 <th>Tableau de bord</th>
                                 <!--<th>J-90</th>-->

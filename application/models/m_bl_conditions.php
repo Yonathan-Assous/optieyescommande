@@ -31,7 +31,6 @@ class m_bl_conditions extends CI_Model
     }
 
     public function getBlConditions($userId) {
-        $now = date('Y-m-d');
         $blConditions = $this->getBlConditionsByUser($userId);
         $i = 0;
         $tab = [];

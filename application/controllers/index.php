@@ -2893,6 +2893,7 @@ class index extends MY_Controller {
                 $data['supplementD'] = 0;
                 $data['supplementG'] = 0;
 //                var_dump($data);die;
+//                print_r($user['user_info']->tarif_supplement_fab);die;
                 if (isset($data['droit'])) {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
 
@@ -2900,7 +2901,7 @@ class index extends MY_Controller {
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
                     if ($verreStockD) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
-                        $data['supplementD'] = $verreStockD->supplement * $quantiteD;
+                        $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
                     }
                     else {
 
@@ -2928,8 +2929,10 @@ class index extends MY_Controller {
                         if (strpos($data['nomverreDH'], 'T-One') !== false && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 1;
                         }
+                        $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
                 }
+                $data['supplementD'] = max(0, $data['supplementD']);
 
                 if (isset($data['gauche'])) {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
@@ -2937,7 +2940,7 @@ class index extends MY_Controller {
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
-                        $data['supplementG'] = $verreStockG->supplement * $quantiteG;
+                        $data['supplementG'] = $verreStockG->supplement * $quantiteG + ($user['user_info']->tarif_supplement - 1);
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -2963,8 +2966,10 @@ class index extends MY_Controller {
                         if (strpos($data['nomverreGH'], 'T-One') !== false && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                             $data['supplementG'] -= 1;
                         }
+                        $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
                 }
+                $data['supplementG'] = max(0, $data['supplementG']);
 
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];
 

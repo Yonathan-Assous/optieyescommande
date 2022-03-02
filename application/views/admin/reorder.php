@@ -287,7 +287,7 @@ include_once('menu.php');
 
                                     echo '<td class="center">';
 
-                                        echo (($recap_commande['total_commande'] - $recap_commande['prix_verre']+$option_prix+$recap_commande['total_remise_paire']) * $quantite_commande);
+                                        echo (($recap_commande['total_commande'] - $recap_commande['prix_verre'] - $recap_commande['tarif_express'] +$option_prix+$recap_commande['total_remise_paire']) * $quantite_commande);
                                         $total_commande += floatval(($recap_commande['total_commande'] - $recap_commande['prix_verre'] + $recap_commande['total_remise_paire']+$option_prix) * $quantite_commande);
 
                                     echo ' €</td>';
@@ -298,17 +298,27 @@ include_once('menu.php');
                             }
 
                             if(isset($recap_commande['id_miroir']) && $recap_commande['id_miroir'] == 0 && $recap_commande['id_type_generation_verre'] != 5) {
-
+                                if ($recap_commande['tarif_express'] == 0) {
+                                    $checked = '';
+                                    $expressQty = 0;
+                                    $expressPrice = 0;
+                                }
+                                else {
+                                    $checked = 'checked';
+                                    $expressQty = $quantite_commande;
+                                    $expressPrice = $recap_commande['tarif_express'] * $quantite_commande;
+                                }
                                 echo '<tr>
                                 <td colspan="3"><h4 style="margin: 20px 0; background: #f8bc05; padding: 10px;">Service Express (25€)</h4></td></tr>
                                 <tr>
                                     <td>
-                                    <input type="checkbox" id="express" value="1" name="express" class="js-switch express" data-color="#ffaa00" />
+                            
+                                    <input type="checkbox" id="express" value="1" name="express" class="js-switch express" data-color="#ffaa00" ' . $checked . '/>
                                     Délais maximum pour une commande passée avant 15h30 : J+3 ( hors jours fériés et week-end )<br />
                                     Rajouter 1 jour pour des verres teintés. 
                                     </td>
-                                <td class="center expressQty">0</td>
-                                <td class="center expressPrice">-</td>
+                                <td class="center expressQty">' . $expressQty . '</td>
+                                <td class="center expressPrice">' . $expressPrice . '</td>
                             </tr>';
 
                             }

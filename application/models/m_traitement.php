@@ -562,8 +562,12 @@ class m_traitement extends CI_Model
             }
         }
         $typeVerreSolaireId = $this->m_type_verre_solaire->getIdByName($myTypeVerreSolaire);
-        return $this->getPrice($traitement->id, $lens->id,
-                                                $typeVerreSolaireId, $userId);
+        $priceTraitement = $this->getPrice($traitement->id, $lens->id,
+            $typeVerreSolaireId, $userId);
+        if (strpos($nom_du_verre, 'T-One') !== false && in_array($traitement->code, [700100, 700102, 700027, 700021]) ) {
+            $priceTraitement--;
+        }
+        return $priceTraitement;
     }
 
     private function getPrice($traitementId, $lensId, $typeVerreSolaireId, $userId) {

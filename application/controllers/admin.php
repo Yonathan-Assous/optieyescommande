@@ -1086,6 +1086,7 @@ class admin
                     $data['supplementD'] = $lenses->supplement;
                     if (strpos($data['nomverreDH'], 'T-One') !== false && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                         $data['supplementD'] -= 1;
+                        $data['prixDH'] -= 1;
                     }
                     $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
                 }
@@ -1123,6 +1124,7 @@ class admin
                     $data['supplementG'] = $lenses->supplement;
                     if (strpos($data['nomverreGH'], 'T-One') !== false && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                         $data['supplementG'] -= 1;
+                        $data['prixGH'] -= 1;
                     }
                     $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                 }
@@ -12887,7 +12889,7 @@ class admin
 
             $data['recap_commande'] =
                 $this->m_commande->getCommandeByIdNew($id_commande);
-            //var_dump($data['recap_commande']);
+//            print_r($data);die;
 
             $data['pair'] =
                 $this->m_commande->getOrderByPairId($id_commande);
@@ -15940,7 +15942,6 @@ class admin
                             '><i class="zmdi zmdi-search"></i></a>',
                             $facture_cli->id_grille_tarifaire
                         );
-
 
                     $total_ht += $facture_cli->total;
                     $total_ht_liv += ($facture_cli->total -

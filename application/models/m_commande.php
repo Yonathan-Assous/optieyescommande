@@ -623,9 +623,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add."
-                                   AND (v.display = 'X' OR v_stock.id_verre IS NOT NULL 
-                                   OR verres.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
+//                                   AND (v.display = 'X' OR v_stock.id_verre IS NOT NULL
+//                                   OR verres.id_verre IS NOT NULL)
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)
@@ -2148,6 +2148,7 @@ class m_commande extends CI_Model {
           ".$user."
           GROUP BY c.id_users, y_m_commande, commande_stock.total_stock, commande_fabrique.total_fabrique, commande_lentilles.total_lentilles, commande_montures.total_montures, commande_express.total_express, total, reduction, commande_stock.exp_stock, commande_fabrique.exp_fabric
           ORDER BY c.id_users";
+//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){

@@ -11,6 +11,7 @@ class m_lenses extends CI_Model
     }
 
     public function getLensesByTradFr($tradFr) {
+        $tradFr = str_replace(" - Stock déporté", "", $tradFr);
         $sql = "SELECT * FROM `lenses` 
                 WHERE `trad_fr` = '$tradFr'
                 AND display = 'X'";

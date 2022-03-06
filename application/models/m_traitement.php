@@ -562,8 +562,12 @@ class m_traitement extends CI_Model
             }
         }
         $typeVerreSolaireId = $this->m_type_verre_solaire->getIdByName($myTypeVerreSolaire);
-        return $this->getPrice($traitement->id, $lens->id,
-                                                $typeVerreSolaireId, $userId);
+        $priceTraitement = $this->getPrice($traitement->id, $lens->id,
+            $typeVerreSolaireId, $userId);
+        if (in_array($lens->code,['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($traitement->code, [700100, 700102, 700027, 700021]) ) {
+            $priceTraitement--;
+        }
+        return $priceTraitement;
     }
 
     private function getPrice($traitementId, $lensId, $typeVerreSolaireId, $userId) {

@@ -2926,7 +2926,7 @@ class index extends MY_Controller {
                             $prisme, $teinteCode) * $quantiteD;
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH']);
                         $data['supplementD'] = $lenses->supplement;
-                        if (strpos($data['nomverreDH'], 'T-One') !== false && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 1;
                         }
                         $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
@@ -2963,7 +2963,7 @@ class index extends MY_Controller {
                             $prisme, $teinteCode) * $quantiteG;
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH']);
                         $data['supplementG'] = $lenses->supplement;
-                        if (strpos($data['nomverreGH'], 'T-One') !== false && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                             $data['supplementG'] -= 1;
                         }
                         $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;

@@ -14381,14 +14381,8 @@ class admin
                         '-' .
                         $commande->id_users;
 
-                    if ($commande->ancienne_commande >
-                        0 &&
-<<<<<<< HEAD
-			$commande->type_commande > 1) {
-=======
-                        $commande->type_commande >
-                        1) {
->>>>>>> df5b3658a1a791c244dde9e03599454b55541a69
+                    if ($commande->ancienne_commande > 0 &&
+                        $commande->type_commande > 1) {
                         $ref_commande .= '<br />(CR' .
                             $commande->ancienne_commande .
                             '-' .

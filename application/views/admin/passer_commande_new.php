@@ -9626,29 +9626,30 @@ $(document).ready(function() {
 		$('#cylindreG').prop('readOnly', true);
 		$('#axeD').prop('readOnly', true);
 		$('#axeG').prop('readOnly', true);
-
-
-		//alert($("#lensFocalGroup").val());
+        
 		if($("#lensFocalGroup").val() == '4')
 		{
 			$('#additionD').prop('readOnly', false);
 			$('#additionG').prop('readOnly', false);
 		}
-		else
+		else if ($("#lensFocalGroup").val() != '')
 		{
-
-			$('#additionD').val(<?php
-			if(floatval($pair_order_correction['verre']['correction_droit']['addition']) >= 0)
-				echo "+".$pair_order_correction['verre']['correction_droit']['addition'];
-			else
-				echo $pair_order_correction['verre']['correction_droit']['addition'];?>);
-			$('#additionG').val(<?php
-			if(floatval($pair_order_correction['verre']['correction_gauche']['addition']) >= 0)
-				echo "+".$pair_order_correction['verre']['correction_gauche']['addition'];
-			else
-				echo $pair_order_correction['verre']['correction_gauche']['addition'];?>);
-			$('#additionD').prop('readOnly', true);
-			$('#additionG').prop('readOnly', true);
+            $('#additionD').val(<?php
+            if (isset($pair_order_correction['verre']['correction_droit']['addition'])) {
+                if (floatval($pair_order_correction['verre']['correction_droit']['addition']) >= 0)
+                    echo "+" . $pair_order_correction['verre']['correction_droit']['addition'];
+                else
+                    echo $pair_order_correction['verre']['correction_droit']['addition'];
+            }?>);
+                $('#additionG').val(<?php
+            if (isset($pair_order_correction['verre']['correction_gauche']['addition'])) {
+                if (floatval($pair_order_correction['verre']['correction_gauche']['addition']) >= 0)
+                    echo "+" . $pair_order_correction['verre']['correction_gauche']['addition'];
+                else
+                    echo $pair_order_correction['verre']['correction_gauche']['addition'];
+            }?>);
+                $('#additionD').prop('readOnly', true);
+                $('#additionG').prop('readOnly', true);
 		}
 
 		<?php

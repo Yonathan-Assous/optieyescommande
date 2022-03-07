@@ -4166,7 +4166,7 @@ class admin
                     $conditionBl = $this->m_bl_conditions->getBlConditionMet($commande->id_users);
 //                    print_r($conditionBl);die;
                     $blConditions = $this->m_bl_conditions->getBlConditions($commande->id_users);
-                    $deal = $blConditions[0]['montant'];
+                    $deal = isset($blConditions[0]['montant']) ? isset($blConditions[0]['montant']) : '';
 //                    print_r($conditionBl);die;
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
 //                    $blAfterThirtyDays = $blAfterXDays[1]->count;

@@ -34,6 +34,7 @@ class m_users extends CI_Model {
             'tarif_livraison'            => 'tarif_livraison',
             'tarif_packaging'            => 'tarif_packaging',
             'tarif_supplement'           => 'tarif_supplement',
+            'tarif_supplement_fab'       => 'tarif_supplement_fab',
             'percent_tva'                => 'percent_tva',
             'nom_responsable'            => 'nom_responsable',
             'deleted'                    => 'deleted',

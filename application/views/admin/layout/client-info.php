@@ -155,8 +155,13 @@
 <!--                </div>-->
 
                 <div class="form-group m-b-10 col-sm-12">
-                    <label for="tarif_supplement" class="control-label">Supplément sur les verres</label>
+                    <label for="tarif_supplement" class="control-label">Supplément sur les verres Stocks</label>
                     <input type="text" id="tarif_supplement" name="tarif_supplement"  class="form-control" value="<?php echo $info_user[0]->tarif_supplement ?>" />
+                </div>
+
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="tarif_supplement_fab" class="control-label">Supplément sur les verres Fab</label>
+                    <input type="text" id="tarif_supplement_fab" name="tarif_supplement_fab"  class="form-control" value="<?php echo $info_user[0]->tarif_supplement_fab ?>" />
                 </div>
 
                 <div class="form-group m-b-10 col-sm-12">

@@ -2922,7 +2922,7 @@ class index extends MY_Controller {
 
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteD;;
+                            $prisme, $teinteCode) * $quantiteD;
                     }
                 }
                 if (isset($data['gauche'])) {
@@ -2950,7 +2950,7 @@ class index extends MY_Controller {
                         }
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteG;;
+                            $prisme, $teinteCode) * $quantiteG;
                     }
                 }
 

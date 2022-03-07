@@ -3154,6 +3154,36 @@ class admin
 
     }
 
+    private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
+                                         $generation = NULL, $traitementCode = NULL, $galbe = NULL,
+                                         $prisme = NULL, $teinteCode = NULL) {
+//        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
+        if ($verreStock) {
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+        }
+        else {
+            $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
+            $teintePrice = 0;
+            if(!empty($teinteCode)) {
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+            }
+            $galbePrice = 0;
+            if (!empty($galbe) && $galbe != "Standard") {
+                $galbePrice = 3.9;
+            }
+            $prismePrice = 0;
+            if (!empty($prisme)) {
+                $prismePrice = 3.9;
+            }
+            return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
+        }
+    }
+
     public
     function index()
     {
@@ -4097,7 +4127,6 @@ class admin
 //                        $cl =
 //                            ' is_checked';
 //                    }
-
                     switch ($commande->type_commande) {
 
                         case 1:
@@ -4135,6 +4164,9 @@ class admin
                     $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
                     $blAfterThirtyDays = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
                     $conditionBl = $this->m_bl_conditions->getBlConditionMet($commande->id_users);
+//                    print_r($conditionBl);die;
+                    $blConditions = $this->m_bl_conditions->getBlConditions($commande->id_users);
+                    $deal = $blConditions[0]['montant'];
 //                    print_r($conditionBl);die;
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
 //                    $blAfterThirtyDays = $blAfterXDays[1]->count;
@@ -4264,6 +4296,7 @@ class admin
                             '" class="btn btn-warning btn-sm"><i class="zmdi zmdi-download"></i></a>',
                             $typeDeVerre,
                             $lastSixMonths,
+                            $deal,
                             $blAfterThirtyDays,
 //                            $blAfterTenDays,
 //                            $blAfterThirtyDays,
@@ -6358,16 +6391,15 @@ class admin
 
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-                            $detail .= " " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ</span>";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
-                            $detail .= " base " .
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
+                                "°</span>";
 
                         }
 
@@ -6452,15 +6484,14 @@ class admin
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
-                            $detail .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ</span>";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                            $detail .= " base  " .
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°";
+                                "°</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
@@ -6860,17 +6891,15 @@ class admin
 
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-                            $detail .= " " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ</span>";
 
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
-                            $detail .= " base " .
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
-
+                                "°</span>";
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
@@ -6947,16 +6976,15 @@ class admin
                         if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                             !empty($information_commande->verre->correction_droit->PrismeSphere)) {
 
-                            $textarea .= "  " .
-                                $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ";
+                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                                "Δ</span>";
                         }
                         if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
 
-                            $textarea .= " base " .
+                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°";
+                                "°</span>";
                         }
 
                         if (isset($information_commande->verre->correction_droit->galbe)) {
@@ -7057,15 +7085,14 @@ class admin
 
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
-                            $detail .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ</span>";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                            $detail .= " base  " .
+                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°";
+                                "°</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
@@ -7138,14 +7165,14 @@ class admin
                         if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                             !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                             $textarea .= " " .
-                                $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ";
+                                " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                                "Δ</span>";
                         }
                         if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                             !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                            $textarea .= " base  " .
+                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                                 $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°";
+                                "°</span>";
                         }
 
                         if (isset($information_commande->verre->correction_gauche->galbe)) {
@@ -8951,16 +8978,15 @@ class admin
 
                     if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
                         !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-                        $detail .= " " .
-                            $information_commande->verre->correction_droit->PrismeSphere .
-                            "Δ";
+                        $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                            "Δ</span>";
 
                     }
                     if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
-                        $detail .= " base " .
+                        $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                             $information_commande->verre->correction_droit->PrismeCylindre .
-                            "°";
+                            "°</span>";
 
                     }
 
@@ -9042,14 +9068,14 @@ class admin
                     if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
                         !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
                         $detail .= " " .
-                            $information_commande->verre->correction_gauche->PrismeSphere .
-                            "Δ";
+                            " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                            "Δ</span>";
                     }
                     if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
                         !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                        $detail .= " Base " .
+                        $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                             $information_commande->verre->correction_gauche->PrismeCylindre .
-                            "°";
+                            "°</span>";
                     }
 
                     if (isset($information_commande->verre->correction_gauche->galbe)) {
@@ -9433,15 +9459,15 @@ class admin
 
                 if (isset($data["PrismeSphereD"]) &&
                     !empty($data["PrismeSphereD"])) {
-                    $textarea .= " " .
+                    $textarea .= "<span style='color:#fff; background-color: #eb6363; font-weight: bold;'> " .
                         $data['PrismeSphereD'] .
-                        "Δ";
+                        "Δ</span>";
                 }
                 if (isset($data["PrismeCylindreD"]) &&
                     !empty($data["PrismeCylindreD"])) {
-                    $textarea .= " base " .
+                    $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                         $data['PrismeCylindreD'] .
-                        "°";
+                        "°</span>";
                 }
 
                 $textarea .= " Galbe: " .
@@ -9533,15 +9559,15 @@ class admin
 
                 if (isset($data["PrismeSphereG"]) &&
                     !empty($data["PrismeSphereG"])) {
-                    $textarea .= " " .
+                    $textarea .= "<span style='color:#fff; background-color: #eb6363; font-weight: bold;'> " .
                         $data['PrismeSphereG'] .
-                        "Δ";
+                        "Δ</span>";
                 }
                 if (isset($data["PrismeCylindreG"]) &&
                     !empty($data["PrismeCylindreG"])) {
-                    $textarea .= " base " .
+                    $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
                         $data['PrismeCylindreG'] .
-                        "°";
+                        "°</span>";
                 }
 
                 $textarea .= " Galbe: " .
@@ -12780,7 +12806,7 @@ class admin
 
             $data['recap_commande'] =
                 $this->m_commande->getCommandeByIdNew($id_commande);
-            //var_dump($data['recap_commande']);
+//            print_r($data);die;
 
             $data['pair'] =
                 $this->m_commande->getOrderByPairId($id_commande);
@@ -14357,7 +14383,12 @@ class admin
 
                     if ($commande->ancienne_commande >
                         0 &&
+<<<<<<< HEAD
 			$commande->type_commande > 1) {
+=======
+                        $commande->type_commande >
+                        1) {
+>>>>>>> df5b3658a1a791c244dde9e03599454b55541a69
                         $ref_commande .= '<br />(CR' .
                             $commande->ancienne_commande .
                             '-' .
@@ -15633,7 +15664,8 @@ class admin
     function generer_pdf_ca_journalier($nom_fichier_pdf,
                                        $date)
     {
-
+//        print_r($date);die;
+//        print_r($this->m_commande->getDifferenceTvaByUsersWithPercentTvaDifferentWithTwenty($date));die;
         $ndate =
             DateTime::createFromFormat('m-Y',
                 $date);
@@ -15831,7 +15863,6 @@ class admin
                             '><i class="zmdi zmdi-search"></i></a>',
                             $facture_cli->id_grille_tarifaire
                         );
-
 
                     $total_ht += $facture_cli->total;
                     $total_ht_liv += ($facture_cli->total -

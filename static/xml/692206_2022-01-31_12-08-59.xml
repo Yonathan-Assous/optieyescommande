@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2022-01-31T12:08:33+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <remark>Blue 75% Solid.</remark>
+         
+         <referenceNo>692206-580</referenceNo>
+         <manufacturer />
+         <secondPair>true</secondPair>
+		 <multiplePair>
+			<referenceNo>692207-580</referenceNo>
+		 </multiplePair>
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>200005</commercialCode>
+               <rxData>
+                  <sphere>0.75</sphere>
+                  <cylinder>
+                      <power>2.00</power>
+                      <axis>115</axis>
+                  </cylinder></rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700100</commercialCode>
+					   </coating>
+						   <coating coatingType="COLOR">
+							  <commercialCode>575</commercialCode>
+						   </coating>
+               <centration>
+               </centration>
+				   <geometry>
+						  <diameter>
+							 <physical>70</physical>
+							 <elliptic>false</elliptic>
+						  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>200005</commercialCode>
+               <rxData>
+                  <sphere>0.50</sphere>
+                  <cylinder>
+                      <power>2.25</power>
+                      <axis>70</axis>
+                  </cylinder></rxData>
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>700100</commercialCode>
+					   </coating>
+						   <coating coatingType="COLOR">
+							  <commercialCode>575</commercialCode>
+						   </coating>
+               <centration>
+               </centration>
+				   <geometry>
+						  <diameter>
+							 <physical>70</physical>
+							 <elliptic>false</elliptic>
+						  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+				</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

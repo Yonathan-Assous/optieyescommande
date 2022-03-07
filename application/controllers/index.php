@@ -81,8 +81,6 @@ class index extends MY_Controller {
     }
 
 	public function test() {
-        $this->m_teledetourage->addTeledetourageFormat('619');
-        die;
         $data['certificat'] = $this->m_commande->getCertificatStock('565817');
 
         $data['control'] = array(
@@ -2043,6 +2041,7 @@ class index extends MY_Controller {
 
     public function addOrder($relance=false,$id_commande=""){
         if($this->input->is_ajax_request()) {
+
             $data = $this->session->userdata('order');
 
             $add = $this->input->post();
@@ -2750,6 +2749,7 @@ class index extends MY_Controller {
                 $id_grille_tarifaire = $this->m_users->getGrilleTarifaire($data['id_users']);
 
                 $prix_verre = $this->m_verres->getPrixVerre($data['id_verre'],$id_grille_tarifaire,$data['id_users']);
+
 				if($prix_verre !== false){
 
                     $supplement = 0;
@@ -2889,6 +2889,7 @@ class index extends MY_Controller {
 //                var_dump($data['prixDH']);die;
 //                print_r($data['txtOmaImageIn']);die;
 //                print_r(bin2hex($data['txtOmaImageIn']));die;
+
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
@@ -2907,7 +2908,6 @@ class index extends MY_Controller {
                         $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
                     }
                     else {
-
                         $teinteCode = NULL;
                         if(isset($data['teinteD'])) {
                             $teinteCode = $data['teinteD'];
@@ -2929,6 +2929,7 @@ class index extends MY_Controller {
                             $prisme, $teinteCode) * $quantiteD;
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH']);
                         $data['supplementD'] = $lenses->supplement;
+                        print_r($data);die;
                         if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 1;
                         }
@@ -3821,6 +3822,7 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
+
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);

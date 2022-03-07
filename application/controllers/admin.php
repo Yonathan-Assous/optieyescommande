@@ -14356,7 +14356,8 @@ class admin
                         $commande->id_users;
 
                     if ($commande->ancienne_commande >
-                        0) {
+                        0 &&
+			$commande->type_commande > 1) {
                         $ref_commande .= '<br />(CR' .
                             $commande->ancienne_commande .
                             '-' .

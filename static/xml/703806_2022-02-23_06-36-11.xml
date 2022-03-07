@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<b2bOptic>
+   <header msgType="ORDER" msgState="NEW">
+      <customersOrderId>48860</customersOrderId>
+      <distributorsOrderId />
+      <timeStamps>
+         <dateTime step="CREATE">2022-02-23T18:36:05+0100</dateTime> 
+      </timeStamps>
+      <orderParties role="ORIGINATOR">
+         <id>48860</id>
+      </orderParties>
+      <software typeOf="ORIGINATOR">
+         <name>OmegaDirect</name>
+         <version>1.3</version>
+      </software>
+      <productCatalog>
+      <name>sf6</name>
+      <release />
+      </productCatalog>
+      <portalOrderId />
+   </header>
+   <items>
+      <item>
+         <referenceNo>703806-518</referenceNo>
+         <manufacturer />
+      	<pair>
+         <lens quantity="1" side="RIGHT">
+               <commercialCode>S3UW50</commercialCode>
+               <rxData>
+                  <sphere>-4.25</sphere>
+                  <cylinder>
+                      <power>0.00</power>
+                      <axis>0</axis>
+                  </cylinder><addition>1.25</addition>
+						  </rxData>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>65</physical>
+                     <optical>70</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            <lens quantity="1" side="LEFT">
+               <commercialCode>S3UW50</commercialCode>
+               <rxData>
+                  <sphere>-4.00</sphere>
+                  <cylinder>
+                      <power>0.00</power>
+                      <axis>0</axis>
+                  </cylinder><addition>1.25</addition>
+						  </rxData>
+               <centration>
+               </centration>
+               <geometry>
+                  <diameter>
+                     <physical>65</physical>
+                     <optical>70</optical>
+                     <elliptic>false</elliptic>
+                  </diameter>
+			    	<thickness reference="EDGE">1.00</thickness>
+                  <thicknessReduction>false</thicknessReduction>
+               </geometry>
+            </lens>
+            
+            	<frame quantity="1">
+				</frame> 
+        </pair>
+     </item>
+  </items>
+</b2bOptic>

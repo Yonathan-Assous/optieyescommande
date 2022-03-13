@@ -31,6 +31,8 @@ if (is_object($pair_order)) {
             max-height: 500px;
             max-width: 1000px;
             margin-top: 25px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #btnSetOmaCode {
@@ -793,7 +795,7 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="number-input">
                                                                                                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>
-                                                                                                                    <input id="teledetourage_ecart_puppillaire_gauche" class="quantity" min="15" max="55" name="quantity" value="27" type="number" step="0.1">
+                                                                                                                    <input id="teledetourage_ecart_puppillaire_gauche" class="quantity teledetourage_ecart_puppillaire_droit" min="15" max="55" name="quantity" value="27" type="number" step="0.1">
                                                                                                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>
                                                                                                                 </div>
                                                                                                             </div>
@@ -825,7 +827,7 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="number-input">
                                                                                                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>
-                                                                                                                    <input id="hauteur_montage_gauche" class="quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">
+                                                                                                                    <input id="hauteur_montage_gauche" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">
                                                                                                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>
                                                                                                                 </div>
                                                                                                             </div>

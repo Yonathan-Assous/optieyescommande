@@ -7,4 +7,3 @@ bzip2 /var/www/vhosts/optieyescommande.com/httpdocs_new/backup-$DAYOFWEEK.sql
 /root/.google-drive-upload/bin/gupload /var/www/vhosts/optieyescommande.com/httpdocs_new/backup-$DAYOFWEEK.sql.bz2
 echo "SQL reçu dans le Drive" | mailx -s "Fichier sql bien reçu dans le drive" yonathan.optieyes@gmail.com
 
-

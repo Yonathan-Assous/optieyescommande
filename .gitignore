@@ -4,3 +4,8 @@
 .htaccess
 /uploads/docs/BL_LAKHAL.pdf
 /uploads/docs/bl_lakhal.pdf
+/static/aa
+/static/xml
+backup*.sql.bz2
+backup*.sql
+application/logs

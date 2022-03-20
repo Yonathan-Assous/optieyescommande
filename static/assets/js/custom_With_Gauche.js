@@ -1273,7 +1273,7 @@ $('#type_de_verreD').on('change', function() {
         		$('#to_etape3').addClass('disabled');
         	}
         	
-		if(type_de_verreD == "S26783")
+		if(type_de_verreD == "41274")
 		{
 			$('#diametreD').append('<option value="70">70</option>');
 		}
@@ -1633,7 +1633,7 @@ $('#type_de_verreG').on('change', function() {
         		$('#to_etape3').addClass('disabled');
         	}
         	
-		if(type_de_verreG == "S26783")
+		if(type_de_verreG == "41274")
 		{
 			$('#diametreG').append('<option value="70">70</option>');
 		}

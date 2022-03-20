@@ -562,7 +562,7 @@ class m_commande extends CI_Model {
         if ($query && $query->num_rows() > 0) {
             $generation = $query->result()[0]->generation;
             $sqlGeneration = "";
-            if (!empty($generation)) {
+            if (!empty($generation) AND strpos($generation, 'stock') == false) {
                 $sqlGeneration = "AND vnew.trad_fr LIKE '%" . $generation . "%'";
             }
             $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
@@ -580,8 +580,7 @@ class m_commande extends CI_Model {
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
                                    AND (display = 'X' OR v.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
-
-
+//print_r($sql);die;
             $query = $this->db->query($sql);
             if ($query && $query->num_rows() > 0)
                 return $query->result();
@@ -4560,7 +4559,7 @@ class m_commande extends CI_Model {
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                WHERE date_click ='".date('Y-m-d')."'
                                AND id_etat_commande < 6 AND
-                               (c.id_verre NOT IN (SELECT code FROM lenses) OR c.id_verre = 'S26783')
+                               (c.id_verre NOT IN (SELECT code FROM lenses) OR c.id_verre = '42174')
                                ORDER BY order_verre");
 
         if ($query && $query->num_rows() > 0){

@@ -4,7 +4,7 @@
     if($recap_commande !== false) {
         echo '<h4 class="modal-title">Commande N°'.$recap_commande[0]->id_commande.'</h4>';
         
-        if($recap_commande[0]->id_verre == "S26783")
+        if($recap_commande[0]->id_verre == "41274")
 		{
 			$recap_commande[0]->trad_fr = "Prog Eco 1,5 HMC";
 		}

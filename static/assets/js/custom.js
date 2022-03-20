@@ -1822,7 +1822,7 @@ $('#type_de_verreD').on('change', function() {
 			$('#traitementD').append('<option value="">----</option>');
 		
 			//alert(rel);
-			if(rel == "]S26783")
+			if(rel == "]41274")
 			{
 				$('#diametreD').append('<option value="70">70</option>');
 				$('#prixVerreD').val('13.00');
@@ -2433,7 +2433,7 @@ $('#type_de_verreG').on('change', function() {
 			$('#diametreG').append('<option value="">choisir</option>');
 		
 			
-			if(rel == "]S26783")
+			if(rel == "]41274")
 			{
 				$('#diametreG').append('<option value="70">70</option>');
 				$('#prixVerreG').val('13.00');
@@ -5257,7 +5257,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 								console.log(data);	
 								$.each(data, function(key, value){
 								setTimeout(function(){
-									$('#type_de_verreD').append('<option value="S26783" rel="]S26783">'+ value.name + '</option>');
+									$('#type_de_verreD').append('<option value="41274" rel="]41274">'+ value.name + '</option>');
 									
 								},300);
 								})
@@ -5793,7 +5793,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 								$.each(data, function(key, value){
 									setTimeout(function(){
 									//$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.id +'">'+ value.name + ' (13.00&euro;)</option>');
-									$('#type_de_verreG').append('<option value="S26783" rel="]S26783">'+ value.name + '</option>');
+									$('#type_de_verreG').append('<option value="41274" rel="]41274">'+ value.name + '</option>');
 									console.log('<option value="'+ value.id +'" rel="'+ value.id +'">'+ value.name + ' (13.00&euro;)</option>');
 									$('#type_de_verreG').trigger('change');
 									console.log(value);

@@ -358,7 +358,7 @@ class m_passer_commande_verre extends CI_Model
                 && $additionD <= 3)) {
             //26783 diametre 70
             $resultat[0]['name'] = "Prog Eco 1,5 HMC - Stock";
-            $resultat[0]['id'] = "S26783";
+            $resultat[0]['id'] = "41274";
 
             return $resultat;
         } else {
@@ -374,15 +374,16 @@ class m_passer_commande_verre extends CI_Model
                 $P_A = "";
             }
 
-            $stock_res = $this->db->query("SELECT *, ppc.prix as prix_perso  
+            $sql = "SELECT *, ppc.prix as prix_perso  
 												FROM verres_stock 
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre
                                        LEFT JOIN prix_par_client ppc ON (ppc.code = verres_stock.id_verre AND id_client="
-                                          . $user_id . ")
+                . $user_id . ")
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' AND id_grille_tarifaire = 1 "
-                                          . $P_A . "
-									   ORDER BY libelle_verre ASC");
+                . $P_A . "
+									   ORDER BY libelle_verre ASC";
+            $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
             $i = 0;
@@ -432,6 +433,7 @@ class m_passer_commande_verre extends CI_Model
     function getstocklens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock,
                           $user_id, $panierA, $type = "1")
     {
+
 //        echo ('$indice: ' . $indice . "<br>");
 //        echo('$lensFocalGroup: ' . $lensFocalGroup . "<br>");
 //        echo('$generation: ' . $generation . "<br>");
@@ -466,8 +468,7 @@ class m_passer_commande_verre extends CI_Model
                     && $additionD <= 3)) {
                 //26783 diametre 70
                 $resultat[0]['name'] = "Prog Eco 1,5 HMC - Stock";
-                $resultat[0]['id'] = "S26783";
-
+                $resultat[0]['id'] = "41274";
                 return $resultat;
             }
         } else {
@@ -493,6 +494,7 @@ class m_passer_commande_verre extends CI_Model
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' " . $P_A . "
 									   ORDER BY libelle_verre ASC";
+
             $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();

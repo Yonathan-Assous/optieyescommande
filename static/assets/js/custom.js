@@ -251,6 +251,7 @@ $('#reference_client').keyup(function() {
 $('#indices').on('change', function() {
 	$('#div_refraction').addClass('hide');
 	$('#div_teledetourage').addClass('hide');
+	$('#div1_format_type').addClass('hide');
     $('#generation').val("").change();
     $('#lensFocalGroup').val("").change();
     $("#generation_progressif").css("display", "none");
@@ -463,10 +464,11 @@ $('#generation').on('change', function() {
 			$('#div_refraction').removeClass('hide')
 		}
 		else {
-			$('#div_teledetourage').removeClass('hide');
+			// $('#div_teledetourage').removeClass('hide');
+			$('#div1_format_type').removeClass('hide');
 			let user_id = $('#user_id').val();
 			$('#txtCustomerCode').val(user_id);
-			Connect();
+			// Connect();
 		}
 
 		$('#sphereD').select();
@@ -2445,15 +2447,7 @@ $('#type_de_verreG').on('change', function() {
 
 			$('#diametreG').empty();
 			$('#diametreG').append('<option value="">choisir</option>');
-<<<<<<< HEAD
-
-
-			if(rel == "]S26783")
-=======
-		
-			
 			if(rel == "]41274")
->>>>>>> 64b257314999d898fbf09cd444fb55d1b301016b
 			{
 				$('#diametreG').append('<option value="70">70</option>');
 				$('#prixVerreG').val('13.00');

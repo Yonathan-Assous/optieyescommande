@@ -15,6 +15,14 @@ if (is_object($pair_order)) {
 ?>
 
     <style>
+        a {
+            cursor: pointer;
+        }
+
+        #progress-tracer {
+            border-radius: 0px;
+            background-color: #FFFFFF;
+        }
         .select2-container .select2-choice > .select2-chosen {
             white-space: break-spaces;
             height: auto;
@@ -112,6 +120,14 @@ if (is_object($pair_order)) {
         
         .divOmaImageData {
             margin-bottom: 30px;
+        }
+
+        .flex>li {
+            flex:1 1 0px;
+        }
+
+        .no-margin-right {
+            margin-right: 0px !important;
         }
     </style>
     <script>
@@ -360,8 +376,8 @@ if (is_object($pair_order)) {
                                                                                         commande</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
-                                                                                    <div class="col-lg-10 card-tabs">
-                                                                                        <ul class="nav nav-pills type_commande_verre">
+                                                                                    <div class="col-lg-12 card-tabs">
+                                                                                        <ul class="nav nav-pills type_commande_verre flex flex-space-between" style = "text-align:center">
                                                                                             <li <?php
                                                                                             if (is_object($pair_order)
                                                                                                 || $panierA == 1) {
@@ -398,7 +414,7 @@ if (is_object($pair_order)) {
                                                                                                     echo 'class="active"';
                                                                                                 } ?> id="li_erreur_ophta">
                                                                                                     <a href="/index/passer_commande/false/3"
-                                                                                                       id="erreur_ophtalmologiste"><b>Erreur
+                                                                                                       id="erreur_ophtalmologiste" class="no-margin-right"><b>Erreur
                                                                                                             ophtalmologiste</b></a>
                                                                                                 </li>
                                                                                                 <?php
@@ -698,6 +714,60 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row hide" id="div1_format_type">
+                                                                        <div class="col-m-12">
+                                                                            <div class="panel panel-default focus_panel"
+                                                                                 id="div2_format_type">
+                                                                                <div class="panel-heading"><h5>Type de
+                                                                                        format</h5></div>
+                                                                                <div class="panel-body"
+                                                                                     style="padding-top: 15px">
+                                                                                    <div class="col-lg-12 card-tabs">
+                                                                                        <ul class="nav nav-pills type_commande_verre flex flex-space-between" style = "text-align:center">
+                                                                                            <li id="li_format_metal">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_metal"><b>Métal</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_plastique">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_plastique"><b>Plastique</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_nylor">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_nylor"><b>Nylor</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_perce">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_perce"
+                                                                                                   class="no-margin-right"><b>Percé</b></a>
+                                                                                            </li>
+                                                                                        </ul>
+
+                                                                                        <div class="ec_commande_status"
+                                                                                             style="display: none;">
+                                                                                            <div class="alert alert-warning"
+                                                                                                 style="margin-bottom: 0px;"
+                                                                                                 id="status_credit">
+                                                                                                Votre crédit : <b>417.78
+                                                                                                    €</b></div>
+                                                                                        </div>
+
+                                                                                        <div class="validator"></div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="form-group row hide"
                                                                          id="div_teledetourage">
                                                                         <div class="col-xs-12" id="tab_teledetourage">
@@ -709,50 +779,52 @@ if (is_object($pair_order)) {
                                                                                      style="padding-top: 15px">
                                                                                     <div class="row">
                                                                                         <div class="col-12 note note-warning">
-<!--                                                                                            <h3>I-  Connexion</h3>-->
-<!--                                                                                            <p class="dark-grey-text font-weight-normal font-small">-->
-<!--                                                                                                Pour se connecter, il suffit de renseigner le code du client. Le code client doit être identique à celui renseigné dans le composant de traçage.-->
-<!--                                                                                            </p>-->
-<!--                                                                                            <div class="md-form input-group">-->
-                                                                                                <input type="text" id="txtCustomerCode" class="form-control" style="display: none;" maxlength="15" />
-<!--                                                                                                <label for="txtCustomerCode">Code client</label>-->
-<!--                                                                                                <div class="input-group-append">-->
-<!--                                                                                                    <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnConnect" onclick="Connect();">Se connecter</button>-->
-<!--                                                                                                </div>-->
-<!--                                                                                            </div>-->
+<!--                                                                                        <div class="col-12">-->
+                                                                                            <input type="text" id="txtCustomerCode" class="form-control" style="display: none;" maxlength="15" />
                                                                                             <div class="w-100" id="divDevices" style="display:none">
-<!--                                                                                                <p class="dark-grey-text font-weight-normal font-small">-->
-<!--                                                                                                    Une fois connecté, on affiche ici la liste des machines connectées ayant le même code client (code magasin).-->
-<!--                                                                                                    <br />Il faut ensuite sélectionner la machine depuis laquelle l'opticien veut faire l'acquisition de la forme.-->
-<!--                                                                                                </p>-->
                                                                                                 <div id="choice_machine">
                                                                                                     <label class="w-100 text-muted">Veuillez choisir la machine connectée</label>
                                                                                                     <select class="form-control" id="ddlDevices" style="max-width:200px">
                                                                                                     </select>
                                                                                                 </div>
-                                                                                                <div>
-                                                                                                    <div class="md-form input-group flex flex-space-between">
-<!--                                                                                                        <div>-->
-<!--                                                                                                            <textarea id="txtOmaTracerOut" class="md-textarea form-control hide" rows="5"></textarea>-->
-<!--                                                                                                            <label class="hide" for="txtOmaTracerOut">Forme OMA reçue depuis le Traceur</label>-->
+                                                                                                <div class="card-tabs">
+                                                                                                    <ul class="nav nav-pills type_teledetourage flex flex-space-between my-0 px-3" style = "text-align:center">
+                                                                                                        <li id="li_btnLaunchTracer">
+                                                                                                            <a 
+                                                                                                               data-toggle="tab"
+                                                                                                               aria-expanded="true"
+                                                                                                               id="btnLaunchTracer"><b>Tracer la forme</b></a>
+                                                                                                        </li>
+<!--                                                                                                        <li id="li_btnLaunchTablette">-->
+<!--                                                                                                            <a href="#"-->
+<!--                                                                                                               data-toggle="tab"-->
+<!--                                                                                                               aria-expanded="true"-->
+<!--                                                                                                               id="btnLaunchTablette"><b>Lancer la tablette</b></a>-->
+<!--                                                                                                        </li>-->
+                                                                                                        <li id="li_btnSetOmaCode">
+                                                                                                            <a href="#"
+                                                                                                               data-toggle="tab"
+                                                                                                               aria-expanded="true"
+                                                                                                               id="btnSetOmaCode"
+                                                                                                               class="no-margin-right"><b>Charger une forme</b></a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                    <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">
+
+<!--                                                                                                    <div class="md-form input-group flex flex-space-between">-->
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTracer" onclick="LaunchTracer();">Lancer le Traceur</button>-->
 <!--                                                                                                        </div>-->
-                                                                                                        <div class="input-group-append">
-                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTracer" onclick="LaunchTracer();">Lancer le Traceur</button>
-                                                                                                        </div>
-                                                                                                        <div class="input-group-append">
-                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Lancer la Tablette</button>
-                                                                                                        </div>
-                                                                                                        <div class="input-group-append">
-                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnSetOmaCode" onclick="SetCodeOma();">Récupérer <br>d'un fichier OMA</button>
-                                                                                                        </div>
-                                                                                                        <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">
-                                                                                                    </div>
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Lancer la Tablette</button>-->
+<!--                                                                                                        </div>-->
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnSetOmaCode" onclick="SetCodeOma();">Récupérer <br>d'un fichier OMA</button>-->
+<!--                                                                                                        </div>-->
+<!--                                                                                                        <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">-->
+<!--                                                                                                    </div>-->
                                                                                                 </div>
                                                                                                 <div class="col-12">
-<!--                                                                                                    <h4>Débogage</h4>-->
-<!--                                                                                                    <p class="dark-grey-text font-weight-normal font-small">-->
-<!--                                                                                                        Dans cette zone, on affiche le détail de l'échange entre le composant de traçage et l'équipement de traçage de l'opticien.-->
-<!--                                                                                                    </p>-->
                                                                                                     <div class="w-100 w-100 border rounded p-2" id="divDebug">
                                                                                                     </div>
                                                                                                 </div>
@@ -5084,6 +5156,34 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
+        <div id="tracer_in_modal" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="tracer_modal_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Tracez votre monture</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="tracer_in_body">Lancez le traçage de votre forme en appuyant sur le bouton de votre palpeur</p>
+                        </div>
+
+<!--                        <div class="modal-footer">-->
+<!--                            <button id="cylindre_negative_ok" class="btn btn-warning waves-effect waves-light"-->
+<!--                                    data-dismiss="modal">Ok</button>-->
+<!--                        </div>-->
+                    </form>
+                </div>
+                <div class="progress" id="progress-tracer">
+                    <div id="progress-bar-tracer" class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="axe_between_0_180" class="modal fade" tabindex="-1" role="dialog"
              aria-hidden="true" style="display: none;">
             <div class="modal-dialog" style="width: 90%; max-width: 400px;">
@@ -5313,6 +5413,31 @@ if (is_object($pair_order)) {
             $('#type_commande').val('3');
         })
 
+        $('#format_metal').click(function () {
+            if ($('#div_teledetourage').is(":hidden")) {
+                Connect();
+            }
+            $('#div_teledetourage').removeClass('hide');
+        })
+        $('#format_plastique').click(function () {
+            if ($('#div_teledetourage').is(":hidden")) {
+                Connect();
+            }
+            $('#div_teledetourage').removeClass('hide');
+        })
+        $('#format_nylor').click(function () {
+            if ($('#div_teledetourage').is(":hidden")) {
+                Connect();
+            }
+            $('#div_teledetourage').removeClass('hide');
+        })
+        $('#format_perce').click(function () {
+            if ($('#div_teledetourage').is(":hidden")) {
+                Connect();
+            }
+            $('#div_teledetourage').removeClass('hide');
+        })
+
         $('#btn_add_info_sup').click(function () {
             $('#add_info_sup').modal('show');
         })
@@ -5524,7 +5649,8 @@ if (is_object($pair_order)) {
 
             $('#lensFocalGroup').on('change', function () {
                 $('#div_refraction').addClass('hide');
-                $('#div_teledetourage').addClass('hide');
+                // $('#div_teledetourage').addClass('hide');
+                $('#div1_format_type').addClass('hide');
                 $('#progression_D').addClass('hide');
                 $('#progression_G').addClass('hide');
 
@@ -5760,10 +5886,11 @@ if (is_object($pair_order)) {
                             $('#div_refraction').removeClass('hide')
                         }
                         else {
-                            $('#div_teledetourage').removeClass('hide');
+                            // $('#div_teledetourage').removeClass('hide');
+                            $('#div1_format_type').removeClass('hide');
                             let user_id = $('#user_id').val();
                             $('#txtCustomerCode').val(user_id);
-                            Connect();
+                            // Connect();
                         }
                         $('#progression_D').addClass('hide')
                         $('#progression_G').addClass('hide')
@@ -7204,6 +7331,7 @@ if (is_object($pair_order)) {
             $('#produit').addClass('hide');
             $('#div_refraction').addClass('hide');
             $('#div_teledetourage').addClass('hide');
+            $('#div1_format_type').addClass('hide');
             $('#type_produit').addClass('hide');
             $('#generation_progressif').addClass('hide');
             $('#indices').val('');
@@ -7235,6 +7363,18 @@ if (is_object($pair_order)) {
 
             return back;
         }
+
+        $('#btnLaunchTracer').click(function () {
+            LaunchTracer();
+        });
+
+        $('#btnLaunchTablette').click(function () {
+            LaunchTablette();
+        });
+
+        $('#btnSetOmaCode').click(function () {
+            SetCodeOma();
+        });
     </script>
 
 

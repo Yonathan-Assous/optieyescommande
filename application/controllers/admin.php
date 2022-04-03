@@ -6794,613 +6794,613 @@ class admin
                 foreach ($data_commande
                          as
                          $key
-                => $commande)
-                {
-                    //var_dump($commande);
+                => $commande) {
+                    if ($commande->trad_fr != '') {
+                        //var_dump($commande);
 
-                    $commande->indice_omega = $commande->indice_verre;
-                    if ($commande->indice_verre == '1.74'
-                        && strpos($commande->lensname, 'stock') !== false) {
-                        $commande = $this->m_commande->change_174_With_167($commande);
-                    }
-                    $detail =
-                    $textarea =
-                        "";
-                    if ($commande->origine_commande ==
-                        '2') {
-                        $detail .= "<b>Commande Stock Déporté</b><br>";
-                    } else {
-                        $detail .= "<b>Commande Fabrication</b><br>";
-                    }
+                        $commande->indice_omega = $commande->indice_verre;
+                        if ($commande->indice_verre == '1.74'
+                            && strpos($commande->lensname, 'stock') !== false) {
+                            $commande = $this->m_commande->change_174_With_167($commande);
+                        }
+                        $detail =
+                        $textarea =
+                            "";
+                        if ($commande->origine_commande ==
+                            '2') {
+                            $detail .= "<b>Commande Stock Déporté</b><br>";
+                        } else {
+                            $detail .= "<b>Commande Fabrication</b><br>";
+                        }
 
-                    if ($commande->panierA ==
-                        '1') {
-                        $detail .= "<br><b>Panier A</b>";
-                    }
+                        if ($commande->panierA ==
+                            '1') {
+                            $detail .= "<br><b>Panier A</b>";
+                        }
 
-                    $detail .= "<br>Nom du verre: <b>" .
-                        $commande->trad_fr .
-                        "</b>";
-                    $detail .= "<br>Indice: " .
-                        $commande->indice_verre .
-                        '';
+                        $detail .= "<br>Nom du verre: <b>" .
+                            $commande->trad_fr .
+                            "</b>";
+                        $detail .= "<br>Indice: " .
+                            $commande->indice_verre .
+                            '';
 
-                    if ($commande->premiere_commande !=
-                        '0') {
-                        $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
-                            $commande->premiere_commande .
+                        if ($commande->premiere_commande !=
+                            '0') {
+                            $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
+                                $commande->premiere_commande .
+                                "-" .
+                                $commande->id_users .
+                                "<br>";
+                        }
+
+                        if ($commande->is_express) {
+                            $textarea .= "<br>EXPRESS<br>";
+                        }
+
+                        $textarea .= "Optieyes reference: " .
+                            $commande->id_commande .
                             "-" .
-                            $commande->id_users .
-                            "<br>";
-                    }
+                            $commande->id_users;
+                        $textarea .= "<br><br>Lens Code: " .
+                            $commande->lenscode;
+                        $textarea .= "<br>Lens Name: " .
+                            $commande->lensname;
 
-                    if ($commande->is_express) {
-                        $textarea .= "<br>EXPRESS<br>";
-                    }
-
-                    $textarea .= "Optieyes reference: " .
-                        $commande->id_commande .
-                        "-" .
-                        $commande->id_users;
-                    $textarea .= "<br><br>Lens Code: " .
-                        $commande->lenscode;
-                    $textarea .= "<br>Lens Name: " .
-                        $commande->lensname;
-
-                    $textarea .= "<br><br>Optical Index: " .
-                        $commande->indice_omega;
+                        $textarea .= "<br><br>Optical Index: " .
+                            $commande->indice_omega;
 
 
-                    $information_commande =
-                        json_decode($commande->information_commande);
-                    //var_dump($information_commande);
+                        $information_commande =
+                            json_decode($commande->information_commande);
+                        //var_dump($information_commande);
 
-                    if (isset($information_commande->verre->correction_droit)) {
+                        if (isset($information_commande->verre->correction_droit)) {
 
-                        $detail .= "<br><br><b>OD :</b>";
-                        $detail .= " " .
-                            $information_commande->verre->correction_droit->sphere .
-                            " ";
-                        $detail .= "(" .
-                            $information_commande->verre->correction_droit->cylindre .
-                            ")";
-                        if ($information_commande->verre->correction_droit->axe !=
-                            "0.00") {
+                            $detail .= "<br><br><b>OD :</b>";
                             $detail .= " " .
-                                $information_commande->verre->correction_droit->axe .
-                                "°";
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->addition) &&
-                            $information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre !=
-                            34) {
-                            $detail .= " ADD " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->addition) &&
-                            $information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre ==
-                            34) {
-                            $detail .= " DEG " .
-                                $information_commande->verre->correction_droit->addition .
-                                "";
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ</span>";
-
-                        }
-                        if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
-                            !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
-                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
-                                $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°</span>";
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->galbe)) {
-                            $detail .= " Galbe: " .
-                                $information_commande->verre->correction_droit->galbe .
+                                $information_commande->verre->correction_droit->sphere .
                                 " ";
-                        }
+                            $detail .= "(" .
+                                $information_commande->verre->correction_droit->cylindre .
+                                ")";
+                            if ($information_commande->verre->correction_droit->axe !=
+                                "0.00") {
+                                $detail .= " " .
+                                    $information_commande->verre->correction_droit->axe .
+                                    "°";
+                            }
 
-                        if (isset($information_commande->verre->correction_droit->traitement) &&
-                            !empty($information_commande->verre->correction_droit->traitement)) {
-                            $traitementD =
-                                $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
-                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
-                                $traitementD .
-                                "</span>";
-                        }
-                        if (isset($information_commande->verre->correction_droit->teinte)) {
-                            $teinteD =
-                                $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
-                            if ($teinteD !=
-                                "") {
-                                $detail .= "<br>Teinte: <b>" .
-                                    $teinteD .
-                                    "</b>";
-                            } else {
-                                if ($information_commande->verre->correction_droit->teinte !=
+                            if (isset($information_commande->verre->correction_droit->addition) &&
+                                $information_commande->verre->correction_droit->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre !=
+                                34) {
+                                $detail .= " ADD " .
+                                    $information_commande->verre->correction_droit->addition .
+                                    "";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->addition) &&
+                                $information_commande->verre->correction_droit->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre ==
+                                34) {
+                                $detail .= " DEG " .
+                                    $information_commande->verre->correction_droit->addition .
+                                    "";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_droit->PrismeSphere)) {
+                                $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                                    "Δ</span>";
+
+                            }
+                            if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
+                                !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
+                                $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
+                                    $information_commande->verre->correction_droit->PrismeCylindre .
+                                    "°</span>";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->galbe)) {
+                                $detail .= " Galbe: " .
+                                    $information_commande->verre->correction_droit->galbe .
+                                    " ";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->traitement) &&
+                                !empty($information_commande->verre->correction_droit->traitement)) {
+                                $traitementD =
+                                    $this->m_commande->getTraitementByCode($information_commande->verre->correction_droit->traitement);
+                                $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
+                                    $traitementD .
+                                    "</span>";
+                            }
+                            if (isset($information_commande->verre->correction_droit->teinte)) {
+                                $teinteD =
+                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                if ($teinteD !=
                                     "") {
-                                    $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_droit->teinte .
+                                    $detail .= "<br>Teinte: <b>" .
+                                        $teinteD .
                                         "</b>";
+                                } else {
+                                    if ($information_commande->verre->correction_droit->teinte !=
+                                        "") {
+                                        $detail .= "<br>Teinte personnalisée: <b>" .
+                                            $information_commande->verre->correction_droit->teinte .
+                                            "</b>";
+                                    }
                                 }
                             }
+                            if (isset($information_commande->verre->correction_droit->diametre) &&
+                                !empty($information_commande->verre->correction_droit->diametre)) {
+                                $detail .= "<br>Diametre: " .
+                                    $information_commande->verre->correction_droit->diametre .
+                                    "";
+
+                            }
+
+                            $textarea .= "<br><br>OD :";
+                            $textarea .= "  " .
+                                $information_commande->verre->correction_droit->sphere;
+                            $textarea .= " ( " .
+                                $information_commande->verre->correction_droit->cylindre .
+                                ")";
+                            if ($information_commande->verre->correction_droit->axe !=
+                                "0.00") {
+                                $textarea .= "  " .
+                                    $information_commande->verre->correction_droit->axe .
+                                    "°";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->addition) &&
+                                $information_commande->verre->correction_droit->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre !=
+                                34) {
+                                $textarea .= " ADD  " .
+                                    $information_commande->verre->correction_droit->addition;
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->addition) &&
+                                $information_commande->verre->correction_droit->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre ==
+                                34) {
+                                $textarea .= " DEG  " .
+                                    $information_commande->verre->correction_droit->addition;
+                            }
+
+
+                            if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_droit->PrismeSphere)) {
+
+                                $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
+                                    "Δ</span>";
+                            }
+                            if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
+                                !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
+
+                                $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
+                                    $information_commande->verre->correction_droit->PrismeCylindre .
+                                    "°</span>";
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->galbe)) {
+                                $textarea .= " Galbe: " .
+                                    $information_commande->verre->correction_droit->galbe .
+                                    " ";
+                            }
+                            if (isset($information_commande->verre->correction_droit->traitement) &&
+                                !empty($information_commande->verre->correction_droit->traitement) &&
+                                ($information_commande->verre->correction_droit->traitement !=
+                                    '700100' ||
+                                    (($information_commande->verre->correction_droit->traitement ==
+                                            '700100') &&
+                                        ((strpos($commande->lensname,
+                                                    '1.5') === false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.53') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.56') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.59') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Transition') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Polarisé') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Xtractive') !== false))
+                                    ))) {
+                                if ($traitementD !=
+                                    "") {
+                                    $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
+                                        $information_commande->verre->correction_droit->traitement .
+                                        "(" .
+                                        $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
+                                        ")</span>";
+                                }
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->teinte)) {
+                                if ($teinteD !=
+                                    "") {
+                                    $textarea .= "<br>Tint: " .
+                                        $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                } else {
+                                    if ($information_commande->verre->correction_droit->teinte !=
+                                        "") {
+                                        $textarea .= "<br>Custom Tint: " .
+                                            $information_commande->verre->correction_droit->teinte;
+                                    }
+                                }
+                            }
+
+                            if (isset($information_commande->verre->correction_droit->diametre) &&
+                                !empty($information_commande->verre->correction_droit->diametre) &&
+                                $information_commande->verre->correction_droit->diametre !=
+                                "precalibrage") {
+                                $textarea .= "<br>Diameter physical: " .
+                                    $information_commande->verre->correction_droit->diametre;
+                            }
+
+
                         }
-                        if (isset($information_commande->verre->correction_droit->diametre) &&
-                            !empty($information_commande->verre->correction_droit->diametre)) {
+
+                        if (isset($information_commande->verre->correction_gauche)) {
+                            $detail .= "<br><br><b>OG :</b>";
+                            $detail .= " " .
+                                $information_commande->verre->correction_gauche->sphere .
+                                "";
+                            $detail .= " (" .
+                                $information_commande->verre->correction_gauche->cylindre .
+                                ")";
+                            if ($information_commande->verre->correction_gauche->axe !=
+                                "0.00") {
+                                $detail .= "  " .
+                                    $information_commande->verre->correction_gauche->axe .
+                                    "°";
+                            }
+                            if (isset($information_commande->verre->correction_gauche->addition) &&
+                                $information_commande->verre->correction_gauche->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre !=
+                                34) {
+                                $detail .= " ADD  " .
+                                    $information_commande->verre->correction_gauche->addition .
+                                    "";
+                            }
+
+                            if (isset($information_commande->verre->correction_gauche->addition) &&
+                                $information_commande->verre->correction_gauche->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre ==
+                                34) {
+                                $detail .= " DEG  " .
+                                    $information_commande->verre->correction_gauche->addition .
+                                    "";
+                            }
+
+
+                            if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
+                                $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                                    "Δ</span>";
+                            }
+                            if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
+                                !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
+                                $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
+                                    $information_commande->verre->correction_gauche->PrismeCylindre .
+                                    "°</span>";
+                            }
+
+                            if (isset($information_commande->verre->correction_gauche->galbe)) {
+                                $detail .= " Galbe: " .
+                                    $information_commande->verre->correction_gauche->galbe .
+                                    " ";
+                            }
+                            if (isset($information_commande->verre->correction_gauche->traitement) &&
+                                !empty($information_commande->verre->correction_gauche->traitement)) {
+
+                                $traitementG =
+                                    $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
+                                $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
+                                    $traitementG .
+                                    "</span>";
+                            }
+
+                            if (isset($information_commande->verre->correction_gauche->teinte)) {
+                                $teinteG =
+                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                if ($teinteG !=
+                                    "") {
+                                    $detail .= "<br>Teinte: <b>" .
+                                        $teinteG .
+                                        "</b>";
+                                } else {
+                                    if ($information_commande->verre->correction_gauche->teinte !=
+                                        "") {
+                                        $detail .= "<br>Teinte personnalisée: <b>" .
+                                            $information_commande->verre->correction_gauche->teinte .
+                                            "</b>";
+                                    }
+                                }
+                            }
                             $detail .= "<br>Diametre: " .
-                                $information_commande->verre->correction_droit->diametre .
+                                $information_commande->verre->correction_gauche->diametre .
                                 "";
 
-                        }
-
-                        $textarea .= "<br><br>OD :";
-                        $textarea .= "  " .
-                            $information_commande->verre->correction_droit->sphere;
-                        $textarea .= " ( " .
-                            $information_commande->verre->correction_droit->cylindre .
-                            ")";
-                        if ($information_commande->verre->correction_droit->axe !=
-                            "0.00") {
+                            $textarea .= "<br><br>OG:";
                             $textarea .= "  " .
-                                $information_commande->verre->correction_droit->axe .
-                                "°";
-                        }
+                                $information_commande->verre->correction_gauche->sphere;
+                            $textarea .= " (" .
+                                $information_commande->verre->correction_gauche->cylindre .
+                                ")";
+                            if ($information_commande->verre->correction_gauche->axe !=
+                                "0.00") {
+                                $textarea .= "  " .
+                                    $information_commande->verre->correction_gauche->axe .
+                                    "°";
+                            }
 
-                        if (isset($information_commande->verre->correction_droit->addition) &&
-                            $information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre !=
-                            34) {
-                            $textarea .= " ADD  " .
-                                $information_commande->verre->correction_droit->addition;
-                        }
+                            if (isset($information_commande->verre->correction_gauche->addition) &&
+                                $information_commande->verre->correction_gauche->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre !=
+                                34) {
+                                $textarea .= " ADD  " .
+                                    $information_commande->verre->correction_gauche->addition;
+                            }
+                            if (isset($information_commande->verre->correction_gauche->addition) &&
+                                $information_commande->verre->correction_gauche->addition !=
+                                "0.00" &&
+                                $commande->id_generation_verre ==
+                                34) {
+                                $textarea .= " DEG  " .
+                                    $information_commande->verre->correction_gauche->addition;
+                            }
 
-                        if (isset($information_commande->verre->correction_droit->addition) &&
-                            $information_commande->verre->correction_droit->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre ==
-                            34) {
-                            $textarea .= " DEG  " .
-                                $information_commande->verre->correction_droit->addition;
-                        }
 
+                            if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
+                                $textarea .= " " .
+                                    " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
+                                    "Δ</span>";
+                            }
+                            if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
+                                !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
+                                $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
+                                    $information_commande->verre->correction_gauche->PrismeCylindre .
+                                    "°</span>";
+                            }
 
-                        if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-
-                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_droit->PrismeSphere .
-                                "Δ</span>";
-                        }
-                        if (isset($information_commande->verre->correction_droit->PrismeCylindre) &&
-                            !empty($information_commande->verre->correction_droit->PrismeCylindre)) {
-
-                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
-                                $information_commande->verre->correction_droit->PrismeCylindre .
-                                "°</span>";
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->galbe)) {
-                            $textarea .= " Galbe: " .
-                                $information_commande->verre->correction_droit->galbe .
-                                " ";
-                        }
-                        if (isset($information_commande->verre->correction_droit->traitement) &&
-                            !empty($information_commande->verre->correction_droit->traitement) &&
-                            ($information_commande->verre->correction_droit->traitement !=
-                                '700100' ||
-                                (($information_commande->verre->correction_droit->traitement ==
-                                        '700100') &&
-                                    ((strpos($commande->lensname,
-                                                '1.5') === false) ||
-                                        (strpos($commande->lensname,
-                                                '1.53') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.56') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.59') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Transition') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Polarisé') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Xtractive') !== false))
-                                ))) {
-                            if ($traitementD !=
-                                "") {
+                            if (isset($information_commande->verre->correction_gauche->galbe)) {
+                                $textarea .= " Galbe: " .
+                                    $information_commande->verre->correction_gauche->galbe .
+                                    " ";
+                            }
+                            if (isset($information_commande->verre->correction_gauche->traitement) &&
+                                !empty($information_commande->verre->correction_gauche->traitement) &&
+                                ($information_commande->verre->correction_gauche->traitement !=
+                                    '700100' ||
+                                    (($information_commande->verre->correction_gauche->traitement ==
+                                            '700100') &&
+                                        ((strpos($commande->lensname,
+                                                    '1.5') === false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.53') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.56') !== false) ||
+                                            (strpos($commande->lensname,
+                                                    '1.59') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Transition') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Polarisé') !== false) ||
+                                            (strpos($commande->trad_fr,
+                                                    'Xtractive') !== false))
+                                    ))) {
                                 $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
-                                    $information_commande->verre->correction_droit->traitement .
+                                    $information_commande->verre->correction_gauche->traitement .
                                     "(" .
-                                    $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_droit->traitement) .
+                                    $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
                                     ")</span>";
                             }
-                        }
-
-                        if (isset($information_commande->verre->correction_droit->teinte)) {
-                            if ($teinteD !=
-                                "") {
-                                $textarea .= "<br>Tint: " .
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
-                            } else {
-                                if ($information_commande->verre->correction_droit->teinte !=
+                            if (isset($information_commande->verre->correction_gauche->teinte)) {
+                                if ($teinteG !=
                                     "") {
-                                    $textarea .= "<br>Custom Tint: " .
-                                        $information_commande->verre->correction_droit->teinte;
+                                    $textarea .= "<br>Tint: " .
+                                        $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                } else {
+                                    if ($information_commande->verre->correction_gauche->teinte !=
+                                        "") {
+                                        $textarea .= "<br>Custom Tint: " .
+                                            $information_commande->verre->correction_gauche->teinte;
+                                    }
                                 }
                             }
-                        }
 
-                        if (isset($information_commande->verre->correction_droit->diametre) &&
-                            !empty($information_commande->verre->correction_droit->diametre) &&
-                            $information_commande->verre->correction_droit->diametre !=
-                            "precalibrage") {
-                            $textarea .= "<br>Diameter physical: " .
-                                $information_commande->verre->correction_droit->diametre;
-                        }
-
-
-                    }
-
-                    if (isset($information_commande->verre->correction_gauche)) {
-                        $detail .= "<br><br><b>OG :</b>";
-                        $detail .= " " .
-                            $information_commande->verre->correction_gauche->sphere .
-                            "";
-                        $detail .= " (" .
-                            $information_commande->verre->correction_gauche->cylindre .
-                            ")";
-                        if ($information_commande->verre->correction_gauche->axe !=
-                            "0.00") {
-                            $detail .= "  " .
-                                $information_commande->verre->correction_gauche->axe .
-                                "°";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->addition) &&
-                            $information_commande->verre->correction_gauche->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre !=
-                            34) {
-                            $detail .= " ADD  " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->addition) &&
-                            $information_commande->verre->correction_gauche->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre ==
-                            34) {
-                            $detail .= " DEG  " .
-                                $information_commande->verre->correction_gauche->addition .
-                                "";
-                        }
-
-
-                        if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
-                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ</span>";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                            $detail .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
-                                $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°</span>";
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->galbe)) {
-                            $detail .= " Galbe: " .
-                                $information_commande->verre->correction_gauche->galbe .
-                                " ";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->traitement) &&
-                            !empty($information_commande->verre->correction_gauche->traitement)) {
-
-                            $traitementG =
-                                $this->m_commande->getTraitementByCode($information_commande->verre->correction_gauche->traitement);
-                            $detail .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Traitement: " .
-                                $traitementG .
-                                "</span>";
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->teinte)) {
-                            $teinteG =
-                                $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
-                            if ($teinteG !=
-                                "") {
-                                $detail .= "<br>Teinte: <b>" .
-                                    $teinteG .
-                                    "</b>";
-                            } else {
-                                if ($information_commande->verre->correction_gauche->teinte !=
-                                    "") {
-                                    $detail .= "<br>Teinte personnalisée: <b>" .
-                                        $information_commande->verre->correction_gauche->teinte .
-                                        "</b>";
-                                }
+                            if (isset($information_commande->verre->correction_gauche->diametre) &&
+                                !empty($information_commande->verre->correction_gauche->diametre) &&
+                                $information_commande->verre->correction_gauche->diametre !=
+                                "precalibrage") {
+                                $textarea .= "<br>Diameter physical: " .
+                                    $information_commande->verre->correction_gauche->diametre;
                             }
-                        }
-                        $detail .= "<br>Diametre: " .
-                            $information_commande->verre->correction_gauche->diametre .
-                            "";
 
-                        $textarea .= "<br><br>OG:";
-                        $textarea .= "  " .
-                            $information_commande->verre->correction_gauche->sphere;
-                        $textarea .= " (" .
-                            $information_commande->verre->correction_gauche->cylindre .
-                            ")";
-                        if ($information_commande->verre->correction_gauche->axe !=
-                            "0.00") {
-                            $textarea .= "  " .
-                                $information_commande->verre->correction_gauche->axe .
-                                "°";
                         }
 
-                        if (isset($information_commande->verre->correction_gauche->addition) &&
-                            $information_commande->verre->correction_gauche->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre !=
-                            34) {
-                            $textarea .= " ADD  " .
-                                $information_commande->verre->correction_gauche->addition;
-                        }
-                        if (isset($information_commande->verre->correction_gauche->addition) &&
-                            $information_commande->verre->correction_gauche->addition !=
-                            "0.00" &&
-                            $commande->id_generation_verre ==
-                            34) {
-                            $textarea .= " DEG  " .
-                                $information_commande->verre->correction_gauche->addition;
-                        }
-
-
-                        if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
-                            $textarea .= " " .
-                                " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>" . $information_commande->verre->correction_gauche->PrismeSphere .
-                                "Δ</span>";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->PrismeCylindre) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeCylindre)) {
-                            $textarea .= " <span style='color:#fff; background-color: #eb6363; font-weight: bold;'>base " .
-                                $information_commande->verre->correction_gauche->PrismeCylindre .
-                                "°</span>";
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->galbe)) {
-                            $textarea .= " Galbe: " .
-                                $information_commande->verre->correction_gauche->galbe .
-                                " ";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->traitement) &&
-                            !empty($information_commande->verre->correction_gauche->traitement) &&
-                            ($information_commande->verre->correction_gauche->traitement !=
-                                '700100' ||
-                                (($information_commande->verre->correction_gauche->traitement ==
-                                        '700100') &&
-                                    ((strpos($commande->lensname,
-                                                '1.5') === false) ||
-                                        (strpos($commande->lensname,
-                                                '1.53') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.56') !== false) ||
-                                        (strpos($commande->lensname,
-                                                '1.59') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Transition') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Polarisé') !== false) ||
-                                        (strpos($commande->trad_fr,
-                                                'Xtractive') !== false))
-                                ))) {
-                            $textarea .= "<br><span style='color:#000; background-color: #fbca35; font-weight: bold;'>Coating code: " .
-                                $information_commande->verre->correction_gauche->traitement .
-                                "(" .
-                                $this->m_commande->getTraitementNameByCode($information_commande->verre->correction_gauche->traitement) .
-                                ")</span>";
-                        }
-                        if (isset($information_commande->verre->correction_gauche->teinte)) {
-                            if ($teinteG !=
-                                "") {
-                                $textarea .= "<br>Tint: " .
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
-                            } else {
-                                if ($information_commande->verre->correction_gauche->teinte !=
-                                    "") {
-                                    $textarea .= "<br>Custom Tint: " .
-                                        $information_commande->verre->correction_gauche->teinte;
-                                }
-                            }
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->diametre) &&
-                            !empty($information_commande->verre->correction_gauche->diametre) &&
-                            $information_commande->verre->correction_gauche->diametre !=
-                            "precalibrage") {
-                            $textarea .= "<br>Diameter physical: " .
-                                $information_commande->verre->correction_gauche->diametre;
-                        }
-
-                    }
-
-                    $precal =
-                        0;
-
-                    if ((isset($information_commande->verre->correction_droit) &&
-                            $information_commande->verre->correction_droit->diametre ==
-                            'precalibrage') ||
-                        (isset($information_commande->verre->correction_gauche) &&
-                            $information_commande->verre->correction_gauche->diametre ==
-                            'precalibrage')) {
                         $precal =
-                            1;
-                        $detail .= '<br><br><b>Précalibrage:</b> <br>';
+                            0;
 
-                        if (isset($information_commande->precalibrage)) {
-                            $detail .= '<br><img src="/static/img/calibre/' .
-                                $information_commande->precalibrage->calibre .
-                                '.jpg" width="150" heigth="70" /><br>';
+                        if ((isset($information_commande->verre->correction_droit) &&
+                                $information_commande->verre->correction_droit->diametre ==
+                                'precalibrage') ||
+                            (isset($information_commande->verre->correction_gauche) &&
+                                $information_commande->verre->correction_gauche->diametre ==
+                                'precalibrage')) {
+                            $precal =
+                                1;
+                            $detail .= '<br><br><b>Précalibrage:</b> <br>';
+
+                            if (isset($information_commande->precalibrage)) {
+                                $detail .= '<br><img src="/static/img/calibre/' .
+                                    $information_commande->precalibrage->calibre .
+                                    '.jpg" width="150" heigth="70" /><br>';
+                            }
+
+                            $mesure_freeform_opt =
+                                "";
+
+                            $mesure_freeform_opt .= isset($information_commande->mesure_freeform->largeur_boxing) ?
+                                'Largeur boxing : ' .
+                                $information_commande->mesure_freeform->largeur_boxing .
+                                ', ' :
+                                '';
+                            $mesure_freeform_opt .= isset($information_commande->mesure_freeform->hauteur_boxing) ?
+                                'Hauteur boxing : ' .
+                                $information_commande->mesure_freeform->hauteur_boxing .
+                                ', ' :
+                                '';
+                            $mesure_freeform_opt .= isset($information_commande->mesure_freeform->taille_du_pont) ?
+                                'Taille du pont : ' .
+                                $information_commande->mesure_freeform->taille_du_pont .
+                                ', ' :
+                                '';
+                            $mesure_freeform_opt .= isset($information_commande->mesure_freeform->diametre_utile) ?
+                                'Diametre utile : ' .
+                                $information_commande->mesure_freeform->diametre_utile .
+                                '<br>' :
+                                '';
+
+                            if (!empty($mesure_freeform_opt)) {
+                                $detail .= '<b>Mesure freeform:</b> <br> - ';
+                                $detail .= $mesure_freeform_opt;
+                            }
+
+                            if (isset($information_commande->monture->type)) {
+                                $detail .= 'Type monture: ' .
+                                    $information_commande->monture->type .
+                                    '<br>';
+                            }
+
+                            if (isset($information_commande->bord_verre->epaisseur) &&
+                                !empty($information_commande->bord_verre->epaisseur)) {
+                                $detail .= 'EP au bord minimum: ' .
+                                    $information_commande->bord_verre->epaisseur .
+                                    '<br>';
+                            }
+
+                            if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
+                                !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
+                                $detail .= 'Ecart puppillaire droit: ' .
+                                    $information_commande->mesure_freeform->ecart_puppillaire_droit .
+                                    '<br>';
+                            }
+
+                            if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
+                                !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
+                                $detail .= 'Ecart puppillaire gauche: ' .
+                                    $information_commande->mesure_freeform->ecart_puppillaire_gauche .
+                                    '<br>';
+                            }
+
+                            if (isset($information_commande->mesure_freeform->hauteur) &&
+                                !empty($information_commande->mesure_freeform->hauteur)) {
+                                $detail .= 'Hauteur de montage droit: ' .
+                                    $information_commande->mesure_freeform->hauteur .
+                                    '<br>';
+                            }
+
+                            if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
+                                !empty($information_commande->mesure_freeform->hauteur_gauche)) {
+                                $detail .= 'Hauteur de montage gauche: ' .
+                                    $information_commande->mesure_freeform->hauteur_gauche .
+                                    '<br>';
+                            }
+
+
+                            $textarea .= "<br><br>Form Data:";
+
+                            if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
+                                !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
+                                $textarea .= "<br>PD right: " .
+                                    $information_commande->mesure_freeform->ecart_puppillaire_droit;
+                            }
+                            if (isset($information_commande->mesure_freeform->hauteur) &&
+                                !empty($information_commande->mesure_freeform->hauteur)) {
+                                $textarea .= "<br>Height right: " .
+                                    $information_commande->mesure_freeform->hauteur;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
+                                !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
+                                $textarea .= "<br>PD left: " .
+                                    $information_commande->mesure_freeform->ecart_puppillaire_gauche;
+                            }
+                            if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
+                                !empty($information_commande->mesure_freeform->hauteur_gauche)) {
+                                $textarea .= "<br>Height left: " .
+                                    $information_commande->mesure_freeform->hauteur_gauche;
+                            }
+
+                            if (isset($information_commande->bord_verre->epaisseur) &&
+                                !empty($information_commande->bord_verre->epaisseur)) {
+                                $textarea .= "<br>Minimal edge thickn.: " .
+                                    $information_commande->bord_verre->epaisseur;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->taille_du_pont) &&
+                                !empty($information_commande->mesure_freeform->taille_du_pont)) {
+                                $textarea .= "<br>DBL: " .
+                                    $information_commande->mesure_freeform->taille_du_pont;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->largeur_boxing) &&
+                                !empty($information_commande->mesure_freeform->largeur_boxing)) {
+                                $textarea .= "<br>Boxing width: " .
+                                    $information_commande->mesure_freeform->largeur_boxing;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
+                                !empty($information_commande->mesure_freeform->hauteur_boxing)) {
+                                $textarea .= "<br>Boxing height: " .
+                                    $information_commande->mesure_freeform->hauteur_boxing;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->diametre_utile) &&
+                                !empty($information_commande->mesure_freeform->diametre_utile)) {
+                                $textarea .= "<br>Diameter: " .
+                                    $information_commande->mesure_freeform->diametre_utile;
+                            }
+
+                            if (isset($information_commande->monture->type) &&
+                                !empty($information_commande->monture->type)) {
+                                $textarea .= "<br>Frame Type: " .
+                                    $information_commande->monture->type;
+                            }
+
+                            if (isset($information_commande->precalibrage->calibre) &&
+                                !empty($information_commande->precalibrage->calibre)) {
+                                $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
+                                    $information_commande->precalibrage->calibre .
+                                    ".jpg' width='150' heigth='70' /><br>";
+                            }
+
+
                         }
 
-                        $mesure_freeform_opt =
-                            "";
-
-                        $mesure_freeform_opt .= isset($information_commande->mesure_freeform->largeur_boxing) ?
-                            'Largeur boxing : ' .
-                            $information_commande->mesure_freeform->largeur_boxing .
-                            ', ' :
-                            '';
-                        $mesure_freeform_opt .= isset($information_commande->mesure_freeform->hauteur_boxing) ?
-                            'Hauteur boxing : ' .
-                            $information_commande->mesure_freeform->hauteur_boxing .
-                            ', ' :
-                            '';
-                        $mesure_freeform_opt .= isset($information_commande->mesure_freeform->taille_du_pont) ?
-                            'Taille du pont : ' .
-                            $information_commande->mesure_freeform->taille_du_pont .
-                            ', ' :
-                            '';
-                        $mesure_freeform_opt .= isset($information_commande->mesure_freeform->diametre_utile) ?
-                            'Diametre utile : ' .
-                            $information_commande->mesure_freeform->diametre_utile .
-                            '<br>' :
-                            '';
-
-                        if (!empty($mesure_freeform_opt)) {
-                            $detail .= '<b>Mesure freeform:</b> <br> - ';
-                            $detail .= $mesure_freeform_opt;
-                        }
-
-                        if (isset($information_commande->monture->type)) {
-                            $detail .= 'Type monture: ' .
-                                $information_commande->monture->type .
-                                '<br>';
-                        }
-
-                        if (isset($information_commande->bord_verre->epaisseur) &&
-                            !empty($information_commande->bord_verre->epaisseur)) {
-                            $detail .= 'EP au bord minimum: ' .
-                                $information_commande->bord_verre->epaisseur .
-                                '<br>';
-                        }
-
-                        if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
-                            !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
-                            $detail .= 'Ecart puppillaire droit: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_droit .
-                                '<br>';
-                        }
-
-                        if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
-                            !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
-                            $detail .= 'Ecart puppillaire gauche: ' .
-                                $information_commande->mesure_freeform->ecart_puppillaire_gauche .
-                                '<br>';
-                        }
-
-                        if (isset($information_commande->mesure_freeform->hauteur) &&
-                            !empty($information_commande->mesure_freeform->hauteur)) {
-                            $detail .= 'Hauteur de montage droit: ' .
-                                $information_commande->mesure_freeform->hauteur .
-                                '<br>';
-                        }
-
-                        if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
-                            !empty($information_commande->mesure_freeform->hauteur_gauche)) {
-                            $detail .= 'Hauteur de montage gauche: ' .
-                                $information_commande->mesure_freeform->hauteur_gauche .
-                                '<br>';
-                        }
-
-
-                        $textarea .= "<br><br>Form Data:";
-
-                        if (isset($information_commande->mesure_freeform->ecart_puppillaire_droit) &&
-                            !empty($information_commande->mesure_freeform->ecart_puppillaire_droit)) {
-                            $textarea .= "<br>PD right: " .
-                                $information_commande->mesure_freeform->ecart_puppillaire_droit;
-                        }
-                        if (isset($information_commande->mesure_freeform->hauteur) &&
-                            !empty($information_commande->mesure_freeform->hauteur)) {
-                            $textarea .= "<br>Height right: " .
-                                $information_commande->mesure_freeform->hauteur;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->ecart_puppillaire_gauche) &&
-                            !empty($information_commande->mesure_freeform->ecart_puppillaire_gauche)) {
-                            $textarea .= "<br>PD left: " .
-                                $information_commande->mesure_freeform->ecart_puppillaire_gauche;
-                        }
-                        if (isset($information_commande->mesure_freeform->hauteur_gauche) &&
-                            !empty($information_commande->mesure_freeform->hauteur_gauche)) {
-                            $textarea .= "<br>Height left: " .
-                                $information_commande->mesure_freeform->hauteur_gauche;
-                        }
-
-                        if (isset($information_commande->bord_verre->epaisseur) &&
-                            !empty($information_commande->bord_verre->epaisseur)) {
-                            $textarea .= "<br>Minimal edge thickn.: " .
-                                $information_commande->bord_verre->epaisseur;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->taille_du_pont) &&
-                            !empty($information_commande->mesure_freeform->taille_du_pont)) {
-                            $textarea .= "<br>DBL: " .
-                                $information_commande->mesure_freeform->taille_du_pont;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->largeur_boxing) &&
-                            !empty($information_commande->mesure_freeform->largeur_boxing)) {
-                            $textarea .= "<br>Boxing width: " .
-                                $information_commande->mesure_freeform->largeur_boxing;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
-                            !empty($information_commande->mesure_freeform->hauteur_boxing)) {
-                            $textarea .= "<br>Boxing height: " .
-                                $information_commande->mesure_freeform->hauteur_boxing;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->diametre_utile) &&
-                            !empty($information_commande->mesure_freeform->diametre_utile)) {
-                            $textarea .= "<br>Diameter: " .
-                                $information_commande->mesure_freeform->diametre_utile;
-                        }
-
-                        if (isset($information_commande->monture->type) &&
-                            !empty($information_commande->monture->type)) {
-                            $textarea .= "<br>Frame Type: " .
-                                $information_commande->monture->type;
-                        }
-
-                        if (isset($information_commande->precalibrage->calibre) &&
-                            !empty($information_commande->precalibrage->calibre)) {
-                            $textarea .= "<br>Form: <img src='http://optieyescommande.com/static/img/calibre/" .
-                                $information_commande->precalibrage->calibre .
-                                ".jpg' width='150' heigth='70' /><br>";
-                        }
-
-
-                    }
-
-                    $xml = '<?xml version="1.0" encoding="UTF-8" ?>
+                        $xml = '<?xml version="1.0" encoding="UTF-8" ?>
 <b2bOptic>
    <header msgType="ORDER" msgState="NEW">
       <customersOrderId>48860</customersOrderId>
       <distributorsOrderId />
       <timeStamps>
          <dateTime step="CREATE">' .
-                        date("Y-m-d\TH:i:sO") . '</dateTime> 
+                            date("Y-m-d\TH:i:sO") . '</dateTime> 
       </timeStamps>
       <orderParties role="ORIGINATOR">
          <id>48860</id>
@@ -7418,51 +7418,48 @@ class admin
    <items>
       <item>';
 
-                    $remark =
-                        '';
-                    if (isset($information_commande->verre->correction_droit->teinte) &&
-                        !empty($information_commande->verre->correction_droit->teinte)) {
-                        if ($teinteD ==
-                            "") {
-                            $remark .= $information_commande->verre->correction_droit->teinte .
-                                '.';
-                        }
-                        if (strpos($information_commande->verre->correction_droit->teinte,
-                                'CUST_') !==
-                            false) {
-                            $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
-                            $teinteD = $lensOption->name;
-                            if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
-                                $remark .= 'Sample color send by mail.';
+                        $remark =
+                            '';
+                        if (isset($information_commande->verre->correction_droit->teinte) &&
+                            !empty($information_commande->verre->correction_droit->teinte)) {
+                            if ($teinteD ==
+                                "") {
+                                $remark .= $information_commande->verre->correction_droit->teinte .
+                                    '.';
                             }
-                            else  if (isset($teinteD)) {
-                                $remark .= $teinteD . '.';
+                            if (strpos($information_commande->verre->correction_droit->teinte,
+                                    'CUST_') !==
+                                false) {
+                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
+                                $teinteD = $lensOption->name;
+                                if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
+                                    $remark .= 'Sample color send by mail.';
+                                } else if (isset($teinteD)) {
+                                    $remark .= $teinteD . '.';
+                                }
                             }
-                        }
-                    }
-                    else if (isset($information_commande->verre->correction_gauche->teinte) &&
-                        !empty($information_commande->verre->correction_gauche->teinte)) {
-                        if ($teinteG ==
-                            "") {
-                            $remark .= $information_commande->verre->correction_gauche->teinte .
-                                '.';
-                        }
-                        if (strpos($information_commande->verre->correction_gauche->teinte,
-                                'CUST_') !==
-                            false) {
-                            $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
-                            $teinteG = $lensOption->name;
-                            if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
-                                $remark .= 'Sample color send by mail.';
+                        } else if (isset($information_commande->verre->correction_gauche->teinte) &&
+                            !empty($information_commande->verre->correction_gauche->teinte)) {
+                            if ($teinteG ==
+                                "") {
+                                $remark .= $information_commande->verre->correction_gauche->teinte .
+                                    '.';
                             }
-                            else  if (isset($teinteG)) {
-                                $remark .= $teinteG . '.';
+                            if (strpos($information_commande->verre->correction_gauche->teinte,
+                                    'CUST_') !==
+                                false) {
+                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
+                                $teinteG = $lensOption->name;
+                                if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
+                                    $remark .= 'Sample color send by mail.';
+                                } else if (isset($teinteG)) {
+                                    $remark .= $teinteG . '.';
+                                }
                             }
                         }
-                    }
 
-                    $lenses_code =
-                        $commande->lenscode;
+                        $lenses_code =
+                            $commande->lenscode;
 
 //                    if ($lenses_code ==
 //                        'PAI-1515') {
@@ -7553,746 +7550,734 @@ class admin
 //                        $remark .= " Change to product INITIAL ";
 //                    }
 
-                    if ($remark !=
-                        '') {
-                        $xml .= '
+                        if ($remark !=
+                            '') {
+                            $xml .= '
          <remark>' . $remark . '</remark>
          ';
-                    }
+                        }
 
-                    $xml .= '
+                        $xml .= '
          <referenceNo>' .
-                        $commande->id_commande .
-                        '-' .
-                        $commande->id_users . '</referenceNo>
+                            $commande->id_commande .
+                            '-' .
+                            $commande->id_users . '</referenceNo>
          <manufacturer />';
 
-                    if ($commande->premiere_commande !=
-                        '0') {
-                        $xml .= '
+                        if ($commande->premiere_commande !=
+                            '0') {
+                            $xml .= '
          <secondPair>true</secondPair>
 		 <multiplePair>
 			<referenceNo>' .
-                            $commande->premiere_commande . "-" .
-                            $commande->id_users . '</referenceNo>
+                                $commande->premiere_commande . "-" .
+                                $commande->id_users . '</referenceNo>
 		 </multiplePair>';
-                    }
+                        }
 
-                    $lenses_code =
-                        $commande->lenscode;
+                        $lenses_code =
+                            $commande->lenscode;
 
-                    $paA = "";
+                        $paA = "";
 
-                    if ($lenses_code ==
-                        'PAS-174') {
-                        $lenses_code =
-                            '100001';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAU-15') {
-                        $lenses_code =
-                            '200010';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAU-159') {
-                        $lenses_code =
-                            '200051';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAU-16') {
-                        $lenses_code =
-                            '200005';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAU-167') {
-                        $lenses_code =
-                            '200003';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAU-174') {
-                        $lenses_code =
-                            '200464';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAS-174') {
+                            $lenses_code =
+                                '100001';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAU-15') {
+                            $lenses_code =
+                                '200010';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAU-159') {
+                            $lenses_code =
+                                '200051';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAU-16') {
+                            $lenses_code =
+                                '200005';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAU-167') {
+                            $lenses_code =
+                                '200003';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAU-174') {
+                            $lenses_code =
+                                '200464';
+                            $paA =
+                                "1";
+                        }
 
-                    if ($lenses_code ==
-                        'PAD-15') {
-                        $lenses_code =
-                            '200076';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAD-159') {
-                        $lenses_code =
-                            '200086';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAD-16') {
-                        $lenses_code =
-                            '200078';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAD-167') {
-                        $lenses_code =
-                            '200913';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAD-174') {
-                        $lenses_code =
-                            '200853';
-                        $paA =
-                            "1";
-                    }
-
-
-                    if ($lenses_code ==
-                        'PAO-15') {
-                        $lenses_code =
-                            '202954';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAO-159') {
-                        $lenses_code =
-                            '202980';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAO-16') {
-                        $lenses_code =
-                            '202955';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAO-167') {
-                        $lenses_code =
-                            '202956';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAO-174') {
-                        $lenses_code =
-                            '202981';
-                        $paA =
-                            "1";
-                    }
-
-                    if ($lenses_code ==
-                        'PAI-1515') {
-                        $lenses_code =
-                            'S4UW50';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1615') {
-                        $lenses_code =
-                            'S3UW50';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1715') {
-                        $lenses_code =
-                            'S2UW50';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1815') {
-                        $lenses_code =
-                            'S1UW50';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAD-15') {
+                            $lenses_code =
+                                '200076';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAD-159') {
+                            $lenses_code =
+                                '200086';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAD-16') {
+                            $lenses_code =
+                                '200078';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAD-167') {
+                            $lenses_code =
+                                '200913';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAD-174') {
+                            $lenses_code =
+                                '200853';
+                            $paA =
+                                "1";
+                        }
 
 
-                    if ($lenses_code ==
-                        'PAI-15159') {
-                        $lenses_code =
-                            'S4UY59';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16159') {
-                        $lenses_code =
-                            'S3UY59';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17159') {
-                        $lenses_code =
-                            'S2UY59';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18159') {
-                        $lenses_code =
-                            'S1UY59';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAO-15') {
+                            $lenses_code =
+                                '202954';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAO-159') {
+                            $lenses_code =
+                                '202980';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAO-16') {
+                            $lenses_code =
+                                '202955';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAO-167') {
+                            $lenses_code =
+                                '202956';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAO-174') {
+                            $lenses_code =
+                                '202981';
+                            $paA =
+                                "1";
+                        }
+
+                        if ($lenses_code ==
+                            'PAI-1515') {
+                            $lenses_code =
+                                'S4UW50';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1615') {
+                            $lenses_code =
+                                'S3UW50';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1715') {
+                            $lenses_code =
+                                'S2UW50';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1815') {
+                            $lenses_code =
+                                'S1UW50';
+                            $paA =
+                                "1";
+                        }
 
 
-                    if ($lenses_code ==
-                        'PAI-1516') {
-                        $lenses_code =
-                            'S4UH60';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1616') {
-                        $lenses_code =
-                            'S3UH60';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1716') {
-                        $lenses_code =
-                            'S2UH60';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-1816') {
-                        $lenses_code =
-                            'S1UH60';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAI-15159') {
+                            $lenses_code =
+                                'S4UY59';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-16159') {
+                            $lenses_code =
+                                'S3UY59';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-17159') {
+                            $lenses_code =
+                                'S2UY59';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-18159') {
+                            $lenses_code =
+                                'S1UY59';
+                            $paA =
+                                "1";
+                        }
 
 
-                    if ($lenses_code ==
-                        'PAI-15167') {
-                        $lenses_code =
-                            'S4UH67';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16167') {
-                        $lenses_code =
-                            'S3UH67';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17167') {
-                        $lenses_code =
-                            'S2UH67';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18167') {
-                        $lenses_code =
-                            'S1UH67';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAI-1516') {
+                            $lenses_code =
+                                'S4UH60';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1616') {
+                            $lenses_code =
+                                'S3UH60';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1716') {
+                            $lenses_code =
+                                'S2UH60';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-1816') {
+                            $lenses_code =
+                                'S1UH60';
+                            $paA =
+                                "1";
+                        }
 
 
-                    if ($lenses_code ==
-                        'PAI-15174') {
-                        $lenses_code =
-                            'S4UH74';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-16174') {
-                        $lenses_code =
-                            'S3UH74';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-17174') {
-                        $lenses_code =
-                            'S2UH74';
-                        $paA =
-                            "1";
-                    }
-                    if ($lenses_code ==
-                        'PAI-18174') {
-                        $lenses_code =
-                            'S1UH74';
-                        $paA =
-                            "1";
-                    }
+                        if ($lenses_code ==
+                            'PAI-15167') {
+                            $lenses_code =
+                                'S4UH67';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-16167') {
+                            $lenses_code =
+                                'S3UH67';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-17167') {
+                            $lenses_code =
+                                'S2UH67';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-18167') {
+                            $lenses_code =
+                                'S1UH67';
+                            $paA =
+                                "1";
+                        }
 
-                    $xml .= '
+
+                        if ($lenses_code ==
+                            'PAI-15174') {
+                            $lenses_code =
+                                'S4UH74';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-16174') {
+                            $lenses_code =
+                                'S3UH74';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-17174') {
+                            $lenses_code =
+                                'S2UH74';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PAI-18174') {
+                            $lenses_code =
+                                'S1UH74';
+                            $paA =
+                                "1";
+                        }
+
+                        $xml .= '
       	<pair>
          ';
 //            var_dump($lenses_code);
 //            var_dump($information_commande->verre);die;
-                    if (isset($information_commande->verre->correction_droit)) {
-                        $xml .= '<lens quantity="1" side="RIGHT">
+                        if (isset($information_commande->verre->correction_droit)) {
+                            $xml .= '<lens quantity="1" side="RIGHT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                                $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_droit->sphere . '</sphere>
+                                $information_commande->verre->correction_droit->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_droit->cylindre . '</power>
+                                $information_commande->verre->correction_droit->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_droit->axe . '</axis>
+                                $information_commande->verre->correction_droit->axe . '</axis>
                   </cylinder>';
-                        if (isset($information_commande->verre->correction_droit->addition)) {
-                            $xml .= '<addition>' .
-                                $information_commande->verre->correction_droit->addition . '</addition>
+                            if (isset($information_commande->verre->correction_droit->addition)) {
+                                $xml .= '<addition>' .
+                                    $information_commande->verre->correction_droit->addition . '</addition>
 						  ';
-                        }
-                        if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_droit->PrismeSphere)) {
-                            $xml .= '<prism>
-						 <power>' .
-                                $information_commande->verre->correction_droit->PrismeSphere . '</power>
-						 <base>' .
-                                $information_commande->verre->correction_droit->PrismeCylindre . '</base>
-					  </prism>';
-                        }
-                        $xml .= '</rxData>';
-
-                        if ((isset($information_commande->verre->correction_droit->traitement) &&
-                                !empty($information_commande->verre->correction_droit->traitement) &&
-                                ($information_commande->verre->correction_droit->traitement !=
-                                    '700100' ||
-                                    (($information_commande->verre->correction_droit->traitement ==
-                                            '700100') &&
-                                        ((strpos($commande->lensname,
-                                                    '1.5') === false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.53') !== false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.56') !== false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.59') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Transition') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Polarisé') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Xtractive') !== false))
-                                    ))) ||
-                            $paA ==
-                            "1") {
-
-                            if ($paA ==
-                                "1") {
-                                $information_commande->verre->correction_droit->traitement =
-                                    "700102";
                             }
+                            if (isset($information_commande->verre->correction_droit->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_droit->PrismeSphere)) {
+                                $xml .= '<prism>
+						 <power>' .
+                                    $information_commande->verre->correction_droit->PrismeSphere . '</power>
+						 <base>' .
+                                    $information_commande->verre->correction_droit->PrismeCylindre . '</base>
+					  </prism>';
+                            }
+                            $xml .= '</rxData>';
 
-                            $xml .= '
+                            if ((isset($information_commande->verre->correction_droit->traitement) &&
+                                    !empty($information_commande->verre->correction_droit->traitement) &&
+                                    ($information_commande->verre->correction_droit->traitement !=
+                                        '700100' ||
+                                        (($information_commande->verre->correction_droit->traitement ==
+                                                '700100') &&
+                                            ((strpos($commande->lensname,
+                                                        '1.5') === false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.53') !== false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.56') !== false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.59') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Transition') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Polarisé') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Xtractive') !== false))
+                                        ))) ||
+                                $paA ==
+                                "1") {
+
+                                if ($paA ==
+                                    "1") {
+                                    $information_commande->verre->correction_droit->traitement =
+                                        "700102";
+                                }
+
+                                $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                    $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
 
-                        }
+                            }
 
-                        if (isset($information_commande->verre->correction_droit->teinte) &&
-                            !empty($information_commande->verre->correction_droit->teinte)) {
-                            if ($teinteD !=
-                                "") {
-                                if (strpos($information_commande->verre->correction_droit->teinte,
-                                        'CUST_') ===
-                                    false) {
-                                    $codeTeinte = $information_commande->verre->correction_droit->teinte;
-                                }
-                                else {
-                                    if ((strpos($commande->lensname,
-                                            '1.67') !== false) || (strpos($commande->lensname,
-                                                '1.74') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '870';
-                                        }
-                                        else {
-                                            $codeTeinte = '869';
-                                        }
-                                    }
-                                    else if ((strpos($commande->lensname,
-                                                '1.56') !== false) || (strpos($commande->lensname,
-                                                '1.6') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '576';
-                                        }
-                                        else {
-                                            $codeTeinte = '575';
-                                        }
-                                    }
-                                    else if ((strpos($commande->lensname,
-                                            '1.5') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '741';
-                                        }
-                                        else {
-                                            $codeTeinte = '740';
+                            if (isset($information_commande->verre->correction_droit->teinte) &&
+                                !empty($information_commande->verre->correction_droit->teinte)) {
+                                if ($teinteD !=
+                                    "") {
+                                    if (strpos($information_commande->verre->correction_droit->teinte,
+                                            'CUST_') ===
+                                        false) {
+                                        $codeTeinte = $information_commande->verre->correction_droit->teinte;
+                                    } else {
+                                        if ((strpos($commande->lensname,
+                                                    '1.67') !== false) || (strpos($commande->lensname,
+                                                    '1.74') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '870';
+                                            } else {
+                                                $codeTeinte = '869';
+                                            }
+                                        } else if ((strpos($commande->lensname,
+                                                    '1.56') !== false) || (strpos($commande->lensname,
+                                                    '1.6') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '576';
+                                            } else {
+                                                $codeTeinte = '575';
+                                            }
+                                        } else if ((strpos($commande->lensname,
+                                                '1.5') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '741';
+                                            } else {
+                                                $codeTeinte = '740';
+                                            }
                                         }
                                     }
-                                }
-                                $xml .= '
+                                    $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $codeTeinte . '</commercialCode>
+                                        $codeTeinte . '</commercialCode>
 						   </coating>';
+                                }
                             }
-                        }
 
-                        if ($commande->is_express) {
-                            $xml .= '<coating coatingType="OTHER">
+                            if ($commande->is_express) {
+                                $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
-                        }
+                            }
 
-                        if (isset($information_commande->mesure_freeform->diametre_utile) &&
-                            $information_commande->verre->correction_droit->diametre ==
-                            'precalibrage') {
-                            $information_commande->verre->correction_droit->diametre =
-                                $information_commande->mesure_freeform->diametre_utile;
-                        }
+                            if (isset($information_commande->mesure_freeform->diametre_utile) &&
+                                $information_commande->verre->correction_droit->diametre ==
+                                'precalibrage') {
+                                $information_commande->verre->correction_droit->diametre =
+                                    $information_commande->mesure_freeform->diametre_utile;
+                            }
 
-                        if (isset($information_commande->verre->hauteur) &&
-                            !empty($information_commande->verre->hauteur)) {
-                            $hauteurD =
-                                $information_commande->verre->hauteur;
-                        }
+                            if (isset($information_commande->verre->hauteur) &&
+                                !empty($information_commande->verre->hauteur)) {
+                                $hauteurD =
+                                    $information_commande->verre->hauteur;
+                            }
 
-                        if (isset($information_commande->verre->hauteur_gauche) &&
-                            !empty($information_commande->verre->hauteur_gauche)) {
-                            $hauteurG =
-                                $information_commande->verre->hauteur_gauche;
-                        }
+                            if (isset($information_commande->verre->hauteur_gauche) &&
+                                !empty($information_commande->verre->hauteur_gauche)) {
+                                $hauteurG =
+                                    $information_commande->verre->hauteur_gauche;
+                            }
 
 
-                        $xml .= '
+                            $xml .= '
                <centration>';
 
-                        if (isset($information_commande->verre->ecart_puppillaire->droit) &&
-                            !empty($information_commande->verre->ecart_puppillaire->droit)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->ecart_puppillaire->droit) &&
+                                !empty($information_commande->verre->ecart_puppillaire->droit)) {
+                                $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->droit .
-                                '</monocularCentrationDistance>';
-                        }
+                                    $information_commande->verre->ecart_puppillaire->droit .
+                                    '</monocularCentrationDistance>';
+                            }
 
-                        if (isset($information_commande->verre->hauteur) &&
-                            !empty($information_commande->verre->hauteur)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->hauteur) &&
+                                !empty($information_commande->verre->hauteur)) {
+                                $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $information_commande->verre->hauteur .
-                                '</height>';
-                        }
+                                    $information_commande->verre->hauteur .
+                                    '</height>';
+                            }
 
-                        $xml .= '
+                            $xml .= '
                </centration>';
 
 
-                        if (strpos($information_commande->verre->correction_droit->diametre,
-                                "/") !==
-                            false) {
-                            $d1 =
-                                explode("/",
-                                    $information_commande->verre->correction_droit->diametre);
-                            $xml .= '
+                            if (strpos($information_commande->verre->correction_droit->diametre,
+                                    "/") !==
+                                false) {
+                                $d1 =
+                                    explode("/",
+                                        $information_commande->verre->correction_droit->diametre);
+                                $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                                    $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                                    $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
-                        } else {
-                            $xml .= '
-				   <geometry>';
-                            if ($information_commande->verre->correction_droit->diametre !=
-                                "precalibrage") {
+                            } else {
                                 $xml .= '
+				   <geometry>';
+                                if ($information_commande->verre->correction_droit->diametre !=
+                                    "precalibrage") {
+                                    $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_droit->diametre . '</physical>
+                                        $information_commande->verre->correction_droit->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
+                                }
                             }
-                        }
 
-                        if (isset($information_commande->bord_verre->epaisseur) &&
-                            !empty($information_commande->bord_verre->epaisseur)) {
-                            $xml .= '
+                            if (isset($information_commande->bord_verre->epaisseur) &&
+                                !empty($information_commande->bord_verre->epaisseur)) {
+                                $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
-                        }
+                                    $information_commande->bord_verre->epaisseur .
+                                    '</thickness>';
+                            }
 
-                        if (isset($information_commande->verre->ecart_puppillaire->droit) &&
-                            !empty($information_commande->verre->ecart_puppillaire->droit)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->ecart_puppillaire->droit) &&
+                                !empty($information_commande->verre->ecart_puppillaire->droit)) {
+                                $xml .= '
                   <thicknessReduction>true</thicknessReduction>';
-                        } else {
-                            $xml .= '
+                            } else {
+                                $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
-                        }
-                        if (isset($information_commande->verre->correction_droit->galbe) &&
-                            $information_commande->verre->correction_droit->galbe !=
-                            "Standard") {
-                            $xml .= '
+                            }
+                            if (isset($information_commande->verre->correction_droit->galbe) &&
+                                $information_commande->verre->correction_droit->galbe !=
+                                "Standard") {
+                                $xml .= '
                   <curve>
                       <baseCurve>' .
-                                $information_commande->verre->correction_droit->galbe .
-                                '</baseCurve>
+                                    $information_commande->verre->correction_droit->galbe .
+                                    '</baseCurve>
                   </curve>';
-                        }
-                        $xml .= '
+                            }
+                            $xml .= '
                </geometry>
             </lens>
             ';
-                    }
+                        }
 
-                    if (isset($information_commande->verre->correction_gauche)) {
-                        $xml .= '<lens quantity="1" side="LEFT">
+                        if (isset($information_commande->verre->correction_gauche)) {
+                            $xml .= '<lens quantity="1" side="LEFT">
                <commercialCode>' .
-                            $lenses_code . '</commercialCode>
+                                $lenses_code . '</commercialCode>
                <rxData>
                   <sphere>' .
-                            $information_commande->verre->correction_gauche->sphere . '</sphere>
+                                $information_commande->verre->correction_gauche->sphere . '</sphere>
                   <cylinder>
                       <power>' .
-                            $information_commande->verre->correction_gauche->cylindre . '</power>
+                                $information_commande->verre->correction_gauche->cylindre . '</power>
                       <axis>' .
-                            $information_commande->verre->correction_gauche->axe . '</axis>
+                                $information_commande->verre->correction_gauche->axe . '</axis>
                   </cylinder>';
-                        if (isset($information_commande->verre->correction_gauche->addition)) {
-                            $xml .= '<addition>' .
-                                $information_commande->verre->correction_gauche->addition . '</addition>
+                            if (isset($information_commande->verre->correction_gauche->addition)) {
+                                $xml .= '<addition>' .
+                                    $information_commande->verre->correction_gauche->addition . '</addition>
 						  ';
-                        }
-
-                        if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
-                            !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
-                            $xml .= '<prism>
-						 <power>' .
-                                $information_commande->verre->correction_gauche->PrismeSphere . '</power>
-						 <base>' .
-                                $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
-					  </prism>';
-                        }
-
-                        $xml .= '</rxData>';
-
-                        if ((isset($information_commande->verre->correction_gauche->traitement) &&
-                                !empty($information_commande->verre->correction_gauche->traitement) &&
-                                ($information_commande->verre->correction_gauche->traitement !=
-                                    '700100' ||
-                                    (($information_commande->verre->correction_gauche->traitement ==
-                                            '700100') &&
-                                        ((strpos($commande->lensname,
-                                                    '1.5') === false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.53') !== false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.56') !== false) ||
-                                            (strpos($commande->lensname,
-                                                    '1.59') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Transition') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Polarisé') !== false) ||
-                                            (strpos($commande->trad_fr,
-                                                    'Xtractive') !== false))
-                                    ))) ||
-                            $paA ==
-                            "1") {
-
-                            if ($paA ==
-                                "1") {
-                                $information_commande->verre->correction_gauche->traitement =
-                                    "700102";
                             }
-                            $xml .= '
-					   <coating coatingType="ANTIREFLEX">
-						  <commercialCode>' .
-                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
-					   </coating>';
-                        }
 
-                        if (isset($information_commande->verre->correction_gauche->teinte) &&
-                            !empty($information_commande->verre->correction_gauche->teinte)) {
-                            if ($teinteG !=
-                                "") {
-                                if (strpos($information_commande->verre->correction_gauche->teinte,
-                                        'CUST_') ===
-                                    false) {
-                                    $codeTeinte = $information_commande->verre->correction_gauche->teinte;
-                                }
-                                else {
-                                    if ((strpos($commande->lensname,
-                                                '1.67') !== false) || (strpos($commande->lensname,
-                                                '1.74') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '870';
-                                        }
-                                        else {
-                                            $codeTeinte = '869';
-                                        }
-                                    }
-                                    else if ((strpos($commande->lensname,
-                                                '1.56') !== false) || (strpos($commande->lensname,
-                                                '1.6') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '576';
-                                        }
-                                        else {
-                                            $codeTeinte = '575';
-                                        }
-                                    }
-                                    else if ((strpos($commande->lensname,
-                                            '1.5') !== false)) {
-                                        if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
-                                            $codeTeinte = '741';
-                                        }
-                                        else {
-                                            $codeTeinte = '740';
-                                        }
-                                    }
+                            if (isset($information_commande->verre->correction_gauche->PrismeSphere) &&
+                                !empty($information_commande->verre->correction_gauche->PrismeSphere)) {
+                                $xml .= '<prism>
+						 <power>' .
+                                    $information_commande->verre->correction_gauche->PrismeSphere . '</power>
+						 <base>' .
+                                    $information_commande->verre->correction_gauche->PrismeCylindre . '</base>
+					  </prism>';
+                            }
+
+                            $xml .= '</rxData>';
+
+                            if ((isset($information_commande->verre->correction_gauche->traitement) &&
+                                    !empty($information_commande->verre->correction_gauche->traitement) &&
+                                    ($information_commande->verre->correction_gauche->traitement !=
+                                        '700100' ||
+                                        (($information_commande->verre->correction_gauche->traitement ==
+                                                '700100') &&
+                                            ((strpos($commande->lensname,
+                                                        '1.5') === false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.53') !== false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.56') !== false) ||
+                                                (strpos($commande->lensname,
+                                                        '1.59') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Transition') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Polarisé') !== false) ||
+                                                (strpos($commande->trad_fr,
+                                                        'Xtractive') !== false))
+                                        ))) ||
+                                $paA ==
+                                "1") {
+
+                                if ($paA ==
+                                    "1") {
+                                    $information_commande->verre->correction_gauche->traitement =
+                                        "700102";
                                 }
                                 $xml .= '
+					   <coating coatingType="ANTIREFLEX">
+						  <commercialCode>' .
+                                    $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+					   </coating>';
+                            }
+
+                            if (isset($information_commande->verre->correction_gauche->teinte) &&
+                                !empty($information_commande->verre->correction_gauche->teinte)) {
+                                if ($teinteG !=
+                                    "") {
+                                    if (strpos($information_commande->verre->correction_gauche->teinte,
+                                            'CUST_') ===
+                                        false) {
+                                        $codeTeinte = $information_commande->verre->correction_gauche->teinte;
+                                    } else {
+                                        if ((strpos($commande->lensname,
+                                                    '1.67') !== false) || (strpos($commande->lensname,
+                                                    '1.74') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '870';
+                                            } else {
+                                                $codeTeinte = '869';
+                                            }
+                                        } else if ((strpos($commande->lensname,
+                                                    '1.56') !== false) || (strpos($commande->lensname,
+                                                    '1.6') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '576';
+                                            } else {
+                                                $codeTeinte = '575';
+                                            }
+                                        } else if ((strpos($commande->lensname,
+                                                '1.5') !== false)) {
+                                            if (isset($teinteD) && strpos($teinteD, 'Gradient') !== false) {
+                                                $codeTeinte = '741';
+                                            } else {
+                                                $codeTeinte = '740';
+                                            }
+                                        }
+                                    }
+                                    $xml .= '
 						   <coating coatingType="COLOR">
 							  <commercialCode>' .
-                                    $codeTeinte . '</commercialCode>
+                                        $codeTeinte . '</commercialCode>
 						   </coating>';
+                                }
                             }
-                        }
 
-                        if ($commande->is_express) {
-                            $xml .= '<coating coatingType="OTHER">
+                            if ($commande->is_express) {
+                                $xml .= '<coating coatingType="OTHER">
 					<commercialCode>EXP24</commercialCode>
 					</coating>';
-                        }
+                            }
 
 
-                        if (isset($information_commande->mesure_freeform->diametre_utile) &&
-                            $information_commande->verre->correction_gauche->diametre ==
-                            'precalibrage') {
-                            $information_commande->verre->correction_gauche->diametre =
-                                $information_commande->mesure_freeform->diametre_utile;
-                        }
+                            if (isset($information_commande->mesure_freeform->diametre_utile) &&
+                                $information_commande->verre->correction_gauche->diametre ==
+                                'precalibrage') {
+                                $information_commande->verre->correction_gauche->diametre =
+                                    $information_commande->mesure_freeform->diametre_utile;
+                            }
 
 
-                        $xml .= '
+                            $xml .= '
                <centration>';
 
-                        if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
-                            !empty($information_commande->verre->ecart_puppillaire->gauche)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
+                                !empty($information_commande->verre->ecart_puppillaire->gauche)) {
+                                $xml .= '
 					  <monocularCentrationDistance reference="FAR">' .
-                                $information_commande->verre->ecart_puppillaire->gauche .
-                                '</monocularCentrationDistance>';
-                        }
+                                    $information_commande->verre->ecart_puppillaire->gauche .
+                                    '</monocularCentrationDistance>';
+                            }
 
-                        if (isset($information_commande->verre->hauteur_gauche) &&
-                            !empty($information_commande->verre->hauteur_gauche)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->hauteur_gauche) &&
+                                !empty($information_commande->verre->hauteur_gauche)) {
+                                $xml .= '
 					  <height reference="NEAR" referenceHeight="OVERBOX">' .
-                                $information_commande->verre->hauteur_gauche .
-                                '</height>';
-                        }
+                                    $information_commande->verre->hauteur_gauche .
+                                    '</height>';
+                            }
 
-                        $xml .= '
+                            $xml .= '
                </centration>';
 
 
-                        if (strpos($information_commande->verre->correction_gauche->diametre,
-                                "/") !==
-                            false) {
-                            $d1 =
-                                explode("/",
-                                    $information_commande->verre->correction_gauche->diametre);
-                            $xml .= '
+                            if (strpos($information_commande->verre->correction_gauche->diametre,
+                                    "/") !==
+                                false) {
+                                $d1 =
+                                    explode("/",
+                                        $information_commande->verre->correction_gauche->diametre);
+                                $xml .= '
                <geometry>
                   <diameter>
                      <physical>' .
-                                $d1[0] . '</physical>
+                                    $d1[0] . '</physical>
                      <optical>' .
-                                $d1[1] . '</optical>
+                                    $d1[1] . '</optical>
                      <elliptic>false</elliptic>
                   </diameter>';
-                        } else {
-                            $xml .= '
-				   <geometry>';
-                            if ($information_commande->verre->correction_gauche->diametre !=
-                                "precalibrage") {
+                            } else {
                                 $xml .= '
+				   <geometry>';
+                                if ($information_commande->verre->correction_gauche->diametre !=
+                                    "precalibrage") {
+                                    $xml .= '
 						  <diameter>
 							 <physical>' .
-                                    $information_commande->verre->correction_gauche->diametre . '</physical>
+                                        $information_commande->verre->correction_gauche->diametre . '</physical>
 							 <elliptic>false</elliptic>
 						  </diameter>';
+                                }
                             }
-                        }
 
-                        if (isset($information_commande->bord_verre->epaisseur) &&
-                            !empty($information_commande->bord_verre->epaisseur)) {
-                            $xml .= '
+                            if (isset($information_commande->bord_verre->epaisseur) &&
+                                !empty($information_commande->bord_verre->epaisseur)) {
+                                $xml .= '
 			    	<thickness reference="EDGE">' .
-                                $information_commande->bord_verre->epaisseur .
-                                '</thickness>';
-                        }
+                                    $information_commande->bord_verre->epaisseur .
+                                    '</thickness>';
+                            }
 
-                        if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
-                            !empty($information_commande->verre->ecart_puppillaire->gauche)) {
-                            $xml .= '
+                            if (isset($information_commande->verre->ecart_puppillaire->gauche) &&
+                                !empty($information_commande->verre->ecart_puppillaire->gauche)) {
+                                $xml .= '
                   <thicknessReduction>true</thicknessReduction>';
-                        } else {
-                            $xml .= '
+                            } else {
+                                $xml .= '
                   <thicknessReduction>false</thicknessReduction>';
-                        }
-                        if (isset($information_commande->verre->correction_gauche->galbe) &&
-                            $information_commande->verre->correction_gauche->galbe !=
-                            "Standard") {
-                            $xml .= '
+                            }
+                            if (isset($information_commande->verre->correction_gauche->galbe) &&
+                                $information_commande->verre->correction_gauche->galbe !=
+                                "Standard") {
+                                $xml .= '
                   <curve>
                       <baseCurve>' .
-                                $information_commande->verre->correction_gauche->galbe .
-                                '</baseCurve>
+                                    $information_commande->verre->correction_gauche->galbe .
+                                    '</baseCurve>
                   </curve>';
-                        }
-                        $xml .= '
+                            }
+                            $xml .= '
                </geometry>
             </lens>
             ';
 
-                    }
-                    $xml .= '
+                        }
+                        $xml .= '
             	<frame quantity="1">';
 //                    if ((isset($information_commande->verre->correction_droit->galbe) &&
 //                         $information_commande->verre->correction_droit->galbe !=
@@ -8315,327 +8300,327 @@ class admin
 //                        }
 //                    }
 
-                    $edg = "";
-                    if ($precal ==
-                        '1') {
+                        $edg = "";
+                        if ($precal ==
+                            '1') {
 
-                        $calibre =
-                        $DBL =
-                        $boxWidth =
-                        $monture_type =
-                            "";
-
-                        if (isset($information_commande->monture->type) &&
-                            !empty($information_commande->monture->type)) {
-                            if ($information_commande->monture->type ==
-                                "Plastique") {
-                                $monture_type =
-                                    "PLASTIC";
-                            }
-                            if ($information_commande->monture->type ==
-                                "Optyl") {
-                                $monture_type =
-                                    "OPTYL";
-                            }
-                            if ($information_commande->monture->type ==
-                                "Metal") {
-                                $monture_type =
-                                    "METAL";
-                            }
-                            if ($information_commande->monture->type ==
-                                "Nylor") {
-                                $monture_type =
-                                    "NYLOR";
-                            }
-                            if ($information_commande->monture->type ==
-                                "Percee") {
-                                $monture_type =
-                                    "DRILLED";
-                            }
-                        }
-
-                        if (isset($information_commande->mesure_freeform->largeur_boxing) &&
-                            !empty($information_commande->mesure_freeform->largeur_boxing)) {
-                            $boxWidth =
-                                $information_commande->mesure_freeform->largeur_boxing;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
-                            !empty($information_commande->mesure_freeform->hauteur_boxing)) {
-                            $boxHeight =
-                                $information_commande->mesure_freeform->hauteur_boxing;
-                        }
-
-                        if (isset($information_commande->mesure_freeform->taille_du_pont) &&
-                            !empty($information_commande->mesure_freeform->taille_du_pont)) {
+                            $calibre =
                             $DBL =
-                                $information_commande->mesure_freeform->taille_du_pont;
-                        }
+                            $boxWidth =
+                            $monture_type =
+                                "";
 
-                        $calibre =
-                            "";
+                            if (isset($information_commande->monture->type) &&
+                                !empty($information_commande->monture->type)) {
+                                if ($information_commande->monture->type ==
+                                    "Plastique") {
+                                    $monture_type =
+                                        "PLASTIC";
+                                }
+                                if ($information_commande->monture->type ==
+                                    "Optyl") {
+                                    $monture_type =
+                                        "OPTYL";
+                                }
+                                if ($information_commande->monture->type ==
+                                    "Metal") {
+                                    $monture_type =
+                                        "METAL";
+                                }
+                                if ($information_commande->monture->type ==
+                                    "Nylor") {
+                                    $monture_type =
+                                        "NYLOR";
+                                }
+                                if ($information_commande->monture->type ==
+                                    "Percee") {
+                                    $monture_type =
+                                        "DRILLED";
+                                }
+                            }
 
-                        if (isset($information_commande->precalibrage->calibre) &&
-                            !empty($information_commande->precalibrage->calibre)) {
+                            if (isset($information_commande->mesure_freeform->largeur_boxing) &&
+                                !empty($information_commande->mesure_freeform->largeur_boxing)) {
+                                $boxWidth =
+                                    $information_commande->mesure_freeform->largeur_boxing;
+                            }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                1) {
-                                $calibre = '<shape>
+                            if (isset($information_commande->mesure_freeform->hauteur_boxing) &&
+                                !empty($information_commande->mesure_freeform->hauteur_boxing)) {
+                                $boxHeight =
+                                    $information_commande->mesure_freeform->hauteur_boxing;
+                            }
+
+                            if (isset($information_commande->mesure_freeform->taille_du_pont) &&
+                                !empty($information_commande->mesure_freeform->taille_du_pont)) {
+                                $DBL =
+                                    $information_commande->mesure_freeform->taille_du_pont;
+                            }
+
+                            $calibre =
+                                "";
+
+                            if (isset($information_commande->precalibrage->calibre) &&
+                                !empty($information_commande->precalibrage->calibre)) {
+
+                                if ($information_commande->precalibrage->calibre ==
+                                    1) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">25302553257525982612261726202620261726122606260025842567255025272494246024272385234022952254222621982170214521262107209120972103210921142120212621402165219022152257230323482394244224902538257526092643267326892705271027052688267226552640262626122600260326062609261226152618262626432660267726892700271227202708268626642633258825432498244823962345230022692238220721842164214421302128212721252124212221212128214221562170219622222247227022902309232923362342234823482346234323402347235523642374239124082424244824762504</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
-                            if ($information_commande->precalibrage->calibre ==
-                                2) {
-                                $calibre = '<shape>
+                                }
+                                if ($information_commande->precalibrage->calibre ==
+                                    2) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">25612589261726452668268527022719271527072698269026732656263926252614260225912580256925582548254325372531253025302530253025302530253025332535253825422548255325592569258025912603261726312645266326832703272227362750276027572739272227052690267626622650264826472645264426422641264326522661266926802691270327112714271727182707270226962691268026692657264526312617260325912580256925582551254325352529252625232519251425082502249824962493249024872484248224772472246624602459245724562454245324512451246024682477249325152537</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                3) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    3) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">26002662272427862860295030403130319332533312335833813379336033243268321231563099304329872935289028452801276627352704267826712663265626492641263426352647265826692691271327362765280428432883292529673010304730693091311331203102308330653045302530062989298529802976297129672962296629802994300830253042305830723079308630863075306130463032300929842958292928902850281127692725268226382582252324632418238223462309228122532224220021812161214121402140214021402140214021432157217121852206223122572283232323632402244724972546</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                4) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    4) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">26682714276028062857291429713028304430353007297629032829275526902634257825222479243723952360233423092284227522692263225722522246224022522263227422912317234223672410245424992548260726662725279428672941300930563103314931303093305730202978293328882845281427832752272426992673264926322615259825812564254725302519250824972484247024562441242524082391237423572340232423102298228522732263225322442239223822362235223322322230223522412247225322582263226822762285229323032317233123452362238224022422245324842515255025882627</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                5) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    5) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">24502446244124352427240523822360233122972262222821922155211920852054202319921964193619081885187118571843183218221812180218041809181318181823182718361850186418781904193219591987201620442072210421382171220622432280231723392360238124012413242624382443244724502450244924462443243924252411239723782355233223102279224822172183214721102074204020061972194219201897187518591845183118201818181718151814181218111816182918411855187118881904192719531978200420342064209521262160219422282260229123222352237223922411242624362447</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                6) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    6) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">24772526257426232682275328242895295230083065310330983060302129602872278426952623255224812420237223242277224822222197217921762173217021672164216121742196221822412283232523672415247125272584264427052767281928502881291229122893287328532829280427792759275327472741273527292723272627402754276827822796281028202806278227572724267326232572251924662413236323302296226322362214219121702167216421612158215521522153216521762188219922102221223122372243224822592258225622552253225222502256226422722282230123212341236924032438</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                7) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    7) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">23722403243324642498253425712607262026302639261925742529248424292363229622292173211920652016197719381898187418551835182018221823182518261828182918401859187918981933196920062048210221562210227223362400245824942530256725772566255425432528251124942480247824772475247424722471247524862497250825192530254025402507247424402395233022662201215021022054200619691934190018761856183618201818181718151814181218111817183418501867189319221950198120172054209121132130214721612167217321782186219422032213223222522271229423192345</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                8) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    8) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>TBLNAT</tracerVersion>
 							 <binaries format="NIDEK">24942532257026092654270727612814283728082770273126782624257125212476243123862351231722832254223422152195219021902190219021902190219022012213222422342242225122592273228723012320235123822413244624802514254425642584260326162624263326412649265826662670266726602653264226292616260325972592258725832578257325732583259225982579255425292503246624272387235323312309228622692253223822222219221722162214221222112213221922252231223322362238224022402240224222452249225122532255225722592270228422982313233223512371239624282460</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                9) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    9) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3133382E3139303B3133382E3139300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35322E30363B35322E30360D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323530393B323531333B323531363B323531393B323532323B323532363B323533303B323533333B323533373B323534310D0A523D323534353B323534383B323535323B323535373B323536313B323536353B323537303B323537343B323537393B323538340D0A523D323538383B323539333B323539383B323630333B323630383B323631333B323631383B323632323B323632373B323633320D0A523D323633383B323634333B323634383B323635333B323635383B323636333B323636383B323637323B323637383B323638330D0A523D323638373B323639323B323639363B323639393B323730323B323730343B323730353B323730353B323730333B323730300D0A523D323639353B323639303B323638333B323637363B323636383B323635393B323635303B323634303B323633303B323632300D0A523D323630393B323539383B323538373B323537363B323536343B323535333B323534323B323533303B323531393B323530370D0A523D323439363B323438343B323437323B323436313B323434393B323433383B323432363B323431353B323430333B323339330D0A523D323338323B323337313B323335393B323334393B323333383B323332383B323331373B323330373B323239363B323238360D0A523D323237353B323236353B323235353B323234353B323233363B323232363B323231363B323230363B323139373B323138380D0A523D323137383B323136383B323135393B323135303B323134323B323133323B323132333B323131353B323130363B323039380D0A523D323039303B323038323B323037333B323036353B323035373B323035303B323034323B323033343B323032373B323031390D0A523D323031323B323030353B313939383B313939303B313938343B313937373B313937303B313936333B313935363B313934390D0A523D313934333B313933373B313933303B313932343B313931383B313931333B313930363B313930303B313839353B313838390D0A523D313838343B313837383B313837323B313836373B313836323B313835363B313835313B313834353B313834303B313833350D0A523D313833313B313832363B313832323B313831373B313831323B313830383B313830333B313739393B313739353B313739300D0A523D313738363B313738323B313737373B313737333B313736393B313736353B313736313B313735373B313735343B313735300D0A523D313734373B313734333B313734303B313733373B313733333B313733303B313732373B313732343B313732313B313731380D0A523D313731353B313731323B313730393B313730373B313730343B313730313B313639393B313639363B313639343B313639310D0A523D313638393B313638373B313638343B313638323B313638303B313637383B313637363B313637343B313637313B313636390D0A523D313636373B313636353B313636333B313636313B313636303B313635383B313635373B313635353B313635343B313635320D0A523D313635303B313634393B313634373B313634363B313634353B313634343B313634333B313634323B313634303B313633390D0A523D313633383B313633373B313633363B313633363B313633353B313633343B313633333B313633333B313633323B313633310D0A523D313633303B313633303B313632393B313632393B313632383B313632383B313632373B313632373B313632373B313632370D0A523D313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632360D0A523D313632363B313632363B313632363B313632373B313632373B313632373B313632373B313632383B313632383B313632390D0A523D313632393B313632393B313632393B313633303B313633313B313633323B313633323B313633333B313633343B313633350D0A523D313633353B313633373B313633383B313633393B313634303B313634313B313634323B313634333B313634353B313634360D0A523D313634373B313634393B313635303B313635323B313635333B313635353B313635363B313635383B313635393B313636310D0A523D313636333B313636353B313636373B313636383B313637303B313637323B313637343B313637363B313637383B313638300D0A523D313638323B313638353B313638373B313639303B313639323B313639353B313639373B313730303B313730323B313730340D0A523D313730373B313730393B313731313B313731343B313731373B313732303B313732333B313732363B313732393B313733320D0A523D313733363B313733393B313734323B313734353B313734383B313735323B313735353B313735393B313736333B313736370D0A523D313737303B313737333B313737363B313737393B313738333B313738373B313739303B313739353B313739393B313830340D0A523D313830383B313831323B313831373B313832323B313832363B313833313B313833353B313834303B313834353B313835300D0A523D313835353B313836303B313836353B313837313B313837373B313838333B313838393B313839353B313930323B313930380D0A523D313931343B313931393B313932353B313933313B313933373B313934343B313935303B313935373B313936333B313937300D0A523D313937373B313938333B313939303B313939383B323030353B323031323B323031393B323032363B323033343B323034320D0A523D323034393B323035373B323036353B323037333B323038313B323038393B323039363B323130343B323131333B323132320D0A523D323133303B323133383B323134373B323135363B323136343B323137333B323138333B323139313B323230303B323230390D0A523D323231383B323232383B323233383B323234383B323235383B323236383B323237383B323238393B323239393B323330390D0A523D323331393B323333303B323334313B323335323B323336323B323337333B323338343B323339353B323430363B323431370D0A523D323432383B323433393B323435303B323436323B323437343B323438363B323439393B323531303B323532323B323533340D0A523D323534363B323535373B323536393B323538303B323539313B323630323B323631333B323632343B323633353B323634340D0A523D323635323B323636313B323636383B323637343B323637383B323638323B323638353B323638373B323638393B323639310D0A523D323639323B323639333B323639333B323639323B323639303B323638383B323638353B323638323B323637393B323637360D0A523D323637333B323637303B323636373B323636353B323636333B323636313B323635383B323635353B323635333B323635300D0A523D323634383B323634353B323634333B323634313B323633383B323633353B323633323B323633303B323632373B323632350D0A523D323632323B323632303B323631373B323631353B323631333B323631313B323631303B323630373B323630353B323630330D0A523D323630303B323539383B323539363B323539353B323539333B323539313B323538383B323538363B323538343B323538330D0A523D323538313B323538303B323538303B323537393B323537383B323537373B323537373B323537363B323537353B323537340D0A523D323537333B323537323B323537323B323537313B323537313B323537303B323537303B323536393B323536393B323536380D0A523D323536373B323536363B323536363B323536353B323536343B323536333B323536313B323536303B323535383B323535360D0A523D323535343B323535323B323534393B323534373B323534353B323534313B323533373B323533333B323532373B323532310D0A523D323531353B323530383B323530313B323439343B323438363B323437383B323437313B323436343B323435363B323434380D0A523D323433393B323433313B323432323B323431343B323430353B323339363B323338383B323338303B323337313B323336320D0A523D323335343B323334353B323333363B323332383B323331393B323331303B323330313B323239323B323238323B323237330D0A523D323236353B323235363B323234373B323233383B323232393B323231393B323231303B323230303B323138393B323138300D0A523D323137323B323136333B323135353B323134373B323133393B323133303B323132303B323131323B323130333B323039350D0A523D323038373B323037393B323037323B323036343B323035373B323034393B323034323B323033353B323032383B323032310D0A523D323031343B323030373B323030303B313939343B313938383B313938323B313937363B313937303B313936343B313935380D0A523D313935323B313934363B313934303B313933353B313932393B313932333B313931383B313931323B313930373B313930320D0A523D313839373B313839313B313838363B313838313B313837363B313837313B313836363B313836323B313835373B313835330D0A523D313834383B313834333B313833383B313833333B313832393B313832353B313832313B313831373B313831333B313830390D0A523D313830353B313830303B313739363B313739323B313738393B313738353B313738313B313737373B313737343B313737300D0A523D313736363B313736333B313735393B313735363B313735323B313734393B313734363B313734333B313734303B313733370D0A523D313733333B313733303B313732373B313732353B313732323B313732303B313731373B313731353B313731333B313731300D0A523D313730383B313730353B313730333B313730313B313639393B313639373B313639343B313639323B313638393B313638370D0A523D313638363B313638343B313638323B313638303B313637383B313637363B313637343B313637333B313637313B313637300D0A523D313636383B313636373B313636353B313636343B313636323B313636303B313635393B313635373B313635363B313635340D0A523D313635333B313635323B313635313B313635303B313634393B313634383B313634373B313634363B313634353B313634340D0A523D313634333B313634323B313634313B313634313B313634303B313633393B313633383B313633383B313633373B313633360D0A523D313633353B313633353B313633343B313633343B313633333B313633333B313633323B313633323B313633313B313633310D0A523D313633303B313633303B313632393B313632393B313632383B313632383B313632383B313632383B313632373B313632370D0A523D313632373B313632373B313632373B313632373B313632363B313632363B313632363B313632363B313632363B313632360D0A523D313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632370D0A523D313632373B313632373B313632373B313632383B313632383B313632393B313632393B313633303B313633303B313633310D0A523D313633313B313633323B313633323B313633333B313633343B313633353B313633363B313633373B313633373B313633380D0A523D313633393B313634303B313634313B313634323B313634333B313634353B313634363B313634373B313634383B313634390D0A523D313635303B313635323B313635343B313635353B313635363B313635373B313635393B313636303B313636323B313636330D0A523D313636353B313636363B313636383B313637313B313637333B313637353B313637373B313637393B313638303B313638320D0A523D313638343B313638363B313638393B313639313B313639333B313639353B313639373B313730303B313730323B313730350D0A523D313730373B313731303B313731333B313731363B313731383B313732313B313732343B313732383B313733313B313733340D0A523D313733373B313734303B313734333B313734363B313735303B313735333B313735363B313736303B313736333B313736370D0A523D313737313B313737343B313737383B313738313B313738353B313738393B313739333B313739373B313830313B313830360D0A523D313831303B313831343B313831383B313832323B313832363B313833313B313833353B313833393B313834343B313834380D0A523D313835333B313835373B313836323B313836383B313837333B313837383B313838333B313838373B313839323B313839370D0A523D313930323B313930383B313931333B313931393B313932343B313932393B313933353B313934303B313934363B313935320D0A523D313935373B313936333B313936393B313937353B313938313B313938373B313939343B323030303B323030363B323031320D0A523D323031393B323032353B323033323B323033393B323034363B323035333B323036313B323036383B323037353B323038320D0A523D323038393B323039363B323130343B323131313B323131393B323132363B323133333B323134313B323134383B323135360D0A523D323136343B323137313B323137393B323138373B323139353B323230323B323231303B323231383B323232353B323233330D0A523D323234313B323234383B323235363B323236333B323237303B323237373B323238343B323239313B323239383B323330340D0A523D323331303B323331363B323332323B323332383B323333333B323333383B323334333B323334383B323335323B323335350D0A523D323335393B323336333B323336363B323337303B323337333B323337363B323337393B323338313B323338343B323338360D0A523D323338383B323339313B323339333B323339353B323339373B323339393B323430313B323430333B323430343B323430360D0A523D323430383B323431303B323431323B323431333B323431353B323431373B323431393B323432313B323432333B323432360D0A523D323432383B323433303B323433323B323433343B323433363B323433383B323434313B323434333B323434353B323434370D0A523D323435303B323435323B323435353B323435373B323436303B323436333B323436363B323436393B323437323B323437350D0A523D323437383B323438313B323438343B323438373B323439313B323439343B323439373B323530303B323530333B323530360D0A545243464D543D313B313030303B453B4C3B460D0A523D323538313B323538333B323538343B323538363B323538383B323539313B323539333B323539353B323539363B323539380D0A523D323630303B323630333B323630353B323630373B323631303B323631313B323631333B323631353B323631373B323632300D0A523D323632323B323632353B323632373B323633303B323633323B323633353B323633383B323634313B323634333B323634350D0A523D323634383B323635303B323635333B323635353B323635383B323636313B323636333B323636353B323636373B323637300D0A523D323637333B323637363B323637393B323638323B323638353B323638383B323639303B323639323B323639333B323639330D0A523D323639323B323639313B323638393B323638373B323638353B323638323B323637383B323637343B323636383B323636310D0A523D323635323B323634343B323633353B323632343B323631333B323630323B323539313B323538303B323536393B323535370D0A523D323534363B323533343B323532323B323531303B323439393B323438363B323437343B323436323B323435303B323433390D0A523D323432383B323431373B323430363B323339353B323338343B323337333B323336323B323335323B323334313B323333300D0A523D323331393B323330393B323239393B323238393B323237383B323236383B323235383B323234383B323233383B323232380D0A523D323231383B323230393B323230303B323139313B323138333B323137333B323136343B323135363B323134373B323133380D0A523D323133303B323132323B323131333B323130343B323039363B323038393B323038313B323037333B323036353B323035370D0A523D323034393B323034323B323033343B323032363B323031393B323031323B323030353B313939383B313939303B313938330D0A523D313937373B313937303B313936333B313935373B313935303B313934343B313933373B313933313B313932353B313931390D0A523D313931343B313930383B313930323B313839353B313838393B313838333B313837373B313837313B313836353B313836300D0A523D313835353B313835303B313834353B313834303B313833353B313833313B313832363B313832323B313831373B313831320D0A523D313830383B313830343B313739393B313739353B313739303B313738373B313738333B313737393B313737363B313737330D0A523D313737303B313736373B313736333B313735393B313735353B313735323B313734383B313734353B313734323B313733390D0A523D313733363B313733323B313732393B313732363B313732333B313732303B313731373B313731343B313731313B313730390D0A523D313730373B313730343B313730323B313730303B313639373B313639353B313639323B313639303B313638373B313638350D0A523D313638323B313638303B313637383B313637363B313637343B313637323B313637303B313636383B313636373B313636350D0A523D313636333B313636313B313635393B313635383B313635363B313635353B313635333B313635323B313635303B313634390D0A523D313634373B313634363B313634353B313634333B313634323B313634313B313634303B313633393B313633383B313633370D0A523D313633353B313633353B313633343B313633333B313633323B313633323B313633313B313633303B313632393B313632390D0A523D313632393B313632393B313632383B313632383B313632373B313632373B313632373B313632373B313632363B313632360D0A523D313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632360D0A523D313632363B313632373B313632373B313632373B313632373B313632383B313632383B313632393B313632393B313633300D0A523D313633303B313633313B313633323B313633333B313633333B313633343B313633353B313633363B313633363B313633370D0A523D313633383B313633393B313634303B313634323B313634333B313634343B313634353B313634363B313634373B313634390D0A523D313635303B313635323B313635343B313635353B313635373B313635383B313636303B313636313B313636333B313636350D0A523D313636373B313636393B313637313B313637343B313637363B313637383B313638303B313638323B313638343B313638370D0A523D313638393B313639313B313639343B313639363B313639393B313730313B313730343B313730373B313730393B313731320D0A523D313731353B313731383B313732313B313732343B313732373B313733303B313733333B313733373B313734303B313734330D0A523D313734373B313735303B313735343B313735373B313736313B313736353B313736393B313737333B313737373B313738320D0A523D313738363B313739303B313739353B313739393B313830333B313830383B313831323B313831373B313832323B313832360D0A523D313833313B313833353B313834303B313834353B313835313B313835363B313836323B313836373B313837323B313837380D0A523D313838343B313838393B313839353B313930303B313930363B313931333B313931383B313932343B313933303B313933370D0A523D313934333B313934393B313935363B313936333B313937303B313937373B313938343B313939303B313939383B323030350D0A523D323031323B323031393B323032373B323033343B323034323B323035303B323035373B323036353B323037333B323038320D0A523D323039303B323039383B323130363B323131353B323132333B323133323B323134323B323135303B323135393B323136380D0A523D323137383B323138383B323139373B323230363B323231363B323232363B323233363B323234353B323235353B323236350D0A523D323237353B323238363B323239363B323330373B323331373B323332383B323333383B323334393B323335393B323337310D0A523D323338323B323339333B323430333B323431353B323432363B323433383B323434393B323436313B323437323B323438340D0A523D323439363B323530373B323531393B323533303B323534323B323535333B323536343B323537363B323538373B323539380D0A523D323630393B323632303B323633303B323634303B323635303B323635393B323636383B323637363B323638333B323639300D0A523D323639353B323730303B323730333B323730353B323730353B323730343B323730323B323639393B323639363B323639320D0A523D323638373B323638333B323637383B323637323B323636383B323636333B323635383B323635333B323634383B323634330D0A523D323633383B323633323B323632373B323632323B323631383B323631333B323630383B323630333B323539383B323539330D0A523D323538383B323538343B323537393B323537343B323537303B323536353B323536313B323535373B323535323B323534380D0A523D323534353B323534313B323533373B323533333B323533303B323532363B323532323B323531393B323531363B323531330D0A523D323530393B323530363B323530333B323530303B323439373B323439343B323439313B323438373B323438343B323438310D0A523D323437383B323437353B323437323B323436393B323436363B323436333B323436303B323435373B323435353B323435320D0A523D323435303B323434373B323434353B323434333B323434313B323433383B323433363B323433343B323433323B323433300D0A523D323432383B323432363B323432333B323432313B323431393B323431373B323431353B323431333B323431323B323431300D0A523D323430383B323430363B323430343B323430333B323430313B323339393B323339373B323339353B323339333B323339310D0A523D323338383B323338363B323338343B323338313B323337393B323337363B323337333B323337303B323336363B323336330D0A523D323335393B323335353B323335323B323334383B323334333B323333383B323333333B323332383B323332323B323331360D0A523D323331303B323330343B323239383B323239313B323238343B323237373B323237303B323236333B323235363B323234380D0A523D323234313B323233333B323232353B323231383B323231303B323230323B323139353B323138373B323137393B323137310D0A523D323136343B323135363B323134383B323134313B323133333B323132363B323131393B323131313B323130343B323039360D0A523D323038393B323038323B323037353B323036383B323036313B323035333B323034363B323033393B323033323B323032350D0A523D323031393B323031323B323030363B323030303B313939343B313938373B313938313B313937353B313936393B313936330D0A523D313935373B313935323B313934363B313934303B313933353B313932393B313932343B313931393B313931333B313930380D0A523D313930323B313839373B313839323B313838373B313838333B313837383B313837333B313836383B313836323B313835370D0A523D313835333B313834383B313834343B313833393B313833353B313833313B313832363B313832323B313831383B313831340D0A523D313831303B313830363B313830313B313739373B313739333B313738393B313738353B313738313B313737383B313737340D0A523D313737313B313736373B313736333B313736303B313735363B313735333B313735303B313734363B313734333B313734300D0A523D313733373B313733343B313733313B313732383B313732343B313732313B313731383B313731363B313731333B313731300D0A523D313730373B313730353B313730323B313730303B313639373B313639353B313639333B313639313B313638393B313638360D0A523D313638343B313638323B313638303B313637393B313637373B313637353B313637333B313637313B313636383B313636360D0A523D313636353B313636333B313636323B313636303B313635393B313635373B313635363B313635353B313635343B313635320D0A523D313635303B313634393B313634383B313634373B313634363B313634353B313634333B313634323B313634313B313634300D0A523D313633393B313633383B313633373B313633373B313633363B313633353B313633343B313633333B313633323B313633320D0A523D313633313B313633313B313633303B313633303B313632393B313632393B313632383B313632383B313632373B313632370D0A523D313632373B313632373B313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632360D0A523D313632363B313632363B313632363B313632363B313632363B313632363B313632363B313632373B313632373B313632370D0A523D313632373B313632373B313632373B313632383B313632383B313632383B313632383B313632393B313632393B313633300D0A523D313633303B313633313B313633313B313633323B313633323B313633333B313633333B313633343B313633343B313633350D0A523D313633353B313633363B313633373B313633383B313633383B313633393B313634303B313634313B313634313B313634320D0A523D313634333B313634343B313634353B313634363B313634373B313634383B313634393B313635303B313635313B313635320D0A523D313635333B313635343B313635363B313635373B313635393B313636303B313636323B313636343B313636353B313636370D0A523D313636383B313637303B313637313B313637333B313637343B313637363B313637383B313638303B313638323B313638340D0A523D313638363B313638373B313638393B313639323B313639343B313639373B313639393B313730313B313730333B313730350D0A523D313730383B313731303B313731333B313731353B313731373B313732303B313732323B313732353B313732373B313733300D0A523D313733333B313733373B313734303B313734333B313734363B313734393B313735323B313735363B313735393B313736330D0A523D313736363B313737303B313737343B313737373B313738313B313738353B313738393B313739323B313739363B313830300D0A523D313830353B313830393B313831333B313831373B313832313B313832353B313832393B313833333B313833383B313834330D0A523D313834383B313835333B313835373B313836323B313836363B313837313B313837363B313838313B313838363B313839310D0A523D313839373B313930323B313930373B313931323B313931383B313932333B313932393B313933353B313934303B313934360D0A523D313935323B313935383B313936343B313937303B313937363B313938323B313938383B313939343B323030303B323030370D0A523D323031343B323032313B323032383B323033353B323034323B323034393B323035373B323036343B323037323B323037390D0A523D323038373B323039353B323130333B323131323B323132303B323133303B323133393B323134373B323135353B323136330D0A523D323137323B323138303B323138393B323230303B323231303B323231393B323232393B323233383B323234373B323235360D0A523D323236353B323237333B323238323B323239323B323330313B323331303B323331393B323332383B323333363B323334350D0A523D323335343B323336323B323337313B323338303B323338383B323339363B323430353B323431343B323432323B323433310D0A523D323433393B323434383B323435363B323436343B323437313B323437383B323438363B323439343B323530313B323530380D0A523D323531353B323532313B323532373B323533333B323533373B323534313B323534353B323534373B323534393B323535320D0A523D323535343B323535363B323535383B323536303B323536313B323536333B323536343B323536353B323536363B323536360D0A523D323536373B323536383B323536393B323536393B323537303B323537303B323537313B323537313B323537323B323537320D0A523D323537333B323537343B323537353B323537363B323537373B323537373B323537383B323537393B323538303B323538300D0A56424F583D33322E35323B33322E35320D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35342E30393B35342E30390D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                10) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    10) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3133362E3730303B3133362E3730300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D34392E31323B34392E31320D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323335353B323335383B323336313B323336343B323336373B323337303B323337343B323337373B323338313B323338340D0A523D323338383B323339323B323339363B323430303B323430343B323430383B323431333B323431373B323432313B323432360D0A523D323433303B323433353B323433393B323434343B323434393B323435333B323435383B323436333B323436393B323437340D0A523D323438303B323438353B323438393B323439343B323439393B323530343B323530393B323531343B323532303B323532350D0A523D323533303B323533363B323534313B323534363B323535313B323535363B323536323B323536373B323537323B323537370D0A523D323538333B323538383B323539333B323539383B323630333B323630383B323631333B323631383B323632323B323632370D0A523D323633313B323633343B323633373B323634303B323634313B323634313B323634303B323633373B323633333B323632350D0A523D323631373B323630363B323539353B323538313B323536373B323535323B323533363B323531393B323530333B323438350D0A523D323436373B323435303B323433333B323431353B323339373B323337393B323336323B323334353B323332383B323331310D0A523D323239343B323237383B323236323B323234353B323232393B323231333B323139383B323138333B323136383B323135330D0A523D323133383B323132343B323131303B323039353B323038313B323036373B323035343B323034313B323032383B323031360D0A523D323030333B313939313B313937393B313936363B313935353B313934343B313933323B313932313B313931313B313930300D0A523D313839303B313837393B313836393B313835393B313835303B313834303B313833313B313832323B313831323B313830330D0A523D313739343B313738363B313737383B313736393B313736313B313735333B313734353B313733373B313732393B313732310D0A523D313731343B313730363B313639393B313639323B313638363B313637393B313637313B313636353B313635383B313635310D0A523D313634353B313633383B313633323B313632363B313632303B313631343B313630383B313630333B313539373B313539320D0A523D313538363B313538313B313537363B313537303B313536353B313536303B313535353B313535303B313534363B313534310D0A523D313533373B313533323B313532373B313532333B313531393B313531353B313531313B313530373B313530333B313439390D0A523D313439363B313439323B313438393B313438353B313438323B313437383B313437353B313437323B313436383B313436350D0A523D313436323B313435383B313435353B313435333B313435303B313434373B313434343B313434323B313433393B313433370D0A523D313433343B313433313B313432393B313432363B313432343B313432323B313432303B313431383B313431363B313431340D0A523D313431323B313431303B313430383B313430373B313430353B313430343B313430323B313430303B313339383B313339370D0A523D313339353B313339343B313339333B313339323B313339313B313338393B313338383B313338373B313338363B313338350D0A523D313338343B313338333B313338323B313338313B313338303B313338303B313337393B313337383B313337373B313337370D0A523D313337373B313337373B313337363B313337363B313337353B313337353B313337343B313337343B313337343B313337340D0A523D313337343B313337343B313337343B313337343B313337343B313337353B313337353B313337363B313337363B313337370D0A523D313337373B313337383B313337383B313337393B313337393B313338303B313338313B313338323B313338333B313338340D0A523D313338353B313338373B313338383B313338393B313339303B313339313B313339323B313339333B313339353B313339360D0A523D313339373B313339393B313430303B313430323B313430333B313430353B313430363B313430383B313431303B313431320D0A523D313431343B313431363B313431383B313432303B313432323B313432343B313432373B313432393B313433313B313433330D0A523D313433363B313433393B313434313B313434343B313434363B313434393B313435313B313435343B313435363B313435390D0A523D313436323B313436363B313436393B313437333B313437373B313438313B313438343B313438373B313439313B313439350D0A523D313439393B313530333B313530373B313531313B313531343B313531373B313532303B313532343B313532383B313533320D0A523D313533373B313534313B313534363B313535303B313535353B313536303B313536353B313537303B313537363B313538310D0A523D313538373B313539323B313539373B313630333B313631303B313631363B313632323B313632383B313633343B313634310D0A523D313634373B313635343B313636303B313636373B313637333B313638303B313638373B313639343B313730313B313730380D0A523D313731343B313732323B313732393B313733373B313734343B313735313B313735393B313736373B313737343B313738320D0A523D313739303B313739383B313830373B313831363B313832353B313833343B313834343B313835333B313836333B313837330D0A523D313838333B313839323B313930333B313931333B313932343B313933363B313934363B313935373B313936383B313938300D0A523D313939323B323030333B323031353B323032373B323034303B323035333B323036363B323037393B323039313B323130340D0A523D323131383B323133313B323134343B323135383B323137323B323138363B323230303B323231343B323232393B323234330D0A523D323235383B323237333B323238373B323330333B323331383B323333333B323334393B323336343B323337393B323339350D0A523D323431313B323432373B323434333B323435393B323437353B323439323B323530393B323532353B323534313B323535360D0A523D323537303B323538333B323539343B323630343B323631313B323631353B323631383B323631393B323631393B323631370D0A523D323631343B323631303B323630373B323630333B323539393B323539343B323539303B323538363B323538313B323537360D0A523D323537313B323536363B323536323B323535383B323535343B323535303B323534363B323534323B323533393B323533350D0A523D323533313B323532383B323532353B323532333B323531383B323531353B323531313B323530383B323530353B323530320D0A523D323530303B323439373B323439333B323439303B323438363B323438333B323438303B323437373B323437353B323437330D0A523D323437323B323437303B323436383B323436363B323436343B323436323B323436303B323435383B323435363B323435350D0A523D323435323B323435313B323434393B323434383B323434373B323434363B323434343B323434333B323434323B323434310D0A523D323434303B323433393B323433383B323433373B323433373B323433363B323433363B323433363B323433363B323433350D0A523D323433353B323433353B323433353B323433353B323433353B323433363B323433363B323433373B323433373B323433380D0A523D323433393B323434313B323434323B323434333B323434343B323434353B323434363B323434373B323434393B323435300D0A523D323435313B323435333B323435343B323435363B323435383B323436303B323436313B323436333B323436353B323436370D0A523D323436393B323437313B323437343B323437363B323437393B323438313B323438343B323438373B323439303B323439340D0A523D323439373B323530303B323530333B323530373B323531303B323531333B323531363B323531393B323532333B323532360D0A523D323533303B323533333B323533363B323533393B323534323B323534343B323534373B323534393B323535303B323535310D0A523D323535313B323534373B323534313B323533323B323532303B323530373B323439323B323437383B323436333B323434370D0A523D323433313B323431343B323339383B323338303B323336333B323334363B323332393B323331323B323239353B323237390D0A523D323236333B323234373B323233313B323231363B323230303B323138353B323137303B323135353B323134303B323132350D0A523D323131303B323039363B323038323B323036393B323035363B323034333B323033303B323031373B323030353B313939320D0A523D313937393B313936363B313935343B313934313B313933303B313931393B313930383B313839373B313838373B313837360D0A523D313836363B313835363B313834353B313833353B313832343B313831343B313830353B313739373B313738383B313737390D0A523D313737303B313736323B313735343B313734353B313733373B313732393B313732323B313731343B313730363B313639390D0A523D313639313B313638353B313637383B313637313B313636353B313635383B313635313B313634353B313633383B313633310D0A523D313632353B313631383B313631323B313630363B313630313B313539353B313538393B313538343B313537383B313537330D0A523D313536383B313536333B313535383B313535323B313534373B313534333B313533383B313533333B313532393B313532340D0A523D313532303B313531363B313531313B313530373B313530333B313439393B313439353B313439323B313438383B313438340D0A523D313438303B313437363B313437333B313436393B313436363B313436333B313436303B313435373B313435333B313435300D0A523D313434373B313434343B313434313B313433393B313433363B313433343B313433313B313432393B313432363B313432340D0A523D313432313B313431393B313431373B313431343B313431323B313431303B313430383B313430363B313430343B313430320D0A523D313430303B313339393B313339373B313339363B313339343B313339323B313339303B313338393B313338383B313338370D0A523D313338353B313338343B313338333B313338323B313338313B313338303B313337393B313337383B313337373B313337360D0A523D313337343B313337343B313337333B313337333B313337323B313337323B313337313B313337313B313337313B313337310D0A523D313337303B313337303B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313336390D0A523D313337303B313337303B313337303B313337313B313337313B313337323B313337323B313337333B313337333B313337340D0A523D313337353B313337363B313337363B313337373B313337383B313337393B313337393B313338303B313338323B313338330D0A523D313338343B313338363B313338373B313338383B313339303B313339313B313339333B313339343B313339363B313339380D0A523D313339393B313430313B313430333B313430353B313430373B313430393B313431313B313431333B313431353B313431370D0A523D313431393B313432313B313432343B313432363B313432393B313433313B313433343B313433363B313433393B313434310D0A523D313434343B313434373B313435303B313435333B313435363B313435393B313436323B313436353B313436393B313437320D0A523D313437353B313437393B313438323B313438363B313438393B313439333B313439373B313530313B313530353B313530390D0A523D313531333B313531373B313532313B313532353B313533303B313533343B313533383B313534333B313534373B313535320D0A523D313535373B313536323B313536373B313537323B313537373B313538323B313538373B313539323B313539383B313630330D0A523D313630393B313631353B313632303B313632363B313633333B313633393B313634353B313635313B313635373B313636330D0A523D313637303B313637363B313638333B313639303B313639373B313730353B313731323B313731393B313732363B313733330D0A523D313734313B313734393B313735373B313736353B313737333B313738313B313738393B313739373B313830363B313831340D0A523D313832323B313833313B313833393B313834383B313835373B313836363B313837353B313838343B313839343B313930330D0A523D313931323B313932313B313933313B313934313B313935313B313936313B313937323B313938323B313939323B323030330D0A523D323031333B323032343B323033353B323034363B323035363B323036373B323037393B323039303B323130323B323131340D0A523D323132353B323133373B323134383B323135393B323137313B323138313B323139313B323230313B323231303B323231380D0A523D323232353B323233303B323233343B323233393B323234333B323234353B323234373B323234393B323235303B323235310D0A523D323235323B323235333B323235343B323235353B323235353B323235353B323235353B323235353B323235353B323235350D0A523D323235353B323235353B323235353B323235343B323235343B323235343B323235343B323235343B323235343B323235340D0A523D323235343B323235343B323235343B323235353B323235353B323235353B323235363B323235373B323235373B323235380D0A523D323235393B323236303B323236303B323236313B323236323B323236333B323236343B323236363B323236373B323236380D0A523D323237303B323237313B323237333B323237343B323237363B323237373B323237393B323238303B323238323B323238330D0A523D323238353B323238373B323238393B323239313B323239323B323239343B323239363B323239383B323330303B323330320D0A523D323330343B323330363B323330383B323331303B323331323B323331353B323331373B323332303B323332323B323332340D0A523D323332373B323332393B323333323B323333343B323333383B323334303B323334333B323334363B323334393B323335320D0A545243464D543D313B313030303B453B4C3B460D0A523D323434303B323434313B323434323B323434333B323434343B323434363B323434373B323434383B323434393B323435310D0A523D323435323B323435353B323435363B323435383B323436303B323436323B323436343B323436363B323436383B323437300D0A523D323437323B323437333B323437353B323437373B323438303B323438333B323438363B323439303B323439333B323439370D0A523D323530303B323530323B323530353B323530383B323531313B323531353B323531383B323532333B323532353B323532380D0A523D323533313B323533353B323533393B323534323B323534363B323535303B323535343B323535383B323536323B323536360D0A523D323537313B323537363B323538313B323538363B323539303B323539343B323539393B323630333B323630373B323631300D0A523D323631343B323631373B323631393B323631393B323631383B323631353B323631313B323630343B323539343B323538330D0A523D323537303B323535363B323534313B323532353B323530393B323439323B323437353B323435393B323434333B323432370D0A523D323431313B323339353B323337393B323336343B323334393B323333333B323331383B323330333B323238373B323237330D0A523D323235383B323234333B323232393B323231343B323230303B323138363B323137323B323135383B323134343B323133310D0A523D323131383B323130343B323039313B323037393B323036363B323035333B323034303B323032373B323031353B323030330D0A523D313939323B313938303B313936383B313935373B313934363B313933363B313932343B313931333B313930333B313839320D0A523D313838333B313837333B313836333B313835333B313834343B313833343B313832353B313831363B313830373B313739380D0A523D313739303B313738323B313737343B313736373B313735393B313735313B313734343B313733373B313732393B313732320D0A523D313731343B313730383B313730313B313639343B313638373B313638303B313637333B313636373B313636303B313635340D0A523D313634373B313634313B313633343B313632383B313632323B313631363B313631303B313630333B313539373B313539320D0A523D313538373B313538313B313537363B313537303B313536353B313536303B313535353B313535303B313534363B313534310D0A523D313533373B313533323B313532383B313532343B313532303B313531373B313531343B313531313B313530373B313530330D0A523D313439393B313439353B313439313B313438373B313438343B313438313B313437373B313437333B313436393B313436360D0A523D313436323B313435393B313435363B313435343B313435313B313434393B313434363B313434343B313434313B313433390D0A523D313433363B313433333B313433313B313432393B313432373B313432343B313432323B313432303B313431383B313431360D0A523D313431343B313431323B313431303B313430383B313430363B313430353B313430333B313430323B313430303B313339390D0A523D313339373B313339363B313339353B313339333B313339323B313339313B313339303B313338393B313338383B313338370D0A523D313338353B313338343B313338333B313338323B313338313B313338303B313337393B313337393B313337383B313337380D0A523D313337373B313337373B313337363B313337363B313337353B313337353B313337343B313337343B313337343B313337340D0A523D313337343B313337343B313337343B313337343B313337343B313337353B313337353B313337363B313337363B313337370D0A523D313337373B313337373B313337373B313337383B313337393B313338303B313338303B313338313B313338323B313338330D0A523D313338343B313338353B313338363B313338373B313338383B313338393B313339313B313339323B313339333B313339340D0A523D313339353B313339373B313339383B313430303B313430323B313430343B313430353B313430373B313430383B313431300D0A523D313431323B313431343B313431363B313431383B313432303B313432323B313432343B313432363B313432393B313433310D0A523D313433343B313433373B313433393B313434323B313434343B313434373B313435303B313435333B313435353B313435380D0A523D313436323B313436353B313436383B313437323B313437353B313437383B313438323B313438353B313438393B313439320D0A523D313439363B313439393B313530333B313530373B313531313B313531353B313531393B313532333B313532373B313533320D0A523D313533373B313534313B313534363B313535303B313535353B313536303B313536353B313537303B313537363B313538310D0A523D313538363B313539323B313539373B313630333B313630383B313631343B313632303B313632363B313633323B313633380D0A523D313634353B313635313B313635383B313636353B313637313B313637393B313638363B313639323B313639393B313730360D0A523D313731343B313732313B313732393B313733373B313734353B313735333B313736313B313736393B313737383B313738360D0A523D313739343B313830333B313831323B313832323B313833313B313834303B313835303B313835393B313836393B313837390D0A523D313839303B313930303B313931313B313932313B313933323B313934343B313935353B313936363B313937393B313939310D0A523D323030333B323031363B323032383B323034313B323035343B323036373B323038313B323039353B323131303B323132340D0A523D323133383B323135333B323136383B323138333B323139383B323231333B323232393B323234353B323236323B323237380D0A523D323239343B323331313B323332383B323334353B323336323B323337393B323339373B323431353B323433333B323435300D0A523D323436373B323438353B323530333B323531393B323533363B323535323B323536373B323538313B323539353B323630360D0A523D323631373B323632353B323633333B323633373B323634303B323634313B323634313B323634303B323633373B323633340D0A523D323633313B323632373B323632323B323631383B323631333B323630383B323630333B323539383B323539333B323538380D0A523D323538333B323537373B323537323B323536373B323536323B323535363B323535313B323534363B323534313B323533360D0A523D323533303B323532353B323532303B323531343B323530393B323530343B323439393B323439343B323438393B323438350D0A523D323438303B323437343B323436393B323436333B323435383B323435333B323434393B323434343B323433393B323433350D0A523D323433303B323432363B323432313B323431373B323431333B323430383B323430343B323430303B323339363B323339320D0A523D323338383B323338343B323338313B323337373B323337343B323337303B323336373B323336343B323336313B323335380D0A523D323335353B323335323B323334393B323334363B323334333B323334303B323333383B323333343B323333323B323332390D0A523D323332373B323332343B323332323B323332303B323331373B323331353B323331323B323331303B323330383B323330360D0A523D323330343B323330323B323330303B323239383B323239363B323239343B323239323B323239313B323238393B323238370D0A523D323238353B323238333B323238323B323238303B323237393B323237373B323237363B323237343B323237333B323237310D0A523D323237303B323236383B323236373B323236363B323236343B323236333B323236323B323236313B323236303B323236300D0A523D323235393B323235383B323235373B323235373B323235363B323235353B323235353B323235353B323235343B323235340D0A523D323235343B323235343B323235343B323235343B323235343B323235343B323235343B323235343B323235353B323235350D0A523D323235353B323235353B323235353B323235353B323235353B323235353B323235353B323235353B323235343B323235330D0A523D323235323B323235313B323235303B323234393B323234373B323234353B323234333B323233393B323233343B323233300D0A523D323232353B323231383B323231303B323230313B323139313B323138313B323137313B323135393B323134383B323133370D0A523D323132353B323131343B323130323B323039303B323037393B323036373B323035363B323034363B323033353B323032340D0A523D323031333B323030333B313939323B313938323B313937323B313936313B313935313B313934313B313933313B313932310D0A523D313931323B313930333B313839343B313838343B313837353B313836363B313835373B313834383B313833393B313833310D0A523D313832323B313831343B313830363B313739373B313738393B313738313B313737333B313736353B313735373B313734390D0A523D313734313B313733333B313732363B313731393B313731323B313730353B313639373B313639303B313638333B313637360D0A523D313637303B313636333B313635373B313635313B313634353B313633393B313633333B313632363B313632303B313631350D0A523D313630393B313630333B313539383B313539323B313538373B313538323B313537373B313537323B313536373B313536320D0A523D313535373B313535323B313534373B313534333B313533383B313533343B313533303B313532353B313532313B313531370D0A523D313531333B313530393B313530353B313530313B313439373B313439333B313438393B313438363B313438323B313437390D0A523D313437353B313437323B313436393B313436353B313436323B313435393B313435363B313435333B313435303B313434370D0A523D313434343B313434313B313433393B313433363B313433343B313433313B313432393B313432363B313432343B313432310D0A523D313431393B313431373B313431353B313431333B313431313B313430393B313430373B313430353B313430333B313430310D0A523D313339393B313339383B313339363B313339343B313339333B313339313B313339303B313338383B313338373B313338360D0A523D313338343B313338333B313338323B313338303B313337393B313337393B313337383B313337373B313337363B313337360D0A523D313337353B313337343B313337333B313337333B313337323B313337323B313337313B313337313B313337303B313337300D0A523D313337303B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313337300D0A523D313337303B313337313B313337313B313337313B313337313B313337323B313337323B313337333B313337333B313337340D0A523D313337343B313337363B313337373B313337383B313337393B313338303B313338313B313338323B313338333B313338340D0A523D313338353B313338373B313338383B313338393B313339303B313339323B313339343B313339363B313339373B313339390D0A523D313430303B313430323B313430343B313430363B313430383B313431303B313431323B313431343B313431373B313431390D0A523D313432313B313432343B313432363B313432393B313433313B313433343B313433363B313433393B313434313B313434340D0A523D313434373B313435303B313435333B313435373B313436303B313436333B313436363B313436393B313437333B313437360D0A523D313438303B313438343B313438383B313439323B313439353B313439393B313530333B313530373B313531313B313531360D0A523D313532303B313532343B313532393B313533333B313533383B313534333B313534373B313535323B313535383B313536330D0A523D313536383B313537333B313537383B313538343B313538393B313539353B313630313B313630363B313631323B313631380D0A523D313632353B313633313B313633383B313634353B313635313B313635383B313636353B313637313B313637383B313638350D0A523D313639313B313639393B313730363B313731343B313732323B313732393B313733373B313734353B313735343B313736320D0A523D313737303B313737393B313738383B313739373B313830353B313831343B313832343B313833353B313834353B313835360D0A523D313836363B313837363B313838373B313839373B313930383B313931393B313933303B313934313B313935343B313936360D0A523D313937393B313939323B323030353B323031373B323033303B323034333B323035363B323036393B323038323B323039360D0A523D323131303B323132353B323134303B323135353B323137303B323138353B323230303B323231363B323233313B323234370D0A523D323236333B323237393B323239353B323331323B323332393B323334363B323336333B323338303B323339383B323431340D0A523D323433313B323434373B323436333B323437383B323439323B323530373B323532303B323533323B323534313B323534370D0A523D323535313B323535313B323535303B323534393B323534373B323534343B323534323B323533393B323533363B323533330D0A523D323533303B323532363B323532333B323531393B323531363B323531333B323531303B323530373B323530333B323530300D0A523D323439373B323439343B323439303B323438373B323438343B323438313B323437393B323437363B323437343B323437310D0A523D323436393B323436373B323436353B323436333B323436313B323436303B323435383B323435363B323435343B323435330D0A523D323435313B323435303B323434393B323434373B323434363B323434353B323434343B323434333B323434323B323434310D0A523D323433393B323433383B323433373B323433373B323433363B323433363B323433353B323433353B323433353B323433350D0A523D323433353B323433353B323433363B323433363B323433363B323433363B323433373B323433373B323433383B323433390D0A56424F583D32372E34393B32372E34390D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35322E38313B35322E38310D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                11) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    11) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3133362E3730303B3133362E3730300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D34392E31323B34392E31320D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323335353B323335383B323336313B323336343B323336373B323337303B323337343B323337373B323338313B323338340D0A523D323338383B323339323B323339363B323430303B323430343B323430383B323431333B323431373B323432313B323432360D0A523D323433303B323433353B323433393B323434343B323434393B323435333B323435383B323436333B323436393B323437340D0A523D323438303B323438353B323438393B323439343B323439393B323530343B323530393B323531343B323532303B323532350D0A523D323533303B323533363B323534313B323534363B323535313B323535363B323536323B323536373B323537323B323537370D0A523D323538333B323538383B323539333B323539383B323630333B323630383B323631333B323631383B323632323B323632370D0A523D323633313B323633343B323633373B323634303B323634313B323634313B323634303B323633373B323633333B323632350D0A523D323631373B323630363B323539353B323538313B323536373B323535323B323533363B323531393B323530333B323438350D0A523D323436373B323435303B323433333B323431353B323339373B323337393B323336323B323334353B323332383B323331310D0A523D323239343B323237383B323236323B323234353B323232393B323231333B323139383B323138333B323136383B323135330D0A523D323133383B323132343B323131303B323039353B323038313B323036373B323035343B323034313B323032383B323031360D0A523D323030333B313939313B313937393B313936363B313935353B313934343B313933323B313932313B313931313B313930300D0A523D313839303B313837393B313836393B313835393B313835303B313834303B313833313B313832323B313831323B313830330D0A523D313739343B313738363B313737383B313736393B313736313B313735333B313734353B313733373B313732393B313732310D0A523D313731343B313730363B313639393B313639323B313638363B313637393B313637313B313636353B313635383B313635310D0A523D313634353B313633383B313633323B313632363B313632303B313631343B313630383B313630333B313539373B313539320D0A523D313538363B313538313B313537363B313537303B313536353B313536303B313535353B313535303B313534363B313534310D0A523D313533373B313533323B313532373B313532333B313531393B313531353B313531313B313530373B313530333B313439390D0A523D313439363B313439323B313438393B313438353B313438323B313437383B313437353B313437323B313436383B313436350D0A523D313436323B313435383B313435353B313435333B313435303B313434373B313434343B313434323B313433393B313433370D0A523D313433343B313433313B313432393B313432363B313432343B313432323B313432303B313431383B313431363B313431340D0A523D313431323B313431303B313430383B313430373B313430353B313430343B313430323B313430303B313339383B313339370D0A523D313339353B313339343B313339333B313339323B313339313B313338393B313338383B313338373B313338363B313338350D0A523D313338343B313338333B313338323B313338313B313338303B313338303B313337393B313337383B313337373B313337370D0A523D313337373B313337373B313337363B313337363B313337353B313337353B313337343B313337343B313337343B313337340D0A523D313337343B313337343B313337343B313337343B313337343B313337353B313337353B313337363B313337363B313337370D0A523D313337373B313337383B313337383B313337393B313337393B313338303B313338313B313338323B313338333B313338340D0A523D313338353B313338373B313338383B313338393B313339303B313339313B313339323B313339333B313339353B313339360D0A523D313339373B313339393B313430303B313430323B313430333B313430353B313430363B313430383B313431303B313431320D0A523D313431343B313431363B313431383B313432303B313432323B313432343B313432373B313432393B313433313B313433330D0A523D313433363B313433393B313434313B313434343B313434363B313434393B313435313B313435343B313435363B313435390D0A523D313436323B313436363B313436393B313437333B313437373B313438313B313438343B313438373B313439313B313439350D0A523D313439393B313530333B313530373B313531313B313531343B313531373B313532303B313532343B313532383B313533320D0A523D313533373B313534313B313534363B313535303B313535353B313536303B313536353B313537303B313537363B313538310D0A523D313538373B313539323B313539373B313630333B313631303B313631363B313632323B313632383B313633343B313634310D0A523D313634373B313635343B313636303B313636373B313637333B313638303B313638373B313639343B313730313B313730380D0A523D313731343B313732323B313732393B313733373B313734343B313735313B313735393B313736373B313737343B313738320D0A523D313739303B313739383B313830373B313831363B313832353B313833343B313834343B313835333B313836333B313837330D0A523D313838333B313839323B313930333B313931333B313932343B313933363B313934363B313935373B313936383B313938300D0A523D313939323B323030333B323031353B323032373B323034303B323035333B323036363B323037393B323039313B323130340D0A523D323131383B323133313B323134343B323135383B323137323B323138363B323230303B323231343B323232393B323234330D0A523D323235383B323237333B323238373B323330333B323331383B323333333B323334393B323336343B323337393B323339350D0A523D323431313B323432373B323434333B323435393B323437353B323439323B323530393B323532353B323534313B323535360D0A523D323537303B323538333B323539343B323630343B323631313B323631353B323631383B323631393B323631393B323631370D0A523D323631343B323631303B323630373B323630333B323539393B323539343B323539303B323538363B323538313B323537360D0A523D323537313B323536363B323536323B323535383B323535343B323535303B323534363B323534323B323533393B323533350D0A523D323533313B323532383B323532353B323532333B323531383B323531353B323531313B323530383B323530353B323530320D0A523D323530303B323439373B323439333B323439303B323438363B323438333B323438303B323437373B323437353B323437330D0A523D323437323B323437303B323436383B323436363B323436343B323436323B323436303B323435383B323435363B323435350D0A523D323435323B323435313B323434393B323434383B323434373B323434363B323434343B323434333B323434323B323434310D0A523D323434303B323433393B323433383B323433373B323433373B323433363B323433363B323433363B323433363B323433350D0A523D323433353B323433353B323433353B323433353B323433353B323433363B323433363B323433373B323433373B323433380D0A523D323433393B323434313B323434323B323434333B323434343B323434353B323434363B323434373B323434393B323435300D0A523D323435313B323435333B323435343B323435363B323435383B323436303B323436313B323436333B323436353B323436370D0A523D323436393B323437313B323437343B323437363B323437393B323438313B323438343B323438373B323439303B323439340D0A523D323439373B323530303B323530333B323530373B323531303B323531333B323531363B323531393B323532333B323532360D0A523D323533303B323533333B323533363B323533393B323534323B323534343B323534373B323534393B323535303B323535310D0A523D323535313B323534373B323534313B323533323B323532303B323530373B323439323B323437383B323436333B323434370D0A523D323433313B323431343B323339383B323338303B323336333B323334363B323332393B323331323B323239353B323237390D0A523D323236333B323234373B323233313B323231363B323230303B323138353B323137303B323135353B323134303B323132350D0A523D323131303B323039363B323038323B323036393B323035363B323034333B323033303B323031373B323030353B313939320D0A523D313937393B313936363B313935343B313934313B313933303B313931393B313930383B313839373B313838373B313837360D0A523D313836363B313835363B313834353B313833353B313832343B313831343B313830353B313739373B313738383B313737390D0A523D313737303B313736323B313735343B313734353B313733373B313732393B313732323B313731343B313730363B313639390D0A523D313639313B313638353B313637383B313637313B313636353B313635383B313635313B313634353B313633383B313633310D0A523D313632353B313631383B313631323B313630363B313630313B313539353B313538393B313538343B313537383B313537330D0A523D313536383B313536333B313535383B313535323B313534373B313534333B313533383B313533333B313532393B313532340D0A523D313532303B313531363B313531313B313530373B313530333B313439393B313439353B313439323B313438383B313438340D0A523D313438303B313437363B313437333B313436393B313436363B313436333B313436303B313435373B313435333B313435300D0A523D313434373B313434343B313434313B313433393B313433363B313433343B313433313B313432393B313432363B313432340D0A523D313432313B313431393B313431373B313431343B313431323B313431303B313430383B313430363B313430343B313430320D0A523D313430303B313339393B313339373B313339363B313339343B313339323B313339303B313338393B313338383B313338370D0A523D313338353B313338343B313338333B313338323B313338313B313338303B313337393B313337383B313337373B313337360D0A523D313337343B313337343B313337333B313337333B313337323B313337323B313337313B313337313B313337313B313337310D0A523D313337303B313337303B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313336390D0A523D313337303B313337303B313337303B313337313B313337313B313337323B313337323B313337333B313337333B313337340D0A523D313337353B313337363B313337363B313337373B313337383B313337393B313337393B313338303B313338323B313338330D0A523D313338343B313338363B313338373B313338383B313339303B313339313B313339333B313339343B313339363B313339380D0A523D313339393B313430313B313430333B313430353B313430373B313430393B313431313B313431333B313431353B313431370D0A523D313431393B313432313B313432343B313432363B313432393B313433313B313433343B313433363B313433393B313434310D0A523D313434343B313434373B313435303B313435333B313435363B313435393B313436323B313436353B313436393B313437320D0A523D313437353B313437393B313438323B313438363B313438393B313439333B313439373B313530313B313530353B313530390D0A523D313531333B313531373B313532313B313532353B313533303B313533343B313533383B313534333B313534373B313535320D0A523D313535373B313536323B313536373B313537323B313537373B313538323B313538373B313539323B313539383B313630330D0A523D313630393B313631353B313632303B313632363B313633333B313633393B313634353B313635313B313635373B313636330D0A523D313637303B313637363B313638333B313639303B313639373B313730353B313731323B313731393B313732363B313733330D0A523D313734313B313734393B313735373B313736353B313737333B313738313B313738393B313739373B313830363B313831340D0A523D313832323B313833313B313833393B313834383B313835373B313836363B313837353B313838343B313839343B313930330D0A523D313931323B313932313B313933313B313934313B313935313B313936313B313937323B313938323B313939323B323030330D0A523D323031333B323032343B323033353B323034363B323035363B323036373B323037393B323039303B323130323B323131340D0A523D323132353B323133373B323134383B323135393B323137313B323138313B323139313B323230313B323231303B323231380D0A523D323232353B323233303B323233343B323233393B323234333B323234353B323234373B323234393B323235303B323235310D0A523D323235323B323235333B323235343B323235353B323235353B323235353B323235353B323235353B323235353B323235350D0A523D323235353B323235353B323235353B323235343B323235343B323235343B323235343B323235343B323235343B323235340D0A523D323235343B323235343B323235343B323235353B323235353B323235353B323235363B323235373B323235373B323235380D0A523D323235393B323236303B323236303B323236313B323236323B323236333B323236343B323236363B323236373B323236380D0A523D323237303B323237313B323237333B323237343B323237363B323237373B323237393B323238303B323238323B323238330D0A523D323238353B323238373B323238393B323239313B323239323B323239343B323239363B323239383B323330303B323330320D0A523D323330343B323330363B323330383B323331303B323331323B323331353B323331373B323332303B323332323B323332340D0A523D323332373B323332393B323333323B323333343B323333383B323334303B323334333B323334363B323334393B323335320D0A545243464D543D313B313030303B453B4C3B460D0A523D323434303B323434313B323434323B323434333B323434343B323434363B323434373B323434383B323434393B323435310D0A523D323435323B323435353B323435363B323435383B323436303B323436323B323436343B323436363B323436383B323437300D0A523D323437323B323437333B323437353B323437373B323438303B323438333B323438363B323439303B323439333B323439370D0A523D323530303B323530323B323530353B323530383B323531313B323531353B323531383B323532333B323532353B323532380D0A523D323533313B323533353B323533393B323534323B323534363B323535303B323535343B323535383B323536323B323536360D0A523D323537313B323537363B323538313B323538363B323539303B323539343B323539393B323630333B323630373B323631300D0A523D323631343B323631373B323631393B323631393B323631383B323631353B323631313B323630343B323539343B323538330D0A523D323537303B323535363B323534313B323532353B323530393B323439323B323437353B323435393B323434333B323432370D0A523D323431313B323339353B323337393B323336343B323334393B323333333B323331383B323330333B323238373B323237330D0A523D323235383B323234333B323232393B323231343B323230303B323138363B323137323B323135383B323134343B323133310D0A523D323131383B323130343B323039313B323037393B323036363B323035333B323034303B323032373B323031353B323030330D0A523D313939323B313938303B313936383B313935373B313934363B313933363B313932343B313931333B313930333B313839320D0A523D313838333B313837333B313836333B313835333B313834343B313833343B313832353B313831363B313830373B313739380D0A523D313739303B313738323B313737343B313736373B313735393B313735313B313734343B313733373B313732393B313732320D0A523D313731343B313730383B313730313B313639343B313638373B313638303B313637333B313636373B313636303B313635340D0A523D313634373B313634313B313633343B313632383B313632323B313631363B313631303B313630333B313539373B313539320D0A523D313538373B313538313B313537363B313537303B313536353B313536303B313535353B313535303B313534363B313534310D0A523D313533373B313533323B313532383B313532343B313532303B313531373B313531343B313531313B313530373B313530330D0A523D313439393B313439353B313439313B313438373B313438343B313438313B313437373B313437333B313436393B313436360D0A523D313436323B313435393B313435363B313435343B313435313B313434393B313434363B313434343B313434313B313433390D0A523D313433363B313433333B313433313B313432393B313432373B313432343B313432323B313432303B313431383B313431360D0A523D313431343B313431323B313431303B313430383B313430363B313430353B313430333B313430323B313430303B313339390D0A523D313339373B313339363B313339353B313339333B313339323B313339313B313339303B313338393B313338383B313338370D0A523D313338353B313338343B313338333B313338323B313338313B313338303B313337393B313337393B313337383B313337380D0A523D313337373B313337373B313337363B313337363B313337353B313337353B313337343B313337343B313337343B313337340D0A523D313337343B313337343B313337343B313337343B313337343B313337353B313337353B313337363B313337363B313337370D0A523D313337373B313337373B313337373B313337383B313337393B313338303B313338303B313338313B313338323B313338330D0A523D313338343B313338353B313338363B313338373B313338383B313338393B313339313B313339323B313339333B313339340D0A523D313339353B313339373B313339383B313430303B313430323B313430343B313430353B313430373B313430383B313431300D0A523D313431323B313431343B313431363B313431383B313432303B313432323B313432343B313432363B313432393B313433310D0A523D313433343B313433373B313433393B313434323B313434343B313434373B313435303B313435333B313435353B313435380D0A523D313436323B313436353B313436383B313437323B313437353B313437383B313438323B313438353B313438393B313439320D0A523D313439363B313439393B313530333B313530373B313531313B313531353B313531393B313532333B313532373B313533320D0A523D313533373B313534313B313534363B313535303B313535353B313536303B313536353B313537303B313537363B313538310D0A523D313538363B313539323B313539373B313630333B313630383B313631343B313632303B313632363B313633323B313633380D0A523D313634353B313635313B313635383B313636353B313637313B313637393B313638363B313639323B313639393B313730360D0A523D313731343B313732313B313732393B313733373B313734353B313735333B313736313B313736393B313737383B313738360D0A523D313739343B313830333B313831323B313832323B313833313B313834303B313835303B313835393B313836393B313837390D0A523D313839303B313930303B313931313B313932313B313933323B313934343B313935353B313936363B313937393B313939310D0A523D323030333B323031363B323032383B323034313B323035343B323036373B323038313B323039353B323131303B323132340D0A523D323133383B323135333B323136383B323138333B323139383B323231333B323232393B323234353B323236323B323237380D0A523D323239343B323331313B323332383B323334353B323336323B323337393B323339373B323431353B323433333B323435300D0A523D323436373B323438353B323530333B323531393B323533363B323535323B323536373B323538313B323539353B323630360D0A523D323631373B323632353B323633333B323633373B323634303B323634313B323634313B323634303B323633373B323633340D0A523D323633313B323632373B323632323B323631383B323631333B323630383B323630333B323539383B323539333B323538380D0A523D323538333B323537373B323537323B323536373B323536323B323535363B323535313B323534363B323534313B323533360D0A523D323533303B323532353B323532303B323531343B323530393B323530343B323439393B323439343B323438393B323438350D0A523D323438303B323437343B323436393B323436333B323435383B323435333B323434393B323434343B323433393B323433350D0A523D323433303B323432363B323432313B323431373B323431333B323430383B323430343B323430303B323339363B323339320D0A523D323338383B323338343B323338313B323337373B323337343B323337303B323336373B323336343B323336313B323335380D0A523D323335353B323335323B323334393B323334363B323334333B323334303B323333383B323333343B323333323B323332390D0A523D323332373B323332343B323332323B323332303B323331373B323331353B323331323B323331303B323330383B323330360D0A523D323330343B323330323B323330303B323239383B323239363B323239343B323239323B323239313B323238393B323238370D0A523D323238353B323238333B323238323B323238303B323237393B323237373B323237363B323237343B323237333B323237310D0A523D323237303B323236383B323236373B323236363B323236343B323236333B323236323B323236313B323236303B323236300D0A523D323235393B323235383B323235373B323235373B323235363B323235353B323235353B323235353B323235343B323235340D0A523D323235343B323235343B323235343B323235343B323235343B323235343B323235343B323235343B323235353B323235350D0A523D323235353B323235353B323235353B323235353B323235353B323235353B323235353B323235353B323235343B323235330D0A523D323235323B323235313B323235303B323234393B323234373B323234353B323234333B323233393B323233343B323233300D0A523D323232353B323231383B323231303B323230313B323139313B323138313B323137313B323135393B323134383B323133370D0A523D323132353B323131343B323130323B323039303B323037393B323036373B323035363B323034363B323033353B323032340D0A523D323031333B323030333B313939323B313938323B313937323B313936313B313935313B313934313B313933313B313932310D0A523D313931323B313930333B313839343B313838343B313837353B313836363B313835373B313834383B313833393B313833310D0A523D313832323B313831343B313830363B313739373B313738393B313738313B313737333B313736353B313735373B313734390D0A523D313734313B313733333B313732363B313731393B313731323B313730353B313639373B313639303B313638333B313637360D0A523D313637303B313636333B313635373B313635313B313634353B313633393B313633333B313632363B313632303B313631350D0A523D313630393B313630333B313539383B313539323B313538373B313538323B313537373B313537323B313536373B313536320D0A523D313535373B313535323B313534373B313534333B313533383B313533343B313533303B313532353B313532313B313531370D0A523D313531333B313530393B313530353B313530313B313439373B313439333B313438393B313438363B313438323B313437390D0A523D313437353B313437323B313436393B313436353B313436323B313435393B313435363B313435333B313435303B313434370D0A523D313434343B313434313B313433393B313433363B313433343B313433313B313432393B313432363B313432343B313432310D0A523D313431393B313431373B313431353B313431333B313431313B313430393B313430373B313430353B313430333B313430310D0A523D313339393B313339383B313339363B313339343B313339333B313339313B313339303B313338383B313338373B313338360D0A523D313338343B313338333B313338323B313338303B313337393B313337393B313337383B313337373B313337363B313337360D0A523D313337353B313337343B313337333B313337333B313337323B313337323B313337313B313337313B313337303B313337300D0A523D313337303B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313336393B313337300D0A523D313337303B313337313B313337313B313337313B313337313B313337323B313337323B313337333B313337333B313337340D0A523D313337343B313337363B313337373B313337383B313337393B313338303B313338313B313338323B313338333B313338340D0A523D313338353B313338373B313338383B313338393B313339303B313339323B313339343B313339363B313339373B313339390D0A523D313430303B313430323B313430343B313430363B313430383B313431303B313431323B313431343B313431373B313431390D0A523D313432313B313432343B313432363B313432393B313433313B313433343B313433363B313433393B313434313B313434340D0A523D313434373B313435303B313435333B313435373B313436303B313436333B313436363B313436393B313437333B313437360D0A523D313438303B313438343B313438383B313439323B313439353B313439393B313530333B313530373B313531313B313531360D0A523D313532303B313532343B313532393B313533333B313533383B313534333B313534373B313535323B313535383B313536330D0A523D313536383B313537333B313537383B313538343B313538393B313539353B313630313B313630363B313631323B313631380D0A523D313632353B313633313B313633383B313634353B313635313B313635383B313636353B313637313B313637383B313638350D0A523D313639313B313639393B313730363B313731343B313732323B313732393B313733373B313734353B313735343B313736320D0A523D313737303B313737393B313738383B313739373B313830353B313831343B313832343B313833353B313834353B313835360D0A523D313836363B313837363B313838373B313839373B313930383B313931393B313933303B313934313B313935343B313936360D0A523D313937393B313939323B323030353B323031373B323033303B323034333B323035363B323036393B323038323B323039360D0A523D323131303B323132353B323134303B323135353B323137303B323138353B323230303B323231363B323233313B323234370D0A523D323236333B323237393B323239353B323331323B323332393B323334363B323336333B323338303B323339383B323431340D0A523D323433313B323434373B323436333B323437383B323439323B323530373B323532303B323533323B323534313B323534370D0A523D323535313B323535313B323535303B323534393B323534373B323534343B323534323B323533393B323533363B323533330D0A523D323533303B323532363B323532333B323531393B323531363B323531333B323531303B323530373B323530333B323530300D0A523D323439373B323439343B323439303B323438373B323438343B323438313B323437393B323437363B323437343B323437310D0A523D323436393B323436373B323436353B323436333B323436313B323436303B323435383B323435363B323435343B323435330D0A523D323435313B323435303B323434393B323434373B323434363B323434353B323434343B323434333B323434323B323434310D0A523D323433393B323433383B323433373B323433373B323433363B323433363B323433353B323433353B323433353B323433350D0A523D323433353B323433353B323433363B323433363B323433363B323433363B323433373B323433373B323433383B323433390D0A56424F583D32372E34393B32372E34390D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35322E38313B35322E38310D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                12) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    12) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3135322E3930303B3135322E3930300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35332E30363B35332E30360D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323434333B323434393B323435343B323436303B323436373B323437333B323437393B323438363B323439323B323439380D0A523D323530353B323531313B323531383B323532353B323533313B323533383B323534343B323535313B323535383B323536350D0A523D323537323B323537393B323538353B323539323B323539393B323630353B323631323B323631393B323632363B323633330D0A523D323634303B323634373B323635343B323636313B323636383B323637363B323638333B323639303B323639373B323730350D0A523D323731323B323732303B323732383B323733353B323734333B323735313B323735383B323736353B323737323B323737390D0A523D323738363B323739333B323830303B323830373B323831333B323832303B323832353B323833313B323833373B323834320D0A523D323834373B323835323B323835373B323836313B323836353B323836393B323837333B323837373B323838313B323838340D0A523D323838383B323839313B323839343B323839373B323839393B323930313B323930333B323930333B323930343B323930340D0A523D323930343B323930343B323930333B323930313B323839393B323839363B323839343B323839303B323838363B323838310D0A523D323837363B323837303B323836343B323835363B323834393B323834313B323833343B323832353B323831373B323830380D0A523D323739393B323739303B323738313B323737313B323736313B323735323B323734323B323733323B323732323B323731310D0A523D323730313B323639303B323638303B323637303B323636303B323634393B323633393B323632383B323631383B323630370D0A523D323539373B323538373B323537373B323536373B323535373B323534373B323533373B323532383B323531383B323530390D0A523D323530303B323439313B323438313B323437323B323436343B323435353B323434363B323433383B323432393B323432300D0A523D323431323B323430343B323339363B323338383B323338303B323337323B323336343B323335363B323334393B323334320D0A523D323333343B323332373B323331393B323331323B323330353B323239383B323239313B323238343B323237373B323237310D0A523D323236343B323235373B323235313B323234343B323233373B323233313B323232353B323231393B323231333B323230370D0A523D323230313B323139353B323138393B323138343B323137383B323137323B323136373B323136323B323135373B323135320D0A523D323134373B323134323B323133373B323133333B323132383B323132343B323131393B323131353B323131313B323130370D0A523D323130333B323039393B323039353B323039303B323038373B323038333B323038303B323037363B323037333B323037300D0A523D323036373B323036343B323036303B323035373B323035353B323035323B323034393B323034363B323034343B323034310D0A523D323033393B323033373B323033343B323033323B323033303B323032383B323032363B323032343B323032323B323032310D0A523D323031393B323031383B323031363B323031353B323031343B323031323B323031313B323031303B323030393B323030380D0A523D323030363B323030363B323030353B323030353B323030343B323030333B323030323B323030323B323030313B323030310D0A523D323030313B323030313B323030303B323030303B323030303B323030303B323030303B323030303B323030303B323030300D0A523D323030303B323030313B323030313B323030313B323030313B323030323B323030333B323030343B323030343B323030350D0A523D323030353B323030363B323030363B323030373B323030383B323030393B323031313B323031323B323031333B323031340D0A523D323031363B323031373B323031393B323032303B323032323B323032343B323032363B323032383B323033303B323033320D0A523D323033343B323033363B323033393B323034323B323034353B323034383B323035303B323035333B323035363B323035390D0A523D323036323B323036353B323036383B323037313B323037343B323037373B323038313B323038353B323038393B323039330D0A523D323039373B323130313B323130343B323130383B323131323B323131363B323132303B323132343B323132393B323133330D0A523D323133373B323134313B323134353B323134393B323135333B323135383B323136323B323136373B323137323B323137370D0A523D323138323B323138383B323139343B323139383B323230333B323230383B323231333B323231383B323232333B323232390D0A523D323233363B323234323B323234383B323235343B323236313B323236383B323237343B323238323B323238393B323239360D0A523D323330333B323331313B323331393B323332363B323333343B323334323B323334393B323335383B323336363B323337330D0A523D323338313B323338393B323339383B323430363B323431343B323432323B323433303B323433393B323434373B323435360D0A523D323436343B323437333B323438323B323439313B323530303B323530393B323531383B323532373B323533373B323534370D0A523D323535363B323536363B323537353B323538353B323539343B323630343B323631333B323632323B323633323B323634310D0A523D323635303B323635383B323636383B323637373B323638353B323639343B323730323B323731303B323731383B323732350D0A523D323733333B323733393B323734363B323735333B323735393B323736353B323737303B323737363B323738323B323738370D0A523D323739313B323739363B323830303B323830343B323830383B323831313B323831333B323831363B323831383B323831380D0A523D323831393B323831393B323831393B323831393B323831393B323831393B323831383B323831373B323831363B323831340D0A523D323831333B323831313B323831303B323830383B323830373B323830353B323830343B323830323B323830303B323739380D0A523D323739363B323739343B323739323B323739313B323738393B323738373B323738353B323738333B323738313B323737390D0A523D323737373B323737353B323737323B323737303B323736373B323736343B323736313B323735393B323735363B323735340D0A523D323735313B323734383B323734353B323734323B323734303B323733373B323733343B323733313B323732393B323732360D0A523D323732333B323732313B323731383B323731363B323731333B323730393B323730363B323730323B323639393B323639350D0A523D323639333B323639323B323639303B323638383B323638363B323638343B323638313B323637393B323637373B323637350D0A523D323637343B323637323B323637303B323636383B323636353B323636333B323636323B323636313B323635393B323635370D0A523D323635343B323635313B323634393B323634383B323634373B323634363B323634353B323634343B323634323B323634310D0A523D323634303B323633383B323633373B323633363B323633353B323633343B323633333B323633313B323633303B323632390D0A523D323632383B323632373B323632373B323632353B323632343B323632333B323632333B323632323B323632313B323632300D0A523D323632303B323631383B323631373B323631363B323631363B323631353B323631353B323631343B323631333B323631320D0A523D323631323B323631313B323631313B323631303B323630393B323630383B323630383B323630373B323630373B323630360D0A523D323630353B323630343B323630333B323630333B323630323B323630323B323630323B323630323B323630313B323630310D0A523D323630303B323630303B323539393B323539393B323539393B323539393B323539383B323539373B323539363B323539350D0A523D323539343B323539333B323539323B323539303B323538393B323538373B323538353B323538333B323538313B323537380D0A523D323537363B323537343B323537323B323536393B323536373B323536353B323536323B323536303B323535373B323535350D0A523D323535323B323535303B323534373B323534353B323534323B323533393B323533373B323533343B323533323B323532390D0A523D323532373B323532343B323532313B323531393B323531363B323531343B323531313B323530383B323530353B323530320D0A523D323439393B323439363B323439333B323439303B323438373B323438333B323438303B323437373B323437333B323437300D0A523D323436373B323436343B323436313B323435373B323435343B323435313B323434373B323434343B323434303B323433360D0A523D323433313B323432373B323432333B323431393B323431353B323431303B323430353B323430313B323339373B323339330D0A523D323338383B323338333B323337383B323337333B323336393B323336343B323335393B323335343B323334393B323334340D0A523D323333393B323333343B323332393B323332343B323331393B323331343B323330383B323330333B323239383B323239330D0A523D323238383B323238333B323237383B323237333B323236383B323236323B323235373B323235333B323234383B323234330D0A523D323233393B323233343B323232393B323232343B323231393B323231353B323231313B323230373B323230333B323139390D0A523D323139353B323139313B323138363B323138323B323137383B323137343B323136393B323136353B323136313B323135370D0A523D323135343B323135303B323134363B323134323B323133393B323133353B323133313B323132383B323132343B323132310D0A523D323131373B323131343B323131313B323130373B323130343B323130313B323039383B323039353B323039323B323038390D0A523D323038363B323038333B323038303B323037373B323037343B323037313B323036393B323036363B323036343B323036310D0A523D323035383B323035363B323035333B323035313B323034393B323034373B323034353B323034323B323034303B323033370D0A523D323033353B323033333B323033313B323032393B323032383B323032363B323032343B323032323B323032303B323031380D0A523D323031373B323031353B323031333B323031313B323031303B323030383B323030373B323030353B323030333B323030310D0A523D323030303B313939393B313939373B313939363B313939343B313939333B313939323B313939313B313938393B313938380D0A523D313938373B313938363B313938353B313938343B313938333B313938323B313938323B313938313B313938303B313937390D0A523D313937383B313937373B313937373B313937363B313937363B313937353B313937353B313937343B313937333B313937320D0A523D313937323B313937313B313937313B313937303B313937303B313936393B313936393B313936383B313936383B313936380D0A523D313936383B313936373B313936373B313936373B313936373B313936363B313936363B313936363B313936363B313936350D0A523D313936353B313936353B313936353B313936353B313936343B313936343B313936343B313936343B313936343B313936340D0A523D313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936340D0A523D313936353B313936353B313936353B313936353B313936363B313936363B313936363B313936363B313936373B313936370D0A523D313936383B313936383B313936393B313936393B313937303B313937303B313937313B313937313B313937323B313937320D0A523D313937333B313937333B313937343B313937343B313937353B313937363B313937363B313937373B313937373B313937380D0A523D313937383B313937393B313937393B313938303B313938313B313938323B313938323B313938333B313938343B313938350D0A523D313938353B313938363B313938373B313938383B313938393B313939313B313939323B313939333B313939343B313939350D0A523D313939363B313939373B313939383B313939393B323030303B323030313B323030323B323030333B323030343B323030350D0A523D323030363B323030373B323030383B323031303B323031313B323031333B323031343B323031353B323031373B323031380D0A523D323032303B323032313B323032333B323032343B323032363B323032373B323033303B323033313B323033333B323033350D0A523D323033373B323033393B323034313B323034333B323034353B323034373B323034393B323035313B323035333B323035350D0A523D323035373B323036303B323036323B323036343B323036363B323036383B323037303B323037333B323037353B323037380D0A523D323038303B323038323B323038353B323038373B323038393B323039313B323039343B323039373B323039393B323130320D0A523D323130343B323130373B323130393B323131323B323131343B323131373B323132303B323132333B323132363B323132390D0A523D323133323B323133343B323133373B323134303B323134333B323134363B323134393B323135323B323135363B323135390D0A523D323136323B323136353B323136383B323137313B323137343B323137373B323138303B323138343B323138383B323139310D0A523D323139353B323139383B323230323B323230363B323231303B323231343B323231373B323232313B323232353B323233300D0A523D323233343B323233383B323234333B323234383B323235323B323235373B323236313B323236363B323237313B323237350D0A523D323238303B323238353B323239303B323239353B323330303B323330353B323331303B323331353B323332303B323332360D0A523D323333313B323333373B323334323B323334373B323335333B323335383B323336333B323336393B323337343B323338300D0A523D323338363B323339313B323339373B323430333B323430383B323431343B323431393B323432363B323433323B323433370D0A545243464D543D313B313030303B453B4C3B460D0A523D323634303B323634313B323634323B323634343B323634353B323634363B323634373B323634383B323634393B323635310D0A523D323635343B323635373B323635393B323636313B323636323B323636333B323636353B323636383B323637303B323637320D0A523D323637343B323637353B323637373B323637393B323638313B323638343B323638363B323638383B323639303B323639320D0A523D323639333B323639353B323639393B323730323B323730363B323730393B323731333B323731363B323731383B323732310D0A523D323732333B323732363B323732393B323733313B323733343B323733373B323734303B323734323B323734353B323734380D0A523D323735313B323735343B323735363B323735393B323736313B323736343B323736373B323737303B323737323B323737350D0A523D323737373B323737393B323738313B323738333B323738353B323738373B323738393B323739313B323739323B323739340D0A523D323739363B323739383B323830303B323830323B323830343B323830353B323830373B323830383B323831303B323831310D0A523D323831333B323831343B323831363B323831373B323831383B323831393B323831393B323831393B323831393B323831390D0A523D323831393B323831383B323831383B323831363B323831333B323831313B323830383B323830343B323830303B323739360D0A523D323739313B323738373B323738323B323737363B323737303B323736353B323735393B323735333B323734363B323733390D0A523D323733333B323732353B323731383B323731303B323730323B323639343B323638353B323637373B323636383B323635380D0A523D323635303B323634313B323633323B323632323B323631333B323630343B323539343B323538353B323537353B323536360D0A523D323535363B323534373B323533373B323532373B323531383B323530393B323530303B323439313B323438323B323437330D0A523D323436343B323435363B323434373B323433393B323433303B323432323B323431343B323430363B323339383B323338390D0A523D323338313B323337333B323336363B323335383B323334393B323334323B323333343B323332363B323331393B323331310D0A523D323330333B323239363B323238393B323238323B323237343B323236383B323236313B323235343B323234383B323234320D0A523D323233363B323232393B323232333B323231383B323231333B323230383B323230333B323139383B323139343B323138380D0A523D323138323B323137373B323137323B323136373B323136323B323135383B323135333B323134393B323134353B323134310D0A523D323133373B323133333B323132393B323132343B323132303B323131363B323131323B323130383B323130343B323130310D0A523D323039373B323039333B323038393B323038353B323038313B323037373B323037343B323037313B323036383B323036350D0A523D323036323B323035393B323035363B323035333B323035303B323034383B323034353B323034323B323033393B323033360D0A523D323033343B323033323B323033303B323032383B323032363B323032343B323032323B323032303B323031393B323031370D0A523D323031363B323031343B323031333B323031323B323031313B323030393B323030383B323030373B323030363B323030360D0A523D323030353B323030353B323030343B323030343B323030333B323030323B323030313B323030313B323030313B323030310D0A523D323030303B323030303B323030303B323030303B323030303B323030303B323030303B323030303B323030303B323030310D0A523D323030313B323030313B323030313B323030323B323030323B323030333B323030343B323030353B323030353B323030360D0A523D323030363B323030383B323030393B323031303B323031313B323031323B323031343B323031353B323031363B323031380D0A523D323031393B323032313B323032323B323032343B323032363B323032383B323033303B323033323B323033343B323033370D0A523D323033393B323034313B323034343B323034363B323034393B323035323B323035353B323035373B323036303B323036340D0A523D323036373B323037303B323037333B323037363B323038303B323038333B323038373B323039303B323039353B323039390D0A523D323130333B323130373B323131313B323131353B323131393B323132343B323132383B323133333B323133373B323134320D0A523D323134373B323135323B323135373B323136323B323136373B323137323B323137383B323138343B323138393B323139350D0A523D323230313B323230373B323231333B323231393B323232353B323233313B323233373B323234343B323235313B323235370D0A523D323236343B323237313B323237373B323238343B323239313B323239383B323330353B323331323B323331393B323332370D0A523D323333343B323334323B323334393B323335363B323336343B323337323B323338303B323338383B323339363B323430340D0A523D323431323B323432303B323432393B323433383B323434363B323435353B323436343B323437323B323438313B323439310D0A523D323530303B323530393B323531383B323532383B323533373B323534373B323535373B323536373B323537373B323538370D0A523D323539373B323630373B323631383B323632383B323633393B323634393B323636303B323637303B323638303B323639300D0A523D323730313B323731313B323732323B323733323B323734323B323735323B323736313B323737313B323738313B323739300D0A523D323739393B323830383B323831373B323832353B323833343B323834313B323834393B323835363B323836343B323837300D0A523D323837363B323838313B323838363B323839303B323839343B323839363B323839393B323930313B323930333B323930340D0A523D323930343B323930343B323930343B323930333B323930333B323930313B323839393B323839373B323839343B323839310D0A523D323838383B323838343B323838313B323837373B323837333B323836393B323836353B323836313B323835373B323835320D0A523D323834373B323834323B323833373B323833313B323832353B323832303B323831333B323830373B323830303B323739330D0A523D323738363B323737393B323737323B323736353B323735383B323735313B323734333B323733353B323732383B323732300D0A523D323731323B323730353B323639373B323639303B323638333B323637363B323636383B323636313B323635343B323634370D0A523D323634303B323633333B323632363B323631393B323631323B323630353B323539393B323539323B323538353B323537390D0A523D323537323B323536353B323535383B323535313B323534343B323533383B323533313B323532353B323531383B323531310D0A523D323530353B323439383B323439323B323438363B323437393B323437333B323436373B323436303B323435343B323434390D0A523D323434333B323433373B323433323B323432363B323431393B323431343B323430383B323430333B323339373B323339310D0A523D323338363B323338303B323337343B323336393B323336333B323335383B323335333B323334373B323334323B323333370D0A523D323333313B323332363B323332303B323331353B323331303B323330353B323330303B323239353B323239303B323238350D0A523D323238303B323237353B323237313B323236363B323236313B323235373B323235323B323234383B323234333B323233380D0A523D323233343B323233303B323232353B323232313B323231373B323231343B323231303B323230363B323230323B323139380D0A523D323139353B323139313B323138383B323138343B323138303B323137373B323137343B323137313B323136383B323136350D0A523D323136323B323135393B323135363B323135323B323134393B323134363B323134333B323134303B323133373B323133340D0A523D323133323B323132393B323132363B323132333B323132303B323131373B323131343B323131323B323130393B323130370D0A523D323130343B323130323B323039393B323039373B323039343B323039313B323038393B323038373B323038353B323038320D0A523D323038303B323037383B323037353B323037333B323037303B323036383B323036363B323036343B323036323B323036300D0A523D323035373B323035353B323035333B323035313B323034393B323034373B323034353B323034333B323034313B323033390D0A523D323033373B323033353B323033333B323033313B323033303B323032373B323032363B323032343B323032333B323032310D0A523D323032303B323031383B323031373B323031353B323031343B323031333B323031313B323031303B323030383B323030370D0A523D323030363B323030353B323030343B323030333B323030323B323030313B323030303B313939393B313939383B313939370D0A523D313939363B313939353B313939343B313939333B313939323B313939313B313938393B313938383B313938373B313938360D0A523D313938353B313938353B313938343B313938333B313938323B313938323B313938313B313938303B313937393B313937390D0A523D313937383B313937383B313937373B313937373B313937363B313937363B313937353B313937343B313937343B313937330D0A523D313937333B313937323B313937323B313937313B313937313B313937303B313937303B313936393B313936393B313936380D0A523D313936383B313936373B313936373B313936363B313936363B313936363B313936363B313936353B313936353B313936350D0A523D313936353B313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936340D0A523D313936343B313936343B313936343B313936343B313936343B313936343B313936343B313936353B313936353B313936350D0A523D313936353B313936353B313936363B313936363B313936363B313936363B313936373B313936373B313936373B313936370D0A523D313936383B313936383B313936383B313936383B313936393B313936393B313937303B313937303B313937313B313937310D0A523D313937323B313937323B313937333B313937343B313937353B313937353B313937363B313937363B313937373B313937370D0A523D313937383B313937393B313938303B313938313B313938323B313938323B313938333B313938343B313938353B313938360D0A523D313938373B313938383B313938393B313939313B313939323B313939333B313939343B313939363B313939373B313939390D0A523D323030303B323030313B323030333B323030353B323030373B323030383B323031303B323031313B323031333B323031350D0A523D323031373B323031383B323032303B323032323B323032343B323032363B323032383B323032393B323033313B323033330D0A523D323033353B323033373B323034303B323034323B323034353B323034373B323034393B323035313B323035333B323035360D0A523D323035383B323036313B323036343B323036363B323036393B323037313B323037343B323037373B323038303B323038330D0A523D323038363B323038393B323039323B323039353B323039383B323130313B323130343B323130373B323131313B323131340D0A523D323131373B323132313B323132343B323132383B323133313B323133353B323133393B323134323B323134363B323135300D0A523D323135343B323135373B323136313B323136353B323136393B323137343B323137383B323138323B323138363B323139310D0A523D323139353B323139393B323230333B323230373B323231313B323231353B323231393B323232343B323232393B323233340D0A523D323233393B323234333B323234383B323235333B323235373B323236323B323236383B323237333B323237383B323238330D0A523D323238383B323239333B323239383B323330333B323330383B323331343B323331393B323332343B323332393B323333340D0A523D323333393B323334343B323334393B323335343B323335393B323336343B323336393B323337333B323337383B323338330D0A523D323338383B323339333B323339373B323430313B323430353B323431303B323431353B323431393B323432333B323432370D0A523D323433313B323433363B323434303B323434343B323434373B323435313B323435343B323435373B323436313B323436340D0A523D323436373B323437303B323437333B323437373B323438303B323438333B323438373B323439303B323439333B323439360D0A523D323439393B323530323B323530353B323530383B323531313B323531343B323531363B323531393B323532313B323532340D0A523D323532373B323532393B323533323B323533343B323533373B323533393B323534323B323534353B323534373B323535300D0A523D323535323B323535353B323535373B323536303B323536323B323536353B323536373B323536393B323537323B323537340D0A523D323537363B323537383B323538313B323538333B323538353B323538373B323538393B323539303B323539323B323539330D0A523D323539343B323539353B323539363B323539373B323539383B323539393B323539393B323539393B323539393B323630300D0A523D323630303B323630313B323630313B323630323B323630323B323630323B323630323B323630333B323630333B323630340D0A523D323630353B323630363B323630373B323630373B323630383B323630383B323630393B323631303B323631313B323631310D0A523D323631323B323631323B323631333B323631343B323631353B323631353B323631363B323631363B323631373B323631380D0A523D323632303B323632303B323632313B323632323B323632333B323632333B323632343B323632353B323632373B323632370D0A523D323632383B323632393B323633303B323633313B323633333B323633343B323633353B323633363B323633373B323633380D0A56424F583D34302E30333B34302E30330D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35382E30383B35382E30380D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                13) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    13) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3134372E3732303B3134372E3732300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35312E33303B35312E33300D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323430343B323430393B323431343B323432303B323432353B323433313B323433363B323434313B323434373B323435330D0A523D323435393B323436353B323437313B323437383B323438343B323439303B323439363B323530333B323531303B323531370D0A523D323532343B323533313B323533373B323534343B323535313B323535373B323536343B323537303B323537363B323538320D0A523D323538383B323539343B323539393B323630353B323631303B323631363B323632313B323632353B323633313B323633360D0A523D323634313B323634363B323635313B323635363B323636313B323636363B323637323B323637383B323638333B323638390D0A523D323639353B323730303B323730363B323731333B323731393B323732353B323733323B323733383B323734353B323735320D0A523D323735383B323736353B323737323B323737383B323738343B323739303B323739363B323830303B323830353B323830370D0A523D323830393B323830373B323830343B323739353B323738353B323737303B323735343B323733353B323731353B323639350D0A523D323637353B323635333B323633323B323631303B323538393B323536383B323534373B323532373B323530383B323438380D0A523D323436393B323435303B323433313B323431333B323339353B323337373B323335393B323334323B323332353B323330380D0A523D323239323B323237363B323236303B323234343B323232393B323231333B323139383B323138333B323136393B323135340D0A523D323134303B323132373B323131333B323039393B323038353B323037323B323035393B323034363B323033343B323032320D0A523D323031303B313939383B313938373B313937363B313936343B313935333B313934323B313933323B313932313B313931310D0A523D313930313B313839323B313838323B313837323B313836333B313835343B313834353B313833363B313832383B313831390D0A523D313831313B313830333B313739353B313738373B313737393B313737313B313736343B313735363B313734393B313734320D0A523D313733363B313732393B313732313B313731353B313730393B313730323B313639363B313638393B313638333B313637370D0A523D313637313B313636353B313636303B313635343B313634383B313634333B313633373B313633323B313632373B313632320D0A523D313631373B313631313B313630363B313630323B313539373B313539333B313538383B313538343B313538303B313537350D0A523D313537313B313536373B313536333B313535393B313535353B313535313B313534373B313534343B313534303B313533370D0A523D313533333B313533303B313532373B313532333B313532303B313531383B313531353B313531323B313530393B313530370D0A523D313530343B313530313B313439383B313439353B313439333B313439313B313438393B313438363B313438343B313438320D0A523D313438303B313437383B313437363B313437343B313437323B313437303B313436383B313436373B313436353B313436340D0A523D313436323B313436313B313436303B313435393B313435383B313435373B313435363B313435353B313435343B313435330D0A523D313435323B313435323B313435313B313435313B313435303B313435303B313434393B313434393B313434383B313434380D0A523D313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434380D0A523D313434383B313434383B313434383B313434393B313434393B313435303B313435303B313435313B313435313B313435320D0A523D313435323B313435333B313435333B313435343B313435363B313435373B313435383B313435393B313436303B313436310D0A523D313436323B313436343B313436353B313436363B313436383B313436393B313437313B313437333B313437353B313437370D0A523D313437383B313438303B313438333B313438353B313438373B313438393B313439313B313439343B313439363B313439380D0A523D313530303B313530323B313530343B313530363B313530383B313531303B313531333B313531353B313531383B313532320D0A523D313532353B313532393B313533323B313533353B313533383B313534313B313534343B313534373B313535303B313535330D0A523D313535373B313536313B313536353B313536393B313537333B313537383B313538323B313538373B313539313B313539360D0A523D313630313B313630363B313631313B313631363B313632313B313632363B313633323B313633383B313634333B313634390D0A523D313635363B313636313B313636373B313637323B313637383B313638353B313639313B313639383B313730343B313731300D0A523D313731373B313732343B313733303B313733383B313734353B313735323B313735393B313736373B313737343B313738320D0A523D313738393B313739373B313830353B313831333B313832313B313832393B313833383B313834363B313835353B313836340D0A523D313837333B313838333B313839323B313930313B313931313B313932323B313933323B313934333B313935343B313936340D0A523D313937363B313938373B313939383B323030393B323032313B323033333B323034363B323035393B323037313B323038340D0A523D323039383B323131313B323132353B323133393B323135333B323136373B323138323B323139373B323231323B323232370D0A523D323234343B323236303B323237373B323239343B323331313B323332383B323334363B323336343B323338323B323430300D0A523D323431393B323433383B323435373B323437373B323439383B323531383B323533393B323536313B323538333B323630350D0A523D323632383B323635313B323637343B323639363B323731373B323733343B323735313B323736323B323737333B323737390D0A523D323738353B323738393B323739323B323739333B323739343B323739323B323738393B323738353B323738313B323737360D0A523D323737303B323736343B323735383B323735323B323734363B323733393B323733333B323732373B323732313B323731350D0A523D323730393B323730333B323639383B323639323B323638373B323638323B323637363B323637313B323636363B323636310D0A523D323635363B323635323B323634373B323634333B323633383B323633323B323632383B323632343B323632303B323631350D0A523D323631313B323630373B323630343B323630313B323539383B323539353B323539323B323538383B323538353B323538320D0A523D323537393B323537363B323537343B323537323B323537303B323536383B323536363B323536353B323536343B323536330D0A523D323536313B323536303B323535393B323535393B323535383B323535383B323535373B323535373B323535363B323535360D0A523D323535353B323535353B323535353B323535353B323535353B323535353B323535353B323535353B323535353B323535350D0A523D323535363B323535373B323535373B323535383B323535383B323535393B323535393B323536303B323536313B323536330D0A523D323536343B323536363B323536373B323536383B323537303B323537313B323537333B323537353B323537373B323537390D0A523D323538313B323538343B323538363B323538393B323539313B323539333B323539363B323539383B323630313B323630340D0A523D323630373B323631303B323631343B323631373B323632313B323632353B323632393B323633333B323633373B323634320D0A523D323634363B323635313B323635363B323636303B323636353B323636393B323637353B323638303B323638353B323639300D0A523D323639363B323730313B323730373B323731333B323731393B323732353B323733323B323733383B323734353B323735320D0A523D323735383B323736353B323737323B323737393B323738363B323739323B323739393B323830343B323831303B323831340D0A523D323831383B323832303B323832323B323832303B323831383B323831323B323830353B323739323B323737383B323735390D0A523D323733393B323731363B323639343B323637323B323635303B323632383B323630363B323538353B323536353B323534350D0A523D323532353B323530363B323438363B323436373B323434373B323432393B323431313B323339323B323337343B323335370D0A523D323333393B323332323B323330353B323238393B323237343B323235383B323234333B323232373B323231313B323139370D0A523D323138323B323136383B323135333B323133393B323132353B323131323B323039393B323038353B323037333B323036300D0A523D323034373B323033353B323032333B323031323B323030303B313938393B313937383B313936363B313935363B313934350D0A523D313933343B313932333B313931323B313930323B313839333B313838343B313837353B313836353B313835363B313834360D0A523D313833363B313832373B313831383B313831303B313830313B313739333B313738363B313737383B313737303B313736330D0A523D313735363B313734393B313734313B313733353B313732383B313732323B313731363B313730393B313730333B313639380D0A523D313639323B313638363B313638303B313637343B313636383B313636333B313635373B313635323B313634373B313634320D0A523D313633373B313633313B313632363B313632313B313631363B313631323B313630373B313630323B313539383B313539340D0A523D313539303B313538363B313538313B313537373B313537333B313536393B313536353B313536313B313535373B313535340D0A523D313535303B313534373B313534343B313534303B313533373B313533343B313533313B313532383B313532353B313532320D0A523D313531393B313531363B313531323B313530393B313530373B313530343B313530323B313530303B313439383B313439350D0A523D313439323B313439303B313438383B313438373B313438353B313438333B313438313B313437393B313437373B313437360D0A523D313437343B313437333B313437313B313436393B313436383B313436373B313436363B313436353B313436343B313436330D0A523D313436313B313436313B313436303B313435393B313435383B313435383B313435373B313435373B313435363B313435360D0A523D313435353B313435353B313435353B313435353B313435343B313435343B313435343B313435343B313435333B313435330D0A523D313435333B313435333B313435333B313435333B313435333B313435333B313435333B313435343B313435343B313435350D0A523D313435353B313435353B313435353B313435363B313435363B313435373B313435383B313435393B313435393B313436300D0A523D313436303B313436323B313436333B313436343B313436353B313436363B313436373B313436383B313437303B313437320D0A523D313437333B313437353B313437363B313437383B313437393B313438313B313438333B313438353B313438373B313438390D0A523D313439313B313439333B313439363B313439383B313530303B313530323B313530353B313530373B313531303B313531340D0A523D313531373B313532303B313532333B313532363B313532393B313533323B313533363B313533393B313534333B313534360D0A523D313535303B313535343B313535383B313536323B313536363B313537303B313537343B313537383B313538333B313538370D0A523D313539323B313539363B313630313B313630353B313631303B313631353B313632303B313632353B313633303B313633360D0A523D313634323B313634373B313635333B313635383B313636343B313637303B313637353B313638323B313638383B313639340D0A523D313730303B313730363B313731323B313731393B313732363B313733323B313733393B313734363B313735333B313736310D0A523D313736383B313737353B313738323B313739303B313739383B313830353B313831333B313832323B313833303B313833380D0A523D313834363B313835353B313836343B313837333B313838333B313839323B313930313B313931303B313932303B313933300D0A523D313933393B313934393B313936303B313937303B313938313B313939323B323030333B323031343B323032353B323033360D0A523D323034383B323036303B323037323B323038343B323039373B323130393B323132323B323133353B323134373B323136300D0A523D323137343B323138373B323230303B323231343B323232373B323234303B323235333B323236353B323237373B323238380D0A523D323239393B323330383B323331363B323332333B323332393B323333333B323333363B323333383B323333393B323333390D0A523D323333383B323333373B323333363B323333353B323333333B323333313B323332393B323332373B323332353B323332330D0A523D323332313B323331383B323331363B323331333B323331313B323330383B323330363B323330343B323330313B323239390D0A523D323239383B323239363B323239353B323239343B323239333B323239323B323239313B323239303B323239303B323238390D0A523D323238383B323238373B323238373B323238363B323238363B323238363B323238363B323238353B323238353B323238350D0A523D323238353B323238353B323238353B323238353B323238353B323238363B323238363B323238373B323238373B323238380D0A523D323238393B323239303B323239313B323239323B323239343B323239353B323239373B323239383B323330303B323330310D0A523D323330333B323330353B323330373B323331303B323331323B323331343B323331373B323331393B323332323B323332340D0A523D323332373B323333303B323333333B323333363B323333393B323334323B323334363B323334393B323335333B323335370D0A523D323336313B323336353B323336393B323337333B323337373B323338323B323338363B323339303B323339353B323339390D0A545243464D543D313B313030303B453B4C3B460D0A523D323535363B323535353B323535353B323535353B323535353B323535353B323535353B323535353B323535353B323535350D0A523D323535353B323535363B323535363B323535373B323535373B323535383B323535383B323535393B323535393B323536300D0A523D323536313B323536333B323536343B323536353B323536363B323536383B323537303B323537323B323537343B323537360D0A523D323537393B323538323B323538353B323538383B323539323B323539353B323539383B323630313B323630343B323630370D0A523D323631313B323631353B323632303B323632343B323632383B323633323B323633383B323634333B323634373B323635320D0A523D323635363B323636313B323636363B323637313B323637363B323638323B323638373B323639323B323639383B323730330D0A523D323730393B323731353B323732313B323732373B323733333B323733393B323734363B323735323B323735383B323736340D0A523D323737303B323737363B323738313B323738353B323738393B323739323B323739343B323739333B323739323B323738390D0A523D323738353B323737393B323737333B323736323B323735313B323733343B323731373B323639363B323637343B323635310D0A523D323632383B323630353B323538333B323536313B323533393B323531383B323439383B323437373B323435373B323433380D0A523D323431393B323430303B323338323B323336343B323334363B323332383B323331313B323239343B323237373B323236300D0A523D323234343B323232373B323231323B323139373B323138323B323136373B323135333B323133393B323132353B323131310D0A523D323039383B323038343B323037313B323035393B323034363B323033333B323032313B323030393B313939383B313938370D0A523D313937363B313936343B313935343B313934333B313933323B313932323B313931313B313930313B313839323B313838330D0A523D313837333B313836343B313835353B313834363B313833383B313832393B313832313B313831333B313830353B313739370D0A523D313738393B313738323B313737343B313736373B313735393B313735323B313734353B313733383B313733303B313732340D0A523D313731373B313731303B313730343B313639383B313639313B313638353B313637383B313637323B313636373B313636310D0A523D313635363B313634393B313634333B313633383B313633323B313632363B313632313B313631363B313631313B313630360D0A523D313630313B313539363B313539313B313538373B313538323B313537383B313537333B313536393B313536353B313536310D0A523D313535373B313535333B313535303B313534373B313534343B313534313B313533383B313533353B313533323B313532390D0A523D313532353B313532323B313531383B313531353B313531333B313531303B313530383B313530363B313530343B313530320D0A523D313530303B313439383B313439363B313439343B313439313B313438393B313438373B313438353B313438333B313438300D0A523D313437383B313437373B313437353B313437333B313437313B313436393B313436383B313436363B313436353B313436340D0A523D313436323B313436313B313436303B313435393B313435383B313435373B313435363B313435343B313435333B313435330D0A523D313435323B313435323B313435313B313435313B313435303B313435303B313434393B313434393B313434383B313434380D0A523D313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434383B313434380D0A523D313434383B313434383B313434383B313434393B313434393B313435303B313435303B313435313B313435313B313435320D0A523D313435323B313435333B313435343B313435353B313435363B313435373B313435383B313435393B313436303B313436310D0A523D313436323B313436343B313436353B313436373B313436383B313437303B313437323B313437343B313437363B313437380D0A523D313438303B313438323B313438343B313438363B313438393B313439313B313439333B313439353B313439383B313530310D0A523D313530343B313530373B313530393B313531323B313531353B313531383B313532303B313532333B313532373B313533300D0A523D313533333B313533373B313534303B313534343B313534373B313535313B313535353B313535393B313536333B313536370D0A523D313537313B313537353B313538303B313538343B313538383B313539333B313539373B313630323B313630363B313631310D0A523D313631373B313632323B313632373B313633323B313633373B313634333B313634383B313635343B313636303B313636350D0A523D313637313B313637373B313638333B313638393B313639363B313730323B313730393B313731353B313732313B313732390D0A523D313733363B313734323B313734393B313735363B313736343B313737313B313737393B313738373B313739353B313830330D0A523D313831313B313831393B313832383B313833363B313834353B313835343B313836333B313837323B313838323B313839320D0A523D313930313B313931313B313932313B313933323B313934323B313935333B313936343B313937363B313938373B313939380D0A523D323031303B323032323B323033343B323034363B323035393B323037323B323038353B323039393B323131333B323132370D0A523D323134303B323135343B323136393B323138333B323139383B323231333B323232393B323234343B323236303B323237360D0A523D323239323B323330383B323332353B323334323B323335393B323337373B323339353B323431333B323433313B323435300D0A523D323436393B323438383B323530383B323532373B323534373B323536383B323538393B323631303B323633323B323635330D0A523D323637353B323639353B323731353B323733353B323735343B323737303B323738353B323739353B323830343B323830370D0A523D323830393B323830373B323830353B323830303B323739363B323739303B323738343B323737383B323737323B323736350D0A523D323735383B323735323B323734353B323733383B323733323B323732353B323731393B323731333B323730363B323730300D0A523D323639353B323638393B323638333B323637383B323637323B323636363B323636313B323635363B323635313B323634360D0A523D323634313B323633363B323633313B323632353B323632313B323631363B323631303B323630353B323539393B323539340D0A523D323538383B323538323B323537363B323537303B323536343B323535373B323535313B323534343B323533373B323533310D0A523D323532343B323531373B323531303B323530333B323439363B323439303B323438343B323437383B323437313B323436350D0A523D323435393B323435333B323434373B323434313B323433363B323433313B323432353B323432303B323431343B323430390D0A523D323430343B323339393B323339353B323339303B323338363B323338323B323337373B323337333B323336393B323336350D0A523D323336313B323335373B323335333B323334393B323334363B323334323B323333393B323333363B323333333B323333300D0A523D323332373B323332343B323332323B323331393B323331373B323331343B323331323B323331303B323330373B323330350D0A523D323330333B323330313B323330303B323239383B323239373B323239353B323239343B323239323B323239313B323239300D0A523D323238393B323238383B323238373B323238373B323238363B323238363B323238353B323238353B323238353B323238350D0A523D323238353B323238353B323238353B323238353B323238363B323238363B323238363B323238363B323238373B323238370D0A523D323238383B323238393B323239303B323239303B323239313B323239323B323239333B323239343B323239353B323239360D0A523D323239383B323239393B323330313B323330343B323330363B323330383B323331313B323331333B323331363B323331380D0A523D323332313B323332333B323332353B323332373B323332393B323333313B323333333B323333353B323333363B323333370D0A523D323333383B323333393B323333393B323333383B323333363B323333333B323332393B323332333B323331363B323330380D0A523D323239393B323238383B323237373B323236353B323235333B323234303B323232373B323231343B323230303B323138370D0A523D323137343B323136303B323134373B323133353B323132323B323130393B323039373B323038343B323037323B323036300D0A523D323034383B323033363B323032353B323031343B323030333B313939323B313938313B313937303B313936303B313934390D0A523D313933393B313933303B313932303B313931303B313930313B313839323B313838333B313837333B313836343B313835350D0A523D313834363B313833383B313833303B313832323B313831333B313830353B313739383B313739303B313738323B313737350D0A523D313736383B313736313B313735333B313734363B313733393B313733323B313732363B313731393B313731323B313730360D0A523D313730303B313639343B313638383B313638323B313637353B313637303B313636343B313635383B313635333B313634370D0A523D313634323B313633363B313633303B313632353B313632303B313631353B313631303B313630353B313630313B313539360D0A523D313539323B313538373B313538333B313537383B313537343B313537303B313536363B313536323B313535383B313535340D0A523D313535303B313534363B313534333B313533393B313533363B313533323B313532393B313532363B313532333B313532300D0A523D313531373B313531343B313531303B313530373B313530353B313530323B313530303B313439383B313439363B313439330D0A523D313439313B313438393B313438373B313438353B313438333B313438313B313437393B313437383B313437363B313437350D0A523D313437333B313437323B313437303B313436383B313436373B313436363B313436353B313436343B313436333B313436320D0A523D313436303B313436303B313435393B313435393B313435383B313435373B313435363B313435363B313435353B313435350D0A523D313435353B313435353B313435343B313435343B313435333B313435333B313435333B313435333B313435333B313435330D0A523D313435333B313435333B313435333B313435343B313435343B313435343B313435343B313435353B313435353B313435350D0A523D313435353B313435363B313435363B313435373B313435373B313435383B313435383B313435393B313436303B313436310D0A523D313436313B313436333B313436343B313436353B313436363B313436373B313436383B313436393B313437313B313437330D0A523D313437343B313437363B313437373B313437393B313438313B313438333B313438353B313438373B313438383B313439300D0A523D313439323B313439353B313439383B313530303B313530323B313530343B313530373B313530393B313531323B313531360D0A523D313531393B313532323B313532353B313532383B313533313B313533343B313533373B313534303B313534343B313534370D0A523D313535303B313535343B313535373B313536313B313536353B313536393B313537333B313537373B313538313B313538360D0A523D313539303B313539343B313539383B313630323B313630373B313631323B313631363B313632313B313632363B313633310D0A523D313633373B313634323B313634373B313635323B313635373B313636333B313636383B313637343B313638303B313638360D0A523D313639323B313639383B313730333B313730393B313731363B313732323B313732383B313733353B313734313B313734390D0A523D313735363B313736333B313737303B313737383B313738363B313739333B313830313B313831303B313831383B313832370D0A523D313833363B313834363B313835363B313836353B313837353B313838343B313839333B313930323B313931323B313932330D0A523D313933343B313934353B313935363B313936363B313937383B313938393B323030303B323031323B323032333B323033350D0A523D323034373B323036303B323037333B323038353B323039393B323131323B323132353B323133393B323135333B323136380D0A523D323138323B323139373B323231313B323232373B323234333B323235383B323237343B323238393B323330353B323332320D0A523D323333393B323335373B323337343B323339323B323431313B323432393B323434373B323436373B323438363B323530360D0A523D323532353B323534353B323536353B323538353B323630363B323632383B323635303B323637323B323639343B323731360D0A523D323733393B323735393B323737383B323739323B323830353B323831323B323831383B323832303B323832323B323832300D0A523D323831383B323831343B323831303B323830343B323739393B323739323B323738363B323737393B323737323B323736350D0A523D323735383B323735323B323734353B323733383B323733323B323732353B323731393B323731333B323730373B323730310D0A523D323639363B323639303B323638353B323638303B323637353B323636393B323636353B323636303B323635363B323635310D0A523D323634363B323634323B323633373B323633333B323632393B323632353B323632313B323631373B323631343B323631300D0A523D323630373B323630343B323630313B323539383B323539363B323539333B323539313B323538393B323538363B323538340D0A523D323538313B323537393B323537373B323537353B323537333B323537313B323537303B323536383B323536373B323536360D0A523D323536343B323536333B323536313B323536303B323535393B323535393B323535383B323535383B323535373B323535370D0A56424F583D32392E30373B32392E30370D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35362E34343B35362E34340D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                14) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    14) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3134332E3336303B3134332E3336300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35312E30333B35312E30330D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323531303B323531323B323531343B323531373B323531393B323532313B323532333B323532363B323532393B323533320D0A523D323533353B323533373B323534303B323534333B323534363B323534393B323535323B323535353B323535373B323536300D0A523D323536333B323536373B323537303B323537333B323537373B323538303B323538333B323538373B323539303B323539330D0A523D323539373B323630303B323630343B323630373B323631313B323631343B323631383B323632323B323632363B323633300D0A523D323633343B323633383B323634323B323634353B323634393B323635323B323635363B323636303B323636333B323636360D0A523D323636393B323637323B323637353B323637383B323638303B323638333B323638353B323638373B323638383B323639300D0A523D323639313B323639323B323639333B323639333B323639343B323639343B323639343B323639333B323639323B323639310D0A523D323638393B323638383B323638363B323638333B323638303B323637363B323637323B323636373B323636323B323635340D0A523D323634373B323633383B323632383B323631383B323630373B323539353B323538333B323537313B323535393B323534350D0A523D323533323B323531393B323530353B323439323B323437393B323436353B323435323B323433393B323432353B323431320D0A523D323339393B323338353B323337323B323336303B323334373B323333343B323332313B323330393B323239373B323238340D0A523D323237313B323235393B323234373B323233353B323232343B323231323B323230303B323138383B323137373B323136360D0A523D323135343B323134333B323133323B323132323B323131313B323130313B323039313B323038313B323037313B323036310D0A523D323035313B323034323B323033323B323032323B323031343B323030353B313939363B313938373B313937383B313936390D0A523D313936303B313935323B313934343B313933363B313932373B313931393B313931323B313930343B313839363B313838390D0A523D313838313B313837343B313836363B313836303B313835333B313834363B313833393B313833323B313832363B313832300D0A523D313831333B313830373B313830313B313739353B313738383B313738333B313737373B313737313B313736363B313736300D0A523D313735353B313734393B313734333B313733383B313733333B313732383B313732333B313731383B313731333B313730380D0A523D313730333B313639383B313639343B313638393B313638353B313638313B313637363B313637323B313636383B313636350D0A523D313636313B313635373B313635333B313634393B313634363B313634323B313633393B313633353B313633323B313632390D0A523D313632363B313632333B313631393B313631363B313631343B313631313B313630393B313630363B313630343B313630310D0A523D313539383B313539363B313539343B313539323B313539303B313538383B313538353B313538333B313538313B313537390D0A523D313537373B313537363B313537343B313537323B313537313B313536393B313536383B313536373B313536363B313536340D0A523D313536333B313536313B313536303B313535393B313535383B313535383B313535373B313535363B313535353B313535350D0A523D313535343B313535343B313535333B313535333B313535323B313535323B313535313B313535313B313535313B313535310D0A523D313535313B313535313B313535313B313535313B313535313B313535323B313535323B313535333B313535333B313535340D0A523D313535343B313535353B313535353B313535363B313535363B313535373B313535383B313535393B313535393B313536300D0A523D313536323B313536333B313536353B313536363B313536373B313536383B313537303B313537313B313537333B313537340D0A523D313537353B313537363B313537373B313537393B313538303B313538323B313538343B313538363B313538383B313539300D0A523D313539323B313539343B313539363B313539383B313630303B313630323B313630343B313630363B313630383B313631310D0A523D313631343B313631373B313632303B313632333B313632363B313632393B313633323B313633353B313633393B313634320D0A523D313634363B313635303B313635333B313635373B313636313B313636353B313636393B313637343B313637383B313638330D0A523D313638383B313639323B313639373B313730313B313730363B313731313B313731363B313732313B313732353B313733300D0A523D313733363B313734313B313734373B313735323B313735383B313736343B313736393B313737353B313738313B313738360D0A523D313739323B313739383B313830343B313831313B313831383B313832343B313833313B313833373B313834333B313835310D0A523D313835383B313836343B313837313B313837383B313838363B313839333B313930313B313930393B313931363B313932340D0A523D313933323B313934313B313935303B313935383B313936363B313937353B313938343B313939333B323030323B323031320D0A523D323032313B323033303B323034303B323035303B323035393B323036393B323037393B323038393B323130303B323131300D0A523D323132313B323133323B323134323B323135333B323136343B323137363B323138373B323139383B323231313B323232330D0A523D323233353B323234383B323236303B323237333B323238363B323239393B323331333B323332363B323334303B323335340D0A523D323336383B323338313B323339353B323430393B323432343B323433383B323435323B323436373B323438313B323439350D0A523D323531303B323532343B323533373B323535313B323536343B323537363B323538383B323539383B323630383B323631370D0A523D323632363B323633323B323633393B323634353B323635313B323635353B323635393B323636323B323636353B323636370D0A523D323637303B323637323B323637343B323637353B323637373B323637383B323637393B323638303B323638303B323638310D0A523D323638303B323637393B323637383B323637373B323637343B323637323B323636393B323636373B323636343B323636310D0A523D323635383B323635353B323635313B323634383B323634353B323634313B323633393B323633363B323633333B323632390D0A523D323632353B323632323B323631383B323631353B323631323B323630393B323630353B323630323B323630303B323539370D0A523D323539353B323539323B323539303B323538373B323538353B323538333B323538303B323537383B323537353B323537330D0A523D323537303B323536383B323536373B323536353B323536333B323536313B323536303B323535383B323535363B323535350D0A523D323535343B323535333B323535313B323535303B323534393B323534383B323534373B323534373B323534363B323534360D0A523D323534353B323534343B323534343B323534333B323534323B323534313B323534313B323534303B323534303B323533390D0A523D323533383B323533383B323533383B323533373B323533373B323533363B323533363B323533363B323533363B323533350D0A523D323533353B323533353B323533353B323533353B323533353B323533353B323533353B323533353B323533353B323533360D0A523D323533363B323533373B323533373B323533373B323533373B323533383B323533383B323533393B323533393B323534300D0A523D323534303B323534313B323534323B323534333B323534343B323534353B323534363B323534363B323534373B323534380D0A523D323534393B323535303B323535313B323535313B323535323B323535323B323535333B323535333B323535343B323535340D0A523D323535353B323535353B323535353B323535353B323535353B323535353B323535343B323535343B323535333B323535330D0A523D323535323B323535313B323534393B323534383B323534363B323534343B323534313B323533383B323533353B323533320D0A523D323532393B323532343B323531393B323531343B323530383B323530313B323439333B323438353B323437373B323436380D0A523D323436303B323435303B323434313B323433323B323432333B323431333B323430333B323339333B323338333B323337330D0A523D323336323B323335323B323334313B323333313B323332303B323330393B323239383B323238383B323237373B323236370D0A523D323235373B323234363B323233353B323232343B323231343B323230333B323139323B323138313B323137313B323136300D0A523D323135303B323134303B323133303B323131393B323130393B323039393B323038393B323038303B323036393B323035390D0A523D323035303B323034313B323033313B323032313B323031323B323030333B313939343B313938353B313937363B313936370D0A523D313935383B313935303B313934313B313933323B313932343B313931353B313930363B313839383B313839303B313838330D0A523D313837373B313837303B313836323B313835353B313834363B313833393B313833323B313832353B313831383B313831320D0A523D313830353B313739393B313739333B313738373B313738303B313737353B313736393B313736333B313735383B313735320D0A523D313734373B313734323B313733373B313733323B313732373B313732333B313731383B313731333B313730393B313730350D0A523D313730313B313639363B313639313B313638373B313638323B313637383B313637333B313636393B313636353B313636310D0A523D313635373B313635333B313635303B313634363B313634333B313634303B313633373B313633333B313633303B313632370D0A523D313632343B313632313B313631383B313631353B313631323B313630393B313630373B313630343B313630323B313539390D0A523D313539363B313539343B313539323B313539303B313538383B313538363B313538343B313538323B313538303B313537380D0A523D313537363B313537343B313537323B313537303B313536393B313536383B313536373B313536363B313536353B313536330D0A523D313536323B313536303B313535393B313535393B313535383B313535373B313535363B313535363B313535353B313535350D0A523D313535343B313535343B313535333B313535333B313535323B313535323B313535313B313535313B313535313B313535310D0A523D313535313B313535313B313535313B313535313B313535313B313535313B313535313B313535323B313535323B313535330D0A523D313535333B313535343B313535343B313535353B313535353B313535363B313535363B313535373B313535383B313535390D0A523D313536303B313536323B313536333B313536343B313536353B313536363B313536383B313536393B313537313B313537330D0A523D313537343B313537363B313537383B313538303B313538323B313538343B313538363B313538383B313539303B313539330D0A523D313539353B313539383B313630303B313630323B313630353B313630383B313631313B313631333B313631363B313631390D0A523D313632323B313632353B313632383B313633313B313633343B313633373B313634313B313634343B313634373B313635300D0A523D313635343B313635383B313636323B313636363B313637303B313637343B313637383B313638323B313638373B313639310D0A523D313639353B313639393B313730343B313730383B313731333B313731383B313732323B313732373B313733323B313733370D0A523D313734333B313734383B313735333B313735383B313736333B313736393B313737343B313738303B313738363B313739310D0A523D313739373B313830333B313830393B313831353B313832323B313832383B313833353B313834313B313834373B313835340D0A523D313836313B313836383B313837353B313838323B313838393B313839373B313930343B313931313B313931383B313932360D0A523D313933343B313934313B313935303B313935383B313936363B313937343B313938333B313939313B323030303B323030380D0A523D323031363B323032353B323033343B323034333B323035323B323036313B323037303B323037383B323038383B323039370D0A523D323130363B323131353B323132353B323133343B323134333B323135323B323136323B323137323B323138313B323139300D0A523D323139393B323230373B323231373B323232363B323233343B323234333B323235313B323235393B323236383B323237360D0A523D323238343B323239313B323239393B323330353B323331323B323331383B323332343B323332393B323333353B323334300D0A523D323334343B323334383B323335333B323335373B323336313B323336343B323336373B323337303B323337333B323337360D0A523D323337383B323338313B323338333B323338353B323338373B323338393B323339313B323339333B323339363B323339380D0A523D323339393B323430313B323430333B323430353B323430373B323430383B323431303B323431323B323431343B323431350D0A523D323431373B323431393B323432313B323432323B323432333B323432353B323432363B323432383B323432393B323433300D0A523D323433313B323433333B323433343B323433353B323433363B323433383B323433393B323434303B323434313B323434330D0A523D323434343B323434353B323434373B323434383B323434393B323435303B323435323B323435333B323435343B323435350D0A523D323435373B323435383B323435393B323436313B323436323B323436343B323436353B323436373B323436383B323437300D0A523D323437313B323437333B323437353B323437373B323437383B323438303B323438323B323438343B323438363B323438380D0A523D323439303B323439323B323439343B323439363B323439393B323530303B323530323B323530343B323530363B323530380D0A545243464D543D313B313030303B453B4C3B460D0A523D323534353B323534363B323534363B323534373B323534373B323534383B323534393B323535303B323535313B323535330D0A523D323535343B323535353B323535363B323535383B323536303B323536313B323536333B323536353B323536373B323536380D0A523D323537303B323537333B323537353B323537383B323538303B323538333B323538353B323538373B323539303B323539320D0A523D323539353B323539373B323630303B323630323B323630353B323630393B323631323B323631353B323631383B323632320D0A523D323632353B323632393B323633333B323633363B323633393B323634313B323634353B323634383B323635313B323635350D0A523D323635383B323636313B323636343B323636373B323636393B323637323B323637343B323637373B323637383B323637390D0A523D323638303B323638313B323638303B323638303B323637393B323637383B323637373B323637353B323637343B323637320D0A523D323637303B323636373B323636353B323636323B323635393B323635353B323635313B323634353B323633393B323633320D0A523D323632363B323631373B323630383B323539383B323538383B323537363B323536343B323535313B323533373B323532340D0A523D323531303B323439353B323438313B323436373B323435323B323433383B323432343B323430393B323339353B323338310D0A523D323336383B323335343B323334303B323332363B323331333B323239393B323238363B323237333B323236303B323234380D0A523D323233353B323232333B323231313B323139383B323138373B323137363B323136343B323135333B323134323B323133320D0A523D323132313B323131303B323130303B323038393B323037393B323036393B323035393B323035303B323034303B323033300D0A523D323032313B323031323B323030323B313939333B313938343B313937353B313936363B313935383B313935303B313934310D0A523D313933323B313932343B313931363B313930393B313930313B313839333B313838363B313837383B313837313B313836340D0A523D313835383B313835313B313834333B313833373B313833313B313832343B313831383B313831313B313830343B313739380D0A523D313739323B313738363B313738313B313737353B313736393B313736343B313735383B313735323B313734373B313734310D0A523D313733363B313733303B313732353B313732313B313731363B313731313B313730363B313730313B313639373B313639320D0A523D313638383B313638333B313637383B313637343B313636393B313636353B313636313B313635373B313635333B313635300D0A523D313634363B313634323B313633393B313633353B313633323B313632393B313632363B313632333B313632303B313631370D0A523D313631343B313631313B313630383B313630363B313630343B313630323B313630303B313539383B313539363B313539340D0A523D313539323B313539303B313538383B313538363B313538343B313538323B313538303B313537393B313537373B313537360D0A523D313537353B313537343B313537333B313537313B313537303B313536383B313536373B313536363B313536353B313536330D0A523D313536323B313536303B313535393B313535393B313535383B313535373B313535363B313535363B313535353B313535350D0A523D313535343B313535343B313535333B313535333B313535323B313535323B313535313B313535313B313535313B313535310D0A523D313535313B313535313B313535313B313535313B313535313B313535323B313535323B313535333B313535333B313535340D0A523D313535343B313535353B313535353B313535363B313535373B313535383B313535383B313535393B313536303B313536310D0A523D313536333B313536343B313536363B313536373B313536383B313536393B313537313B313537323B313537343B313537360D0A523D313537373B313537393B313538313B313538333B313538353B313538383B313539303B313539323B313539343B313539360D0A523D313539383B313630313B313630343B313630363B313630393B313631313B313631343B313631363B313631393B313632330D0A523D313632363B313632393B313633323B313633353B313633393B313634323B313634363B313634393B313635333B313635370D0A523D313636313B313636353B313636383B313637323B313637363B313638313B313638353B313638393B313639343B313639380D0A523D313730333B313730383B313731333B313731383B313732333B313732383B313733333B313733383B313734333B313734390D0A523D313735353B313736303B313736363B313737313B313737373B313738333B313738383B313739353B313830313B313830370D0A523D313831333B313832303B313832363B313833323B313833393B313834363B313835333B313836303B313836363B313837340D0A523D313838313B313838393B313839363B313930343B313931323B313931393B313932373B313933363B313934343B313935320D0A523D313936303B313936393B313937383B313938373B313939363B323030353B323031343B323032323B323033323B323034320D0A523D323035313B323036313B323037313B323038313B323039313B323130313B323131313B323132323B323133323B323134330D0A523D323135343B323136363B323137373B323138383B323230303B323231323B323232343B323233353B323234373B323235390D0A523D323237313B323238343B323239373B323330393B323332313B323333343B323334373B323336303B323337323B323338350D0A523D323339393B323431323B323432353B323433393B323435323B323436353B323437393B323439323B323530353B323531390D0A523D323533323B323534353B323535393B323537313B323538333B323539353B323630373B323631383B323632383B323633380D0A523D323634373B323635343B323636323B323636373B323637323B323637363B323638303B323638333B323638363B323638380D0A523D323638393B323639313B323639323B323639333B323639343B323639343B323639343B323639333B323639333B323639320D0A523D323639313B323639303B323638383B323638373B323638353B323638333B323638303B323637383B323637353B323637320D0A523D323636393B323636363B323636333B323636303B323635363B323635323B323634393B323634353B323634323B323633380D0A523D323633343B323633303B323632363B323632323B323631383B323631343B323631313B323630373B323630343B323630300D0A523D323539373B323539333B323539303B323538373B323538333B323538303B323537373B323537333B323537303B323536370D0A523D323536333B323536303B323535373B323535353B323535323B323534393B323534363B323534333B323534303B323533370D0A523D323533353B323533323B323532393B323532363B323532333B323532313B323531393B323531373B323531343B323531320D0A523D323531303B323530383B323530363B323530343B323530323B323530303B323439393B323439363B323439343B323439320D0A523D323439303B323438383B323438363B323438343B323438323B323438303B323437383B323437373B323437353B323437330D0A523D323437313B323437303B323436383B323436373B323436353B323436343B323436323B323436313B323435393B323435380D0A523D323435373B323435353B323435343B323435333B323435323B323435303B323434393B323434383B323434373B323434350D0A523D323434343B323434333B323434313B323434303B323433393B323433383B323433363B323433353B323433343B323433330D0A523D323433313B323433303B323432393B323432383B323432363B323432353B323432333B323432323B323432313B323431390D0A523D323431373B323431353B323431343B323431323B323431303B323430383B323430373B323430353B323430333B323430310D0A523D323339393B323339383B323339363B323339333B323339313B323338393B323338373B323338353B323338333B323338310D0A523D323337383B323337363B323337333B323337303B323336373B323336343B323336313B323335373B323335333B323334380D0A523D323334343B323334303B323333353B323332393B323332343B323331383B323331323B323330353B323239393B323239310D0A523D323238343B323237363B323236383B323235393B323235313B323234333B323233343B323232363B323231373B323230370D0A523D323139393B323139303B323138313B323137323B323136323B323135323B323134333B323133343B323132353B323131350D0A523D323130363B323039373B323038383B323037383B323037303B323036313B323035323B323034333B323033343B323032350D0A523D323031363B323030383B323030303B313939313B313938333B313937343B313936363B313935383B313935303B313934310D0A523D313933343B313932363B313931383B313931313B313930343B313839373B313838393B313838323B313837353B313836380D0A523D313836313B313835343B313834373B313834313B313833353B313832383B313832323B313831353B313830393B313830330D0A523D313739373B313739313B313738363B313738303B313737343B313736393B313736333B313735383B313735333B313734380D0A523D313734333B313733373B313733323B313732373B313732323B313731383B313731333B313730383B313730343B313639390D0A523D313639353B313639313B313638373B313638323B313637383B313637343B313637303B313636363B313636323B313635380D0A523D313635343B313635303B313634373B313634343B313634313B313633373B313633343B313633313B313632383B313632350D0A523D313632323B313631393B313631363B313631333B313631313B313630383B313630353B313630323B313630303B313539380D0A523D313539353B313539333B313539303B313538383B313538363B313538343B313538323B313538303B313537383B313537360D0A523D313537343B313537333B313537313B313536393B313536383B313536363B313536353B313536343B313536333B313536320D0A523D313536303B313535393B313535383B313535373B313535363B313535363B313535353B313535353B313535343B313535340D0A523D313535333B313535333B313535323B313535323B313535313B313535313B313535313B313535313B313535313B313535310D0A523D313535313B313535313B313535313B313535313B313535313B313535323B313535323B313535333B313535333B313535340D0A523D313535343B313535353B313535353B313535363B313535363B313535373B313535383B313535393B313535393B313536300D0A523D313536323B313536333B313536353B313536363B313536373B313536383B313536393B313537303B313537323B313537340D0A523D313537363B313537383B313538303B313538323B313538343B313538363B313538383B313539303B313539323B313539340D0A523D313539363B313539393B313630323B313630343B313630373B313630393B313631323B313631353B313631383B313632310D0A523D313632343B313632373B313633303B313633333B313633373B313634303B313634333B313634363B313635303B313635330D0A523D313635373B313636313B313636353B313636393B313637333B313637383B313638323B313638373B313639313B313639360D0A523D313730313B313730353B313730393B313731333B313731383B313732333B313732373B313733323B313733373B313734320D0A523D313734373B313735323B313735383B313736333B313736393B313737353B313738303B313738373B313739333B313739390D0A523D313830353B313831323B313831383B313832353B313833323B313833393B313834363B313835353B313836323B313837300D0A523D313837373B313838333B313839303B313839383B313930363B313931353B313932343B313933323B313934313B313935300D0A523D313935383B313936373B313937363B313938353B313939343B323030333B323031323B323032313B323033313B323034310D0A523D323035303B323035393B323036393B323038303B323038393B323039393B323130393B323131393B323133303B323134300D0A523D323135303B323136303B323137313B323138313B323139323B323230333B323231343B323232343B323233353B323234360D0A523D323235373B323236373B323237373B323238383B323239383B323330393B323332303B323333313B323334313B323335320D0A523D323336323B323337333B323338333B323339333B323430333B323431333B323432333B323433323B323434313B323435300D0A523D323436303B323436383B323437373B323438353B323439333B323530313B323530383B323531343B323531393B323532340D0A523D323532393B323533323B323533353B323533383B323534313B323534343B323534363B323534383B323534393B323535310D0A523D323535323B323535333B323535333B323535343B323535343B323535353B323535353B323535353B323535353B323535350D0A523D323535353B323535343B323535343B323535333B323535333B323535323B323535323B323535313B323535313B323535300D0A523D323534393B323534383B323534373B323534363B323534363B323534353B323534343B323534333B323534323B323534310D0A523D323534303B323534303B323533393B323533393B323533383B323533383B323533373B323533373B323533373B323533370D0A523D323533363B323533363B323533353B323533353B323533353B323533353B323533353B323533353B323533353B323533350D0A523D323533353B323533353B323533363B323533363B323533363B323533363B323533373B323533373B323533383B323533380D0A523D323533383B323533393B323534303B323534303B323534313B323534313B323534323B323534333B323534343B323534340D0A56424F583D33312E30333B33312E30330D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35332E38373B35332E38370D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                15) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    15) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3132382E3239303B3132382E3239300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D34382E30363B34382E30360D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323337333B323337363B323337383B323338313B323338343B323338363B323338383B323339303B323339313B323339330D0A523D323339363B323339383B323430313B323430343B323430373B323430393B323431313B323431323B323431343B323431370D0A523D323431393B323432323B323432353B323432383B323433303B323433323B323433343B323433353B323433373B323433380D0A523D323433393B323434313B323434313B323434323B323434313B323434303B323433393B323433383B323433383B323433370D0A523D323433373B323433363B323433353B323433353B323433343B323433343B323433333B323433323B323433313B323433300D0A523D323432383B323432353B323432323B323431393B323431363B323431333B323430383B323430333B323339373B323339310D0A523D323338343B323337373B323337303B323336323B323335353B323334383B323334303B323333333B323332363B323331380D0A523D323331303B323330323B323239343B323238363B323237373B323236393B323236303B323235323B323234333B323233350D0A523D323232373B323231393B323231313B323230333B323139353B323138373B323137383B323137303B323136323B323135340D0A523D323134373B323133393B323133313B323132343B323131363B323130393B323130323B323039353B323038383B323038310D0A523D323037353B323036383B323036323B323035363B323035303B323034343B323033383B323033323B323032363B323032300D0A523D323031343B323030393B323030333B313939373B313939313B313938353B313938303B313937343B313936383B313936320D0A523D313935363B313935303B313934343B313933383B313933333B313932373B313932313B313931363B313931303B313930340D0A523D313839393B313839333B313838383B313838333B313837373B313837323B313836363B313836313B313835353B313835300D0A523D313834353B313834303B313833353B313833303B313832353B313832313B313831363B313831323B313830373B313830330D0A523D313739393B313739343B313739303B313738353B313738313B313737373B313737343B313737303B313736363B313736320D0A523D313735393B313735353B313735313B313734383B313734353B313734323B313733383B313733353B313733323B313732380D0A523D313732353B313732323B313731393B313731363B313731323B313730393B313730363B313730333B313730303B313639370D0A523D313639343B313639323B313638393B313638373B313638343B313638313B313637393B313637363B313637333B313637300D0A523D313636383B313636363B313636333B313636313B313635393B313635373B313635353B313635333B313635313B313634390D0A523D313634383B313634373B313634363B313634353B313634343B313634333B313634313B313633393B313633383B313633360D0A523D313633343B313633333B313633313B313633303B313632393B313632383B313632363B313632353B313632333B313632320D0A523D313632303B313631393B313631383B313631373B313631363B313631353B313631343B313631343B313631333B313631330D0A523D313631313B313631313B313631303B313630393B313630383B313630383B313630373B313630363B313630353B313630350D0A523D313630343B313630343B313630343B313630343B313630333B313630333B313630323B313630323B313630323B313630320D0A523D313630323B313630323B313630323B313630323B313630323B313630323B313630323B313630333B313630333B313630330D0A523D313630333B313630343B313630343B313630353B313630353B313630363B313630373B313630383B313630383B313630390D0A523D313630393B313631313B313631323B313631333B313631343B313631353B313631363B313631373B313631393B313632300D0A523D313632313B313632333B313632343B313632363B313632373B313632393B313633303B313633323B313633333B313633350D0A523D313633363B313633383B313634303B313634323B313634343B313634353B313634373B313634393B313635313B313635330D0A523D313635353B313635383B313636303B313636333B313636353B313636373B313636393B313637313B313637333B313637360D0A523D313637383B313638303B313638333B313638353B313638383B313639313B313639343B313639373B313730303B313730330D0A523D313730363B313730393B313731323B313731353B313731383B313732323B313732353B313732393B313733333B313733360D0A523D313734303B313734333B313734373B313735313B313735353B313735393B313736323B313736363B313737303B313737350D0A523D313737393B313738333B313738373B313739323B313739363B313830313B313830353B313831303B313831353B313831390D0A523D313832343B313832383B313833333B313833383B313834343B313834393B313835353B313836303B313836353B313837310D0A523D313837373B313838323B313838383B313839343B313930303B313930363B313931323B313931383B313932343B313933300D0A523D313933373B313934333B313935303B313935363B313936323B313936393B313937363B313938323B313938393B313939360D0A523D323030323B323030393B323031363B323032333B323033303B323033373B323034343B323035313B323035383B323036350D0A523D323037333B323038303B323038383B323039353B323130323B323130393B323131373B323132343B323133323B323133390D0A523D323134363B323135343B323136313B323136393B323137373B323138343B323139323B323230303B323230373B323231350D0A523D323232333B323233303B323233383B323234363B323235343B323236323B323237303B323237383B323238353B323239330D0A523D323330313B323330383B323331353B323332333B323333303B323333373B323334343B323335313B323335383B323336340D0A523D323337313B323337383B323338343B323339303B323339373B323430333B323431303B323431363B323432323B323432370D0A523D323433333B323433393B323434343B323434383B323435333B323435373B323436303B323436343B323436373B323436390D0A523D323437313B323437333B323437333B323437343B323437343B323437333B323437323B323437313B323436393B323436370D0A523D323436353B323436343B323436313B323435393B323435363B323435343B323435323B323435303B323434383B323434350D0A523D323434333B323434313B323433393B323433363B323433343B323433323B323433303B323432383B323432363B323432340D0A523D323432323B323432303B323431383B323431363B323431333B323431313B323430393B323430363B323430343B323430310D0A523D323339383B323339353B323339323B323338393B323338363B323338323B323337393B323337373B323337343B323337310D0A523D323336383B323336353B323336323B323335393B323335363B323335333B323335303B323334363B323334333B323334300D0A523D323333373B323333343B323333303B323332373B323332343B323332303B323331373B323331343B323331303B323330360D0A523D323330323B323239393B323239353B323239313B323238373B323238333B323237393B323237343B323237303B323236350D0A523D323236313B323235373B323235333B323234393B323234343B323234303B323233353B323233313B323232363B323232310D0A523D323231373B323231323B323230373B323230333B323139383B323139333B323138373B323138323B323137373B323137320D0A523D323136373B323136323B323135373B323135323B323134363B323134303B323133353B323132393B323132333B323131380D0A523D323131323B323130363B323130313B323039353B323039303B323038343B323037373B323037323B323036363B323036310D0A523D323035363B323035303B323034343B323033393B323033333B323032383B323032323B323031363B323031313B323030350D0A523D313939393B313939343B313938393B313938343B313937393B313937343B313936393B313936343B313935383B313935330D0A523D313934373B313934333B313933383B313933333B313932383B313932333B313931383B313931333B313930383B313930340D0A523D313839393B313839353B313839303B313838363B313838323B313837373B313837333B313836393B313836353B313836310D0A523D313835363B313835323B313834393B313834353B313834313B313833373B313833333B313832393B313832353B313832320D0A523D313831373B313831333B313830393B313830353B313830323B313739383B313739343B313739313B313738373B313738340D0A523D313738303B313737373B313737333B313737303B313736373B313736333B313736303B313735373B313735343B313735310D0A523D313734383B313734353B313734323B313733393B313733363B313733333B313733303B313732383B313732353B313732320D0A523D313731393B313731363B313731343B313731313B313730393B313730363B313730343B313730313B313639393B313639360D0A523D313639343B313639323B313638393B313638373B313638353B313638333B313638303B313637383B313637363B313637340D0A523D313637323B313637303B313636383B313636363B313636353B313636333B313636313B313635393B313635363B313635340D0A523D313635333B313635313B313634393B313634383B313634363B313634353B313634333B313634313B313633393B313633380D0A523D313633363B313633353B313633333B313633323B313633303B313632383B313632373B313632353B313632343B313632330D0A523D313632323B313632303B313631393B313631383B313631373B313631363B313631353B313631343B313631333B313631320D0A523D313631313B313631303B313630393B313630393B313630383B313630373B313630363B313630363B313630353B313630350D0A523D313630343B313630343B313630343B313630343B313630333B313630333B313630323B313630323B313630313B313630310D0A523D313630303B313630303B313630303B313630303B313630303B313630303B313630303B313630303B313630303B313630300D0A523D313539393B313539393B313539393B313539393B313630303B313630303B313630303B313630303B313630313B313630310D0A523D313630313B313630323B313630323B313630323B313630323B313630333B313630333B313630343B313630343B313630350D0A523D313630353B313630353B313630353B313630363B313630363B313630373B313630383B313630393B313630393B313631300D0A523D313631313B313631323B313631333B313631343B313631353B313631363B313631373B313631383B313631393B313632300D0A523D313632313B313632323B313632333B313632353B313632363B313632373B313632383B313633303B313633313B313633330D0A523D313633343B313633363B313633383B313633393B313634313B313634323B313634343B313634363B313634383B313634390D0A523D313635313B313635333B313635353B313635373B313635393B313636313B313636333B313636353B313636373B313636390D0A523D313637313B313637333B313637353B313637373B313637393B313638313B313638343B313638363B313638383B313639310D0A523D313639333B313639353B313639373B313730303B313730323B313730353B313730383B313731313B313731343B313731360D0A523D313731383B313732303B313732333B313732353B313732383B313733313B313733333B313733363B313733383B313734310D0A523D313734333B313734363B313734393B313735323B313735353B313735373B313736303B313736323B313736353B313736370D0A523D313737303B313737333B313737363B313737393B313738313B313738353B313738383B313739313B313739343B313739370D0A523D313830303B313830333B313830363B313830393B313831323B313831343B313831383B313832313B313832343B313832380D0A523D313833313B313833353B313833383B313834313B313834343B313834383B313835323B313835353B313835393B313836320D0A523D313836353B313836393B313837333B313837373B313838303B313838343B313838373B313839313B313839353B313839390D0A523D313930333B313930373B313931313B313931353B313931393B313932333B313932373B313933313B313933353B313933390D0A523D313934333B313934383B313935323B313935373B313936323B313936363B313937303B313937343B313937393B313938330D0A523D313938373B313939313B313939363B323030303B323030353B323030393B323031333B323031383B323032323B323032370D0A523D323033313B323033353B323034303B323034343B323034383B323035323B323035363B323036313B323036353B323036390D0A523D323037333B323037373B323038313B323038363B323039303B323039343B323130303B323130353B323131313B323131360D0A523D323132313B323132363B323133303B323133353B323133393B323134333B323134383B323135333B323135393B323136350D0A523D323137313B323137373B323138323B323138373B323139323B323139383B323230333B323230383B323231333B323231380D0A523D323232333B323232373B323233323B323233383B323234333B323234383B323235333B323235383B323236333B323236380D0A523D323237333B323237383B323238333B323238383B323239333B323239383B323330333B323330383B323331333B323331370D0A523D323332313B323332353B323332393B323333333B323333363B323333383B323334303B323334333B323334353B323334380D0A523D323335303B323335333B323335363B323335393B323336323B323336343B323336363B323336373B323336383B323337300D0A545243464D543D313B313030303B453B4C3B460D0A523D323336383B323337313B323337343B323337373B323337393B323338323B323338363B323338393B323339323B323339350D0A523D323339383B323430313B323430343B323430363B323430393B323431313B323431333B323431363B323431383B323432300D0A523D323432323B323432343B323432363B323432383B323433303B323433323B323433343B323433363B323433393B323434310D0A523D323434333B323434353B323434383B323435303B323435323B323435343B323435363B323435393B323436313B323436340D0A523D323436353B323436373B323436393B323437313B323437323B323437333B323437343B323437343B323437333B323437330D0A523D323437313B323436393B323436373B323436343B323436303B323435373B323435333B323434383B323434343B323433390D0A523D323433333B323432373B323432323B323431363B323431303B323430333B323339373B323339303B323338343B323337380D0A523D323337313B323336343B323335383B323335313B323334343B323333373B323333303B323332333B323331353B323330380D0A523D323330313B323239333B323238353B323237383B323237303B323236323B323235343B323234363B323233383B323233300D0A523D323232333B323231353B323230373B323230303B323139323B323138343B323137373B323136393B323136313B323135340D0A523D323134363B323133393B323133323B323132343B323131373B323130393B323130323B323039353B323038383B323038300D0A523D323037333B323036353B323035383B323035313B323034343B323033373B323033303B323032333B323031363B323030390D0A523D323030323B313939363B313938393B313938323B313937363B313936393B313936323B313935363B313935303B313934330D0A523D313933373B313933303B313932343B313931383B313931323B313930363B313930303B313839343B313838383B313838320D0A523D313837373B313837313B313836353B313836303B313835353B313834393B313834343B313833383B313833333B313832380D0A523D313832343B313831393B313831353B313831303B313830353B313830313B313739363B313739323B313738373B313738330D0A523D313737393B313737353B313737303B313736363B313736323B313735393B313735353B313735313B313734373B313734330D0A523D313734303B313733363B313733333B313732393B313732353B313732323B313731383B313731353B313731323B313730390D0A523D313730363B313730333B313730303B313639373B313639343B313639313B313638383B313638353B313638333B313638300D0A523D313637383B313637363B313637333B313637313B313636393B313636373B313636353B313636333B313636303B313635380D0A523D313635353B313635333B313635313B313634393B313634373B313634353B313634343B313634323B313634303B313633380D0A523D313633363B313633353B313633333B313633323B313633303B313632393B313632373B313632363B313632343B313632330D0A523D313632313B313632303B313631393B313631373B313631363B313631353B313631343B313631333B313631323B313631310D0A523D313630393B313630393B313630383B313630383B313630373B313630363B313630353B313630353B313630343B313630340D0A523D313630333B313630333B313630333B313630333B313630323B313630323B313630323B313630323B313630323B313630320D0A523D313630323B313630323B313630323B313630323B313630323B313630333B313630333B313630343B313630343B313630340D0A523D313630343B313630353B313630353B313630363B313630373B313630383B313630383B313630393B313631303B313631310D0A523D313631313B313631333B313631333B313631343B313631343B313631353B313631363B313631373B313631383B313631390D0A523D313632303B313632323B313632333B313632353B313632363B313632383B313632393B313633303B313633313B313633330D0A523D313633343B313633363B313633383B313633393B313634313B313634333B313634343B313634353B313634363B313634370D0A523D313634383B313634393B313635313B313635333B313635353B313635373B313635393B313636313B313636333B313636360D0A523D313636383B313637303B313637333B313637363B313637393B313638313B313638343B313638373B313638393B313639320D0A523D313639343B313639373B313730303B313730333B313730363B313730393B313731323B313731363B313731393B313732320D0A523D313732353B313732383B313733323B313733353B313733383B313734323B313734353B313734383B313735313B313735350D0A523D313735393B313736323B313736363B313737303B313737343B313737373B313738313B313738353B313739303B313739340D0A523D313739393B313830333B313830373B313831323B313831363B313832313B313832353B313833303B313833353B313834300D0A523D313834353B313835303B313835353B313836313B313836363B313837323B313837373B313838333B313838383B313839330D0A523D313839393B313930343B313931303B313931363B313932313B313932373B313933333B313933383B313934343B313935300D0A523D313935363B313936323B313936383B313937343B313938303B313938353B313939313B313939373B323030333B323030390D0A523D323031343B323032303B323032363B323033323B323033383B323034343B323035303B323035363B323036323B323036380D0A523D323037353B323038313B323038383B323039353B323130323B323130393B323131363B323132343B323133313B323133390D0A523D323134373B323135343B323136323B323137303B323137383B323138373B323139353B323230333B323231313B323231390D0A523D323232373B323233353B323234333B323235323B323236303B323236393B323237373B323238363B323239343B323330320D0A523D323331303B323331383B323332363B323333333B323334303B323334383B323335353B323336323B323337303B323337370D0A523D323338343B323339313B323339373B323430333B323430383B323431333B323431363B323431393B323432323B323432350D0A523D323432383B323433303B323433313B323433323B323433333B323433343B323433343B323433353B323433353B323433360D0A523D323433373B323433373B323433383B323433383B323433393B323434303B323434313B323434323B323434313B323434310D0A523D323433393B323433383B323433373B323433353B323433343B323433323B323433303B323432383B323432353B323432320D0A523D323431393B323431373B323431343B323431323B323431313B323430393B323430373B323430343B323430313B323339380D0A523D323339363B323339333B323339313B323339303B323338383B323338363B323338343B323338313B323337383B323337360D0A523D323337333B323337303B323336383B323336373B323336363B323336343B323336323B323335393B323335363B323335330D0A523D323335303B323334383B323334353B323334333B323334303B323333383B323333363B323333333B323332393B323332350D0A523D323332313B323331373B323331333B323330383B323330333B323239383B323239333B323238383B323238333B323237380D0A523D323237333B323236383B323236333B323235383B323235333B323234383B323234333B323233383B323233323B323232370D0A523D323232333B323231383B323231333B323230383B323230333B323139383B323139323B323138373B323138323B323137370D0A523D323137313B323136353B323135393B323135333B323134383B323134333B323133393B323133353B323133303B323132360D0A523D323132313B323131363B323131313B323130353B323130303B323039343B323039303B323038363B323038313B323037370D0A523D323037333B323036393B323036353B323036313B323035363B323035323B323034383B323034343B323034303B323033350D0A523D323033313B323032373B323032323B323031383B323031333B323030393B323030353B323030303B313939363B313939310D0A523D313938373B313938333B313937393B313937343B313937303B313936363B313936323B313935373B313935323B313934380D0A523D313934333B313933393B313933353B313933313B313932373B313932333B313931393B313931353B313931313B313930370D0A523D313930333B313839393B313839353B313839313B313838373B313838343B313838303B313837373B313837333B313836390D0A523D313836353B313836323B313835393B313835353B313835323B313834383B313834343B313834313B313833383B313833350D0A523D313833313B313832383B313832343B313832313B313831383B313831343B313831323B313830393B313830363B313830330D0A523D313830303B313739373B313739343B313739313B313738383B313738353B313738313B313737393B313737363B313737330D0A523D313737303B313736373B313736353B313736323B313736303B313735373B313735353B313735323B313734393B313734360D0A523D313734333B313734313B313733383B313733363B313733333B313733313B313732383B313732353B313732333B313732300D0A523D313731383B313731363B313731343B313731313B313730383B313730353B313730323B313730303B313639373B313639350D0A523D313639333B313639313B313638383B313638363B313638343B313638313B313637393B313637373B313637353B313637330D0A523D313637313B313636393B313636373B313636353B313636333B313636313B313635393B313635373B313635353B313635330D0A523D313635313B313634393B313634383B313634363B313634343B313634323B313634313B313633393B313633383B313633360D0A523D313633343B313633333B313633313B313633303B313632383B313632373B313632363B313632353B313632333B313632320D0A523D313632313B313632303B313631393B313631383B313631373B313631363B313631353B313631343B313631333B313631320D0A523D313631313B313631303B313630393B313630393B313630383B313630373B313630363B313630363B313630353B313630350D0A523D313630353B313630353B313630343B313630343B313630333B313630333B313630323B313630323B313630323B313630320D0A523D313630313B313630313B313630313B313630303B313630303B313630303B313630303B313539393B313539393B313539390D0A523D313539393B313630303B313630303B313630303B313630303B313630303B313630303B313630303B313630303B313630300D0A523D313630303B313630313B313630313B313630323B313630323B313630333B313630333B313630343B313630343B313630340D0A523D313630343B313630353B313630353B313630363B313630363B313630373B313630383B313630393B313630393B313631300D0A523D313631313B313631323B313631333B313631343B313631353B313631363B313631373B313631383B313631393B313632300D0A523D313632323B313632333B313632343B313632353B313632373B313632383B313633303B313633323B313633333B313633350D0A523D313633363B313633383B313633393B313634313B313634333B313634353B313634363B313634383B313634393B313635310D0A523D313635333B313635343B313635363B313635393B313636313B313636333B313636353B313636363B313636383B313637300D0A523D313637323B313637343B313637363B313637383B313638303B313638333B313638353B313638373B313638393B313639320D0A523D313639343B313639363B313639393B313730313B313730343B313730363B313730393B313731313B313731343B313731360D0A523D313731393B313732323B313732353B313732383B313733303B313733333B313733363B313733393B313734323B313734350D0A523D313734383B313735313B313735343B313735373B313736303B313736333B313736373B313737303B313737333B313737370D0A523D313738303B313738343B313738373B313739313B313739343B313739383B313830323B313830353B313830393B313831330D0A523D313831373B313832323B313832353B313832393B313833333B313833373B313834313B313834353B313834393B313835320D0A523D313835363B313836313B313836353B313836393B313837333B313837373B313838323B313838363B313839303B313839350D0A523D313839393B313930343B313930383B313931333B313931383B313932333B313932383B313933333B313933383B313934330D0A523D313934373B313935333B313935383B313936343B313936393B313937343B313937393B313938343B313938393B313939340D0A523D313939393B323030353B323031313B323031363B323032323B323032383B323033333B323033393B323034343B323035300D0A523D323035363B323036313B323036363B323037323B323037373B323038343B323039303B323039353B323130313B323130360D0A523D323131323B323131383B323132333B323132393B323133353B323134303B323134363B323135323B323135373B323136320D0A523D323136373B323137323B323137373B323138323B323138373B323139333B323139383B323230333B323230373B323231320D0A523D323231373B323232313B323232363B323233313B323233353B323234303B323234343B323234393B323235333B323235370D0A523D323236313B323236353B323237303B323237343B323237393B323238333B323238373B323239313B323239353B323239390D0A523D323330323B323330363B323331303B323331343B323331373B323332303B323332343B323332373B323333303B323333340D0A523D323333373B323334303B323334333B323334363B323335303B323335333B323335363B323335393B323336323B323336350D0A56424F583D33322E30343B33322E30340D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D34392E34383B34392E34380D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                16) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    16) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3134322E3036303B3134322E3036300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35322E31393B35322E31390D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323535323B323535363B323536303B323536353B323536393B323537333B323537383B323538323B323538363B323538390D0A523D323539333B323539363B323630303B323630333B323630363B323630393B323631323B323631353B323631383B323632310D0A523D323632343B323632383B323633313B323633343B323633373B323634303B323634333B323634363B323634393B323635320D0A523D323635363B323635393B323636333B323636363B323637303B323637333B323637373B323638323B323638363B323639300D0A523D323639343B323639383B323730333B323730373B323731323B323731363B323732313B323732363B323733313B323733360D0A523D323734313B323734363B323735323B323735373B323736333B323736393B323737343B323738303B323738363B323739330D0A523D323739393B323830363B323831333B323832303B323832363B323833323B323833383B323834303B323834303B323833320D0A523D323831393B323830333B323738353B323736353B323734353B323732353B323730343B323638333B323636333B323634320D0A523D323632313B323630313B323538313B323536313B323534313B323532323B323530333B323438343B323436353B323434370D0A523D323432383B323431303B323339333B323337363B323335393B323334323B323332353B323330393B323239333B323237370D0A523D323236323B323234373B323233313B323231363B323230313B323138373B323137333B323135393B323134353B323133310D0A523D323131373B323130343B323039303B323037383B323036353B323035323B323034303B323032373B323031353B323030330D0A523D313939313B313937393B313936383B313935373B313934353B313933343B313932333B313931333B313930323B313839320D0A523D313838323B313837333B313836333B313835333B313834343B313833353B313832363B313831383B313830393B313830300D0A523D313739313B313738333B313737353B313736373B313735393B313735313B313734343B313733363B313732383B313732310D0A523D313731343B313730373B313639393B313639333B313638363B313637393B313637333B313636363B313635393B313635330D0A523D313634373B313634313B313633353B313632393B313632323B313631373B313631313B313630363B313630313B313539350D0A523D313539303B313538343B313537393B313537353B313537303B313536353B313536303B313535353B313535303B313534360D0A523D313534323B313533373B313533333B313532383B313532343B313532303B313531363B313531333B313530393B313530360D0A523D313530323B313439383B313439353B313439313B313438383B313438353B313438323B313437393B313437363B313437330D0A523D313437303B313436373B313436333B313436303B313435383B313435353B313435333B313435303B313434373B313434340D0A523D313434323B313434303B313433373B313433353B313433333B313433313B313432393B313432373B313432353B313432330D0A523D313432313B313431393B313431373B313431353B313431343B313431333B313431323B313431303B313430393B313430370D0A523D313430363B313430343B313430333B313430323B313430313B313430303B313339393B313339383B313339373B313339360D0A523D313339353B313339343B313339333B313339333B313339323B313339323B313339313B313339313B313339303B313339300D0A523D313338393B313338393B313338393B313338383B313338383B313338383B313338383B313338383B313338383B313338370D0A523D313338373B313338373B313338373B313338373B313338373B313338373B313338373B313338383B313338383B313338390D0A523D313338393B313338393B313339303B313339313B313339313B313339323B313339333B313339343B313339343B313339350D0A523D313339363B313339373B313339383B313339393B313430303B313430313B313430323B313430333B313430333B313430340D0A523D313430343B313430353B313430363B313430373B313430393B313431303B313431323B313431343B313431373B313431390D0A523D313432323B313432343B313432363B313432383B313433303B313433323B313433343B313433363B313433373B313433390D0A523D313434323B313434343B313434373B313435303B313435333B313435353B313435383B313436313B313436343B313436370D0A523D313437303B313437333B313437373B313438303B313438333B313438373B313439303B313439343B313439383B313530320D0A523D313530363B313531303B313531343B313531383B313532323B313532373B313533313B313533353B313534303B313534340D0A523D313534393B313535333B313535383B313536333B313536373B313537323B313537363B313538313B313538363B313539310D0A523D313539363B313630313B313630363B313631323B313631373B313632333B313632383B313633343B313633393B313634350D0A523D313635313B313635363B313636323B313636393B313637353B313638313B313638373B313639343B313730303B313730370D0A523D313731333B313731393B313732363B313733343B313734313B313734383B313735353B313736323B313737313B313737390D0A523D313738363B313739343B313830323B313831313B313831393B313832373B313833353B313834343B313835333B313836320D0A523D313837313B313837393B313838393B313839383B313930383B313931383B313932373B313933373B313934373B313935370D0A523D313936373B313937383B313938383B313939393B323031313B323032323B323033333B323034353B323035373B323036390D0A523D323038313B323039333B323130363B323131393B323133323B323134353B323135383B323137323B323138353B323139390D0A523D323231333B323232373B323234323B323235373B323237323B323238373B323330323B323331383B323333333B323334390D0A523D323336353B323338313B323339373B323431333B323433303B323434363B323436333B323438303B323439383B323531350D0A523D323533333B323535303B323536383B323538363B323630333B323632313B323633383B323635353B323637303B323638360D0A523D323639353B323730323B323730313B323639393B323639373B323639343B323639313B323638373B323638343B323638310D0A523D323637383B323637353B323637323B323636393B323636363B323636333B323636303B323635373B323635343B323635310D0A523D323634383B323634353B323634323B323633393B323633373B323633353B323633333B323633313B323633303B323632380D0A523D323632353B323632333B323632313B323631393B323631383B323631373B323631363B323631353B323631343B323631330D0A523D323631313B323631303B323630393B323630393B323630383B323630383B323630393B323630393B323630393B323630390D0A523D323630393B323631303B323631303B323631303B323631303B323631313B323631313B323631323B323631323B323631330D0A523D323631343B323631353B323631363B323631373B323631393B323632303B323632323B323632333B323632353B323632360D0A523D323632383B323633303B323633323B323633343B323633363B323633393B323634323B323634343B323634373B323634390D0A523D323635323B323635343B323635383B323636313B323636343B323636383B323637313B323637353B323637383B323638320D0A523D323638353B323638393B323639333B323639373B323730313B323730353B323730393B323731343B323731383B323732330D0A523D323732373B323733323B323733363B323734303B323734343B323734373B323734353B323733393B323732353B323730390D0A523D323639323B323637343B323635353B323633373B323631393B323630313B323538323B323536333B323534353B323532370D0A523D323530393B323439313B323437343B323435363B323433393B323432323B323430363B323338393B323337333B323335370D0A523D323334313B323332363B323331303B323239363B323238313B323236363B323235313B323233363B323232313B323230370D0A523D323139333B323138303B323136363B323135333B323134303B323132363B323131333B323130313B323038393B323037370D0A523D323036353B323035343B323034323B323033303B323031393B323030383B313939373B313938363B313937353B313936350D0A523D313935353B313934343B313933343B313932353B313931353B313930343B313839353B313838373B313837383B313836380D0A523D313836303B313835313B313834323B313833323B313832333B313831333B313830343B313739363B313738383B313738300D0A523D313737333B313736363B313735393B313735323B313734343B313733373B313733303B313732333B313731373B313731310D0A523D313730333B313639363B313638383B313638313B313637353B313636393B313636333B313635373B313635313B313634360D0A523D313634303B313633353B313633303B313632343B313631393B313631333B313630383B313630343B313539393B313539340D0A523D313539303B313538353B313538313B313537363B313537323B313536383B313536333B313535393B313535353B313535310D0A523D313534383B313534343B313534303B313533363B313533323B313532393B313532353B313532323B313531383B313531340D0A523D313531313B313530373B313530343B313530313B313439383B313439343B313439313B313438383B313438343B313438310D0A523D313437393B313437363B313437333B313437303B313436373B313436353B313436323B313436303B313435373B313435350D0A523D313435323B313434393B313434373B313434353B313434333B313434313B313433393B313433373B313433353B313433330D0A523D313433313B313433303B313432383B313432363B313432343B313432333B313432313B313432303B313431383B313431370D0A523D313431363B313431353B313431333B313431323B313431313B313431303B313430393B313430383B313430373B313430370D0A523D313430353B313430353B313430343B313430333B313430323B313430323B313430313B313430313B313430303B313430300D0A523D313339393B313339393B313339393B313339393B313339383B313339383B313339383B313339383B313339383B313339380D0A523D313339373B313339373B313339373B313339383B313339383B313339383B313339383B313339393B313339393B313339390D0A523D313339393B313430303B313430303B313430313B313430313B313430323B313430333B313430343B313430343B313430350D0A523D313430363B313430383B313430393B313431303B313431313B313431323B313431333B313431343B313431363B313431380D0A523D313431393B313432313B313432323B313432343B313432353B313432373B313432393B313433313B313433323B313433340D0A523D313433363B313433383B313434313B313434333B313434353B313434373B313435303B313435323B313435343B313435360D0A523D313435393B313436323B313436353B313436383B313437303B313437333B313437363B313437393B313438323B313438350D0A523D313438383B313439323B313439353B313439393B313530323B313530363B313531303B313531333B313531373B313532310D0A523D313532353B313532393B313533333B313533373B313534313B313534353B313534393B313535333B313535373B313536320D0A523D313536373B313537313B313537363B313538313B313538363B313539313B313539363B313630313B313630373B313631320D0A523D313631373B313632333B313632383B313633343B313633393B313634353B313635313B313635373B313636333B313636390D0A523D313637353B313638323B313638383B313639353B313730313B313730383B313731353B313732323B313732393B313733360D0A523D313734343B313735313B313735393B313736373B313737353B313738323B313739303B313739383B313830373B313831360D0A523D313832343B313833333B313834323B313835323B313836313B313837303B313837393B313838383B313839383B313930380D0A523D313931383B313932373B313933383B313934383B313935393B313937303B313938303B313939313B323030323B323031340D0A523D323032353B323033363B323034383B323036303B323037323B323038353B323039373B323131303B323132323B323133350D0A523D323134383B323136313B323137343B323138373B323230303B323231333B323232363B323233393B323235323B323236360D0A523D323237393B323239323B323330353B323331363B323332383B323333393B323335303B323335383B323336353B323336390D0A523D323337323B323337343B323337353B323337363B323337363B323337363B323337363B323337363B323337363B323337360D0A523D323337363B323337353B323337353B323337363B323337363B323337373B323337373B323337373B323337373B323337380D0A523D323337383B323337393B323337393B323338303B323338313B323338323B323338333B323338343B323338353B323338360D0A523D323338373B323338393B323339303B323339323B323339333B323339353B323339363B323339383B323430303B323430320D0A523D323430343B323430363B323430383B323431303B323431333B323431353B323431373B323432303B323432333B323432360D0A523D323432383B323433313B323433343B323433373B323434303B323434333B323434373B323435313B323435353B323435390D0A523D323436323B323436363B323437303B323437343B323437383B323438333B323438373B323439313B323439363B323530300D0A523D323530343B323530393B323531333B323531383B323532333B323532383B323533333B323533373B323534323B323534370D0A545243464D543D313B313030303B453B4C3B460D0A523D323630393B323630393B323630393B323630393B323630393B323630383B323630383B323630393B323630393B323631300D0A523D323631313B323631333B323631343B323631353B323631363B323631373B323631383B323631393B323632313B323632330D0A523D323632353B323632383B323633303B323633313B323633333B323633353B323633373B323633393B323634323B323634350D0A523D323634383B323635313B323635343B323635373B323636303B323636333B323636363B323636393B323637323B323637350D0A523D323637383B323638313B323638343B323638373B323639313B323639343B323639373B323639393B323730313B323730320D0A523D323639353B323638363B323637303B323635353B323633383B323632313B323630333B323538363B323536383B323535300D0A523D323533333B323531353B323439383B323438303B323436333B323434363B323433303B323431333B323339373B323338310D0A523D323336353B323334393B323333333B323331383B323330323B323238373B323237323B323235373B323234323B323232370D0A523D323231333B323139393B323138353B323137323B323135383B323134353B323133323B323131393B323130363B323039330D0A523D323038313B323036393B323035373B323034353B323033333B323032323B323031313B313939393B313938383B313937380D0A523D313936373B313935373B313934373B313933373B313932373B313931383B313930383B313839383B313838393B313837390D0A523D313837313B313836323B313835333B313834343B313833353B313832373B313831393B313831313B313830323B313739340D0A523D313738363B313737393B313737313B313736323B313735353B313734383B313734313B313733343B313732363B313731390D0A523D313731333B313730373B313730303B313639343B313638373B313638313B313637353B313636393B313636323B313635360D0A523D313635313B313634353B313633393B313633343B313632383B313632333B313631373B313631323B313630363B313630310D0A523D313539363B313539313B313538363B313538313B313537363B313537323B313536373B313536333B313535383B313535330D0A523D313534393B313534343B313534303B313533353B313533313B313532373B313532323B313531383B313531343B313531300D0A523D313530363B313530323B313439383B313439343B313439303B313438373B313438333B313438303B313437373B313437330D0A523D313437303B313436373B313436343B313436313B313435383B313435353B313435333B313435303B313434373B313434340D0A523D313434323B313433393B313433373B313433363B313433343B313433323B313433303B313432383B313432363B313432340D0A523D313432323B313431393B313431373B313431343B313431323B313431303B313430393B313430373B313430363B313430350D0A523D313430343B313430343B313430333B313430333B313430323B313430313B313430303B313339393B313339383B313339370D0A523D313339363B313339353B313339343B313339343B313339333B313339323B313339313B313339313B313339303B313338390D0A523D313338393B313338393B313338383B313338383B313338373B313338373B313338373B313338373B313338373B313338370D0A523D313338373B313338373B313338383B313338383B313338383B313338383B313338383B313338383B313338393B313338390D0A523D313338393B313339303B313339303B313339313B313339313B313339323B313339323B313339333B313339333B313339340D0A523D313339353B313339363B313339373B313339383B313339393B313430303B313430313B313430323B313430333B313430340D0A523D313430363B313430373B313430393B313431303B313431323B313431333B313431343B313431353B313431373B313431390D0A523D313432313B313432333B313432353B313432373B313432393B313433313B313433333B313433353B313433373B313434300D0A523D313434323B313434343B313434373B313435303B313435333B313435353B313435383B313436303B313436333B313436370D0A523D313437303B313437333B313437363B313437393B313438323B313438353B313438383B313439313B313439353B313439380D0A523D313530323B313530363B313530393B313531333B313531363B313532303B313532343B313532383B313533333B313533370D0A523D313534323B313534363B313535303B313535353B313536303B313536353B313537303B313537353B313537393B313538340D0A523D313539303B313539353B313630313B313630363B313631313B313631373B313632323B313632393B313633353B313634310D0A523D313634373B313635333B313635393B313636363B313637333B313637393B313638363B313639333B313639393B313730370D0A523D313731343B313732313B313732383B313733363B313734343B313735313B313735393B313736373B313737353B313738330D0A523D313739313B313830303B313830393B313831383B313832363B313833353B313834343B313835333B313836333B313837330D0A523D313838323B313839323B313930323B313931333B313932333B313933343B313934353B313935373B313936383B313937390D0A523D313939313B323030333B323031353B323032373B323034303B323035323B323036353B323037383B323039303B323130340D0A523D323131373B323133313B323134353B323135393B323137333B323138373B323230313B323231363B323233313B323234370D0A523D323236323B323237373B323239333B323330393B323332353B323334323B323335393B323337363B323339333B323431300D0A523D323432383B323434373B323436353B323438343B323530333B323532323B323534313B323536313B323538313B323630310D0A523D323632313B323634323B323636333B323638333B323730343B323732353B323734353B323736353B323738353B323830330D0A523D323831393B323833323B323834303B323834303B323833383B323833323B323832363B323832303B323831333B323830360D0A523D323739393B323739333B323738363B323738303B323737343B323736393B323736333B323735373B323735323B323734360D0A523D323734313B323733363B323733313B323732363B323732313B323731363B323731323B323730373B323730333B323639380D0A523D323639343B323639303B323638363B323638323B323637373B323637333B323637303B323636363B323636333B323635390D0A523D323635363B323635323B323634393B323634363B323634333B323634303B323633373B323633343B323633313B323632380D0A523D323632343B323632313B323631383B323631353B323631323B323630393B323630363B323630333B323630303B323539360D0A523D323539333B323538393B323538363B323538323B323537383B323537333B323536393B323536353B323536303B323535360D0A523D323535323B323534373B323534323B323533373B323533333B323532383B323532333B323531383B323531333B323530390D0A523D323530343B323530303B323439363B323439313B323438373B323438333B323437383B323437343B323437303B323436360D0A523D323436323B323435393B323435353B323435313B323434373B323434333B323434303B323433373B323433343B323433310D0A523D323432383B323432363B323432333B323432303B323431373B323431353B323431333B323431303B323430383B323430360D0A523D323430343B323430323B323430303B323339383B323339363B323339353B323339333B323339323B323339303B323338390D0A523D323338373B323338363B323338353B323338343B323338333B323338323B323338313B323338303B323337393B323337390D0A523D323337383B323337383B323337373B323337373B323337373B323337373B323337363B323337363B323337353B323337350D0A523D323337363B323337363B323337363B323337363B323337363B323337363B323337363B323337363B323337353B323337340D0A523D323337323B323336393B323336353B323335383B323335303B323333393B323332383B323331363B323330353B323239320D0A523D323237393B323236363B323235323B323233393B323232363B323231333B323230303B323138373B323137343B323136310D0A523D323134383B323133353B323132323B323131303B323039373B323038353B323037323B323036303B323034383B323033360D0A523D323032353B323031343B323030323B313939313B313938303B313937303B313935393B313934383B313933383B313932370D0A523D313931383B313930383B313839383B313838383B313837393B313837303B313836313B313835323B313834323B313833330D0A523D313832343B313831363B313830373B313739383B313739303B313738323B313737353B313736373B313735393B313735310D0A523D313734343B313733363B313732393B313732323B313731353B313730383B313730313B313639353B313638383B313638320D0A523D313637353B313636393B313636333B313635373B313635313B313634353B313633393B313633343B313632383B313632330D0A523D313631373B313631323B313630373B313630313B313539363B313539313B313538363B313538313B313537363B313537310D0A523D313536373B313536323B313535373B313535333B313534393B313534353B313534313B313533373B313533333B313532390D0A523D313532353B313532313B313531373B313531333B313531303B313530363B313530323B313439393B313439353B313439320D0A523D313438383B313438353B313438323B313437393B313437363B313437333B313437303B313436383B313436353B313436320D0A523D313435393B313435363B313435343B313435323B313435303B313434373B313434353B313434333B313434313B313433380D0A523D313433363B313433343B313433323B313433313B313432393B313432373B313432353B313432343B313432323B313432310D0A523D313431393B313431383B313431363B313431343B313431333B313431323B313431313B313431303B313430393B313430380D0A523D313430363B313430353B313430343B313430343B313430333B313430323B313430313B313430313B313430303B313430300D0A523D313339393B313339393B313339393B313339393B313339383B313339383B313339383B313339383B313339373B313339370D0A523D313339373B313339383B313339383B313339383B313339383B313339383B313339383B313339393B313339393B313339390D0A523D313339393B313430303B313430303B313430313B313430313B313430323B313430323B313430333B313430343B313430350D0A523D313430353B313430373B313430373B313430383B313430393B313431303B313431313B313431323B313431333B313431350D0A523D313431363B313431373B313431383B313432303B313432313B313432333B313432343B313432363B313432383B313433300D0A523D313433313B313433333B313433353B313433373B313433393B313434313B313434333B313434353B313434373B313434390D0A523D313435323B313435353B313435373B313436303B313436323B313436353B313436373B313437303B313437333B313437360D0A523D313437393B313438313B313438343B313438383B313439313B313439343B313439383B313530313B313530343B313530370D0A523D313531313B313531343B313531383B313532323B313532353B313532393B313533323B313533363B313534303B313534340D0A523D313534383B313535313B313535353B313535393B313536333B313536383B313537323B313537363B313538313B313538350D0A523D313539303B313539343B313539393B313630343B313630383B313631333B313631393B313632343B313633303B313633350D0A523D313634303B313634363B313635313B313635373B313636333B313636393B313637353B313638313B313638383B313639360D0A523D313730333B313731313B313731373B313732333B313733303B313733373B313734343B313735323B313735393B313736360D0A523D313737333B313738303B313738383B313739363B313830343B313831333B313832333B313833323B313834323B313835310D0A523D313836303B313836383B313837383B313838373B313839353B313930343B313931353B313932353B313933343B313934340D0A523D313935353B313936353B313937353B313938363B313939373B323030383B323031393B323033303B323034323B323035340D0A523D323036353B323037373B323038393B323130313B323131333B323132363B323134303B323135333B323136363B323138300D0A523D323139333B323230373B323232313B323233363B323235313B323236363B323238313B323239363B323331303B323332360D0A523D323334313B323335373B323337333B323338393B323430363B323432323B323433393B323435363B323437343B323439310D0A523D323530393B323532373B323534353B323536333B323538323B323630313B323631393B323633373B323635353B323637340D0A523D323639323B323730393B323732353B323733393B323734353B323734373B323734343B323734303B323733363B323733320D0A523D323732373B323732333B323731383B323731343B323730393B323730353B323730313B323639373B323639333B323638390D0A523D323638353B323638323B323637383B323637353B323637313B323636383B323636343B323636313B323635383B323635340D0A523D323635323B323634393B323634373B323634343B323634323B323633393B323633363B323633343B323633323B323633300D0A523D323632383B323632363B323632353B323632333B323632323B323632303B323631393B323631373B323631363B323631350D0A523D323631343B323631333B323631323B323631323B323631313B323631313B323631303B323631303B323631303B323631300D0A56424F583D32372E39353B32372E39350D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35362E38303B35362E38300D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                17) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    17) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3133382E3537303B3133382E3537300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35302E31323B35302E31320D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323434343B323434373B323434393B323435323B323435353B323435383B323436303B323436343B323436373B323437300D0A523D323437333B323437363B323437393B323438323B323438353B323438383B323439313B323439343B323439373B323530300D0A523D323530343B323530373B323531313B323531343B323531383B323532323B323532353B323533303B323533333B323533370D0A523D323534313B323534363B323535303B323535343B323535393B323536333B323536373B323537323B323537363B323538310D0A523D323538353B323539303B323539353B323630303B323630353B323630393B323631343B323631393B323632333B323632380D0A523D323633323B323633373B323634313B323634353B323634393B323635333B323635373B323636303B323636323B323636330D0A523D323636343B323636353B323636353B323636333B323636303B323635363B323635303B323634333B323633343B323632340D0A523D323631333B323630313B323538383B323537353B323536313B323534363B323533323B323531373B323530323B323438370D0A523D323437313B323435363B323434303B323432363B323431313B323339363B323338313B323336363B323335313B323333370D0A523D323332333B323330393B323239353B323238313B323236383B323235343B323234313B323232383B323231363B323230330D0A523D323139313B323137393B323136373B323135343B323134323B323133313B323131393B323130373B323039353B323038340D0A523D323037333B323036333B323035323B323034313B323033303B323032303B323031303B323030303B313939303B313938300D0A523D313937313B313936323B313935333B313934343B313933363B313932373B313931383B313931303B313930313B313839330D0A523D313838353B313837373B313836393B313836323B313835343B313834363B313833393B313833313B313832343B313831360D0A523D313830393B313830313B313739343B313738373B313738313B313737343B313736373B313736313B313735343B313734380D0A523D313734313B313733353B313732393B313732333B313731373B313731313B313730353B313730303B313639343B313638390D0A523D313638333B313637373B313637323B313636363B313636313B313635363B313635303B313634353B313634303B313633350D0A523D313633313B313632353B313632303B313631363B313631323B313630383B313630333B313539383B313539343B313539300D0A523D313538363B313538323B313537383B313537333B313537303B313536363B313536323B313535393B313535353B313535320D0A523D313534393B313534353B313534323B313533393B313533363B313533333B313533303B313532373B313532343B313532310D0A523D313531383B313531353B313531323B313530393B313530373B313530343B313530323B313439393B313439373B313439350D0A523D313439323B313439303B313438383B313438363B313438343B313438333B313438313B313437393B313437373B313437360D0A523D313437343B313437333B313437313B313437303B313436393B313436373B313436363B313436353B313436343B313436330D0A523D313436313B313436303B313435393B313435393B313435383B313435373B313435363B313435363B313435353B313435350D0A523D313435343B313435333B313435323B313435323B313435313B313435313B313435303B313435303B313435303B313435300D0A523D313434393B313434393B313434393B313434393B313434393B313434393B313434393B313434393B313434393B313435300D0A523D313435303B313435303B313435303B313435303B313435303B313435313B313435313B313435323B313435333B313435340D0A523D313435343B313435363B313435363B313435373B313435383B313435393B313436303B313436313B313436323B313436340D0A523D313436353B313436373B313436383B313436393B313437303B313437323B313437333B313437343B313437353B313437360D0A523D313437373B313437393B313438313B313438333B313438363B313438383B313439303B313439323B313439343B313439360D0A523D313439383B313530303B313530333B313530363B313530393B313531323B313531363B313531393B313532313B313532330D0A523D313532363B313532383B313533313B313533333B313533363B313533393B313534323B313534353B313534383B313535310D0A523D313535353B313535383B313536323B313536363B313537303B313537343B313537373B313538313B313538353B313539300D0A523D313539343B313539383B313630323B313630363B313631313B313631363B313632303B313632353B313633303B313633350D0A523D313634303B313634353B313635303B313635363B313636313B313636363B313637323B313637373B313638333B313638390D0A523D313639343B313639393B313730353B313731313B313731373B313732333B313732393B313733353B313734313B313734370D0A523D313735333B313736303B313736363B313737323B313737393B313738363B313739333B313830303B313830373B313831340D0A523D313832323B313832393B313833373B313834353B313835333B313836313B313836393B313837373B313838363B313839350D0A523D313930333B313931313B313932313B313933303B313933383B313934373B313935363B313936363B313937353B313938350D0A523D313939363B323030363B323031363B323032363B323033363B323034363B323035363B323036363B323037373B323038370D0A523D323039383B323130393B323132303B323133323B323134343B323135353B323136373B323137393B323139323B323230340D0A523D323231373B323233303B323234333B323235363B323237303B323238333B323239373B323331313B323332353B323334300D0A523D323335353B323336393B323338343B323339393B323431343B323432383B323434333B323435393B323437343B323438390D0A523D323530353B323532303B323533353B323534393B323536323B323537353B323538373B323539373B323630353B323631320D0A523D323631353B323631353B323631353B323631343B323631333B323631323B323631313B323630393B323630373B323630350D0A523D323630323B323539393B323539353B323539323B323538393B323538363B323538333B323537393B323537373B323537340D0A523D323537313B323536383B323536353B323536323B323535383B323535343B323535313B323534373B323534353B323534320D0A523D323534303B323533373B323533353B323533333B323533313B323532393B323532373B323532353B323532343B323532330D0A523D323532313B323532303B323531393B323531383B323531373B323531363B323531353B323531333B323531323B323531320D0A523D323531313B323531303B323530393B323530383B323530373B323530373B323530363B323530363B323530353B323530350D0A523D323530343B323530343B323530343B323530343B323530343B323530333B323530333B323530343B323530343B323530350D0A523D323530353B323530353B323530353B323530363B323530373B323530383B323530393B323531303B323531313B323531320D0A523D323531333B323531353B323531363B323531373B323531393B323532303B323532323B323532333B323532353B323532370D0A523D323532393B323533313B323533343B323533363B323533383B323534303B323534323B323534343B323534363B323534380D0A523D323535303B323535333B323535363B323535393B323536323B323536343B323536373B323537303B323537333B323537370D0A523D323538303B323538333B323538363B323538393B323539333B323539363B323539393B323630323B323630353B323630380D0A523D323631313B323631343B323631373B323631393B323632313B323632333B323632343B323632353B323632353B323632340D0A523D323632333B323632313B323631373B323631303B323630333B323539333B323538323B323536393B323535363B323534310D0A523D323532373B323531333B323439383B323438343B323436393B323435343B323433393B323432343B323430393B323339340D0A523D323337393B323336343B323334393B323333353B323332313B323330373B323239333B323237393B323236363B323235330D0A523D323234303B323232363B323231333B323230313B323138383B323137363B323136333B323135303B323133383B323132360D0A523D323131353B323130333B323039313B323037393B323036383B323035373B323034363B323033353B323032343B323031330D0A523D323030323B313939323B313938323B313937313B313936323B313935323B313934323B313933333B313932333B313931340D0A523D313930343B313839353B313838343B313837343B313836343B313835353B313834363B313833383B313833303B313832330D0A523D313831353B313830383B313830313B313739333B313738353B313737363B313736393B313736313B313735343B313734370D0A523D313734313B313733343B313732373B313732313B313731343B313730383B313730323B313639373B313639313B313638350D0A523D313637393B313637343B313636393B313636333B313635383B313635333B313634383B313634333B313633383B313633330D0A523D313632393B313632333B313631383B313631343B313630393B313630353B313630313B313539363B313539323B313538380D0A523D313538343B313538303B313537363B313537313B313536383B313536343B313536303B313535373B313535333B313535300D0A523D313534363B313534323B313533393B313533363B313533333B313533303B313532373B313532343B313532313B313531380D0A523D313531353B313531323B313530393B313530363B313530343B313530313B313439393B313439373B313439353B313439320D0A523D313439303B313438383B313438363B313438343B313438323B313438313B313437393B313437373B313437353B313437340D0A523D313437323B313437313B313437303B313436383B313436373B313436353B313436343B313436333B313436323B313436310D0A523D313436303B313435393B313435383B313435373B313435363B313435363B313435353B313435343B313435333B313435330D0A523D313435323B313435323B313435323B313435323B313435313B313435313B313435303B313435303B313435303B313435300D0A523D313435313B313435313B313435313B313435313B313435313B313435313B313435313B313435323B313435323B313435330D0A523D313435333B313435343B313435343B313435353B313435363B313435373B313435373B313435383B313435393B313436300D0A523D313436313B313436333B313436343B313436353B313436363B313436373B313436393B313437303B313437313B313437330D0A523D313437343B313437363B313437383B313438303B313438313B313438333B313438353B313438373B313438393B313439310D0A523D313439333B313439353B313439383B313530303B313530323B313530343B313530373B313530393B313531323B313531350D0A523D313531383B313532313B313532343B313532373B313533303B313533333B313533363B313533393B313534323B313534350D0A523D313534383B313535323B313535353B313535393B313536323B313536363B313537303B313537343B313537383B313538320D0A523D313538363B313539303B313539353B313539393B313630333B313630383B313631323B313631363B313632303B313632350D0A523D313633303B313633353B313634303B313634343B313634393B313635343B313635393B313636343B313637303B313637350D0A523D313638313B313638363B313639313B313639373B313730323B313730383B313731343B313732303B313732363B313733320D0A523D313733393B313734353B313735323B313735393B313736353B313737323B313737393B313738363B313739333B313830300D0A523D313830363B313831343B313832313B313832393B313833363B313834333B313835313B313835393B313836373B313837350D0A523D313838333B313839303B313839383B313930373B313931353B313932333B313933313B313933393B313934383B313935370D0A523D313936363B313937343B313938333B313939323B323030313B323031303B323031393B323032383B323033373B323034360D0A523D323035363B323036353B323037353B323038343B323039343B323130343B323131333B323132333B323133333B323134320D0A523D323135313B323136313B323137303B323137393B323138373B323139363B323230343B323231323B323231393B323232360D0A523D323233323B323233373B323234313B323234353B323234393B323235313B323235343B323235373B323235393B323236310D0A523D323236323B323236343B323236363B323236373B323236383B323237303B323237313B323237323B323237333B323237350D0A523D323237363B323237373B323237393B323238303B323238313B323238323B323238343B323238353B323238373B323238380D0A523D323239303B323239313B323239333B323239343B323239363B323239383B323330303B323330323B323330343B323330360D0A523D323330383B323331303B323331323B323331343B323331363B323331393B323332313B323332343B323332363B323332390D0A523D323333323B323333343B323333373B323333393B323334323B323334353B323334383B323335313B323335343B323335370D0A523D323335393B323336323B323336353B323336383B323337313B323337343B323337373B323337393B323338323B323338350D0A523D323338383B323339313B323339343B323339373B323430303B323430333B323430363B323430393B323431313B323431340D0A523D323431373B323432303B323432333B323432353B323432383B323433313B323433343B323433363B323433393B323434310D0A545243464D543D313B313030303B453B4C3B460D0A523D323530343B323530353B323530353B323530363B323530363B323530373B323530373B323530383B323530393B323531300D0A523D323531313B323531323B323531323B323531333B323531353B323531363B323531373B323531383B323531393B323532300D0A523D323532313B323532333B323532343B323532353B323532373B323532393B323533313B323533333B323533353B323533370D0A523D323534303B323534323B323534353B323534373B323535313B323535343B323535383B323536323B323536353B323536380D0A523D323537313B323537343B323537373B323537393B323538333B323538363B323538393B323539323B323539353B323539390D0A523D323630323B323630353B323630373B323630393B323631313B323631323B323631333B323631343B323631353B323631350D0A523D323631353B323631323B323630353B323539373B323538373B323537353B323536323B323534393B323533353B323532300D0A523D323530353B323438393B323437343B323435393B323434333B323432383B323431343B323339393B323338343B323336390D0A523D323335353B323334303B323332353B323331313B323239373B323238333B323237303B323235363B323234333B323233300D0A523D323231373B323230343B323139323B323137393B323136373B323135353B323134343B323133323B323132303B323130390D0A523D323039383B323038373B323037373B323036363B323035363B323034363B323033363B323032363B323031363B323030360D0A523D313939363B313938353B313937353B313936363B313935363B313934373B313933383B313933303B313932313B313931310D0A523D313930333B313839353B313838363B313837373B313836393B313836313B313835333B313834353B313833373B313832390D0A523D313832323B313831343B313830373B313830303B313739333B313738363B313737393B313737323B313736363B313736300D0A523D313735333B313734373B313734313B313733353B313732393B313732333B313731373B313731313B313730353B313639390D0A523D313639343B313638393B313638333B313637373B313637323B313636363B313636313B313635363B313635303B313634350D0A523D313634303B313633353B313633303B313632353B313632303B313631363B313631313B313630363B313630323B313539380D0A523D313539343B313539303B313538353B313538313B313537373B313537343B313537303B313536363B313536323B313535380D0A523D313535353B313535313B313534383B313534353B313534323B313533393B313533363B313533333B313533313B313532380D0A523D313532363B313532333B313532313B313531393B313531363B313531323B313530393B313530363B313530333B313530300D0A523D313439383B313439363B313439343B313439323B313439303B313438383B313438363B313438333B313438313B313437390D0A523D313437373B313437363B313437353B313437343B313437333B313437323B313437303B313436393B313436383B313436370D0A523D313436353B313436343B313436323B313436313B313436303B313435393B313435383B313435373B313435363B313435360D0A523D313435343B313435343B313435333B313435323B313435313B313435313B313435303B313435303B313435303B313435300D0A523D313435303B313435303B313434393B313434393B313434393B313434393B313434393B313434393B313434393B313434390D0A523D313434393B313435303B313435303B313435303B313435303B313435313B313435313B313435323B313435323B313435330D0A523D313435343B313435353B313435353B313435363B313435363B313435373B313435383B313435393B313435393B313436300D0A523D313436313B313436333B313436343B313436353B313436363B313436373B313436393B313437303B313437313B313437330D0A523D313437343B313437363B313437373B313437393B313438313B313438333B313438343B313438363B313438383B313439300D0A523D313439323B313439353B313439373B313439393B313530323B313530343B313530373B313530393B313531323B313531350D0A523D313531383B313532313B313532343B313532373B313533303B313533333B313533363B313533393B313534323B313534350D0A523D313534393B313535323B313535353B313535393B313536323B313536363B313537303B313537333B313537383B313538320D0A523D313538363B313539303B313539343B313539383B313630333B313630383B313631323B313631363B313632303B313632350D0A523D313633313B313633353B313634303B313634353B313635303B313635363B313636313B313636363B313637323B313637370D0A523D313638333B313638393B313639343B313730303B313730353B313731313B313731373B313732333B313732393B313733350D0A523D313734313B313734383B313735343B313736313B313736373B313737343B313738313B313738373B313739343B313830310D0A523D313830393B313831363B313832343B313833313B313833393B313834363B313835343B313836323B313836393B313837370D0A523D313838353B313839333B313930313B313931303B313931383B313932373B313933363B313934343B313935333B313936320D0A523D313937313B313938303B313939303B323030303B323031303B323032303B323033303B323034313B323035323B323036330D0A523D323037333B323038343B323039353B323130373B323131393B323133313B323134323B323135343B323136373B323137390D0A523D323139313B323230333B323231363B323232383B323234313B323235343B323236383B323238313B323239353B323330390D0A523D323332333B323333373B323335313B323336363B323338313B323339363B323431313B323432363B323434303B323435360D0A523D323437313B323438373B323530323B323531373B323533323B323534363B323536313B323537353B323538383B323630310D0A523D323631333B323632343B323633343B323634333B323635303B323635363B323636303B323636333B323636353B323636350D0A523D323636343B323636333B323636323B323636303B323635373B323635333B323634393B323634353B323634313B323633370D0A523D323633323B323632383B323632333B323631393B323631343B323630393B323630353B323630303B323539353B323539300D0A523D323538353B323538313B323537363B323537323B323536373B323536333B323535393B323535343B323535303B323534360D0A523D323534313B323533373B323533333B323533303B323532353B323532323B323531383B323531343B323531313B323530370D0A523D323530343B323530303B323439373B323439343B323439313B323438383B323438353B323438323B323437393B323437360D0A523D323437333B323437303B323436373B323436343B323436303B323435383B323435353B323435323B323434393B323434370D0A523D323434343B323434313B323433393B323433363B323433343B323433313B323432383B323432353B323432333B323432300D0A523D323431373B323431343B323431313B323430393B323430363B323430333B323430303B323339373B323339343B323339310D0A523D323338383B323338353B323338323B323337393B323337373B323337343B323337313B323336383B323336353B323336320D0A523D323335393B323335373B323335343B323335313B323334383B323334353B323334323B323333393B323333373B323333340D0A523D323333323B323332393B323332363B323332343B323332313B323331393B323331363B323331343B323331323B323331300D0A523D323330383B323330363B323330343B323330323B323330303B323239383B323239363B323239343B323239333B323239310D0A523D323239303B323238383B323238373B323238353B323238343B323238323B323238313B323238303B323237393B323237370D0A523D323237363B323237353B323237333B323237323B323237313B323237303B323236383B323236373B323236363B323236340D0A523D323236323B323236313B323235393B323235373B323235343B323235313B323234393B323234353B323234313B323233370D0A523D323233323B323232363B323231393B323231323B323230343B323139363B323138373B323137393B323137303B323136310D0A523D323135313B323134323B323133333B323132333B323131333B323130343B323039343B323038343B323037353B323036350D0A523D323035363B323034363B323033373B323032383B323031393B323031303B323030313B313939323B313938333B313937340D0A523D313936363B313935373B313934383B313933393B313933313B313932333B313931353B313930373B313839383B313839300D0A523D313838333B313837353B313836373B313835393B313835313B313834333B313833363B313832393B313832313B313831340D0A523D313830363B313830303B313739333B313738363B313737393B313737323B313736353B313735393B313735323B313734350D0A523D313733393B313733323B313732363B313732303B313731343B313730383B313730323B313639373B313639313B313638360D0A523D313638313B313637353B313637303B313636343B313635393B313635343B313634393B313634343B313634303B313633350D0A523D313633303B313632353B313632303B313631363B313631323B313630383B313630333B313539393B313539353B313539300D0A523D313538363B313538323B313537383B313537343B313537303B313536363B313536323B313535393B313535353B313535320D0A523D313534383B313534353B313534323B313533393B313533363B313533333B313533303B313532373B313532343B313532310D0A523D313531383B313531353B313531323B313530393B313530373B313530343B313530323B313530303B313439383B313439350D0A523D313439333B313439313B313438393B313438373B313438353B313438333B313438313B313438303B313437383B313437360D0A523D313437343B313437333B313437313B313437303B313436393B313436373B313436363B313436353B313436343B313436330D0A523D313436313B313436303B313435393B313435383B313435373B313435373B313435363B313435353B313435343B313435340D0A523D313435333B313435333B313435323B313435323B313435313B313435313B313435313B313435313B313435313B313435310D0A523D313435313B313435303B313435303B313435303B313435303B313435313B313435313B313435323B313435323B313435320D0A523D313435323B313435333B313435333B313435343B313435353B313435363B313435363B313435373B313435383B313435390D0A523D313436303B313436313B313436323B313436333B313436343B313436353B313436373B313436383B313437303B313437310D0A523D313437323B313437343B313437353B313437373B313437393B313438313B313438323B313438343B313438363B313438380D0A523D313439303B313439323B313439353B313439373B313439393B313530313B313530343B313530363B313530393B313531320D0A523D313531353B313531383B313532313B313532343B313532373B313533303B313533333B313533363B313533393B313534320D0A523D313534363B313535303B313535333B313535373B313536303B313536343B313536383B313537313B313537363B313538300D0A523D313538343B313538383B313539323B313539363B313630313B313630353B313630393B313631343B313631383B313632330D0A523D313632393B313633333B313633383B313634333B313634383B313635333B313635383B313636333B313636393B313637340D0A523D313637393B313638353B313639313B313639373B313730323B313730383B313731343B313732313B313732373B313733340D0A523D313734313B313734373B313735343B313736313B313736393B313737363B313738353B313739333B313830313B313830380D0A523D313831353B313832333B313833303B313833383B313834363B313835353B313836343B313837343B313838343B313839350D0A523D313930343B313931343B313932333B313933333B313934323B313935323B313936323B313937313B313938323B313939320D0A523D323030323B323031333B323032343B323033353B323034363B323035373B323036383B323037393B323039313B323130330D0A523D323131353B323132363B323133383B323135303B323136333B323137363B323138383B323230313B323231333B323232360D0A523D323234303B323235333B323236363B323237393B323239333B323330373B323332313B323333353B323334393B323336340D0A523D323337393B323339343B323430393B323432343B323433393B323435343B323436393B323438343B323439383B323531330D0A523D323532373B323534313B323535363B323536393B323538323B323539333B323630333B323631303B323631373B323632310D0A523D323632333B323632343B323632353B323632353B323632343B323632333B323632313B323631393B323631373B323631340D0A523D323631313B323630383B323630353B323630323B323539393B323539363B323539333B323538393B323538363B323538330D0A523D323538303B323537373B323537333B323537303B323536373B323536343B323536323B323535393B323535363B323535330D0A523D323535303B323534383B323534363B323534343B323534323B323534303B323533383B323533363B323533343B323533310D0A523D323532393B323532373B323532353B323532333B323532323B323532303B323531393B323531373B323531363B323531350D0A523D323531333B323531323B323531313B323531303B323530393B323530383B323530373B323530363B323530353B323530350D0A523D323530353B323530353B323530343B323530343B323530333B323530333B323530343B323530343B323530343B323530340D0A56424F583D32392E30323B32392E30320D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35332E33303B35332E33300D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                18) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    18) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3133342E3132303B3133342E3132300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D34392E30363B34392E30360D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323434373B323434393B323435303B323435313B323435323B323435333B323435343B323435353B323435363B323435370D0A523D323435373B323435383B323435383B323435383B323435383B323435383B323435383B323435383B323435383B323435370D0A523D323435373B323435353B323435353B323435343B323435343B323435333B323435323B323435313B323435303B323434390D0A523D323434383B323434373B323434363B323434353B323434343B323434323B323434313B323434303B323433393B323433380D0A523D323433373B323433363B323433353B323433343B323433333B323433323B323433313B323433303B323432383B323432370D0A523D323432353B323432343B323432323B323431393B323431373B323431343B323431323B323431303B323430383B323430350D0A523D323430323B323339393B323339363B323339333B323339303B323338363B323338333B323338303B323337363B323337330D0A523D323336393B323336363B323336323B323335383B323335353B323335313B323334373B323334333B323333393B323333350D0A523D323333313B323332373B323332333B323331393B323331353B323331313B323330373B323330323B323239373B323239330D0A523D323238383B323238343B323237393B323237343B323237303B323236353B323236303B323235353B323235303B323234360D0A523D323234313B323233363B323233313B323232363B323232313B323231353B323231303B323230353B323230303B323139350D0A523D323139303B323138353B323138303B323137343B323137303B323136353B323136303B323135353B323135303B323134350D0A523D323134303B323133343B323132393B323132343B323131393B323131343B323130393B323130353B323130303B323039350D0A523D323038393B323038343B323038303B323037353B323037313B323036363B323036313B323035363B323035303B323034350D0A523D323034313B323033363B323033323B323032373B323032323B323031383B323031333B323030393B323030343B313939390D0A523D313939353B313939313B313938363B313938323B313937373B313937333B313936393B313936353B313936313B313935370D0A523D313935333B313934393B313934343B313934303B313933363B313933333B313932393B313932353B313932313B313931370D0A523D313931343B313931303B313930373B313930333B313839393B313839353B313839313B313838383B313838353B313838310D0A523D313837383B313837343B313837313B313836373B313836343B313836313B313835383B313835353B313835313B313834380D0A523D313834353B313834323B313833393B313833373B313833343B313833323B313832393B313832373B313832343B313832320D0A523D313831393B313831363B313831343B313831313B313830393B313830373B313830353B313830323B313830303B313739380D0A523D313739363B313739343B313739323B313739303B313738383B313738373B313738353B313738333B313738313B313738300D0A523D313737383B313737373B313737353B313737343B313737333B313737313B313737303B313736393B313736383B313736360D0A523D313736353B313736333B313736323B313736323B313736313B313736303B313735393B313735383B313735373B313735370D0A523D313735363B313735353B313735343B313735343B313735333B313735333B313735323B313735323B313735323B313735320D0A523D313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735310D0A523D313735313B313735323B313735323B313735323B313735323B313735333B313735333B313735343B313735343B313735340D0A523D313735343B313735353B313735353B313735363B313735363B313735373B313735373B313735383B313735393B313736300D0A523D313736313B313736323B313736333B313736343B313736353B313736363B313736373B313736393B313737303B313737310D0A523D313737323B313737343B313737363B313737373B313737383B313737393B313738313B313738323B313738343B313738360D0A523D313738383B313738393B313739313B313739333B313739353B313739363B313739383B313830303B313830323B313830350D0A523D313830373B313830393B313831303B313831323B313831343B313831363B313831383B313832303B313832323B313832340D0A523D313832363B313832393B313833313B313833343B313833373B313834303B313834333B313834373B313835303B313835320D0A523D313835353B313835383B313836313B313836343B313836373B313837303B313837333B313837363B313837393B313838320D0A523D313838353B313838383B313839313B313839343B313839373B313930303B313930333B313930373B313931303B313931350D0A523D313931383B313932323B313932363B313933303B313933343B313933373B313934313B313934343B313934383B313935320D0A523D313935373B313936313B313936353B313936393B313937333B313937373B313938313B313938353B313939303B313939340D0A523D313939393B323030333B323030373B323031313B323031353B323032303B323032353B323032393B323033343B323033380D0A523D323034323B323034373B323035323B323035373B323036313B323036353B323037303B323037353B323038303B323038350D0A523D323039303B323039363B323130313B323130363B323131313B323131363B323132323B323132373B323133323B323133370D0A523D323134323B323134373B323135323B323135373B323136323B323136373B323137323B323137373B323138323B323138370D0A523D323139323B323139383B323230333B323230393B323231343B323231393B323232343B323232393B323233343B323233390D0A523D323234333B323234393B323235353B323236303B323236353B323236393B323237343B323237393B323238343B323238390D0A523D323239343B323239393B323330333B323330383B323331323B323331363B323332313B323332363B323333303B323333350D0A523D323333393B323334333B323334373B323335323B323335363B323336303B323336343B323336383B323337323B323337350D0A523D323337393B323338333B323338373B323339303B323339333B323339363B323339393B323430323B323430353B323430380D0A523D323431313B323431333B323431363B323431393B323432323B323432343B323432373B323433303B323433333B323433360D0A523D323433383B323434303B323434313B323434323B323434333B323434333B323434343B323434353B323434363B323434370D0A523D323434383B323434383B323434373B323434373B323434383B323434393B323435303B323435313B323435323B323435320D0A523D323435323B323435323B323435313B323435313B323435313B323435323B323435333B323435333B323435333B323435320D0A523D323435313B323435313B323435313B323435313B323435313B323435313B323435313B323435303B323435303B323434390D0A523D323434383B323434373B323434373B323434363B323434343B323434333B323434323B323434313B323433393B323433380D0A523D323433363B323433353B323433333B323433313B323432393B323432373B323432353B323432343B323432323B323432300D0A523D323431383B323431363B323431343B323431323B323431303B323430363B323430333B323339393B323339373B323339340D0A523D323339323B323339303B323338383B323338373B323338343B323338313B323337383B323337363B323337343B323337320D0A523D323337303B323336373B323336353B323336323B323335383B323335353B323335313B323334363B323334313B323333370D0A523D323333333B323333303B323332373B323332333B323332303B323331363B323331323B323330383B323330343B323330310D0A523D323239383B323239353B323239323B323238383B323238343B323238303B323237373B323237333B323236393B323236340D0A523D323236303B323235363B323235313B323234373B323234333B323233383B323233333B323232383B323232343B323231390D0A523D323231353B323231313B323230373B323230323B323139373B323139323B323138383B323138333B323137393B323137350D0A523D323137313B323136373B323136323B323135363B323135313B323134353B323134313B323133363B323133313B323132370D0A523D323132323B323131383B323131333B323130383B323130343B323039393B323039343B323039303B323038353B323038310D0A523D323037363B323037323B323036383B323036333B323035393B323035353B323035303B323034363B323034323B323033380D0A523D323033343B323032393B323032353B323032313B323031373B323031323B323030393B323030353B323030313B313939380D0A523D313939343B313939303B313938363B313938323B313937393B313937353B313937313B313936373B313936343B313936300D0A523D313935363B313935333B313934393B313934353B313934313B313933383B313933353B313933313B313932383B313932340D0A523D313932313B313931373B313931343B313931313B313930373B313930343B313930313B313839383B313839353B313839320D0A523D313838393B313838363B313838333B313838303B313837363B313837333B313837303B313836383B313836353B313836330D0A523D313836303B313835373B313835343B313835323B313834393B313834363B313834343B313834313B313833393B313833360D0A523D313833343B313833313B313832383B313832363B313832333B313832313B313831393B313831373B313831343B313831320D0A523D313831303B313830373B313830353B313830333B313830313B313739393B313739373B313739353B313739343B313739320D0A523D313739303B313738393B313738373B313738363B313738343B313738323B313738303B313737393B313737373B313737360D0A523D313737343B313737333B313737323B313737303B313736393B313736383B313736373B313736363B313736353B313736340D0A523D313736323B313736323B313736313B313736303B313735393B313735393B313735383B313735373B313735363B313735360D0A523D313735353B313735353B313735343B313735343B313735333B313735333B313735333B313735333B313735323B313735320D0A523D313735323B313735313B313735313B313735313B313735313B313735303B313735303B313735303B313735303B313735310D0A523D313735313B313735313B313735313B313735313B313735313B313735323B313735323B313735333B313735333B313735330D0A523D313735333B313735343B313735353B313735363B313735363B313735373B313735373B313735383B313735393B313736300D0A523D313736313B313736323B313736323B313736333B313736343B313736353B313736363B313736373B313736383B313736390D0A523D313737303B313737323B313737333B313737343B313737353B313737363B313737383B313737393B313738313B313738320D0A523D313738343B313738353B313738373B313738383B313739303B313739323B313739343B313739363B313739383B313830300D0A523D313830313B313830333B313830353B313830373B313830393B313831313B313831333B313831353B313831373B313831390D0A523D313832313B313832343B313832363B313832393B313833313B313833343B313833373B313833393B313834323B313834340D0A523D313834373B313834393B313835323B313835343B313835373B313836303B313836333B313836363B313836393B313837320D0A523D313837343B313837383B313838313B313838343B313838373B313839303B313839343B313839373B313930303B313930340D0A523D313930373B313931313B313931353B313931383B313932323B313932353B313932393B313933323B313933353B313933390D0A523D313934323B313934353B313934383B313935323B313935353B313935383B313936323B313936353B313936383B313937320D0A523D313937353B313937393B313938323B313938363B313938393B313939323B313939363B323030303B323030343B323030370D0A523D323031313B323031353B323031383B323032323B323032363B323033303B323033333B323033373B323034313B323034350D0A523D323034393B323035333B323035373B323036313B323036353B323036393B323037333B323037373B323038303B323038340D0A523D323038383B323039323B323039373B323130313B323130353B323130393B323131333B323131373B323132313B323132350D0A523D323132393B323133333B323133383B323134323B323134363B323135303B323135343B323135383B323136323B323136360D0A523D323137303B323137343B323137393B323138333B323138373B323139313B323139353B323139393B323230333B323230380D0A523D323231323B323231363B323232303B323232353B323232393B323233333B323233373B323234313B323234353B323234390D0A523D323235333B323235373B323236313B323236363B323237303B323237343B323237383B323238323B323238363B323239300D0A523D323239343B323239383B323330323B323330363B323331313B323331353B323331393B323332333B323332363B323333300D0A523D323333343B323333383B323334323B323334353B323335303B323335343B323335373B323336313B323336343B323336380D0A523D323337313B323337353B323337393B323338323B323338363B323338393B323339323B323339353B323339383B323430310D0A523D323430343B323430373B323431303B323431323B323431353B323431383B323432303B323432323B323432343B323432370D0A523D323432393B323433323B323433343B323433353B323433373B323433393B323434313B323434323B323434343B323434350D0A545243464D543D313B313030303B453B4C3B460D0A523D323435313B323435323B323435333B323435333B323435333B323435323B323435313B323435313B323435313B323435320D0A523D323435323B323435323B323435323B323435313B323435303B323434393B323434383B323434373B323434373B323434380D0A523D323434383B323434373B323434363B323434353B323434343B323434333B323434333B323434323B323434313B323434300D0A523D323433383B323433363B323433333B323433303B323432373B323432343B323432323B323431393B323431363B323431330D0A523D323431313B323430383B323430353B323430323B323339393B323339363B323339333B323339303B323338373B323338330D0A523D323337393B323337353B323337323B323336383B323336343B323336303B323335363B323335323B323334373B323334330D0A523D323333393B323333353B323333303B323332363B323332313B323331363B323331323B323330383B323330333B323239390D0A523D323239343B323238393B323238343B323237393B323237343B323236393B323236353B323236303B323235353B323234390D0A523D323234333B323233393B323233343B323232393B323232343B323231393B323231343B323230393B323230333B323139380D0A523D323139323B323138373B323138323B323137373B323137323B323136373B323136323B323135373B323135323B323134370D0A523D323134323B323133373B323133323B323132373B323132323B323131363B323131313B323130363B323130313B323039360D0A523D323039303B323038353B323038303B323037353B323037303B323036353B323036313B323035373B323035323B323034370D0A523D323034323B323033383B323033343B323032393B323032353B323032303B323031353B323031313B323030373B323030330D0A523D313939393B313939343B313939303B313938353B313938313B313937373B313937333B313936393B313936353B313936310D0A523D313935373B313935323B313934383B313934343B313934313B313933373B313933343B313933303B313932363B313932320D0A523D313931383B313931353B313931303B313930373B313930333B313930303B313839373B313839343B313839313B313838380D0A523D313838353B313838323B313837393B313837363B313837333B313837303B313836373B313836343B313836313B313835380D0A523D313835353B313835323B313835303B313834373B313834333B313834303B313833373B313833343B313833313B313832390D0A523D313832363B313832343B313832323B313832303B313831383B313831363B313831343B313831323B313831303B313830390D0A523D313830373B313830353B313830323B313830303B313739383B313739363B313739353B313739333B313739313B313738390D0A523D313738383B313738363B313738343B313738323B313738313B313737393B313737383B313737373B313737363B313737340D0A523D313737323B313737313B313737303B313736393B313736373B313736363B313736353B313736343B313736333B313736320D0A523D313736313B313736303B313735393B313735383B313735373B313735373B313735363B313735363B313735353B313735350D0A523D313735343B313735343B313735343B313735343B313735333B313735333B313735323B313735323B313735323B313735320D0A523D313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735313B313735310D0A523D313735313B313735323B313735323B313735323B313735323B313735333B313735333B313735343B313735343B313735350D0A523D313735363B313735373B313735373B313735383B313735393B313736303B313736313B313736323B313736323B313736330D0A523D313736353B313736363B313736383B313736393B313737303B313737313B313737333B313737343B313737353B313737370D0A523D313737383B313738303B313738313B313738333B313738353B313738373B313738383B313739303B313739323B313739340D0A523D313739363B313739383B313830303B313830323B313830353B313830373B313830393B313831313B313831343B313831360D0A523D313831393B313832323B313832343B313832373B313832393B313833323B313833343B313833373B313833393B313834320D0A523D313834353B313834383B313835313B313835353B313835383B313836313B313836343B313836373B313837313B313837340D0A523D313837383B313838313B313838353B313838383B313839313B313839353B313839393B313930333B313930373B313931300D0A523D313931343B313931373B313932313B313932353B313932393B313933333B313933363B313934303B313934343B313934390D0A523D313935333B313935373B313936313B313936353B313936393B313937333B313937373B313938323B313938363B313939310D0A523D313939353B313939393B323030343B323030393B323031333B323031383B323032323B323032373B323033323B323033360D0A523D323034313B323034353B323035303B323035363B323036313B323036363B323037313B323037353B323038303B323038340D0A523D323038393B323039353B323130303B323130353B323130393B323131343B323131393B323132343B323132393B323133340D0A523D323134303B323134353B323135303B323135353B323136303B323136353B323137303B323137343B323138303B323138350D0A523D323139303B323139353B323230303B323230353B323231303B323231353B323232313B323232363B323233313B323233360D0A523D323234313B323234363B323235303B323235353B323236303B323236353B323237303B323237343B323237393B323238340D0A523D323238383B323239333B323239373B323330323B323330373B323331313B323331353B323331393B323332333B323332370D0A523D323333313B323333353B323333393B323334333B323334373B323335313B323335353B323335383B323336323B323336360D0A523D323336393B323337333B323337363B323338303B323338333B323338363B323339303B323339333B323339363B323339390D0A523D323430323B323430353B323430383B323431303B323431323B323431343B323431373B323431393B323432323B323432340D0A523D323432353B323432373B323432383B323433303B323433313B323433323B323433333B323433343B323433353B323433360D0A523D323433373B323433383B323433393B323434303B323434313B323434323B323434343B323434353B323434363B323434370D0A523D323434383B323434393B323435303B323435313B323435323B323435333B323435343B323435343B323435353B323435350D0A523D323435373B323435373B323435383B323435383B323435383B323435383B323435383B323435383B323435383B323435380D0A523D323435373B323435373B323435363B323435353B323435343B323435333B323435323B323435313B323435303B323434390D0A523D323434373B323434353B323434343B323434323B323434313B323433393B323433373B323433353B323433343B323433320D0A523D323432393B323432373B323432343B323432323B323432303B323431383B323431353B323431323B323431303B323430370D0A523D323430343B323430313B323339383B323339353B323339323B323338393B323338363B323338323B323337393B323337350D0A523D323337313B323336383B323336343B323336313B323335373B323335343B323335303B323334353B323334323B323333380D0A523D323333343B323333303B323332363B323332333B323331393B323331353B323331313B323330363B323330323B323239380D0A523D323239343B323239303B323238363B323238323B323237383B323237343B323237303B323236363B323236313B323235370D0A523D323235333B323234393B323234353B323234313B323233373B323233333B323232393B323232353B323232303B323231360D0A523D323231323B323230383B323230333B323139393B323139353B323139313B323138373B323138333B323137393B323137340D0A523D323137303B323136363B323136323B323135383B323135343B323135303B323134363B323134323B323133383B323133330D0A523D323132393B323132353B323132313B323131373B323131333B323130393B323130353B323130313B323039373B323039320D0A523D323038383B323038343B323038303B323037373B323037333B323036393B323036353B323036313B323035373B323035330D0A523D323034393B323034353B323034313B323033373B323033333B323033303B323032363B323032323B323031383B323031350D0A523D323031313B323030373B323030343B323030303B313939363B313939323B313938393B313938363B313938323B313937390D0A523D313937353B313937323B313936383B313936353B313936323B313935383B313935353B313935323B313934383B313934350D0A523D313934323B313933393B313933353B313933323B313932393B313932353B313932323B313931383B313931353B313931310D0A523D313930373B313930343B313930303B313839373B313839343B313839303B313838373B313838343B313838313B313837380D0A523D313837343B313837323B313836393B313836363B313836333B313836303B313835373B313835343B313835323B313834390D0A523D313834373B313834343B313834323B313833393B313833373B313833343B313833313B313832393B313832363B313832340D0A523D313832313B313831393B313831373B313831353B313831333B313831313B313830393B313830373B313830353B313830330D0A523D313830313B313830303B313739383B313739363B313739343B313739323B313739303B313738383B313738373B313738350D0A523D313738343B313738323B313738313B313737393B313737383B313737363B313737353B313737343B313737333B313737320D0A523D313737303B313736393B313736383B313736373B313736363B313736353B313736343B313736333B313736323B313736320D0A523D313736313B313736303B313735393B313735383B313735373B313735373B313735363B313735363B313735353B313735340D0A523D313735333B313735333B313735333B313735333B313735323B313735323B313735313B313735313B313735313B313735310D0A523D313735313B313735313B313735303B313735303B313735303B313735303B313735313B313735313B313735313B313735310D0A523D313735323B313735323B313735323B313735333B313735333B313735333B313735333B313735343B313735343B313735350D0A523D313735353B313735363B313735363B313735373B313735383B313735393B313735393B313736303B313736313B313736320D0A523D313736323B313736343B313736353B313736363B313736373B313736383B313736393B313737303B313737323B313737330D0A523D313737343B313737363B313737373B313737393B313738303B313738323B313738343B313738363B313738373B313738390D0A523D313739303B313739323B313739343B313739353B313739373B313739393B313830313B313830333B313830353B313830370D0A523D313831303B313831323B313831343B313831373B313831393B313832313B313832333B313832363B313832383B313833310D0A523D313833343B313833363B313833393B313834313B313834343B313834363B313834393B313835323B313835343B313835370D0A523D313836303B313836333B313836353B313836383B313837303B313837333B313837363B313838303B313838333B313838360D0A523D313838393B313839323B313839353B313839383B313930313B313930343B313930373B313931313B313931343B313931370D0A523D313932313B313932343B313932383B313933313B313933353B313933383B313934313B313934353B313934393B313935330D0A523D313935363B313936303B313936343B313936373B313937313B313937353B313937393B313938323B313938363B313939300D0A523D313939343B313939383B323030313B323030353B323030393B323031323B323031373B323032313B323032353B323032390D0A523D323033343B323033383B323034323B323034363B323035303B323035353B323035393B323036333B323036383B323037320D0A523D323037363B323038313B323038353B323039303B323039343B323039393B323130343B323130383B323131333B323131380D0A523D323132323B323132373B323133313B323133363B323134313B323134353B323135313B323135363B323136323B323136370D0A523D323137313B323137353B323137393B323138333B323138383B323139323B323139373B323230323B323230373B323231310D0A523D323231353B323231393B323232343B323232383B323233333B323233383B323234333B323234373B323235313B323235360D0A523D323236303B323236343B323236393B323237333B323237373B323238303B323238343B323238383B323239323B323239350D0A523D323239383B323330313B323330343B323330383B323331323B323331363B323332303B323332333B323332373B323333300D0A523D323333333B323333373B323334313B323334363B323335313B323335353B323335383B323336323B323336353B323336370D0A523D323337303B323337323B323337343B323337363B323337383B323338313B323338343B323338373B323338383B323339300D0A523D323339323B323339343B323339373B323339393B323430333B323430363B323431303B323431323B323431343B323431360D0A523D323431383B323432303B323432323B323432343B323432353B323432373B323432393B323433313B323433333B323433350D0A523D323433363B323433383B323433393B323434313B323434323B323434333B323434343B323434363B323434373B323434370D0A523D323434383B323434393B323435303B323435303B323435313B323435313B323435313B323435313B323435313B323435310D0A56424F583D33352E30353B33352E30350D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D34392E31363B34392E31360D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                19) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    19) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3135322E3535303B3135322E3535300D0A44424C3D32302E30300D0A455459503D330D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D330D0A4744455054483D302E35303B302E35300D0A4757494454483D302E36303B302E36300D0A48424F583D35332E31343B35332E31340D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323538313B323538343B323538373B323539303B323539333B323539373B323630303B323630343B323630373B323631300D0A523D323631343B323631373B323632313B323632353B323632383B323633323B323633363B323634303B323634343B323634380D0A523D323635323B323635353B323635393B323636333B323636383B323637323B323637363B323638313B323638353B323639300D0A523D323639343B323639393B323730333B323730383B323731333B323731373B323732323B323732373B323733323B323733370D0A523D323734313B323734363B323735313B323735363B323736323B323736373B323737333B323737383B323738333B323738380D0A523D323739343B323739393B323830353B323831303B323831353B323832313B323832363B323833323B323833363B323834310D0A523D323834353B323835303B323835343B323835383B323836323B323836363B323836393B323837323B323837343B323837360D0A523D323837383B323837393B323838313B323838313B323838323B323838313B323837393B323837373B323837343B323837300D0A523D323836353B323835393B323835333B323834363B323833383B323832393B323831393B323830393B323739393B323738380D0A523D323737363B323736343B323735333B323734303B323732383B323731353B323730323B323638393B323637363B323636330D0A523D323635303B323633363B323632333B323631303B323539373B323538343B323537313B323535383B323534343B323533310D0A523D323531383B323530353B323439323B323438303B323436373B323435353B323434333B323433313B323431393B323430370D0A523D323339353B323338343B323337333B323336323B323335303B323333393B323332383B323331373B323330373B323239360D0A523D323238353B323237353B323236343B323235343B323234343B323233353B323232353B323231353B323230363B323139370D0A523D323138383B323137393B323136393B323136303B323135323B323134333B323133353B323132373B323131393B323131300D0A523D323130323B323039343B323038363B323037383B323037313B323036343B323035363B323034393B323034323B323033360D0A523D323032393B323032323B323031363B323031303B323030333B313939373B313939313B313938353B313938303B313937340D0A523D313936393B313936333B313935373B313935323B313934363B313934313B313933363B313933313B313932373B313932320D0A523D313931373B313931323B313930373B313930333B313839383B313839343B313839303B313838353B313838313B313837370D0A523D313837333B313836393B313836353B313836303B313835373B313835333B313834393B313834353B313834323B313833390D0A523D313833353B313833323B313832383B313832353B313832323B313831393B313831363B313831333B313831313B313830380D0A523D313830353B313830333B313830303B313739383B313739353B313739333B313739313B313738383B313738363B313738330D0A523D313738313B313738303B313737383B313737363B313737343B313737323B313737313B313736393B313736383B313736360D0A523D313736353B313736333B313736323B313736313B313736303B313735393B313735383B313735373B313735363B313735350D0A523D313735343B313735333B313735323B313735323B313735313B313735313B313735303B313735303B313735303B313735300D0A523D313734393B313734393B313734393B313734383B313734383B313734383B313734383B313734383B313734383B313734370D0A523D313734373B313734373B313734373B313734383B313734383B313734383B313734383B313734393B313735303B313735310D0A523D313735323B313735333B313735343B313735353B313735353B313735363B313735373B313735383B313735393B313736300D0A523D313736303B313736313B313736323B313736343B313736353B313736373B313736393B313737313B313737333B313737350D0A523D313737373B313737393B313738323B313738343B313738373B313738393B313739323B313739343B313739373B313830300D0A523D313830333B313830363B313830393B313831323B313831353B313831383B313832303B313832333B313832373B313833300D0A523D313833333B313833363B313833393B313834333B313834363B313835303B313835343B313835373B313836323B313836360D0A523D313837303B313837343B313837383B313838323B313838363B313839313B313839353B313839393B313930333B313930380D0A523D313931333B313931373B313932323B313932373B313933323B313933373B313934313B313934363B313935323B313935370D0A523D313936333B313936393B313937343B313938303B313938353B313939313B313939373B323030333B323030393B323031360D0A523D323032333B323032393B323033363B323034333B323034393B323035363B323036333B323037313B323037383B323038350D0A523D323039323B323130303B323130383B323131363B323132343B323133323B323134303B323134383B323135373B323136350D0A523D323137333B323138323B323139313B323230303B323230393B323231393B323232383B323233373B323234373B323235370D0A523D323236373B323237373B323238373B323239373B323330373B323331373B323332383B323333383B323334393B323336300D0A523D323337303B323338313B323339323B323430343B323431353B323432373B323433383B323435303B323436323B323437340D0A523D323438353B323439373B323531303B323532323B323533343B323534353B323535373B323536393B323538313B323539330D0A523D323630353B323631373B323632383B323633393B323635313B323636323B323637333B323638343B323639343B323730350D0A523D323731353B323732343B323733333B323734323B323735303B323735383B323736353B323737323B323737383B323738340D0A523D323738393B323739333B323739363B323739383B323739393B323739393B323739393B323739383B323739373B323739360D0A523D323739353B323739333B323739313B323738393B323738373B323738353B323738323B323737393B323737363B323737330D0A523D323736393B323736363B323736323B323735393B323735363B323735323B323734393B323734353B323734323B323733390D0A523D323733353B323733323B323732393B323732363B323732333B323731393B323731363B323731323B323731303B323730370D0A523D323730343B323730313B323639393B323639363B323639333B323639303B323638373B323638353B323638323B323638300D0A523D323637373B323637353B323637323B323637303B323636383B323636363B323636343B323636323B323636303B323635380D0A523D323635353B323635333B323635313B323635303B323634383B323634373B323634363B323634363B323634353B323634350D0A523D323634353B323634343B323634333B323634323B323634323B323634313B323634313B323634313B323634313B323634310D0A523D323634313B323634303B323634303B323633393B323633393B323633383B323633373B323633373B323633373B323633380D0A523D323633393B323634313B323634313B323634323B323634323B323634333B323634343B323634353B323634363B323634370D0A523D323634383B323635303B323635313B323635323B323635333B323635353B323635363B323635383B323636303B323636320D0A523D323636343B323636363B323636383B323637303B323637333B323637353B323637373B323637393B323638313B323638330D0A523D323638363B323638393B323639313B323639343B323639363B323639393B323730313B323730343B323730363B323730390D0A523D323731323B323731353B323731383B323732313B323732343B323732363B323732393B323733313B323733323B323733340D0A523D323733363B323733373B323733383B323733393B323734303B323734303B323734303B323734303B323734303B323734300D0A523D323733393B323733383B323733363B323733333B323732393B323732343B323731393B323731323B323730363B323639380D0A523D323639303B323638323B323637333B323636343B323635343B323634343B323633343B323632343B323631333B323630330D0A523D323539323B323538313B323537303B323535393B323534383B323533363B323532353B323531343B323530323B323439310D0A523D323438303B323436393B323435373B323434353B323433343B323432343B323431323B323430313B323339313B323338300D0A523D323337303B323336303B323335303B323333393B323332393B323331383B323330383B323239383B323238383B323237380D0A523D323236383B323235393B323234393B323233393B323233303B323232313B323231323B323230343B323139353B323138360D0A523D323137373B323136393B323136313B323135333B323134343B323133363B323132383B323132303B323131323B323130350D0A523D323039373B323038393B323038323B323037343B323036373B323036303B323035333B323034363B323033383B323033320D0A523D323032353B323031383B323031323B323030363B313939393B313939333B313938373B313938303B313937343B313936370D0A523D313936313B313935353B313934393B313934343B313933383B313933333B313932383B313932333B313931383B313931320D0A523D313930363B313930313B313839363B313839313B313838363B313838323B313837373B313837333B313836393B313836350D0A523D313836313B313835373B313835343B313835303B313834373B313834333B313834303B313833363B313833333B313833300D0A523D313832373B313832343B313832313B313831383B313831353B313831323B313831303B313830373B313830353B313830330D0A523D313830303B313739383B313739353B313739333B313739313B313738393B313738373B313738353B313738333B313738300D0A523D313737383B313737373B313737353B313737333B313737313B313736393B313736383B313736373B313736363B313736340D0A523D313736333B313736313B313736303B313735393B313735383B313735383B313735373B313735373B313735363B313735350D0A523D313735343B313735343B313735333B313735333B313735323B313735323B313735323B313735323B313735313B313735310D0A523D313735313B313735313B313735313B313735303B313735303B313735303B313735303B313735303B313735303B313735310D0A523D313735313B313735323B313735323B313735333B313735333B313735343B313735343B313735353B313735353B313735360D0A523D313735373B313735393B313736303B313736313B313736323B313736333B313736353B313736363B313736373B313736390D0A523D313737313B313737333B313737343B313737363B313737383B313738303B313738313B313738333B313738353B313738380D0A523D313739303B313739323B313739353B313739373B313739393B313830313B313830343B313830373B313831303B313831340D0A523D313831373B313832303B313832323B313832353B313832383B313833313B313833343B313833373B313834313B313834340D0A523D313834383B313835323B313835353B313835393B313836333B313836373B313837313B313837353B313837393B313838330D0A523D313838383B313839323B313839363B313930303B313930353B313930393B313931333B313931383B313932323B313932370D0A523D313933333B313933373B313934323B313934373B313935323B313935373B313936323B313936373B313937333B313937380D0A523D313938343B313939303B313939353B323030313B323030363B323031323B323031383B323032343B323033303B323033360D0A523D323034323B323034393B323035353B323036313B323036373B323037343B323038313B323038373B323039343B323130310D0A523D323130383B323131363B323132323B323132393B323133373B323134343B323135323B323136303B323136373B323137350D0A523D323138333B323139303B323139383B323230373B323231353B323232333B323233313B323233383B323234373B323235350D0A523D323236333B323237313B323237393B323238383B323239363B323330343B323331323B323332303B323332383B323333360D0A523D323334333B323335313B323335393B323336363B323337343B323338313B323338393B323339353B323430323B323430390D0A523D323431353B323432323B323432383B323433333B323433383B323434343B323435303B323435343B323435393B323436340D0A523D323436383B323437323B323437363B323437393B323438333B323438353B323438373B323438393B323439313B323439320D0A523D323439333B323439343B323439353B323439363B323439373B323439373B323439373B323439383B323439383B323439380D0A523D323439383B323439393B323439393B323439393B323439393B323439393B323439393B323439393B323439393B323439390D0A523D323439393B323439393B323439393B323530303B323530303B323530303B323530303B323530303B323530303B323530310D0A523D323530313B323530323B323530323B323530333B323530333B323530343B323530343B323530353B323530353B323530360D0A523D323530373B323530383B323530393B323530393B323531303B323531313B323531323B323531333B323531353B323531360D0A523D323531373B323531383B323532303B323532323B323532333B323532353B323532363B323532383B323532393B323533310D0A523D323533323B323533343B323533363B323533383B323533393B323534323B323534343B323534363B323534383B323535310D0A523D323535333B323535363B323535393B323536313B323536343B323536363B323536393B323537323B323537353B323537380D0A545243464D543D313B313030303B453B4C3B460D0A523D323634353B323634353B323634353B323634363B323634363B323634373B323634383B323635303B323635313B323635330D0A523D323635353B323635383B323636303B323636323B323636343B323636363B323636383B323637303B323637323B323637350D0A523D323637373B323638303B323638323B323638353B323638373B323639303B323639333B323639363B323639393B323730310D0A523D323730343B323730373B323731303B323731323B323731363B323731393B323732333B323732363B323732393B323733320D0A523D323733353B323733393B323734323B323734353B323734393B323735323B323735363B323735393B323736323B323736360D0A523D323736393B323737333B323737363B323737393B323738323B323738353B323738373B323738393B323739313B323739330D0A523D323739353B323739363B323739373B323739383B323739393B323739393B323739393B323739383B323739363B323739330D0A523D323738393B323738343B323737383B323737323B323736353B323735383B323735303B323734323B323733333B323732340D0A523D323731353B323730353B323639343B323638343B323637333B323636323B323635313B323633393B323632383B323631370D0A523D323630353B323539333B323538313B323536393B323535373B323534353B323533343B323532323B323531303B323439370D0A523D323438353B323437343B323436323B323435303B323433383B323432373B323431353B323430343B323339323B323338310D0A523D323337303B323336303B323334393B323333383B323332383B323331373B323330373B323239373B323238373B323237370D0A523D323236373B323235373B323234373B323233373B323232383B323231393B323230393B323230303B323139313B323138320D0A523D323137333B323136353B323135373B323134383B323134303B323133323B323132343B323131363B323130383B323130300D0A523D323039323B323038353B323037383B323037313B323036333B323035363B323034393B323034333B323033363B323032390D0A523D323032333B323031363B323030393B323030333B313939373B313939313B313938353B313938303B313937343B313936390D0A523D313936333B313935373B313935323B313934363B313934313B313933373B313933323B313932373B313932323B313931370D0A523D313931333B313930383B313930333B313839393B313839353B313839313B313838363B313838323B313837383B313837340D0A523D313837303B313836363B313836323B313835373B313835343B313835303B313834363B313834333B313833393B313833360D0A523D313833333B313833303B313832373B313832333B313832303B313831383B313831353B313831323B313830393B313830360D0A523D313830333B313830303B313739373B313739343B313739323B313738393B313738373B313738343B313738323B313737390D0A523D313737373B313737353B313737333B313737313B313736393B313736373B313736353B313736343B313736323B313736310D0A523D313736303B313736303B313735393B313735383B313735373B313735363B313735353B313735353B313735343B313735330D0A523D313735323B313735313B313735303B313734393B313734383B313734383B313734383B313734383B313734373B313734370D0A523D313734373B313734373B313734383B313734383B313734383B313734383B313734383B313734383B313734393B313734390D0A523D313734393B313735303B313735303B313735303B313735303B313735313B313735313B313735323B313735323B313735330D0A523D313735343B313735353B313735363B313735373B313735383B313735393B313736303B313736313B313736323B313736330D0A523D313736353B313736363B313736383B313736393B313737313B313737323B313737343B313737363B313737383B313738300D0A523D313738313B313738333B313738363B313738383B313739313B313739333B313739353B313739383B313830303B313830330D0A523D313830353B313830383B313831313B313831333B313831363B313831393B313832323B313832353B313832383B313833320D0A523D313833353B313833393B313834323B313834353B313834393B313835333B313835373B313836303B313836353B313836390D0A523D313837333B313837373B313838313B313838353B313839303B313839343B313839383B313930333B313930373B313931320D0A523D313931373B313932323B313932373B313933313B313933363B313934313B313934363B313935323B313935373B313936330D0A523D313936393B313937343B313938303B313938353B313939313B313939373B323030333B323031303B323031363B323032320D0A523D323032393B323033363B323034323B323034393B323035363B323036343B323037313B323037383B323038363B323039340D0A523D323130323B323131303B323131393B323132373B323133353B323134333B323135323B323136303B323136393B323137390D0A523D323138383B323139373B323230363B323231353B323232353B323233353B323234343B323235343B323236343B323237350D0A523D323238353B323239363B323330373B323331373B323332383B323333393B323335303B323336323B323337333B323338340D0A523D323339353B323430373B323431393B323433313B323434333B323435353B323436373B323438303B323439323B323530350D0A523D323531383B323533313B323534343B323535383B323537313B323538343B323539373B323631303B323632333B323633360D0A523D323635303B323636333B323637363B323638393B323730323B323731353B323732383B323734303B323735333B323736340D0A523D323737363B323738383B323739393B323830393B323831393B323832393B323833383B323834363B323835333B323835390D0A523D323836353B323837303B323837343B323837373B323837393B323838313B323838323B323838313B323838313B323837390D0A523D323837383B323837363B323837343B323837323B323836393B323836363B323836323B323835383B323835343B323835300D0A523D323834353B323834313B323833363B323833323B323832363B323832313B323831353B323831303B323830353B323739390D0A523D323739343B323738383B323738333B323737383B323737333B323736373B323736323B323735363B323735313B323734360D0A523D323734313B323733373B323733323B323732373B323732323B323731373B323731333B323730383B323730333B323639390D0A523D323639343B323639303B323638353B323638313B323637363B323637323B323636383B323636333B323635393B323635350D0A523D323635323B323634383B323634343B323634303B323633363B323633323B323632383B323632353B323632313B323631370D0A523D323631343B323631303B323630373B323630343B323630303B323539373B323539333B323539303B323538373B323538340D0A523D323538313B323537383B323537353B323537323B323536393B323536363B323536343B323536313B323535393B323535360D0A523D323535333B323535313B323534383B323534363B323534343B323534323B323533393B323533383B323533363B323533340D0A523D323533323B323533313B323532393B323532383B323532363B323532353B323532333B323532323B323532303B323531380D0A523D323531373B323531363B323531353B323531333B323531323B323531313B323531303B323530393B323530393B323530380D0A523D323530373B323530363B323530353B323530353B323530343B323530343B323530333B323530333B323530323B323530320D0A523D323530313B323530313B323530303B323530303B323530303B323530303B323530303B323530303B323439393B323439390D0A523D323439393B323439393B323439393B323439393B323439393B323439393B323439393B323439393B323439393B323439390D0A523D323439383B323439383B323439383B323439383B323439373B323439373B323439373B323439363B323439353B323439340D0A523D323439333B323439323B323439313B323438393B323438373B323438353B323438333B323437393B323437363B323437320D0A523D323436383B323436343B323435393B323435343B323435303B323434343B323433383B323433333B323432383B323432320D0A523D323431353B323430393B323430323B323339353B323338393B323338313B323337343B323336363B323335393B323335310D0A523D323334333B323333363B323332383B323332303B323331323B323330343B323239363B323238383B323237393B323237310D0A523D323236333B323235353B323234373B323233383B323233313B323232333B323231353B323230373B323139383B323139300D0A523D323138333B323137353B323136373B323136303B323135323B323134343B323133373B323132393B323132323B323131360D0A523D323130383B323130313B323039343B323038373B323038313B323037343B323036373B323036313B323035353B323034390D0A523D323034323B323033363B323033303B323032343B323031383B323031323B323030363B323030313B313939353B313939300D0A523D313938343B313937383B313937333B313936373B313936323B313935373B313935323B313934373B313934323B313933370D0A523D313933333B313932373B313932323B313931383B313931333B313930393B313930353B313930303B313839363B313839320D0A523D313838383B313838333B313837393B313837353B313837313B313836373B313836333B313835393B313835353B313835320D0A523D313834383B313834343B313834313B313833373B313833343B313833313B313832383B313832353B313832323B313832300D0A523D313831373B313831343B313831303B313830373B313830343B313830313B313739393B313739373B313739353B313739320D0A523D313739303B313738383B313738353B313738333B313738313B313738303B313737383B313737363B313737343B313737330D0A523D313737313B313736393B313736373B313736363B313736353B313736333B313736323B313736313B313736303B313735390D0A523D313735373B313735363B313735353B313735353B313735343B313735343B313735333B313735333B313735323B313735320D0A523D313735313B313735313B313735303B313735303B313735303B313735303B313735303B313735303B313735313B313735310D0A523D313735313B313735313B313735313B313735323B313735323B313735323B313735323B313735333B313735333B313735340D0A523D313735343B313735353B313735363B313735373B313735373B313735383B313735383B313735393B313736303B313736310D0A523D313736333B313736343B313736363B313736373B313736383B313736393B313737313B313737333B313737353B313737370D0A523D313737383B313738303B313738333B313738353B313738373B313738393B313739313B313739333B313739353B313739380D0A523D313830303B313830333B313830353B313830373B313831303B313831323B313831353B313831383B313832313B313832340D0A523D313832373B313833303B313833333B313833363B313834303B313834333B313834373B313835303B313835343B313835370D0A523D313836313B313836353B313836393B313837333B313837373B313838323B313838363B313839313B313839363B313930310D0A523D313930363B313931323B313931383B313932333B313932383B313933333B313933383B313934343B313934393B313935350D0A523D313936313B313936373B313937343B313938303B313938373B313939333B313939393B323030363B323031323B323031380D0A523D323032353B323033323B323033383B323034363B323035333B323036303B323036373B323037343B323038323B323038390D0A523D323039373B323130353B323131323B323132303B323132383B323133363B323134343B323135333B323136313B323136390D0A523D323137373B323138363B323139353B323230343B323231323B323232313B323233303B323233393B323234393B323235390D0A523D323236383B323237383B323238383B323239383B323330383B323331383B323332393B323333393B323335303B323336300D0A523D323337303B323338303B323339313B323430313B323431323B323432343B323433343B323434353B323435373B323436390D0A523D323438303B323439313B323530323B323531343B323532353B323533363B323534383B323535393B323537303B323538310D0A523D323539323B323630333B323631333B323632343B323633343B323634343B323635343B323636343B323637333B323638320D0A523D323639303B323639383B323730363B323731323B323731393B323732343B323732393B323733333B323733363B323733380D0A523D323733393B323734303B323734303B323734303B323734303B323734303B323734303B323733393B323733383B323733370D0A523D323733363B323733343B323733323B323733313B323732393B323732363B323732343B323732313B323731383B323731350D0A523D323731323B323730393B323730363B323730343B323730313B323639393B323639363B323639343B323639313B323638390D0A523D323638363B323638333B323638313B323637393B323637373B323637353B323637333B323637303B323636383B323636360D0A523D323636343B323636323B323636303B323635383B323635363B323635353B323635333B323635323B323635313B323635300D0A523D323634383B323634373B323634363B323634353B323634343B323634333B323634323B323634323B323634313B323634310D0A523D323633393B323633383B323633373B323633373B323633373B323633383B323633393B323633393B323634303B323634300D0A523D323634313B323634313B323634313B323634313B323634313B323634313B323634323B323634323B323634333B323634340D0A56424F583D33352E30323B33352E30320D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A5A54494C543D31303B31300D0A4645443D35372E36323B35372E36320D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                20) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    20) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3134342E3934303B3134342E3934300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35332E31303B35332E31300D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323437313B323437383B323438343B323439313B323439383B323530343B323531313B323531383B323532343B323533320D0A523D323533393B323534353B323535323B323535393B323536353B323537323B323537393B323538363B323539333B323539390D0A523D323630363B323631343B323632303B323632373B323633343B323634313B323634383B323635363B323636333B323637300D0A523D323637373B323638333B323639303B323639373B323730333B323730393B323731353B323732313B323732373B323733340D0A523D323733393B323734353B323735303B323735353B323736303B323736343B323737303B323737353B323737393B323738330D0A523D323738373B323739313B323739343B323739383B323830323B323830353B323830383B323831313B323831333B323831360D0A523D323831383B323832303B323832313B323832323B323832333B323832333B323832343B323832343B323832333B323832320D0A523D323832313B323832303B323831383B323831363B323831343B323831323B323831303B323830383B323830353B323830320D0A523D323739393B323739363B323739333B323738393B323738353B323738313B323737373B323737333B323736383B323736330D0A523D323735383B323735323B323734373B323734313B323733343B323732383B323732313B323731333B323730353B323639380D0A523D323639303B323638323B323637333B323636343B323635363B323634363B323633373B323632373B323631373B323630360D0A523D323539363B323538353B323537343B323536333B323535323B323534313B323533303B323531393B323530383B323439370D0A523D323438363B323437353B323436343B323435343B323434333B323433323B323432323B323431313B323430313B323339300D0A523D323337393B323336393B323335383B323334383B323333383B323332383B323331373B323330373B323239383B323238390D0A523D323237393B323236393B323236303B323235303B323234313B323233323B323232333B323231353B323230363B323139370D0A523D323138383B323138303B323137323B323136343B323135353B323134383B323134303B323133323B323132353B323131370D0A523D323130393B323130323B323039353B323038383B323038303B323037343B323036373B323036303B323035343B323034370D0A523D323034313B323033343B323032383B323032323B323031363B323031303B323030343B313939383B313939323B313938360D0A523D313938303B313937353B313936393B313936343B313935393B313935343B313934393B313934343B313933383B313933330D0A523D313932383B313932343B313931393B313931353B313931303B313930353B313930313B313839373B313839333B313838390D0A523D313838353B313838313B313837373B313837333B313836393B313836353B313836323B313835383B313835353B313835310D0A523D313834373B313834343B313834313B313833383B313833353B313833323B313832393B313832363B313832333B313832300D0A523D313831383B313831353B313831333B313831303B313830383B313830353B313830333B313830313B313739383B313739360D0A523D313739343B313739323B313739313B313738393B313738373B313738353B313738343B313738323B313738303B313737390D0A523D313737383B313737373B313737353B313737343B313737323B313737313B313737303B313736393B313736383B313736370D0A523D313736363B313736353B313736353B313736343B313736333B313736323B313736323B313736313B313736303B313735390D0A523D313735393B313735393B313735393B313735393B313735393B313735383B313735383B313735383B313735383B313735390D0A523D313735393B313735393B313735393B313736303B313736303B313736313B313736313B313736323B313736323B313736330D0A523D313736343B313736353B313736353B313736363B313736373B313736383B313736393B313737313B313737323B313737330D0A523D313737343B313737363B313737383B313737393B313738313B313738323B313738343B313738353B313738373B313738390D0A523D313739313B313739323B313739343B313739373B313739393B313830313B313830333B313830363B313830383B313831300D0A523D313831333B313831353B313831383B313832303B313832333B313832363B313832393B313833313B313833333B313833360D0A523D313833383B313834303B313834323B313834353B313834383B313835313B313835343B313835383B313836323B313836370D0A523D313837313B313837353B313837393B313838323B313838363B313838393B313839323B313839363B313839393B313930330D0A523D313930373B313931313B313931353B313932303B313932343B313932393B313933333B313933383B313934333B313934380D0A523D313935333B313935383B313936333B313936393B313937353B313938303B313938363B313939323B313939393B323030350D0A523D323031313B323031363B323032323B323032383B323033343B323034313B323034373B323035333B323035393B323036360D0A523D323037333B323037393B323038363B323039333B323130303B323130373B323131343B323132313B323132393B323133360D0A523D323134333B323135313B323135393B323136373B323137353B323138333B323139303B323139383B323230363B323231350D0A523D323232333B323233313B323233393B323234373B323235363B323236343B323237323B323238303B323238383B323239370D0A523D323330353B323331333B323332313B323332393B323333383B323334363B323335353B323336343B323337323B323338310D0A523D323339303B323339383B323430363B323431343B323432323B323433303B323433383B323434363B323435333B323436310D0A523D323437303B323437373B323438353B323439333B323530303B323530383B323531363B323532333B323533313B323533380D0A523D323534353B323535323B323535383B323536353B323537313B323537383B323538343B323538393B323539353B323630300D0A523D323630363B323631303B323631353B323631393B323632343B323632383B323633313B323633353B323633393B323634320D0A523D323634353B323634373B323634383B323634393B323634393B323635303B323635313B323635323B323635333B323635340D0A523D323635353B323635363B323635373B323635383B323635393B323635393B323636303B323636303B323636313B323636310D0A523D323636313B323636313B323636313B323636313B323636323B323636323B323636333B323636333B323636323B323636320D0A523D323636323B323636323B323636313B323636313B323636303B323636303B323635393B323635393B323635393B323635390D0A523D323635383B323635383B323635373B323635373B323635373B323635363B323635353B323635343B323635333B323635330D0A523D323635333B323635333B323635333B323635323B323635323B323635313B323635313B323635303B323635303B323635300D0A523D323635303B323635303B323635303B323634393B323634393B323634393B323634393B323634393B323634393B323634380D0A523D323634373B323634363B323634363B323634353B323634353B323634343B323634333B323634323B323634313B323633390D0A523D323633393B323633383B323633383B323633373B323633353B323633333B323633323B323633303B323632393B323632370D0A523D323632363B323632353B323632323B323632303B323631373B323631353B323631333B323631313B323630393B323630360D0A523D323630333B323630303B323539373B323539333B323539313B323538383B323538353B323538323B323537383B323537350D0A523D323537313B323536373B323536323B323535383B323535333B323534383B323534333B323533383B323533343B323532390D0A523D323532343B323531393B323531343B323530383B323530323B323439363B323439303B323438343B323437393B323437340D0A523D323436383B323436333B323435383B323435333B323434373B323434313B323433363B323433313B323432353B323431390D0A523D323431333B323430383B323430333B323339373B323339303B323338343B323337383B323337333B323336373B323336310D0A523D323335343B323334383B323334313B323333353B323333303B323332353B323332303B323331343B323330383B323330310D0A523D323239353B323238393B323238333B323237383B323237323B323236353B323236303B323235343B323234383B323234320D0A523D323233363B323233313B323232353B323232303B323231353B323230393B323230333B323139383B323139323B323138360D0A523D323138313B323137353B323137303B323136353B323135393B323135343B323134393B323134333B323133383B323133320D0A523D323132373B323132323B323131373B323131323B323130373B323130333B323039373B323039333B323038383B323038330D0A523D323037383B323037333B323036383B323036333B323035383B323035333B323034383B323034333B323033383B323033330D0A523D323032393B323032343B323032303B323031353B323031303B323030363B323030313B313939363B313939323B313938380D0A523D313938343B313937393B313937343B313937303B313936363B313936323B313935373B313935343B313935303B313934360D0A523D313934323B313933383B313933353B313933313B313932383B313932343B313932303B313931363B313931323B313930390D0A523D313930353B313930313B313839383B313839353B313839323B313838383B313838353B313838323B313837393B313837360D0A523D313837333B313837303B313836373B313836343B313836323B313835393B313835373B313835353B313835333B313835300D0A523D313834373B313834353B313834323B313834303B313833383B313833363B313833333B313833313B313832393B313832360D0A523D313832343B313832323B313832303B313831383B313831373B313831353B313831343B313831323B313831313B313830390D0A523D313830383B313830363B313830353B313830333B313830323B313830313B313830303B313739393B313739383B313739370D0A523D313739363B313739363B313739353B313739343B313739333B313739333B313739323B313739323B313739313B313739300D0A523D313738393B313738383B313738383B313738373B313738373B313738363B313738363B313738353B313738353B313738340D0A523D313738343B313738343B313738343B313738333B313738333B313738333B313738333B313738333B313738333B313738320D0A523D313738323B313738333B313738333B313738333B313738333B313738333B313738333B313738333B313738333B313738340D0A523D313738343B313738343B313738343B313738353B313738353B313738363B313738363B313738373B313738373B313738380D0A523D313738393B313739303B313739313B313739313B313739323B313739333B313739343B313739353B313739363B313739370D0A523D313739383B313739393B313830303B313830313B313830333B313830343B313830353B313830373B313830383B313831300D0A523D313831313B313831333B313831343B313831363B313831373B313831393B313832303B313832323B313832333B313832350D0A523D313832373B313832393B313833313B313833333B313833353B313833373B313833393B313834313B313834333B313834350D0A523D313834373B313834393B313835313B313835333B313835353B313835383B313836303B313836323B313836343B313836370D0A523D313836393B313837323B313837353B313837373B313838303B313838323B313838353B313838383B313839313B313839330D0A523D313839363B313839393B313930323B313930353B313930383B313931323B313931353B313931383B313932313B313932340D0A523D313932373B313933303B313933333B313933363B313933393B313934323B313934363B313934393B313935323B313935360D0A523D313935393B313936333B313936363B313937303B313937333B313937373B313938303B313938333B313938373B313939300D0A523D313939343B313939383B323030313B323030353B323030383B323031323B323031353B323031393B323032333B323032360D0A523D323033303B323033333B323033373B323034303B323034333B323034363B323035303B323035333B323035363B323035390D0A523D323036323B323036353B323036383B323037313B323037353B323037383B323038313B323038343B323038373B323039300D0A523D323039343B323039373B323130303B323130333B323130363B323130383B323131313B323131343B323131373B323132300D0A523D323132333B323132363B323132393B323133323B323133353B323133383B323134313B323134343B323134373B323135300D0A523D323135333B323135373B323136303B323136333B323136363B323136393B323137333B323137363B323138303B323138330D0A523D323138363B323138393B323139323B323139363B323139393B323230323B323230353B323230393B323231333B323231360D0A523D323232303B323232343B323232383B323233323B323233353B323233393B323234333B323234373B323235313B323235360D0A523D323236303B323236343B323236383B323237333B323237373B323238323B323238363B323239313B323239363B323330300D0A523D323330353B323331303B323331353B323332303B323332343B323332393B323333343B323333393B323334343B323334390D0A523D323335353B323336303B323336353B323337303B323337363B323338313B323338363B323339323B323339373B323430330D0A523D323431303B323431353B323432313B323432373B323433333B323433393B323434353B323435323B323435393B323436350D0A545243464D543D313B313030303B453B4C3B460D0A523D323635333B323635333B323635333B323635343B323635353B323635363B323635373B323635373B323635373B323635380D0A523D323635383B323635393B323635393B323635393B323635393B323636303B323636303B323636313B323636313B323636320D0A523D323636323B323636323B323636323B323636333B323636333B323636323B323636323B323636313B323636313B323636310D0A523D323636313B323636313B323636313B323636303B323636303B323635393B323635393B323635383B323635373B323635360D0A523D323635353B323635343B323635333B323635323B323635313B323635303B323634393B323634393B323634383B323634370D0A523D323634353B323634323B323633393B323633353B323633313B323632383B323632343B323631393B323631353B323631300D0A523D323630363B323630303B323539353B323538393B323538343B323537383B323537313B323536353B323535383B323535320D0A523D323534353B323533383B323533313B323532333B323531363B323530383B323530303B323439333B323438353B323437370D0A523D323437303B323436313B323435333B323434363B323433383B323433303B323432323B323431343B323430363B323339380D0A523D323339303B323338313B323337323B323336343B323335353B323334363B323333383B323332393B323332313B323331330D0A523D323330353B323239373B323238383B323238303B323237323B323236343B323235363B323234373B323233393B323233310D0A523D323232333B323231353B323230363B323139383B323139303B323138333B323137353B323136373B323135393B323135310D0A523D323134333B323133363B323132393B323132313B323131343B323130373B323130303B323039333B323038363B323037390D0A523D323037333B323036363B323035393B323035333B323034373B323034313B323033343B323032383B323032323B323031360D0A523D323031313B323030353B313939393B313939323B313938363B313938303B313937353B313936393B313936333B313935380D0A523D313935333B313934383B313934333B313933383B313933333B313932393B313932343B313932303B313931353B313931310D0A523D313930373B313930333B313839393B313839363B313839323B313838393B313838363B313838323B313837393B313837350D0A523D313837313B313836373B313836323B313835383B313835343B313835313B313834383B313834353B313834323B313834300D0A523D313833383B313833363B313833333B313833313B313832393B313832363B313832333B313832303B313831383B313831350D0A523D313831333B313831303B313830383B313830363B313830333B313830313B313739393B313739373B313739343B313739320D0A523D313739313B313738393B313738373B313738353B313738343B313738323B313738313B313737393B313737383B313737360D0A523D313737343B313737333B313737323B313737313B313736393B313736383B313736373B313736363B313736353B313736350D0A523D313736343B313736333B313736323B313736323B313736313B313736313B313736303B313736303B313735393B313735390D0A523D313735393B313735393B313735383B313735383B313735383B313735383B313735393B313735393B313735393B313735390D0A523D313735393B313735393B313736303B313736313B313736323B313736323B313736333B313736343B313736353B313736350D0A523D313736363B313736373B313736383B313736393B313737303B313737313B313737323B313737343B313737353B313737370D0A523D313737383B313737393B313738303B313738323B313738343B313738353B313738373B313738393B313739313B313739320D0A523D313739343B313739363B313739383B313830313B313830333B313830353B313830383B313831303B313831333B313831350D0A523D313831383B313832303B313832333B313832363B313832393B313833323B313833353B313833383B313834313B313834340D0A523D313834373B313835313B313835353B313835383B313836323B313836353B313836393B313837333B313837373B313838310D0A523D313838353B313838393B313839333B313839373B313930313B313930353B313931303B313931353B313931393B313932340D0A523D313932383B313933333B313933383B313934343B313934393B313935343B313935393B313936343B313936393B313937350D0A523D313938303B313938363B313939323B313939383B323030343B323031303B323031363B323032323B323032383B323033340D0A523D323034313B323034373B323035343B323036303B323036373B323037343B323038303B323038383B323039353B323130320D0A523D323130393B323131373B323132353B323133323B323134303B323134383B323135353B323136343B323137323B323138300D0A523D323138383B323139373B323230363B323231353B323232333B323233323B323234313B323235303B323236303B323236390D0A523D323237393B323238393B323239383B323330373B323331373B323332383B323333383B323334383B323335383B323336390D0A523D323337393B323339303B323430313B323431313B323432323B323433323B323434333B323435343B323436343B323437350D0A523D323438363B323439373B323530383B323531393B323533303B323534313B323535323B323536333B323537343B323538350D0A523D323539363B323630363B323631373B323632373B323633373B323634363B323635363B323636343B323637333B323638320D0A523D323639303B323639383B323730353B323731333B323732313B323732383B323733343B323734313B323734373B323735320D0A523D323735383B323736333B323736383B323737333B323737373B323738313B323738353B323738393B323739333B323739360D0A523D323739393B323830323B323830353B323830383B323831303B323831323B323831343B323831363B323831383B323832300D0A523D323832313B323832323B323832333B323832343B323832343B323832333B323832333B323832323B323832313B323832300D0A523D323831383B323831363B323831333B323831313B323830383B323830353B323830323B323739383B323739343B323739310D0A523D323738373B323738333B323737393B323737353B323737303B323736343B323736303B323735353B323735303B323734350D0A523D323733393B323733343B323732373B323732313B323731353B323730393B323730333B323639373B323639303B323638330D0A523D323637373B323637303B323636333B323635363B323634383B323634313B323633343B323632373B323632303B323631340D0A523D323630363B323539393B323539333B323538363B323537393B323537323B323536353B323535393B323535323B323534350D0A523D323533393B323533323B323532343B323531383B323531313B323530343B323439383B323439313B323438343B323437380D0A523D323437313B323436353B323435393B323435323B323434353B323433393B323433333B323432373B323432313B323431350D0A523D323431303B323430333B323339373B323339323B323338363B323338313B323337363B323337303B323336353B323336300D0A523D323335353B323334393B323334343B323333393B323333343B323332393B323332343B323332303B323331353B323331300D0A523D323330353B323330303B323239363B323239313B323238363B323238323B323237373B323237333B323236383B323236340D0A523D323236303B323235363B323235313B323234373B323234333B323233393B323233353B323233323B323232383B323232340D0A523D323232303B323231363B323231333B323230393B323230353B323230323B323139393B323139363B323139323B323138390D0A523D323138363B323138333B323138303B323137363B323137333B323136393B323136363B323136333B323136303B323135370D0A523D323135333B323135303B323134373B323134343B323134313B323133383B323133353B323133323B323132393B323132360D0A523D323132333B323132303B323131373B323131343B323131313B323130383B323130363B323130333B323130303B323039370D0A523D323039343B323039303B323038373B323038343B323038313B323037383B323037353B323037313B323036383B323036350D0A523D323036323B323035393B323035363B323035333B323035303B323034363B323034333B323034303B323033373B323033330D0A523D323033303B323032363B323032333B323031393B323031353B323031323B323030383B323030353B323030313B313939380D0A523D313939343B313939303B313938373B313938333B313938303B313937373B313937333B313937303B313936363B313936330D0A523D313935393B313935363B313935323B313934393B313934363B313934323B313933393B313933363B313933333B313933300D0A523D313932373B313932343B313932313B313931383B313931353B313931323B313930383B313930353B313930323B313839390D0A523D313839363B313839333B313839313B313838383B313838353B313838323B313838303B313837373B313837353B313837320D0A523D313836393B313836373B313836343B313836323B313836303B313835383B313835353B313835333B313835313B313834390D0A523D313834373B313834353B313834333B313834313B313833393B313833373B313833353B313833333B313833313B313832390D0A523D313832373B313832353B313832333B313832323B313832303B313831393B313831373B313831363B313831343B313831330D0A523D313831313B313831303B313830383B313830373B313830353B313830343B313830333B313830313B313830303B313739390D0A523D313739383B313739373B313739363B313739353B313739343B313739333B313739323B313739313B313739313B313739300D0A523D313738393B313738383B313738373B313738373B313738363B313738363B313738353B313738353B313738343B313738340D0A523D313738343B313738343B313738333B313738333B313738333B313738333B313738333B313738333B313738333B313738330D0A523D313738323B313738323B313738333B313738333B313738333B313738333B313738333B313738333B313738343B313738340D0A523D313738343B313738343B313738353B313738353B313738363B313738363B313738373B313738373B313738383B313738380D0A523D313738393B313739303B313739313B313739323B313739323B313739333B313739333B313739343B313739353B313739360D0A523D313739363B313739373B313739383B313739393B313830303B313830313B313830323B313830333B313830353B313830360D0A523D313830383B313830393B313831313B313831323B313831343B313831353B313831373B313831383B313832303B313832320D0A523D313832343B313832363B313832393B313833313B313833333B313833363B313833383B313834303B313834323B313834350D0A523D313834373B313835303B313835333B313835353B313835373B313835393B313836323B313836343B313836373B313837300D0A523D313837333B313837363B313837393B313838323B313838353B313838383B313839323B313839353B313839383B313930310D0A523D313930353B313930393B313931323B313931363B313932303B313932343B313932383B313933313B313933353B313933380D0A523D313934323B313934363B313935303B313935343B313935373B313936323B313936363B313937303B313937343B313937390D0A523D313938343B313938383B313939323B313939363B323030313B323030363B323031303B323031353B323032303B323032340D0A523D323032393B323033333B323033383B323034333B323034383B323035333B323035383B323036333B323036383B323037330D0A523D323037383B323038333B323038383B323039333B323039373B323130333B323130373B323131323B323131373B323132320D0A523D323132373B323133323B323133383B323134333B323134393B323135343B323135393B323136353B323137303B323137350D0A523D323138313B323138363B323139323B323139383B323230333B323230393B323231353B323232303B323232353B323233310D0A523D323233363B323234323B323234383B323235343B323236303B323236353B323237323B323237383B323238333B323238390D0A523D323239353B323330313B323330383B323331343B323332303B323332353B323333303B323333353B323334313B323334380D0A523D323335343B323336313B323336373B323337333B323337383B323338343B323339303B323339373B323430333B323430380D0A523D323431333B323431393B323432353B323433313B323433363B323434313B323434373B323435333B323435383B323436330D0A523D323436383B323437343B323437393B323438343B323439303B323439363B323530323B323530383B323531343B323531390D0A523D323532343B323532393B323533343B323533383B323534333B323534383B323535333B323535383B323536323B323536370D0A523D323537313B323537353B323537383B323538323B323538353B323538383B323539313B323539333B323539373B323630300D0A523D323630333B323630363B323630393B323631313B323631333B323631353B323631373B323632303B323632323B323632350D0A523D323632363B323632373B323632393B323633303B323633323B323633333B323633353B323633373B323633383B323633380D0A523D323633393B323633393B323634313B323634323B323634333B323634343B323634353B323634353B323634363B323634360D0A523D323634373B323634383B323634393B323634393B323634393B323634393B323634393B323634393B323635303B323635300D0A523D323635303B323635303B323635303B323635303B323635313B323635313B323635323B323635323B323635333B323635330D0A56424F583D33352E38373B33352E38370D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35362E34383B35362E34380D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                21) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    21) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3135312E3036303B3135312E3036300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35332E30363B35332E30360D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323535363B323536303B323536333B323536373B323537303B323537343B323537383B323538323B323538363B323538390D0A523D323539333B323539373B323630313B323630353B323630393B323631333B323631383B323632323B323632373B323633310D0A523D323633353B323634303B323634343B323634393B323635343B323635383B323636333B323636373B323637323B323637370D0A523D323638323B323638373B323639323B323639383B323730333B323730383B323731333B323731383B323732343B323732390D0A523D323733343B323733393B323734353B323735303B323735353B323736303B323736363B323737323B323737373B323738330D0A523D323738393B323739353B323830313B323830373B323831333B323831393B323832353B323833313B323833373B323834330D0A523D323835303B323835363B323836323B323836383B323837343B323838303B323838363B323839313B323839353B323930300D0A523D323930353B323930393B323931323B323931353B323931373B323931383B323931393B323931383B323931363B323931320D0A523D323930383B323930333B323839373B323838393B323838313B323837313B323836313B323835303B323833393B323832360D0A523D323831333B323739393B323738353B323737313B323735363B323734313B323732363B323731313B323639363B323638300D0A523D323636343B323634393B323633343B323631393B323630343B323538383B323537333B323535383B323534343B323532390D0A523D323531353B323530313B323438363B323437313B323435373B323434333B323432393B323431363B323430323B323338390D0A523D323337363B323336323B323334393B323333373B323332343B323331313B323239393B323238363B323237343B323236320D0A523D323235303B323233383B323232373B323231363B323230353B323139333B323138333B323137323B323136313B323135310D0A523D323134303B323133303B323132313B323131313B323130303B323039313B323038313B323037323B323036323B323035330D0A523D323034343B323033353B323032363B323031383B323030393B323030313B313939333B313938353B313937383B313937300D0A523D313936323B313935353B313934383B313934313B313933333B313932363B313931393B313931323B313930353B313839380D0A523D313839323B313838353B313837393B313837333B313836373B313836313B313835353B313834393B313834333B313833370D0A523D313833313B313832363B313832303B313831353B313831303B313830353B313830303B313739353B313739303B313738350D0A523D313738303B313737363B313737313B313736373B313736323B313735373B313735333B313734393B313734353B313734310D0A523D313733373B313733343B313733303B313732363B313732333B313732303B313731373B313731333B313730393B313730350D0A523D313730313B313639383B313639343B313639303B313638363B313638333B313637393B313637373B313637353B313637320D0A523D313637303B313636383B313636363B313636333B313636313B313635383B313635353B313635323B313635303B313634380D0A523D313634363B313634343B313634333B313634313B313634303B313633383B313633373B313633353B313633343B313633330D0A523D313633313B313633303B313632393B313632393B313632383B313632373B313632363B313632363B313632353B313632350D0A523D313632343B313632333B313632333B313632323B313632323B313632323B313632323B313632313B313632313B313632310D0A523D313632313B313632303B313632303B313632313B313632313B313632313B313632313B313632313B313632313B313632320D0A523D313632323B313632323B313632323B313632333B313632343B313632353B313632353B313632363B313632373B313632380D0A523D313632393B313633303B313633313B313633323B313633333B313633353B313633363B313633373B313633393B313634310D0A523D313634323B313634343B313634363B313634383B313635303B313635323B313635343B313635363B313635383B313636300D0A523D313636333B313636363B313636383B313637313B313637333B313637353B313637383B313638313B313638333B313638360D0A523D313638393B313639323B313639353B313639393B313730323B313730353B313730393B313731323B313731363B313731390D0A523D313732333B313732363B313733303B313733343B313733383B313734323B313734363B313735303B313735343B313735390D0A523D313736333B313736373B313737323B313737373B313738323B313738373B313739313B313739363B313830323B313830370D0A523D313831323B313831373B313832323B313832383B313833333B313833393B313834353B313835303B313835363B313836320D0A523D313836393B313837353B313838323B313838383B313839343B313930313B313930383B313931353B313932323B313932390D0A523D313933373B313934343B313935323B313936303B313936383B313937363B313938343B313939323B323030313B323030390D0A523D323031383B323032373B323033363B323034353B323035343B323036333B323037333B323038323B323039333B323130330D0A523D323131333B323132333B323133343B323134343B323135353B323136363B323137373B323138383B323230303B323231320D0A523D323232343B323233363B323234383B323236313B323237343B323238373B323330303B323331333B323332373B323334310D0A523D323335353B323336393B323338333B323339373B323431323B323432363B323434313B323435363B323437313B323438360D0A523D323530323B323531373B323533333B323534393B323536353B323538313B323539383B323631343B323633313B323634370D0A523D323636343B323638313B323639373B323731333B323733303B323734363B323736313B323737353B323738393B323830310D0A523D323831323B323832303B323832383B323833333B323833363B323833373B323833383B323833373B323833353B323833320D0A523D323832393B323832353B323832323B323831373B323831343B323831303B323830363B323830313B323739373B323739320D0A523D323738373B323738333B323737383B323737333B323736383B323736323B323735373B323735323B323734383B323734330D0A523D323733383B323733343B323733303B323732353B323732313B323731363B323731323B323730383B323730353B323730310D0A523D323639383B323639343B323639303B323638373B323638343B323638313B323637383B323637353B323637323B323637300D0A523D323636363B323636343B323636313B323635393B323635363B323635343B323635323B323634393B323634373B323634350D0A523D323634323B323634303B323633383B323633373B323633353B323633343B323633323B323633313B323632393B323632380D0A523D323632363B323632353B323632343B323632323B323632313B323632303B323631393B323631383B323631383B323631370D0A523D323631373B323631373B323631373B323631373B323631373B323631373B323631373B323631383B323631383B323631380D0A523D323631383B323632303B323632303B323632313B323632313B323632323B323632333B323632343B323632353B323632360D0A523D323632373B323632393B323633303B323633313B323633323B323633343B323633363B323633383B323633393B323634310D0A523D323634333B323634353B323634373B323634393B323635313B323635333B323635363B323635383B323636303B323636320D0A523D323636353B323636383B323637303B323637333B323637353B323637383B323638313B323638343B323638373B323639300D0A523D323639333B323639363B323639393B323730333B323730363B323730383B323731303B323731323B323731343B323731360D0A523D323731373B323731373B323731383B323731373B323731363B323731343B323731323B323730393B323730353B323730310D0A523D323639363B323639303B323638333B323637353B323636373B323635373B323634373B323633373B323632373B323631350D0A523D323630333B323539313B323537393B323536363B323535343B323534323B323532393B323531373B323530353B323439320D0A523D323437393B323436383B323435363B323434333B323433313B323431393B323430373B323339363B323338343B323337320D0A523D323336313B323335303B323333383B323332373B323331363B323330353B323239343B323238333B323237323B323236320D0A523D323235313B323234313B323233313B323232303B323231303B323230303B323139303B323138313B323137313B323136310D0A523D323135323B323134333B323133333B323132343B323131353B323130363B323039373B323038393B323038303B323037310D0A523D323036323B323035343B323034363B323033383B323033303B323032323B323031343B323030363B313939393B313939320D0A523D313938353B313937383B313937303B313936333B313935363B313935303B313934343B313933373B313933303B313932340D0A523D313931383B313931323B313930363B313930303B313839343B313838383B313838323B313837373B313837323B313836360D0A523D313836313B313835353B313834393B313834343B313833393B313833353B313833303B313832353B313832303B313831350D0A523D313831313B313830373B313830333B313739383B313739343B313739303B313738353B313738323B313737383B313737340D0A523D313737303B313736363B313736333B313735393B313735363B313735323B313734393B313734363B313734333B313734300D0A523D313733373B313733343B313733303B313732373B313732343B313732313B313731393B313731363B313731333B313731300D0A523D313730373B313730353B313730323B313639393B313639373B313639353B313639333B313639313B313638393B313638370D0A523D313638353B313638343B313638323B313638303B313637383B313637363B313637353B313637333B313637313B313636390D0A523D313636383B313636363B313636353B313636343B313636333B313636323B313636313B313636303B313635393B313635390D0A523D313635383B313635383B313635383B313635383B313635373B313635373B313635373B313635373B313635373B313635370D0A523D313635373B313635383B313635383B313635393B313635393B313635393B313635393B313636303B313636303B313636310D0A523D313636313B313636323B313636323B313636333B313636333B313636343B313636353B313636363B313636363B313636370D0A523D313636383B313637303B313637313B313637323B313637343B313637353B313637363B313637373B313637393B313638310D0A523D313638333B313638353B313638363B313638383B313639303B313639323B313639343B313639363B313639383B313730300D0A523D313730323B313730353B313730373B313730393B313731323B313731343B313731373B313732303B313732333B313732360D0A523D313732393B313733323B313733353B313733383B313734313B313734343B313734373B313735303B313735353B313735380D0A523D313736313B313736353B313736393B313737333B313737363B313738303B313738343B313738383B313739333B313739370D0A523D313830313B313830363B313831313B313831353B313832303B313832353B313832393B313833343B313833383B313834340D0A523D313835303B313835353B313836303B313836353B313837303B313837363B313838313B313838373B313839333B313839390D0A523D313930353B313931313B313931373B313932333B313933303B313933363B313934323B313934393B313935353B313936330D0A523D313937303B313937363B313938333B313939303B313939383B323030353B323031333B323032313B323032383B323033360D0A523D323034343B323035313B323035393B323036373B323037353B323038333B323039313B323039393B323130373B323131360D0A523D323132343B323133323B323134303B323134393B323135373B323136363B323137343B323138323B323139313B323230300D0A523D323230383B323231363B323232343B323233313B323233393B323234373B323235343B323236323B323236393B323237360D0A523D323238343B323239303B323239373B323330343B323331303B323331373B323332343B323333303B323333363B323334310D0A523D323334383B323335333B323335383B323336333B323336383B323337333B323337383B323338323B323338373B323339310D0A523D323339353B323339393B323430333B323430363B323430393B323431323B323431363B323431393B323432323B323432350D0A523D323432383B323433303B323433323B323433343B323433353B323433373B323433383B323434303B323434313B323434320D0A523D323434333B323434353B323434363B323434373B323434373B323434383B323434383B323434393B323435303B323435310D0A523D323435313B323435323B323435323B323435333B323435333B323435343B323435343B323435353B323435353B323435360D0A523D323435363B323435373B323435383B323435393B323435393B323436303B323436313B323436323B323436323B323436330D0A523D323436343B323436353B323436363B323436373B323436383B323436393B323437313B323437323B323437343B323437360D0A523D323437383B323437393B323438313B323438333B323438353B323438373B323438393B323439313B323439333B323439350D0A523D323439383B323530303B323530333B323530353B323530383B323531313B323531343B323531373B323531393B323532320D0A523D323532353B323532383B323533313B323533343B323533373B323534313B323534343B323534373B323535303B323535330D0A545243464D543D313B313030303B453B4C3B460D0A523D323632363B323632383B323632393B323633313B323633323B323633343B323633353B323633373B323633383B323634300D0A523D323634323B323634353B323634373B323634393B323635323B323635343B323635363B323635393B323636313B323636340D0A523D323636363B323637303B323637323B323637353B323637383B323638313B323638343B323638373B323639303B323639340D0A523D323639383B323730313B323730353B323730383B323731323B323731363B323732313B323732353B323733303B323733340D0A523D323733383B323734333B323734383B323735323B323735373B323736323B323736383B323737333B323737383B323738330D0A523D323738373B323739323B323739373B323830313B323830363B323831303B323831343B323831373B323832323B323832350D0A523D323832393B323833323B323833353B323833373B323833383B323833373B323833363B323833333B323832383B323832300D0A523D323831323B323830313B323738393B323737353B323736313B323734363B323733303B323731333B323639373B323638310D0A523D323636343B323634373B323633313B323631343B323539383B323538313B323536353B323534393B323533333B323531370D0A523D323530323B323438363B323437313B323435363B323434313B323432363B323431323B323339373B323338333B323336390D0A523D323335353B323334313B323332373B323331333B323330303B323238373B323237343B323236313B323234383B323233360D0A523D323232343B323231323B323230303B323138383B323137373B323136363B323135353B323134343B323133343B323132330D0A523D323131333B323130333B323039333B323038323B323037333B323036333B323035343B323034353B323033363B323032370D0A523D323031383B323030393B323030313B313939323B313938343B313937363B313936383B313936303B313935323B313934340D0A523D313933373B313932393B313932323B313931353B313930383B313930313B313839343B313838383B313838323B313837350D0A523D313836393B313836323B313835363B313835303B313834353B313833393B313833333B313832383B313832323B313831370D0A523D313831323B313830373B313830323B313739363B313739313B313738373B313738323B313737373B313737323B313736370D0A523D313736333B313735393B313735343B313735303B313734363B313734323B313733383B313733343B313733303B313732360D0A523D313732333B313731393B313731363B313731323B313730393B313730353B313730323B313639393B313639353B313639320D0A523D313638393B313638363B313638333B313638313B313637383B313637353B313637333B313637313B313636383B313636360D0A523D313636333B313636303B313635383B313635363B313635343B313635323B313635303B313634383B313634363B313634340D0A523D313634323B313634313B313633393B313633373B313633363B313633353B313633333B313633323B313633313B313633300D0A523D313632393B313632383B313632373B313632363B313632353B313632353B313632343B313632333B313632323B313632320D0A523D313632323B313632323B313632313B313632313B313632313B313632313B313632313B313632313B313632303B313632300D0A523D313632313B313632313B313632313B313632313B313632323B313632323B313632323B313632323B313632333B313632330D0A523D313632343B313632353B313632353B313632363B313632363B313632373B313632383B313632393B313632393B313633300D0A523D313633313B313633333B313633343B313633353B313633373B313633383B313634303B313634313B313634333B313634340D0A523D313634363B313634383B313635303B313635323B313635353B313635383B313636313B313636333B313636363B313636380D0A523D313637303B313637323B313637353B313637373B313637393B313638333B313638363B313639303B313639343B313639380D0A523D313730313B313730353B313730393B313731333B313731373B313732303B313732333B313732363B313733303B313733340D0A523D313733373B313734313B313734353B313734393B313735333B313735373B313736323B313736373B313737313B313737360D0A523D313738303B313738353B313739303B313739353B313830303B313830353B313831303B313831353B313832303B313832360D0A523D313833313B313833373B313834333B313834393B313835353B313836313B313836373B313837333B313837393B313838350D0A523D313839323B313839383B313930353B313931323B313931393B313932363B313933333B313934313B313934383B313935350D0A523D313936323B313937303B313937383B313938353B313939333B323030313B323030393B323031383B323032363B323033350D0A523D323034343B323035333B323036323B323037323B323038313B323039313B323130303B323131313B323132313B323133300D0A523D323134303B323135313B323136313B323137323B323138333B323139333B323230353B323231363B323232373B323233380D0A523D323235303B323236323B323237343B323238363B323239393B323331313B323332343B323333373B323334393B323336320D0A523D323337363B323338393B323430323B323431363B323432393B323434333B323435373B323437313B323438363B323530310D0A523D323531353B323532393B323534343B323535383B323537333B323538383B323630343B323631393B323633343B323634390D0A523D323636343B323638303B323639363B323731313B323732363B323734313B323735363B323737313B323738353B323739390D0A523D323831333B323832363B323833393B323835303B323836313B323837313B323838313B323838393B323839373B323930330D0A523D323930383B323931323B323931363B323931383B323931393B323931383B323931373B323931353B323931323B323930390D0A523D323930353B323930303B323839353B323839313B323838363B323838303B323837343B323836383B323836323B323835360D0A523D323835303B323834333B323833373B323833313B323832353B323831393B323831333B323830373B323830313B323739350D0A523D323738393B323738333B323737373B323737323B323736363B323736303B323735353B323735303B323734353B323733390D0A523D323733343B323732393B323732343B323731383B323731333B323730383B323730333B323639383B323639323B323638370D0A523D323638323B323637373B323637323B323636373B323636333B323635383B323635343B323634393B323634343B323634300D0A523D323633353B323633313B323632373B323632323B323631383B323631333B323630393B323630353B323630313B323539370D0A523D323539333B323538393B323538363B323538323B323537383B323537343B323537303B323536373B323536333B323536300D0A523D323535363B323535333B323535303B323534373B323534343B323534313B323533373B323533343B323533313B323532380D0A523D323532353B323532323B323531393B323531373B323531343B323531313B323530383B323530353B323530333B323530300D0A523D323439383B323439353B323439333B323439313B323438393B323438373B323438353B323438333B323438313B323437390D0A523D323437383B323437363B323437343B323437323B323437313B323436393B323436383B323436373B323436363B323436350D0A523D323436343B323436333B323436323B323436323B323436313B323436303B323435393B323435393B323435383B323435370D0A523D323435363B323435363B323435353B323435353B323435343B323435343B323435333B323435333B323435323B323435320D0A523D323435313B323435313B323435303B323434393B323434383B323434383B323434373B323434373B323434363B323434350D0A523D323434333B323434323B323434313B323434303B323433383B323433373B323433353B323433343B323433323B323433300D0A523D323432383B323432353B323432323B323431393B323431363B323431323B323430393B323430363B323430333B323339390D0A523D323339353B323339313B323338373B323338323B323337383B323337333B323336383B323336333B323335383B323335330D0A523D323334383B323334313B323333363B323333303B323332343B323331373B323331303B323330343B323239373B323239300D0A523D323238343B323237363B323236393B323236323B323235343B323234373B323233393B323233313B323232343B323231360D0A523D323230383B323230303B323139313B323138323B323137343B323136363B323135373B323134393B323134303B323133320D0A523D323132343B323131363B323130373B323039393B323039313B323038333B323037353B323036373B323035393B323035310D0A523D323034343B323033363B323032383B323032313B323031333B323030353B313939383B313939303B313938333B313937360D0A523D313937303B313936333B313935353B313934393B313934323B313933363B313933303B313932333B313931373B313931310D0A523D313930353B313839393B313839333B313838373B313838313B313837363B313837303B313836353B313836303B313835350D0A523D313835303B313834343B313833383B313833343B313832393B313832353B313832303B313831353B313831313B313830360D0A523D313830313B313739373B313739333B313738383B313738343B313738303B313737363B313737333B313736393B313736350D0A523D313736313B313735383B313735353B313735303B313734373B313734343B313734313B313733383B313733353B313733320D0A523D313732393B313732363B313732333B313732303B313731373B313731343B313731323B313730393B313730373B313730350D0A523D313730323B313730303B313639383B313639363B313639343B313639323B313639303B313638383B313638363B313638350D0A523D313638333B313638313B313637393B313637373B313637363B313637353B313637343B313637323B313637313B313637300D0A523D313636383B313636373B313636363B313636363B313636353B313636343B313636333B313636333B313636323B313636320D0A523D313636313B313636313B313636303B313636303B313635393B313635393B313635393B313635393B313635383B313635380D0A523D313635373B313635373B313635373B313635373B313635373B313635373B313635373B313635383B313635383B313635380D0A523D313635383B313635393B313635393B313636303B313636313B313636323B313636333B313636343B313636353B313636360D0A523D313636383B313636393B313637313B313637333B313637353B313637363B313637383B313638303B313638323B313638340D0A523D313638353B313638373B313638393B313639313B313639333B313639353B313639373B313639393B313730323B313730350D0A523D313730373B313731303B313731333B313731363B313731393B313732313B313732343B313732373B313733303B313733340D0A523D313733373B313734303B313734333B313734363B313734393B313735323B313735363B313735393B313736333B313736360D0A523D313737303B313737343B313737383B313738323B313738353B313739303B313739343B313739383B313830333B313830370D0A523D313831313B313831353B313832303B313832353B313833303B313833353B313833393B313834343B313834393B313835350D0A523D313836313B313836363B313837323B313837373B313838323B313838383B313839343B313930303B313930363B313931320D0A523D313931383B313932343B313933303B313933373B313934343B313935303B313935363B313936333B313937303B313937380D0A523D313938353B313939323B313939393B323030363B323031343B323032323B323033303B323033383B323034363B323035340D0A523D323036323B323037313B323038303B323038393B323039373B323130363B323131353B323132343B323133333B323134330D0A523D323135323B323136313B323137313B323138313B323139303B323230303B323231303B323232303B323233313B323234310D0A523D323235313B323236323B323237323B323238333B323239343B323330353B323331363B323332373B323333383B323335300D0A523D323336313B323337323B323338343B323339363B323430373B323431393B323433313B323434333B323435363B323436380D0A523D323437393B323439323B323530353B323531373B323532393B323534323B323535343B323536363B323537393B323539310D0A523D323630333B323631353B323632373B323633373B323634373B323635373B323636373B323637353B323638333B323639300D0A523D323639363B323730313B323730353B323730393B323731323B323731343B323731363B323731373B323731383B323731370D0A523D323731373B323731363B323731343B323731323B323731303B323730383B323730363B323730333B323639393B323639360D0A523D323639333B323639303B323638373B323638343B323638313B323637383B323637353B323637333B323637303B323636380D0A523D323636353B323636323B323636303B323635383B323635363B323635333B323635313B323634393B323634373B323634350D0A523D323634333B323634313B323633393B323633383B323633363B323633343B323633323B323633313B323633303B323632390D0A523D323632373B323632363B323632353B323632343B323632333B323632323B323632313B323632313B323632303B323632300D0A523D323631383B323631383B323631383B323631383B323631373B323631373B323631373B323631373B323631373B323631370D0A523D323631373B323631373B323631383B323631383B323631393B323632303B323632313B323632323B323632343B323632350D0A56424F583D33332E31363B33332E31360D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35382E33373B35382E33370D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                22) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    22) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3135372E3838303B3135372E3838300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35362E31383B35362E31380D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323732303B323732343B323732373B323733313B323733353B323733393B323734343B323734383B323735323B323735360D0A523D323736303B323736343B323736383B323737323B323737373B323738313B323738363B323739303B323739353B323830300D0A523D323830343B323830393B323831333B323831383B323832333B323832383B323833333B323833373B323834323B323834370D0A523D323835323B323835373B323836323B323836373B323837323B323837363B323838313B323838363B323839313B323839360D0A523D323930303B323930353B323930393B323931333B323931373B323932313B323932353B323932383B323933323B323933360D0A523D323933393B323934333B323934363B323934393B323935313B323935333B323935353B323935363B323935373B323935370D0A523D323935373B323935373B323935363B323935343B323935333B323935313B323934383B323934353B323934313B323933370D0A523D323933323B323932373B323932323B323931373B323931313B323930353B323839383B323839313B323838333B323837350D0A523D323836383B323835393B323835313B323834323B323833333B323832343B323831353B323830363B323739363B323738360D0A523D323737363B323736373B323735373B323734373B323733363B323732363B323731363B323730363B323639353B323638350D0A523D323637353B323636343B323635333B323634333B323633323B323632313B323631303B323630303B323538393B323537380D0A523D323536373B323535373B323534363B323533353B323532343B323531343B323530333B323439323B323438313B323437310D0A523D323436303B323435303B323434303B323432393B323431393B323430393B323339393B323338393B323337393B323336390D0A523D323335393B323335303B323334303B323333313B323332323B323331333B323330343B323239343B323238353B323237360D0A523D323236373B323235393B323235303B323234323B323233333B323232353B323231373B323230393B323230313B323139330D0A523D323138353B323137373B323137303B323136323B323135353B323134383B323134313B323133343B323132373B323132310D0A523D323131343B323130373B323130313B323039353B323038383B323038323B323037363B323037303B323036343B323035380D0A523D323035333B323034373B323034313B323033363B323033303B323032353B323032303B323031353B323031303B323030350D0A523D323030303B313939353B313939303B313938363B313938313B313937373B313937323B313936383B313936343B313935390D0A523D313935353B313935313B313934373B313934333B313934303B313933363B313933333B313932393B313932363B313932330D0A523D313931393B313931363B313931323B313930393B313930363B313930333B313930313B313839383B313839363B313839330D0A523D313839313B313838393B313838363B313838343B313838323B313838303B313837383B313837363B313837343B313837320D0A523D313837303B313836393B313836373B313836353B313836343B313836323B313836313B313836303B313835393B313835380D0A523D313835363B313835353B313835343B313835333B313835323B313835323B313835313B313835313B313835303B313835300D0A523D313834393B313834393B313834383B313834383B313834383B313834383B313834383B313834383B313834383B313834380D0A523D313834393B313834393B313834393B313835303B313835303B313835313B313835313B313835323B313835323B313835330D0A523D313835333B313835343B313835353B313835363B313835373B313835383B313836303B313836313B313836323B313836330D0A523D313836353B313836363B313836383B313837303B313837323B313837343B313837363B313837373B313837393B313838310D0A523D313838323B313838343B313838363B313838383B313839303B313839333B313839353B313839383B313930303B313930330D0A523D313930353B313930373B313931303B313931323B313931353B313931373B313932313B313932343B313932383B313933320D0A523D313933353B313933393B313934323B313934363B313935303B313935343B313935383B313936333B313936373B313937320D0A523D313937373B313938323B313938373B313939323B313939373B323030323B323030373B323031323B323031373B323032320D0A523D323032373B323033333B323033393B323034343B323035303B323035353B323036313B323036373B323037323B323037380D0A523D323038353B323039313B323039373B323130333B323131303B323131373B323132333B323133313B323133383B323134340D0A523D323135313B323135393B323136363B323137343B323138313B323138393B323139373B323230363B323231343B323232320D0A523D323233303B323233393B323234383B323235373B323236353B323237343B323238333B323239333B323330333B323331320D0A523D323332323B323333313B323334313B323335313B323336313B323337313B323338313B323339323B323430323B323431330D0A523D323432333B323433343B323434353B323435353B323436363B323437373B323438383B323530303B323531313B323532330D0A523D323533343B323534363B323535373B323536393B323538313B323539333B323630343B323631353B323632373B323633390D0A523D323635303B323636313B323637323B323638343B323639343B323730353B323731363B323732363B323733373B323734360D0A523D323735363B323736363B323737363B323738363B323739363B323830353B323831353B323832343B323833323B323834300D0A523D323834373B323835343B323836313B323836373B323837343B323837393B323838343B323838393B323839333B323839370D0A523D323930313B323930343B323930373B323931303B323931323B323931343B323931353B323931373B323931383B323931390D0A523D323931393B323931383B323931383B323931383B323931383B323931373B323931363B323931353B323931343B323931330D0A523D323931323B323931313B323930393B323930373B323930353B323930333B323930313B323839393B323839363B323839340D0A523D323839313B323838383B323838363B323838333B323838313B323837383B323837363B323837333B323837313B323836390D0A523D323836373B323836363B323836343B323836323B323836303B323835383B323835363B323835353B323835333B323835300D0A523D323834383B323834363B323834343B323834323B323834303B323833383B323833363B323833343B323833333B323833310D0A523D323832393B323832373B323832363B323832343B323832333B323832313B323832303B323831383B323831373B323831360D0A523D323831343B323831333B323831323B323831313B323831303B323830393B323830383B323830383B323830373B323830360D0A523D323830353B323830353B323830353B323830343B323830343B323830333B323830333B323830323B323830323B323830320D0A523D323830323B323830323B323830323B323830333B323830333B323830333B323830333B323830343B323830343B323830350D0A523D323830353B323830363B323830363B323830373B323830383B323830393B323830393B323831303B323831313B323831320D0A523D323831333B323831343B323831353B323831363B323831363B323831373B323831383B323831393B323832303B323832310D0A523D323832323B323832333B323832343B323832353B323832363B323832373B323832383B323832383B323832393B323833300D0A523D323833313B323833313B323833323B323833323B323833323B323833323B323833323B323833323B323833313B323833310D0A523D323833303B323833303B323832393B323832383B323832373B323832363B323832353B323832343B323832333B323832310D0A523D323831393B323831383B323831363B323831343B323831323B323831303B323830373B323830353B323830323B323739390D0A523D323739363B323739333B323738393B323738353B323738313B323737373B323737333B323736383B323736333B323735380D0A523D323735333B323734373B323734323B323733363B323733303B323732343B323731383B323731323B323730363B323639390D0A523D323639323B323638353B323637373B323636393B323636313B323635323B323634333B323633353B323632363B323631370D0A523D323630393B323630303B323539313B323538323B323537333B323536333B323535343B323534343B323533343B323532340D0A523D323531353B323530353B323439353B323438353B323437363B323436363B323435363B323434373B323433373B323432370D0A523D323431383B323430393B323339393B323338393B323338303B323337313B323336303B323335303B323334313B323333320D0A523D323332333B323331343B323330353B323239363B323238373B323237383B323236393B323236313B323235333B323234340D0A523D323233363B323232383B323232303B323231313B323230333B323139343B323138363B323137383B323137313B323136330D0A523D323135353B323134383B323134313B323133343B323132363B323132303B323131333B323130363B323130303B323039340D0A523D323038383B323038323B323037363B323037303B323036343B323035383B323035333B323034383B323034333B323033380D0A523D323033323B323032373B323032323B323031373B323031323B323030373B323030323B313939373B313939333B313938380D0A523D313938333B313937393B313937353B313937303B313936363B313936323B313935383B313935343B313935303B313934370D0A523D313934333B313934303B313933363B313933323B313932393B313932353B313932323B313931383B313931353B313931320D0A523D313930393B313930373B313930343B313930313B313839383B313839363B313839333B313839313B313838393B313838360D0A523D313838343B313838323B313838303B313837373B313837353B313837333B313837323B313837303B313836393B313836370D0A523D313836363B313836343B313836333B313836313B313836303B313835383B313835373B313835363B313835343B313835340D0A523D313835333B313835323B313835313B313835313B313835303B313835303B313834393B313834393B313834383B313834380D0A523D313834383B313834373B313834373B313834373B313834373B313834373B313834373B313834373B313834373B313834370D0A523D313834373B313834383B313834383B313834383B313834383B313834393B313834393B313835303B313835303B313835310D0A523D313835323B313835333B313835343B313835353B313835363B313835373B313835383B313835393B313836313B313836330D0A523D313836343B313836353B313836363B313836383B313837303B313837323B313837343B313837363B313837373B313837390D0A523D313838313B313838333B313838363B313838383B313839313B313839333B313839363B313839383B313930313B313930330D0A523D313930363B313930393B313931313B313931343B313931363B313931393B313932323B313932353B313932373B313933300D0A523D313933343B313933373B313934303B313934343B313934373B313935313B313935343B313935373B313936313B313936340D0A523D313936383B313937313B313937353B313937393B313938323B313938363B313939303B313939343B313939383B323030320D0A523D323030363B323031303B323031343B323031383B323032323B323032363B323033303B323033353B323034303B323034340D0A523D323034393B323035333B323035373B323036323B323036363B323037313B323037353B323038303B323038353B323038390D0A523D323039343B323039383B323130333B323130383B323131333B323131383B323132333B323132383B323133333B323133380D0A523D323134333B323134383B323135333B323135393B323136343B323136393B323137343B323137393B323138343B323138390D0A523D323139353B323230303B323230363B323231313B323231363B323232323B323232373B323233323B323233373B323234320D0A523D323234383B323235333B323235383B323236343B323236393B323237343B323237393B323238343B323239303B323239350D0A523D323330303B323330353B323331303B323331353B323332303B323332353B323333313B323333363B323334313B323334360D0A523D323335303B323335353B323336303B323336353B323337303B323337343B323337393B323338333B323338383B323339330D0A523D323339383B323430333B323430373B323431323B323431373B323432313B323432363B323433303B323433343B323433390D0A523D323434333B323434373B323435323B323435363B323436303B323436343B323436383B323437323B323437363B323438300D0A523D323438343B323438383B323439313B323439353B323439383B323530323B323530363B323530393B323531333B323531360D0A523D323532303B323532343B323532373B323533303B323533333B323533373B323534303B323534333B323534373B323535300D0A523D323535333B323535363B323536303B323536343B323536373B323537303B323537333B323537373B323538303B323538330D0A523D323538373B323539303B323539333B323539363B323539393B323630333B323630363B323631303B323631333B323631360D0A523D323631393B323632323B323632353B323632383B323633313B323633343B323633383B323634313B323634343B323634370D0A523D323635313B323635343B323635373B323636303B323636343B323636373B323637313B323637343B323637373B323638300D0A523D323638333B323638373B323639303B323639343B323639373B323730313B323730353B323730383B323731323B323731360D0A545243464D543D313B313030303B453B4C3B460D0A523D323830353B323830363B323830373B323830383B323830383B323830393B323831303B323831313B323831323B323831330D0A523D323831343B323831363B323831373B323831383B323832303B323832313B323832333B323832343B323832363B323832370D0A523D323832393B323833313B323833333B323833343B323833363B323833383B323834303B323834323B323834343B323834360D0A523D323834383B323835303B323835333B323835353B323835363B323835383B323836303B323836323B323836343B323836360D0A523D323836373B323836393B323837313B323837333B323837363B323837383B323838313B323838333B323838363B323838380D0A523D323839313B323839343B323839363B323839393B323930313B323930333B323930353B323930373B323930393B323931310D0A523D323931323B323931333B323931343B323931353B323931363B323931373B323931383B323931383B323931383B323931380D0A523D323931393B323931393B323931383B323931373B323931353B323931343B323931323B323931303B323930373B323930340D0A523D323930313B323839373B323839333B323838393B323838343B323837393B323837343B323836373B323836313B323835340D0A523D323834373B323834303B323833323B323832343B323831353B323830353B323739363B323738363B323737363B323736360D0A523D323735363B323734363B323733373B323732363B323731363B323730353B323639343B323638343B323637323B323636310D0A523D323635303B323633393B323632373B323631353B323630343B323539333B323538313B323536393B323535373B323534360D0A523D323533343B323532333B323531313B323530303B323438383B323437373B323436363B323435353B323434353B323433340D0A523D323432333B323431333B323430323B323339323B323338313B323337313B323336313B323335313B323334313B323333310D0A523D323332323B323331323B323330333B323239333B323238333B323237343B323236353B323235373B323234383B323233390D0A523D323233303B323232323B323231343B323230363B323139373B323138393B323138313B323137343B323136363B323135390D0A523D323135313B323134343B323133383B323133313B323132333B323131373B323131303B323130333B323039373B323039310D0A523D323038353B323037383B323037323B323036373B323036313B323035353B323035303B323034343B323033393B323033330D0A523D323032373B323032323B323031373B323031323B323030373B323030323B313939373B313939323B313938373B313938320D0A523D313937373B313937323B313936373B313936333B313935383B313935343B313935303B313934363B313934323B313933390D0A523D313933353B313933323B313932383B313932343B313932313B313931373B313931353B313931323B313931303B313930370D0A523D313930353B313930333B313930303B313839383B313839353B313839333B313839303B313838383B313838363B313838340D0A523D313838323B313838313B313837393B313837373B313837363B313837343B313837323B313837303B313836383B313836360D0A523D313836353B313836333B313836323B313836313B313836303B313835383B313835373B313835363B313835353B313835340D0A523D313835333B313835333B313835323B313835323B313835313B313835313B313835303B313835303B313834393B313834390D0A523D313834393B313834383B313834383B313834383B313834383B313834383B313834383B313834383B313834383B313834390D0A523D313834393B313835303B313835303B313835313B313835313B313835323B313835323B313835333B313835343B313835350D0A523D313835363B313835383B313835393B313836303B313836313B313836323B313836343B313836353B313836373B313836390D0A523D313837303B313837323B313837343B313837363B313837383B313838303B313838323B313838343B313838363B313838390D0A523D313839313B313839333B313839363B313839383B313930313B313930333B313930363B313930393B313931323B313931360D0A523D313931393B313932333B313932363B313932393B313933333B313933363B313934303B313934333B313934373B313935310D0A523D313935353B313935393B313936343B313936383B313937323B313937373B313938313B313938363B313939303B313939350D0A523D323030303B323030353B323031303B323031353B323032303B323032353B323033303B323033363B323034313B323034370D0A523D323035333B323035383B323036343B323037303B323037363B323038323B323038383B323039353B323130313B323130370D0A523D323131343B323132313B323132373B323133343B323134313B323134383B323135353B323136323B323137303B323137370D0A523D323138353B323139333B323230313B323230393B323231373B323232353B323233333B323234323B323235303B323235390D0A523D323236373B323237363B323238353B323239343B323330343B323331333B323332323B323333313B323334303B323335300D0A523D323335393B323336393B323337393B323338393B323339393B323430393B323431393B323432393B323434303B323435300D0A523D323436303B323437313B323438313B323439323B323530333B323531343B323532343B323533353B323534363B323535370D0A523D323536373B323537383B323538393B323630303B323631303B323632313B323633323B323634333B323635333B323636340D0A523D323637353B323638353B323639353B323730363B323731363B323732363B323733363B323734373B323735373B323736370D0A523D323737363B323738363B323739363B323830363B323831353B323832343B323833333B323834323B323835313B323835390D0A523D323836383B323837353B323838333B323839313B323839383B323930353B323931313B323931373B323932323B323932370D0A523D323933323B323933373B323934313B323934353B323934383B323935313B323935333B323935343B323935363B323935370D0A523D323935373B323935373B323935373B323935363B323935353B323935333B323935313B323934393B323934363B323934330D0A523D323933393B323933363B323933323B323932383B323932353B323932313B323931373B323931333B323930393B323930350D0A523D323930303B323839363B323839313B323838363B323838313B323837363B323837323B323836373B323836323B323835370D0A523D323835323B323834373B323834323B323833373B323833333B323832383B323832333B323831383B323831333B323830390D0A523D323830343B323830303B323739353B323739303B323738363B323738313B323737373B323737323B323736383B323736340D0A523D323736303B323735363B323735323B323734383B323734343B323733393B323733353B323733313B323732373B323732340D0A523D323732303B323731363B323731323B323730383B323730353B323730313B323639373B323639343B323639303B323638370D0A523D323638333B323638303B323637373B323637343B323637313B323636373B323636343B323636303B323635373B323635340D0A523D323635313B323634373B323634343B323634313B323633383B323633343B323633313B323632383B323632353B323632320D0A523D323631393B323631363B323631333B323631303B323630363B323630333B323539393B323539363B323539333B323539300D0A523D323538373B323538333B323538303B323537373B323537333B323537303B323536373B323536343B323536303B323535360D0A523D323535333B323535303B323534373B323534333B323534303B323533373B323533333B323533303B323532373B323532340D0A523D323532303B323531363B323531333B323530393B323530363B323530323B323439383B323439353B323439313B323438380D0A523D323438343B323438303B323437363B323437323B323436383B323436343B323436303B323435363B323435323B323434370D0A523D323434333B323433393B323433343B323433303B323432363B323432313B323431373B323431323B323430373B323430330D0A523D323339383B323339333B323338383B323338333B323337393B323337343B323337303B323336353B323336303B323335350D0A523D323335303B323334363B323334313B323333363B323333313B323332353B323332303B323331353B323331303B323330350D0A523D323330303B323239353B323239303B323238343B323237393B323237343B323236393B323236343B323235383B323235330D0A523D323234383B323234323B323233373B323233323B323232373B323232323B323231363B323231313B323230363B323230300D0A523D323139353B323138393B323138343B323137393B323137343B323136393B323136343B323135393B323135333B323134380D0A523D323134333B323133383B323133333B323132383B323132333B323131383B323131333B323130383B323130333B323039380D0A523D323039343B323038393B323038353B323038303B323037353B323037313B323036363B323036323B323035373B323035330D0A523D323034393B323034343B323034303B323033353B323033303B323032363B323032323B323031383B323031343B323031300D0A523D323030363B323030323B313939383B313939343B313939303B313938363B313938323B313937393B313937353B313937310D0A523D313936383B313936343B313936313B313935373B313935343B313935313B313934373B313934343B313934303B313933370D0A523D313933343B313933303B313932373B313932353B313932323B313931393B313931363B313931343B313931313B313930390D0A523D313930363B313930333B313930313B313839383B313839363B313839333B313839313B313838383B313838363B313838330D0A523D313838313B313837393B313837373B313837363B313837343B313837323B313837303B313836383B313836363B313836350D0A523D313836343B313836333B313836313B313835393B313835383B313835373B313835363B313835353B313835343B313835330D0A523D313835323B313835313B313835303B313835303B313834393B313834393B313834383B313834383B313834383B313834380D0A523D313834373B313834373B313834373B313834373B313834373B313834373B313834373B313834373B313834373B313834370D0A523D313834383B313834383B313834383B313834393B313834393B313835303B313835303B313835313B313835313B313835320D0A523D313835333B313835343B313835343B313835363B313835373B313835383B313836303B313836313B313836333B313836340D0A523D313836363B313836373B313836393B313837303B313837323B313837333B313837353B313837373B313838303B313838320D0A523D313838343B313838363B313838393B313839313B313839333B313839363B313839383B313930313B313930343B313930370D0A523D313930393B313931323B313931353B313931383B313932323B313932353B313932393B313933323B313933363B313934300D0A523D313934333B313934373B313935303B313935343B313935383B313936323B313936363B313937303B313937353B313937390D0A523D313938333B313938383B313939333B313939373B323030323B323030373B323031323B323031373B323032323B323032370D0A523D323033323B323033383B323034333B323034383B323035333B323035383B323036343B323037303B323037363B323038320D0A523D323038383B323039343B323130303B323130363B323131333B323132303B323132363B323133343B323134313B323134380D0A523D323135353B323136333B323137313B323137383B323138363B323139343B323230333B323231313B323232303B323232380D0A523D323233363B323234343B323235333B323236313B323236393B323237383B323238373B323239363B323330353B323331340D0A523D323332333B323333323B323334313B323335303B323336303B323337313B323338303B323338393B323339393B323430390D0A523D323431383B323432373B323433373B323434373B323435363B323436363B323437363B323438353B323439353B323530350D0A523D323531353B323532343B323533343B323534343B323535343B323536333B323537333B323538323B323539313B323630300D0A523D323630393B323631373B323632363B323633353B323634333B323635323B323636313B323636393B323637373B323638350D0A523D323639323B323639393B323730363B323731323B323731383B323732343B323733303B323733363B323734323B323734370D0A523D323735333B323735383B323736333B323736383B323737333B323737373B323738313B323738353B323738393B323739330D0A523D323739363B323739393B323830323B323830353B323830373B323831303B323831323B323831343B323831363B323831380D0A523D323831393B323832313B323832333B323832343B323832353B323832363B323832373B323832383B323832393B323833300D0A523D323833303B323833313B323833313B323833323B323833323B323833323B323833323B323833323B323833323B323833310D0A523D323833313B323833303B323832393B323832383B323832383B323832373B323832363B323832353B323832343B323832330D0A523D323832323B323832313B323832303B323831393B323831383B323831373B323831363B323831363B323831353B323831340D0A523D323831333B323831323B323831313B323831303B323830393B323830393B323830383B323830373B323830363B323830360D0A523D323830353B323830353B323830343B323830343B323830333B323830333B323830333B323830333B323830323B323830320D0A523D323830323B323830323B323830323B323830323B323830333B323830333B323830343B323830343B323830353B323830350D0A56424F583D33372E30313B33372E30310D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35392E31343B35392E31340D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
-                            }
+                                }
 
-                            if ($information_commande->precalibrage->calibre ==
-                                23) {
-                                $calibre = '<shape>
+                                if ($information_commande->precalibrage->calibre ==
+                                    23) {
+                                    $calibre = '<shape>
 						  <tracerData>
 							 <tracerType>Unknown</tracerType>
 							 <tracerVersion>OMAVCA</tracerVersion>
 							 <binaries format="OMA3.02">4F4D41563D30332E31300D0A444F3D420D0A4245564D3D302E30303B302E30300D0A424556503D373B370D0A434952433D3134302E3939303B3134302E3939300D0A44424C3D32302E30300D0A455459503D310D0A46435347494E3D302E30303B302E30300D0A4643534755503D302E30303B302E30300D0A4650494E423D302E30303B302E30300D0A465459503D320D0A48424F583D35302E30333B35302E30330D0A50494E423D302E30303B302E30300D0A504F4C4953483D300D0A545243464D543D313B313030303B453B523B460D0A523D323431333B323431373B323432303B323432343B323432383B323433323B323433373B323434313B323434353B323434380D0A523D323435323B323435363B323436303B323436353B323436393B323437333B323437383B323438323B323438373B323439310D0A523D323439353B323439393B323530333B323530383B323531333B323531373B323532313B323532363B323533303B323533350D0A523D323533393B323534343B323534383B323535333B323535373B323536313B323536363B323537303B323537353B323537390D0A523D323538323B323538363B323539303B323539333B323539363B323539393B323630323B323630343B323630363B323630380D0A523D323631303B323631323B323631333B323631343B323631343B323631343B323631343B323631343B323631333B323631310D0A523D323630393B323630373B323630343B323630313B323539383B323539353B323539323B323538393B323538343B323538300D0A523D323537363B323537323B323536373B323536333B323535383B323535333B323534383B323534323B323533373B323533310D0A523D323532353B323531393B323531333B323530383B323530323B323439363B323439303B323438333B323437363B323437300D0A523D323436343B323435373B323435313B323434343B323433373B323433313B323432343B323431373B323431313B323430340D0A523D323339373B323339313B323338343B323337373B323337313B323336333B323335363B323335303B323334333B323333360D0A523D323333303B323332333B323331363B323330393B323330323B323239363B323238393B323238333B323237373B323237300D0A523D323236343B323235383B323235313B323234353B323233393B323233333B323232373B323232313B323231353B323230390D0A523D323230343B323139383B323139333B323138373B323138313B323137363B323137303B323136353B323135393B323135340D0A523D323134393B323134343B323133393B323133343B323132393B323132343B323131383B323131343B323130393B323130340D0A523D323039393B323039343B323039303B323038353B323038303B323037363B323037323B323036383B323036333B323035390D0A523D323035353B323035313B323034363B323034323B323033383B323033353B323033313B323032373B323032343B323032300D0A523D323031373B323031333B323031303B323030363B323030323B313939393B313939363B313939333B313938393B313938360D0A523D313938333B313938303B313937373B313937353B313937323B313936393B313936363B313936333B313936313B313935380D0A523D313935363B313935343B313935313B313934393B313934373B313934353B313934323B313934303B313933373B313933350D0A523D313933343B313933323B313933303B313932383B313932373B313932353B313932343B313932323B313932313B313931390D0A523D313931373B313931363B313931353B313931343B313931323B313931313B313931303B313930393B313930383B313930370D0A523D313930363B313930363B313930353B313930343B313930333B313930323B313930313B313930313B313930303B313930300D0A523D313839393B313839393B313839383B313839383B313839373B313839373B313839373B313839373B313839373B313839370D0A523D313839363B313839363B313839363B313839363B313839363B313839363B313839373B313839373B313839373B313839370D0A523D313839383B313839393B313839393B313930303B313930303B313930313B313930313B313930323B313930333B313930340D0A523D313930343B313930353B313930363B313930373B313930393B313931303B313931313B313931323B313931333B313931340D0A523D313931363B313931373B313931393B313932303B313932323B313932333B313932353B313932373B313932393B313933310D0A523D313933323B313933343B313933373B313933393B313934313B313934333B313934353B313934383B313935303B313935320D0A523D313935343B313935373B313936303B313936323B313936343B313936363B313936393B313937313B313937343B313937370D0A523D313938303B313938333B313938363B313938393B313939333B313939363B323030303B323030333B323030363B323030390D0A523D323031333B323031373B323032303B323032343B323032383B323033323B323033363B323034303B323034343B323034370D0A523D323035313B323035343B323035383B323036323B323036363B323037303B323037343B323037393B323038343B323038390D0A523D323039343B323039383B323130333B323130373B323131323B323131373B323132323B323132373B323133333B323133380D0A523D323134333B323134383B323135333B323135393B323136343B323137303B323137363B323138313B323138373B323139330D0A523D323139383B323230343B323230393B323231353B323232313B323232373B323233333B323233393B323234363B323235320D0A523D323235383B323236343B323237303B323237363B323238333B323238393B323239363B323330323B323330383B323331350D0A523D323332313B323332373B323333343B323334313B323334373B323335333B323336303B323336363B323337323B323337390D0A523D323338353B323339313B323339383B323430343B323431303B323431353B323432323B323432383B323433333B323433390D0A523D323434353B323435313B323435373B323436323B323436383B323437333B323437393B323438343B323438393B323439340D0A523D323439393B323530343B323530383B323531333B323531383B323532333B323532383B323533323B323533373B323534320D0A523D323534373B323535323B323535363B323536303B323536343B323536373B323537313B323537343B323537373B323538300D0A523D323538323B323538353B323538373B323538393B323539313B323539333B323539353B323539373B323539393B323630300D0A523D323630313B323630323B323630323B323630333B323630333B323630343B323630343B323630343B323630343B323630340D0A523D323630343B323630343B323630333B323630323B323630323B323630313B323630303B323539393B323539383B323539370D0A523D323539353B323539333B323539323B323539313B323538393B323538373B323538353B323538333B323538313B323537390D0A523D323537363B323537333B323537303B323536383B323536353B323536323B323535383B323535353B323535323B323534390D0A523D323534373B323534343B323534313B323533383B323533353B323533323B323532393B323532363B323532333B323532300D0A523D323531373B323531343B323531313B323530393B323530363B323530333B323530303B323439373B323439353B323439320D0A523D323438393B323438363B323438333B323438313B323437373B323437353B323437323B323437303B323436373B323436340D0A523D323436313B323435383B323435363B323435333B323435313B323434383B323434363B323434333B323434303B323433370D0A523D323433343B323433323B323432393B323432373B323432343B323432323B323431393B323431363B323431343B323431320D0A523D323431303B323430373B323430353B323430323B323430303B323339373B323339343B323339323B323338393B323338370D0A523D323338343B323338323B323337393B323337373B323337343B323337313B323336383B323336343B323336313B323335370D0A523D323335353B323335323B323335303B323334383B323334363B323334353B323334323B323333393B323333363B323333340D0A523D323333323B323333303B323332383B323332363B323332343B323332313B323331393B323331363B323331353B323331330D0A523D323331303B323330383B323330353B323330333B323330323B323330303B323239393B323239363B323239333B323239300D0A523D323238383B323238363B323238343B323238323B323238313B323237393B323237363B323237333B323237303B323236390D0A523D323236373B323236363B323236343B323236313B323235383B323235353B323235323B323235303B323234383B323234360D0A523D323234343B323234323B323234303B323233383B323233353B323233333B323233323B323233303B323232383B323232360D0A523D323232333B323232313B323231393B323231373B323231353B323231333B323231313B323230393B323230373B323230340D0A523D323230313B323139393B323139373B323139353B323139323B323139303B323138373B323138353B323138333B323138310D0A523D323137393B323137363B323137343B323137313B323136393B323136363B323136333B323136313B323135383B323135360D0A523D323135333B323135313B323134383B323134363B323134333B323134313B323133383B323133363B323133343B323133310D0A523D323132393B323132363B323132333B323132313B323131383B323131363B323131333B323131313B323130383B323130360D0A523D323130333B323130313B323039393B323039363B323039343B323039323B323039303B323038373B323038353B323038320D0A523D323037393B323037373B323037343B323037323B323036393B323036373B323036343B323036313B323035393B323035360D0A523D323035343B323035313B323034393B323034363B323034343B323034323B323033393B323033373B323033343B323033320D0A523D323032393B323032373B323032353B323032333B323032303B323031383B323031363B323031333B323031313B323030390D0A523D323030373B323030343B323030313B313939383B313939363B313939343B313939313B313938393B313938363B313938340D0A523D313938313B313937383B313937363B313937343B313937323B313936393B313936373B313936343B313936323B313936300D0A523D313935373B313935353B313935323B313935303B313934383B313934363B313934343B313934313B313933393B313933360D0A523D313933343B313933333B313933313B313932393B313932373B313932353B313932333B313932313B313931383B313931360D0A523D313931353B313931333B313931313B313930393B313930373B313930353B313930343B313930323B313930303B313839390D0A523D313839373B313839363B313839343B313839333B313839313B313838393B313838373B313838363B313838353B313838340D0A523D313838323B313838313B313838303B313837383B313837373B313837363B313837353B313837343B313837333B313837320D0A523D313837323B313837313B313837303B313836393B313836383B313836373B313836373B313836363B313836363B313836350D0A523D313836343B313836333B313836333B313836323B313836323B313836323B313836323B313836313B313836313B313836310D0A523D313836313B313836303B313836303B313836303B313836303B313836303B313836303B313836303B313836303B313836300D0A523D313836303B313836303B313836303B313836303B313836303B313836303B313836313B313836313B313836313B313836310D0A523D313836323B313836323B313836333B313836333B313836343B313836343B313836353B313836353B313836363B313836360D0A523D313836373B313836373B313836383B313836393B313837303B313837313B313837323B313837333B313837343B313837350D0A523D313837363B313837373B313837383B313837393B313838303B313838313B313838323B313838333B313838353B313838360D0A523D313838373B313838383B313839303B313839313B313839333B313839343B313839353B313839373B313839393B313930310D0A523D313930323B313930343B313930353B313930373B313930383B313931303B313931323B313931343B313931363B313931370D0A523D313931393B313932313B313932333B313932353B313932373B313932393B313933313B313933333B313933353B313933370D0A523D313933393B313934313B313934343B313934363B313934383B313935313B313935333B313935353B313935373B313936300D0A523D313936323B313936353B313936373B313936393B313937313B313937343B313937373B313937393B313938323B313938340D0A523D313938373B313938393B313939323B313939343B313939373B323030303B323030323B323030353B323030383B323031310D0A523D323031333B323031363B323031393B323032323B323032353B323032383B323033313B323033343B323033373B323034300D0A523D323034333B323034363B323034393B323035323B323035353B323035383B323036313B323036343B323036373B323037300D0A523D323037343B323037373B323038313B323038343B323038373B323039303B323039333B323039373B323130303B323130330D0A523D323130363B323131303B323131333B323131363B323132303B323132333B323132373B323133303B323133343B323133380D0A523D323134313B323134353B323134383B323135333B323135363B323136303B323136343B323136373B323137313B323137340D0A523D323137383B323138323B323138353B323139303B323139333B323139373B323230303B323230343B323230383B323231310D0A523D323231353B323231393B323232333B323232373B323233313B323233353B323233383B323234323B323234363B323235300D0A523D323235343B323235383B323236323B323236353B323237303B323237343B323237373B323238313B323238353B323238390D0A523D323239323B323239363B323330303B323330343B323330393B323331333B323331373B323332313B323332343B323332380D0A523D323333323B323333363B323334303B323334343B323334383B323335333B323335373B323336303B323336343B323336380D0A523D323337323B323337363B323338303B323338343B323338383B323339333B323339373B323430313B323430353B323430390D0A545243464D543D313B313030303B453B4C3B460D0A523D323436313B323436343B323436373B323437303B323437323B323437353B323437373B323438313B323438333B323438360D0A523D323438393B323439323B323439353B323439373B323530303B323530333B323530363B323530393B323531313B323531340D0A523D323531373B323532303B323532333B323532363B323532393B323533323B323533353B323533383B323534313B323534340D0A523D323534373B323534393B323535323B323535353B323535383B323536323B323536353B323536383B323537303B323537330D0A523D323537363B323537393B323538313B323538333B323538353B323538373B323538393B323539313B323539323B323539330D0A523D323539353B323539373B323539383B323539393B323630303B323630313B323630323B323630323B323630333B323630340D0A523D323630343B323630343B323630343B323630343B323630343B323630343B323630333B323630333B323630323B323630320D0A523D323630313B323630303B323539393B323539373B323539353B323539333B323539313B323538393B323538373B323538350D0A523D323538323B323538303B323537373B323537343B323537313B323536373B323536343B323536303B323535363B323535320D0A523D323534373B323534323B323533373B323533323B323532383B323532333B323531383B323531333B323530383B323530340D0A523D323439393B323439343B323438393B323438343B323437393B323437333B323436383B323436323B323435373B323435310D0A523D323434353B323433393B323433333B323432383B323432323B323431353B323431303B323430343B323339383B323339310D0A523D323338353B323337393B323337323B323336363B323336303B323335333B323334373B323334313B323333343B323332370D0A523D323332313B323331353B323330383B323330323B323239363B323238393B323238333B323237363B323237303B323236340D0A523D323235383B323235323B323234363B323233393B323233333B323232373B323232313B323231353B323230393B323230340D0A523D323139383B323139333B323138373B323138313B323137363B323137303B323136343B323135393B323135333B323134380D0A523D323134333B323133383B323133333B323132373B323132323B323131373B323131323B323130373B323130333B323039380D0A523D323039343B323038393B323038343B323037393B323037343B323037303B323036363B323036323B323035383B323035340D0A523D323035313B323034373B323034343B323034303B323033363B323033323B323032383B323032343B323032303B323031370D0A523D323031333B323030393B323030363B323030333B323030303B313939363B313939333B313938393B313938363B313938330D0A523D313938303B313937373B313937343B313937313B313936393B313936363B313936343B313936323B313936303B313935370D0A523D313935343B313935323B313935303B313934383B313934353B313934333B313934313B313933393B313933373B313933340D0A523D313933323B313933313B313932393B313932373B313932353B313932333B313932323B313932303B313931393B313931370D0A523D313931363B313931343B313931333B313931323B313931313B313931303B313930393B313930373B313930363B313930350D0A523D313930343B313930343B313930333B313930323B313930313B313930313B313930303B313930303B313839393B313839390D0A523D313839383B313839373B313839373B313839373B313839373B313839363B313839363B313839363B313839363B313839360D0A523D313839363B313839373B313839373B313839373B313839373B313839373B313839373B313839383B313839383B313839390D0A523D313839393B313930303B313930303B313930313B313930313B313930323B313930333B313930343B313930353B313930360D0A523D313930363B313930373B313930383B313930393B313931303B313931313B313931323B313931343B313931353B313931360D0A523D313931373B313931393B313932313B313932323B313932343B313932353B313932373B313932383B313933303B313933320D0A523D313933343B313933353B313933373B313934303B313934323B313934353B313934373B313934393B313935313B313935340D0A523D313935363B313935383B313936313B313936333B313936363B313936393B313937323B313937353B313937373B313938300D0A523D313938333B313938363B313938393B313939333B313939363B313939393B323030323B323030363B323031303B323031330D0A523D323031373B323032303B323032343B323032373B323033313B323033353B323033383B323034323B323034363B323035310D0A523D323035353B323035393B323036333B323036383B323037323B323037363B323038303B323038353B323039303B323039340D0A523D323039393B323130343B323130393B323131343B323131383B323132343B323132393B323133343B323133393B323134340D0A523D323134393B323135343B323135393B323136353B323137303B323137363B323138313B323138373B323139333B323139380D0A523D323230343B323230393B323231353B323232313B323232373B323233333B323233393B323234353B323235313B323235380D0A523D323236343B323237303B323237373B323238333B323238393B323239363B323330323B323330393B323331363B323332330D0A523D323333303B323333363B323334333B323335303B323335363B323336333B323337313B323337373B323338343B323339310D0A523D323339373B323430343B323431313B323431373B323432343B323433313B323433373B323434343B323435313B323435370D0A523D323436343B323437303B323437363B323438333B323439303B323439363B323530323B323530383B323531333B323531390D0A523D323532353B323533313B323533373B323534323B323534383B323535333B323535383B323536333B323536373B323537320D0A523D323537363B323538303B323538343B323538393B323539323B323539353B323539383B323630313B323630343B323630370D0A523D323630393B323631313B323631333B323631343B323631343B323631343B323631343B323631343B323631333B323631320D0A523D323631303B323630383B323630363B323630343B323630323B323539393B323539363B323539333B323539303B323538360D0A523D323538323B323537393B323537353B323537303B323536363B323536313B323535373B323535333B323534383B323534340D0A523D323533393B323533353B323533303B323532363B323532313B323531373B323531333B323530383B323530333B323439390D0A523D323439353B323439313B323438373B323438323B323437383B323437333B323436393B323436353B323436303B323435360D0A523D323435323B323434383B323434353B323434313B323433373B323433323B323432383B323432343B323432303B323431370D0A523D323431333B323430393B323430353B323430313B323339373B323339333B323338383B323338343B323338303B323337360D0A523D323337323B323336383B323336343B323336303B323335373B323335333B323334383B323334343B323334303B323333360D0A523D323333323B323332383B323332343B323332313B323331373B323331333B323330393B323330343B323330303B323239360D0A523D323239323B323238393B323238353B323238313B323237373B323237343B323237303B323236353B323236323B323235380D0A523D323235343B323235303B323234363B323234323B323233383B323233353B323233313B323232373B323232333B323231390D0A523D323231353B323231313B323230383B323230343B323230303B323139373B323139333B323139303B323138353B323138320D0A523D323137383B323137343B323137313B323136373B323136343B323136303B323135363B323135333B323134383B323134350D0A523D323134313B323133383B323133343B323133303B323132373B323132333B323132303B323131363B323131333B323131300D0A523D323130363B323130333B323130303B323039373B323039333B323039303B323038373B323038343B323038313B323037370D0A523D323037343B323037303B323036373B323036343B323036313B323035383B323035353B323035323B323034393B323034360D0A523D323034333B323034303B323033373B323033343B323033313B323032383B323032353B323032323B323031393B323031360D0A523D323031333B323031313B323030383B323030353B323030323B323030303B313939373B313939343B313939323B313938390D0A523D313938373B313938343B313938323B313937393B313937373B313937343B313937313B313936393B313936373B313936350D0A523D313936323B313936303B313935373B313935353B313935333B313935313B313934383B313934363B313934343B313934310D0A523D313933393B313933373B313933353B313933333B313933313B313932393B313932373B313932353B313932333B313932310D0A523D313931393B313931373B313931363B313931343B313931323B313931303B313930383B313930373B313930353B313930340D0A523D313930323B313930313B313839393B313839373B313839353B313839343B313839333B313839313B313839303B313838380D0A523D313838373B313838363B313838353B313838333B313838323B313838313B313838303B313837393B313837383B313837370D0A523D313837363B313837353B313837343B313837333B313837323B313837313B313837303B313836393B313836383B313836370D0A523D313836373B313836363B313836363B313836353B313836353B313836343B313836343B313836333B313836333B313836320D0A523D313836323B313836313B313836313B313836313B313836313B313836303B313836303B313836303B313836303B313836300D0A523D313836303B313836303B313836303B313836303B313836303B313836303B313836303B313836303B313836303B313836300D0A523D313836313B313836313B313836313B313836313B313836323B313836323B313836323B313836323B313836333B313836330D0A523D313836343B313836353B313836363B313836363B313836373B313836373B313836383B313836393B313837303B313837310D0A523D313837323B313837323B313837333B313837343B313837353B313837363B313837373B313837383B313838303B313838310D0A523D313838323B313838343B313838353B313838363B313838373B313838393B313839313B313839333B313839343B313839360D0A523D313839373B313839393B313930303B313930323B313930343B313930353B313930373B313930393B313931313B313931330D0A523D313931353B313931363B313931383B313932313B313932333B313932353B313932373B313932393B313933313B313933330D0A523D313933343B313933363B313933393B313934313B313934343B313934363B313934383B313935303B313935323B313935350D0A523D313935373B313936303B313936323B313936343B313936373B313936393B313937323B313937343B313937363B313937380D0A523D313938313B313938343B313938363B313938393B313939313B313939343B313939363B313939383B323030313B323030340D0A523D323030373B323030393B323031313B323031333B323031363B323031383B323032303B323032333B323032353B323032370D0A523D323032393B323033323B323033343B323033373B323033393B323034323B323034343B323034363B323034393B323035310D0A523D323035343B323035363B323035393B323036313B323036343B323036373B323036393B323037323B323037343B323037370D0A523D323037393B323038323B323038353B323038373B323039303B323039323B323039343B323039363B323039393B323130310D0A523D323130333B323130363B323130383B323131313B323131333B323131363B323131383B323132313B323132333B323132360D0A523D323132393B323133313B323133343B323133363B323133383B323134313B323134333B323134363B323134383B323135310D0A523D323135333B323135363B323135383B323136313B323136333B323136363B323136393B323137313B323137343B323137360D0A523D323137393B323138313B323138333B323138353B323138373B323139303B323139323B323139353B323139373B323139390D0A523D323230313B323230343B323230373B323230393B323231313B323231333B323231353B323231373B323231393B323232310D0A523D323232333B323232363B323232383B323233303B323233323B323233333B323233353B323233383B323234303B323234320D0A523D323234343B323234363B323234383B323235303B323235323B323235353B323235383B323236313B323236343B323236360D0A523D323236373B323236393B323237303B323237333B323237363B323237393B323238313B323238323B323238343B323238360D0A523D323238383B323239303B323239333B323239363B323239393B323330303B323330323B323330333B323330353B323330380D0A523D323331303B323331333B323331353B323331363B323331393B323332313B323332343B323332363B323332383B323333300D0A523D323333323B323333343B323333363B323333393B323334323B323334353B323334363B323334383B323335303B323335320D0A523D323335353B323335373B323336313B323336343B323336383B323337313B323337343B323337373B323337393B323338320D0A523D323338343B323338373B323338393B323339323B323339343B323339373B323430303B323430323B323430353B323430370D0A523D323431303B323431323B323431343B323431363B323431393B323432323B323432343B323432373B323432393B323433320D0A523D323433343B323433373B323434303B323434333B323434363B323434383B323435313B323435333B323435363B323435380D0A56424F583D33382E30333B33382E30330D0A485645523D322E302E300D0A464352563D342E3030303B342E3030300D0A4645443D35322E32383B35322E32380D0A56454E3D4252495643410D0A</binaries>
 						  </tracerData>
 					   </shape>';
+                                }
+
                             }
 
-                        }
 
-
-                        if ($calibre !=
-                            "") {
-                            $edg = '
+                            if ($calibre !=
+                                "") {
+                                $edg = '
 						<edging edgingType="NONE">
 						   <bevel>
 							  <type>BEVEL</type>
@@ -8643,124 +8628,122 @@ class admin
 						  </bevel>
 						  <polish>false</polish>
 						</edging>';
-                        }
+                            }
 
-                        $xml .= '<material>' .
-                            $monture_type . '</material>
+                            $xml .= '<material>' .
+                                $monture_type . '</material>
 				   <boxWidth>' .
-                            $boxWidth . '</boxWidth>
+                                $boxWidth . '</boxWidth>
 				   <boxHeight>' .
-                            $boxHeight . '</boxHeight>
+                                $boxHeight . '</boxHeight>
 				   <distanceBetweenLenses>' .
-                            $DBL . '</distanceBetweenLenses>
+                                $DBL . '</distanceBetweenLenses>
 				   ' .
-                            $calibre;
-                    }
-                    $xml .= '
+                                $calibre;
+                        }
+                        $xml .= '
 				</frame>';
-                    $xml .= $edg . ' 
+                        $xml .= $edg . ' 
         </pair>
      </item>
   </items>
 </b2bOptic>
 ';
-                    if ($commande->type_commande >
-                        1) {
-
-                        $ancienne_commande =
-                            '';
-
-                        if ($commande->ancienne_commande >
-                            0) {
-                            $ancienne_commande .= '<br />(CR' .
-                                $commande->ancienne_commande .
-                                '-' .
-                                $commande->id_users .
-                                ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
-                                $commande->id_commande .
-                                '">Comparer</a>';
-                        }
-                        if ($commande->penalty !=
+                        if ($commande->type_commande >
                             1) {
-                            $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
-                                $commande->id_commande .
-                                '">Rejeter</a>';
+
+                            $ancienne_commande =
+                                '';
+
+                            if ($commande->ancienne_commande >
+                                0) {
+                                $ancienne_commande .= '<br />(CR' .
+                                    $commande->ancienne_commande .
+                                    '-' .
+                                    $commande->id_users .
+                                    ')<br /><a class="btn btn-danger btn-sm compare_commande" data-toggle="modal" data-target="#compare-commandes" rel="' .
+                                    $commande->id_commande .
+                                    '">Comparer</a>';
+                            }
+                            if ($commande->penalty !=
+                                1) {
+                                $ancienne_commande .= '<br /> <a class="btn btn-warning btn-sm reject_ec" rel="' .
+                                    $commande->id_commande .
+                                    '">Rejeter</a>';
+                            }
+                        } else {
+                            $ancienne_commande =
+                                '';
                         }
-                    } else {
-                        $ancienne_commande =
-                            '';
-                    }
 
-                    $ref_optieyes =
-                        'CR' .
-                        $commande->id_commande .
-                        '-' .
-                        $commande->id_users .
-                        $ancienne_commande;
-                    switch ($commande->type_commande) {
+                        $ref_optieyes =
+                            'CR' .
+                            $commande->id_commande .
+                            '-' .
+                            $commande->id_users .
+                            $ancienne_commande;
+                        switch ($commande->type_commande) {
 
-                        case 1:
-                            $prix_commande =
-                                $commande->total_commande .
-                                ' €';
-                            break;
+                            case 1:
+                                $prix_commande =
+                                    $commande->total_commande .
+                                    ' €';
+                                break;
 
-                        case 2:
+                            case 2:
 
-                            $prix_commande =
-                                '<del>' .
-                                $commande->total_commande .
-                                '</del> ' .
-                                ($commande->tarif_express >
-                                0 ?
-                                    $commande->tarif_express :
-                                    '0') .
-                                ' €<br />Casse atelier';
-                            break;
+                                $prix_commande =
+                                    '<del>' .
+                                    $commande->total_commande .
+                                    '</del> ' .
+                                    ($commande->tarif_express >
+                                    0 ?
+                                        $commande->tarif_express :
+                                        '0') .
+                                    ' €<br />Casse atelier';
+                                break;
 
-                        case 3:
-                            $prix_commande =
-                                '<del>' .
-                                $commande->total_commande .
-                                '</del> ' .
-                                ($commande->tarif_express >
-                                0 ?
-                                    $commande->tarif_express :
-                                    '0') .
-                                ' €<br />Erreur ophta';
-                            break;
-                    }
+                            case 3:
+                                $prix_commande =
+                                    '<del>' .
+                                    $commande->total_commande .
+                                    '</del> ' .
+                                    ($commande->tarif_express >
+                                    0 ?
+                                        $commande->tarif_express :
+                                        '0') .
+                                    ' €<br />Erreur ophta';
+                                break;
+                        }
 
-                    $infos =
-                        "Date: <b>" .
-                        date('d/m/Y H:i',
-                            strtotime($commande->date_commande)) .
-                        "</b><br>Ref.&nbsp;Optieyes: <b>" .
-                        $ref_optieyes .
-                        "</b><br>Ref. client: <b>" .
-                        $commande->reference_client .
-                        "</b><br>Tarif HT: <b>" .
-                        $prix_commande .
-                        "</b>";
+                        $infos =
+                            "Date: <b>" .
+                            date('d/m/Y H:i',
+                                strtotime($commande->date_commande)) .
+                            "</b><br>Ref.&nbsp;Optieyes: <b>" .
+                            $ref_optieyes .
+                            "</b><br>Ref. client: <b>" .
+                            $commande->reference_client .
+                            "</b><br>Tarif HT: <b>" .
+                            $prix_commande .
+                            "</b>";
 
-                    if ($commande->is_express) {
-                        $infos .= "<br><b>EXPRESS</b><br>";
-                        if ($commande->tarif_express == 25) {
+                        if ($commande->is_express) {
+                            $infos .= "<br><b>EXPRESS</b><br>";
+                            if ($commande->tarif_express == 25) {
+                                $factureChecked = 'checked';
+                            } else {
+                                $factureChecked = '';
+                            }
+                            $expressChecked = 'checked';
+                            $displayFacture = '';
+                        } else {
                             $factureChecked = 'checked';
+                            $expressChecked = '';
+                            $displayFacture = 'display: none;';
                         }
-                        else {
-                            $factureChecked = '';
-                        }
-                        $expressChecked = 'checked';
-                        $displayFacture = '';
-                    }
-                    else {
-                        $factureChecked = 'checked';
-                        $expressChecked = '';
-                        $displayFacture = 'display: none;';
-                    }
 
-                    $express = '<div id = "div_express_' . $commande->id_commande . '" style="text-align: center;">
+                        $express = '<div id = "div_express_' . $commande->id_commande . '" style="text-align: center;">
                                         <h5>Express</h5>
                                         <label class="switch">
                                           <input id="express_' . $commande->id_commande . '" class="express" type="checkbox" ' . $expressChecked . '>
@@ -8776,110 +8759,111 @@ class admin
                                         </label>
                                     </div>';
 
-                    if ($commande->commentaire !=
-                        "") {
-                        $infos .= "<br><br><div style='border:2px solid red; padding:5px 10px'><b style='color:red'>Commentaires client:  <br>" .
-                            $commande->commentaire .
-                            "</b></div>";
-                    }
+                        if ($commande->commentaire !=
+                            "") {
+                            $infos .= "<br><br><div style='border:2px solid red; padding:5px 10px'><b style='color:red'>Commentaires client:  <br>" .
+                                $commande->commentaire .
+                                "</b></div>";
+                        }
 
-                    if ($commande->commentaire_omega !=
-                        "") {
-                        $infos .= '<br><br>Commentaires OMEGA: <b>' .
-                            $commande->commentaire_omega .
-                            '</b>';
-                    }
+                        if ($commande->commentaire_omega !=
+                            "") {
+                            $infos .= '<br><br>Commentaires OMEGA: <b>' .
+                                $commande->commentaire_omega .
+                                '</b>';
+                        }
 
-                    $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
-                        $commande->id_commande .
-                        '_' .
-                        $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
-            		';
-
-                    if ($commande->seconde_omega !=
-                        "") {
-                        $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                            $commande->seconde_omega .
-                            "</b>";
-                        $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
+                        $infos .= '<br><br><a class="btn btn-inverse btn-sm" id="button_commentaires_omega_' .
                             $commande->id_commande .
                             '_' .
-                            $commande->id_users .
-                            '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
-                    } else {
-                        if ($commande->premiere_commande !=
-                            0) {
+                            $commande->id_users . '" data-toggle="modal" data-target="#edit-commentaire_omega"><i class="zmdi zmdi-edit"></i> commentaire Omega</a>
+            		';
+
+                        if ($commande->seconde_omega !=
+                            "") {
                             $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
-                                $commande->premiere_commande .
-                                "-" .
-                                $commande->id_users .
+                                $commande->seconde_omega .
                                 "</b>";
-                        } else {
                             $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
                                 $commande->id_commande .
                                 '_' .
                                 $commande->id_users .
                                 '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                        } else {
+                            if ($commande->premiere_commande !=
+                                0) {
+                                $infos .= "<br><br>Seconde Paire OMEGA: <b>" .
+                                    $commande->premiere_commande .
+                                    "-" .
+                                    $commande->id_users .
+                                    "</b>";
+                            } else {
+                                $infos .= '<br><br><a class="btn btn-warning btn-sm" id="button_seconde_paire_omega_' .
+                                    $commande->id_commande .
+                                    '_' .
+                                    $commande->id_users .
+                                    '" data-toggle="modal" data-target="#edit-seconde_paire_omega"><i class="zmdi zmdi-edit"></i> seconde paire Omega</a>';
+                            }
+
                         }
 
-                    }
-
 //                    var_dump($xml);die;
-                    $CommandeOmega =
-                        $this->m_commande->getTextCommandeOmega($commande->id_commande,
-                            $textarea,
-                            $xml);
+                        $CommandeOmega =
+                            $this->m_commande->getTextCommandeOmega($commande->id_commande,
+                                $textarea,
+                                $xml);
 
-                    $c_omega =
-                        "";
-                    $checkbox_omega =
-                        "";
-
-                    if (isset($CommandeOmega[0]->id)) {
                         $c_omega =
-                            "<a href='/admin/omega_autre_verre/" .
-                            $commande->id_commande .
-                            "/" .
-                            $CommandeOmega[0]->id .
-                            "'><button>Commander un autre verre</button></a><br><br>" .
-                            $CommandeOmega[0]->commande .
                             "";
                         $checkbox_omega =
-                            '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
-                            $CommandeOmega[0]->status .
-                            '" id="edi_' .
-                            $commande->id_commande .
-                            '" name="edi_' .
-                            $commande->id_commande .
-                            '" ' .
-                            ($CommandeOmega[0]->status ==
-                            '1' ?
-                                'checked' :
-                                '') .
-                            '/><label for="edi_' .
-                            $commande->id_commande .
-                            '" id="edi_date_' .
-                            $commande->id_commande .
-                            '">' .
-                            (!empty($commande->edi_date) ?
-                                date("d-m-Y",
-                                    strtotime($commande->edi_date)) :
-                                "") .
-                            '</label><button class="btn btn-danger waves-effect waves-light delete-order-edi" rel="' .
-                            $commande->id_commande .
-                            '">Supprimer</button></div>';
+                            "";
+
+                        if (isset($CommandeOmega[0]->id)) {
+                            $c_omega =
+                                "<a href='/admin/omega_autre_verre/" .
+                                $commande->id_commande .
+                                "/" .
+                                $CommandeOmega[0]->id .
+                                "'><button>Commander un autre verre</button></a><br><br>" .
+                                $CommandeOmega[0]->commande .
+                                "";
+                            $checkbox_omega =
+                                '<div class="checkbox checkbox-success checkbox-inline"><input type="checkbox" value="' .
+                                $CommandeOmega[0]->status .
+                                '" id="edi_' .
+                                $commande->id_commande .
+                                '" name="edi_' .
+                                $commande->id_commande .
+                                '" ' .
+                                ($CommandeOmega[0]->status ==
+                                '1' ?
+                                    'checked' :
+                                    '') .
+                                '/><label for="edi_' .
+                                $commande->id_commande .
+                                '" id="edi_date_' .
+                                $commande->id_commande .
+                                '">' .
+                                (!empty($commande->edi_date) ?
+                                    date("d-m-Y",
+                                        strtotime($commande->edi_date)) :
+                                    "") .
+                                '</label><button class="btn btn-danger waves-effect waves-light delete-order-edi" rel="' .
+                                $commande->id_commande .
+                                '">Supprimer</button></div>';
+                        }
+
+                        $data['aaData'][$compteur] =
+                            array(
+                                $infos,
+                                $detail,
+                                $c_omega,
+                                $express,
+                                $checkbox_omega,
+                            );
+
+                        $compteur++;
                     }
-
-                    $data['aaData'][$compteur] =
-                        array(
-                            $infos,
-                            $detail,
-                            $c_omega,
-                            $express,
-                            $checkbox_omega,
-                        );
-
-                    $compteur++;
                 }
             }
 //            print_r($data);die;

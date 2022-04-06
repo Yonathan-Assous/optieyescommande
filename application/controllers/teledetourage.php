@@ -20,4 +20,9 @@ class teledetourage extends MY_Controller
     public function testTracerEdiEyes() {
         $this->load->view('test_teledetourage');
     }
+
+    public function getFormatPrice() {
+        $data = $this->input->post();
+        echo $this->m_teledetourage->getTeledetourageFormatPrice($data['user_id'], $data['formatTeledetourage']);
+    }
 }

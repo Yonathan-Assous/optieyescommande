@@ -133,6 +133,11 @@ if (is_object($pair_order)) {
         .nav.type_teledetourage {
             margin-bottom : 10px;
         }
+
+        #btnLaunchTablette {
+            width: 100%;
+            margin-top: 10px;
+        }
     </style>
     <script>
         var panierA       = <?php if ($panierA == 1) {
@@ -723,7 +728,7 @@ if (is_object($pair_order)) {
                                                                             <div class="panel panel-default focus_panel"
                                                                                  id="div2_format_type">
                                                                                 <div class="panel-heading"><h5>Type de
-                                                                                        format</h5></div>
+                                                                                        monture</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
                                                                                     <div class="col-lg-12 card-tabs">
@@ -778,7 +783,7 @@ if (is_object($pair_order)) {
                                                                             <div class="panel panel-default"
                                                                                  id="refraction_panel">
                                                                                 <div class="panel-heading"><h5>
-                                                                                        Télédétourage</h5></div>
+                                                                                        Forme</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
                                                                                     <div class="row">
@@ -977,7 +982,7 @@ if (is_object($pair_order)) {
                                                                                                             <div class="col-xs-12 col-md-6 number-input"">
                                                                                                                 <input type="number"
                                                                                                                        min="0"
-                                                                                                                       class="quantity valid form-control info_comp"
+                                                                                                                       class="quantity valid form-control"
                                                                                                                        name="quantity"
                                                                                                                        id="largeur_boxing"
                                                                                                                        value=""
@@ -993,7 +998,7 @@ if (is_object($pair_order)) {
                                                                                                             <div class="col-xs-12 col-md-6 number-input"">
                                                                                                                 <input type="number"
                                                                                                                        min="0" max="50"
-                                                                                                                       class="quantity valid form-control info_comp"
+                                                                                                                       class="quantity valid form-control"
                                                                                                                        name="quantity"
                                                                                                                        id="taille_du_pont"
                                                                                                                        value=""
@@ -1009,7 +1014,7 @@ if (is_object($pair_order)) {
                                                                                                             <div class="col-xs-12 col-md-6 number-input"">
                                                                                                                 <input type="number"
                                                                                                                        min="0"
-                                                                                                                       class="quantity valid form-control info_comp"
+                                                                                                                       class="quantity valid form-control"
                                                                                                                        name="quantity"
                                                                                                                        id="hauteur_boxing"
                                                                                                                        value=""
@@ -1036,7 +1041,7 @@ if (is_object($pair_order)) {
                                                                                                             </div>
                                                                                                             <div class="col-xs-12 col-md-3 number-input">
                                                                                                                 <input id="teledetourage_ecart_puppillaire_droit"
-                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control info_comp"
+                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
                                                                                                                        min="15" max="55"
                                                                                                                        name="quantity"
                                                                                                                        value=""
@@ -1045,7 +1050,7 @@ if (is_object($pair_order)) {
                                                                                                             </div>
                                                                                                             <div class="col-xs-12 col-md-3 number-input">
                                                                                                                 <input type="number"
-                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control info_comp"
+                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
                                                                                                                        min="15" max="55"
                                                                                                                        name="quantity"
                                                                                                                        id="teledetourage_ecart_puppillaire_gauche"
@@ -1062,7 +1067,7 @@ if (is_object($pair_order)) {
                                                                                                             <div class="col-xs-12 col-md-3 number-input"">
                                                                                                                 <input type="number"
                                                                                                                        min="5" max="60"
-                                                                                                                       class="quantity hauteur_montage valid form-control info_comp"
+                                                                                                                       class="quantity hauteur_montage valid form-control"
                                                                                                                        name="quantity"
                                                                                                                        id="hauteur_montage_droit"
                                                                                                                        value=""
@@ -1071,7 +1076,7 @@ if (is_object($pair_order)) {
                                                                                                             <div class="col-xs-12 col-md-3 number-input"">
                                                                                                                 <input type="number"
                                                                                                                        min="5" max="60"
-                                                                                                                       class="quantity hauteur_montage valid form-control info_comp"
+                                                                                                                       class="quantity hauteur_montage valid form-control"
                                                                                                                        name="quantity"
                                                                                                                        id="hauteur_montage_gauche"
                                                                                                                        value=""
@@ -1079,6 +1084,14 @@ if (is_object($pair_order)) {
                                                                                                             </div>
                                                                                                             <div class="col-xs-12 col-md-1"></div>
                                                                                                         </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-10 input-group-append">
+                                                                                                                <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Percez vos verres</button>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                    
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div id="divOmaImageError hide">
@@ -5211,6 +5224,8 @@ if (is_object($pair_order)) {
                                                    name="id_generation_verre">
                                             <input type="hidden" id="id_indice_verre" value="1" name="id_indice_verre">
                                             <input type="hidden" id="type_commande" name="type_commande" value="1">
+                                            <input type="hidden" id="prix_teledetourage" name="prix_teledetourage" value="0">
+                                            <input type="hidden" id="format_teledetourage" name="format_teledetourage" value="">
                                         </div>
                                         <div id="casse" class="tab-pane fade">
                                             <h3>Casse atelier</h3>
@@ -5530,7 +5545,27 @@ if (is_object($pair_order)) {
             $('#type_commande').val('3');
         })
 
+
+
+        function getFormatTeledetouragePrice(format_teledetourage) {
+            console.log(format_teledetourage)
+            $.ajax({
+                type: "POST",
+                url: "/teledetourage/getFormatPrice",
+                data: {"user_id" : $('#user_id').val(),
+                    "formatTeledetourage" : format_teledetourage},
+                dataType: "json",
+                success: function (data) {
+                    $('#prix_teledetourage').val(data)
+                    $('#format_teledetourage').val(format_teledetourage)
+                    calculPrice();
+                    console.log(data);
+                }
+            });
+        }
+
         $('#format_metal').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5541,8 +5576,17 @@ if (is_object($pair_order)) {
             else {
                 $('#teledetourage_not_connected').modal('show');
             }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+
+            getFormatTeledetouragePrice('metal');
         })
+
         $('#format_plastique').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5553,8 +5597,15 @@ if (is_object($pair_order)) {
             else {
                 $('#teledetourage_not_connected').modal('show');
             }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+            getFormatTeledetouragePrice('plastic');
         })
         $('#format_nylor').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5565,6 +5616,13 @@ if (is_object($pair_order)) {
             else {
                 $('#teledetourage_not_connected').modal('show');
             }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+
+            getFormatTeledetouragePrice('nylor');
         })
         $('#format_perce').click(function () {
             if ($('#div_teledetourage').is(":hidden")) {
@@ -5573,10 +5631,18 @@ if (is_object($pair_order)) {
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
+                $('#btnLaunchTablette').removeClass('hide');
             }
             else {
                 $('#teledetourage_not_connected').modal('show');
             }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+            if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
+                $('#div_refraction').addClass('hide');
+                $('#produit').addClass('hide');
+            }
+
+            getFormatTeledetouragePrice('rimless');
         })
 
         $('#btn_add_info_sup').click(function () {
@@ -7469,7 +7535,7 @@ if (is_object($pair_order)) {
 
         function hideAll() {
             $('#produit').addClass('hide');
-            $('#div_refraction').addClass('hide');
+            // $('#format_perce').addClass('hide');
             $('#div_teledetourage').addClass('hide');
             $('#div1_format_type').addClass('hide');
             $('#type_produit').addClass('hide');

@@ -2043,6 +2043,7 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
+//            print_r($data);die;
 
             $add = $this->input->post();
 //
@@ -2896,14 +2897,31 @@ class index extends MY_Controller {
                 $data['prixGH'] = 0;
                 $data['supplementD'] = 0;
                 $data['supplementG'] = 0;
+                $data['tarif_teledetourage'] = 0;
+
+                if($data['format_teledetourage']) {
+                    $is_teledetourage = true;
+                    $data['prix_teledetourage'] = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $data['format_teledetourage']);
+                    if (isset($data['droit'])) {
+                        $data['tarif_teledetourage'] += $data['prix_teledetourage'];
+                    }
+                    if (isset($data['gauche'])) {
+                        $data['tarif_teledetourage'] += $data['prix_teledetourage'];
+                    }
+                    $data['teledetourage_format_id'] = $this->m_teledetourage->getTeledetourageFormatId($data['format_teledetourage']);
+                }
+                else {
+                    $is_teledetourage = false;
+                    $data['prix_teledetourage'] = 0;
+                }
 //                var_dump($data);die;
 //                print_r($user['user_info']->tarif_supplement_fab);die;
                 if (isset($data['droit'])) {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
-
+//                    print_r($verreName);die;
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
-                    if ($verreStockD) {
+                    if ($verreStockD && !$data['format_teledetourage']) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
                         $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
                     }
@@ -2924,12 +2942,11 @@ class index extends MY_Controller {
                         if(isset($data['PrismeSphereD'])) {
                             $prisme = $data['PrismeSphereD'];
                         }
-                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+                        $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteD;
-                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH']);
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                         $data['supplementD'] = $lenses->supplement;
-                        print_r($data);die;
                         if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 1;
                         }
@@ -2942,7 +2959,7 @@ class index extends MY_Controller {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
-                    if ($verreStockG) {
+                    if ($verreStockG && !$data['format_teledetourage']) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
                         $data['supplementG'] = $verreStockG->supplement * $quantiteG + ($user['user_info']->tarif_supplement - 1);
                     } else {
@@ -2965,7 +2982,7 @@ class index extends MY_Controller {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteG;
-                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH']);
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                         $data['supplementG'] = $lenses->supplement;
                         if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                             $data['supplementG'] -= 1;
@@ -3825,6 +3842,7 @@ class index extends MY_Controller {
 
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
+//                print_r($data);die;
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

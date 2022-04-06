@@ -4160,6 +4160,7 @@ $('#traitementD').on('change', function() {
     var diametreG = $('#diametreG').val();
 
     var prixverre = $('#prixVerreD').val();
+	//var prixTeledetourage = $('#prix_teledetourage').val();
 
   	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 	$('.eye_text, .corrections .d, .corrections .g').hide();
@@ -4251,6 +4252,7 @@ $('#traitementD').on('change', function() {
 				success: function (data) {
 					setTimeout(function(){
 							var prixtraitement = $('#prixTraitementD').val();
+							// var prixTeledetourage = $('#prix_teledetourage').val();
 							$.each(data, function(key, value){
 								$('#prixTeinteD').val(value.prix);
 								var tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
@@ -8777,6 +8779,9 @@ function calculPrice() {
 	console.log($('#traitementG').val());
 }
 function calculPriceD() {
+	let priceTeledetourage = $('#prix_teledetourage').val();
+	console.log('dataaaaaaaaaaaa' + priceTeledetourage);
+
 	var droit = $('#droit').is(':checked');
 	if (!droit) {
 		$('#prixVerreD').val(0)
@@ -8794,20 +8799,19 @@ function calculPriceD() {
 	console.log("prixTraitementD:");
 	console.log(prixtraitement);
 
-	var tot;
+	var tot = parseFloat(prixverre)
+		+ parseFloat(prixtraitement)
+		+ parseFloat(prixteinte)
+		+ addPrismeGalbeDroit();
 	if(quantiteD != "")
 	{
-		tot = ( ((parseFloat(prixverre)
-			+parseFloat(prixtraitement)
-			+parseFloat(prixteinte)
-			+addPrismeGalbeDroit()
-		))*parseFloat(quantiteD)).toFixed(2);
+		tot = ( tot*parseFloat(quantiteD)).toFixed(2);
 	}
 	else
 	{
-		tot =  (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+addPrismeGalbeDroit()).toFixed(2);
+		tot =  tot.toFixed(2);
 	}
-	console.log("tot:");
+	console.log("totrerewew:");
 	console.log(tot);
 
 	$('#prixD').val(tot+"€");
@@ -8816,6 +8820,7 @@ function calculPriceD() {
 }
 
 function calculPriceG() {
+	let priceTeledetourage = $('#prix_teledetourage').val();
 	var gauche = $('#gauche').is(':checked');
 	if (!gauche) {
 		$('#prixVerreG').val(0)
@@ -8833,18 +8838,17 @@ function calculPriceG() {
 	console.log("prixTraitementG:");
 	console.log(prixtraitement);
 
-	var tot;
-	if(quantiteD != "")
+	var tot = parseFloat(prixverre)
+		+ parseFloat(prixtraitement)
+		+ parseFloat(prixteinte)
+		+ addPrismeGalbeDroit();
+	if(quantiteG != "")
 	{
-		tot = ( ((parseFloat(prixverre)
-			+parseFloat(prixtraitement)
-			+parseFloat(prixteinte)
-			+addPrismeGalbeGauche()
-		))*parseFloat(quantiteG)).toFixed(2);
+		tot = ( tot*parseFloat(quantiteG)).toFixed(2);
 	}
 	else
 	{
-		tot = (parseFloat(prixverre)+parseFloat(prixtraitement)+parseFloat(prixteinte)+addPrismeGalbeGauche()).toFixed(2);
+		tot =  tot.toFixed(2);
 	}
 	console.log("tot:");
 	console.log(tot);

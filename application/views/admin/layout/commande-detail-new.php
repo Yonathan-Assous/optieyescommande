@@ -11,7 +11,7 @@
         }
        echo '<h4 class="modal-title">Commande N°'.$recap_commande[0]->id_commande.' '. $commande_by .'</h4>';
 		//var_dump($recap_commande[0]);
-		if($recap_commande[0]->id_verre == "S26783")
+		if($recap_commande[0]->id_verre == "41274")
 		{
 			$recap_commande[0]->trad_fr = "Prog Eco 1,5 HMC";
 		}
@@ -374,6 +374,17 @@
                     </tr>';
                 }
 
+                if($recap_commande[0]->code_oma) {
+                    $monture = $this->m_teledetourage->getNameInFrenchMontureByFormatId($recap_commande[0]->teledetourage_format_id);
+
+                    echo '<tr>
+                    <td>
+                        <h4 style="margin: 20px 0 10px">Télédétourage Monture ' . $monture . '</h4>
+                    </td>
+                    <td></td>
+                    <td class="center">'.number_format($recap_commande[0]->tarif_teledetourage, 2, ',', ' ').' €</td>
+                    </tr>';
+                }
                 ?>
                 </tbody>
             </table>
@@ -382,15 +393,15 @@
 
             if($recap_commande[0]->type_commande > 1) {
 
-                $total_final = 0 + $express;
+                $total_final = 0 + $express + $recap_commande[0]->tarif_teledetourage;
 
                 echo '<div class="total final"><span>Total final</span><strong>'.number_format($total_final, 2, '.', ' ').' €</strong></div>';
-                echo '<div class="total"><span>Total</span><strong><del>'.$recap_commande[0]->total_commande.' €</del></strong></div>';
+                echo '<div class="total"><span>Total</span><strong><del>'.number_format($recap_commande[0]->total_commande, 2, ',', ' ') .' €</del></strong></div>';
 
 
             }
             else {
-                echo '<div class="total"><span>Total</span><strong>'.$recap_commande[0]->total_commande.' €</strong></div>';
+                echo '<div class="total"><span>Total</span><strong>' . number_format($recap_commande[0]->total_commande + $recap_commande[0]->tarif_teledetourage, 2, ',', ' ') .' €</strong></div>';
             }
 
             ?>

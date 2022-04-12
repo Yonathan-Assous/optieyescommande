@@ -38,7 +38,6 @@ class m_bl_conditions extends CI_Model
             $tab[$i]['montant'] = $blCondition->average_amount;
             $tab[$i]['date_start'] = $blCondition->date_start;
             $tab[$i]['date_activation'] = $blCondition->actived_at;
-
             if ($blCondition->is_active) {
                 $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $blCondition->date_start);
                 $tab[$i]['active'] = true;
@@ -76,6 +75,8 @@ class m_bl_conditions extends CI_Model
             $now = date('Y-m');
             $newDateStart = date('Y-m',strtotime('+1 month',strtotime($dateStart)));
 //            print_r($newDateStart);die;
+//            echo $userId . ": " . $newDateStart . $now . '<br>';
+
             if($newDateStart > $now) {
                 return 'bl_conditions_new';
             }
@@ -88,7 +89,6 @@ class m_bl_conditions extends CI_Model
                     return 'bl_conditions_non_remplies';
                 }
             }
-            return $result;
         }
         else {
             return false;

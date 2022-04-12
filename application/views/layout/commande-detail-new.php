@@ -4,7 +4,7 @@
     if($recap_commande !== false) {
         echo '<h4 class="modal-title">Commande N°'.$recap_commande[0]->id_commande.'</h4>';
         
-        if($recap_commande[0]->id_verre == "S26783")
+        if($recap_commande[0]->id_verre == "41274")
 		{
 			$recap_commande[0]->trad_fr = "Prog Eco 1,5 HMC";
 		}
@@ -300,16 +300,19 @@
                 echo '</tr>';
 
             }
-                
 
-                echo '<tr>';
-                echo '<td colspan="3" style="padding-top: 15px">';
-                if(isset($info_commande['verre']['traitement'])) { echo '<strong>Traitement :</strong> '.$info_commande['verre']['traitement'].'<br />'; }
-                if(isset($info_commande['verre']['photocromie'])) {echo '<strong>Photocromie :</strong> '.$info_commande['verre']['photocromie'].'<br />'; }
-                if(isset($info_commande['verre']['teinte'])) {echo '<strong>Teinte :</strong> '.$info_commande['verre']['teinte']; }
-                echo (isset($correction['verre']['miroir_stock']) ? $options_miroir[$correction['verre']['miroir_stock']['type_miroir']] : '').(isset($correction['verre']['polarise']) ? $correction['verre']['polarise'] : '');
-                echo '</td>';
-                echo '</tr>';
+                if(isset($info_commande['verre']['traitement']) || isset($info_commande['verre']['photocromie'])
+                    || isset($info_commande['verre']['teinte']) || isset($info_commande['verre']['miroir_stock'])) {
+                    echo '<tr>';
+                    echo '<td colspan="3" style="padding-top: 15px">';
+                    if(isset($info_commande['verre']['traitement'])) { echo '<strong>Traitement :</strong> '.$info_commande['verre']['traitement'].'<br />'; }
+                    if(isset($info_commande['verre']['photocromie'])) {echo '<strong>Photocromie :</strong> '.$info_commande['verre']['photocromie'].'<br />'; }
+                    if(isset($info_commande['verre']['teinte'])) {echo '<strong>Teinte :</strong> '.$info_commande['verre']['teinte']; }
+                    echo (isset($correction['verre']['miroir_stock']) ? $options_miroir[$correction['verre']['miroir_stock']['type_miroir']] : '').(isset($correction['verre']['polarise']) ? $correction['verre']['polarise'] : '');
+                    echo '</td>';
+                    echo '</tr>';
+                }
+
 
                 $express = 0;
                 if($recap_commande[0]->is_express) {
@@ -321,10 +324,21 @@
                         Délais maximum pour une commande passée avant 15h30 : J+3<br />( hors jours fériés et week-end )<br />
                         Rajouter 1 jour pour des verres teintés. 
                     </td>
-                    <td class="center">'.$recap_commande[0]->tarif_express.' €</td>
+                    <td class="center">'.number_format($recap_commande[0]->tarif_express, 2, ',', ' ').' €</td>
                     </tr>';
                 }
 
+                if($recap_commande[0]->code_oma) {
+                    $monture = $this->m_teledetourage->getNameInFrenchMontureByFormatId($recap_commande[0]->teledetourage_format_id);
+
+                    echo '<tr>
+                    <td>
+                        <h4 style="margin: 20px 0 10px">Télédétourage Monture ' . $monture . '</h4>
+                    </td>
+                    <td></td>
+                    <td class="center">'.number_format($recap_commande[0]->tarif_teledetourage, 2, ',', ' ').' €</td>
+                    </tr>';
+                }
                 ?>
                 </tbody>
             </table>
@@ -333,15 +347,15 @@
 
             if($recap_commande[0]->type_commande > 1) {
 
-                $total_final = 0 + $express;
+                $total_final = 0 + $express + $recap_commande[0]->tarif_teledetourage;
 
                 echo '<div class="total final"><span>Total final</span><strong>'.number_format($total_final, 2, '.', ' ').' €</strong></div>';
-                echo '<div class="total"><span>Total</span><strong><del>'.$recap_commande[0]->total_commande.' €</del></strong></div>';
+                echo '<div class="total"><span>Total</span><strong><del>'.number_format($recap_commande[0]->total_commande, 2, ',', ' ') .' €</del></strong></div>';
 
 
             }
             else {
-                echo '<div class="total"><span>Total</span><strong>'.$recap_commande[0]->total_commande.' €</strong></div>';
+                echo '<div class="total"><span>Total</span><strong>' . number_format($recap_commande[0]->total_commande + $recap_commande[0]->tarif_teledetourage, 2, ',', ' ') .' €</strong></div>';
             }
 
             ?>

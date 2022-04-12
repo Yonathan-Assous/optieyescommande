@@ -102,10 +102,10 @@ class cron extends MY_Controller {
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
+
            // $date = date('m-Y', time());
         //echo $date;die;
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
-
             $current = array();
 
             foreach ($factures as $f) {
@@ -140,8 +140,8 @@ class cron extends MY_Controller {
                     if ($id_mandat == 0) {
                         $id_mandat = $facture_cli->id_users;
                     }
-
-                    $facture_cli->total += $packaging[0]->tarif_packaging;
+                    $remiseSpecial = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
+                    $facture_cli->total += $packaging[0]->tarif_packaging - $remiseSpecial;
 
                     $dep = substr($facture_cli->cp, 0, -3);
 
@@ -167,18 +167,18 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                    if ($id_mandat >= 555) {
-                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
-                    }
-                    else {
-                        $mandat = getMandat('OPTR' . $id_mandat);
-                        if (!$mandat) {
-                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
-                        }
-                    }
+//                    if ($id_mandat >= 555) {
+//                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+//                    }
+//                    else {
+//                        $mandat = getMandat('OPTR' . $id_mandat);
+//                        if (!$mandat) {
+//                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+//                        }
+//                    }
 
                     $paiement = array(
-                        'mandat_status' => $mandat,
+//                        'mandat_status' => $mandat,
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
                         'magasin' => $facture_cli->id_users,
                         'mandat' => $id_mandat,
@@ -264,7 +264,8 @@ class cron extends MY_Controller {
                         $id_mandat = $facture_cli->id_users;
                     }
 
-                    $facture_cli->total += $packaging[0]->tarif_packaging;
+                    $remiseSpecial = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
+                    $facture_cli->total += $packaging[0]->tarif_packaging - $remiseSpecial;
 
                     $dep = substr($facture_cli->cp, 0, -3);
 

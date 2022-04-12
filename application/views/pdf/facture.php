@@ -380,26 +380,30 @@
 								$sup += $reduc->reduction;
 							else
 								$remise += $reduc->reduction;
-								
+
 							$total_facture_ht -= $reduc->reduction;
 						}
+                        $remiseSpecial = $this->m_remise->getTotalRemisesByUser($id_users, $total_facture_ht + $reduc->reduction);
 
+                        $total_facture_ht -= $remiseSpecial;
+                        $remise += $remiseSpecial;
 
-
-
-
-						if($remise !=0){
-
+                        if($remise !=0){
+//                            echo ' <tr>
+//                        <td colspan="4" style="text-align: right;"></td>
+//                        <td colspan="1" style="text-align: right;"><strong>P & E</strong></td>
+//                        <td class="change_order_total_col" style="text-align:right;"><strong>' . number_format($tarifPackaging, 2, '.', ' ') . ' €</strong></td>
+//
                             echo ' <tr>
-									<td colspan="4"></td>
-									<td colspan="1" style="text-align: right; padding-top: 30px !important;"><strong>Total HT</strong></td>
-									<td class="change_order_total_col" style="text-align:right;  padding-top: 30px !important;"><strong>'.number_format($total_sans_remise+abs($sup),2,'.',' ').' €</strong></td>
+									<td colspan="4" style="text-align: right;"></td>
+									<td colspan="1" style="text-align: right;"><strong>Total HT</strong></td>
+									<td class="change_order_total_col" style="text-align:right;"><strong>'.number_format($total_sans_remise+abs($sup),2,'.',' ').' €</strong></td>
 								   </tr>';
 
-							echo ' <tr>
-									<td colspan="4"></td>
-									<td colspan="1" style="text-align: right; padding-top: 30px !important;"><strong>Remise</strong></td>
-									<td class="change_order_total_col" style="text-align:right; padding-top: 30px !important;"><strong>'.number_format($remise,2,'.',' ').' €</strong></td>
+                            echo ' <tr>
+									<td colspan="4" style="text-align: right;"></td>
+									<td colspan="1" style="text-align: right;"><strong>Remise</strong></td>
+									<td class="change_order_total_col" style="text-align:right;"><strong>'.number_format($remise,2,'.',' ').' €</strong></td>
 								   </tr>';
 
                             $label_remise = '<br />Remise incluse';
@@ -424,12 +428,11 @@
 
                     echo ' <tr>
                     <td colspan="4" style="text-align: right;"></td>
-                    <td colspan="1" style="text-align: right; padding-top: 30px !important;"><strong>'.$label_price.$label_remise.'</strong></td>
-                    <td class="change_order_total_col" style="text-align:right; padding-top: 30px !important;"><strong>'.number_format($total_facture_ht,2,'.',' ').' €</strong></td>
+                    <td colspan="1" style="text-align: right;"><strong>'.$label_price.$label_remise.'</strong></td>
+                    <td class="change_order_total_col" style="text-align:right; "><strong>'.number_format($total_facture_ht,2,'.',' ').' €</strong></td>
                     </tr>';
 
                     if($tarifPackaging > 0 && $timestamp >= strtotime('2016-10')) {
-
                         $total_facture_ht += $tarifPackaging;
 
                         echo ' <tr>
@@ -437,6 +440,15 @@
                         <td colspan="1" style="text-align: right;"><strong>P & E</strong></td>
                         <td class="change_order_total_col" style="text-align:right;"><strong>' . number_format($tarifPackaging, 2, '.', ' ') . ' €</strong></td>
                         </tr>';
+
+//                        if (!empty($totalRemises)) {
+//                            echo ' <tr>
+//                            <td colspan="4" style="text-align: right;"></td>
+//                            <td colspan="1" style="text-align: right;"><strong>Remises</strong></td>
+//                            <td class="change_order_total_col" style="text-align:right;"><strong>' . number_format($totalRemises, 2, '.', ' ') . ' €</strong></td>
+//                            </tr>';
+//                            $total_facture_ht -= $totalRemises;
+//                        }
 
                         echo ' <tr>
                         <td colspan="4" style="text-align: right;"></td>

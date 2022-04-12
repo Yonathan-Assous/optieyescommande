@@ -63,11 +63,11 @@
                 <span>Prix&nbsp;Verres</span>
             </a>
         </li>
-<!--        <li class="">-->
-<!--            <a href="#user-modal-remises" data-toggle="tab" aria-expanded="false">-->
-<!--                <span>Remises</span>-->
-<!--            </a>-->
-<!--        </li>-->
+        <li class="">
+            <a href="#user-modal-remises" data-toggle="tab" aria-expanded="false">
+                <span>Remises</span>
+            </a>
+        </li>
         <li class="">
             <a href="#user-modal-bl" data-toggle="tab" aria-expanded="false">
                 <span>Conditions</span>
@@ -140,29 +140,32 @@
                     <label for="tarif_packaging" class="control-label">Tarif packaging</label>
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
-<!---->
-<!--                <div class="form-group m-b-10 col-sm-4">-->
-<!--                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>-->
-<!--                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="--><?php //echo $price_teledetourage_user['plastique'] ?><!--" />-->
-<!--                </div>-->
-<!--                <div class="form-group m-b-10 col-sm-4">-->
-<!--                    <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>-->
-<!--                    <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="--><?php //echo $price_teledetourage_user['metal'] ?><!--" />-->
-<!--                </div>-->
-<!--                <div class="form-group m-b-10 col-sm-4">-->
-<!--                    <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>-->
-<!--                    <input type="text" id="teledetourage_nylor" name="teledetourage_nylor"  class="form-control" value="--><?php //echo $price_teledetourage_user['nylor'] ?><!--" />-->
-<!--                </div>-->
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
+                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>
+                    <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="<?php echo $price_teledetourage_user['metal'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_rimless" class="control-label">Télédétourage Percés</label>
+                    <input type="text" id="teledetourage_rimless" name="teledetourage_rimless"  class="form-control" value="<?php echo $price_teledetourage_user['rimless'] ?>" />
+                </div>
+                <div class="form-group m-b-10 col-sm-3">
+                    <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>
+                    <input type="text" id="teledetourage_nylor" name="teledetourage_nylor"  class="form-control" value="<?php echo $price_teledetourage_user['nylor'] ?>" />
+                </div>
 
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="tarif_supplement" class="control-label">Supplément sur les verres Stocks</label>
                     <input type="text" id="tarif_supplement" name="tarif_supplement"  class="form-control" value="<?php echo $info_user[0]->tarif_supplement ?>" />
                 </div>
 
-                <div class="form-group m-b-10 col-sm-12">
-                    <label for="tarif_supplement_fab" class="control-label">Supplément sur les verres Fab</label>
-                    <input type="text" id="tarif_supplement_fab" name="tarif_supplement_fab"  class="form-control" value="<?php echo $info_user[0]->tarif_supplement_fab ?>" />
-                </div>
+<!--                <div class="form-group m-b-10 col-sm-12">-->
+<!--                    <label for="tarif_supplement_fab" class="control-label">Supplément sur les verres Fab</label>-->
+<!--                    <input type="text" id="tarif_supplement_fab" name="tarif_supplement_fab"  class="form-control" value="--><?php //echo $info_user[0]->tarif_supplement_fab ?><!--" />-->
+<!--                </div>-->
 
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="percent_tva" class="control-label">Pourcentage de la TVA</label>
@@ -209,6 +212,14 @@
 <!--                        <option value="0" --><?php //echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?><!--Non</option>-->
 <!--                    </select>-->
 <!--                </div>-->
+
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="is_teledetourable" class="control-label">Activer le télédétourage</label>
+                    <select id="is_teledetourable" name="is_teledetourable" class="form-control">
+                        <option value="1" <?php echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?>>Oui</option>
+                        <option value="0" <?php echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?>>Non</option>
+                    </select>
+                </div>
 
                 <div class="form-group m-b-10 col-sm-12">
                     <label for="commande_suspendue" class="control-label">Suspendre les commandes</label>
@@ -454,86 +465,95 @@
                 </div>
             </div>
         </div>
-<!--        <div class="tab-pane" id="user-modal-remises">-->
-<!--            <div class="form-group row">-->
-<!--                <div class="form-group m-b-10 col-sm-3">-->
-<!--                    <label for="teledetourage_remise" class="control-label">Remise <span class="obligatoire">*</span></label>-->
-<!--                    <input type="text" id="teledetourage_remise" name="teledetourage_remise" class="form-control" value="" />-->
-<!--                    <div class="validator"></div>-->
-<!--                </div>-->
-<!--                <div class="form-group m-b-10 col-sm-3">-->
-<!--                    <label for="teledetourage_remise_start_montant" class="control-label">Montant (à partir de) <span class="obligatoire">*</span></label>-->
-<!--                    <input type="text" id="teledetourage_remise_start_montant" name="teledetourage_remise_start_montant" class="form-control" value="" />-->
-<!--                    <p class="error reset-error"></p>-->
-<!--                </div>-->
-<!--                <div class="form-group m-b-10 col-sm-3">-->
-<!--                    <label for="teledetourage_remise_start_date" class="control-label">Date de début <span class="obligatoire">*</span></label>-->
-<!--                    <input type="date" id="teledetourage_remise_start_date" name="teledetourage_remise_start_date" min="2021-09-12" class="form-control teledetourage_date checkbox_date" value="" />-->
-<!--                    <p id="error_teledetourage_remise_start_date" class="error reset-error error_date"></p>-->
-<!--                </div>-->
-<!--                <div class="form-group m-b-10 col-sm-3">-->
-<!--                    <label for="teledetourage_remise_end_date" class="control-label">Date de fin (facultatif)</label>-->
-<!--                    <input type="date" id="teledetourage_remise_end_date" name="teledetourage_remise_end_date" min="2021-09-12" class="form-control teledetourage_date checkbox_date" value="" />-->
-<!--                </div>-->
-<!--                <div class="form-group text-center m-t-30">-->
-<!--                    <div class="col-xs-12">-->
-<!--                        <button id="check_remises" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase m-b-30" type="button" name="check_remises">Accepter remise</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="modal_remise" class="modal modal_remise fade" tabindex="-1" role="dialog" aria-hidden="true">-->
-<!--                    <div class="modal-dialog" style="width: 90%; max-width: 700px;">-->
-<!--                        <div id="modal-remise-content" class="modal-content-new">-->
-<!--                            <div class="modal-header">-->
-<!--                                <button type="button" class="close_modal_remise" aria-hidden="true">×</button>-->
-<!--                                <h4 class="modal-title">Acceptation des remises</h4>-->
-<!--                            </div>-->
-<!--                            <div class="modal-body">-->
-<!--                                <div class="panel-body" style="padding-top: 15px">-->
-<!--                                    <div id="text_modal_remise">-->
-<!--                                        Veuillez Confirmer le fait que vous acceptez les remises effectuées-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="modal-footer">-->
-<!--                                <button id="annule_remise" type="button" class="btn btn-default waves-effect close_modal_remise">Annuler</button>-->
-<!--                                <button id="accept_remise" type="button" class="btn btn-warning waves-effect waves-light close_modal_remise">Suivant</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="history_remise" class="form-group row">-->
-<!--                    <div class="tab-content">-->
-<!--                        <p>-->
-<!--                            <input type="checkbox" id="checkbox-remise-past" class="checkbox-remise checkbox-design checkbox-design-past"/>-->
-<!--                            <label for="checkbox-remise-past" aria-describedby="label">Passé</label>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--                            <input type="checkbox" id="checkbox-remise-present" class="checkbox-remise checkbox-design checkbox-design-present" checked="checked" />-->
-<!--                            <label for="checkbox-remise-present" aria-describedby="label">Présent</label>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--                            <input type="checkbox" id="checkbox-remise-future" class="checkbox-remise checkbox-design checkbox-design-future" />-->
-<!--                            <label for="checkbox-remise-future" aria-describedby="label">Futur</label>-->
-<!--                        </p>-->
-<!--                        <div class="tab-pane active" id="modal-history-remise">-->
-<!--                            <h5>Table des Remises</h5>-->
-<!--                            <table id="table_remises_teledetourage"-->
-<!--                                   class="table table-striped dt-responsive nowrap">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th>Montant (à partir de)</th>-->
-<!--                                    <th>Remise</th>-->
-<!--                                    <th>Date début</th>-->
-<!--                                    <th>Date Fin</th>-->
-<!--                                    <th>Désactivation</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="tab-pane" id="user-modal-remises">
+            <div class="form-group row">
+                <div class="form-group m-b-10 div-sm-5">
+                    <label for="remise" class="control-label">Remise <span class="obligatoire">*</span></label>
+                    <input type="text" id="remise" name="remise" class="form-control" value="" />
+                    <div class="validator"></div>
+                </div>
+                <div class="form-group m-b-10 div-sm-5">
+                    <label for="remise_start_montant" class="control-label">Montant (à partir de) <span class="obligatoire">*</span></label>
+                    <input type="text" id="remise_start_montant" name="remise_start_montant" class="form-control" value="" />
+                    <p class="error reset-error"></p>
+                </div>
+                <div class="form-group m-b-10 div-sm-5">
+                    <label for="remise_start_date" class="control-label">Date de début <span class="obligatoire">*</span></label>
+                    <input type="date" id="remise_start_date" name="remise_start_date" min="2021-09-12" class="form-control remise_date checkbox_date" value="" />
+                    <p id="error_remise_start_date" class="error reset-error error_date"></p>
+                </div>
+                <div class="form-group m-b-10 div-sm-5">
+                    <label for="remise_end_date" class="control-label">Date de fin (facultatif)</label>
+                    <input type="date" id="remise_end_date" name="remise_end_date" min="2021-09-12" class="form-control remise_date checkbox_date" value="" />
+                </div>
+                <div class="form-group m-b-10 div-sm-5">
+                    <label for="type_remise" class="control-label">Type de remise</label>
+                    <select id="type_remise" name="type_remise" class="form-control">
+                        <option value="remise_teledetourage" selected="selected">Télédétourage</option>
+                        <option value="remise_exceptionnelle">Remise exceptionnelle</option>
+                    </select>
+                </div>
+                <div class="form-group text-center m-t-30">
+                    <div class="col-xs-12">
+                        <button id="check_remises" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase m-b-30" type="button" name="check_remises">Accepter remise</button>
+                    </div>
+                </div>
+                <div id="modal_remise" class="modal modal_remise fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 90%; max-width: 700px;">
+                        <div id="modal-remise-content" class="modal-content-new">
+                            <div class="modal-header">
+                                <button type="button" class="close_modal_remise" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Acceptation des remises</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="panel-body" style="padding-top: 15px">
+                                    <div id="text_modal_remise">
+                                        Veuillez Confirmer le fait que vous acceptez les remises effectuées
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="annule_remise" type="button" class="btn btn-default waves-effect close_modal_remise">Annuler</button>
+                                <button id="accept_remise" type="button" class="btn btn-warning waves-effect waves-light close_modal_remise">Suivant</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="history_remise" class="form-group row">
+                    <div class="tab-content">
+                        <p>
+                            <input type="checkbox" id="checkbox-remise-past" class="checkbox-remise checkbox-design checkbox-design-past"/>
+                            <label for="checkbox-remise-past" aria-describedby="label">Passé</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="checkbox-remise-present" class="checkbox-remise checkbox-design checkbox-design-present" checked="checked" />
+                            <label for="checkbox-remise-present" aria-describedby="label">Présent</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" id="checkbox-remise-future" class="checkbox-remise checkbox-design checkbox-design-future" />
+                            <label for="checkbox-remise-future" aria-describedby="label">Futur</label>
+                        </p>
+                        <div class="tab-pane active" id="modal-history-remise">
+                            <h5>Table des Remises</h5>
+                            <table id="table_remises"
+                                   class="table table-striped dt-responsive nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Montant (à partir de)</th>
+                                    <th>Remise</th>
+                                    <th>Date début</th>
+                                    <th>Date Fin</th>
+                                    <th>Type de remise</th>
+                                    <th>Désactivation</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tab-pane" id="user-modal-bl">
             <div class="form-group row">
                 <div class="form-group m-b-10 col-sm-6">
@@ -653,12 +673,12 @@
 	else
 	{ ?>
 
-    $("#teledetourage_remise_start_date").change(function(){
-        document.getElementById('teledetourage_remise_end_date').setAttribute("min", $("#teledetourage_remise_start_date").val())
+    $("#remise_start_date").change(function(){
+        document.getElementById('remise_end_date').setAttribute("min", $("#remise_start_date").val())
     });
 
-    $("#teledetourage_remise_end_date").change(function(){
-        document.getElementById('teledetourage_remise_start_date').setAttribute("max", $("#teledetourage_remise_end_date").val())
+    $("#remise_end_date").change(function(){
+        document.getElementById('remise_start_date').setAttribute("max", $("#remise_end_date").val())
     });
 
         $.extend($.validator.messages, {
@@ -676,15 +696,15 @@
         $("#updateUser").validate({
             errorClass: 'jqInvalid',
             rules: {
-                "teledetourage_remise": {
+                "remise": {
                     required: true,
                     number: true,
                 },
-                "teledetourage_remise_start_montant": {
+                "remise_start_montant": {
                     required: true,
                     number: true,
                 },
-                "teledetourage_remise_start_date": {
+                "remise_start_date": {
                     required: true,
                 },
                 "bl_conditions_start_montant": {
@@ -696,15 +716,15 @@
                 },
             },
             messages: {
-                "teledetourage_remise": {
+                "remise": {
                     required: "Ce champ est obligatoire",
                     number: "Veuillez indiquer un nombre",
                 },
-                "teledetourage_remise_start_montant": {
+                "remise_start_montant": {
                     required: "Ce champ est obligatoire",
                     number: "Veuillez indiquer un nombre",
                 },
-                "teledetourage_remise_start_date" : {
+                "remise_start_date" : {
                     required: "Veuillez indiquer une date",
                 },
                 "bl_conditions_start_montant": {
@@ -725,25 +745,25 @@
             }
         });
 
-        $('#teledetourage_remise_start_date').on('change', function(e) {
-            if ($('#teledetourage_remise_start_date').val()) {
-                document.getElementById("teledetourage_remise_start_date").style.setProperty('background-color', 'white', 'important');
-                var myEle = document.getElementById("teledetourage_remise_start_date-error");
+        $('#remise_start_date').on('change', function(e) {
+            if ($('#remise_start_date').val()) {
+                document.getElementById("remise_start_date").style.setProperty('background-color', 'white', 'important');
+                var myEle = document.getElementById("remise_start_date-error");
                 if(myEle){
-                    document.getElementById("teledetourage_remise_start_date-error").innerText = '';
+                    document.getElementById("remise_start_date-error").innerText = '';
                 }
-                // document.getElementById("teledetourage_remise_start_date-error").innerText = '';
-                document.getElementById("error_teledetourage_remise_start_date").innerText = '';
+                // document.getElementById("remise_start_date-error").innerText = '';
+                document.getElementById("error_remise_start_date").innerText = '';
             }
             else {
-                document.getElementById("teledetourage_remise_start_date").style.setProperty('background-color', '#f5dcdc ', 'important');
-                var myEle = document.getElementById("teledetourage_remise_start_date-error");
+                document.getElementById("remise_start_date").style.setProperty('background-color', '#f5dcdc ', 'important');
+                var myEle = document.getElementById("remise_start_date-error");
                 if(myEle){
-                    document.getElementById("teledetourage_remise_start_date-error").innerText = 'Veuillez indiquer une date';
-                    document.getElementById("error_teledetourage_remise_start_date").innerText = '';
+                    document.getElementById("remise_start_date-error").innerText = 'Veuillez indiquer une date';
+                    document.getElementById("error_remise_start_date").innerText = '';
                 }
                 else {
-                    document.getElementById("error_teledetourage_remise_start_date").innerText = 'Veuillez indiquer une date';
+                    document.getElementById("error_remise_start_date").innerText = 'Veuillez indiquer une date';
                 }
             }
         });
@@ -755,7 +775,7 @@
                 if(myEle){
                     document.getElementById("bl_conditions_start_date-error").innerText = '';
                 }
-                // document.getElementById("teledetourage_remise_start_date-error").innerText = '';
+                // document.getElementById("remise_start_date-error").innerText = '';
                 document.getElementById("error_bl_conditions_start_date").innerText = '';
             }
             else {
@@ -774,34 +794,40 @@
 
 
         $('#check_remises').on('click', function(e) {
-            document.getElementById("error_teledetourage_remise_start_date").innerText = '';
+            document.getElementById("error_remise_start_date").innerText = '';
             if ($("#updateUser").valid()) {
-                $.ajax({
-                    type: "POST",
-                    url: "/teledetourage/checkOtherRemise",
-                    data: {
-                        'user_id' : <?php echo $info_user[0]->id_users ?>,
-                        'remise' : $('#teledetourage_remise').val(),
-                        'montant' : $('#teledetourage_remise_start_montant').val(),
-                        'since_date' : $('#teledetourage_remise_start_date').val(),
-                        'until_date' : $('#teledetourage_remise_end_date').val()
-                    },
-                    success: function(data){
-                        let res = $.parseJSON(data);
-                        if (res.status == "ok") {
-                            if (res.total_remise == 0) {
-                                $('#text_modal_remise').html('Veuillez Confirmer le fait que vous acceptez les remises effectuées');
+                if ($('#type_remise').val() == 'remise_teledetourage') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/remise/checkOtherRemise",
+                        data: {
+                            'user_id' : <?php echo $info_user[0]->id_users ?>,
+                            'remise' : $('#remise').val(),
+                            'montant' : $('#remise_start_montant').val(),
+                            'since_date' : $('#remise_start_date').val(),
+                            'until_date' : $('#remise_end_date').val()
+                        },
+                        success: function(data){
+                            let res = $.parseJSON(data);
+                            if (res.status == "ok") {
+                                if (res.total_remise == 0) {
+                                    $('#text_modal_remise').html('Veuillez confirmer le fait que vous acceptez les remises effectuées');
+                                }
+                                else if (res.total_remise == 1) {
+                                    $('#text_modal_remise').html('Vous avez déjà une remise dans ces dates qui s\'écraseront, confirmez-vous cette remise ?');
+                                }
+                                else {
+                                    $('#text_modal_remise').html('Vous avez déjà plusieurs remises dans ces dates qui s\'écraseront, confirmez-vous cette remise ?');
+                                }
+                                $('#modal_remise').modal('show');
                             }
-                            else if (res.total_remise == 1) {
-                                $('#text_modal_remise').html('Vous avez déjà une remise dans ces dates qui s\'écraseront, confirmez-vous cette remise ?');
-                            }
-                            else {
-                                $('#text_modal_remise').html('Vous avez déjà plusieurs remises dans ces dates qui s\'écraseront, confirmez-vous cette remise ?');
-                            }
-                            $('#modal_remise').modal('show');
                         }
-                    }
-                });
+                    });
+                }
+                else {
+                    $('#text_modal_remise').html('Veuillez Confirmer le fait que vous acceptez les remises effectuées');
+                    $('#modal_remise').modal('show');
+                }
             }
         });
         $('.close_modal_remise').click(function() {
@@ -816,16 +842,17 @@
             if ($("#updateUser").valid()) {
                 $.ajax({
                     type: "POST",
-                    url: "/teledetourage/addRemise",
+                    url: "/remise/addRemise",
                     data: {
                         'user_id' : <?php echo $info_user[0]->id_users ?>,
-                        'remise' : $('#teledetourage_remise').val(),
-                        'montant' : $('#teledetourage_remise_start_montant').val(),
-                        'since_date' : $('#teledetourage_remise_start_date').val(),
-                        'until_date' : $('#teledetourage_remise_end_date').val()
+                        'remise' : $('#remise').val(),
+                        'montant' : $('#remise_start_montant').val(),
+                        'since_date' : $('#remise_start_date').val(),
+                        'until_date' : $('#remise_end_date').val(),
+                        'type_remise' : $('#type_remise').val()
                     },
                     success: function(data){
-                        get_remises_teledetourage()
+                        get_remises()
                         //let res = $.parseJSON(data);
                     }
                 });
@@ -844,7 +871,6 @@
                     },
                     success: function(data){
                         get_bl_conditions()
-                        // get_remises_teledetourage()
                         //let res = $.parseJSON(data);
                     }
                 });
@@ -986,26 +1012,26 @@ $(document).ready(function(){
 
     });
 
-    // $('#table_remises_teledetourage').DataTable({
-    //     aLengthMenu: [
-    //         [10, 25, 50, 100, 200, -1],
-    //         [10, 25, 50, 100, 200, "Tout"]
-    //     ],
-    //     deferRender: true,
-    //     order: [1, 'desc'],
-    //     language: {
-    //         "lengthMenu": "Afficher _MENU_ verres par page",
-    //         "info": "Affichage de la page page _PAGE_ sur _PAGES_",
-    //         "infoFiltered": "(Filtrat de _MAX_ entrées)",
-    //         "search": "Recherche",
-    //         "paginate": {
-    //             "first":      "Première",
-    //             "last":       "Dernière",
-    //             "next":       "Suivant",
-    //             "previous":   "Précédent"
-    //         }
-    //     }
-    // });
+    $('#table_remises').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, 200, -1],
+            [10, 25, 50, 100, 200, "Tout"]
+        ],
+        deferRender: true,
+        order: [1, 'desc'],
+        language: {
+            "lengthMenu": "Afficher _MENU_ verres par page",
+            "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+            "infoFiltered": "(Filtrat de _MAX_ entrées)",
+            "search": "Recherche",
+            "paginate": {
+                "first":      "Première",
+                "last":       "Dernière",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            }
+        }
+    });
 
     $('#table_bl_conditions').DataTable({
         aLengthMenu: [
@@ -1121,7 +1147,8 @@ $(document).ready(function(){
     getTraitementPriceList();
     getTeintePriceList();
     getCatalogue();
-    // get_remises_teledetourage();
+    get_remises();
+
     get_bl_conditions()
 
     // console.log('test');
@@ -1350,60 +1377,61 @@ $(document).ready(function(){
 		}
 
     });
-    //function get_remises_teledetourage() {
-    //    let displayStart = $('#table_remises_teledetourage').DataTable().page.info().page * 10;
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/teledetourage/getRemises",
-    //        data: {
-    //            'user_id' : <?php //echo $info_user[0]->id_users ?>
-    //        },
-    //        dataType: "json",
-    //    }).done( function(data) {
-    //        $('#table_remises_teledetourage').dataTable( {
-    //            aLengthMenu: [
-    //                [10, 25, 50, 100, 200, -1],
-    //                [10, 25, 50, 100, 200, "Tout"]
-    //            ],
-    //            "destroy": true,
-    //            "aaData": data,
-    //            "columns": [
-    //                { "data": "montant" },
-    //                { "data": "remise" },
-    //                { "data": "date_start" },
-    //                { "data": "date_end" },
-    //                { "data": "action" },
-    //            ],
-    //            "displayStart" : displayStart,
-    //
-    //            "language": {
-    //                "lengthMenu": "Afficher _MENU_ traitements par page",
-    //                "info": "Affichage de la page page _PAGE_ sur _PAGES_",
-    //                "infoFiltered": "(Filtrat de _MAX_ entrées)",
-    //                "search": "Recherche",
-    //                "paginate": {
-    //                    "first":      "Première",
-    //                    "last":       "Dernière",
-    //                    "next":       "Suivant",
-    //                    "previous":   "Précédent"
-    //                }
-    //            },
-    //            "createdRow": function (row, data, index) {
-    //                if (data['status'] == 'past') {
-    //                    $(row).addClass('remise_past');
-    //                }
-    //                else if (data['status'] == 'present') {
-    //                    $(row).addClass('remise_present')
-    //                }
-    //                else if (data['status'] == 'future') {
-    //                    $(row).addClass('remise_future')
-    //                }
-    //            },
-    //            "order": [[ 3, "asc" ]]
-    //        });
-    //        remiseActiveInactive();
-    //    });
-    //}
+    function get_remises() {
+        let displayStart = $('#table_remises').DataTable().page.info().page * 10;
+        $.ajax({
+            type: "POST",
+            url: "/remise/getRemises",
+            data: {
+                'user_id' : <?php echo $info_user[0]->id_users ?>
+            },
+            dataType: "json",
+        }).done( function(data) {
+            $('#table_remises').dataTable( {
+                aLengthMenu: [
+                    [10, 25, 50, 100, 200, -1],
+                    [10, 25, 50, 100, 200, "Tout"]
+                ],
+                "destroy": true,
+                "aaData": data,
+                "columns": [
+                    { "data": "montant" },
+                    { "data": "remise" },
+                    { "data": "date_start" },
+                    { "data": "date_end" },
+                    { "data": "type_remise" },
+                    { "data": "action" },
+                ],
+                "displayStart" : displayStart,
+
+                "language": {
+                    "lengthMenu": "Afficher _MENU_ traitements par page",
+                    "info": "Affichage de la page page _PAGE_ sur _PAGES_",
+                    "infoFiltered": "(Filtrat de _MAX_ entrées)",
+                    "search": "Recherche",
+                    "paginate": {
+                        "first":      "Première",
+                        "last":       "Dernière",
+                        "next":       "Suivant",
+                        "previous":   "Précédent"
+                    }
+                },
+                "createdRow": function (row, data, index) {
+                    if (data['status'] == 'past') {
+                        $(row).addClass('remise_past');
+                    }
+                    else if (data['status'] == 'present') {
+                        $(row).addClass('remise_present')
+                    }
+                    else if (data['status'] == 'future') {
+                        $(row).addClass('remise_future')
+                    }
+                },
+                "order": [[ 3, "asc" ]]
+            });
+            remiseActiveInactive();
+        });
+    }
 
     function get_bl_conditions() {
         let displayStart = $('#table_bl_conditions').DataTable().page.info().page * 10;
@@ -1766,7 +1794,7 @@ $(document).ready(function(){
                     console.log('export complete');
                 }
             } );
-            //traitementTeinteActiveInactive();
+            //remiseActiveInactive();
         });
     }
 
@@ -1774,9 +1802,9 @@ $(document).ready(function(){
         addClickEventDesactivePrixTraitement();
     } );
 
-    // $('#table_remises_teledetourage').on( 'draw.dt', function () {
-    //     addClickEventDesactiveRemiseTeledetourage();
-    // } );
+    $('#table_remises').on( 'draw.dt', function () {
+        addClickEventDesactiveRemise();
+    } );
 
     $('#table_bl_conditions').on( 'draw.dt', function () {
         addClickEventDesactiveBlConditions();
@@ -1808,16 +1836,16 @@ $(document).ready(function(){
         });
     }
 
-    // function addClickEventDesactiveRemiseTeledetourage() {
-    //     $('.desactive_remise_teledetourage').click(function(e) {
-    //         // e.stopPropagation();
-    //         e.preventDefault() ;
-    //     }) ;
-    //     $('.desactive_remise_teledetourage').click(function () {
-    //         let remise_id = $(this).attr('rel').replace('remise_', '');
-    //         desactiveRemiseTeledetourage(remise_id);
-    //     });
-    // }
+    function addClickEventDesactiveRemise() {
+        $('.desactive_remise').click(function(e) {
+            // e.stopPropagation();
+            e.preventDefault() ;
+        }) ;
+        $('.desactive_remise').click(function () {
+            let remise_id = $(this).attr('rel').replace('remise_', '');
+            desactiveRemise(remise_id);
+        });
+    }
 
     function addClickEventDesactiveBlConditions() {
         $('.desactive_bl_conditions').click(function(e) {
@@ -1852,20 +1880,20 @@ $(document).ready(function(){
         });
     }
 
-    // function desactiveRemiseTeledetourage (remise_id) {
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/teledetourage/desactiveRemise",
-    //         data: {
-    //             'remise_id': remise_id,
-    //         },
-    //         dataType: "html",
-    //         success: function(data){
-    //                 //$('#tableCustomPrixTraitements').DataTable().clear();
-    //             get_remises_teledetourage();
-    //         }
-    //     });
-    // }
+    function desactiveRemise (remise_id) {
+        $.ajax({
+            type: "POST",
+            url: "/remise/desactiveRemise",
+            data: {
+                'remise_id': remise_id,
+            },
+            dataType: "html",
+            success: function(data){
+                    //$('#tableCustomPrixTraitements').DataTable().clear();
+                get_remises();
+            }
+        });
+    }
 
     function desactiveBlCOnditions (bl_condition_id) {
         $.ajax({
@@ -2147,10 +2175,9 @@ $(document).ready(function(){
         blCOnditionsActiveInactive();
     });
 
-    // $('.checkbox-remise').click(function(){
-    //     remiseActiveInactive()
-    // });
-
+    $('.checkbox-remise').click(function(){
+        remiseActiveInactive()
+    });
 
     $('#nav-prix-verre').click(function(){
         $('#nav-history-verres').addClass('active');
@@ -2199,26 +2226,27 @@ $(document).ready(function(){
         }
     }
 
-    // function remiseActiveInactive() {
-    //     if ($('#checkbox-remise-future').is(":checked") == false) {
-    //         $('.remise_future').addClass('hide');
-    //     }
-    //     else {
-    //         $('.remise_future').removeClass('hide');
-    //     }
-    //     if ($('#checkbox-remise-present').is(":checked") == false) {
-    //         $('.remise_present').addClass('hide');
-    //     }
-    //     else {
-    //         $('.remise_present').removeClass('hide');
-    //     }
-    //     if ($('#checkbox-remise-past').is(":checked") == false) {
-    //         $('.remise_past').addClass('hide');
-    //     }
-    //     else {
-    //         $('.remise_past').removeClass('hide');
-    //     }
-    // }
+    function remiseActiveInactive() {
+        if ($('#checkbox-remise-future').is(":checked") == false) {
+            $('.remise_future').addClass('hide');
+        }
+        else {
+            $('.remise_future').removeClass('hide');
+        }
+        if ($('#checkbox-remise-present').is(":checked") == false) {
+            $('.remise_present').addClass('hide');
+        }
+        else {
+            $('.remise_present').removeClass('hide');
+        }
+        if ($('#checkbox-remise-past').is(":checked") == false) {
+            $('.remise_past').addClass('hide');
+        }
+        else {
+            $('.remise_past').removeClass('hide');
+        }
+    }
+
 </script>
 
 <style>
@@ -2366,5 +2394,13 @@ $(document).ready(function(){
         right: 0;
         top: 0;
         width: auto;
+    }
+
+    #history_remise{
+        margin-top: 85px;
+    }
+
+    #type_remise {
+        cursor: pointer;
     }
 </style>

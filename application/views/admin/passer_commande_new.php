@@ -1704,7 +1704,7 @@ $('#type_de_verreD').on('change', function() {
 			$('#traitementD').append('<option value="">----</option>');
 
 			//alert(rel);
-			if(rel == "]S26783")
+			if(rel == "]41274")
 			{
 				$('#diametreD').append('<option value="70">70</option>');
 				$('#prixVerreD').val('13.00');
@@ -2358,7 +2358,7 @@ $('#type_de_verreG').on('change', function() {
 			$('#diametreG').append('<option value="">choisir</option>');
 
 
-			if(rel == "]S26783")
+			if(rel == "]41274")
 			{
 				$('#diametreG').append('<option value="70">70</option>');
 				$('#prixVerreG').val('13.00');
@@ -4990,7 +4990,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 								console.log(data);
 								$.each(data, function(key, value){
 								setTimeout(function(){
-									$('#type_de_verreD').append('<option value="S26783" rel="]S26783">'+ value.name + '</option>');
+									$('#type_de_verreD').append('<option value="41274" rel="]41274">'+ value.name + '</option>');
 								},300);
 								})
 							}
@@ -5515,7 +5515,7 @@ function getTypedeVerre(indiceId,lensFocalGroup,generation,sphereD,sphereG,cylin
 								$.each(data, function(key, value){
 									setTimeout(function(){
 									//$('#type_de_verreG').append('<option value="'+ value.id +'" rel="'+ value.id +'">'+ value.name + ' (13.00&euro;)</option>');
-									$('#type_de_verreG').append('<option value="S26783" rel="]S26783">'+ value.name + '</option>');
+									$('#type_de_verreG').append('<option value="41274" rel="]41274">'+ value.name + '</option>');
 									console.log('<option value="'+ value.id +'" rel="'+ value.id +'">'+ value.name + ' (13.00&euro;)</option>');
 									$('#type_de_verreG').trigger('change');
 									console.log(value);
@@ -8317,7 +8317,7 @@ $(document).ready(function() {
 															<div class="panel panel-default focus_panel" id="div2_type_commande">
 																<div class="panel-heading"><h5 >Type de commande</h5></div>
 																<div class="panel-body" style="padding-top: 15px">
-																	<div class="col-lg-10 card-tabs">
+																	<div class="col-lg-12 card-tabs">
 																			<ul class="nav nav-pills type_commande_verre">
 																				<li><a href="#" data-toggle="tab" aria-expanded="true" id="commande_ferme">Commande ferme</a>
 																				</li>
@@ -9626,29 +9626,30 @@ $(document).ready(function() {
 		$('#cylindreG').prop('readOnly', true);
 		$('#axeD').prop('readOnly', true);
 		$('#axeG').prop('readOnly', true);
-
-
-		//alert($("#lensFocalGroup").val());
+        
 		if($("#lensFocalGroup").val() == '4')
 		{
 			$('#additionD').prop('readOnly', false);
 			$('#additionG').prop('readOnly', false);
 		}
-		else
+		else if ($("#lensFocalGroup").val() != '')
 		{
-
-			$('#additionD').val(<?php
-			if(floatval($pair_order_correction['verre']['correction_droit']['addition']) >= 0)
-				echo "+".$pair_order_correction['verre']['correction_droit']['addition'];
-			else
-				echo $pair_order_correction['verre']['correction_droit']['addition'];?>);
-			$('#additionG').val(<?php
-			if(floatval($pair_order_correction['verre']['correction_gauche']['addition']) >= 0)
-				echo "+".$pair_order_correction['verre']['correction_gauche']['addition'];
-			else
-				echo $pair_order_correction['verre']['correction_gauche']['addition'];?>);
-			$('#additionD').prop('readOnly', true);
-			$('#additionG').prop('readOnly', true);
+            $('#additionD').val(<?php
+            if (isset($pair_order_correction['verre']['correction_droit']['addition'])) {
+                if (floatval($pair_order_correction['verre']['correction_droit']['addition']) >= 0)
+                    echo "+" . $pair_order_correction['verre']['correction_droit']['addition'];
+                else
+                    echo $pair_order_correction['verre']['correction_droit']['addition'];
+            }?>);
+                $('#additionG').val(<?php
+            if (isset($pair_order_correction['verre']['correction_gauche']['addition'])) {
+                if (floatval($pair_order_correction['verre']['correction_gauche']['addition']) >= 0)
+                    echo "+" . $pair_order_correction['verre']['correction_gauche']['addition'];
+                else
+                    echo $pair_order_correction['verre']['correction_gauche']['addition'];
+            }?>);
+                $('#additionD').prop('readOnly', true);
+                $('#additionG').prop('readOnly', true);
 		}
 
 		<?php

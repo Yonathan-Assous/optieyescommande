@@ -13,7 +13,16 @@ if (is_object($pair_order)) {
 
 
 ?>
+
     <style>
+        a {
+            cursor: pointer;
+        }
+
+        #progress-tracer {
+            border-radius: 0px;
+            background-color: #FFFFFF;
+        }
         .select2-container .select2-choice > .select2-chosen {
             white-space: break-spaces;
             height: auto;
@@ -21,6 +30,113 @@ if (is_object($pair_order)) {
 
         .text_info_comp {
             transform: translateY(25%);
+        }
+
+        #text_teledetourage_not_connected {
+            text-align: justify;
+        }
+        #divOmaImageOut {
+            max-height: 500px;
+            max-width: 1000px;
+            margin-top: 25px;
+            /*margin-left: auto;*/
+            /*margin-right: auto;*/
+        }
+
+        #btnSetOmaCode {
+            padding: 4px;
+        }
+
+        .btn-md {
+            width: 140px;
+        }
+        #divSaveOmaToFile {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="number"] {
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .number-input {
+            /*border: 2px solid #ddd;*/
+            display: inline-flex;
+        }
+
+        .number-input,
+        .number-input * {
+            box-sizing: border-box;
+        }
+
+        .number-input button {
+            outline:none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+        }
+
+        .number-input button:before,
+        .number-input button:after {
+            display: inline-block;
+            position: absolute;
+            content: '';
+            width: 1rem;
+            height: 2px;
+            background-color: #212121;
+            transform: translate(-50%, -50%);
+        }
+        .number-input button.plus:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .number-input input[type=number] {
+            font-family: sans-serif;
+            /*max-width: 7rem;*/
+            /*padding: .5rem;*/
+            /*border: solid #ddd;*/
+            /*border-width: 0 2px;*/
+            font-size: 2rem;
+            /*height: 3rem;*/
+            font-weight: bold;
+            text-align: center;
+        }
+        .cote_image {
+            height: 77px;
+        }
+        
+        /*.divOmaImageData {*/
+        /*    margin-bottom: 30px;*/
+        /*}*/
+
+        .flex>li {
+            flex:1 1 0px;
+        }
+
+        .no-margin-right {
+            margin-right: 0px !important;
+        }
+
+        .nav.type_teledetourage {
+            margin-bottom : 10px;
+        }
+
+        #btnLaunchTablette {
+            width: 100%;
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -43,6 +159,14 @@ if (is_object($pair_order)) {
 
             return (Math.round(numToRound * numToRoundTo) / numToRoundTo).toFixed(2);
         }
+
+        // $('.btn-plus, .btn-minus').on('click', function(e) {
+        //     const isNegative = $(e.target).closest('.btn-minus').is('.btn-minus');
+        //     const input = $(e.target).closest('.input-group').find('input');
+        //     if (input.is('input')) {
+        //         input[0][isNegative ? 'stepDown' : 'stepUp']()
+        //     }
+        // })
     </script>
     <div class="loading style-2">
         <div class="loading-wheel"></div>
@@ -51,12 +175,14 @@ if (is_object($pair_order)) {
         <!-- Start content -->
         <div class="content">
             <div class="container">
-
+                <div id="loading-overlay" style="display:none;"></div>
+                <div id="loading" style="display:none;">
+                    <span id="text_loading">Chargement...</span>
+                </div>
+                <input type="text" id="user_id" class="form-control" style="display: none;" maxlength="15" value="<?php echo $user_info->id_users ?>"/>
                 <?php
                 if ($user_info->valid_mandat != 1 || $user_info->commande_suspendue == 1) { ?>
                     <div class="row">
-
-
                         <div class="col-sm-12">
 
                             <?php
@@ -259,8 +385,8 @@ if (is_object($pair_order)) {
                                                                                         commande</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
-                                                                                    <div class="col-lg-10 card-tabs">
-                                                                                        <ul class="nav nav-pills type_commande_verre">
+                                                                                    <div class="col-lg-12 card-tabs">
+                                                                                        <ul class="nav nav-pills type_commande_verre flex flex-space-between" style = "text-align:center">
                                                                                             <li <?php
                                                                                             if (is_object($pair_order)
                                                                                                 || $panierA == 1) {
@@ -297,7 +423,7 @@ if (is_object($pair_order)) {
                                                                                                     echo 'class="active"';
                                                                                                 } ?> id="li_erreur_ophta">
                                                                                                     <a href="/index/passer_commande/false/3"
-                                                                                                       id="erreur_ophtalmologiste"><b>Erreur
+                                                                                                       id="erreur_ophtalmologiste" class="no-margin-right"><b>Erreur
                                                                                                             ophtalmologiste</b></a>
                                                                                                 </li>
                                                                                                 <?php
@@ -385,40 +511,64 @@ if (is_object($pair_order)) {
                                                                         echo 'hide';
                                                                     } ?>" id="caracteristique_verre">
                                                                         <div class="col-xs-12 col-md-3">
-                                                                            <div class="panel panel-default">
+                                                                            <div class="panel panel-default panel-intro">
                                                                                 <div class="panel-heading "><h5>
-                                                                                        Format</h5></div>
-                                                                                <div class="panel-body text-center"
-                                                                                     style="padding-top: 25px;padding-bottom: 26px;">
-                                                                                    <div class="radio radio-warning radio-inline">
-                                                                                        <input type="radio"
-                                                                                               id="Standard"
-                                                                                               value="Standard"
-                                                                                               name="format"
-                                                                                               class="required"
-                                                                                               aria-required="true"
-                                                                                               checked>
-                                                                                        <label for="Standard">
-                                                                                            Standard </label>
+                                                                                        Télédétourage</h5></div>
+                                                                                <div class="panel-body text-center">
+                                                                                    <div id="div_is_teledetourage" style="text-align: center;">
+<!--                                                                                        <h5 style="text-align: left;"><span class="color-sample-standard"></span>&nbsp;Standard<br>-->
+<!--                                                                                            <span class="color-sample-teledetourage"></span>&nbsp;Télédétourage</h5>-->
+                                                                                        <label class="switch">
+                                                                                            <input id="is_teledetourage" class="is_teledetourage" type="checkbox"
+                                                                                            <?php
+                                                                                                if (!$user_info->is_teledetourable) {
+                                                                                                    echo 'disabled';
+                                                                                                }
+                                                                                            ?>
+                                                                                            >
+                                                                                            <span id='slider_teledetourage' class="slider slider_teledetourage round"
+                                                                                            <?php
+                                                                                            if (!$user_info->is_teledetourable) {
+                                                                                                echo 'style = "cursor: no-drop"';
+                                                                                            }
+                                                                                            ?>
+                                                                                            ></span>
+                                                                                        </label>
                                                                                     </div>
-
-                                                                                    <div class="radio radio-warning radio-inline">
-                                                                                        <input type="radio"
-                                                                                               id="Teledetourage"
-                                                                                               value="Teledetourage"
-                                                                                               name="format"
-                                                                                               class="required"
-                                                                                               aria-required="true">
-                                                                                        <label for="Teledetourage">
-                                                                                            Teledetourage </label>
-
-                                                                                    </div>
+<!--                                                                                    <div class="radio radio-warning radio-inline">-->
+<!--                                                                                        <input type="radio"-->
+<!--                                                                                               id="Standard"-->
+<!--                                                                                               value="Standard"-->
+<!--                                                                                               name="format"-->
+<!--                                                                                               class="required"-->
+<!--                                                                                               aria-required="true"-->
+<!--                                                                                               checked>-->
+<!--                                                                                        <label for="Standard">-->
+<!--                                                                                            Standard </label>-->
+<!--                                                                                    </div>-->
+<!---->
+<!--                                                                                    <div class="radio radio-warning radio-inline">-->
+<!--                                                                                        <input type="radio"-->
+<!--                                                                                               id="Teledetourage"-->
+<!--                                                                                               value="Teledetourage"-->
+<!--                                                                                               name="format"-->
+<!--                                                                                               class="required"-->
+<!--                                                                                               aria-required="true"-->
+<!--                                                                                            --><?php
+//                                                                                            if (!$user_info->is_teledetourable) {
+//                                                                                                echo 'disabled';
+//                                                                                            } ?>
+<!--                                                                                        >-->
+<!--                                                                                        <label for="Teledetourage">-->
+<!--                                                                                            Teledetourage </label>-->
+<!---->
+<!--                                                                                    </div>-->
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-xs-12 col-md-3">
-                                                                            <div class="panel panel-default focus_panel"
+                                                                            <div class="panel panel-default focus_panel panel-intro"
                                                                                  id="indices_panel">
                                                                                 <div class="panel-heading"><h5>
                                                                                         Indice</h5></div>
@@ -450,7 +600,7 @@ if (is_object($pair_order)) {
                                                                         </div>
                                                                         <div class="col-xs-12 col-md-3 hide"
                                                                              id="type_produit">
-                                                                            <div class="panel panel-default"
+                                                                            <div class="panel panel-default panel-intro"
                                                                                  id="lensFocalGroup_panel">
                                                                                 <div
                                                                                         class="panel-heading"><h5>Type de
@@ -523,7 +673,7 @@ if (is_object($pair_order)) {
                                                                         </div>
                                                                         <div class="col-xs-12 col-md-3 hide"
                                                                              id="generation_progressif">
-                                                                            <div class="panel panel-default"
+                                                                            <div class="panel panel-default panel-intro"
                                                                                  id="generation_panel">
                                                                                 <div class="panel-heading"><h5>
                                                                                         Génération</h5></div>
@@ -573,6 +723,391 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row hide" id="div1_format_type">
+                                                                        <div class="col-m-12">
+                                                                            <div class="panel panel-default focus_panel"
+                                                                                 id="div2_format_type">
+                                                                                <div class="panel-heading"><h5>Type de
+                                                                                        monture</h5></div>
+                                                                                <div class="panel-body"
+                                                                                     style="padding-top: 15px">
+                                                                                    <div class="col-lg-12 card-tabs">
+                                                                                        <ul id="ul_type_format" class="nav nav-pills type_commande_verre flex flex-space-between" style = "text-align:center">
+                                                                                            <li id="li_format_metal">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_metal"><b>Métal</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_plastique">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_plastique"><b>Plastique</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_nylor">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_nylor"><b>Nylor</b></a>
+                                                                                            </li>
+                                                                                            <li id="li_format_perce">
+                                                                                                <a href="#"
+                                                                                                   data-toggle="tab"
+                                                                                                   aria-expanded="true"
+                                                                                                   id="format_perce"
+                                                                                                   class="no-margin-right"><b>Percé</b></a>
+                                                                                            </li>
+                                                                                        </ul>
+
+                                                                                        <div class="ec_commande_status"
+                                                                                             style="display: none;">
+                                                                                            <div class="alert alert-warning"
+                                                                                                 style="margin-bottom: 0px;"
+                                                                                                 id="status_credit">
+                                                                                                Votre crédit : <b>417.78
+                                                                                                    €</b></div>
+                                                                                        </div>
+
+                                                                                        <div class="validator"></div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row hide"
+                                                                         id="div_teledetourage">
+                                                                        <div class="col-xs-12" id="tab_teledetourage">
+                                                                            <div class="panel panel-default"
+                                                                                 id="refraction_panel">
+                                                                                <div class="panel-heading"><h5>
+                                                                                        Forme</h5></div>
+                                                                                <div class="panel-body"
+                                                                                     style="padding-top: 15px">
+                                                                                    <div class="row">
+                                                                                        <div class="col-12">
+<!--                                                                                        <div class="col-12">-->
+                                                                                            <input type="text" id="txtCustomerCode" class="form-control" style="display: none;" maxlength="15" />
+                                                                                            <div class="w-100" id="divDevices" style="display:none">
+                                                                                                <div id="choice_machine">
+                                                                                                    <label class="w-100 text-muted">Veuillez choisir la machine connectée</label>
+                                                                                                    <select class="form-control" id="ddlDevices" style="max-width:200px">
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                                <div class="card-tabs">
+                                                                                                    <ul class="nav nav-pills type_teledetourage flex flex-space-between my-0 px-3" style = "text-align:center">
+                                                                                                        <li id="li_btnLaunchTracer">
+                                                                                                            <a 
+                                                                                                               data-toggle="tab"
+                                                                                                               aria-expanded="true"
+                                                                                                               id="btnLaunchTracer"><b>Tracer la forme</b></a>
+                                                                                                        </li>
+<!--                                                                                                        <li id="li_btnLaunchTablette">-->
+<!--                                                                                                            <a href="#"-->
+<!--                                                                                                               data-toggle="tab"-->
+<!--                                                                                                               aria-expanded="true"-->
+<!--                                                                                                               id="btnLaunchTablette"><b>Lancer la tablette</b></a>-->
+<!--                                                                                                        </li>-->
+                                                                                                        <li id="li_btnSetOmaCode">
+                                                                                                            <a href="#"
+                                                                                                               data-toggle="tab"
+                                                                                                               aria-expanded="true"
+                                                                                                               id="btnSetOmaCode"
+                                                                                                               class="no-margin-right"><b>Charger une forme</b></a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                    <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">
+
+<!--                                                                                                    <div class="md-form input-group flex flex-space-between">-->
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTracer" onclick="LaunchTracer();">Lancer le Traceur</button>-->
+<!--                                                                                                        </div>-->
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Lancer la Tablette</button>-->
+<!--                                                                                                        </div>-->
+<!--                                                                                                        <div class="input-group-append">-->
+<!--                                                                                                            <button class="btn btn-md btn-warning my-0 px-3" type="button" id="btnSetOmaCode" onclick="SetCodeOma();">Récupérer <br>d'un fichier OMA</button>-->
+<!--                                                                                                        </div>-->
+<!--                                                                                                        <input type="file" name="inputFileToOma" id="inputFileToOma" aria-invalid="false" class="valid hide">-->
+<!--                                                                                                    </div>-->
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <div class="w-100 w-100 border rounded p-2" id="divDebug">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="note note-warning row" id="omaImageDatas" style="display: none">
+                                                                                                    <div class="col-md-8 col-xs-12" >
+                                                                                                        <div class="md-form input-group hide">
+                                                                                                            <textarea id="txtOmaImageIn" name="txtOmaImageIn" class="md-textarea form-control" rows="5"></textarea>
+                                                                                                            <label for="txtOmaImageIn">Forme OMA</label>
+                                                                                                            <div class="input-group-append">
+                                                                                                                <button class="btn btn-md btn-warning my-0 px-3" type="button" onclick="GetImageFromOma();">Récupérer l'image</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div id="divOmaImageOut">
+                                                                                                            <img id="imgOmaImageOut" />
+                                                                                                        </div>
+<!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
+<!--                                                                                                            <div class="col-md-6">-->
+<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+<!--                                                                                                                    Ecarts-->
+<!--                                                                                                                    pupillaire-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div style="text-align: center">-->
+<!--                                                                                                                <img alt="Ecart pupillaire"-->
+<!--                                                                                                                     class="hep-image"-->
+<!--                                                                                                                     src="/static/img/mesure_freeform/ecart_pup.jpg"-->
+<!--                                                                                                                     style="margin-bottom: 18px;">-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+<!--                                                                                                                    <div>-->
+<!--                                                                                                                        <label>DROITE</label>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
+<!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_droit" class="quantity teledetourage_ecart_puppillaire" min="15" max=55 name="quantity" value="27" type="number" step="0.1">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+<!--                                                                                                                    <div>-->
+<!--                                                                                                                        <label>GAUCHE</label>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
+<!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_gauche" class="quantity teledetourage_ecart_puppillaire" min="15" max="55" name="quantity" value="27" type="number" step="0.1">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                            </div>-->
+<!--                                                                                                            <div class="col-md-6">-->
+<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+<!--                                                                                                                    Hauteur de-->
+<!--                                                                                                                    montage-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div style="text-align: center">-->
+<!--                                                                                                                    <img alt="Hauteur"-->
+<!--                                                                                                                         class="hep-image"-->
+<!--                                                                                                                         src="/static/img/mesure_freeform/Hauteur.jpg"-->
+<!--                                                                                                                         style="margin-bottom: 18px;">-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+<!--                                                                                                                    <div>-->
+<!--                                                                                                                        <label>DROITE</label>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
+<!--                                                                                                                        <input id="hauteur_montage_droit" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+<!--                                                                                                                    <div>-->
+<!--                                                                                                                        <label>GAUCHE</label>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
+<!--                                                                                                                        <input id="hauteur_montage_gauche" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                            </div>-->
+<!--                                                                                                        </div>-->
+<!---->
+<!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
+<!--                                                                                                            <div class="col-md-4">-->
+<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+<!--                                                                                                                    Largeur boxing-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+<!--                                                                                                                    <img alt="Largeur boxing"-->
+<!--                                                                                                                         class="hep-image"-->
+<!--                                                                                                                         src="/static/img/mesure_freeform/cote_a.jpg"-->
+<!--                                                                                                                         style="margin-bottom: 18px;">-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_largeur_boxing"></button>-->
+<!--                                                                                                                        <input id="largeur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_largeur_boxing" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                            </div>-->
+<!--                                                                                                            <div class="col-md-4">-->
+<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+<!--                                                                                                                    Hauteur boxing-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+<!--                                                                                                                    <img alt="Hauteur boxing"-->
+<!--                                                                                                                         class="hep-image"7rem-->
+<!--                                                                                                                         src="/static/img/mesure_freeform/cote_b.jpg"-->
+<!--                                                                                                                         style="margin-bottom: 18px;">-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_boxing"></button>-->
+<!--                                                                                                                        <input id="hauteur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_boxing" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                            </div>-->
+<!--                                                                                                            <div class="col-md-4">-->
+<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+<!--                                                                                                                    Taille du pont-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+<!--                                                                                                                    <img alt="Taille du pont"-->
+<!--                                                                                                                         class="hep-image"-->
+<!--                                                                                                                         src="/static/img/mesure_freeform/cote_c.jpg"-->
+<!--                                                                                                                         style="margin-bottom: 18px;">-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+<!--                                                                                                                    <div class="number-input">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_taille_du_pont"></button>-->
+<!--                                                                                                                        <input id="taille_du_pont" class="quantity" min="0" max="50" name="quantity" value="18" type="number" step="0.1">-->
+<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_taille_du_pont" type="button"></button>-->
+<!--                                                                                                                    </div>-->
+<!--                                                                                                                </div>-->
+<!--                                                                                                            </div>-->
+<!--                                                                                                        </div>-->
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4 col-xs-12" style="margin-top: 70px;">
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                <strong>Taille de la monture</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
+                                                                                                                <input type="number"
+                                                                                                                       min="0"
+                                                                                                                       class="quantity valid form-control"
+                                                                                                                       name="quantity"
+                                                                                                                       id="largeur_boxing"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                <strong>Taille du pont</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
+                                                                                                                <input type="number"
+                                                                                                                       min="0" max="50"
+                                                                                                                       class="quantity valid form-control"
+                                                                                                                       name="quantity"
+                                                                                                                       id="taille_du_pont"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                <strong>Hauteur du calibre</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
+                                                                                                                <input type="number"
+                                                                                                                       min="0"
+                                                                                                                       class="quantity valid form-control"
+                                                                                                                       name="quantity"
+                                                                                                                       id="hauteur_boxing"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+
+                                                                                                        <div class="form-group row" style="margin-top: 50px;">
+
+                                                                                                            <div class="col-xs-12 col-md-5"></div>
+                                                                                                            <div class="col-xs-12 col-md-3 text-center text_info_comp">
+                                                                                                                <strong>oeil droit</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-3 text-center text_info_comp">
+                                                                                                                <strong>oeil gauche</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                <strong>Écart pupillaire</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-3 number-input">
+                                                                                                                <input id="teledetourage_ecart_puppillaire_droit"
+                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
+                                                                                                                       min="15" max="55"
+                                                                                                                       name="quantity"
+                                                                                                                       value=""
+                                                                                                                       type="number"
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-3 number-input">
+                                                                                                                <input type="number"
+                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
+                                                                                                                       min="15" max="55"
+                                                                                                                       name="quantity"
+                                                                                                                       id="teledetourage_ecart_puppillaire_gauche"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                <strong>Hauteur de montage</strong>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-3 number-input"">
+                                                                                                                <input type="number"
+                                                                                                                       min="5" max="60"
+                                                                                                                       class="quantity hauteur_montage valid form-control"
+                                                                                                                       name="quantity"
+                                                                                                                       id="hauteur_montage_droit"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-3 number-input"">
+                                                                                                                <input type="number"
+                                                                                                                       min="5" max="60"
+                                                                                                                       class="quantity hauteur_montage valid form-control"
+                                                                                                                       name="quantity"
+                                                                                                                       id="hauteur_montage_gauche"
+                                                                                                                       value=""
+                                                                                                                       aria-invalid="false">
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group row">
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                            <div class="col-xs-12 col-md-10 input-group-append">
+                                                                                                                <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Percez vos verres</button>
+                                                                                                            </div>
+                                                                                                            <div class="col-xs-12 col-md-1"></div>
+                                                                                                        </div>
+                                                                                    
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div id="divOmaImageError hide">
+
+                                                                                                </div>
+<!--                                                                                                <div class="input-group-append" id="divSaveOmaToFile">-->
+<!--                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnSaveOmaToFile" onclick="saveOmaToFile();">Sauvegarder le code OMA<br>dans un fichier</button>-->
+<!--                                                                                                </div>-->
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <br>
+                                                                    </div>
 
                                                                     <div class="form-group row hide"
                                                                          id="div_refraction">
@@ -580,7 +1115,7 @@ if (is_object($pair_order)) {
                                                                             <div class="panel panel-default"
                                                                                  id="refraction_panel">
                                                                                 <div class="panel-heading"><h5>
-                                                                                        Refraction</h5></div>
+                                                                                        Réfraction</h5></div>
                                                                                 <div class="panel-body"
                                                                                      style="padding-top: 15px">
                                                                                     <div class="col-xs-12">
@@ -4689,6 +5224,8 @@ if (is_object($pair_order)) {
                                                    name="id_generation_verre">
                                             <input type="hidden" id="id_indice_verre" value="1" name="id_indice_verre">
                                             <input type="hidden" id="type_commande" name="type_commande" value="1">
+                                            <input type="hidden" id="prix_teledetourage" name="prix_teledetourage" value="0">
+                                            <input type="hidden" id="format_teledetourage" name="format_teledetourage" value="">
                                         </div>
                                         <div id="casse" class="tab-pane fade">
                                             <h3>Casse atelier</h3>
@@ -4751,6 +5288,34 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
+        <div id="tracer_in_modal" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="tracer_modal_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Tracez votre monture</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="tracer_in_body">Lancez le traçage de votre forme en appuyant sur le bouton de votre palpeur</p>
+                        </div>
+
+<!--                        <div class="modal-footer">-->
+<!--                            <button id="cylindre_negative_ok" class="btn btn-warning waves-effect waves-light"-->
+<!--                                    data-dismiss="modal">Ok</button>-->
+<!--                        </div>-->
+                    </form>
+                </div>
+                <div class="progress" id="progress-tracer">
+                    <div id="progress-bar-tracer" class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="axe_between_0_180" class="modal fade" tabindex="-1" role="dialog"
              aria-hidden="true" style="display: none;">
             <div class="modal-dialog" style="width: 90%; max-width: 400px;">
@@ -4778,13 +5343,49 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
+        <div id="teledetourage_not_connected" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="teledetourage_not_connected_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Machine non connectée</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_teledetourage_not_connected">Votre machine n'est pas connectée, veuillez la connecter et appuyez sur le bouton <strong>"CONNECT".</strong></br>
+                                Si vous voulez passer une commande standard appuyez sur <strong>"RETOUR"</strong>.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger waves-effect return_to_commande_standard" data-dismiss="modal">RETOUR</button>
+                            <button id="connect_machine_modal" class="btn btn-warning waves-effect waves-light connect_machine" data-dismiss="modal">CONNECT</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div> <!-- content -->
 
     <!-- Form wizard -->
     <script src="/static/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
     <script src="/static/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/static/assets/mdb/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/fileSaver.min.js"></script>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>-->
 
+<!--    <script type="text/javascript" src="/static/assets/mdb/js/mdb.min.js"></script>-->
+    <!-- MDB - Only for documentation -->
+    <!-- SignalR - Required -->
+    <script src="/static/assets/js/jquery.signalR-2.4.1.min.js"></script>
+    <script src="https://tracerserver.edieyes.net/signalrserver/signalr/hubs"></script>
+
+    <script src="/static/assets/js/ediEyes.js"></script>
     <script type="text/javascript">
+
         $('#commande_ferme').click(function () {
 
             $('#produit').addClass('hide');
@@ -4818,7 +5419,6 @@ if (is_object($pair_order)) {
         if($type_commande == '2') {
         ?>
         $(document).ready(function ($) {
-
             $('#produit').addClass('hide');
             $("#detailD").css("display", "none");
             $("#afficherV").css("display", "inline-block");
@@ -4943,6 +5543,106 @@ if (is_object($pair_order)) {
             $('#to_etape2').addClass('disabled');
             type = '3';
             $('#type_commande').val('3');
+        })
+
+
+
+        function getFormatTeledetouragePrice(format_teledetourage) {
+            console.log(format_teledetourage)
+            $.ajax({
+                type: "POST",
+                url: "/teledetourage/getFormatPrice",
+                data: {"user_id" : $('#user_id').val(),
+                    "formatTeledetourage" : format_teledetourage},
+                dataType: "json",
+                success: function (data) {
+                    $('#prix_teledetourage').val(data)
+                    $('#format_teledetourage').val(format_teledetourage)
+                    calculPrice();
+                    console.log(data);
+                }
+            });
+        }
+
+        $('#format_metal').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
+            if ($('#div_teledetourage').is(":hidden")) {
+                $('#divDevices').show()
+                // Connect();
+            }
+            if ($("#ddlDevices").val() != null) {
+                $('#div_teledetourage').removeClass('hide');
+            }
+            else {
+                $('#teledetourage_not_connected').modal('show');
+            }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+
+            getFormatTeledetouragePrice('metal');
+        })
+
+        $('#format_plastique').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
+            if ($('#div_teledetourage').is(":hidden")) {
+                $('#divDevices').show()
+                // Connect();
+            }
+            if ($("#ddlDevices").val() != null) {
+                $('#div_teledetourage').removeClass('hide');
+            }
+            else {
+                $('#teledetourage_not_connected').modal('show');
+            }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+            getFormatTeledetouragePrice('plastic');
+        })
+        $('#format_nylor').click(function () {
+            $('#btnLaunchTablette').addClass('hide');
+            if ($('#div_teledetourage').is(":hidden")) {
+                $('#divDevices').show()
+                // Connect();
+            }
+            if ($("#ddlDevices").val() != null) {
+                $('#div_teledetourage').removeClass('hide');
+            }
+            else {
+                $('#teledetourage_not_connected').modal('show');
+            }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+                $('#div_refraction').removeClass('hide');
+            }
+
+            getFormatTeledetouragePrice('nylor');
+        })
+        $('#format_perce').click(function () {
+            if ($('#div_teledetourage').is(":hidden")) {
+                $('#divDevices').show()
+                // Connect();
+            }
+            if ($("#ddlDevices").val() != null) {
+                $('#div_teledetourage').removeClass('hide');
+                $('#btnLaunchTablette').removeClass('hide');
+            }
+            else {
+                $('#teledetourage_not_connected').modal('show');
+            }
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+            if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
+                $('#div_refraction').addClass('hide');
+                $('#produit').addClass('hide');
+            }
+
+            getFormatTeledetouragePrice('rimless');
         })
 
         $('#btn_add_info_sup').click(function () {
@@ -5144,6 +5844,7 @@ if (is_object($pair_order)) {
                 });
             }
 
+
             $('#back_calibre').on('click', function () {
                 $("#big_img").hide();
                 $("#mini_calibres").show();
@@ -5155,6 +5856,8 @@ if (is_object($pair_order)) {
 
             $('#lensFocalGroup').on('change', function () {
                 $('#div_refraction').addClass('hide');
+                // $('#div_teledetourage').addClass('hide');
+                $('#div1_format_type').addClass('hide');
                 $('#progression_D').addClass('hide');
                 $('#progression_G').addClass('hide');
 
@@ -5386,7 +6089,15 @@ if (is_object($pair_order)) {
                     }
 
                     if (lensFocalGroup != "3" || $('#indices').val() == "mineral") {
-                        $('#div_refraction').removeClass('hide')
+                        if ($('#is_teledetourage').is(':checked') == false) {
+                            $('#div_refraction').removeClass('hide')
+                        }
+                        else {
+                            // $('#div_teledetourage').removeClass('hide');
+                            $('#div1_format_type').removeClass('hide');
+
+                            // Connect();
+                        }
                         $('#progression_D').addClass('hide')
                         $('#progression_G').addClass('hide')
                     } else {
@@ -6810,6 +7521,72 @@ if (is_object($pair_order)) {
             if(axe < 0 || axe > 180){
                 $('#axe_between_0_180').modal('show');
                 $('#axeD').val('');
+            }
+        });
+
+        $('.connect_machine').click(function () {
+            Connect(null, true);
+        })
+
+        $('.return_to_commande_standard').click(function () {
+            document.getElementById("is_teledetourage").checked = false;
+            hideAll();
+        })
+
+        function hideAll() {
+            $('#produit').addClass('hide');
+            // $('#format_perce').addClass('hide');
+            $('#div_teledetourage').addClass('hide');
+            $('#div1_format_type').addClass('hide');
+            $('#type_produit').addClass('hide');
+            $('#generation_progressif').addClass('hide');
+            $('#indices').val('');
+        }
+
+        function widthImageOma () {
+            let divDevices = document.getElementById('divDevices');
+            document.getElementById('divOmaImageOut').setAttribute("style","height:" + divDevices.offsetWidth / 2 + "px");
+        }
+
+        String.prototype.hexEncode = function(){
+            var hex, i;
+
+            var result = "";
+            for (i=0; i<this.length; i++) {
+                hex = this.charCodeAt(i).toString(16);
+                result += ("000"+hex).slice(-4);
+            }
+            return result
+        }
+
+        String.prototype.hexDecode = function(){
+            var j;
+            var hexes = this.match(/.{1,4}/g) || [];
+            var back = "";
+            for(j = 0; j<hexes.length; j++) {
+                back += String.fromCharCode(parseInt(hexes[j], 16));
+            }
+
+            return back;
+        }
+
+        $('#btnLaunchTracer').click(function () {
+            LaunchTracer();
+        });
+
+        $('#btnLaunchTablette').click(function () {
+            LaunchTablette();
+        });
+
+        $('#btnSetOmaCode').click(function () {
+            SetCodeOma();
+        });
+
+        $('#is_teledetourage').change(function() {
+            if ($('#is_teledetourage').is(':checked')) {
+                let user_id = $('#user_id').val();
+                $('#txtCustomerCode').val(user_id);
+                Connect();
             }
         });
     </script>

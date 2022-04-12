@@ -270,7 +270,14 @@ $('#indices').on('change', function() {
 	$('#refraction_panel').removeClass('focus_panel')
 	$('#generation_panel').removeClass('focus_panel')
 
-
+	if ($('#indices').val() == '1.5' || $('#indices').val() == '1.74') {
+		$('#li_format_nylor').addClass('hide');
+		$('#li_format_perce').addClass('hide');
+	}
+	else {
+		$('#li_format_nylor').removeClass('hide');
+		$('#li_format_perce').removeClass('hide');
+	}
 	var indiceId = $(this).val();
 	var generation = $('#generation').val();
 	var lensFocalGroup = $('#lensFocalGroup').val();
@@ -1404,7 +1411,7 @@ $("input[name='dispoD']").change(function(){
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-    var teledetourage = $('#is_teledetourage').is(':checked');
+    var isTeledetourage = $('#is_teledetourage').is(':checked');
 
     var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
@@ -1482,7 +1489,7 @@ $("input[name='dispoD']").change(function(){
 
 
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(isTeledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 
 	}
 });
@@ -1499,7 +1506,7 @@ $('#progressionD').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-	var teledetourage = $('#is_teledetourage').is(':checked');
+	var isTeledetourage = $('#is_teledetourage').is(':checked');
 
 	var droite = $('#droit').is(':checked');
 	var gauche = $('#gauche').is(':checked');
@@ -1557,7 +1564,7 @@ $('#progressionD').on('change', function() {
 	}
 
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(isTeledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 
 	}
 
@@ -1575,7 +1582,7 @@ $('#progressionG').on('change', function() {
     var cylindreG = $('#cylindreG').val();
     var axeG = $('#axeG').val();
     var additionG = $('#additionG').val();
-	var teledetourage = $('#is_teledetourage').is(':checked');
+	var isTeledetourage = $('#is_teledetourage').is(':checked');
 
 	var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
@@ -1622,7 +1629,7 @@ $('#progressionG').on('change', function() {
     $('#galbeG option[value="Standard"]').prop('selected', true);
 
 	if(indiceId != "" && (cylindreD != '' || cylindreG != '')) {
-	   getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
+	   getTypedeVerre(isTeledetourage,indiceId,lensFocalGroup,generation,sphereD,sphereG,cylindreD,cylindreG,axeD,axeG,additionD,additionG,stockD,stockG,progressionD,progressionG,droite,gauche,panierAm,deuxiemepaire);
 
 	}
 });
@@ -1652,6 +1659,8 @@ $('#type_de_verreD').on('change', function() {
 
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
+
+	let diametreUtileRight = $('#diametre_utile_right').val();
 
 	if(stockG == "StockG")
 	{
@@ -2112,36 +2121,44 @@ $('#type_de_verreD').on('change', function() {
 						});
 					}
 				}
-
-				$.ajax({
+				if ($('#is_teledetourage').is(':checked') == true && selectedText.indexOf("Stock") == -1) {
+					// document.getElementById("diametreD").disabled = true;
+					$('#diametreD').empty();
+					$('#diametreD').append('<option value="Télédétourage">Télédétourage</option>');
+				}
+				else {
+					document.getElementById("diametreD").disabled = false;
+					$.ajax({
 						type: "POST",
 						url: "/index/get_Diametre",
-						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
+						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD, "diametre_utile" : diametreUtileRight},
 						dataType: "json",
 						success: function (data) {
-						console.log(data);
-						$('#diametreD').empty();
-						$('#diametreD').append('<option value="">-- Choisir --</option>');
+							console.log(data);
+							$('#diametreD').empty();
+							$('#diametreD').append('<option value="">-- Choisir --</option>');
 
-						$.each(data, function(key, value){
-							console.log(value.name);
-							if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
+							$.each(data, function(key, value){
+								console.log(value.name);
+								if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
+								{
+									$('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+								}
+								else
+								{
+									$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
+								}
+
+
+							});
+							if(selectedText.indexOf(" - Stock") == -1)
 							{
-								$('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+								$('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 							}
-							else
-							{
-								$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
-							}
-
-
-						});
-						if(selectedText.indexOf(" - Stock") == -1)
-						{
-							$('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 						}
-					}
-				});
+					});
+				}
+
 
 
 			}
@@ -2274,6 +2291,8 @@ $('#type_de_verreG').on('change', function() {
 
     var stockD = $('input[name="dispoD"]:checked').val()
 	var stockG = $('input[name="dispoG"]:checked').val()
+
+	let diametreUtileLeft = $('#diametre_utile_left').val();
 
 	if(stockG == "StockG")
 	{
@@ -2752,40 +2771,47 @@ $('#type_de_verreG').on('change', function() {
 
 
 				}
-
-				$.ajax({
+				if ($('#is_teledetourage').is(':checked') == true && selectedText.indexOf("Stock") == -1) {
+					// document.getElementById("diametreG").disabled = true;
+					$('#diametreG').empty();
+					$('#diametreG').append('<option value="Télédétourage">Télédétourage</option>');
+				}
+				else {
+					document.getElementById("diametreG").disabled = false;
+					$.ajax({
 						type: "POST",
 						url: "/index/get_Diametre",
-						data: {"lens" : type_de_verreG,"sphere" : sphereG,"cylindre" : cylindreG},
+						data: {
+							"lens": type_de_verreG,
+							"sphere": sphereG,
+							"cylindre": cylindreG,
+							"diametre_utile": diametreUtileLeft
+						},
 						dataType: "json",
 						success: function (data) {
-						//alert(data);
-						console.log(data);
+							//alert(data);
+							console.log(data);
 
-						$('#diametreG').empty();
-						$('#diametreG').append('<option value="">-- Choisir --</option>');
+							$('#diametreG').empty();
+							$('#diametreG').append('<option value="">-- Choisir --</option>');
 
-						$.each(data, function(key, value){
-							console.log(value.name);
-							if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
-							{
-								$('#diametreG').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+							$.each(data, function (key, value) {
+								console.log(value.name);
+								if (lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0)) {
+									$('#diametreG').append('<option value="' + value.diameter_physical + '">' + value.diameter_physical + '</option>');
+								} else {
+
+									$('#diametreG').append('<option value="' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '">' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '</option>');
+								}
+
+							});
+
+							if (selectedText.indexOf(" - Stock") == -1) {
+								$('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 							}
-							else
-							{
-
-								$('#diametreG').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
-							}
-
-						});
-
-						if(selectedText.indexOf(" - Stock") == -1)
-						{
-							$('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
 						}
-					}
-				});
-
+					});
+				}
 
 			}
 		}

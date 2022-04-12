@@ -4145,7 +4145,7 @@ $('input[name=additionG]').change(function() {
 				else{
 					//window.location.replace("/admin/edi_omega");
 					var n = $("a[id^=" + "button_commentaires_omega_" + "]").get(0).id
-					window.location.replace("/admin/edi_omega?id="+n);
+					// window.location.replace("/admin/edi_omega?id="+n);
 				}
 			},
 			error : function(){

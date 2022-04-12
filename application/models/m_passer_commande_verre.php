@@ -1682,7 +1682,7 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getDiametres($lens, $sphere, $cylindre)
+    function getDiametres($lens, $sphere, $cylindre, $diametreUtile = NULL)
     {
         $sphere = str_replace("+", "", $sphere);
         $cylindre = str_replace("+", "", $cylindre);
@@ -1754,7 +1754,10 @@ class m_passer_commande_verre extends CI_Model
 
         if ($rangesids != "") {
             $rangesids = "(" . $rangesids . ")";
-
+            $diametreUtileSql = '';
+            if ($diametreUtile) {
+                $diametreUtileSql = ' AND diameter_physical >= ' . $diametreUtile;
+            }
             //	echo $rangesids."<br>";
             /*$rangesFDiameters = DB::table('lensRanges')
 						 ->whereRaw(\DB::raw($rangesids))
@@ -1762,7 +1765,7 @@ class m_passer_commande_verre extends CI_Model
 						 */
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
             $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
-                . "  GROUP BY diameter_physical ORDER BY diameter_physical";
+                . $diametreUtileSql . " GROUP BY diameter_physical ORDER BY diameter_physical";
 
             $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";

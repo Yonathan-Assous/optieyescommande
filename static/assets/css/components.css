@@ -1302,13 +1302,6 @@ div.DTS tbody tr.even {
   transition: .4s;
 }
 
-.slider_teledetourage {
-  background-color: #fb2b54;
-}
-input:checked + #slider_teledetourage {
-  background-color: #64bd63;
-}
-
 .color-sample-standard {
   display: inline-block;
   width: 12px;

@@ -643,7 +643,7 @@ $panierA = get_cookie("panierA");
             else if ($recap_commande['format_teledetourage'] == 'nylor') {
                 $formatTeledetourage = 'Nylor';
             }
-            else if ($recap_commande['format_teledetourage'] == 'rimless') {
+            else if ($recap_commande['format_teledetourage'] == 'drilled') {
                 $formatTeledetourage = 'Percée';
             }
             echo '<tr>';

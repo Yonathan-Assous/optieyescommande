@@ -94,8 +94,15 @@ class m_teledetourage extends CI_Model
                 return 'Métal';
             case 'nylor':
                 return 'Nylor';
-            case 'rimless':
+            case 'drilled':
                 return 'Percée';
         }
+    }
+
+    public function getResultByOmaAndData($data, $oma) {
+        $index = stripos($oma, $data);
+        $string = substr($oma, $index);
+        $firstIndex = stripos($string, '=') + 1;
+        return substr($string, $firstIndex, 2);
     }
 }

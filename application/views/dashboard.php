@@ -5226,6 +5226,8 @@ if (is_object($pair_order)) {
                                             <input type="hidden" id="type_commande" name="type_commande" value="1">
                                             <input type="hidden" id="prix_teledetourage" name="prix_teledetourage" value="0">
                                             <input type="hidden" id="format_teledetourage" name="format_teledetourage" value="">
+                                            <input type="hidden" id="diametre_utile_right" name="diametre_utile_right" value="">
+                                            <input type="hidden" id="diametre_utile_left" name="diametre_utile_left" value="">
                                         </div>
                                         <div id="casse" class="tab-pane fade">
                                             <h3>Casse atelier</h3>
@@ -5642,7 +5644,7 @@ if (is_object($pair_order)) {
                 $('#produit').addClass('hide');
             }
 
-            getFormatTeledetouragePrice('rimless');
+            getFormatTeledetouragePrice('drilled');
         })
 
         $('#btn_add_info_sup').click(function () {
@@ -6737,7 +6739,7 @@ if (is_object($pair_order)) {
 				$('#type_commande').val('2');
 			}
 			*/
-
+                        // console.log(formData);
                         $.ajax({
                             type: "POST",
                             url: "/index/setOrderRecapNew",

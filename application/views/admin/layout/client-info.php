@@ -149,8 +149,8 @@
                     <input type="text" id="teledetourage_metal" name="teledetourage_metal"  class="form-control" value="<?php echo $price_teledetourage_user['metal'] ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
-                    <label for="teledetourage_rimless" class="control-label">Télédétourage Percés</label>
-                    <input type="text" id="teledetourage_rimless" name="teledetourage_rimless"  class="form-control" value="<?php echo $price_teledetourage_user['rimless'] ?>" />
+                    <label for="teledetourage_drilled" class="control-label">Télédétourage Percés</label>
+                    <input type="text" id="teledetourage_drilled" name="teledetourage_drilled"  class="form-control" value="<?php echo $price_teledetourage_user['drilled'] ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_nylor" class="control-label">Télédétourage Nylor</label>

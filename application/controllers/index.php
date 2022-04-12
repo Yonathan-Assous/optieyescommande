@@ -222,12 +222,12 @@ class index extends MY_Controller {
 
 	public function get_Diametre($recovery=false){
 		if($this->session->userdata('logged_in') === true){
-			$sphere = $_POST['sphere'];
+            $sphere = $_POST['sphere'];
 			$cylindre = $_POST['cylindre'];
 			$lens = $_POST['lens'];
+            $diametreUtile = $_POST['diametre_utile'];
 
-
-			$res = $this->m_passer_commande_verre->getDiametres($lens,$sphere,$cylindre);
+			$res = $this->m_passer_commande_verre->getDiametres($lens,$sphere,$cylindre,$diametreUtile);
 			echo json_encode($res);
 		}
 		else
@@ -1838,7 +1838,7 @@ class index extends MY_Controller {
 						else
 						{
 							$recommande = '<a class="commande-info btn btn-icon waves-effect waves-light '.(!empty($commande->commentaire) ? 'btn-warning tooltipster' : 'btn-inverse').'" data-toggle="modal" data-target="#detail-commande" rel="' . $commande->id_commande . '" ' . (!empty($commande->commentaire) ? 'original-title="' . htmlentities($commande->commentaire) . '" title="'.htmlentities($commande->commentaire).'"' : '') . ' ><i class="zmdi zmdi-'.(!empty($commande->commentaire) ? 'comment' : 'search').'"></i> Voir</a>';
-							if($commande->id_generation_verre>=30)
+							if($commande->id_generation_verre>=30 && !$commande->code_oma)
 							{
 								$recommande .= '<a class="btn btn-warning waves-effect wave-light" href="/index/recommande/'.$commande->id_commande.'">Recommander</a>';
 							}
@@ -2890,7 +2890,7 @@ class index extends MY_Controller {
 //                var_dump($data['prixDH']);die;
 //                print_r($data['txtOmaImageIn']);die;
 //                print_r(bin2hex($data['txtOmaImageIn']));die;
-
+//                print_r($data);die;
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
@@ -4922,7 +4922,6 @@ class index extends MY_Controller {
     public function getDiametre(){
       if($this->input->is_ajax_request()){
           $post = $this->input->post();
-
           $return = $this->m_grille_stock->getDiametre($post);
 
           $data = array();

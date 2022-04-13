@@ -3135,7 +3135,9 @@ class index extends MY_Controller {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
-					$data['reference_client'] = $pair_order->reference_client;
+                    $pair_order->format_teledetourage = $this->m_teledetourage->getMontureByFormatId($pair_order->teledetourage_format_id);
+                    $pair_order->prix_teledetourage = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $pair_order->format_teledetourage);
+                    $data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
 				if($data['diametreD'] == 'precalibrage')
@@ -3792,7 +3794,6 @@ class index extends MY_Controller {
 
 				}
                 $this->session->set_userdata('order', $data);
-
 				$data['recap_commande'] = $data;
 
 				if($data['panierA']==2)
@@ -3842,7 +3843,6 @@ class index extends MY_Controller {
 
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
-//                print_r($data);die;
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

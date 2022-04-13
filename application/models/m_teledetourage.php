@@ -94,7 +94,7 @@ class m_teledetourage extends CI_Model
                 return 'Métal';
             case 'nylor':
                 return 'Nylor';
-            case 'drilled':
+            case 'rimless':
                 return 'Percée';
         }
     }

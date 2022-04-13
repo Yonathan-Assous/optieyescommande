@@ -3179,6 +3179,7 @@ class m_commande extends CI_Model {
 //                }
 //                $data['code_oma'] = "'" . $hex . "'";
             }
+
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3422,6 +3423,7 @@ class m_commande extends CI_Model {
 
                 if($type_commande_verre!=4)
                 {
+
                     $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
                     if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
@@ -3476,6 +3478,7 @@ class m_commande extends CI_Model {
                     }
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
+
 //                    var_dump($sql);die;
                     //print_r($sql);die;
                     if($this->db->query($sql))

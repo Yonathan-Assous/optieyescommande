@@ -1723,7 +1723,8 @@ $('#type_de_verreD').on('change', function() {
 							type: "POST",
 							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
 							data: {"lens" : ref_type_de_verreD,
-							"typedelens" : "stock"},
+							"typedelens" : "stock",
+                            "traitement" : $('#traitementD').val()},
 							dataType: "json",
 							success: function (data) {
 								$.each(data, function(key, value){
@@ -1767,7 +1768,9 @@ $('#type_de_verreD').on('change', function() {
                         url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
                         data: {"lens" : type_de_verreD,
                             "typedelens" : "fab",
-                            "generation" : generation},
+                            "generation" : generation,
+                            "traitement" : $('#traitementD').val()
+                        },
                         dataType: "json",
                         success: function (data) {
                             //console.log(data);
@@ -1889,7 +1892,9 @@ $('#type_de_verreD').on('change', function() {
                                     url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
                                     data: {"lens" : type_de_verreD,
                                         "typedelens" : "fab",
-                                        "generation" : generation},
+                                        "generation" : generation,
+                                        "traitement" : $('#traitementD').val()
+                                    },
                                     dataType: "json",
                                     success: function (data) {
                                         //console.log(data);
@@ -2123,7 +2128,8 @@ function getPrixG() {
         url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
         data: {"lens" : type_de_verreG,
             "typedelens" : "fab",
-            "generation" : generation},
+            "generation" : generation,
+            "traitement" : $('#traitementD').val()},
         dataType: "json",
         success: function (data) {
             $.each(data, function(key, value){
@@ -2377,7 +2383,9 @@ $('#type_de_verreG').on('change', function() {
 							type: "POST",
 							url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
 							data: {"lens" : ref_type_de_verreG,
-							"typedelens" : "stock"},
+							"typedelens" : "stock",
+                            "traitement" : $('#traitementD').val()
+                            },
 							dataType: "json",
 							success: function (data) {
 								$.each(data, function(key, value){
@@ -2417,7 +2425,9 @@ $('#type_de_verreG').on('change', function() {
                         url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
                         data: {"lens" : type_de_verreG,
                             "typedelens" : "fab",
-                            "generation" : generation},
+                            "generation" : generation,
+                            "traitement" : $('#traitementD').val()
+                        },
                         dataType: "json",
                         success: function (data) {
                             $.each(data, function(key, value){
@@ -2551,7 +2561,9 @@ $('#type_de_verreG').on('change', function() {
                                     url: "/admin/getPrix/<?php echo $user_info[0]->id_users;?>",
                                     data: {"lens" : type_de_verreG,
                                         "typedelens" : "fab",
-                                        "generation" : generation},
+                                        "generation" : generation,
+                                        "traitement" : $('#traitementD').val()
+                                    },
                                     dataType: "json",
                                     success: function (data) {
                                         $.each(data, function(key, value){

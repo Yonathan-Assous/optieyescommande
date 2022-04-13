@@ -16882,7 +16882,8 @@ class admin
             $res =
                 $this->m_passer_commande_verre->getPrix($idlens,
                     $user_id,
-                    $generation);
+                    $generation,
+                    $_POST['traitement']);
         }
         echo json_encode($res);
 

@@ -270,7 +270,7 @@ $('#indices').on('change', function() {
 	$('#refraction_panel').removeClass('focus_panel')
 	$('#generation_panel').removeClass('focus_panel')
 
-	if ($('#indices').val() == '1.5' || $('#indices').val() == '1.74') {
+	if ($('#indices').val() == '1.5' || $('#indices').val() == '1.74' || $('#indices').val() == '1.56' || $('#indices').val() == 'mineral') {
 		$('#li_format_nylor').addClass('hide');
 		$('#li_format_perce').addClass('hide');
 	}

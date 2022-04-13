@@ -49,7 +49,6 @@ $panierA = get_cookie("panierA");
     $orderbag = array();
     $total_commande = 0;
     $prixmonture = 0;
-    $quantiteVerreTeledetourage = 0;
 
     if(isset($pair_order_recap)) {
         $orderbag['pair_order'] = $pair_order_recap;
@@ -57,9 +56,11 @@ $panierA = get_cookie("panierA");
 
     $orderbag['order'] = $recap_commande;
 	//var_dump($recap_commande);
-
+//echo '<pre>';
+//print_r($orderbag);
+//echo '</pre>';
     foreach($orderbag as $k => $recap_commande) {
-
+        $quantiteVerreTeledetourage = 0;
        if($k == 'pair_order') {
            echo '<h2>Première commande</h2>';
        }
@@ -632,6 +633,9 @@ $panierA = get_cookie("panierA");
 
                 echo '</tr>';
             }
+//            echo '<pre>';
+//        print_r($recap_commande);
+//        echo '</pre>';
 
         if ($recap_commande['format_teledetourage']) {
             if ($recap_commande['format_teledetourage'] == 'plastic') {

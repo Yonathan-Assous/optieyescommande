@@ -46,7 +46,7 @@ class m_remise extends CI_Model
     }
 
     public function getRemises($userId) {
-        $now = date('Y-m-d');
+        $now = date('Y-m-d H:i:s');
         $remises = $this->getRemisesByUsers($userId);
         $i = 0;
         $tab = [];
@@ -56,7 +56,6 @@ class m_remise extends CI_Model
             $tab[$i]['date_start'] = $remise->since_date;
             $tab[$i]['date_end'] = $remise->until_date;
             $tab[$i]['type_remise'] = ucfirst($remise->type_remise);
-
             if ($remise->since_date > $now) {
                 $tab[$i]['status'] = 'future';
                 $textAction = 'Annuler';
@@ -145,6 +144,7 @@ class m_remise extends CI_Model
     }
 
     public function getTotalRemisesByUser($userId, $totalFacture) {
+
         $now = date('Y-m-d');
 
         $sql = "SELECT SUM(remise) as total_remise FROM `remises` 
@@ -155,6 +155,7 @@ class m_remise extends CI_Model
                 AND from_amount <= $totalFacture";
 //        print_r($sql);die;
         $query = $this->db->query($sql);
+
         if ($query->num_rows()) {
             $result = $query->result()[0];
             return $result->total_remise;

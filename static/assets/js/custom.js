@@ -1643,6 +1643,8 @@ $('#type_de_verreD').on('change', function() {
     var lensFocalGroup = $('#lensFocalGroup').val();
 
     var type_de_verreD = $(this).val();
+    var traitementD = $('#traitementD').val();
+    var traitementG = $('#traitementG').val();
     var sphereD = String($('#sphereD').val());
     var cylindreD = String($('#cylindreD').val());
     var axeD = String($('#axeD').val());
@@ -1867,7 +1869,7 @@ $('#type_de_verreD').on('change', function() {
 							url: "/index/getPrix",
 							data: {"lens" : ref_type_de_verreD,
 							"typedelens" : "stock",
-							"traitement" : $('#traitementD').val()
+							"traitementId" : $('#traitementD').val()
 							},
 							dataType: "json",
 							success: function (data) {
@@ -1909,13 +1911,15 @@ $('#type_de_verreD').on('change', function() {
 
 				if(selectedText.indexOf(" - Stock") >= 0)
 				{
+					console.log('traitementD' + $('#traitementD').val());
+					console.log('traitementDH' + $('#traitementDH').val());
 					$.ajax({
 						type: "POST",
 						url: "/index/getPrix",
 						data: {"lens" : type_de_verreD,
 							"typedelens" : "fab",
 							"generation" : generation,
-							"traitement" : $('#traitementD').val()
+							"traitementId" : $('#traitementD').val()
 						},
 						dataType: "json",
 						success: function (data) {
@@ -2043,14 +2047,20 @@ $('#type_de_verreD').on('change', function() {
 								}
 							});
 							var selectedText = $("#traitementD option:selected").html();
+							var traitement = $('#traitementD').val();
 							$('#traitementDH').val(selectedText);
+							console.log('traitementD ' + traitement);
+							console.log('traitementDH ' + $('#traitementDH').val());
+
+							console.log(type_de_verreD);
+							console.log(traitement);
 								$.ajax({
 									type: "POST",
 									url: "/index/getPrix",
 									data: {"lens" : type_de_verreD,
 										"typedelens" : "fab",
 										"generation" : generation,
-										"traitement" : $('#traitementD').val()
+										"traitementId" : traitementD
 									},
 									dataType: "json",
 									success: function (data) {
@@ -2492,7 +2502,7 @@ $('#type_de_verreG').on('change', function() {
 							url: "/index/getPrix",
 							data: {"lens" : ref_type_de_verreG,
 							"typedelens" : "stock",
-							"traitement" : $('#traitementG').val()
+							"traitementId" : $('#traitementG').val()
 							},
 							dataType: "json",
 							success: function (data) {
@@ -2536,7 +2546,7 @@ $('#type_de_verreG').on('change', function() {
 						data: {"lens" : type_de_verreG,
 							"typedelens" : "fab",
 							"generation" : generation,
-							"traitement" : $('#traitementG').val()
+							"traitementId" : $('#traitementG').val()
 						},
 						dataType: "json",
 						success: function (data) {
@@ -2665,6 +2675,7 @@ $('#type_de_verreG').on('change', function() {
 								// console.log('77777777777777777777777777777777777777777777777777777777777');
 								// console.log($('#traitementG').val());
 								var traitementG = $('#traitementG').val();
+								var traitementD = $('#traitementD').val();
 							$('#traitementG option:eq(0)').prop('selected', true);
 								// console.log('888888888888888888888888888888888888888888888888');
 								// console.log($('#traitementG').val());
@@ -2685,8 +2696,8 @@ $('#type_de_verreG').on('change', function() {
 									url: "/index/getPrix",
 									data: {"lens" : type_de_verreG,
 										"typedelens" : "fab",
-										"generation" : generation,
-										"traitement" : $('#traitementG').val()
+										"traitementId" : traitementG,
+										"generation" : generation
 									},
 									dataType: "json",
 									success: function (data) {
@@ -2745,9 +2756,68 @@ $('#type_de_verreG').on('change', function() {
 											});
 										});
 									}
-								});
+							});
+							// if (type_de_verreD) {
+							// 	$.ajax({
+							// 		type: "POST",
+							// 		url: "/index/getPrix",
+							// 		data: {"lens" : type_de_verreD,
+							// 			"typedelens" : "fab",
+							// 			"traitementId" : traitementD,
+							// 			"generation" : generation
+							// 		},
+							// 		dataType: "json",
+							// 		success: function (data) {
+							// 			$.each(data, function(key, value){
+							// 				$('#prixVerreG').val(value.prix);
+							// 				//calculPriceG();
+							// 				// $('#prixG').val(value.prix+"€");
+							// 				//$('#prixGH').val(value.prix);
+							// 				var indice = $('#indices').val();
+							// 				var generation = $('#generation').val();
+							// 				var nomtraitement = $("#traitementG option:selected").html();
+							// 				var nomverre = $("#type_de_verreG option:selected").html();
+							// 				traitementD = $('#traitementD').val();
+							// 				var prixverre = $('#prixVerreD').val();
+							//
+							// 				if (!nomtraitement) {
+							// 					nomtraitement = "Durci";
+							// 				}
+							// 				if (!traitementG) {
+							// 					traitementG = "700100";
+							// 				}
+							// 				console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+							//
+							// 				$.ajax({
+							// 					type: "POST",
+							// 					url: "/index/getOptions_price",
+							// 					data: {"code" : traitementD,
+							// 						"name" : nomtraitement,
+							// 						"nom_du_verre" : nomverre,
+							// 						"indice": indice,
+							// 						"generation": generation
+							// 					},
+							// 					dataType: "json",
+							// 					success: function (data) {
+							// 						setTimeout(function(){
+							// 							var prixteinte = $('#prixTeinteD').val();
+							// 							$.each(data, function(key, value){
+							// 								console.log()
+							// 								$('#prixTraitementD').val(value.prix);
+							// 								var tot =  (parseFloat(prixverre)+parseFloat(prixteinte)+parseFloat(value.prix)+addPrismeGalbeDroit()).toFixed(2);
+							// 								$('#prixD').val(tot+"€");
+							// 								$('#prixDH').val(tot+"€");
+							// 							});
+							// 						},1000);
+							// 					}
+							//
+							// 				});
+							// 			});
+							// 		}
+							// 	});
+							// }
+						}
 
-							}
 					});
 
 
@@ -2823,6 +2893,7 @@ $('#type_de_verreG').on('change', function() {
 							}
 						}
 					});
+
 				}
 
 			}
@@ -4196,8 +4267,33 @@ $('#traitementD').on('change', function() {
     var progressionG = $('#progressionG').val();
 
     var diametreG = $('#diametreG').val();
+	var prixverre = $('#prixVerreD').val();
+	var generation = $('#generation').val();
+    if ($('#type_de_verreD').val() == 'S1UW50' || $('#type_de_verreD').val() == 'S2UW50' || $('#type_de_verreD').val() == 'S3UW50' || $('#type_de_verreD').val() == 'S4UW50') {
+		$.ajax({
+			type: "POST",
+			url: "/index/getPrix",
+			data: {"lens" : $('#type_de_verreD').val(),
+				"typedelens" : "fab",
+				"generation" : generation,
+				"traitementId" : $('#traitementD').val()
+			},
+			dataType: "json",
+			success: function (data) {
+				$.each(data, function(key, value){
+					$('#prixVerreD').val(value.prix);
+					console.log("PrixD1")
+					$('#prixD').val(value.prix+"€");
+					$('#prixDH').val(value.prix);
+					prixverre = $('#prixVerreD').val();
+				});
+			}
+		});
+	}
+    else {
 
-    var prixverre = $('#prixVerreD').val();
+	}
+
 	//var prixTeledetourage = $('#prix_teledetourage').val();
 
   	$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();

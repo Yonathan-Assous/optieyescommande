@@ -138,6 +138,10 @@ if (is_object($pair_order)) {
             width: 100%;
             margin-top: 10px;
         }
+
+        .connect_machine, .return_to_commande_standard {
+            margin-top: 33px !important;
+        }
     </style>
     <script>
         var panierA       = <?php if ($panierA == 1) {
@@ -178,6 +182,10 @@ if (is_object($pair_order)) {
                 <div id="loading-overlay" style="display:none;"></div>
                 <div id="loading" style="display:none;">
                     <span id="text_loading">Chargement...</span>
+                </div>
+                <div id="loading-overlay" style="display:none;"></div>
+                <div id="loading-drole" style="display:none;">
+                    <span id="text_loading_drole">Chargement...</span>
                 </div>
                 <input type="text" id="user_id" class="form-control" style="display: none;" maxlength="15" value="<?php echo $user_info->id_users ?>"/>
                 <?php
@@ -5345,31 +5353,31 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
-        <div id="teledetourage_not_connected" class="modal fade" tabindex="-1" role="dialog"
-             aria-hidden="true" style="display: none;">
-            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
-                <div class="modal-content">
-
-                    <form id="teledetourage_not_connected_form">
-
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Machine non connectée</h4>
-                        </div>
-
-                        <div class="modal-body">
-                            <p id="text_teledetourage_not_connected">Votre machine n'est pas connectée, veuillez la connecter et appuyez sur le bouton <strong>"CONNECT".</strong></br>
-                                Si vous voulez passer une commande standard appuyez sur <strong>"RETOUR"</strong>.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger waves-effect return_to_commande_standard" data-dismiss="modal">RETOUR</button>
-                            <button id="connect_machine_modal" class="btn btn-warning waves-effect waves-light connect_machine" data-dismiss="modal">CONNECT</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
+<!--        <div id="teledetourage_not_connected" class="modal fade" tabindex="-1" role="dialog"-->
+<!--             aria-hidden="true" style="display: none;">-->
+<!--            <div class="modal-dialog" style="width: 90%; max-width: 400px;">-->
+<!--                <div class="modal-content">-->
+<!---->
+<!--                    <form id="teledetourage_not_connected_form">-->
+<!---->
+<!--                        <div class="modal-header">-->
+<!--                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+<!--                            <h4 class="modal-title">Machine non connectée</h4>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="modal-body">-->
+<!--                            <p id="text_teledetourage_not_connected">Votre machine n'est pas connectée, veuillez la connecter et appuyez sur le bouton <strong>"CONNECT".</strong></br>-->
+<!--                                Si vous voulez passer une commande standard appuyez sur <strong>"RETOUR"</strong>.</p>-->
+<!--                        </div>-->
+<!--                        <div class="modal-footer">-->
+<!--                            <button class="btn btn-danger waves-effect return_to_commande_standard" data-dismiss="modal">RETOUR</button>-->
+<!--                            <button id="connect_machine_modal" class="btn btn-warning waves-effect waves-light connect_machine" data-dismiss="modal">CONNECT</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!---->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div> <!-- content -->
 
     <!-- Form wizard -->
@@ -5574,13 +5582,15 @@ if (is_object($pair_order)) {
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
+                backgroundEcartAndHauteurAll();
             }
             else {
-                $('#teledetourage_not_connected').modal('show');
+                swalTeledetourage()
+                // $('#teledetourage_not_connected').modal('show');
             }
             let txtOmaImageIn = $('#txtOmaImageIn').val();
 
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
                 $('#div_refraction').removeClass('hide');
             }
 
@@ -5595,13 +5605,15 @@ if (is_object($pair_order)) {
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
+                backgroundEcartAndHauteurAll();
             }
             else {
-                $('#teledetourage_not_connected').modal('show');
+                swalTeledetourage()
+                // $('#teledetourage_not_connected').modal('show');
             }
             let txtOmaImageIn = $('#txtOmaImageIn').val();
 
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
                 $('#div_refraction').removeClass('hide');
             }
             getFormatTeledetouragePrice('plastic');
@@ -5614,13 +5626,15 @@ if (is_object($pair_order)) {
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
+                backgroundEcartAndHauteurAll();
             }
             else {
-                $('#teledetourage_not_connected').modal('show');
+                swalTeledetourage()
+                // $('#teledetourage_not_connected').modal('show');
             }
             let txtOmaImageIn = $('#txtOmaImageIn').val();
 
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1) {
+            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
                 $('#div_refraction').removeClass('hide');
             }
 
@@ -5634,9 +5648,11 @@ if (is_object($pair_order)) {
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
                 $('#btnLaunchTablette').removeClass('hide');
+                backgroundEcartAndHauteurAll();
             }
             else {
-                $('#teledetourage_not_connected').modal('show');
+                swalTeledetourage()
+                // $('#teledetourage_not_connected').modal('show');
             }
             let txtOmaImageIn = $('#txtOmaImageIn').val();
             if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
@@ -7527,6 +7543,7 @@ if (is_object($pair_order)) {
         });
 
         $('.connect_machine').click(function () {
+            console.log('rewrewrwerwerrrrrrrrrrrrrrrrrr');
             Connect(null, true);
         })
 
@@ -7591,6 +7608,50 @@ if (is_object($pair_order)) {
                 Connect();
             }
         });
+
+        function swalTeledetourage() {
+            swal({
+                title: "Traceur non connecté",
+                text: "\nVotre traceur n'est pas connecté, veuillez le connecter en appuyant sur \"CONNECTER\".\n\n" +
+                    "                                Si vous souhaitez passer une commande sans télédétourage, appuyez sur \"RETOUR\"",
+                type: "warning",
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: "CONNECTER",
+                cancelButtonText: "RETOUR",
+                confirmButtonClass: "connect_machine btn-success",
+                cancelButtonClass: "return_to_commande_standard",
+            });
+            $('.return_to_commande_standard').click(function () {
+                document.getElementById("is_teledetourage").checked = false;
+                hideAll();
+            })
+            $('.connect_machine').click(function () {
+                Connect(null, true);
+            })
+        }
+        function backgroundEcartAndHauteurAll() {
+            backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_droit')
+            backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_gauche')
+            backgroundEcartAndHauteur('hauteur_montage_droit')
+            backgroundEcartAndHauteur('hauteur_montage_gauche')
+            backgroundEcartAndHauteur('largeur_boxing')
+            backgroundEcartAndHauteur('taille_du_pont')
+            backgroundEcartAndHauteur('hauteur_boxing')
+        }
+        function backgroundEcartAndHauteur(id) {
+            console.log(id);
+            let jqueryId = '#' + id;
+            if ($(jqueryId).val() == '') {
+                $(jqueryId).attr('style', "background-color: #e39090" +
+                    " !important")
+                // document.getElementById(id).style.backgroundColor = 'red !important';
+                // document.getElementById("'" + id + "'").style.backgroundColor = 'red !important';
+            }
+            else {
+                $(jqueryId).attr('style', "background-color: #a0e7a0  !important")
+            }
+        }
     </script>
 
 

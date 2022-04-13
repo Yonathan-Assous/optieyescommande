@@ -14570,7 +14570,7 @@ class admin
                                 $commande->id_commande .
                                 '/' .
                                 $commande->id_users .
-                                '">Recommandereeee</a>'),
+                                '">Recommander</a>'),
                                 '<button id="annule_envoi_' .
                                 $commande->id_commande .
                                 '" aria-disabled="false" role="button" class="btn btn-default btn-sm" type="button">Annuler</button>',

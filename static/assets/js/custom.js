@@ -1866,7 +1866,9 @@ $('#type_de_verreD').on('change', function() {
 							type: "POST",
 							url: "/index/getPrix",
 							data: {"lens" : ref_type_de_verreD,
-							"typedelens" : "stock"},
+							"typedelens" : "stock",
+							"traitement" : $('#traitementD').val()
+							},
 							dataType: "json",
 							success: function (data) {
 								$.each(data, function(key, value){
@@ -1912,7 +1914,9 @@ $('#type_de_verreD').on('change', function() {
 						url: "/index/getPrix",
 						data: {"lens" : type_de_verreD,
 							"typedelens" : "fab",
-							"generation" : generation},
+							"generation" : generation,
+							"traitement" : $('#traitementD').val()
+						},
 						dataType: "json",
 						success: function (data) {
 							//console.log(data);
@@ -2045,7 +2049,9 @@ $('#type_de_verreD').on('change', function() {
 									url: "/index/getPrix",
 									data: {"lens" : type_de_verreD,
 										"typedelens" : "fab",
-										"generation" : generation},
+										"generation" : generation,
+										"traitement" : $('#traitementD').val()
+									},
 									dataType: "json",
 									success: function (data) {
 										//console.log(data);
@@ -2485,7 +2491,9 @@ $('#type_de_verreG').on('change', function() {
 							type: "POST",
 							url: "/index/getPrix",
 							data: {"lens" : ref_type_de_verreG,
-							"typedelens" : "stock"},
+							"typedelens" : "stock",
+							"traitement" : $('#traitementG').val()
+							},
 							dataType: "json",
 							success: function (data) {
 								$.each(data, function(key, value){
@@ -2527,7 +2535,9 @@ $('#type_de_verreG').on('change', function() {
 						url: "/index/getPrix",
 						data: {"lens" : type_de_verreG,
 							"typedelens" : "fab",
-							"generation" : generation},
+							"generation" : generation,
+							"traitement" : $('#traitementG').val()
+						},
 						dataType: "json",
 						success: function (data) {
 							$.each(data, function(key, value){
@@ -2675,7 +2685,9 @@ $('#type_de_verreG').on('change', function() {
 									url: "/index/getPrix",
 									data: {"lens" : type_de_verreG,
 										"typedelens" : "fab",
-										"generation" : generation},
+										"generation" : generation,
+										"traitement" : $('#traitementG').val()
+									},
 									dataType: "json",
 									success: function (data) {
 										$.each(data, function(key, value){

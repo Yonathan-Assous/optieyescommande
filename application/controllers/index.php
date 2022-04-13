@@ -211,7 +211,7 @@ class index extends MY_Controller {
 			{
 				$generation = $_POST['generation'];
 //                var_dump($generation);
-				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation);
+				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation,$_POST['traitement']);
 			}
 			echo json_encode($res);
 		}
@@ -2949,6 +2949,7 @@ class index extends MY_Controller {
                         $data['supplementD'] = $lenses->supplement;
                         if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 1;
+                            $data['prixDH'] -= 1;
                         }
                         $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
@@ -2986,6 +2987,7 @@ class index extends MY_Controller {
                         $data['supplementG'] = $lenses->supplement;
                         if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                             $data['supplementG'] -= 1;
+                            $data['prixGH'] -= 1;
                         }
                         $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                     }

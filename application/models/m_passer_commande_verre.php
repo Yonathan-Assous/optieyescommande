@@ -1624,7 +1624,7 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getPrix($lens = "", $user_id, $generation)
+    function getPrix($lens = "", $user_id, $generation, $traitement = NULL)
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
@@ -1651,6 +1651,12 @@ class m_passer_commande_verre extends CI_Model
                 $resultat[$res->code]["prix"] = $res->prix;
             }
         }
+        if ($traitement && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($traitement, [700100, 700102, 700027, 700021])) {
+            $resultat[$res->code]["prix"] -= 1;
+        }
+//        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+//            $data['supplementD'] -= 1;
+//        }
         return $resultat;
     }
 

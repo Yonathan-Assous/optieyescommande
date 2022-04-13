@@ -169,6 +169,8 @@
 
                     $total_facture_aff = $total_facture_ht = $compteur = $nbMaxElementParPage = $total_livraison_ht = 0;
 
+
+
                     $tab_tva = array();
                     $MaxElement = 20;
                     $nb_page = 1;
@@ -184,7 +186,7 @@
 //                                $i = 1;
 //                        }
                         //++$i;
-					
+
                         if($nbMaxElementParPage == $MaxElement){
                             echo '</tbody></table>
                                     <div style="text-align:center;bottom:10;position: fixed;font-weight:bold">
@@ -192,7 +194,7 @@
                                         <page_footer>'.$nb_page.'</page_footer> 
                                        </page>
                                      </div>';
-									 
+
                             echo '<div style="page-break-before: always;"></div>';
 
                             $nbMaxElementParPage =0;
@@ -202,7 +204,7 @@
 
                             <?php
 
-								  
+
                             $nb_page++;
                         }
 
@@ -213,9 +215,9 @@
 
                         if($nbMaxElementParPage == 0){
                             echo $header;
-                            
+
                         }
-						
+
 						if($facture->total_commande > 0){
 
 							echo '<tr class="'.$class.'">';
@@ -225,10 +227,10 @@
 								echo '<td style="text-align: center">'.$facture->reference_client.'</td>';
 
 								echo '<td style="text-align: center">';
-							
+
 								$gen = 0;
 								$lent = 0;
-							    
+
 							    /*
 							    if(null !== $facture->generation_verre) {
                                     echo $facture->generation_verre;
@@ -253,17 +255,19 @@
                                     echo $facture->lens_name;
 									$lent = 1;
                                 }
-							
+
 								if(null !== $facture->commande_monture) {
 									if($gen != 1 && $lent != 1)
 									{	//echo ' / ';
                                     echo 'Montures';
 									}
                                 }
-								
+
 								echo '</td>';
 
-
+                                $facture->total_commande += $facture->tarif_teledetourage;
+                                $total_facture_ht += $facture->tarif_teledetourage;
+                                $total_livraison_ht += $facture->tarif_teledetourage;
                                 if($facture->type_commande > 1) {
 
 								    if($facture->penalty == 1) {
@@ -313,10 +317,11 @@
                         }
 
 
+
                         $compteur++;
                         $nbMaxElementParPage++;
                     }
-                  
+
 
                 if($nbMaxElementParPage == $MaxElement){
 
@@ -326,9 +331,9 @@
                               <page_footer>'.$nb_page.'</page_footer> 
                              </page>
                            </div>';
-                           
+
                    echo '<div style="page-break-before: always;"></div>';
-                           
+
                    /*echo '<table style="width: 100%;">
                           <tr>
                             <td><img src="static/img/logo.jpg" width="227" height="72" /></td>
@@ -345,13 +350,13 @@
 
 
                         echo $header;
-                        
+
                         $nb_page++;
 
                 } else
                     echo '</tbody><tbody>';
-                
-				
+
+
 
 					/*echo ' <tr>
 							<td colspan="4"></td>
@@ -364,17 +369,20 @@
                 <!--tr>
                     <td colspan="4"></td>
                     <td colspan="1" style="text-align: right;"><strong>TOTAL HT</strong></td>
-                    <td class="change_order_total_col" style="text-align:center;"><strong><?php echo number_format($total_facture_ht,2,'.',' '); ?> €</strong></td>
+
+                    <td class="change_order_total_col" style="text-align:center;"><strong><?php
+
+                echo number_format($total_facture_ht,2,'.',' '); ?> €</strong></td>
                 </tr -->
                 <?php
 
                 $label_remise = '';
-                
+
                     if(isset($reduction) && $reduction !== false){
 
                         $total_sans_remise = $total_facture_ht;
 						$sup = $remise = 0;
-						
+
 						foreach($reduction as $reduc){
 							if($reduc->reduction<0)
 								$sup += $reduc->reduction;
@@ -463,7 +471,7 @@
                     <td colspan="1" style="text-align: right;"><strong>TVA '.$taux_tva.'%</strong></td>
                     <td class="change_order_total_col" style="text-align:right;"><strong>'.number_format(round($total_facture_ht * ($taux_tva/100),2) ,2,'.',' ').' €</strong></td>
                     </tr>';
-					
+
                 ?>
 				<tr class="highlight">
                     <td colspan="4" class="disabled"></td>
@@ -472,7 +480,7 @@
                 </tr>
             </table>
 			<div style="text-align:center;bottom:20px;position: fixed;font-weight:bold">
-				<?php echo $nb_page; ?> 
+				<?php echo $nb_page; ?>
 			</div>
         </div>
     </div>

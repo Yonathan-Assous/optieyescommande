@@ -307,6 +307,8 @@ class MY_Controller extends CI_Controller {
             $data['date'] = $data['date_remise'] = $date;
 
             $commande = $this->m_commande->getAllCommandeByMonth($data);
+//            echo '<pre>';
+//            print_r($commande);die;
             $data['tarifPackaging'] = $this->m_users->getTarifPackaging($data['id_users']);
 
          //   var_dump($commande);
@@ -344,7 +346,9 @@ class MY_Controller extends CI_Controller {
                 $data['reduction'] = !empty($reduction) ? $reduction : false;
 
                 $data_custom_file = array('id_users' => $data['id_users'], 'date' => $date);
-
+//                echo '<pre>';
+//print_r($data);
+//echo '</pre/';die;
                // return $this->load->view('pdf/'.$nom_fichier_pdf, $data,$data_custom_file, true);
                 if(!$stream)
                   return $this->pdf($nom_fichier_pdf,$data,$data_custom_file,$stream);

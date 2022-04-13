@@ -70,7 +70,7 @@ function Connect(callBack, is_loading = false) {
             if ($('#ul_type_format li.active').attr('id') && $('#div1_format_type').is(':visible')) {
                 $('#div_teledetourage').removeClass('hide');
             }
-            $("#loading-overlay,#loading").hide();
+            $("#loading-overlay,#loading-drole").hide();
             // $('#divDevices').show();
         }
         else if (_Device.id === deviceId) {
@@ -116,9 +116,18 @@ function Connect(callBack, is_loading = false) {
         //const deviceName = datas[0];
         var index = message.indexOf("START");
         if(index !== -1){
-            $("#loading-overlay,#loading").hide();
-            $('#loading span').css('top', 118);
-            $('#tracer_in_modal').modal('show');
+            $("#loading-overlay,#loading-drole").hide();
+            $('#loading-drole span').css('top', 248);
+            swal({
+                title: "Tracez votre monture",
+                text: "Lancez le traçage de votre forme en appuyant sur le bouton de votre palpeur.",
+                type: "success",
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: "Fermer",
+                timer: 4000,
+            });
+            // $('#tracer_in_modal').modal('show');
             const timeModal = 3000;
             let remainingTime = timeModal;
             let percent = 100;
@@ -133,7 +142,7 @@ function Connect(callBack, is_loading = false) {
                 }
             }, 100);
             setTimeout(function () {
-                $('#tracer_in_modal').modal('hide')
+                // $('#tracer_in_modal').modal('hide')
             }, timeModal);
             //$("#divDebug").html($("#divDebug").html() + "<br/>" + "Veuillez faire démarrer le traceur");
         }
@@ -175,10 +184,11 @@ function Connect(callBack, is_loading = false) {
 
                     $.connection.hub.stop();
 
-                    $("#loading-overlay,#loading").hide();
+                    $("#loading-overlay,#loading-drole").hide();
                     //$('#divDevices').show();
                     if ($('#is_teledetourage').is(':checked')) {
-                        $('#teledetourage_not_connected').modal('show');
+                        swalTeledetourage()
+                        // $('#teledetourage_not_connected').modal('show');
                     }
                     // alert('Aucune machine n\'est connecté');
                 }
@@ -234,7 +244,7 @@ function LaunchTracer() {
     };
 
     isLoading('Connection au <br>Traceur en cours...');
-    $('#loading span').css('top', 109);
+    $('#loading-drole span').css('top', 248);
 
     // $('#btnLaunchTracer').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Lancement du <br>Traceur en cours...').addClass('disabled');
     document.getElementById("inputFileToOma").value = "";
@@ -482,7 +492,7 @@ function GetImageFromOma() {
                         $('#div_refraction').addClass('hide');
                     }
                 }
-
+                backgroundEcartAndHauteurAll();
                 // x = (result.right.rayon[0] / 100) * Math.sin(result.right.angle[0] / 100);
                 // y = (result.right.rayon[0] / 100) * Math.cos(result.right.angle[0] / 100);
                 // longueur = Math.sqrt(Math.pow(x_centre_eye_right - x, 2) + Math.pow(y_centre_eye_right - y, 2))
@@ -577,8 +587,8 @@ function SetCodeOma() {
 }
 
 function isLoading(text) {
-    $("#text_loading").html(text) ;
-    $("#loading-overlay,#loading").show();
+    $("#text_loading_drole").html(text) ;
+    $("#loading-overlay,#loading-drole").show();
 }
 
 function saveOmaToFile() {

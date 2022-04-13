@@ -1407,3 +1407,7 @@ input:-webkit-autofill:active  {
     width: 20%;
   }
 }
+
+.showSweetAlert {
+  padding: 33px !important;
+}

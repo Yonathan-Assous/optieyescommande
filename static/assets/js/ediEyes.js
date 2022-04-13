@@ -258,6 +258,11 @@ const omaApiUrl = 'https://tracerserver.edieyes.net/Api/oma/';
 
 // ------------------------ I- Récupération d'une image à partir d'une forme OMA ------------------------
 function GetImageFromOma() {
+    $('#produit').addClass('hide');
+
+    // $('.quantity').on('change', function () {
+    //     $('#produit').addClass('hide');
+    // })
 
     // $('#divOmaImageOut').hide();
     // $('#divOmaImageError').hide();

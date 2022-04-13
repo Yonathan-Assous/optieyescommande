@@ -1243,7 +1243,7 @@ if (is_object($pair_order)) {
                                                                         </div>
                                                                         <br>
                                                                         <div class="btn btn-warning btn-lg waves-effect waves-light"
-                                                                             style="margin-left: 15px;float: left;"
+                                                                             style="width: 100%;"
                                                                              id="afficherV">Afficher les verres
                                                                         </div>
                                                                     </div>
@@ -5871,7 +5871,6 @@ if (is_object($pair_order)) {
                 $("#click_calibre").show();
             });
 
-
             $('#lensFocalGroup').on('change', function () {
                 $('#div_refraction').addClass('hide');
                 // $('#div_teledetourage').addClass('hide');
@@ -7640,11 +7639,12 @@ if (is_object($pair_order)) {
             backgroundEcartAndHauteur('hauteur_boxing')
         }
         function backgroundEcartAndHauteur(id) {
-            console.log(id);
             let jqueryId = '#' + id;
             if ($(jqueryId).val() == '') {
                 $(jqueryId).attr('style', "background-color: #e39090" +
                     " !important")
+                $('#div_refraction').addClass('hide');
+                $('#afficherV').show();
                 // document.getElementById(id).style.backgroundColor = 'red !important';
                 // document.getElementById("'" + id + "'").style.backgroundColor = 'red !important';
             }

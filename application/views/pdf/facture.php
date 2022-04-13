@@ -266,8 +266,7 @@
 								echo '</td>';
 
                                 $facture->total_commande += $facture->tarif_teledetourage;
-                                $total_facture_ht += $facture->tarif_teledetourage;
-                                $total_livraison_ht += $facture->tarif_teledetourage;
+                                
                                 if($facture->type_commande > 1) {
 
 								    if($facture->penalty == 1) {

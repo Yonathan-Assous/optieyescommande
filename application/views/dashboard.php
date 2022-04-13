@@ -7644,12 +7644,12 @@ if (is_object($pair_order)) {
                 $(jqueryId).attr('style', "background-color: #e39090" +
                     " !important")
                 $('#div_refraction').addClass('hide');
-                $('#afficherV').show();
                 // document.getElementById(id).style.backgroundColor = 'red !important';
                 // document.getElementById("'" + id + "'").style.backgroundColor = 'red !important';
             }
             else {
                 $(jqueryId).attr('style', "background-color: #a0e7a0  !important")
+                $('#afficherV').show();
             }
         }
     </script>

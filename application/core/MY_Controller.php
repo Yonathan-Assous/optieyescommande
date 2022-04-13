@@ -313,7 +313,9 @@ class MY_Controller extends CI_Controller {
 
          //   var_dump($commande);
             $reduction = $this->m_facture_reduction->get_reduction($data);
+//            $remise_special = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
 
+            echo '<pre>';
             if(!empty($commande)){
                 if(!empty($commande[0]->libelle_verre_personnalise) && !$this->session->userdata('is_admin')){
                     $commande[0]->generation_verre = $this->remplace_personnalisation_verre($commande[0]->generation_verre,$commande[0]->libelle_verre_personnalise);

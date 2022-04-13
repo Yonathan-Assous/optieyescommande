@@ -2944,6 +2944,7 @@ class index extends MY_Controller {
                         $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteD;
+
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                         $data['supplementD'] = $lenses->supplement;
                         if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
@@ -2979,9 +2980,10 @@ class index extends MY_Controller {
                         if (isset($data['PrismeSphereG'])) {
                             $prisme = $data['PrismeSphereG'];
                         }
-                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
+                        $data['prixGH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteG;
+
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                         $data['supplementG'] = $lenses->supplement;
                         if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {

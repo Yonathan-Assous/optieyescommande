@@ -1223,37 +1223,40 @@ $('#type_de_verreD').on('change', function() {
 					});	
 				}
 			
-    	
-			$.ajax({
-					type: "POST",
-					url: "/admin/get_Diametre/",
-					data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
-					dataType: "json",
-					success: function (data) {	
-					$('#diametreD').empty();
-					$('#diametreD').append('<option value="">-- Choisir --</option>');
-					
-					$.each(data, function(key, value){
-						console.log(value.name);
-						if(lensFocalGroup == "1" || lensFocalGroup == "6")
-						{
-							$('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
-						}
-						else
-						{
-							$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
-						}
-						
-					
-					}); 
-					if(selectedText.indexOf("-stock") == -1 && selectedText.indexOf(" - stock") == -1)
-					{
-						$('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
-					}
-				}
-			});	
-			
-			
+            if ($('#diameter_droit').text() == 'Télédétourage') {
+                $('#diametreD').empty();
+                $('#diametreD').append('<option value="">Télédétourage</option>');
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/get_Diametre/",
+                    data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD},
+                    dataType: "json",
+                    success: function (data) {
+                        $('#diametreD').empty();
+                        $('#diametreD').append('<option value="">-- Choisir --</option>');
+
+                        $.each(data, function(key, value){
+                            console.log(value.name);
+                            if(lensFocalGroup == "1" || lensFocalGroup == "6")
+                            {
+                                $('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+                            }
+                            else
+                            {
+                                $('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
+                            }
+
+
+                        });
+                        if(selectedText.indexOf("-stock") == -1 && selectedText.indexOf(" - stock") == -1)
+                        {
+                            $('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
+                        }
+                    }
+                });
+            }
     	}
     }
   	
@@ -1540,43 +1543,46 @@ $('#type_de_verreG').on('change', function() {
 			
 					});	
 				}
-				
-				
-			
-    	
-			$.ajax({
-					type: "POST",
-					url: "/admin/get_Diametre/",
-					data: {"lens" : type_de_verreG,"sphere" : sphereG,"cylindre" : cylindreG},
-					dataType: "json",
-					success: function (data) {		
-					//alert(data);	
-					console.log(data);
-				
-					$('#diametreG').empty();
-					$('#diametreG').append('<option value="">-- Choisir --</option>');
-					
-					$.each(data, function(key, value){
-						console.log(value.name);
-						if(lensFocalGroup == "1" || lensFocalGroup == "6")
-						{
-							$('#diametreG').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
-						}
-						else
-						{
-							$('#diametreG').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
-						}
-					
-					}); 
-					
-					if(selectedText.indexOf("-stock") == -1 && selectedText.indexOf(" - stock") == -1)
-					{
-						$('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
-					}
-				}
-			});	
-    		
-    	
+
+
+
+            if ($('#diameter_gauche').text() == 'Télédétourage') {
+                $('#diametreD').empty();
+                $('#diametreD').append('<option value="">Télédétourage</option>');
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/get_Diametre/",
+                    data: {"lens" : type_de_verreG,"sphere" : sphereG,"cylindre" : cylindreG},
+                    dataType: "json",
+                    success: function (data) {
+                        //alert(data);
+                        console.log(data);
+
+                        $('#diametreG').empty();
+                        $('#diametreG').append('<option value="">-- Choisir --</option>');
+
+                        $.each(data, function(key, value){
+                            console.log(value.name);
+                            if(lensFocalGroup == "1" || lensFocalGroup == "6")
+                            {
+                                $('#diametreG').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+                            }
+                            else
+                            {
+                                $('#diametreG').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
+                            }
+
+                        });
+
+                        if(selectedText.indexOf("-stock") == -1 && selectedText.indexOf(" - stock") == -1)
+                        {
+                            $('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
+                        }
+                    }
+                });
+            }
     	}
     }	
     

@@ -6473,7 +6473,7 @@ class admin
                             }
                             if (isset($information_commande->verre->correction_droit->diametre) &&
                                 !empty($information_commande->verre->correction_droit->diametre)) {
-                                $detail .= "<br>Diametre: " .
+                                $detail .= "<br>Diametre:" .
                                     $information_commande->verre->correction_droit->diametre .
                                     "";
 
@@ -9073,9 +9073,9 @@ class admin
                     }
                     if (isset($information_commande->verre->correction_droit->diametre) &&
                         !empty($information_commande->verre->correction_droit->diametre)) {
-                        $detail .= "<br>Diametre: " .
+                        $detail .= "<br>Diametre:  <span id='diameter_gauche'>" .
                             $information_commande->verre->correction_droit->diametre .
-                            "";
+                            "</span>";
 
                     }
 
@@ -9161,9 +9161,9 @@ class admin
                             }
                         }
                     }
-                    $detail .= "<br>Diametre: " .
+                    $detail .= "<br>Diametre:  <span id='diameter_droit'>" .
                         $information_commande->verre->correction_gauche->diametre .
-                        "";
+                        "</span>";
 
                 }
 

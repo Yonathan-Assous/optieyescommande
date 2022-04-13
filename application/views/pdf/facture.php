@@ -266,7 +266,7 @@
 								echo '</td>';
 
                                 $facture->total_commande += $facture->tarif_teledetourage;
-                                
+
                                 if($facture->type_commande > 1) {
 
 								    if($facture->penalty == 1) {
@@ -390,10 +390,10 @@
 
 							$total_facture_ht -= $reduc->reduction;
 						}
-                        $remiseSpecial = $this->m_remise->getTotalRemisesByUser($id_users, $total_facture_ht + $reduc->reduction);
+//                        $remiseSpecial = $this->m_remise->getTotalRemisesByUser($id_users, $total_facture_ht + $reduc->reduction);
 
-                        $total_facture_ht -= $remiseSpecial;
-                        $remise += $remiseSpecial;
+//                        $total_facture_ht -= $remiseSpecial;
+//                        $remise += $remiseSpecial;
 
                         if($remise !=0){
 //                            echo ' <tr>
@@ -448,6 +448,15 @@
                         <td class="change_order_total_col" style="text-align:right;"><strong>' . number_format($tarifPackaging, 2, '.', ' ') . ' €</strong></td>
                         </tr>';
 
+                        $remise_special = $this->m_remise->getTotalRemisesByUser($facture->id_users, $total_facture_ht);
+//                        if ($remise_special > 0) {
+                            echo ' <tr>
+                            <td colspan="4" style="text-align: right;"></td>
+                            <td colspan="1" style="text-align: right;"><strong>Remises spéciales</strong></td>
+                            <td class="change_order_total_col" style="text-align:right;"><strong>' . number_format($remise_special, 2, '.', ' ') . ' €</strong></td>
+                            </tr>';
+                            $total_facture_ht -= $remise_special;
+//                        }
 //                        if (!empty($totalRemises)) {
 //                            echo ' <tr>
 //                            <td colspan="4" style="text-align: right;"></td>
@@ -464,6 +473,8 @@
                         </tr>';
 
                     }
+
+
 
                     echo ' <tr>
                     <td colspan="4"></td>

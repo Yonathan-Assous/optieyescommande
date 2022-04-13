@@ -196,7 +196,6 @@ class index extends MY_Controller {
 		if($this->session->userdata('logged_in') === true){
 			$idlens = $_POST['lens'];
 			$typedelens = $_POST['typedelens'];
-
 //            var_dump($idlens);
 
 			$idlens = str_replace("]","",$idlens);
@@ -211,7 +210,7 @@ class index extends MY_Controller {
 			{
 				$generation = $_POST['generation'];
 //                var_dump($generation);
-				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation,$_POST['traitement']);
+				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation,$_POST['traitementId']);
 			}
 			echo json_encode($res);
 		}

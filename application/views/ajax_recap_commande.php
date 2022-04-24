@@ -547,7 +547,7 @@ $panierA = get_cookie("panierA");
                     	if(isset($discount) && $discount['on'] == $k) {
 							if($discount['amount'] > 0) {
 								$recap_commande['prix_discount'] = ($prixVerreG) - ( ( ($prixVerreG) / 100 ) * $discount['amount'] ).' €';
-								echo '<del>'.((number_format($prixVerreG, 2, ','))).' €</del> ';
+								echo '<del>'.((number_format($prixVerreG, 2, ',', ''))).' €</del> ';
 								echo '-'.$discount['amount'].'% ';
 								echo ($recap_commande['prix_discount']);
 								$total_commande += round(floatval($recap_commande['prix_discount']), 2);
@@ -637,7 +637,7 @@ $panierA = get_cookie("panierA");
 //        print_r($recap_commande);
 //        echo '</pre>';
 
-        if ($recap_commande['format_teledetourage']) {
+        if (isset($recap_commande['format_teledetourage']) && $recap_commande['format_teledetourage']) {
             if ($recap_commande['format_teledetourage'] == 'plastic') {
                 $formatTeledetourage = 'Plasique';
             }

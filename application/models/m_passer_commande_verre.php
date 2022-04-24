@@ -1627,14 +1627,14 @@ class m_passer_commande_verre extends CI_Model
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
 
         } else {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
@@ -1649,10 +1649,11 @@ class m_passer_commande_verre extends CI_Model
             } else {
                 $resultat[$res->code]["prix"] = $res->prix;
             }
+            if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
+                $resultat[$res->code]["prix"] -= 1;
+            }
         }
-        if (!is_null($traitement) && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
-            $resultat[$res->code]["prix"] -= 1;
-        }
+
 
 //        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
 //            $data['supplementD'] -= 1;

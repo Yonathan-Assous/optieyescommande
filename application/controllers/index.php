@@ -2958,7 +2958,7 @@ class index extends MY_Controller {
 
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                         $data['supplementD'] = $lenses->supplement;
-                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
                             $data['supplementD'] -= 1;
                             $data['prixDH'] -= 1;
                         }
@@ -2997,7 +2997,7 @@ class index extends MY_Controller {
 
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                         $data['supplementG'] = $lenses->supplement;
-                        if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
                             $data['supplementG'] -= 1;
                             $data['prixGH'] -= 1;
                         }

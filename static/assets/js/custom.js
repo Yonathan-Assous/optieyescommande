@@ -4282,7 +4282,7 @@ $('#traitementD').on('change', function() {
     var diametreG = $('#diametreG').val();
 	var prixverre = $('#prixVerreD').val();
 	var generation = $('#generation').val();
-    if ($('#type_de_verreD').val() == 'S1UW50' || $('#type_de_verreD').val() == 'S2UW50' || $('#type_de_verreD').val() == 'S3UW50' || $('#type_de_verreD').val() == 'S4UW50') {
+    if (generation == 'T-One' && ($('#type_de_verreD').val() == 'S1UW50' || $('#type_de_verreD').val() == 'S2UW50' || $('#type_de_verreD').val() == 'S3UW50' || $('#type_de_verreD').val() == 'S4UW50')) {
 		$.ajax({
 			type: "POST",
 			url: "/index/getPrix",

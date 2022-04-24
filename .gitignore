@@ -2,10 +2,9 @@
 /static/my_config.php
 /application/config
 .htaccess
-/uploads/docs/BL_LAKHAL.pdf
-/uploads/docs/bl_lakhal.pdf
 /static/aa
 /static/xml
+/uploads/docs
 backup*.sql.bz2
 backup*.sql
 application/logs

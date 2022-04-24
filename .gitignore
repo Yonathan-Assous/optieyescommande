@@ -4,8 +4,7 @@
 /static/my_config.php
 /application/config
 .htaccess
-/uploads/docs/BL_LAKHAL.pdf
-/uploads/docs/bl_lakhal.pdf
+/uploads/docs
 /static/aa
 /static/xml
 backup*.sql.bz2

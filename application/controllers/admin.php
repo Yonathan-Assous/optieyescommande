@@ -11007,7 +11007,8 @@ class admin
 
                 if ($calibre !=
                     "") {
-                    if ($commande->code_oma) {
+//                    print_r($commande_origine->code_oma);die;
+                    if ($commande_origine->code_oma) {
                         $edg = '
 						<edging edgingType="ONSHAPE">';
                     }

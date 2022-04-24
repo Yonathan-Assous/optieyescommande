@@ -1225,7 +1225,7 @@ $('#type_de_verreD').on('change', function() {
 			
             if ($('#diameter_droit').text() == 'Télédétourage') {
                 $('#diametreD').empty();
-                $('#diametreD').append('<option value="">Télédétourage</option>');
+                $('#diametreD').append('<option value="Télédétourage">Télédétourage</option>');
             }
             else {
                 $.ajax({
@@ -1548,7 +1548,7 @@ $('#type_de_verreG').on('change', function() {
 
             if ($('#diameter_gauche').text() == 'Télédétourage') {
                 $('#diametreD').empty();
-                $('#diametreD').append('<option value="">Télédétourage</option>');
+                $('#diametreD').append('<option value="Télédétourage">Télédétourage</option>');
             }
             else {
                 $.ajax({

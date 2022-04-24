@@ -1609,7 +1609,6 @@ class m_passer_commande_verre extends CI_Model
 									   WHERE verres_stock.id_verre = '" . $lens
             . "' AND grille_tarifaire.id_grille_tarifaire = 1";
 //        var_dump($sql);die;
-        print_r($sql);die;
         $stock_res = $this->db->query($sql);
 
         $stock_query = $stock_res->result();

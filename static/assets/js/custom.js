@@ -1,8 +1,20 @@
 // JavaScript Document
 var type_commande_verre = 0;
+var restrict = false;
 //var deuxiemepaire = 0;
 $(document).ready(function(){
     setInterval(function(){ reload_page(); },120*60000);
+	$.ajax({
+		type: "POST",
+		url: '/index/getRestriction',
+		success: function(restriction){
+			console.log('restriction: ' + restriction)
+			if(restriction == 1){
+				restrict = true;
+			}
+		}
+	});
+	console.log(restrict);
  });
 
  function reload_page()
@@ -2180,7 +2192,8 @@ $('#type_de_verreD').on('change', function() {
 			}
 		}
   	}
-    if(type_de_verreD != "")
+    console.log('dsadsadsadsadsadsasaddsasadsafdsgsdrfg')
+    if(type_de_verreD != "" && !restrict)
     {
     	$('#divprixD').removeClass('hide');
     }
@@ -2899,7 +2912,7 @@ $('#type_de_verreG').on('change', function() {
 			}
 		}
     }
-    if(type_de_verreG != "")
+    if(type_de_verreG != "" && !restrict)
     {
     	$('#divprixG').removeClass('hide');
     }
@@ -3782,7 +3795,7 @@ $('#teinteD').on('change', function() {
 		additionG = String(additionG).replace('.00', '');
 	}
 
-	if(type_de_verreD != "")
+	if(type_de_verreD != "" && !restrict)
     {
     	if(teinteD != "")
     	{
@@ -3963,7 +3976,7 @@ $('#teinteG').on('change', function() {
 
     $('#prixTeinteG').val("0");
 
-    if(type_de_verreG != "")
+    if(type_de_verreG != "" && !restrict)
     {
     	if(teinteG != "")
     	{
@@ -4338,7 +4351,7 @@ $('#traitementD').on('change', function() {
     	traitementD = "";
     }
 
-    if(type_de_verreD != "")
+    if(type_de_verreD != "" && !restrict)
     {
     	if(traitementD != "")
     	{
@@ -4610,11 +4623,12 @@ $('#traitementG').on('change', function() {
 	}
 	else
 	{
-		$('#civilite_client').css("display", "block");
+        console.log('B!!!!!!!!!!!!!!!!!!!!')
+        $('#civilite_client').css("display", "block");
 		// $('#to_etape2').addClass('disabled');
 	}
 
-    if(type_de_verreG != "")
+    if(type_de_verreG != "" && !restrict)
     {
     	if(traitementG != "")
     	{
@@ -4794,6 +4808,7 @@ var galbeG = $('#galbeG').val();
 	}
 	else
 	{
+	    console.log('A!!!!!!!!!!!!!!!!!!!!')
 		$('#civilite_client').css("display", "block");
 		// $('#to_etape2').addClass('disabled');
 	}
@@ -7847,6 +7862,21 @@ var forceAddStep = false;
 var forceSphStep = false;
 
 $(document).ready(function() {
+
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $pre_url; ?>'+"index/getRestriction",
+		success: function(restriction){
+			if(restriction == 1){
+				$('.disable_with_restrict').addClass('hide');
+			}
+			else {
+				$('.disable_with_restrict').addClass('show');
+			}
+
+		}
+	});
+
 		$('.order-form-container').fadeIn(60);
 	$(".select-search").select2();
 
@@ -8301,8 +8331,8 @@ $(document).ready(function() {
 	}
 	});
 
-	$('#commandeForm').on('change', 'input[name="carte_auth"]', function() {
-
+	// $('#commandeForm').on('change', 'input[name="carte_auth"]', function() {
+	$('.carte_auth').on('click', function() {
 		$('#to_etape2').removeClass('disabled');
 
 		var type_de_verreD = $('#type_de_verreD').val();
@@ -8425,8 +8455,8 @@ $(document).ready(function() {
 		$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 		$('.eye_text, .corrections .d, .corrections .g').hide();
 
-		if( $(this).val() == 1) {
-
+		console.log($('#li_carte_auth_y').hasClass('active'));
+		if (this.id == 'li_carte_auth_y') {
 			$('#commandeForm input[name="nom_client"], #commandeForm input[name="prenom_client"], #commandeForm select').addClass('required');
 
 			$('.next .btn').addClass('disabled');
@@ -8715,7 +8745,7 @@ $(document).ready(function() {
 			});
 
 		} else {
-			$('.auth_fields, #preview_auth_card, #preview_auth_img, #prev_auth, div.sub-auth').fadeOut();
+			$('.auth_fields, #preview_auth_card, #preview_auth_img, #prev_auth, div.sub-auth, #generer_carte').fadeOut();
 			$('.next .btn').removeClass('disabled');
 			$('#commandeForm input[type=text], #commandeForm select').removeClass('required');
 		}

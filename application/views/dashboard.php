@@ -764,7 +764,7 @@ if (is_object($pair_order)) {
                                                                                                    data-toggle="tab"
                                                                                                    aria-expanded="true"
                                                                                                    id="format_perce"
-                                                                                                   class="no-margin-right"><b>Percé</b></a>
+                                                                                                   class="no-margin-right"><b>Percée</b></a>
                                                                                             </li>
                                                                                         </ul>
 
@@ -4785,37 +4785,56 @@ if (is_object($pair_order)) {
                                                                                      style="padding-top: 15px">
 
                                                                                     <div id="type_commande_error"
-                                                                                         class="col-lg-10">
+                                                                                         class="col-lg-12">
                                                                                         <?php
                                                                                         if ($panierA != 1) {
                                                                                             ?>
-                                                                                            <div class="radio radio-warning">
-                                                                                                <input type="radio"
-                                                                                                       id="carte_auth_y"
-                                                                                                       value="1"
-                                                                                                       name="carte_auth"
-                                                                                                       class="required"
-                                                                                                       aria-required="true">
-                                                                                                <label id="text_titre_carte"
-                                                                                                       for="carte_auth_y">
-                                                                                                    Je souhaite un
-                                                                                                    certificat
-                                                                                                    d'authenticité
-                                                                                                    (Gratuit) </label>
+                                                                                        <div class="col-lg-12 card-tabs">
+                                                                                            <ul id="ul_carte_auth" class="nav nav-pills flex flex-space-between" style = "text-align:center">
+                                                                                                    <li id="li_carte_auth_y" class="carte_auth">
+                                                                                                        <a href="#"
+                                                                                                           data-toggle="tab"
+                                                                                                           aria-expanded="true"
+                                                                                                           id="carte_auth_y"><b>Je souhaite un
+                                                                                                                certificat
+                                                                                                                d'authenticité
+                                                                                                                (Gratuit)</b></a>
+                                                                                                    </li>
+                                                                                                    <li id="li_carte_auth_n" class="active carte_auth">
+                                                                                                        <a href="#"
+                                                                                                           data-toggle="tab"
+                                                                                                           aria-expanded="true"
+                                                                                                           id="carte_auth_nn"><b>Non</b></a>
+                                                                                                    </li>
+                                                                                                </ul>
                                                                                             </div>
-
-                                                                                            <div class="radio radio-warning"
-                                                                                                 id="div_auth_n">
-                                                                                                <input type="radio"
-                                                                                                       id="carte_auth_n"
-                                                                                                       value="0"
-                                                                                                       name="carte_auth"
-                                                                                                       class="required"
-                                                                                                       aria-required="true"
-                                                                                                       checked>
-                                                                                                <label for="carte_auth_n">
-                                                                                                    Non </label>
-                                                                                            </div>
+<!--                                                                                            <div class="radio radio-warning">-->
+<!--                                                                                                <input type="radio"-->
+<!--                                                                                                       id="carte_auth_y"-->
+<!--                                                                                                       value="1"-->
+<!--                                                                                                       name="carte_auth"-->
+<!--                                                                                                       class="required"-->
+<!--                                                                                                       aria-required="true">-->
+<!--                                                                                                <label id="text_titre_carte"-->
+<!--                                                                                                       for="carte_auth_y">-->
+<!--                                                                                                    Je souhaite un-->
+<!--                                                                                                    certificat-->
+<!--                                                                                                    d'authenticité-->
+<!--                                                                                                    (Gratuit) </label>-->
+<!--                                                                                            </div>-->
+<!---->
+<!--                                                                                            <div class="radio radio-warning"-->
+<!--                                                                                                 id="div_auth_n">-->
+<!--                                                                                                <input type="radio"-->
+<!--                                                                                                       id="carte_auth_n"-->
+<!--                                                                                                       value="0"-->
+<!--                                                                                                       name="carte_auth"-->
+<!--                                                                                                       class="required"-->
+<!--                                                                                                       aria-required="true"-->
+<!--                                                                                                       checked>-->
+<!--                                                                                                <label for="carte_auth_n">-->
+<!--                                                                                                    Non </label>-->
+<!--                                                                                            </div>-->
                                                                                             <?php
                                                                                         } else {
                                                                                             ?>

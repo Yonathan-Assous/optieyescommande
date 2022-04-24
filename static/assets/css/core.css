@@ -457,7 +457,10 @@ a:focus {
 .col-sm-6,
 .col-sm-7,
 .col-sm-8,
-.col-sm-9
+.col-sm-9,
+.div-lg-5,
+.div-md-5,
+.div-sm-5
  {
   padding-left: 10px;
   padding-right: 10px;
@@ -474,7 +477,8 @@ a:focus {
 .col-xs-6,
 .col-xs-7,
 .col-xs-8,
-.col-xs-9 {
+.col-xs-9,
+.div-xs-5 {
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -1309,4 +1313,101 @@ input:-webkit-autofill:active  {
   #div-video {
     display: none;
   }
+
+  .div-md-5 {
+    float: left;
+  }
+
+  .div-md-5 {
+    width: 20%;
+  }
+}
+.div-lg-5, .div-md-5, .div-sm-5 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.div-xs-5 {
+  width: 20%;
+}
+
+.div-xs-5 {
+  float: left;
+}
+
+.note {
+  padding:10px;
+  /*border-left:6px solid;*/
+  border-radius:5px
+}
+
+.note strong {
+  font-weight:600
+}
+.note p {
+  font-weight:500
+}
+
+.note-primary {
+  background-color:#dfeefd;border-color:#176ac4
+}
+
+.note-secondary {
+  background-color:#e2e3e5;border-color:#58595a
+}
+
+.note-success {
+  background-color:#e2f0e5;border-color:#49a75f
+}
+
+.note-danger {
+  background-color:#fae7e8;border-color:#e45460
+}
+
+.note-warning {
+  background-color:#faf4e0;border-color:#c2a442
+}
+
+.note-info {
+  background-color:#e4f2f5;border-color:#2492a5
+}
+
+.note-light {
+  background-color:#fefefe;border-color:#0f0f0f
+}
+
+.btn-md {
+  height: 140px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+  .div-lg-5 {
+    float: left;
+  }
+  .div-lg-5 {
+    width: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .div-sm-5 {
+    float: left;
+  }
+  .div-sm-5 {
+    width: 20%;
+  }
+}
+
+.showSweetAlert {
+  padding: 33px !important;
 }

@@ -33,6 +33,10 @@
     <link href="<?php echo $pre_url;?>static/assets/plugins/select2/dist/css/select2-bootstrap.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $pre_url;?>static/assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo $pre_url;?>static/assets/plugins/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!--    <link rel="stylesheet" href="/static/assets/mdb/css/mdb.min.css">-->
+    <link rel="stylesheet" href="/static/assets/mdb/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&family=Azeret+Mono:wght@200&family=Bellota:wght@400;700&family=Cinzel:wght@500&family=Eczar&family=Heebo:wght@300;400&family=Hina+Mincho&family=PT+Serif&family=Pacifico&family=Rajdhani&family=Roboto+Condensed:wght@300&family=Shadows+Into+Light&family=Titillium+Web:wght@300&display=swap" rel="stylesheet">

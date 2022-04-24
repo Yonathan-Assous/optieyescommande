@@ -50,16 +50,17 @@ $panierA = get_cookie("panierA");
     $total_commande = 0;
     $prixmonture = 0;
 
-
     if(isset($pair_order_recap)) {
         $orderbag['pair_order'] = $pair_order_recap;
     }
 
     $orderbag['order'] = $recap_commande;
 	//var_dump($recap_commande);
-
+//echo '<pre>';
+//print_r($orderbag);
+//echo '</pre>';
     foreach($orderbag as $k => $recap_commande) {
-
+        $quantiteVerreTeledetourage = 0;
        if($k == 'pair_order') {
            echo '<h2>Première commande</h2>';
        }
@@ -333,6 +334,7 @@ $panierA = get_cookie("panierA");
                /* if($recap_commande['type_commande'] == 1 || $recap_commande['type_commande'] == 2)
                 	echo '<td><h4>Oeil droit : '.$recap_commande['libelle_verre'].'</h4>'.$correction_droit.'</td>';
                 	*/
+
                 if($k == 'pair_order') {
 
                 	$info_d="<br>";
@@ -361,6 +363,7 @@ $panierA = get_cookie("panierA");
 
                 	echo '<td><h4>Oeil droit : '.$recap_commande['trad_fr'].'</h4>'.$correction_droit.'</td>';
                 	echo '<td class="center">1</td>';
+                    $quantiteVerreTeledetourage += 1;
 
                 	echo '<td class="center">';
                 	//var_dump($discount);
@@ -393,72 +396,73 @@ $panierA = get_cookie("panierA");
 					}
 
                 	echo '<td class="center">'.$recap_commande['quantiteD'].'</td>';
-                	if($user_info->restriction_compte == 0){
+					$quantiteVerreTeledetourage += $recap_commande['quantiteD'];
+                	if($user_info->restriction_compte == 0)
+                	{
 
 
 
-                    if(isset($info_commande['verre']['miroir']['prix_miroir'])) {
-                        $option_prix += $info_commande['verre']['miroir']['prix_miroir'];
+                        if(isset($info_commande['verre']['miroir']['prix_miroir'])) {
+                            $option_prix += $info_commande['verre']['miroir']['prix_miroir'];
+                        }
+
+
+                        if($recap_commande['type_de_verreD']!="")
+                        {
+                            echo '<td class="center">';
+                            if(isset($discount) && $discount['on'] == $k) {
+                                if($discount['amount'] > 0) {
+                                    $recap_commande['prix_discount'] = ($recap_commande['prixDH']) - ( ( ($recap_commande['prixDH']) / 100 ) * $discount['amount'] );
+                                    echo '<del>'.(($recap_commande['prixDH'])).' €</del> ';
+                                    echo '-'.$discount['amount'].'% ';
+                                    echo ($recap_commande['prix_discount']);
+                                    $total_commande += round(floatval($recap_commande['prix_discount']), 2);
+                                }
+                                else {
+                                    echo (($recap_commande['prixDH']));
+                                    $total_commande += round(floatval($recap_commande['prixDH']), 2);
+                                }
+                            }
+                            else {
+                                echo (($recap_commande['prixDH']));
+                                $total_commande += round(floatval($recap_commande['prixDH']), 2);
+                            }
+                             echo ' €</td>';
+
+                        }
+
+
+                        /*
+                        if($recap_commande['type_commande'] == 1 || $recap_commande['type_commande'] == 2)
+                        {
+                            if(isset($discount) && $discount['on'] == $k) {
+                                if($discount['amount'] > 0) {
+                                    $recap_commande['prix_discount'] = ($recap_commande['prix_verre']+$option_prix) - ( ( ($recap_commande['prix_verre']+$option_prix) / 100 ) * $discount['amount'] );
+                                    echo '<del>'.(($recap_commande['prix_verre']+$option_prix) * $quantite_commande).' €</del>';
+                                    echo '-'.$discount['amount'].'% ';
+                                    echo ($recap_commande['prix_discount']*$quantite_commande);
+                                    $total_commande += floatval($recap_commande['prix_discount']*$quantite_commande);
+                                }
+                                else {
+                                    echo (($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
+                                    $total_commande += floatval(($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
+                                }
+                            }
+                            else {
+                                echo (($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
+                                $total_commande += floatval(($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
+                            }
+                        }*/
+
+
+
                     }
-
-
-                    if($recap_commande['type_de_verreD']!="")
-                    {
-                    	echo '<td class="center">';
-                    	if(isset($discount) && $discount['on'] == $k) {
-							if($discount['amount'] > 0) {
-								$recap_commande['prix_discount'] = ($recap_commande['prixDH']) - ( ( ($recap_commande['prixDH']) / 100 ) * $discount['amount'] );
-								echo '<del>'.(($recap_commande['prixDH'])).' €</del> ';
-								echo '-'.$discount['amount'].'% ';
-								echo ($recap_commande['prix_discount']);
-								$total_commande += round(floatval($recap_commande['prix_discount']), 2);
-							}
-							else {
-								echo (($recap_commande['prixDH']));
-								$total_commande += round(floatval($recap_commande['prixDH']), 2);
-							}
-						}
-						else {
-							echo (($recap_commande['prixDH']));
-							$total_commande += round(floatval($recap_commande['prixDH']), 2);
-						}
-						 echo ' €</td>';
-
-                    }
-
-
-                    /*
-					if($recap_commande['type_commande'] == 1 || $recap_commande['type_commande'] == 2)
-                    {
-						if(isset($discount) && $discount['on'] == $k) {
-							if($discount['amount'] > 0) {
-								$recap_commande['prix_discount'] = ($recap_commande['prix_verre']+$option_prix) - ( ( ($recap_commande['prix_verre']+$option_prix) / 100 ) * $discount['amount'] );
-								echo '<del>'.(($recap_commande['prix_verre']+$option_prix) * $quantite_commande).' €</del>';
-								echo '-'.$discount['amount'].'% ';
-								echo ($recap_commande['prix_discount']*$quantite_commande);
-								$total_commande += floatval($recap_commande['prix_discount']*$quantite_commande);
-							}
-							else {
-								echo (($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
-								$total_commande += floatval(($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
-							}
-						}
-						else {
-							echo (($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
-							$total_commande += floatval(($recap_commande['prix_verre']+$option_prix) * $quantite_commande);
-						}
-					}*/
-
-
-
                 }
-                }
-
-
-
                 echo '</tr>';
 
             }
+
+
 
             if($correction_gauche!=''){
                 $correction_gauche .=$info_g;
@@ -533,6 +537,7 @@ $panierA = get_cookie("panierA");
                 	echo '<td><h4>Oeil gauche : '.$recap_commande['trad_fr'].'</h4>'
                          .$correction_gauche.'</td>';
                 	echo '<td class="center">1</td>';
+                    $quantiteVerreTeledetourage += 1;
 
                 	echo '<td class="center">';
 //                	    echo '<pre>';
@@ -542,7 +547,7 @@ $panierA = get_cookie("panierA");
                     	if(isset($discount) && $discount['on'] == $k) {
 							if($discount['amount'] > 0) {
 								$recap_commande['prix_discount'] = ($prixVerreG) - ( ( ($prixVerreG) / 100 ) * $discount['amount'] ).' €';
-								echo '<del>'.((number_format($prixVerreG, 2, ','))).' €</del> ';
+								echo '<del>'.((number_format($prixVerreG, 2, ',', ''))).' €</del> ';
 								echo '-'.$discount['amount'].'% ';
 								echo ($recap_commande['prix_discount']);
 								$total_commande += round(floatval($recap_commande['prix_discount']), 2);
@@ -566,6 +571,7 @@ $panierA = get_cookie("panierA");
 					}
 
 					echo '<td class="center">'.$recap_commande['quantiteG'].'</td>';
+                    $quantiteVerreTeledetourage += $recap_commande['quantiteG'];
 
 					if($user_info->restriction_compte == 0){
 						$option_prix = 0;
@@ -627,7 +633,34 @@ $panierA = get_cookie("panierA");
 
                 echo '</tr>';
             }
-            if(($type_commande_verre == 1  || (isset($type_commande_verreG) && $type_commande_verreG == 1 && $type_commande_verre == 4)
+//            echo '<pre>';
+//        print_r($recap_commande);
+//        echo '</pre>';
+
+        if (isset($recap_commande['format_teledetourage']) && $recap_commande['format_teledetourage']) {
+            if ($recap_commande['format_teledetourage'] == 'plastic') {
+                $formatTeledetourage = 'Plasique';
+            }
+            else if ($recap_commande['format_teledetourage'] == 'metal') {
+                $formatTeledetourage = 'Métal';
+            }
+            else if ($recap_commande['format_teledetourage'] == 'nylor') {
+                $formatTeledetourage = 'Nylor';
+            }
+            else if ($recap_commande['format_teledetourage'] == 'drilled') {
+                $formatTeledetourage = 'Percée';
+            }
+            echo '<tr>';
+            echo '<td><h4>Télédétourage Monture: '.$formatTeledetourage . ' (' . $recap_commande['prix_teledetourage'] . ' € par verre)</h4></td>';
+            echo '<td class="center">' . $quantiteVerreTeledetourage . '</td>';
+            echo '<td class="center">' . $quantiteVerreTeledetourage * $recap_commande['prix_teledetourage'] . ' €</td>';
+            echo '</tr>';
+            $total_commande += $quantiteVerreTeledetourage * $recap_commande['prix_teledetourage'];
+        }
+
+
+
+        if(($type_commande_verre == 1  || (isset($type_commande_verreG) && $type_commande_verreG == 1 && $type_commande_verre == 4)
                 || $k == 'pair_order')
                 && isset($recap_commande['recap_commande'])
                 && strpos(strtolower($recap_commande['recap_commande']['nomverreDH']),

@@ -661,6 +661,9 @@ File: Components
   box-shadow: none;
   background-color: #ffffff;
 }
+.panel-intro {
+  height: 151px;
+}
 .panel .panel-body {
   padding: 20px;
 }
@@ -1299,6 +1302,22 @@ div.DTS tbody tr.even {
   transition: .4s;
 }
 
+.color-sample-standard {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  background-color: #f8bc05;
+}
+
+.color-sample-teledetourage {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  background-color: #2196f3;
+}
+
 .slider:before {
   position: absolute;
   content: "";
@@ -1309,6 +1328,14 @@ div.DTS tbody tr.even {
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+}
+
+#slider_teledetourage {
+  background-color: #fb2b54;
+}
+
+input:checked + #slider_teledetourage {
+  background-color: #64bd63;
 }
 
 input:checked + .slider {

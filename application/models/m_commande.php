@@ -37,6 +37,9 @@ class m_commande extends CI_Model {
         'tarif_packaging'                => 'tarif_packaging',
         'tarif_supplement'               => 'tarif_supplement',
         'tarif_express'                  => 'tarif_express',
+        'tarif_teledetourage'            => 'tarif_teledetourage',
+        'teledetourage_format_id'        => 'teledetourage_format_id',
+        'code_oma'                       => 'code_oma',
         'is_express'                     => 'is_express',
         'email_send'                     => 'email_send',
         'type_commande'					 => 'type_commande',
@@ -253,7 +256,7 @@ class m_commande extends CI_Model {
             $add .= 'AND c.type_commande > 1';
         }
 
-        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
+        $sql = "SELECT date_update_commande,c.id_commande,c.id_type_generation_verre,date_commande, c.code_oma, c.tarif_express, c.is_express, c.id_etat_commande,information_commande,type_commande,ancienne_commande,total_commande,reference_client,libelle_etat_commande,generation_verre,
                                    type_generation_verre,c.prix_verre,intitule_bl,c.id_generation_verre, c.origine_commande,commentaire
                                    FROM ".$this->table." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -578,9 +581,9 @@ class m_commande extends CI_Model {
                                    LEFT JOIN ".$table_commentaire." cc ON cc.id_commande = c.id_commande
                                    LEFT JOIN intitule_bl ib ON c.id_commande = ib.id_commande
                                    WHERE c.id_commande=".$id_commande." ".$sql_add." " . $sqlGeneration . "
-                                   AND (display = 'X' OR v.id_verre IS NOT NULL)
                                    ORDER BY date_commande DESC";
-//print_r($sql);die;
+//            AND (display = 'X' OR v.id_verre IS NOT NULL)
+
             $query = $this->db->query($sql);
             if ($query && $query->num_rows() > 0)
                 return $query->result();
@@ -642,7 +645,7 @@ class m_commande extends CI_Model {
     public function getAllCommandeEdiOmega()
     {
         $sql_add = "WHERE (c.id_verre IN (SELECT code FROM lenses) AND c.id_etat_commande < 6)";
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.tarif_teledetourage, c.teledetourage_format_id, c.code_oma, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -685,7 +688,7 @@ class m_commande extends CI_Model {
             $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
             $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
         }
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -707,7 +710,7 @@ class m_commande extends CI_Model {
 
     public function getCommandeEdiOmegaById($id_commande){
 
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_teledetourage, c.teledetourage_format_id, c.code_oma, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -728,7 +731,7 @@ class m_commande extends CI_Model {
     public function getCommandeEdiOmegaByIdD($id_commande){
 
 
-        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -747,7 +750,6 @@ class m_commande extends CI_Model {
     public function updateCommandeOmega($id_commande,$textarea,$axml)
     {
         $sql = "UPDATE commande_omega SET xml = '".addslashes($axml)."',commande = '".addslashes($textarea)."'  WHERE id = '".$id_commande."'";
-
         //echo $sql; die;
         if($this->db->query($sql)) {
             return 1;
@@ -1063,7 +1065,7 @@ class m_commande extends CI_Model {
 //			$sWhere .= $addField;
 //		}
 
-        $sql = "SELECT c.id_users,c.id_commande,c.intitule_bl, c.tarif_express, c.is_express, c.penalty, c.ancienne_commande, c.total_commande, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
+        $sql = "SELECT c.id_users,c.id_commande,c.intitule_bl, c.code_oma, c.tarif_express, c.is_express, c.penalty, c.ancienne_commande, c.total_commande, date_commande,reference_client,date_update_commande,type_commande,nom_magasin,nom_societe,commentaire,c.id_generation_verre
                                     FROM ".$this->table." c
                                     INNER JOIN users u ON c.id_users = u.id_users 
                                     LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
@@ -1434,7 +1436,7 @@ class m_commande extends CI_Model {
             }
         }
 
-        $query = $this->db->query("SELECT l.name as lens_name, c.id_commande,c.id_users, c.type_commande, c.penalty, date_commande,c.tarif_express,c.is_express,reference_client,total_commande,generation_verre,taux_tva,libelle_verre_personnalise, 0 as TarifLivraison,intitule_bl, c.id_users, date_update_commande, tarif_packaging, c.commande_monture, v.libelle_verre, trad_fr
+        $query = $this->db->query("SELECT l.name as lens_name, c.id_commande,c.id_users, c.type_commande, c.penalty, date_commande,c.tarif_express,c.is_express,c.tarif_teledetourage,reference_client,total_commande,generation_verre,taux_tva,libelle_verre_personnalise, 0 as TarifLivraison,intitule_bl, c.id_users, date_update_commande, tarif_packaging, c.commande_monture, v.libelle_verre, trad_fr
                                        FROM ".$this->table." c
                                        LEFT JOIN generation_verre gv ON gv.id_generation_verre = c.id_generation_verre
                                        LEFT JOIN lens l ON l.id = c.lens_id
@@ -1462,7 +1464,9 @@ class m_commande extends CI_Model {
             return $data;
         }
 
-        $query2 = $this->db->query("SELECT 0 as total_commande,0 as total_stock,0 as total_fabrique,c.id_users, '".$data['date']."-01' as date_commande,cp,nom_magasin c.penalty, ,id_grille_tarifaire,nom_societe,' ' as intitule_bl, COALESCE(SUM(TarifLivraison1), 0) + COALESCE(SUM(TarifLivraison2), 0) as TarifLivraison
+        $query2 = $this->db->query("SELECT 0 as total_commande,0 as total_stock,0 as total_fabrique,c.id_users, '".$data['date']."-01' as date_commande,
+        cp,nom_magasin c.penalty, ,id_grille_tarifaire,nom_societe,' ' as intitule_bl, 
+        COALESCE(SUM(TarifLivraison1), 0) + COALESCE(SUM(TarifLivraison2), 0) as TarifLivraison
 										FROM ".$this->table." c
 										INNER JOIN users u ON c.id_users = u.id_users
 										   LEFT JOIN (
@@ -1932,7 +1936,6 @@ class m_commande extends CI_Model {
 
 
     public function getAllCommandeByMonthAndUser($date, $excl = null, $user = null){
-
         if($excl) {
             $excl = 'AND c.id_users NOT IN('.implode(',', $excl).')';
         }
@@ -2085,7 +2088,7 @@ class m_commande extends CI_Model {
            )
            LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_stock,id_users as idusersstock,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_stock
+            SUM(total_commande) + SUM(tarif_teledetourage) as total_stock,id_users as idusersstock,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_stock
             FROM ".$this->table." c
             WHERE (id_type_generation_verre = 5 OR id_type_generation_verre = 23 OR origine_commande=2) 
             AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
@@ -2098,7 +2101,7 @@ class m_commande extends CI_Model {
           )
           LEFT JOIN 
           (SELECT 
-            SUM(total_commande) as total_fabrique,id_users as idusersfabrique,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_fabric
+            SUM(total_commande) + SUM(tarif_teledetourage) as total_fabrique,id_users as idusersfabrique,DATE_FORMAT(c.date_commande, '%Y-%m') AS y_m_commande, COUNT(1) AS exp_fabric
             FROM ".$this->table." c
             WHERE (origine_commande=1)
             AND (type_commande = 1 OR (type_commande > 1 AND penalty = 1))
@@ -2147,7 +2150,6 @@ class m_commande extends CI_Model {
           ".$user."
           GROUP BY c.id_users, y_m_commande, commande_stock.total_stock, commande_fabrique.total_fabrique, commande_lentilles.total_lentilles, commande_montures.total_montures, commande_express.total_express, total, reduction, commande_stock.exp_stock, commande_fabrique.exp_fabric
           ORDER BY c.id_users";
-//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
@@ -2571,7 +2573,7 @@ class m_commande extends CI_Model {
                 }
         }
 //        print_r($TarifLivraison);die;
-        $sql = "SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM commande
+        $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1
                                    OR type_commande > 1 AND penalty = 1)
                                    AND is_confirmed = 1)
@@ -2649,7 +2651,8 @@ class m_commande extends CI_Model {
             }
         }
 
-        return $total;
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonthAndByCommercial(date("Y-m"), 'Samuel');
+        return $total - $remises;
     }
 
     public function getCAmonthSupplement_Daniel($date){
@@ -2696,8 +2699,8 @@ class m_commande extends CI_Model {
                 $total += $result->ca;
             }
         }
-
-        return $total;
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonthAndByCommercial(date("Y-m"), 'Daniel');
+        return $total - $remises;
     }
 
     public function getCAmonthSupplement_Gregory($date){
@@ -2750,8 +2753,9 @@ class m_commande extends CI_Model {
                 $total += $result->ca;
             }
         }
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonthAndByCommercial(date("Y-m"), 'Gregory');
 
-        return $total;
+        return $total - $remises;
     }
 
     public function getCAmonthSupplement_Glenn($date){
@@ -2807,8 +2811,8 @@ class m_commande extends CI_Model {
                 $total += $result->ca;
             }
         }
-
-        return $total;
+        $remises = $this->m_remise->getTotalRemisesPerUserByMonthAndByCommercial(date("Y-m"), 'Glenn');
+        return $total - $remises;
     }
 
     public function getCAmonthSupplement_Optical_Service($date){
@@ -3169,6 +3173,15 @@ class m_commande extends CI_Model {
             $pair = $data['pair'];
             unset($data['discount']);
             $data['by_admin'] = $byAdmin;
+            if (isset($data['txtOmaImageIn'])) {
+                $data['code_oma'] = "'" . bin2hex($data['txtOmaImageIn']) . "'";
+//                $hex='';
+//                for ($i=0; $i < strlen($data['txtOmaImageIn']); $i++){
+//                    $hex .= dechex(ord($data['txtOmaImageIn'][$i]));
+//                }
+//                $data['code_oma'] = "'" . $hex . "'";
+            }
+
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3226,6 +3239,7 @@ class m_commande extends CI_Model {
                 }
                 $data['id_verre'] = "'".$data['id_verre']."'";
                 $data['generation'] = "'".$data['generation']."'";
+                $data['code_oma'] = "'".$data['code_oma']."'";
                 $data['id_type_generation_verre']=0;
                 // PLZ RTFM
                 // https://www.codeigniter.com/userguide2/database/active_record.html
@@ -3270,7 +3284,6 @@ class m_commande extends CI_Model {
 
             else
             {
-
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3468,9 +3481,10 @@ class m_commande extends CI_Model {
                     }
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-//                    var_dump($sql);die;
 
-                    if($this->db->query($sql));
+//                    var_dump($sql);die;
+                    //print_r($sql);die;
+                    if($this->db->query($sql))
                     {
 
                         $commande_id = $this->db->insert_id();
@@ -4006,7 +4020,7 @@ class m_commande extends CI_Model {
                     $TarifLivraison += $value->TarifLivraison;
                 }
 
-            $query = $this->db->query("SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
+            $sql = "SELECT COALESCE(TarifLivraison1,0) + COALESCE(TarifLivraison2,0) as TarifLivraison,id_users,date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -4040,7 +4054,9 @@ class m_commande extends CI_Model {
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime(date('Y-m').'-01 -1 month'))."'
-                                     GROUP BY id_users, TarifLivraison, date_update_commande");
+                                     GROUP BY id_users, TarifLivraison, date_update_commande";
+
+            $query = $this->db->query($sql);
 
 //            print_r($sql);
 
@@ -4073,7 +4089,7 @@ class m_commande extends CI_Model {
 
         }
 
-        $sql = "SELECT (SELECT IFNULL(SUM(total_commande),0) as ca_journalier FROM ".$this->table."
+        $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND (type_commande = 1 OR type_commande > 1 AND penalty = 1)
@@ -4089,7 +4105,8 @@ class m_commande extends CI_Model {
                                    -
 								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
 								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier";
-//        print_r($sql);
+
+//        print_r($sql);die;
 
 
         $query = $this->db->query($sql);
@@ -4108,13 +4125,14 @@ class m_commande extends CI_Model {
         $TabHoraireTarifLiv = array();
 
         $tarif = 0;
-        $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
+        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
                                    AND id_etat_commande = 6
                                    AND ( DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND ((date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
-                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day");
+                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day";
+        $query = $this->db->query($sql);
 
         $TarifLivraisonTab = array();
 
@@ -4136,14 +4154,14 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-
-        $query = $this->db->query("SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
+        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
                                    AND id_etat_commande = 6
                                    AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
-                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day");
+                                   GROUP BY id_users,date(date_update_commande), TarifLivraison, day";
+        $query = $this->db->query($sql);
 
         if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
@@ -4165,7 +4183,7 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-        $query = $this->db->query("SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
+        $sql = "SELECT COALESCE(SUM(TarifLivraison1),0) + COALESCE(SUM(TarifLivraison2),0) as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) as date_update_commande
                                      FROM ".$this->table." c
 									 LEFT JOIN 
 									  ( 
@@ -4198,7 +4216,8 @@ class m_commande extends CI_Model {
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
                                      AND DATE_FORMAT(date_commande, '%Y-%m') = '".date('Y-m',strtotime($date.'-01 -1 month'))."'
-                                     GROUP BY id_users,date(date_update_commande), day");
+                                     GROUP BY id_users,date(date_update_commande), day";
+        $query = $this->db->query($sql);
 
         if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
@@ -4263,7 +4282,7 @@ class m_commande extends CI_Model {
 //                }
 //        }
 
-        $sql = "SELECT SUM(total_commande) - COALESCE(total_reductions, 0) AS total_ht,
+        $sql = "SELECT SUM(total_commande) + SUM(tarif_teledetourage) - COALESCE(total_reductions, 0) AS total_ht,
                         taux_tva,
                         DATE_FORMAT(date_commande, '%e') AS day,
                         date_commande
@@ -4318,6 +4337,8 @@ class m_commande extends CI_Model {
                     $data[$day]['total_ht'] += $tarif;
                     $data[$day]['total_ttc'] += round($data[$day]['total_ht'] * 1.2 ,2);
                 }
+//print_r($data);die;
+
             return $data;
         }
 
@@ -5362,6 +5383,19 @@ class m_commande extends CI_Model {
         $this->db->query($sql);
     }
 
+//    public function getTotalCommandePerUSersByMonth()
+//    {
+//        $sql = "SELECT id_users, SUM(`total_commande`) as total FROM `commande`
+//                WHERE `date_commande` >= '2021-12'
+//                AND (type_commande = 1
+//                OR (type_commande > 1 AND penalty = 1))
+//                GROUP BY id_users";
+//        $query = $this->db->query($sql);
+//        if ($query && $query->num_rows() > 0) {
+//            return $query->result();
+//        }
+//    }
+
     /** La date est sous forme m-Y */
     public function getTotalCommandeWithAndWithoutTvaByuserAndDate($userId, $date = NULL){
 
@@ -5387,10 +5421,6 @@ class m_commande extends CI_Model {
             return $query->result();
 
         return false;
-    }
-
-    public function getTotalTvaByUser($userId) {
-
     }
 
     /** La date est sous forme m-Y */

@@ -131,7 +131,7 @@ class index extends MY_Controller {
 			$axeD = $_POST['axeD'];
 			$additionD = $_POST['additionD'];
 			$stock = $_POST['stockD'];
-
+            $teledetourage = $_POST['teledetourage'];
 			$panierA = $_POST['panierA'];
 
 			if(isset($_POST['type']))
@@ -141,7 +141,7 @@ class index extends MY_Controller {
 
 			$user_id = $this->data['user_info']->id_users;
 
-			$res = $this->m_passer_commande_verre->getlens($indice,$lensFocalGroup,$generation,$sphereD,$cylindreD,$axeD,$additionD,$stock,$user_id,$panierA,$type);
+			$res = $this->m_passer_commande_verre->getlens($indice,$lensFocalGroup,$generation,$sphereD,$cylindreD,$axeD,$additionD,$stock,$user_id,$panierA,$type,$teledetourage);
 			echo json_encode($res);
 		}
 		else
@@ -196,7 +196,6 @@ class index extends MY_Controller {
 		if($this->session->userdata('logged_in') === true){
 			$idlens = $_POST['lens'];
 			$typedelens = $_POST['typedelens'];
-
 //            var_dump($idlens);
 
 			$idlens = str_replace("]","",$idlens);
@@ -211,7 +210,7 @@ class index extends MY_Controller {
 			{
 				$generation = $_POST['generation'];
 //                var_dump($generation);
-				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation);
+				$res = $this->m_passer_commande_verre->getPrix($idlens,$user_id,$generation,$_POST['traitementId']);
 			}
 			echo json_encode($res);
 		}
@@ -222,12 +221,12 @@ class index extends MY_Controller {
 
 	public function get_Diametre($recovery=false){
 		if($this->session->userdata('logged_in') === true){
-			$sphere = $_POST['sphere'];
+            $sphere = $_POST['sphere'];
 			$cylindre = $_POST['cylindre'];
 			$lens = $_POST['lens'];
+            $diametreUtile = $_POST['diametre_utile'];
 
-
-			$res = $this->m_passer_commande_verre->getDiametres($lens,$sphere,$cylindre);
+			$res = $this->m_passer_commande_verre->getDiametres($lens,$sphere,$cylindre,$diametreUtile);
 			echo json_encode($res);
 		}
 		else
@@ -1689,8 +1688,10 @@ class index extends MY_Controller {
 
                 $id_commande = (int)$this->input->post('id');
                 $data['page'] = "Commande N°" . $id_commande;
+
                 $data['recap_commande'] = $this->m_commande->getCommandeById($id_commande,$this->data['user_info']->id_users);
                 $data['pair'] = $this->m_commande->getOrderByPairId($id_commande);
+
                 if($data['recap_commande'][0]->id_type_generation_verre == "0")
 				{
 					$info_commande = json_decode($data['recap_commande'][0]->information_commande,true);
@@ -1709,6 +1710,15 @@ class index extends MY_Controller {
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
+
+					if ($this->getRestrictionToDisable()) {
+                        $data['restrict'] = true;
+
+                    }
+					else {
+                        $data['restrict'] = false;
+                    }
+
 					$this->load->view('layout/commande-detail-new', $data);
 				}
         		else
@@ -1838,7 +1848,7 @@ class index extends MY_Controller {
 						else
 						{
 							$recommande = '<a class="commande-info btn btn-icon waves-effect waves-light '.(!empty($commande->commentaire) ? 'btn-warning tooltipster' : 'btn-inverse').'" data-toggle="modal" data-target="#detail-commande" rel="' . $commande->id_commande . '" ' . (!empty($commande->commentaire) ? 'original-title="' . htmlentities($commande->commentaire) . '" title="'.htmlentities($commande->commentaire).'"' : '') . ' ><i class="zmdi zmdi-'.(!empty($commande->commentaire) ? 'comment' : 'search').'"></i> Voir</a>';
-							if($commande->id_generation_verre>=30)
+							if($commande->id_generation_verre>=30 && !$commande->code_oma)
 							{
 								$recommande .= '<a class="btn btn-warning waves-effect wave-light" href="/index/recommande/'.$commande->id_commande.'">Recommander</a>';
 							}
@@ -2043,6 +2053,7 @@ class index extends MY_Controller {
         if($this->input->is_ajax_request()) {
 
             $data = $this->session->userdata('order');
+//            print_r($data);die;
 
             $add = $this->input->post();
 //
@@ -2097,7 +2108,6 @@ class index extends MY_Controller {
 
                     $pair_order_data = $this->m_commande->getCommandeByIdNew($data['pair_order_id'], $data['id_users'], $pair = true)[0];
                    // var_dump($pair_order_data);
-
                     $data_corrections = json_decode($data['information_commande'], true);
                     $pair_order_data_corrections = json_decode($pair_order_data->information_commande, true);
 
@@ -2766,17 +2776,17 @@ class index extends MY_Controller {
 					$data['total_commande'] = $data['prix_verre'] =  $prix_verre[0]->prix_verre+$supplement;
 
                     if($data['type_commande'] == 1) {
-                        $data['tarif_supplement'] = $supplement;
+//                        $data['tarif_supplement'] = $supplement;
                     }
                     else {
-                        $data['tarif_supplement'] = 0;
+//                        $data['tarif_supplement'] = 0;
                     }
 
 					$data['libelle_verre'] =   $prix_verre[0]->libelle_verre;
 
                     if($prix_double) {
                         $data['total_commande'] *= 2;
-                        $data['tarif_supplement'] *= 2;
+//                        $data['tarif_supplement'] *= 2;
                     }
 
 					if(isset($data['miroir']) && $data['miroir'] != 0)
@@ -2887,20 +2897,42 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
 //                var_dump($data['prixDH']);die;
-
+//                print_r($data['txtOmaImageIn']);die;
+//                print_r(bin2hex($data['txtOmaImageIn']));die;
+//                print_r($data);die;
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;
                 $data['prixGH'] = 0;
+                $data['supplementD'] = 0;
+                $data['supplementG'] = 0;
+                $data['tarif_teledetourage'] = 0;
+
+                if($data['format_teledetourage']) {
+                    $is_teledetourage = true;
+                    $data['prix_teledetourage'] = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $data['format_teledetourage']);
+                    if (isset($data['droit'])) {
+                        $data['tarif_teledetourage'] += $data['prix_teledetourage'];
+                    }
+                    if (isset($data['gauche'])) {
+                        $data['tarif_teledetourage'] += $data['prix_teledetourage'];
+                    }
+                    $data['teledetourage_format_id'] = $this->m_teledetourage->getTeledetourageFormatId($data['format_teledetourage']);
+                }
+                else {
+                    $is_teledetourage = false;
+                    $data['prix_teledetourage'] = 0;
+                }
 //                var_dump($data);die;
+//                print_r($user['user_info']->tarif_supplement_fab);die;
                 if (isset($data['droit'])) {
                     $verreName = stristr($data['nomverreDH'], ' -', true);
-
+//                    print_r($verreName);die;
                     $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
-
-                    if ($verreStockD) {
+                    if ($verreStockD && !$data['format_teledetourage']) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
+                        $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
                     }
                     else {
                         $teinteCode = NULL;
@@ -2919,18 +2951,28 @@ class index extends MY_Controller {
                         if(isset($data['PrismeSphereD'])) {
                             $prisme = $data['PrismeSphereD'];
                         }
-
-                        $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId, $data['nomverreDH'],
+                        $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteD;
+
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
+                        $data['supplementD'] = $lenses->supplement;
+                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
+                            $data['supplementD'] -= 1;
+                            $data['prixDH'] -= 1;
+                        }
+                        $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
                 }
+                $data['supplementD'] = max(0, $data['supplementD']);
+
                 if (isset($data['gauche'])) {
                     $verreName = stristr($data['nomverreGH'], ' -', true);
                     $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
-                    if ($verreStockG) {
+                    if ($verreStockG && !$data['format_teledetourage']) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
+                        $data['supplementG'] = $verreStockG->supplement * $quantiteG + ($user['user_info']->tarif_supplement - 1);
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -2948,11 +2990,20 @@ class index extends MY_Controller {
                         if (isset($data['PrismeSphereG'])) {
                             $prisme = $data['PrismeSphereG'];
                         }
-                        $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId, $data['nomverreGH'],
+                        $data['prixGH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode) * $quantiteG;
+
+                        $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
+                        $data['supplementG'] = $lenses->supplement;
+                        if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
+                            $data['supplementG'] -= 1;
+                            $data['prixGH'] -= 1;
+                        }
+                        $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
                 }
+                $data['supplementG'] = max(0, $data['supplementG']);
 
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];
 
@@ -2960,12 +3011,12 @@ class index extends MY_Controller {
                 $data['id_users'] = $user['user_info']->id_users;
                 $data['data_admin'] = $this->session->userdata('data_admin');
 
-                $supplement = 0;
 
-                if($data['user_info']->tarif_supplement > 0) {
-					$supplement = $data['user_info']->tarif_supplement;
-				}
+//                $supplement = 0;
 
+//                if($data['user_info']->tarif_supplement > 0) {
+//					$supplement = $data['user_info']->tarif_supplement;
+//				}
 				$result = $this->m_config->getConfig(array('nom_config' => 'commentaire'));
                 $data['commentaire_actif'] = json_decode($result[0]->param_config);
 
@@ -2981,7 +3032,7 @@ class index extends MY_Controller {
 				//$data['true_type_commande'] = $data['type_commande'];
 
 				$data['panierA'] = 0;
-				$data['tarif_supplement'] = 0;
+//				$data['tarif_supplement'] = 0;
 
 				if($data['type_de_verreD']!=$data['type_de_verreG'] || !isset($data['gauche']) || !isset($data['droit']))
 				{
@@ -3011,7 +3062,7 @@ class index extends MY_Controller {
 							$data['origine_commande'] = 1;
 							$data['origine_commandeD'] = 1;
 
-                        	$data['tarif_supplement'] = $supplement;
+//                        	$data['tarif_supplement'] = $supplement;
 						}
 					}
 
@@ -3039,7 +3090,7 @@ class index extends MY_Controller {
 							$data['origine_commande'] = 1;
 							$data['origine_commandeG'] = 1;
 
-							$data['tarif_supplement'] = $supplement;
+//							$data['tarif_supplement'] = $supplement;
 						}
 
                     }
@@ -3075,7 +3126,7 @@ class index extends MY_Controller {
 						$data['origine_commandeD'] = 1;
 						$data['origine_commandeG'] = 1;
 
-						$data['tarif_supplement'] = $supplement;
+//						$data['tarif_supplement'] = $supplement;
 					}
 				}
 
@@ -3097,7 +3148,11 @@ class index extends MY_Controller {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
-					$data['reference_client'] = $pair_order->reference_client;
+                    if ($pair_order->code_oma) {
+                        $pair_order->format_teledetourage = $this->m_teledetourage->getMontureByFormatId($pair_order->teledetourage_format_id);
+                        $pair_order->prix_teledetourage = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $pair_order->format_teledetourage);
+                    }
+                    $data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
 				if($data['diametreD'] == 'precalibrage')
@@ -3640,10 +3695,12 @@ class index extends MY_Controller {
 
 				if($prix_double) {
 					$data['total_commande'] *= 2;
-					$data['tarif_supplement'] *= 2;
+//					$data['tarif_supplement'] *= 2;
 				}
 
-				$data['recap_commande'] = $data;
+                $data['tarif_supplement'] = $data['supplementG'] + $data['supplementD'];
+
+                $data['recap_commande'] = $data;
 				if(isset($data['pair_order_recap'])) {
 					$info_commande_pair = json_decode($pair_order->information_commande,true);
 //                    var_dump($info_commande_pair["verre"]["correction_droit"]["traitement"]);
@@ -3752,7 +3809,6 @@ class index extends MY_Controller {
 
 				}
                 $this->session->set_userdata('order', $data);
-
 				$data['recap_commande'] = $data;
 
 				if($data['panierA']==2)
@@ -3982,6 +4038,11 @@ class index extends MY_Controller {
             return $this->m_users->getUserById($this->data['user_info']->id_users)[0]->restriction_compte;
         }
 
+    }
+
+    public function getRestrictionToDisable(){
+        $this->load->model('m_users');
+        return $this->m_users->getUserById($this->data['user_info']->id_users)[0]->restriction_compte;
     }
 
     public function recommande($order_id = false) {
@@ -4881,7 +4942,6 @@ class index extends MY_Controller {
     public function getDiametre(){
       if($this->input->is_ajax_request()){
           $post = $this->input->post();
-
           $return = $this->m_grille_stock->getDiametre($post);
 
           $data = array();
@@ -5132,6 +5192,7 @@ class index extends MY_Controller {
                         //Vous trouverez aussi en pièce jointe de ce mail notre catalogue électronique pour votre logiciel optique. Merci de bien vouloir contacter le service client de votre logiciel et lui fournir le fichier joint à ce mail, pour qu'il puisse vous intégrer notre catalogue Optimize sur votre logiciel d'opticien.
                         $inscription['user_id'] = $userId;
                         $submitSepa = $this->submit_sepa($inscription, $sepa);
+                        $this->m_teledetourage->addTeledetourageFormat($userId);
                         if (!$submitSepa) {
                             echo json_encode(array('status'=> 'error', 'error' => 'iban'));
                         }

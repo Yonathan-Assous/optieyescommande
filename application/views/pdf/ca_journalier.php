@@ -20,13 +20,16 @@
                     <td><h1 style="text-align: left">Export CA <?php echo $date; ?></h1></td>
                 </tr>
             </table>
-
-
+            <?php
+            $dCust=explode("-",$date);
+            $dEnd=$dCust[1].'-'.$dCust[0];
+            ?>
 <!--            <table class="change_order_items">-->
 <!--                <tbody>-->
 <!--                --><?php
-                $dCust=explode("-",$date);
-                $dEnd=$dCust[1].'-'.$dCust[0];
+//                $dCust=explode("-",$date);
+//                $dEnd=$dCust[1].'-'.$dCust[0];
+
 //
 //                $maxJour = date("t",strtotime($date));
 //                $maxJourParLigne = 7;

@@ -1,4 +1,6 @@
-/system
+/system/database
+/system/core
+/system/fonts
 /static/my_config.php
 /application/config
 /application/logs

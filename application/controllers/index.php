@@ -2108,7 +2108,6 @@ class index extends MY_Controller {
 
                     $pair_order_data = $this->m_commande->getCommandeByIdNew($data['pair_order_id'], $data['id_users'], $pair = true)[0];
                    // var_dump($pair_order_data);
-
                     $data_corrections = json_decode($data['information_commande'], true);
                     $pair_order_data_corrections = json_decode($pair_order_data->information_commande, true);
 
@@ -3149,8 +3148,10 @@ class index extends MY_Controller {
 					$pair_order = $this->m_commande->getCommandeByIdNew($data['pair_order'], $user['user_info']->id_users, true)[0];
 					$pair_order_id = $data['pair_order'];
 					//$data['type_commande'] = $pair_order->type_commande;
-                    $pair_order->format_teledetourage = $this->m_teledetourage->getMontureByFormatId($pair_order->teledetourage_format_id);
-                    $pair_order->prix_teledetourage = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $pair_order->format_teledetourage);
+                    if ($pair_order->code_oma) {
+                        $pair_order->format_teledetourage = $this->m_teledetourage->getMontureByFormatId($pair_order->teledetourage_format_id);
+                        $pair_order->prix_teledetourage = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $pair_order->format_teledetourage);
+                    }
                     $data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}

@@ -3239,6 +3239,7 @@ class m_commande extends CI_Model {
                 }
                 $data['id_verre'] = "'".$data['id_verre']."'";
                 $data['generation'] = "'".$data['generation']."'";
+                $data['code_oma'] = "'".$data['code_oma']."'";
                 $data['id_type_generation_verre']=0;
                 // PLZ RTFM
                 // https://www.codeigniter.com/userguide2/database/active_record.html

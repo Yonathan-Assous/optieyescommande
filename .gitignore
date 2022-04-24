@@ -3,10 +3,10 @@
 /system/fonts
 /static/my_config.php
 /application/config
+/application/logs
 .htaccess
 /static/aa
 /static/xml
 /uploads/docs
 backup*.sql.bz2
 backup*.sql
-application/logs

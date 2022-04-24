@@ -6238,8 +6238,15 @@ class admin
                     
                     if ($calibre !=
                         "") {
-                        $edg = '
-						<edging edgingType="NONE">
+                        if ($commande->code_oma) {
+                            $edg = '
+						<edging edgingType="ONSHAPE">';
+                        }
+                        else {
+                            $edg = '
+						<edging edgingType="NONE">';
+                        }
+                        $edg .= '
 						   <bevel>
 							  <type>BEVEL</type>
 							  <position posType="AUTO">0</position>
@@ -8684,8 +8691,15 @@ class admin
 
                             if ($calibre !=
                                 "") {
-                                $edg = '
-            <edging edgingType="NONE">
+                                if ($commande->code_oma) {
+                                    $edg = '
+            <edging edgingType="ONSHAPE">';
+                                }
+                                else {
+                                    $edg = '
+            <edging edgingType="NONE">';
+                                }
+                                $edg .= '
                <bevel>
                   <type>BEVEL</type>
                   <position posType="AUTO">0</position>
@@ -10993,8 +11007,15 @@ class admin
 
                 if ($calibre !=
                     "") {
-                    $edg = '
-						<edging edgingType="NONE">
+                    if ($commande->code_oma) {
+                        $edg = '
+						<edging edgingType="ONSHAPE">';
+                    }
+                    else {
+                        $edg = '
+						<edging edgingType="NONE">';
+                    }
+                    $edg .= '
 						   <bevel>
 							  <type>BEVEL</type>
 							  <position posType="AUTO">0</position>

@@ -200,13 +200,17 @@
 				
 				echo '<td><h4>Oeil droit : '.$recap_commande[0]->trad_fr.$recap_commande[0]->libelle_verre.'</h4>'.$correction_droit.'</td>';
 				echo '<td class="center">1</td>';
-				
-				echo '<td class="center">';
-				
-				if($recap_commande[0]->total_remise_paire > 0) {
-					echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
-				}
-                echo (number_format($recap_commande[0]->prix_verre+$option_prix,2, ',', '')).' €';
+
+				if (!$restrict) {
+                    echo '<td class="center">';
+
+                    if($recap_commande[0]->total_remise_paire > 0) {
+                        echo '<del>'.($recap_commande[0]->prix_verre+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
+                    }
+                    echo (number_format($recap_commande[0]->prix_verre+$option_prix,2, ',', '')).' €';
+                    echo '</td>';
+                }
+
 
 				echo '</tr>';
 
@@ -286,15 +290,17 @@
 				echo '<td><h4>Oeil gauche : '.$recap_commande[0]->trad_fr
                      .$recap_commande[0]->libelle_verre.'</h4>'.$correction_gauche.'</td>';
 				echo '<td class="center">1</td>';
-				
-				echo '<td class="center">';
-				
-				if($recap_commande[0]->total_remise_paire > 0) {
-					echo '<del>'.($prixVerreG+$option_prix+$recap_commande[0]->total_remise_paire).' €</del> ';
-				}
+                if (!$restrict) {
+                    echo '<td class="center">';
+
+                    if ($recap_commande[0]->total_remise_paire > 0) {
+                        echo '<del>' . ($prixVerreG + $option_prix + $recap_commande[0]->total_remise_paire) . ' €</del> ';
+                    }
 
 //				echo ($prixVerreG+$option_prix).' €';
-                echo (number_format($prixVerreG+$option_prix,2, ',', '')).' €';
+                    echo (number_format($prixVerreG + $option_prix, 2, ',', '')) . ' €';
+                    echo '</td>';
+                }
 
 
                 echo '</tr>';
@@ -324,7 +330,9 @@
                         Délais maximum pour une commande passée avant 15h30 : J+3<br />( hors jours fériés et week-end )<br />
                         Rajouter 1 jour pour des verres teintés. 
                     </td>
-                    <td class="center">'.number_format($recap_commande[0]->tarif_express, 2, ',', ' ').' €</td>
+                    if (!$restrict) {
+                        <td class="center">'.number_format($recap_commande[0]->tarif_express, 2, ',', ' ').' €</td>
+                    }
                     </tr>';
                 }
 
@@ -336,7 +344,9 @@
                         <h4 style="margin: 20px 0 10px">Télédétourage Monture ' . $monture . '</h4>
                     </td>
                     <td></td>
-                    <td class="center">'.number_format($recap_commande[0]->tarif_teledetourage, 2, ',', ' ').' €</td>
+                    if (!$restrict) {
+                        <td class="center">'.number_format($recap_commande[0]->tarif_teledetourage, 2, ',', ' ').' €</td>
+                    }
                     </tr>';
                 }
                 ?>
@@ -348,14 +358,15 @@
             if($recap_commande[0]->type_commande > 1) {
 
                 $total_final = 0 + $express + $recap_commande[0]->tarif_teledetourage;
-
-                echo '<div class="total final"><span>Total final</span><strong>'.number_format($total_final, 2, '.', ' ').' €</strong></div>';
-                echo '<div class="total"><span>Total</span><strong><del>'.number_format($recap_commande[0]->total_commande, 2, ',', ' ') .' €</del></strong></div>';
-
-
+                if (!$restrict) {
+                    echo '<div class="total final"><span>Total final</span><strong>'.number_format($total_final, 2, '.', ' ').' €</strong></div>';
+                    echo '<div class="total"><span>Total</span><strong><del>'.number_format($recap_commande[0]->total_commande, 2, ',', ' ') .' €</del></strong></div>';
+                }
             }
             else {
-                echo '<div class="total"><span>Total</span><strong>' . number_format($recap_commande[0]->total_commande + $recap_commande[0]->tarif_teledetourage, 2, ',', ' ') .' €</strong></div>';
+                if (!$restrict) {
+                    echo '<div class="total"><span>Total</span><strong>' . number_format($recap_commande[0]->total_commande + $recap_commande[0]->tarif_teledetourage, 2, ',', ' ') . ' €</strong></div>';
+                }
             }
 
             ?>

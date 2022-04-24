@@ -1688,8 +1688,10 @@ class index extends MY_Controller {
 
                 $id_commande = (int)$this->input->post('id');
                 $data['page'] = "Commande N°" . $id_commande;
+
                 $data['recap_commande'] = $this->m_commande->getCommandeById($id_commande,$this->data['user_info']->id_users);
                 $data['pair'] = $this->m_commande->getOrderByPairId($id_commande);
+
                 if($data['recap_commande'][0]->id_type_generation_verre == "0")
 				{
 					$info_commande = json_decode($data['recap_commande'][0]->information_commande,true);
@@ -1708,6 +1710,15 @@ class index extends MY_Controller {
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
+
+					if ($this->getRestrictionToDisable()) {
+                        $data['restrict'] = true;
+
+                    }
+					else {
+                        $data['restrict'] = false;
+                    }
+
 					$this->load->view('layout/commande-detail-new', $data);
 				}
         		else
@@ -4026,6 +4037,11 @@ class index extends MY_Controller {
             return $this->m_users->getUserById($this->data['user_info']->id_users)[0]->restriction_compte;
         }
 
+    }
+
+    public function getRestrictionToDisable(){
+        $this->load->model('m_users');
+        return $this->m_users->getUserById($this->data['user_info']->id_users)[0]->restriction_compte;
     }
 
     public function recommande($order_id = false) {

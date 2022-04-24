@@ -4,9 +4,9 @@
 /static/my_config.php
 /application/config
 .htaccess
-/uploads/docs
 /static/aa
 /static/xml
+/uploads/docs
 backup*.sql.bz2
 backup*.sql
 application/logs

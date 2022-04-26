@@ -99,10 +99,30 @@ class m_teledetourage extends CI_Model
         }
     }
 
-    public function getResultByOmaAndData($data, $oma) {
+    public function getResultByOmaAndData($data, $oma, $length = 5) {
         $index = stripos($oma, $data);
         $string = substr($oma, $index);
         $firstIndex = stripos($string, '=') + 1;
-        return substr($string, $firstIndex, 2);
+        $string = substr($string, $firstIndex, $length);
+        preg_match_all('!\d+\.*\d*!', $string, $matches);
+        return $matches[0][0];
+    }
+
+    public function getResultByOmaDrilledData($omaString) {
+        $true = true;
+        $omaString = stristr($omaString, '_DRILLE=B;CF');
+        $drilled_array = [];
+        //$i = 0;
+        while ($omaString) {
+            $end = strpos($omaString, 'CentreBoxing');
+            $string = substr($omaString, 0, $end);
+            preg_match_all('!\-*\d+\.*\d*!', $string, $matches);
+            array_push($drilled_array,$matches[0]);
+            $omaString = substr($omaString, $end);
+            $omaString = stristr($omaString, '_DRILLE=B;CF');
+//            print_r($omaString);
+        }
+//        print_r($i);
+        return $drilled_array;
     }
 }

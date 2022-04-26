@@ -3950,7 +3950,6 @@ class admin
                         unset($order_data[$key]);
                     }
                 }
-
                 if ($order =
                     $this->m_commande->addOrder($order_data)) {
 
@@ -5914,7 +5913,7 @@ class admin
                         $omaString = hexTostr($commande->code_oma);
                         $boxWidth = number_format($this->m_teledetourage->getResultByOmaAndData('HBOX', $omaString), 2, '.', '');
                         $boxHeight = number_format($this->m_teledetourage->getResultByOmaAndData('VBOX', $omaString), 2, '.', '');
-                        $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString);
+                        $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString, 2);
                         $monture_type = $this->m_teledetourage->getMontureByFormatId($commande->teledetourage_format_id);
 
                         $calibre = '<shape>
@@ -5952,6 +5951,7 @@ class admin
                                 "Percee") {
                                 $monture_type =
                                     "DRILLED";
+                                print_r('1');
                             }
                         }
 
@@ -8368,10 +8368,64 @@ class admin
                                 $omaString = hexTostr($commande->code_oma);
                                 $boxWidth = number_format($this->m_teledetourage->getResultByOmaAndData('HBOX', $omaString), 2, '.', '');
                                 $boxHeight = number_format($this->m_teledetourage->getResultByOmaAndData('VBOX', $omaString), 2, '.', '');
-                                $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString);
+                                $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString, 2);
                                 $monture_type = $this->m_teledetourage->getMontureByFormatId($commande->teledetourage_format_id);
+//                                print_r($boxWidth);die;
+                                $drilledRight = '';
+                                $drilledLeft = '';
+                                if ($monture_type == 'drilled') {
+                                    $drilledArray = $this->m_teledetourage->getResultByOmaDrilledData($omaString);
 
-                                $calibre = '<shape>
+                                    if (isset($information_commande->verre->correction_droit)) {
+                                        $drilledRight = '
+                <drillHoles side="RIGHT">';
+                                    }
+                                    if (isset($information_commande->verre->correction_droit)) {
+                                        $drilledLeft = '
+                <drillHoles side="LEFT">';
+                                    }
+                                    foreach ($drilledArray as $item) {
+                                        if (isset($information_commande->verre->correction_droit)) {
+                                            $drilledRight .= "
+                    <cDrillHole>
+                        <point>
+                          <x>$item[0]</x>
+                          <y>$item[1]</y>
+                        </point>";
+                                        if (isset($item[2])) {
+                                            $drilledRight .= "
+                        <diameterHole>$item[2]</diameterHole>";
+                                        }
+                                        $drilledRight .= "
+                    </cDrillHole>";
+                                        }
+                                        if (isset($information_commande->verre->correction_droit)) {
+                                            $drilledLeft .= "
+                    <cDrillHole>
+                        <point>
+                          <x>" . -$item[0] . "</x>
+                          <y>$item[1]</y>
+                        </point>";
+                                        if (isset($item[2])) {
+                                            $drilledLeft .= "
+                        <diameterHole>$item[2]</diameterHole>";
+                                        }
+                                        $drilledLeft .= "
+                    </cDrillHole>";
+                                        }
+                                    }
+                                    if (isset($information_commande->verre->correction_droit)) {
+                                        $drilledRight .= '
+                </drillHoles>';
+                                    }
+                                    if (isset($information_commande->verre->correction_gauche)) {
+                                        $drilledLeft .= '
+                </drillHoles>';
+                                    }
+                                }
+
+                                $calibre = '
+                <shape>
                   <tracerData>
                     <tracerType>Unknown</tracerType>
                     <tracerVersion>OMAVCA</tracerVersion>
@@ -8709,15 +8763,16 @@ class admin
                             }
 
                             $xml .= '
-               <material>' .
+                <material>' .
                             $monture_type . '</material>
-               <boxWidth>' .
+                <boxWidth>' .
                             $boxWidth . '</boxWidth>
-               <boxHeight>' .
+                <boxHeight>' .
                             $boxHeight . '</boxHeight>
-               <distanceBetweenLenses>' .
+                <distanceBetweenLenses>' .
                             $DBL . '</distanceBetweenLenses>
-               ' .
+               ' . $drilledRight
+                 . $drilledLeft .
                             $calibre;
                         }
                         $xml .= '
@@ -10687,7 +10742,7 @@ class admin
                     $omaString = hexTostr($commande_origine->code_oma);
                     $boxWidth = number_format($this->m_teledetourage->getResultByOmaAndData('HBOX', $omaString), 2, '.', '');
                     $boxHeight = number_format($this->m_teledetourage->getResultByOmaAndData('VBOX', $omaString), 2, '.', '');
-                    $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString);
+                    $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString, 2);
                     $monture_type = $this->m_teledetourage->getMontureByFormatId($commande_origine->teledetourage_format_id);
 
                     $calibre = ' <shape>
@@ -10725,6 +10780,7 @@ class admin
                             "Percee") {
                             $monture_type =
                                 "DRILLED";
+                            print_r('3');
                         }
                     }
 

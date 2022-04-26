@@ -3950,7 +3950,6 @@ class admin
                         unset($order_data[$key]);
                     }
                 }
-
                 if ($order =
                     $this->m_commande->addOrder($order_data)) {
 

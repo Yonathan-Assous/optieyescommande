@@ -8363,7 +8363,8 @@ class admin
                             $boxWidth =
                             $monture_type =
                                 "";
-
+                            $drilledRight = '';
+                            $drilledLeft = '';
                             if ($commande->code_oma) {
                                 $omaString = hexTostr($commande->code_oma);
                                 $boxWidth = number_format($this->m_teledetourage->getResultByOmaAndData('HBOX', $omaString), 2, '.', '');
@@ -8371,8 +8372,6 @@ class admin
                                 $DBL = $this->m_teledetourage->getResultByOmaAndData('DBL', $omaString, 2);
                                 $monture_type = $this->m_teledetourage->getMontureByFormatId($commande->teledetourage_format_id);
 //                                print_r($boxWidth);die;
-                                $drilledRight = '';
-                                $drilledLeft = '';
                                 if ($monture_type == 'drilled') {
                                     $drilledArray = $this->m_teledetourage->getResultByOmaDrilledData($omaString);
 

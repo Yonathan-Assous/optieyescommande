@@ -1706,10 +1706,15 @@ $('#type_de_verreD').on('change', function() {
 	{
 		panierA = 1;
 		//panierAm = 1;
-
+		$('#to_etape2').addClass('disabled');
 		$('#text_titre_carte').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»");
-		$('input[name=carte_auth][value=1]').prop("checked",true);
+		$('#a_carte_auth_y b').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»")
+		$('#li_carte_auth_y').addClass('active');
+		$('#li_carte_auth_n').removeClass('active');
+		$('#li_carte_auth_n').addClass('hide');
 
+
+		$('input[name=carte_auth][value=1]').prop("checked",true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
 
@@ -1718,8 +1723,12 @@ $('#type_de_verreD').on('change', function() {
 	else
 	{
 		panierA = 0;
-
+		$('#to_etape2').removeClass('disabled');
 		$('#text_titre_carte').html(" Je souhaite un certificat d'authenticité (Gratuit) ");
+		$('#a_carte_auth_y b').text(" Je souhaite un certificat d'authenticité (Gratuit) ");
+		$('#li_carte_auth_n').addClass('active');
+		$('#li_carte_auth_y').removeClass('active');
+		$('#li_carte_auth_n').removeClass('hide');
 		$('input[name=carte_auth][value=0]').prop("checked",true);
 
 		$('#div_auth_n').css("display", "block");
@@ -2351,8 +2360,14 @@ $('#type_de_verreG').on('change', function() {
     if(selectedText.indexOf("Panier") >= 0 || selectedTextD.indexOf("Panier") >= 0)
 	{
 		panierA = 1;
-
+		$('#to_etape2').addClass('disabled');
+		console.log('aaaaa');
 		$('#text_titre_carte').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»");
+		$('#a_carte_auth_y b').html("«&nbsp;La carte d'authenticité est obligatoire pour des produits commandés en panier A&nbsp;»")
+		$('#li_carte_auth_y').addClass('active');
+		$('#li_carte_auth_n').removeClass('active');
+		$('#li_carte_auth_n').addClass('hide');
+
 		$('input[name=carte_auth][value=1]').prop("checked",true);
 
 		$("#carte_auth_y").prop("checked", true);
@@ -2366,6 +2381,11 @@ $('#type_de_verreG').on('change', function() {
 		panierA = 0;
 
 		$('#text_titre_carte').html(" Je souhaite un certificat d'authenticité (Gratuit) ");
+		$('#a_carte_auth_y b').text(" Je souhaite un certificat d'authenticité (Gratuit) ");
+		$('#li_carte_auth_n').addClass('active');
+		$('#li_carte_auth_y').removeClass('active');
+		$('#li_carte_auth_n').removeClass('hide');
+
 		$('input[name=carte_auth][value=0]').prop("checked",true);
 		//$('#carte_auth_y').prop('checked', true);
 
@@ -2945,7 +2965,7 @@ $('#type_de_verreG').on('change', function() {
 
 	if(panierA == 1)
 	{
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 });
 
@@ -3069,7 +3089,7 @@ $('#teinteG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
    $("#teintepersoG").val("");
@@ -3316,7 +3336,7 @@ $('#diametreD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
     if (String(sphereD).indexOf("+") >= 0)
@@ -3623,7 +3643,7 @@ $('#diametreG').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
 	if(diametreG=="precalibrage")
@@ -3725,7 +3745,7 @@ $('#teinteD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
     $("#teinteDH").val(selectedText);
@@ -4206,7 +4226,7 @@ $('#galbeD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
 /*	if(sphereD == sphereG && cylindreD==cylindreG && axeD==axeG && additionD==additionG  && progressionD==progressionG && stockD==stockG && droite && gauche && type_de_verreG==type_de_verreD && traitementD==traitementG && teinteD==teinteG && diametreD==diametreG && ((galbeG=="Standard" || galbeD==galbeG) && galbeD!="Standard"))
@@ -4343,7 +4363,7 @@ $('#traitementD').on('change', function() {
 	else
 	{
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
     if(traitementD == "0")
@@ -4625,7 +4645,7 @@ $('#traitementG').on('change', function() {
 	{
         console.log('B!!!!!!!!!!!!!!!!!!!!')
         $('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 
     if(type_de_verreG != "" && !restrict)
@@ -4810,7 +4830,7 @@ var galbeG = $('#galbeG').val();
 	{
 	    console.log('A!!!!!!!!!!!!!!!!!!!!')
 		$('#civilite_client').css("display", "block");
-		// $('#to_etape2').addClass('disabled');
+		$('#to_etape2').addClass('disabled');
 	}
 	calculPrice();
 
@@ -7520,7 +7540,7 @@ function copyVersDroit()
 	}
 	else
 	{
-		if(diametreD != "")
+		if(diametreD != "" && !panierA)
 		{
 			$('#to_etape2').removeClass('disabled');
 		}
@@ -7736,7 +7756,7 @@ function copyVersGauche()
 		$('#to_etape2').removeClass('disabled');
 		if(panierA == 1)
 		{
-			// $('#to_etape2').addClass('disabled');
+			$('#to_etape2').addClass('disabled');
 		}
 		//alert(selectedText.indexOf(" - Stock"));
 		if( (selectedText.toLowerCase()).indexOf("t-one") != -1 ||
@@ -8333,8 +8353,6 @@ $(document).ready(function() {
 
 	// $('#commandeForm').on('change', 'input[name="carte_auth"]', function() {
 	$('.carte_auth').on('click', function() {
-		$('#to_etape2').removeClass('disabled');
-
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
 
@@ -8455,8 +8473,10 @@ $(document).ready(function() {
 		$('#preview_carte, #preview_auth_card, #preview_auth_img, #prev_auth').hide();
 		$('.eye_text, .corrections .d, .corrections .g').hide();
 
-		console.log($('#li_carte_auth_y').hasClass('active'));
+		// if( $(this).val() == 1) {
 		if (this.id == 'li_carte_auth_y') {
+			$("#carte_auth_y").prop("checked", true);
+			$('#to_etape2').addClass('disabled');
 			$('#commandeForm input[name="nom_client"], #commandeForm input[name="prenom_client"], #commandeForm select').addClass('required');
 
 			$('.next .btn').addClass('disabled');
@@ -8745,15 +8765,17 @@ $(document).ready(function() {
 			});
 
 		} else {
+			$("#carte_auth_n").prop("checked", true);
 			$('.auth_fields, #preview_auth_card, #preview_auth_img, #prev_auth, div.sub-auth, #generer_carte').fadeOut();
 			$('.next .btn').removeClass('disabled');
 			$('#commandeForm input[type=text], #commandeForm select').removeClass('required');
+			$('#to_etape2').removeClass('disabled');
 		}
 
 	});
 
 	$('.content').on('click', '#generer_carte', function() {
-
+		$('#to_etape2').removeClass('disabled');
 		var type_de_verreD = $('#type_de_verreD').val();
 		var type_de_verreG = $('#type_de_verreG').val();
 

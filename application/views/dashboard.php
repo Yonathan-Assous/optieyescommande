@@ -139,8 +139,18 @@ if (is_object($pair_order)) {
             margin-top: 10px;
         }
 
+        #btnAddDrilled {
+            width: 100%;
+            margin-top: 10px;
+        }
+
         .connect_machine, .return_to_commande_standard {
             margin-top: 33px !important;
+        }
+
+        .label_drilled {
+            width: 40%;
+            line-height: 50px;
         }
     </style>
     <script>
@@ -845,234 +855,234 @@ if (is_object($pair_order)) {
                                                                                                     <div class="w-100 w-100 border rounded p-2" id="divDebug">
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="note note-warning row" id="omaImageDatas" style="display: none">
-                                                                                                    <div class="col-md-8 col-xs-12" >
-                                                                                                        <div class="md-form input-group hide">
-                                                                                                            <textarea id="txtOmaImageIn" name="txtOmaImageIn" class="md-textarea form-control" rows="5"></textarea>
-                                                                                                            <label for="txtOmaImageIn">Forme OMA</label>
-                                                                                                            <div class="input-group-append">
-                                                                                                                <button class="btn btn-md btn-warning my-0 px-3" type="button" onclick="GetImageFromOma();">Récupérer l'image</button>
+                                                                                                <div class="note note-warning" id="omaImageDatas" style="display: none">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-8 col-xs-12" >
+                                                                                                            <div class="md-form input-group hide">
+                                                                                                                <textarea id="txtOmaImageIn" name="txtOmaImageIn" class="md-textarea form-control" rows="5"></textarea>
+                                                                                                                <label for="txtOmaImageIn">Forme OMA</label>
+                                                                                                                <div class="input-group-append">
+                                                                                                                    <button class="btn btn-md btn-warning my-0 px-3" type="button" onclick="GetImageFromOma();">Récupérer l'image</button>
+                                                                                                                </div>
                                                                                                             </div>
+                                                                                                            <div id="divOmaImageOut">
+                                                                                                                <img id="imgOmaImageOut" />
+                                                                                                            </div>
+    <!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
+    <!--                                                                                                            <div class="col-md-6">-->
+    <!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+    <!--                                                                                                                    Ecarts-->
+    <!--                                                                                                                    pupillaire-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div style="text-align: center">-->
+    <!--                                                                                                                <img alt="Ecart pupillaire"-->
+    <!--                                                                                                                     class="hep-image"-->
+    <!--                                                                                                                     src="/static/img/mesure_freeform/ecart_pup.jpg"-->
+    <!--                                                                                                                     style="margin-bottom: 18px;">-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+    <!--                                                                                                                    <div>-->
+    <!--                                                                                                                        <label>DROITE</label>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
+    <!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_droit" class="quantity teledetourage_ecart_puppillaire" min="15" max=55 name="quantity" value="27" type="number" step="0.1">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+    <!--                                                                                                                    <div>-->
+    <!--                                                                                                                        <label>GAUCHE</label>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
+    <!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_gauche" class="quantity teledetourage_ecart_puppillaire" min="15" max="55" name="quantity" value="27" type="number" step="0.1">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                            </div>-->
+    <!--                                                                                                            <div class="col-md-6">-->
+    <!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+    <!--                                                                                                                    Hauteur de-->
+    <!--                                                                                                                    montage-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div style="text-align: center">-->
+    <!--                                                                                                                    <img alt="Hauteur"-->
+    <!--                                                                                                                         class="hep-image"-->
+    <!--                                                                                                                         src="/static/img/mesure_freeform/Hauteur.jpg"-->
+    <!--                                                                                                                         style="margin-bottom: 18px;">-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+    <!--                                                                                                                    <div>-->
+    <!--                                                                                                                        <label>DROITE</label>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
+    <!--                                                                                                                        <input id="hauteur_montage_droit" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
+    <!--                                                                                                                    <div>-->
+    <!--                                                                                                                        <label>GAUCHE</label>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
+    <!--                                                                                                                        <input id="hauteur_montage_gauche" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                            </div>-->
+    <!--                                                                                                        </div>-->
+    <!---->
+    <!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
+    <!--                                                                                                            <div class="col-md-4">-->
+    <!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+    <!--                                                                                                                    Largeur boxing-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+    <!--                                                                                                                    <img alt="Largeur boxing"-->
+    <!--                                                                                                                         class="hep-image"-->
+    <!--                                                                                                                         src="/static/img/mesure_freeform/cote_a.jpg"-->
+    <!--                                                                                                                         style="margin-bottom: 18px;">-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_largeur_boxing"></button>-->
+    <!--                                                                                                                        <input id="largeur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_largeur_boxing" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                            </div>-->
+    <!--                                                                                                            <div class="col-md-4">-->
+    <!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+    <!--                                                                                                                    Hauteur boxing-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+    <!--                                                                                                                    <img alt="Hauteur boxing"-->
+    <!--                                                                                                                         class="hep-image"7rem-->
+    <!--                                                                                                                         src="/static/img/mesure_freeform/cote_b.jpg"-->
+    <!--                                                                                                                         style="margin-bottom: 18px;">-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_boxing"></button>-->
+    <!--                                                                                                                        <input id="hauteur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_boxing" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                            </div>-->
+    <!--                                                                                                            <div class="col-md-4">-->
+    <!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
+    <!--                                                                                                                    Taille du pont-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div style="text-align: center" class="cote_image">-->
+    <!--                                                                                                                    <img alt="Taille du pont"-->
+    <!--                                                                                                                         class="hep-image"-->
+    <!--                                                                                                                         src="/static/img/mesure_freeform/cote_c.jpg"-->
+    <!--                                                                                                                         style="margin-bottom: 18px;">-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
+    <!--                                                                                                                    <div class="number-input">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_taille_du_pont"></button>-->
+    <!--                                                                                                                        <input id="taille_du_pont" class="quantity" min="0" max="50" name="quantity" value="18" type="number" step="0.1">-->
+    <!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_taille_du_pont" type="button"></button>-->
+    <!--                                                                                                                    </div>-->
+    <!--                                                                                                                </div>-->
+    <!--                                                                                                            </div>-->
+    <!--                                                                                                        </div>-->
                                                                                                         </div>
-                                                                                                        <div id="divOmaImageOut">
-                                                                                                            <img id="imgOmaImageOut" />
-                                                                                                        </div>
-<!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
-<!--                                                                                                            <div class="col-md-6">-->
-<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
-<!--                                                                                                                    Ecarts-->
-<!--                                                                                                                    pupillaire-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div style="text-align: center">-->
-<!--                                                                                                                <img alt="Ecart pupillaire"-->
-<!--                                                                                                                     class="hep-image"-->
-<!--                                                                                                                     src="/static/img/mesure_freeform/ecart_pup.jpg"-->
-<!--                                                                                                                     style="margin-bottom: 18px;">-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
-<!--                                                                                                                    <div>-->
-<!--                                                                                                                        <label>DROITE</label>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
-<!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_droit" class="quantity teledetourage_ecart_puppillaire" min="15" max=55 name="quantity" value="27" type="number" step="0.1">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
-<!--                                                                                                                    <div>-->
-<!--                                                                                                                        <label>GAUCHE</label>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_ecart_puppillaire"></button>-->
-<!--                                                                                                                        <input id="teledetourage_ecart_puppillaire_gauche" class="quantity teledetourage_ecart_puppillaire" min="15" max="55" name="quantity" value="27" type="number" step="0.1">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_ecart_puppillaire" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                            </div>-->
-<!--                                                                                                            <div class="col-md-6">-->
-<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
-<!--                                                                                                                    Hauteur de-->
-<!--                                                                                                                    montage-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div style="text-align: center">-->
-<!--                                                                                                                    <img alt="Hauteur"-->
-<!--                                                                                                                         class="hep-image"-->
-<!--                                                                                                                         src="/static/img/mesure_freeform/Hauteur.jpg"-->
-<!--                                                                                                                         style="margin-bottom: 18px;">-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
-<!--                                                                                                                    <div>-->
-<!--                                                                                                                        <label>DROITE</label>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
-<!--                                                                                                                        <input id="hauteur_montage_droit" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-6" style="text-align: center">-->
-<!--                                                                                                                    <div>-->
-<!--                                                                                                                        <label>GAUCHE</label>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_montage"></button>-->
-<!--                                                                                                                        <input id="hauteur_montage_gauche" class="hauteur_montage quantity" min="5" max="60" name="quantity" value="25" type="number" step="0.1">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_montage" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                            </div>-->
-<!--                                                                                                        </div>-->
-<!---->
-<!--                                                                                                        <div class="col-md-12 divOmaImageData">-->
-<!--                                                                                                            <div class="col-md-4">-->
-<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
-<!--                                                                                                                    Largeur boxing-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
-<!--                                                                                                                    <img alt="Largeur boxing"-->
-<!--                                                                                                                         class="hep-image"-->
-<!--                                                                                                                         src="/static/img/mesure_freeform/cote_a.jpg"-->
-<!--                                                                                                                         style="margin-bottom: 18px;">-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_largeur_boxing"></button>-->
-<!--                                                                                                                        <input id="largeur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_largeur_boxing" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                            </div>-->
-<!--                                                                                                            <div class="col-md-4">-->
-<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
-<!--                                                                                                                    Hauteur boxing-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
-<!--                                                                                                                    <img alt="Hauteur boxing"-->
-<!--                                                                                                                         class="hep-image"7rem-->
-<!--                                                                                                                         src="/static/img/mesure_freeform/cote_b.jpg"-->
-<!--                                                                                                                         style="margin-bottom: 18px;">-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_hauteur_boxing"></button>-->
-<!--                                                                                                                        <input id="hauteur_boxing" class="quantity" min="0" name="quantity" value="0" type="number" step="0.01">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_hauteur_boxing" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                            </div>-->
-<!--                                                                                                            <div class="col-md-4">-->
-<!--                                                                                                                <div style="text-align:center;padding-bottom:10px">-->
-<!--                                                                                                                    Taille du pont-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div style="text-align: center" class="cote_image">-->
-<!--                                                                                                                    <img alt="Taille du pont"-->
-<!--                                                                                                                         class="hep-image"-->
-<!--                                                                                                                         src="/static/img/mesure_freeform/cote_c.jpg"-->
-<!--                                                                                                                         style="margin-bottom: 18px;">-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                                <div class="col-md-12" style="text-align: center">-->
-<!--                                                                                                                    <div class="number-input">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="change_taille_du_pont"></button>-->
-<!--                                                                                                                        <input id="taille_du_pont" class="quantity" min="0" max="50" name="quantity" value="18" type="number" step="0.1">-->
-<!--                                                                                                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus change_taille_du_pont" type="button"></button>-->
-<!--                                                                                                                    </div>-->
-<!--                                                                                                                </div>-->
-<!--                                                                                                            </div>-->
-<!--                                                                                                        </div>-->
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4 col-xs-12" style="margin-top: 70px;">
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
-                                                                                                                <strong>Taille de la monture</strong>
+                                                                                                        <div class="col-md-4 col-xs-12" style="margin-top: 70px;">
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Taille de la monture</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="0"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="quantity"
+                                                                                                                           id="largeur_boxing"
+                                                                                                                           value=""
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
-                                                                                                                <input type="number"
-                                                                                                                       min="0"
-                                                                                                                       class="quantity valid form-control"
-                                                                                                                       name="quantity"
-                                                                                                                       id="largeur_boxing"
-                                                                                                                       value=""
-                                                                                                                       aria-invalid="false">
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Taille du pont</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="0" max="50"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="quantity"
+                                                                                                                           id="taille_du_pont"
+                                                                                                                           value=""
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
-                                                                                                                <strong>Taille du pont</strong>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Hauteur du calibre</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="0"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="quantity"
+                                                                                                                           id="hauteur_boxing"
+                                                                                                                           value=""
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
-                                                                                                                <input type="number"
-                                                                                                                       min="0" max="50"
-                                                                                                                       class="quantity valid form-control"
-                                                                                                                       name="quantity"
-                                                                                                                       id="taille_du_pont"
-                                                                                                                       value=""
-                                                                                                                       aria-invalid="false">
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
-                                                                                                                <strong>Hauteur du calibre</strong>
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-6 number-input"">
-                                                                                                                <input type="number"
-                                                                                                                       min="0"
-                                                                                                                       class="quantity valid form-control"
-                                                                                                                       name="quantity"
-                                                                                                                       id="hauteur_boxing"
-                                                                                                                       value=""
-                                                                                                                       aria-invalid="false">
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
+                                                                                                            <div class="form-group row" style="margin-top: 50px;">
 
-                                                                                                        <div class="form-group row" style="margin-top: 50px;">
-
-                                                                                                            <div class="col-xs-12 col-md-5"></div>
-                                                                                                            <div class="col-xs-12 col-md-3 text-center text_info_comp">
-                                                                                                                <strong>oeil droit</strong>
+                                                                                                                <div class="col-xs-12 col-md-5"></div>
+                                                                                                                <div class="col-xs-12 col-md-3 text-center text_info_comp">
+                                                                                                                    <strong>oeil droit</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-3 text-center text_info_comp">
+                                                                                                                    <strong>oeil gauche</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-3 text-center text_info_comp">
-                                                                                                                <strong>oeil gauche</strong>
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Écart pupillaire</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-3 number-input">
+                                                                                                                    <input id="teledetourage_ecart_puppillaire_droit"
+                                                                                                                           class="quantity teledetourage_ecart_puppillaire valid form-control"
+                                                                                                                           min="15" max="55"
+                                                                                                                           name="quantity"
+                                                                                                                           value=""
+                                                                                                                           type="number"
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-3 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           class="quantity teledetourage_ecart_puppillaire valid form-control"
+                                                                                                                           min="15" max="55"
+                                                                                                                           name="quantity"
+                                                                                                                           id="teledetourage_ecart_puppillaire_gauche"
+                                                                                                                           value=""
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
-                                                                                                                <strong>Écart pupillaire</strong>
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-3 number-input">
-                                                                                                                <input id="teledetourage_ecart_puppillaire_droit"
-                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
-                                                                                                                       min="15" max="55"
-                                                                                                                       name="quantity"
-                                                                                                                       value=""
-                                                                                                                       type="number"
-                                                                                                                       aria-invalid="false">
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-3 number-input">
-                                                                                                                <input type="number"
-                                                                                                                       class="quantity teledetourage_ecart_puppillaire valid form-control"
-                                                                                                                       min="15" max="55"
-                                                                                                                       name="quantity"
-                                                                                                                       id="teledetourage_ecart_puppillaire_gauche"
-                                                                                                                       value=""
-                                                                                                                       aria-invalid="false">
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-4 text-center text_info_comp">
-                                                                                                                <strong>Hauteur de montage</strong>
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-3 number-input"">
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Hauteur de montage</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-3 number-input">
                                                                                                                 <input type="number"
                                                                                                                        min="5" max="60"
                                                                                                                        class="quantity hauteur_montage valid form-control"
@@ -1080,31 +1090,35 @@ if (is_object($pair_order)) {
                                                                                                                        id="hauteur_montage_droit"
                                                                                                                        value=""
                                                                                                                        aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-3 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="5" max="60"
+                                                                                                                           class="quantity hauteur_montage valid form-control"
+                                                                                                                           name="quantity"
+                                                                                                                           id="hauteur_montage_gauche"
+                                                                                                                           value=""
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-3 number-input"">
-                                                                                                                <input type="number"
-                                                                                                                       min="5" max="60"
-                                                                                                                       class="quantity hauteur_montage valid form-control"
-                                                                                                                       name="quantity"
-                                                                                                                       id="hauteur_montage_gauche"
-                                                                                                                       value=""
-                                                                                                                       aria-invalid="false">
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-10 input-group-append">
+<!--                                                                                                                    <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Percez vos verres</button>-->
+                                                                                                                    <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnAddDrilled" onclick="addDrilled();">Ajouter un point de Percage</button>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
                                                                                                         </div>
-                                                                                                        <div class="form-group row">
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                            <div class="col-xs-12 col-md-10 input-group-append">
-                                                                                                                <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Percez vos verres</button>
-                                                                                                            </div>
-                                                                                                            <div class="col-xs-12 col-md-1"></div>
-                                                                                                        </div>
-                                                                                    
+                                                                                                    </div>
+                                                                                                    <div id="add_drille" style="margin-top: 20px;">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div id="divOmaImageError hide">
 
                                                                                                 </div>
+
 <!--                                                                                                <div class="input-group-append" id="divSaveOmaToFile">-->
 <!--                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnSaveOmaToFile" onclick="saveOmaToFile();">Sauvegarder le code OMA<br>dans un fichier</button>-->
 <!--                                                                                                </div>-->
@@ -5596,7 +5610,9 @@ if (is_object($pair_order)) {
         }
 
         $('#format_metal').click(function () {
-            $('#btnLaunchTablette').addClass('hide');
+            // $('#btnLaunchTablette').addClass('hide');
+            $('#btnAddDrilled').addClass('hide');
+            $('#add_drille').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5619,7 +5635,9 @@ if (is_object($pair_order)) {
         })
 
         $('#format_plastique').click(function () {
-            $('#btnLaunchTablette').addClass('hide');
+            // $('#btnLaunchTablette').addClass('hide');
+            $('#btnAddDrilled').addClass('hide');
+            $('#add_drille').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5640,7 +5658,9 @@ if (is_object($pair_order)) {
             getFormatTeledetouragePrice('plastic');
         })
         $('#format_nylor').click(function () {
-            $('#btnLaunchTablette').addClass('hide');
+            // $('#btnLaunchTablette').addClass('hide');
+            $('#btnAddDrilled').addClass('hide');
+            $('#add_drille').addClass('hide');
             if ($('#div_teledetourage').is(":hidden")) {
                 $('#divDevices').show()
                 // Connect();
@@ -5668,7 +5688,9 @@ if (is_object($pair_order)) {
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
-                $('#btnLaunchTablette').removeClass('hide');
+                // $('#btnLaunchTablette').removeClass('hide');
+                $('#btnAddDrilled').removeClass('hide');
+                $('#add_drille').removeClass('hide');
                 backgroundEcartAndHauteurAll();
             }
             else {
@@ -7613,12 +7635,13 @@ if (is_object($pair_order)) {
             LaunchTracer();
         });
 
-        $('#btnLaunchTablette').click(function () {
-            LaunchTablette();
-        });
+        // $('#btnLaunchTablette').click(function () {
+        //     LaunchTablette();
+        // });
 
         $('#btnSetOmaCode').click(function () {
             SetCodeOma();
+            //backgroundDrilled()
         });
 
         $('#is_teledetourage').change(function() {
@@ -7671,6 +7694,31 @@ if (is_object($pair_order)) {
             else {
                 $(jqueryId).attr('style', "background-color: #a0e7a0  !important")
                 $('#afficherV').show();
+            }
+        }
+
+        function backgroundDrilled() {
+            let els = document.getElementsByClassName("percage");
+            let id;
+            let disableRefraction = false;
+            for(let i = 0; i < els.length; i++)
+            {
+                id = '#' + els[i].id
+                if(els[i].value) {
+                    $(id).attr('style', "background-color: #a0e7a0" +
+                        " !important")
+                }
+                else {
+                    $(id).attr('style', "background-color: #e39090" +
+                        " !important")
+                    disableRefraction = true
+                }
+            }
+            if (!disableRefraction && els.length > 0) {
+                $('#div_refraction').removeClass('hide');
+            }
+            else {
+                $('#div_refraction').addClass('hide');
             }
         }
     </script>

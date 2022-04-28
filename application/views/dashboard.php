@@ -5915,7 +5915,9 @@ if (is_object($pair_order)) {
             });
 
             $('#lensFocalGroup').on('change', function () {
-                $('#div_refraction').addClass('hide');
+                if ($('#is_teledetourage').is(':checked') == false) {
+                    $('#div_refraction').addClass('hide');
+                }
                 // $('#div_teledetourage').addClass('hide');
                 $('#div1_format_type').addClass('hide');
                 $('#progression_D').addClass('hide');

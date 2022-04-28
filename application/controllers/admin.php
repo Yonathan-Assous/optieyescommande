@@ -5453,6 +5453,69 @@ class admin
                     $paA =
                         "1";
                 }
+                if ($lenses_code ==
+                    'PA-100001') {
+                    $lenses_code =
+                        '100001';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100074') {
+                    $lenses_code =
+                        '100074';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100048') {
+                    $lenses_code =
+                        '100048';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100071') {
+                    $lenses_code =
+                        '100071';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100004') {
+                    $lenses_code =
+                        '100004';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100002') {
+                    $lenses_code =
+                        '100002';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100070') {
+                    $lenses_code =
+                        '100070';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100141') {
+                    $lenses_code =
+                        '100141';
+                    $paA =
+                        "1";
+                }
+                if ($lenses_code ==
+                    'PA-100013') {
+                    $lenses_code =
+                        '100013';
+                    $paA =
+                        "1";
+                }
 
                 $xml .= '
       	<pair>
@@ -7897,6 +7960,69 @@ class admin
                             $paA =
                                 "1";
                         }
+                        if ($lenses_code ==
+                            'PA-100001') {
+                            $lenses_code =
+                                '100001';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100074') {
+                            $lenses_code =
+                                '100074';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100048') {
+                            $lenses_code =
+                                '100048';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100071') {
+                            $lenses_code =
+                                '100071';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100004') {
+                            $lenses_code =
+                                '100004';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100002') {
+                            $lenses_code =
+                                '100002';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100070') {
+                            $lenses_code =
+                                '100070';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100141') {
+                            $lenses_code =
+                                '100141';
+                            $paA =
+                                "1";
+                        }
+                        if ($lenses_code ==
+                            'PA-100013') {
+                            $lenses_code =
+                                '100013';
+                            $paA =
+                                "1";
+                        }
 
                         $xml .= '
       	<pair>
@@ -10272,6 +10398,69 @@ class admin
                 $lenses_code =
                     'S1UH74';
                 $paA = "1";
+            }
+            if ($lenses_code ==
+                'PA-100001') {
+                $lenses_code =
+                    '100001';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100074') {
+                $lenses_code =
+                    '100074';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100048') {
+                $lenses_code =
+                    '100048';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100071') {
+                $lenses_code =
+                    '100071';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100004') {
+                $lenses_code =
+                    '100004';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100002') {
+                $lenses_code =
+                    '100002';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100070') {
+                $lenses_code =
+                    '100070';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100141') {
+                $lenses_code =
+                    '100141';
+                $paA =
+                    "1";
+            }
+            if ($lenses_code ==
+                'PA-100013') {
+                $lenses_code =
+                    '100013';
+                $paA =
+                    "1";
             }
 
             $xml .= '

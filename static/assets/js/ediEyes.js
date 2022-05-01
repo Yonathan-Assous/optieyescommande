@@ -229,6 +229,85 @@ function LaunchTablette() {
     Connect(callBack);
 }
 
+function addDrilled(valueX = '', valueY = '', valueDiameter = '') {
+    const div = document.createElement('div');
+
+
+    div.className = 'row form-group drilled';
+    let num_drilled = '';
+    let i = 0;
+    let element = '';
+    let myElem;
+    while (!num_drilled) {
+        i++;
+        element = "drilled_" + i;
+        myElem = document.getElementById(element);
+        if (!myElem) {
+            num_drilled = element;
+        }
+    }
+    div.setAttribute('id',num_drilled);
+
+    div.innerHTML = `
+    <div class="col-xs-12 col-md-1"></div>
+        <div class="col-xs-12 col-md-2 number-input">
+        <label class="label_drilled" for="drilled_X_` + i + `">Valeur X</label>
+        <input type="number"
+               class="percage percage_` + i + ` valid form-control"
+               name="drilled_X_` + i + `"
+               id="drilled_X_` + i + `"
+               value="` + valueX + `"
+               aria-invalid="false">
+        </div>
+        <div class="col-xs-12 col-md-1"></div>
+        <div class="col-xs-12 col-md-2 number-input">
+        <label class="label_drilled" for="drilled_Y_` + i + `">Valeur Y</label>
+        <input type="number"
+               class="percage percage_` + i + ` valid form-control"
+               name="drilled_Y_` + i + `"
+               id="drilled_Y_` + i + `"
+               value="` + valueY + `" 
+               aria-invalid="false">
+        </div>
+        <div class="col-xs-12 col-md-1"></div>
+        <div class="col-xs-12 col-md-2 number-input">
+        <label for="drilled_diameter_` + i + `" style="margin-top: 7px; text-align:center">Diamètre du trou</label>
+        <input type="number"
+           class="percage percage_` + i + ` valid form-control"
+           name="drilled_diameter_` + i + `"
+           id="drilled_diameter_` + i + `"
+           value="` + valueDiameter + `"
+           aria-invalid="false">
+        </div>
+        <div class="col-xs-12 col-md-1">
+        </div>
+        <div class="col-xs-12 col-md-1">
+        <button id="delete_drille_` + i + `" class="btn btn-warning btn-bordred btn-block waves-effect waves-light text-uppercase form-control delete_drille" type="button" name="delete_drille_` + i + `">Supprimer</button>
+        </div>
+        <div class="col-xs-12 col-md-1"></div>
+  `;
+    document.getElementById('add_drille').appendChild(div);
+    $('.percage').off('input');
+    $('.percage').on('input', function () {
+        changeImageByOma('DRILLED', 'drilled', 1000, false)
+        backgroundDrilled()
+    });
+    $('.delete_drille').off('click');
+    $(".delete_drille").on('click', function() {
+        let id =  this.id;
+        console.log('id: ' + id);
+        id = id.replace('delete_drille', "drilled");
+        console.log('id_new: ' + id);
+        let add_drille = document.getElementById("add_drille");
+        console.log('add_drille: ' + add_drille);
+        let drilled = document.getElementById(id);
+        console.log('drilled: ' + drilled);
+        add_drille.removeChild(drilled);
+        changeImageByOma('DRILLED', 'drilled', 500, false)
+    });
+    backgroundDrilled()
+}
+
 
 // ------------------------ III- Lancer le Traceur ------------------------
 function LaunchTracer() {
@@ -356,6 +435,12 @@ function GetImageFromOma() {
                     calculDiametreUtile = false;
                 }
 
+                if (txtOmaImageIn.lastIndexOf("DRILLE") != -1) {
+                    let els = document.getElementsByClassName("drilled");
+                    if (els.length == 0) {
+                        getDrilledByOmaAndSet(txtOmaImageIn);
+                    }
+                }
 
                 let dbl = txtOmaImageIn.substring(
                     txtOmaImageIn.lastIndexOf("DBL") + 3,
@@ -449,6 +534,7 @@ function GetImageFromOma() {
                     result.right.angle.push(36000 / rightLength * i)
                 }
 
+
                 if (calculDiametreUtile) {
                     taille_du_pont = parseFloat(taille_du_pont)
                     largeurBoxing = parseFloat(largeurBoxing)
@@ -490,7 +576,7 @@ function GetImageFromOma() {
                     $('#diametre_utile_right').val(diametreUtileRight);
                     $('#diametre_utile_left').val(diametreUtileLeft);
                     // console.log(result);
-                    if (!($('#li_format_perce').hasClass('active')) || txtOmaImageIn.lastIndexOf("DRILLE") != -1) {
+                    if (!($('#li_format_perce').hasClass('active'))) {
                         $('#div_refraction').removeClass('hide');
                     }
                     else {
@@ -498,6 +584,7 @@ function GetImageFromOma() {
                     }
                 }
                 backgroundEcartAndHauteurAll();
+                backgroundDrilled()
                 // x = (result.right.rayon[0] / 100) * Math.sin(result.right.angle[0] / 100);
                 // y = (result.right.rayon[0] / 100) * Math.cos(result.right.angle[0] / 100);
                 // longueur = Math.sqrt(Math.pow(x_centre_eye_right - x, 2) + Math.pow(y_centre_eye_right - y, 2))
@@ -641,6 +728,7 @@ $('#hauteur_boxing').on('input', function () {
 });
 
 $('#taille_du_pont').on('input', function () {
+    alert('xxx');
     changeImageByOma('DBL', 'taille_du_pont', 1000, false)
 });
 
@@ -682,70 +770,178 @@ function changeOma(dataChangeInOma, dataChangeInSite, droit_gauche = true) {
     let txtOmaImageIn = $('#txtOmaImageIn').val();
     console.log(txtOmaImageIn);
     console.log(dataChangeInOma);
-    let data = txtOmaImageIn.substring(
-        txtOmaImageIn.lastIndexOf(dataChangeInOma),
-        txtOmaImageIn.lastIndexOf("\n") + 2);
-    data = data.substring(
-        0,
-        data.indexOf("\n") + 1);
-
-    txtOmaImageIn = txtOmaImageIn.replace(data, "");
-    if (droit_gauche) {
-        let idDroit = dataChangeInSite + '_droit';
-        let valueDroit = $('#' + idDroit).val();
-        // let valueDroitOld = $('#' + idDroit).val();
-        // console.log('valueDroitOld ' + valueDroitOld);
-        console.log('valueDroit ' + valueDroit);
-        console.log('dataChangeInOma ' + dataChangeInOma + ' ' + valueDroit);
-        let minDroit = document.getElementById(idDroit).min;
-        let maxDroit = document.getElementById(idDroit).max;
-
-        if (valueDroit) {
-            valueDroit = Math.max(minDroit, valueDroit);
-            valueDroit = Math.min(maxDroit, valueDroit);
-        }
-
-        let idGauche = dataChangeInSite + '_gauche';
-        let valueGauche = $('#' + idGauche).val();
-        // let valueGaucheOld = $('#' + idGauche).val();
-        let minGauche = document.getElementById(idGauche).min;
-        let maxGauche = document.getElementById(idGauche).max;
-
-        if (valueGauche) {
-            valueGauche = Math.max(minGauche, valueGauche);
-            valueGauche = Math.min(maxGauche, valueGauche);
-        }
-
-        if (valueGauche && !valueDroit) {
-            valueDroit = valueGauche
-        }
-        else if (valueDroit && !valueGauche) {
-            valueGauche = valueDroit
-        }
-        // console.log('valueDroitOld' + valueDroitOld);
-        // console.log(!(!valueDroitOld && !valueGaucheOld));
-        if (valueDroit || valueGauche) {
-            $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + valueDroit + ';' + valueGauche + '\n');
-        }
+    if (dataChangeInOma == 'DRILLED') {
+        changeOmaForDrilled(txtOmaImageIn);
     }
     else {
-        let id = dataChangeInSite;
-        let value = $('#' + id).val();
-        let min = document.getElementById(id).min;
-        let max = document.getElementById(id).max;
+        let data = txtOmaImageIn.substring(
+            txtOmaImageIn.lastIndexOf(dataChangeInOma),
+            txtOmaImageIn.lastIndexOf("\n") + 2);
+        data = data.substring(
+            0,
+            data.indexOf("\n") + 1);
 
-        if (!value) {
-            value = min;
-        } else {
-            value = Math.max(min, value);
-            value = Math.min(max, value);
-        }
+        txtOmaImageIn = txtOmaImageIn.replace(data, "");
+        if (droit_gauche) {
+            let idDroit = dataChangeInSite + '_droit';
+            let valueDroit = $('#' + idDroit).val();
 
-        if (dataChangeInOma == 'DBL') {
-            $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + value + '\n');
+            // console.log('valueDroit ' + valueDroit);
+            // console.log('dataChangeInOma ' + dataChangeInOma + ' ' + valueDroit);
+            // let minDroit = document.getElementById(idDroit).min;
+            // let maxDroit = document.getElementById(idDroit).max;
+            //
+            // if (valueDroit) {
+            //     valueDroit = Math.max(minDroit, valueDroit);
+            //     valueDroit = Math.min(maxDroit, valueDroit);
+            // }
+
+            let idGauche = dataChangeInSite + '_gauche';
+            let valueGauche = $('#' + idGauche).val();
+
+            // let minGauche = document.getElementById(idGauche).min;
+            // let maxGauche = document.getElementById(idGauche).max;
+            //
+            // if (valueGauche) {
+            //     valueGauche = Math.max(minGauche, valueGauche);
+            //     valueGauche = Math.min(maxGauche, valueGauche);
+            // }
+            //
+            if (valueGauche && !valueDroit) {
+                valueDroit = valueGauche
+            }
+            else if (valueDroit && !valueGauche) {
+                valueGauche = valueDroit
+            }
+            // console.log('valueDroitOld' + valueDroitOld);
+            // console.log(!(!valueDroitOld && !valueGaucheOld));
+            if (valueDroit || valueGauche) {
+                $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + valueDroit + ';' + valueGauche + '\n');
+            }
         }
         else {
-            $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + value + ';' + value + '\n');
+            let id = dataChangeInSite;
+            let value = $('#' + id).val();
+            // let min = document.getElementById(id).min;
+            // let max = document.getElementById(id).max;
+
+            // if (!value) {
+            //     value = min;
+            // } else {
+            //     value = Math.max(min, value);
+            //     value = Math.min(max, value);
+            // }
+
+            if (dataChangeInOma == 'DBL') {
+                $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + value + '\n');
+            }
+            else {
+                $('#txtOmaImageIn').val(txtOmaImageIn + dataChangeInOma + "=" + value + ';' + value + '\n');
+            }
         }
     }
+}
+
+function changeOmaForDrilled(txtOmaImageIn) {
+    let data;
+    let indexDrille = txtOmaImageIn.indexOf("DRILLE");
+    while (indexDrille >= 0) {
+        data = txtOmaImageIn.substring(
+            indexDrille,
+            txtOmaImageIn.indexOf("CentreBoxing") + 13);
+        // console.log("DATA     :    " + data);
+        // console.log("txtOmaImageIn     :    " + txtOmaImageIn);
+
+        txtOmaImageIn = txtOmaImageIn.replace(data, "");
+        // console.log("txtOmaImageInNNNNNNNNNNNNNNNNNNNNNNNNNN   " + txtOmaImageIn);
+        indexDrille = txtOmaImageIn.indexOf("DRILLE");
+    }
+
+    // console.log(txtOmaImageIn);
+
+    let els = document.getElementsByClassName("drilled");
+    let num;
+    let addDrilled = '';
+    let drilled_X = '';
+    let drilled_Y = '';
+    let drilled_diameter = '';
+    for(let i = 0; i < els.length; i++)
+    {
+        num = els[i].id.replace("drilled", "");
+        drilled_X = $('#drilled_X' + num).val();
+        drilled_Y = $('#drilled_Y' + num).val();
+        drilled_diameter = $('#drilled_diameter' + num).val();
+        if (drilled_X != '' && drilled_Y != '' && drilled_diameter != '') {
+            addDrilled += 'DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;\n' +
+                '_DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;;CentreBoxing\n';
+        }
+    }
+    txtOmaImageIn += addDrilled;
+    $('#txtOmaImageIn').val(txtOmaImageIn);
+
+}
+
+function getDrilledByOmaAndSet(txtOmaImageIn) {
+    let data;
+    let indexDrille = txtOmaImageIn.indexOf("DRILLE");
+    // let endIndex = txtOmaImageIn.indexOf("_DRILLE");
+    let matches;
+    let valueX = '';
+    let valueY = '';
+    let valueDiameter = '';
+    // if (endIndex < 0) {
+    let endIndex = txtOmaImageIn.indexOf("CentreBoxing");
+    // }
+    let i=0;
+    let dataClone;
+    while (indexDrille >= 0 && i<10) {
+        data = txtOmaImageIn.substring(
+            indexDrille,
+            endIndex);
+        // console.log("DATA     :    " + data);
+        // console.log("txtOmaImageIn     :    " + txtOmaImageIn);
+        dataClone = data;
+        for (let i = 0; i < 3; i++) {
+            matches = data.match(/(\-*\d+\.*\d*)/);
+            if (typeof matches[0] !== 'undefined') {
+                if (i == 0) {
+                    valueX = matches[0];
+                }
+                else if (i == 1) {
+                    valueY = matches[0];
+                }
+                else {
+                    valueDiameter = matches[0];
+                }
+            }
+            console.log('valueX ' + valueX);
+            console.log('valueY ' + valueY);
+            console.log('valueDiameter ' + valueDiameter);
+            data = data.replace(matches[0], "");
+        }
+        addDrilled(valueX, valueY, valueDiameter)
+        txtOmaImageIn = txtOmaImageIn.replace(dataClone, "");
+        indexDrille = txtOmaImageIn.indexOf("DRILLE");
+        i++;
+    }
+
+    // console.log(txtOmaImageIn);
+
+    // let els = document.getElementsByClassName("drilled");
+    // let num;
+    // let addDrilled = '';
+    // let drilled_X = '';
+    // let drilled_Y = '';
+    // let drilled_diameter = '';
+    // for(let i = 0; i < els.length; i++)
+    // {
+    //     num = els[i].id.replace("drilled", "");
+    //     drilled_X = $('#drilled_X' + num).val();
+    //     drilled_Y = $('#drilled_Y' + num).val();
+    //     drilled_diameter = $('#drilled_diameter' + num).val();
+    //     if (drilled_X != '' && drilled_Y != '' && drilled_diameter != '') {
+    //         addDrilled += 'DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;\n' +
+    //             '_DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;;CentreBoxing\n';
+    //     }
+    // }
 }

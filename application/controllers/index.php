@@ -2101,7 +2101,6 @@ class index extends MY_Controller {
             }
 
             $errors = 0;
-
             for ($i = 1; $i <= $data['nb_multi_commande']; $i++) {
 
                 if(isset($data['discount'])) {
@@ -2932,7 +2931,7 @@ class index extends MY_Controller {
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
                     if ($verreStockD && !$data['format_teledetourage']) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
-                        $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
+                        $data['supplementD'] = $verreStockD->supplement + ($user['user_info']->tarif_supplement - 1);
                     }
                     else {
                         $teinteCode = NULL;
@@ -2972,7 +2971,7 @@ class index extends MY_Controller {
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG && !$data['format_teledetourage']) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
-                        $data['supplementG'] = $verreStockG->supplement * $quantiteG + ($user['user_info']->tarif_supplement - 1);
+                        $data['supplementG'] = $verreStockG->supplement + ($user['user_info']->tarif_supplement - 1);
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {

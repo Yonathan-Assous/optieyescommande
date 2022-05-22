@@ -568,7 +568,7 @@ class m_commande extends CI_Model {
             if (!empty($generation) AND strpos($generation, 'stock') == false) {
                 $sqlGeneration = "AND vnew.trad_fr LIKE '%" . $generation . "%'";
             }
-            $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+            $sql = "SELECT c.*, indice_verre, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                    generation_verre,type_generation_verre,libelle_verre,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin,vnew.trad_fr,c.id_type_generation_verre,v.gtin as gtin_stock, vnew.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -612,7 +612,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, indice_verre, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,verres.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -5444,5 +5444,72 @@ class m_commande extends CI_Model {
             }
         }
         return $total;
+    }
+
+    public function updateCommande($commandeId, $data) {
+        $dateUpdateCommande = date('Y-m-d H:i:s');
+        $informationCommande = json_decode($data['information_commande']);
+        $oldCommande = $this->getCommandeById($commandeId);
+//        print_r($informationCommandeOld);die;
+        $origineCommande = 2;
+        if (isset($data['sphereG'])) {
+            $informationCommande->verre->correction_gauche->sphere = $data['sphereG'];
+            $informationCommande->verre->correction_gauche->cylindre = $data['cylindreG'];
+            $informationCommande->verre->correction_gauche->axe = $data['axeG'];
+            if ($data['type'] != 'stock') {
+                $informationCommande->verre->correction_gauche->traitement = $data['traitementG'];
+                $informationCommande->verre->correction_gauche->galbe = $data['galbeG'];
+                $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereG'];
+                $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreG'];
+                $informationCommande->verre->dioptrie_gauche = $data['PrismeSphereG'];
+                $informationCommande->verre->base_gauche = $data['PrismeCylindreG'];
+                if ($data['type'] == 'fab') {
+                    $origineCommande = 1;
+                }
+            }
+            $informationCommande->verre->correction_gauche->diametre = $data['diametreG'];
+            $informationCommande->verre->diametre = $data['diametreG'];
+
+        }
+        if (isset($data['sphereD'])) {
+            $informationCommande->verre->correction_droit->sphere = $data['sphereD'];
+            $informationCommande->verre->correction_droit->cylindre = $data['cylindreD'];
+            $informationCommande->verre->correction_droit->axe = $data['axeD'];
+            if ($data['type'] != 'stock') {
+                $informationCommande->verre->correction_gauche->traitement = $data['traitementD'];
+                $informationCommande->verre->correction_gauche->galbe = $data['galbeD'];
+                $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereD'];
+                $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreD'];
+                $informationCommande->verre->dioptrie_gauche = $data['PrismeSphereD'];
+                $informationCommande->verre->base_gauche = $data['PrismeCylindreD'];
+                if ($data['type'] == 'fab') {
+                    $origineCommande = 1;
+                }
+            }
+
+            $informationCommande->verre->correction_droit->diametre = $data['diametreD'];
+            $informationCommande->verre->diametre = $data['diametreD'];
+
+        }
+
+        $informationCommande = json_encode($informationCommande);
+        $prixVerre = $data['prix_verre_droit'];
+        $totalCommande = $data['prix_verre_gauche'] + $data['prix_verre_droit'] + $oldCommande[0]->tarif_express;
+        $lensFocalGroup = $data['lensFocalGroup'] + 30;
+        if ($data['type_de_verreD'] == $data['type_de_verreG']) {
+            $sql = "UPDATE `commande` SET `date_update_commande` = '" . $dateUpdateCommande ."',
+                                      `id_generation_verre` = '" . $lensFocalGroup ."',
+                                      `id_verre` = '" . $data['type_de_verreD'] ."', 
+                                      `id_indice_verre` = '" . $data['id_indice_verre'] ."',
+                                      `information_commande` = '" . $informationCommande ."',
+                                      `prix_verre` = '" . $prixVerre . "',
+                                      `total_commande` = '" . $totalCommande . "',
+                                      `origine_commande` = $origineCommande,
+                                      `by_admin` = 1
+                                      WHERE id_commande = '" . $commandeId . "'
+                                      ";
+        }
+//        print_r($sql);die;
+        $this->db->query($sql);
     }
 }

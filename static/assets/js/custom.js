@@ -5919,7 +5919,7 @@ function getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD
 						//
 						}
 					});
-					}
+				}
 
 					$.each(tab_verres_stock, function(key, value){
 							//console.log("Stock: "+key+" - "+value.code+" - "+value.name);
@@ -5931,16 +5931,16 @@ function getTypedeVerre(teledetourage,indiceId,lensFocalGroup,generation,sphereD
 							$('#type_de_verreD').append('<option value="'+ value.id +'" rel="'+ value.code +'">'+value.name+'</option>');
 					});
 
-				}
-				setTimeout(function(){
-					console.log("getTypedeVerre Append type_de_verreD");
-					$('#type_de_verreD').trigger('change');
-
-				},500);
-				setTimeout(function(){
-					$(".loading").hide();
-				},2300);
 			}
+			setTimeout(function(){
+				console.log("getTypedeVerre Append type_de_verreD");
+				$('#type_de_verreD').trigger('change');
+
+			},500);
+			setTimeout(function(){
+				$(".loading").hide();
+			},2300);
+		}
 
 			if(cylindreG != '-' && gauche)
 			{

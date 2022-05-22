@@ -433,7 +433,6 @@ class m_passer_commande_verre extends CI_Model
     function getstocklens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock,
                           $user_id, $panierA, $type = "1")
     {
-
 //        echo ('$indice: ' . $indice . "<br>");
 //        echo('$lensFocalGroup: ' . $lensFocalGroup . "<br>");
 //        echo('$generation: ' . $generation . "<br>");
@@ -469,6 +468,8 @@ class m_passer_commande_verre extends CI_Model
                 //26783 diametre 70
                 $resultat[0]['name'] = "Prog Eco 1,5 HMC - Stock";
                 $resultat[0]['id'] = "41274";
+                $resultat[0]['code'] = "41274";
+                $resultat[0]['id_verre'] = "41274";
                 return $resultat;
             }
         } else {
@@ -494,7 +495,7 @@ class m_passer_commande_verre extends CI_Model
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' " . $P_A . "
 									   ORDER BY libelle_verre ASC";
-
+//            print_r($sql);die;
             $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
@@ -551,7 +552,13 @@ class m_passer_commande_verre extends CI_Model
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
                      $panierA, $type = "1", $isTeledetourage = false)
     {
-        $isTeledetourage = $isTeledetourage == 'true' ? true : false;
+        if ($isTeledetourage == false || $isTeledetourage == 'false') {
+            $isTeledetourage = false;
+        }
+        else {
+            $isTeledetourage = true;
+        }
+//        $isTeledetourage = ('true' || true) ? true : false;
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -1700,7 +1707,6 @@ class m_passer_commande_verre extends CI_Model
         $rangesFDiameters = array();
         $rangesids = "";
         $sql = "SELECT * FROM " . $this->table_lenses . " WHERE code = '" . $lens . "'";
-
         $res = $this->db->query($sql);
         $r = $res->result()[0]->ranges;
         $ranges_list = array();

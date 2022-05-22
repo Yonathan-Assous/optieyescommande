@@ -9616,7 +9616,10 @@ $(document).ready(function() {
 			{?>
 			$('#sphereD').val(<?php echo $pair_order_correction['verre']['correction_droit']['sphere'];?>);
 			$('#sphereG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['sphere'];?>);
-			<?php
+            $('#additionD').val("+" + (<?php echo $pair_order_correction['verre']['correction_droit']['addition'];?>).toFixed(2));
+            $('#additionG').val("+" + (<?php echo $pair_order_correction['verre']['correction_gauche']['addition'];?>).toFixed(2));
+
+        <?php
 			}?>
 		}
 		else

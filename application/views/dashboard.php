@@ -1002,7 +1002,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input type="number"
                                                                                                                            min="0"
                                                                                                                            class="quantity valid form-control"
-                                                                                                                           name="quantity"
+                                                                                                                           name="largeur_boxing"
                                                                                                                            id="largeur_boxing"
                                                                                                                            value=""
                                                                                                                            aria-invalid="false">
@@ -1018,7 +1018,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input type="number"
                                                                                                                            min="0" max="50"
                                                                                                                            class="quantity valid form-control"
-                                                                                                                           name="quantity"
+                                                                                                                           name="taille_du_pont"
                                                                                                                            id="taille_du_pont"
                                                                                                                            value=""
                                                                                                                            aria-invalid="false">
@@ -1034,7 +1034,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input type="number"
                                                                                                                            min="0"
                                                                                                                            class="quantity valid form-control"
-                                                                                                                           name="quantity"
+                                                                                                                           name="hauteur_boxing"
                                                                                                                            id="hauteur_boxing"
                                                                                                                            value=""
                                                                                                                            aria-invalid="false">
@@ -1061,7 +1061,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input id="teledetourage_ecart_puppillaire_droit"
                                                                                                                            class="quantity teledetourage_ecart_puppillaire valid form-control"
                                                                                                                            min="15" max="55"
-                                                                                                                           name="quantity"
+                                                                                                                           name="teledetourage_ecart_puppillaire_droit"
                                                                                                                            value=""
                                                                                                                            type="number"
                                                                                                                            aria-invalid="false">
@@ -1070,7 +1070,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input type="number"
                                                                                                                            class="quantity teledetourage_ecart_puppillaire valid form-control"
                                                                                                                            min="15" max="55"
-                                                                                                                           name="quantity"
+                                                                                                                           name="teledetourage_ecart_puppillaire_gauche"
                                                                                                                            id="teledetourage_ecart_puppillaire_gauche"
                                                                                                                            value=""
                                                                                                                            aria-invalid="false">
@@ -1086,7 +1086,7 @@ if (is_object($pair_order)) {
                                                                                                                 <input type="number"
                                                                                                                        min="5" max="60"
                                                                                                                        class="quantity hauteur_montage valid form-control"
-                                                                                                                       name="quantity"
+                                                                                                                       name="hauteur_montage_droit"
                                                                                                                        id="hauteur_montage_droit"
                                                                                                                        value=""
                                                                                                                        aria-invalid="false">
@@ -1095,7 +1095,7 @@ if (is_object($pair_order)) {
                                                                                                                     <input type="number"
                                                                                                                            min="5" max="60"
                                                                                                                            class="quantity hauteur_montage valid form-control"
-                                                                                                                           name="quantity"
+                                                                                                                           name="hauteur_montage_gauche"
                                                                                                                            id="hauteur_montage_gauche"
                                                                                                                            value=""
                                                                                                                            aria-invalid="false">
@@ -5947,6 +5947,8 @@ if (is_object($pair_order)) {
                     {?>
                     $('#sphereD').val(<?php echo $pair_order_correction['verre']['correction_droit']['sphere'];?>);
                     $('#sphereG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['sphere'];?>);
+                    $('#additionD').val("+" + (<?php echo $pair_order_correction['verre']['correction_droit']['addition'];?>).toFixed(2));
+                    $('#additionG').val("+" + (<?php echo $pair_order_correction['verre']['correction_gauche']['addition'];?>).toFixed(2));
                     <?php
                     }?>
                 } else {
@@ -5973,8 +5975,8 @@ if (is_object($pair_order)) {
                 if ($("#lensFocalGroup").val() == '4') {
                     $('#additionD').prop('readOnly', false);
                     $('#additionG').prop('readOnly', false);
-                    $('#additionD').val("+0.75");
-                    $('#additionG').val("+0.75");
+                    // $('#additionD').val("+0.75");
+                    // $('#additionG').val("+0.75");
                 } else {
 
 
@@ -7599,6 +7601,7 @@ if (is_object($pair_order)) {
         function hideAll() {
             $('#produit').addClass('hide');
             // $('#format_perce').addClass('hide');
+            $('#div_refraction').addClass('hide');
             $('#div_teledetourage').addClass('hide');
             $('#div1_format_type').addClass('hide');
             $('#type_produit').addClass('hide');

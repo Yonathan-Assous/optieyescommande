@@ -500,7 +500,9 @@ function GetImageFromOma() {
                         else if (element.substr(0,1) == 'A') {
                             currentElementType = 'angle';
                         }
-
+			if (element.substr(-1) == ';') {
+                             element = element.substring(0, element.length - 1);                         
+			}
                         const ligne = element.substr(2,999);
                         const ligneArray = ligne.split(';');
                         ligneArray.forEach(value=>result[currentEye][currentElementType].push(parseInt(value)));
@@ -580,11 +582,12 @@ function GetImageFromOma() {
                         $('#div_refraction').removeClass('hide');
                     }
                     else {
-                        $('#div_refraction').addClass('hide');
+			backgroundDrilled()
+                        //$('#div_refraction').addClass('hide');
                     }
                 }
                 backgroundEcartAndHauteurAll();
-                backgroundDrilled()
+                
                 // x = (result.right.rayon[0] / 100) * Math.sin(result.right.angle[0] / 100);
                 // y = (result.right.rayon[0] / 100) * Math.cos(result.right.angle[0] / 100);
                 // longueur = Math.sqrt(Math.pow(x_centre_eye_right - x, 2) + Math.pow(y_centre_eye_right - y, 2))
@@ -728,7 +731,7 @@ $('#hauteur_boxing').on('input', function () {
 });
 
 $('#taille_du_pont').on('input', function () {
-    alert('xxx');
+    //alert('xxx');
     changeImageByOma('DBL', 'taille_du_pont', 1000, false)
 });
 

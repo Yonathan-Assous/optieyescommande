@@ -5388,6 +5388,33 @@ if (is_object($pair_order)) {
             </div>
         </div>
 
+        <div id="nothing_diameter" class="modal fade" tabindex="-1" role="dialog"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width: 90%; max-width: 400px;">
+                <div class="modal-content">
+
+                    <form id="nothing_diameter_form">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Pas de diamètre</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="text_nothing_diameter">Il n'y pas de diamètre assez grand en fonction de la monture, de l'écart pupillaire et de la hauteur du montage que vous avez mis.</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="nothing_diameter_ok" class="btn btn-warning waves-effect waves-light"
+                                    data-dismiss="modal">Ok</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
 <!--        <div id="teledetourage_not_connected" class="modal fade" tabindex="-1" role="dialog"-->
 <!--             aria-hidden="true" style="display: none;">-->
 <!--            <div class="modal-dialog" style="width: 90%; max-width: 400px;">-->
@@ -5947,8 +5974,18 @@ if (is_object($pair_order)) {
                     {?>
                     $('#sphereD').val(<?php echo $pair_order_correction['verre']['correction_droit']['sphere'];?>);
                     $('#sphereG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['sphere'];?>);
-                    $('#additionD').val("+" + (<?php echo $pair_order_correction['verre']['correction_droit']['addition'];?>).toFixed(2));
-                    $('#additionG').val("+" + (<?php echo $pair_order_correction['verre']['correction_gauche']['addition'];?>).toFixed(2));
+                    <?php if (isset($pair_order_correction['verre']['correction_droit']['addition']))
+                    {
+                    ?>
+                    $('#additionD').val("+" + (<?php echo floatval($pair_order_correction['verre']['correction_droit']['addition']);?>).toFixed(2));
+                    <?php
+                    }?>
+                    <?php if (isset($pair_order_correction['verre']['correction_gauche']['addition']))
+                    {
+                    ?>
+                    $('#additionG').val("+" + (<?php echo floatval($pair_order_correction['verre']['correction_gauche']['addition']);?>).toFixed(2));
+                    <?php
+                    }?>
                     <?php
                     }?>
                 } else {

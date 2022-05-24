@@ -1,6 +1,8 @@
 // JavaScript Document
 var type_commande_verre = 0;
 var restrict = false;
+var verify_diameter = false;
+
 //var deuxiemepaire = 0;
 $(document).ready(function(){
     setInterval(function(){ reload_page(); },120*60000);
@@ -2164,6 +2166,7 @@ $('#type_de_verreD').on('change', function() {
 					$('#diametreD').append('<option value="Télédétourage">Télédétourage</option>');
 				}
 				else {
+					//verify_diameter = false;
 					document.getElementById("diametreD").disabled = false;
 					$.ajax({
 						type: "POST",
@@ -2171,23 +2174,36 @@ $('#type_de_verreD').on('change', function() {
 						data: {"lens" : type_de_verreD,"sphere" : sphereD,"cylindre" : cylindreD, "diametre_utile" : diametreUtileRight},
 						dataType: "json",
 						success: function (data) {
-							console.log(data);
 							$('#diametreD').empty();
 							$('#diametreD').append('<option value="">-- Choisir --</option>');
+							console.log('DATA' + data);
+							if (data.length == 0) {
+								// $('#nothing_diameter').modal('show');
+								swal({
+									title: "Pas de diamètre",
+									text: "En fonction des écarts pupillaires et des hauteurs que vous avez inscrit, aucun diamètre n’est disponible pour ce produit.",
+									type: "info",
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: "Fermer",
+									timer: 4000,
+								});
+								//verify_diameter = true;
+							}
+							else {
+								$.each(data, function(key, value){
+									console.log(value.name);
+									if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
+									{
+										$('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
+									}
+									else
+									{
+										$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
+									}
+								});
+							}
 
-							$.each(data, function(key, value){
-								console.log(value.name);
-								if(lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0))
-								{
-									$('#diametreD').append('<option value="'+ value.diameter_physical +'">' + value.diameter_physical + '</option>');
-								}
-								else
-								{
-									$('#diametreD').append('<option value="'+ value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5) +'">' + value.diameter_physical + '/'+(parseInt(value.diameter_physical)+5)+'</option>');
-								}
-
-
-							});
 							if(selectedText.indexOf(" - Stock") == -1)
 							{
 								$('#diametreD').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');
@@ -2909,17 +2925,31 @@ $('#type_de_verreG').on('change', function() {
 
 							$('#diametreG').empty();
 							$('#diametreG').append('<option value="">-- Choisir --</option>');
+							if (data.length == 0) {
+								// $('#nothing_diameter').modal('show');
+								swal({
+									title: "Pas de diamètre",
+									text: "En fonction des écarts pupillaires et des hauteurs que vous avez inscrit, aucun diamètre n’est disponible pour ce produit.",
+									type: "info",
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: "Fermer",
+									timer: 4000,
+								});
+								//verify_diameter = true;
+							}
+							else {
+								$.each(data, function (key, value) {
+									console.log(value.name);
+									if (lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0)) {
+										$('#diametreG').append('<option value="' + value.diameter_physical + '">' + value.diameter_physical + '</option>');
+									} else {
 
-							$.each(data, function (key, value) {
-								console.log(value.name);
-								if (lensFocalGroup == "1" || lensFocalGroup == "6" || (lensFocalGroup == "4" && selectedText.indexOf(" - Stock") >= 0)) {
-									$('#diametreG').append('<option value="' + value.diameter_physical + '">' + value.diameter_physical + '</option>');
-								} else {
+										$('#diametreG').append('<option value="' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '">' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '</option>');
+									}
 
-									$('#diametreG').append('<option value="' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '">' + value.diameter_physical + '/' + (parseInt(value.diameter_physical) + 5) + '</option>');
-								}
-
-							});
+								});
+							}
 
 							if (selectedText.indexOf(" - Stock") == -1) {
 								$('#diametreG').append('<option value="precalibrage">Précalibrage (Gratuit)</option>');

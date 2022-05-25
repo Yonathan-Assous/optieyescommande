@@ -149,6 +149,11 @@ function Connect(callBack, is_loading = false) {
             }, timeModal);
             //$("#divDebug").html($("#divDebug").html() + "<br/>" + "Veuillez faire démarrer le traceur");
         }
+        index = message.indexOf("Build OMA");
+        if(index !== -1) {
+            $("#loading-overlay,#loading-drole").hide();
+            $('#loading-drole span').css('top', 248);
+        }
         // index = message.indexOf("JOB requested");
         console.log(message);
         // if(index !== -1){

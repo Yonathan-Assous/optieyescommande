@@ -1118,10 +1118,13 @@ if (is_object($pair_order)) {
                                                                                                 <div id="divOmaImageError hide">
 
                                                                                                 </div>
-
-<!--                                                                                                <div class="input-group-append" id="divSaveOmaToFile">-->
-<!--                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnSaveOmaToFile" onclick="saveOmaToFile();">Sauvegarder le code OMA<br>dans un fichier</button>-->
-<!--                                                                                                </div>-->
+                                                                                                <?php
+                                                                                                if ($user_info->can_save_oma) {
+                                                                                                ?>
+                                                                                                <div class="input-group-append" id="divSaveOmaToFile">
+                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnSaveOmaToFile" onclick="saveOmaToFile();">Sauvegarder le code OMA<br>dans un fichier</button>
+                                                                                                </div>
+                                                                                                <?php }?>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

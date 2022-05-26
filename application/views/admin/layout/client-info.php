@@ -222,6 +222,14 @@
                 </div>
 
                 <div class="form-group m-b-10 col-sm-12">
+                    <label for="can_save_oma" class="control-label">Activer la possibilité de sauvegarder le fichier OMA</label>
+                    <select id="can_save_oma" name="can_save_oma" class="form-control">
+                        <option value="1" <?php echo ($info_user[0]->can_save_oma == 1 ? 'selected="selected"' : '') ?>>Oui</option>
+                        <option value="0" <?php echo ($info_user[0]->can_save_oma == 0 ? 'selected="selected"' : '') ?>>Non</option>
+                    </select>
+                </div>
+
+                <div class="form-group m-b-10 col-sm-12">
                     <label for="commande_suspendue" class="control-label">Suspendre les commandes</label>
                     <select id="commande_suspendue" name="commande_suspendue" class="form-control">
                         <option value="1" <?php echo ($info_user[0]->commande_suspendue == 1 ? 'selected="selected"' : '') ?>>Oui</option>

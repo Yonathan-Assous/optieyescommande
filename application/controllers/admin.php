@@ -5843,7 +5843,7 @@ class admin
                                 $codeTeinte = $information_commande->verre->correction_gauche->teinte;
                             }
                             else {
-                                $codeTeinte = '576';
+                                $codeTeinte = '575';
                             }
                             $xml .= '
 						   <coating coatingType="COLOR">

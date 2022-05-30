@@ -4917,6 +4917,8 @@ class admin
                                   $change,
                                   $id_commande)
     {
+        $this->load->helper('maths');
+
         if ($this->input->is_ajax_request()) {
             $data = array();
             $data['aaData'] =

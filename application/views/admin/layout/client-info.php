@@ -141,8 +141,8 @@
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
-                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
-                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
+                    <label for="teledetourage_plastic" class="control-label">Télédétourage Plastique</label>
+                    <input type="text" id="teledetourage_plastic" name="teledetourage_plastic"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>

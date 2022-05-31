@@ -150,7 +150,8 @@ function Connect(callBack, is_loading = false) {
             //$("#divDebug").html($("#divDebug").html() + "<br/>" + "Veuillez faire démarrer le traceur");
         }
         index = message.indexOf("Build OMA");
-        if(index !== -1) {
+        let index2 = message.indexOf("Create virtual OMA tracer");
+        if(index !== -1 || index2 !== -1) {
             $("#loading-overlay,#loading-drole").hide();
             $('#loading-drole span').css('top', 248);
         }

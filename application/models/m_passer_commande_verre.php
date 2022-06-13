@@ -238,15 +238,20 @@ class m_passer_commande_verre extends CI_Model
 
             $omega_res = $this->db->query("SELECT * 
 									   FROM lenses 
-									   WHERE trad_fr LIKE '%" . utf8_encode($requete) . "%' AND display = 'X'
+									   WHERE trad_fr LIKE '%" . utf8_encode($requete) . "%' AND (display = 'X' OR is_teledetourable = 1)
 									   ORDER BY trad_fr ASC");
 
             $omega_query = $omega_res->result();
-
+//            print_r($omega_query);die;
             foreach ($omega_query as $omega) {
                 $tab[$i]['verre_or_lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
-                $tab[$i]['libelle'] = $omega->trad_fr;
+                if ($omega->display != 'X' && $omega->is_teledetourable == 1) {
+                    $tab[$i]['libelle'] = $omega->trad_fr . ' (télédétourage)';
+                }
+                else {
+                    $tab[$i]['libelle'] = $omega->trad_fr;
+                }
                 $tab[$i]['prix'] = $omega->prix;
                 $tab[$i]['source'] = "omega";
                 $sql_generation = "";

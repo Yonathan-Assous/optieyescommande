@@ -2420,7 +2420,7 @@ class m_commande extends CI_Model {
     }
 
 
-    public function CAMensuel($date, $tarif_Livraison = true){
+    public function CAMensuel($date, $tarif_Livraison = true, $is_teledetourage = false){
 
         // Tests
         /*$data = $this->getAllCommandeByMonthAndUser($date);
@@ -2573,20 +2573,30 @@ class m_commande extends CI_Model {
                 }
         }
 //        print_r($TarifLivraison);die;
+        if ($is_teledetourage) {
+            $sqlTeledetourage = 'AND code_oma != "" AND code_oma IS NOT NULL';
+            $sqlReduction = 0;
+        }
+        else {
+            $sqlTeledetourage = '';
+            $sqlReduction = "SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."'";
+        }
         $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1
                                    OR type_commande > 1 AND penalty = 1)
-                                   AND is_confirmed = 1)
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
                                    AND type_commande > 1 AND penalty != 1
-                                   AND is_confirmed = 1) 
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage) 
                                    +
                                    (".$TarifLivraison.")
 								   -
-								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."') as ca";
+								  ($sqlReduction) as ca";
         $query = $this->db->query($sql);
 
         $total = 0;
@@ -3977,7 +3987,7 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getCaJournalier($tarif_Livraison = true) {
+    public function getCaJournalier($tarif_Livraison = true, $is_teledetourage = true) {
 
         $TarifLivraison = 0;
         $TabHoraireTarifLiv = array();
@@ -4089,25 +4099,33 @@ class m_commande extends CI_Model {
                 }
 
         }
-
+        if ($is_teledetourage) {
+            $sqlTeledetourage = 'AND code_oma != "" AND code_oma IS NOT NULL';
+            $sqlReduction = 0;
+        }
+        else {
+            $sqlTeledetourage = '';
+            $sqlReduction = "SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
+								   WHERE date_remise = '".date("Y-m-d")."'";
+        }
         $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND (type_commande = 1 OR type_commande > 1 AND penalty = 1)
-                                   AND is_confirmed = 1)
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND type_commande > 1 AND penalty != 1
-                                   AND is_confirmed = 1) 
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage) 
                                    +
                                    (".$TarifLivraison.")
                                    -
-								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier";
+								  ($sqlReduction) as ca_journalier";
 
-//        print_r($sql);die;
 
 
         $query = $this->db->query($sql);
@@ -4659,7 +4677,7 @@ class m_commande extends CI_Model {
     }
 
     public function getCertificatStock($id_commande){
-        $query = $this->db->query("SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
                                FROM commande c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON l.code = c.id_verre
@@ -4667,7 +4685,9 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND  (c.id_generation_verre = 23 OR c.panierA != 0)
                                GROUP BY c.id_commande
-                               ORDER BY date_commande DESC");
+                               ORDER BY date_commande DESC";
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }

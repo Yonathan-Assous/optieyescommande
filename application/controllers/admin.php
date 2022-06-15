@@ -3210,6 +3210,10 @@ class admin
             $this->m_commande->getCaJournalier();
         $ca_journalier_sans_livraison =
             $this->m_commande->getCaJournalier(false);
+        $ca_journalier_teledetourage =
+            $this->m_commande->getCaJournalier(false, true);
+        $data['ca_journalier_teledetourage'] = $ca_journalier_teledetourage[0]->ca_journalier;
+//        print_r($data);die;
 //        echo '<br/>----------------------------<br/>';
         $date_M_Y = date("m-Y");
         $date_Y_M = date("Y-m");
@@ -3221,7 +3225,8 @@ class admin
         $ca_mensuel_sans_livraison =
             $this->m_commande->CAMensuel($date_M_Y,
                 false);
-
+        $data['ca_mensuel_teledetourage'] = $this->m_commande->CAMensuel($date_M_Y,
+            false, true);
 //        var_dump(
 //            $ca_journalier
 //        );die;

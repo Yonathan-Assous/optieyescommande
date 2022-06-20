@@ -9602,6 +9602,7 @@ $(document).ready(function() {
 	<?php
 	if(is_object($pair_order)) {
 		?>
+        console.log('gfdgfdgfdgfd' + $("#lensFocalGroup").val());
 		if($("#lensFocalGroup").val() == '4')
 		{
 			<?php
@@ -9616,7 +9617,20 @@ $(document).ready(function() {
 			{?>
 			$('#sphereD').val(<?php echo $pair_order_correction['verre']['correction_droit']['sphere'];?>);
 			$('#sphereG').val(<?php echo $pair_order_correction['verre']['correction_gauche']['sphere'];?>);
-			<?php
+			<?php if (isset($pair_order_correction['verre']['correction_droit']['addition']))
+			{
+            ?>
+            $('#additionD').val("+" + (<?php echo floatval($pair_order_correction['verre']['correction_droit']['addition']);?>).toFixed(2));
+            <?php
+            }?>
+            <?php if (isset($pair_order_correction['verre']['correction_gauche']['addition']))
+            {
+            ?>
+            $('#additionG').val("+" + (<?php echo floatval($pair_order_correction['verre']['correction_gauche']['addition']);?>).toFixed(2));
+            <?php
+            }?>
+
+        <?php
 			}?>
 		}
 		else

@@ -2101,7 +2101,6 @@ class index extends MY_Controller {
             }
 
             $errors = 0;
-
             for ($i = 1; $i <= $data['nb_multi_commande']; $i++) {
 
                 if(isset($data['discount'])) {
@@ -2932,7 +2931,7 @@ class index extends MY_Controller {
                     $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
                     if ($verreStockD && !$data['format_teledetourage']) {
                         $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
-                        $data['supplementD'] = $verreStockD->supplement * $quantiteD + ($user['user_info']->tarif_supplement - 1);
+                        $data['supplementD'] = $verreStockD->supplement + ($user['user_info']->tarif_supplement - 1);
                     }
                     else {
                         $teinteCode = NULL;
@@ -2972,7 +2971,7 @@ class index extends MY_Controller {
                     $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
                     if ($verreStockG && !$data['format_teledetourage']) {
                         $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
-                        $data['supplementG'] = $verreStockG->supplement * $quantiteG + ($user['user_info']->tarif_supplement - 1);
+                        $data['supplementG'] = $verreStockG->supplement + ($user['user_info']->tarif_supplement - 1);
                     } else {
                         $teinteCode = NULL;
                         if (isset($data['teinteG'])) {
@@ -3584,12 +3583,22 @@ class index extends MY_Controller {
 					$data_commande['verre']['hauteur'] = $data['hauteur'];
 					$data_commandeD['verre']['hauteur'] = $data['hauteur'];
 				}
+				else if(isset($data['hauteur_montage_droit']) && !empty($data['hauteur_montage_droit']))
+                {
+                    $data_commande['verre']['hauteur'] = $data['hauteur_montage_droit'];
+                    $data_commandeD['verre']['hauteur'] = $data['hauteur_montage_droit'];
+                }
 
 				if(isset($data['hauteur_gauche']) && !empty($data['hauteur_gauche']))
 				{
 					$data_commande['verre']['hauteur_gauche'] = $data['hauteur_gauche'];
 					$data_commandeG['verre']['hauteur_gauche'] = $data['hauteur_gauche'];
 				}
+                else if(isset($data['hauteur_montage_gauche']) && !empty($data['hauteur_montage_gauche']))
+                {
+                    $data_commande['verre']['hauteur_gauche'] = $data['hauteur_montage_gauche'];
+                    $data_commandeD['verre']['hauteur_gauche'] = $data['hauteur_montage_gauche'];
+                }
 
 				if(isset($data['photocromie']) && !empty($data['photocromie']))
 					$data_commande['verre']['photocromie']= $data['photocromie'];
@@ -3598,10 +3607,18 @@ class index extends MY_Controller {
                     $data_commande['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
                     $data_commandeD['verre']['ecart_puppillaire']['droit'] = $data['ecart_puppillaire_droit'];
                 }
+				else if(isset($data['teledetourage_ecart_puppillaire_droit']) && !empty($data['teledetourage_ecart_puppillaire_droit'])) {
+                    $data_commande['verre']['ecart_puppillaire']['droit'] = $data['teledetourage_ecart_puppillaire_droit'];
+                    $data_commandeD['verre']['ecart_puppillaire']['droit'] = $data['teledetourage_ecart_puppillaire_droit'];
+                }
 
 				if(isset($data['ecart_puppillaire_gauche']) && !empty($data['ecart_puppillaire_gauche'])) {
                     $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
                     $data_commandeG['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
+                }
+                else if(isset($data['teledetourage_ecart_puppillaire_gauche']) && !empty($data['teledetourage_ecart_puppillaire_gauche'])) {
+                    $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['teledetourage_ecart_puppillaire_gauche'];
+                    $data_commandeD['verre']['ecart_puppillaire']['gauche'] = $data['teledetourage_ecart_puppillaire_gauche'];
                 }
 
 				if(isset($data['angle_pantoscopique']) && !empty($data['angle_pantoscopique']))
@@ -3855,7 +3872,6 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
-
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);
@@ -4133,7 +4149,6 @@ class index extends MY_Controller {
         	$this->data['type_commande'] = $t;
 
             $this->data['infos_user'] = $this->m_users->getUserById($this->data['user_info']->id_users);
-
             if(false !== $pair_order) {
                 $this->data['pair_order'] = $this->m_commande->getCommandeByIdNew($pair_order, $this->data['user_info']->id_users, true)[0];
             }
@@ -4188,6 +4203,7 @@ class index extends MY_Controller {
         else {
             $this->redirect();
         }
+//        print_r($this->data);die;
 
 		$panierA = get_cookie("panierA");
 		if($panierA=='1'){

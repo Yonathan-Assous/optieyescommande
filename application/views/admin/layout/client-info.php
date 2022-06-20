@@ -141,8 +141,8 @@
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
-                    <label for="teledetourage_plastique" class="control-label">Télédétourage Plastique</label>
-                    <input type="text" id="teledetourage_plastique" name="teledetourage_plastique"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
+                    <label for="teledetourage_plastic" class="control-label">Télédétourage Plastique</label>
+                    <input type="text" id="teledetourage_plastic" name="teledetourage_plastic"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />
                 </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_metal" class="control-label">Télédétourage Métal</label>
@@ -218,6 +218,14 @@
                     <select id="is_teledetourable" name="is_teledetourable" class="form-control">
                         <option value="1" <?php echo ($info_user[0]->is_teledetourable == 1 ? 'selected="selected"' : '') ?>>Oui</option>
                         <option value="0" <?php echo ($info_user[0]->is_teledetourable == 0 ? 'selected="selected"' : '') ?>>Non</option>
+                    </select>
+                </div>
+
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="can_save_oma" class="control-label">Activer la possibilité de sauvegarder le fichier OMA</label>
+                    <select id="can_save_oma" name="can_save_oma" class="form-control">
+                        <option value="1" <?php echo ($info_user[0]->can_save_oma == 1 ? 'selected="selected"' : '') ?>>Oui</option>
+                        <option value="0" <?php echo ($info_user[0]->can_save_oma == 0 ? 'selected="selected"' : '') ?>>Non</option>
                     </select>
                 </div>
 

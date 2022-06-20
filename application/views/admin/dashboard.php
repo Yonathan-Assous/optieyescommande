@@ -41,7 +41,7 @@ else
 					<div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
-								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_mensuel,2,'.',''); ?></span>  €</h2>
+								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_mensuel,2,'.',''); ?></span> €</h2>
 								<h5>CA Mensuel<br />Frais de livraison inclus</h5>
 							</div>
 						</div>
@@ -49,8 +49,9 @@ else
 					 <div class="col-lg-6 col-md-6 col-xs-12">
 						<div class="card-box widget-user">
 							<div>
-								<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_mensuel_sans_livraison,2,'.',''); ?></span>  €</h2>
-								<h5>CA Mensuel<br />Hors frais de livraison</h5>
+								<h2 class="text-warning" style="display: inline-block"><span data-plugin="counterup" ><?php echo number_format($ca_mensuel_sans_livraison,2,'.',''); ?></span>  €</h2>
+                                <h4 class="text-warning" style="display: inline-block">(<span data-plugin="counterup"><?php echo number_format($ca_mensuel_teledetourage,2,'.',''); ?></span>  €)</h4>
+                                <h5>CA Mensuel (Télédétourage)<br />Hors frais de livraison</h5>
 							</div>
 						</div>
 					</div>
@@ -150,8 +151,9 @@ else
 							<div class="col-lg-6 col-md-6 col-xs-12">
 								<div class="card-box widget-user">
 									<div>
-										<h2 class="text-warning"><span data-plugin="counterup"><?php echo number_format($ca_journalier_sans_livraison,2,'.',''); ?></span>  €</h2>
-										<h5>CA Journalier<br />Hors frais de livraison</h5>
+										<h2 class="text-warning" style="display: inline-block"><span data-plugin="counterup"><?php echo number_format($ca_journalier_sans_livraison,2,'.',''); ?></span>  €</h2>
+                                        <h4 class="text-warning" style="display: inline-block">(<span data-plugin="counterup"><?php echo number_format($ca_journalier_teledetourage,2,'.',''); ?></span>  €)</h4>
+                                        <h5>CA Journalier (Télédétourage)<br />Hors frais de livraison</h5>
 									</div>
 								</div>
 							</div>

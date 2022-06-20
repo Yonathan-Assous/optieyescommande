@@ -66,6 +66,9 @@ function Connect(callBack, is_loading = false) {
             if (i == 1) {
                 $('#choice_machine').hide();
             }
+            else {
+                $('#choice_machine').show();
+            }
             // $('#btnConnect').html('Se connecter').removeClass('disabled');
             if ($('#ul_type_format li.active').attr('id') && $('#div1_format_type').is(':visible')) {
                 $('#div_teledetourage').removeClass('hide');
@@ -145,6 +148,12 @@ function Connect(callBack, is_loading = false) {
                 // $('#tracer_in_modal').modal('hide')
             }, timeModal);
             //$("#divDebug").html($("#divDebug").html() + "<br/>" + "Veuillez faire démarrer le traceur");
+        }
+        index = message.indexOf("Build OMA");
+        let index2 = message.indexOf("Create virtual OMA tracer");
+        if(index !== -1 || index2 !== -1) {
+            $("#loading-overlay,#loading-drole").hide();
+            $('#loading-drole span').css('top', 248);
         }
         // index = message.indexOf("JOB requested");
         console.log(message);
@@ -409,12 +418,20 @@ function GetImageFromOma() {
                 }
 
                 if (txtOmaImageIn.lastIndexOf("SEGHT") != -1) {
-                    let seght = txtOmaImageIn.substring(
-                        txtOmaImageIn.lastIndexOf("SEGHT") + 5,
-                        txtOmaImageIn.lastIndexOf("\n") + 2);
-                    seght = seght.substring(
-                        0,
-                        seght.indexOf("\n"));
+                    let seght;
+                    if (txtOmaImageIn.lastIndexOf("SEGHT") + 5 < txtOmaImageIn.lastIndexOf("\n") + 2) {
+                        seght = txtOmaImageIn.substring(
+                            txtOmaImageIn.lastIndexOf("SEGHT") + 5,
+                            txtOmaImageIn.lastIndexOf("\n") + 2);
+                        seght = seght.substring(
+                            0,
+                            seght.indexOf("\n"));
+                    }
+                    else {
+                        seght = txtOmaImageIn.substring(
+                            txtOmaImageIn.lastIndexOf("SEGHT") + 5);
+                    }
+                    console.log('seghtTTTTTTTTTTTTTT : ' + seght)
 
                     // console.log('txtOmaImageIn :' + txtOmaImageIn);
                     console.log('seght :' + seght);
@@ -500,10 +517,14 @@ function GetImageFromOma() {
                         else if (element.substr(0,1) == 'A') {
                             currentElementType = 'angle';
                         }
+                        if (element.substr(-1) == ';') {
+                            element = element.substring(0, element.length - 1);
+                        }
 
                         const ligne = element.substr(2,999);
                         const ligneArray = ligne.split(';');
-                        ligneArray.forEach(value=>result[currentEye][currentElementType].push(parseInt(value)));
+                        ligneArray.forEach(
+                            value=>result[currentEye][currentElementType].push(parseInt(value)));
                     }
                 });
                 let addAngleLeft = false;
@@ -580,11 +601,13 @@ function GetImageFromOma() {
                         $('#div_refraction').removeClass('hide');
                     }
                     else {
-                        $('#div_refraction').addClass('hide');
+                        backgroundDrilled()
+                        // $('#div_refraction').addClass('hide');
                     }
                 }
                 backgroundEcartAndHauteurAll();
-                backgroundDrilled()
+
+
                 // x = (result.right.rayon[0] / 100) * Math.sin(result.right.angle[0] / 100);
                 // y = (result.right.rayon[0] / 100) * Math.cos(result.right.angle[0] / 100);
                 // longueur = Math.sqrt(Math.pow(x_centre_eye_right - x, 2) + Math.pow(y_centre_eye_right - y, 2))
@@ -728,7 +751,8 @@ $('#hauteur_boxing').on('input', function () {
 });
 
 $('#taille_du_pont').on('input', function () {
-    alert('xxx');
+    // alert('xxx');
+
     changeImageByOma('DBL', 'taille_du_pont', 1000, false)
 });
 
@@ -770,17 +794,30 @@ function changeOma(dataChangeInOma, dataChangeInSite, droit_gauche = true) {
     let txtOmaImageIn = $('#txtOmaImageIn').val();
     console.log(txtOmaImageIn);
     console.log(dataChangeInOma);
+    if (txtOmaImageIn.length != txtOmaImageIn.lastIndexOf("\n") + 1) {
+        txtOmaImageIn += '\n';
+        console.log('COOL');
+    }
+    console.log(txtOmaImageIn);
+
     if (dataChangeInOma == 'DRILLED') {
         changeOmaForDrilled(txtOmaImageIn);
     }
     else {
-        let data = txtOmaImageIn.substring(
-            txtOmaImageIn.lastIndexOf(dataChangeInOma),
-            txtOmaImageIn.lastIndexOf("\n") + 2);
-        data = data.substring(
-            0,
-            data.indexOf("\n") + 1);
-
+        let data;
+        if (txtOmaImageIn.lastIndexOf(dataChangeInOma) < txtOmaImageIn.lastIndexOf("\n")) {
+            data = txtOmaImageIn.substring(
+                txtOmaImageIn.lastIndexOf(dataChangeInOma),
+                txtOmaImageIn.lastIndexOf("\n") + 2);
+            data = data.substring(
+                0,
+                data.indexOf("\n") + 1);
+        }
+        else {
+            data = txtOmaImageIn.substring(
+                txtOmaImageIn.lastIndexOf(dataChangeInOma));
+        }
+        console.log('DATAAAAAAAAAAAAA: ' + data);
         txtOmaImageIn = txtOmaImageIn.replace(data, "");
         if (droit_gauche) {
             let idDroit = dataChangeInSite + '_droit';

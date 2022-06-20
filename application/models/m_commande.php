@@ -568,7 +568,7 @@ class m_commande extends CI_Model {
             if (!empty($generation) AND strpos($generation, 'stock') == false) {
                 $sqlGeneration = "AND vnew.trad_fr LIKE '%" . $generation . "%'";
             }
-            $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+            $sql = "SELECT c.*, indice_verre, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                    generation_verre,type_generation_verre,libelle_verre,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique, v.gtin,vnew.trad_fr,c.id_type_generation_verre,v.gtin as gtin_stock, vnew.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -612,7 +612,7 @@ class m_commande extends CI_Model {
             $table_commande = $this->table_temp;
             $table_commentaire = $this->table_commentaire_temp;
         }
-        $sql = "SELECT c.*, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
+        $sql = "SELECT c.*, indice_verre, information_commande,ancienne_commande,reference_client,total_commande,penalty,libelle_etat_commande,nom_societe,nom_magasin,adresse,cp,ville,tel_fixe,tel_fax,email,
                                           generation_verre,v.trad_fr,commentaire,type_commande, ib.intitule_bl as nouvel_intitule, ib.date_bl,ib.type_optique, ib.intitule_type_optique, ib.quantite_type_optique,v_stock.libelle_verre,c.id_type_generation_verre,verres.gtin as gtin_stock, v.gtin as gtin
                                    FROM ".$table_commande." c
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -2420,7 +2420,7 @@ class m_commande extends CI_Model {
     }
 
 
-    public function CAMensuel($date, $tarif_Livraison = true){
+    public function CAMensuel($date, $tarif_Livraison = true, $is_teledetourage = false){
 
         // Tests
         /*$data = $this->getAllCommandeByMonthAndUser($date);
@@ -2573,20 +2573,30 @@ class m_commande extends CI_Model {
                 }
         }
 //        print_r($TarifLivraison);die;
+        if ($is_teledetourage) {
+            $sqlTeledetourage = 'AND code_oma != "" AND code_oma IS NOT NULL';
+            $sqlReduction = 0;
+        }
+        else {
+            $sqlTeledetourage = '';
+            $sqlReduction = "SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."'";
+        }
         $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (type_commande = 1
                                    OR type_commande > 1 AND penalty = 1)
-                                   AND is_confirmed = 1)
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM commande
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."'
                                    AND type_commande > 1 AND penalty != 1
-                                   AND is_confirmed = 1) 
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage) 
                                    +
                                    (".$TarifLivraison.")
 								   -
-								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."') as ca";
+								  ($sqlReduction) as ca";
         $query = $this->db->query($sql);
 
         $total = 0;
@@ -3977,7 +3987,7 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getCaJournalier($tarif_Livraison = true) {
+    public function getCaJournalier($tarif_Livraison = true, $is_teledetourage = false) {
 
         $TarifLivraison = 0;
         $TabHoraireTarifLiv = array();
@@ -4089,25 +4099,32 @@ class m_commande extends CI_Model {
                 }
 
         }
-
+        if ($is_teledetourage) {
+            $sqlTeledetourage = 'AND code_oma != "" AND code_oma IS NOT NULL';
+            $sqlReduction = 0;
+        }
+        else {
+            $sqlTeledetourage = '';
+            $sqlReduction = "SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
+								   WHERE date_remise = '".date("Y-m-d")."'";
+        }
         $sql = "SELECT (SELECT IFNULL(SUM(total_commande) + SUM(tarif_teledetourage),0) as ca_journalier FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND (type_commande = 1 OR type_commande > 1 AND penalty = 1)
-                                   AND is_confirmed = 1)
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage)
                                    +
                                    (SELECT IFNULL(SUM(tarif_express),0) as tarif_express FROM ".$this->table."
                                    WHERE date_commande>='".date("Y-m-d 00:00:00")."'
                                    AND date_commande<='".date("Y-m-d 23:59:59")."'
                                    AND type_commande > 1 AND penalty != 1
-                                   AND is_confirmed = 1) 
+                                   AND is_confirmed = 1
+                                   $sqlTeledetourage) 
                                    +
                                    (".$TarifLivraison.")
                                    -
-								  (SELECT IFNULL(SUM(reduction),0) as reduction FROM facture_reduction fr
-								   WHERE date_remise = '".date("Y-m-d")."') as ca_journalier";
-
-//        print_r($sql);die;
+								  ($sqlReduction) as ca_journalier";
 
 
         $query = $this->db->query($sql);
@@ -4619,16 +4636,18 @@ class m_commande extends CI_Model {
     }
 
     public function getEtiquetteFabricationNew($from = 0, $to = 0){
-        $query = $this->db->query("SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
                                INNER JOIN etiquette e ON e.id_commande=c.id_commande
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               AND c.id_verre IN (SELECT code FROM lenses)
-                               AND l.display = 'X'
-                               ORDER BY date_click, ordre LIMIT ".$from.",".$to);
+                               AND c.id_verre IN (SELECT code FROM lenses)       
+                               ORDER BY date_click, ordre LIMIT ".$from.",".$to;
+        //AND (l.display = 'X' OR l.is_teledetourable = 1)
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             return $query->result();
@@ -4659,7 +4678,7 @@ class m_commande extends CI_Model {
     }
 
     public function getCertificatStock($id_commande){
-        $query = $this->db->query("SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
                                FROM commande c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON l.code = c.id_verre
@@ -4667,7 +4686,9 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND  (c.id_generation_verre = 23 OR c.panierA != 0)
                                GROUP BY c.id_commande
-                               ORDER BY date_commande DESC");
+                               ORDER BY date_commande DESC";
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0){
             return $query->result();
         }
@@ -5444,5 +5465,72 @@ class m_commande extends CI_Model {
             }
         }
         return $total;
+    }
+
+    public function updateCommande($commandeId, $data) {
+        $dateUpdateCommande = date('Y-m-d H:i:s');
+        $informationCommande = json_decode($data['information_commande']);
+        $oldCommande = $this->getCommandeById($commandeId);
+//        print_r($informationCommandeOld);die;
+        $origineCommande = 2;
+        if (isset($data['sphereG'])) {
+            $informationCommande->verre->correction_gauche->sphere = $data['sphereG'];
+            $informationCommande->verre->correction_gauche->cylindre = $data['cylindreG'];
+            $informationCommande->verre->correction_gauche->axe = $data['axeG'];
+            if ($data['type'] != 'stock') {
+                $informationCommande->verre->correction_gauche->traitement = $data['traitementG'];
+                $informationCommande->verre->correction_gauche->galbe = $data['galbeG'];
+                $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereG'];
+                $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreG'];
+                $informationCommande->verre->dioptrie_gauche = $data['PrismeSphereG'];
+                $informationCommande->verre->base_gauche = $data['PrismeCylindreG'];
+                if ($data['type'] == 'fab') {
+                    $origineCommande = 1;
+                }
+            }
+            $informationCommande->verre->correction_gauche->diametre = $data['diametreG'];
+            $informationCommande->verre->diametre = $data['diametreG'];
+
+        }
+        if (isset($data['sphereD'])) {
+            $informationCommande->verre->correction_droit->sphere = $data['sphereD'];
+            $informationCommande->verre->correction_droit->cylindre = $data['cylindreD'];
+            $informationCommande->verre->correction_droit->axe = $data['axeD'];
+            if ($data['type'] != 'stock') {
+                $informationCommande->verre->correction_gauche->traitement = $data['traitementD'];
+                $informationCommande->verre->correction_gauche->galbe = $data['galbeD'];
+                $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereD'];
+                $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreD'];
+                $informationCommande->verre->dioptrie_gauche = $data['PrismeSphereD'];
+                $informationCommande->verre->base_gauche = $data['PrismeCylindreD'];
+                if ($data['type'] == 'fab') {
+                    $origineCommande = 1;
+                }
+            }
+
+            $informationCommande->verre->correction_droit->diametre = $data['diametreD'];
+            $informationCommande->verre->diametre = $data['diametreD'];
+
+        }
+
+        $informationCommande = json_encode($informationCommande);
+        $prixVerre = $data['prix_verre_droit'];
+        $totalCommande = $data['prix_verre_gauche'] + $data['prix_verre_droit'] + $oldCommande[0]->tarif_express;
+        $lensFocalGroup = $data['lensFocalGroup'] + 30;
+        if ($data['type_de_verreD'] == $data['type_de_verreG']) {
+            $sql = "UPDATE `commande` SET `date_update_commande` = '" . $dateUpdateCommande ."',
+                                      `id_generation_verre` = '" . $lensFocalGroup ."',
+                                      `id_verre` = '" . $data['type_de_verreD'] ."', 
+                                      `id_indice_verre` = '" . $data['id_indice_verre'] ."',
+                                      `information_commande` = '" . $informationCommande ."',
+                                      `prix_verre` = '" . $prixVerre . "',
+                                      `total_commande` = '" . $totalCommande . "',
+                                      `origine_commande` = $origineCommande,
+                                      `by_admin` = 1
+                                      WHERE id_commande = '" . $commandeId . "'
+                                      ";
+        }
+//        print_r($sql);die;
+        $this->db->query($sql);
     }
 }

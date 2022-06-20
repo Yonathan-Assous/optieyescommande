@@ -187,7 +187,8 @@
 							{
 								if($info_commande['verre']['correction_gauche']['diametre']=='precalibrage')
 									$info_commande['verre']['correction_gauche']['diametre'] = 'Precal';
-									
+                                if($info_commande['verre']['correction_gauche']['diametre']=='Télédétourage')
+                                    $info_commande['verre']['correction_gauche']['diametre'] = 'Tel';
 								echo $info_commande['verre']['correction_gauche']['diametre'];
 							}
 							else
@@ -200,15 +201,17 @@
 						if(isset($info_commande['verre']['correction_droit']['diametre']))
 						{
 							if($info_commande['verre']['correction_droit']['diametre']=='precalibrage')
-									$info_commande['verre']['correction_droit']['diametre'] = 'Precal';
-									
+                                $info_commande['verre']['correction_droit']['diametre'] = 'Precal';
+                            if($info_commande['verre']['correction_droit']['diametre']=='Télédétourage')
+                                $info_commande['verre']['correction_droit']['diametre'] = 'Tel';
 							echo ($value->cote == "droit" ? 'D' : (isset($info_commande['verre']['correction_droit']['diametre']) ? $info_commande['verre']['correction_droit']['diametre'] : "Precal" ));
 						}
 						else
 						{	
 							if(isset($info_commande['diametre_verre']) && $info_commande['diametre_verre']=='precalibrage')
-									$info_commande['diametre_verre'] = 'Precal';
-									
+                                $info_commande['diametre_verre'] = 'Precal';
+                            if(isset($info_commande['diametre_verre']) && $info_commande['diametre_verre']=='Télédétourage')
+                                $info_commande['diametre_verre'] = 'Tel';
 							echo ($value->cote == "droit" ? 'D' : (isset($info_commande['diametre_verre']) ? $info_commande['diametre_verre'] : ( ($value->id_indice_verre == 6 && $value->id_generation_verre == 9) || $value->id_generation_verre == 14 ? '70' : "Precal" )));
 						}
 					}
@@ -271,7 +274,8 @@
 							{
 								if($info_commande['verre']['correction_droit']['diametre']=='precalibrage')
 									$info_commande['verre']['correction_droit']['diametre'] = 'Precal';
-									
+                                if($info_commande['verre']['correction_droit']['diametre']=='Télédétourage')
+                                    $info_commande['verre']['correction_droit']['diametre'] = 'Tel';
 								echo $info_commande['verre']['correction_droit']['diametre'];
 							}
 							else
@@ -286,14 +290,16 @@
 						{
 							if($info_commande['verre']['correction_gauche']['diametre']=='precalibrage')
 									$info_commande['verre']['correction_gauche']['diametre'] = 'Precal';
-									
+                            if($info_commande['verre']['correction_gauche']['diametre']=='Télédétourage')
+                                $info_commande['verre']['correction_gauche']['diametre'] = 'Tel';
 							echo ($value->cote == "gauche" ? 'G' : (isset($info_commande['verre']['correction_gauche']['diametre']) ? $info_commande['verre']['correction_gauche']['diametre'] : "Precal" ));
 						}
 						else
 						{
 							if(isset($info_commande['diametre_verre']) && $info_commande['diametre_verre']=='precalibrage')
 									$info_commande['diametre_verre'] = 'Precal';
-									
+                            if(isset($info_commande['diametre_verre']) && $info_commande['diametre_verre']=='Télédétourage')
+                                $info_commande['diametre_verre'] = 'Tel';
 							echo ($value->cote == "gauche" ? 'G' : (isset($info_commande['diametre_verre']) ? $info_commande['diametre_verre'] : ( ($value->id_indice_verre == 6 && $value->id_generation_verre == 9) || $value->id_generation_verre == 14 ? '70' : "Precal" )));
 						}
 					}

@@ -153,7 +153,7 @@ else
 									<div>
 										<h2 class="text-warning" style="display: inline-block"><span data-plugin="counterup"><?php echo number_format($ca_journalier_sans_livraison,2,'.',''); ?></span>  €</h2>
                                         <h4 class="text-warning" style="display: inline-block">(<span data-plugin="counterup"><?php echo number_format($ca_journalier_teledetourage,2,'.',''); ?></span>  €)</h4>
-                                        <h5>CA Journalier<br />Hors frais de livraison</h5>
+                                        <h5>CA Journalier (Télédétourage)<br />Hors frais de livraison</h5>
 									</div>
 								</div>
 							</div>

@@ -1620,8 +1620,8 @@ class m_passer_commande_verre extends CI_Model
             . $user_id . ")
 									   WHERE verres_stock.id_verre = '" . $lens
             . "' AND grille_tarifaire.id_grille_tarifaire = 1";
-//        var_dump($sql);die;
         $stock_res = $this->db->query($sql);
+        $user = $this->m_users->getUserById($user_id);
 
         $stock_query = $stock_res->result();
         foreach ($stock_query as $stock) {
@@ -1630,6 +1630,10 @@ class m_passer_commande_verre extends CI_Model
             } else {
                 $resultat[$stock->id_verre]["prix"] = $stock->prix_verre;
             }
+            if ($stock->supplement != 0) {
+                $resultat[$stock->id_verre]["prix"] += $user[0]->tarif_supplement - 1;
+            }
+            $resultat[$stock->id_verre]["prix"] = number_format($resultat[$stock->id_verre]["prix"], 2);
         }
         return $resultat;
     }
@@ -1651,6 +1655,7 @@ class m_passer_commande_verre extends CI_Model
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
         }
+        $user = $this->m_users->getUserById($user_id);
         $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
@@ -1664,6 +1669,12 @@ class m_passer_commande_verre extends CI_Model
             if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
                 $resultat[$res->code]["prix"] -= 1;
             }
+            else {
+                $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+            }
+            $resultat[$stock->id_verre]["prix"] = number_format($resultat[$res->code]["prix"], 2);
+
+//            print_r($user);die;
         }
 
 

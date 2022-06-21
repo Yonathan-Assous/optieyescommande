@@ -10,10 +10,17 @@ class m_lenses extends CI_Model
         parent::__construct();
     }
 
-    public function getLensesByTradFr($tradFr) {
+    public function getLensesByTradFr($tradFr, $is_teledetourage = false) {
+        $tradFr = str_replace(" - Stock déporté", "", $tradFr);
+        if (!$is_teledetourage) {
+            $addSql = "AND display = 'X'";
+        }
+        else {
+            $addSql = "AND is_teledetourable = true";
+        }
         $sql = "SELECT * FROM `lenses` 
                 WHERE `trad_fr` = '$tradFr'
-                AND display = 'X'";
+                $addSql";
         $query = $this->db->query($sql);
         $lenses =  $query->result();
         return $lenses[0];

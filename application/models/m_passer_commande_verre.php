@@ -238,15 +238,20 @@ class m_passer_commande_verre extends CI_Model
 
             $omega_res = $this->db->query("SELECT * 
 									   FROM lenses 
-									   WHERE trad_fr LIKE '%" . utf8_encode($requete) . "%' AND display = 'X'
+									   WHERE trad_fr LIKE '%" . utf8_encode($requete) . "%' AND (display = 'X' OR is_teledetourable = 1)
 									   ORDER BY trad_fr ASC");
 
             $omega_query = $omega_res->result();
-
+//            print_r($omega_query);die;
             foreach ($omega_query as $omega) {
                 $tab[$i]['verre_or_lens_id'] = $omega->id;
                 $tab[$i]['code'] = $omega->code;
-                $tab[$i]['libelle'] = $omega->trad_fr;
+                if ($omega->display != 'X' && $omega->is_teledetourable == 1) {
+                    $tab[$i]['libelle'] = $omega->trad_fr . ' (télédétourage)';
+                }
+                else {
+                    $tab[$i]['libelle'] = $omega->trad_fr;
+                }
                 $tab[$i]['prix'] = $omega->prix;
                 $tab[$i]['source'] = "omega";
                 $sql_generation = "";
@@ -358,7 +363,7 @@ class m_passer_commande_verre extends CI_Model
                 && $additionD <= 3)) {
             //26783 diametre 70
             $resultat[0]['name'] = "Prog Eco 1,5 HMC - Stock";
-            $resultat[0]['id'] = "S26783";
+            $resultat[0]['id'] = "41274";
 
             return $resultat;
         } else {
@@ -374,15 +379,16 @@ class m_passer_commande_verre extends CI_Model
                 $P_A = "";
             }
 
-            $stock_res = $this->db->query("SELECT *, ppc.prix as prix_perso  
+            $sql = "SELECT *, ppc.prix as prix_perso  
 												FROM verres_stock 
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   JOIN grille_tarifaire ON grille_tarifaire.id_verre = verres_stock.id_verre
                                        LEFT JOIN prix_par_client ppc ON (ppc.code = verres_stock.id_verre AND id_client="
-                                          . $user_id . ")
+                . $user_id . ")
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' AND id_grille_tarifaire = 1 "
-                                          . $P_A . "
-									   ORDER BY libelle_verre ASC");
+                . $P_A . "
+									   ORDER BY libelle_verre ASC";
+            $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
             $i = 0;
@@ -466,8 +472,9 @@ class m_passer_commande_verre extends CI_Model
                     && $additionD <= 3)) {
                 //26783 diametre 70
                 $resultat[0]['name'] = "Prog Eco 1,5 HMC - Stock";
-                $resultat[0]['id'] = "S26783";
-
+                $resultat[0]['id'] = "41274";
+                $resultat[0]['code'] = "41274";
+                $resultat[0]['id_verre'] = "41274";
                 return $resultat;
             }
         } else {
@@ -493,6 +500,7 @@ class m_passer_commande_verre extends CI_Model
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' " . $P_A . "
 									   ORDER BY libelle_verre ASC";
+//            print_r($sql);die;
             $stock_res = $this->db->query($sql);
 
             $stock_query = $stock_res->result();
@@ -547,8 +555,15 @@ class m_passer_commande_verre extends CI_Model
 
     public
     function getlens($indice, $lensFocalGroup, $generation, $sphereD, $cylindreD, $axeD, $additionD, $stock, $user_id,
-                     $panierA, $type = "1")
+                     $panierA, $type = "1", $isTeledetourage = false)
     {
+        if ($isTeledetourage == false || $isTeledetourage == 'false') {
+            $isTeledetourage = false;
+        }
+        else {
+            $isTeledetourage = true;
+        }
+//        $isTeledetourage = ('true' || true) ? true : false;
         $sphereD = str_replace(".00", "", $sphereD);
         $cylindreD = str_replace(".00", "", $cylindreD);
         $additionD = str_replace(".00", "", $additionD);
@@ -662,7 +677,7 @@ class m_passer_commande_verre extends CI_Model
                 }
                 $conditions = rtrim($conditions, " OR ");
                 $conditions .= ")";
-
+                $teledetourageCondition = $isTeledetourage ? "AND is_teledetourable = true" : "AND display = 'X'";
                 //echo "Conditions:".$conditions." - Generation:".$generation." - Indice:".$indice;
                 if ($conditions != "()") {
                     if ($generation == '-') {
@@ -673,7 +688,7 @@ class m_passer_commande_verre extends CI_Model
                                         WHERE focalGroupId=" . $lensFocalGroup . "
 										AND " . $conditions . "
 										AND is_mineral = 1 
-										AND display = 'X'
+										$teledetourageCondition
 										ORDER BY sorting,trad_fr";
 
                                 $res = $this->db->query($sql);
@@ -688,7 +703,7 @@ class m_passer_commande_verre extends CI_Model
 													FROM " . $this->table_lenses . " 
 										   WHERE focalGroupId=" . $lensFocalGroup . "
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
                                 } else {
@@ -697,7 +712,7 @@ class m_passer_commande_verre extends CI_Model
                                     $res = $this->db->query("SELECT * 
 													FROM " . $this->table_lenses . " 
 										   WHERE " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
 
@@ -712,7 +727,7 @@ class m_passer_commande_verre extends CI_Model
                                     . "' OR name LIKE '%" . $indice . "-%' OR name LIKE '%"
                                     . $indice . "0%')
 										   AND name NOT LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr";
                                 $res = $this->db->query($sql);
                                 /*echo "SELECT *
@@ -731,7 +746,7 @@ class m_passer_commande_verre extends CI_Model
 													FROM " . $this->table_lenses . " 
 										   WHERE focalGroupId=" . $lensFocalGroup . "
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             } else {
                                 //$res = DB::table("lenses")->whereRaw(\DB::raw($conditions))->orderBy('name', 'ASC')->pluck("id","name");
@@ -739,7 +754,7 @@ class m_passer_commande_verre extends CI_Model
                                 $res = $this->db->query("SELECT * 
 													FROM " . $this->table_lenses . " 
 										   WHERE " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             }
                         }
@@ -752,7 +767,7 @@ class m_passer_commande_verre extends CI_Model
 										   AND focalGroupId='3'
 										   AND " . $conditions . "
 										   AND name LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
 
                             } elseif ($indice == "all") {
@@ -762,7 +777,7 @@ class m_passer_commande_verre extends CI_Model
 										   WHERE trad_fr LIKE '%" . $generation . "%'
 										   AND focalGroupId='3'
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                             } else {
                                 $sql = "SELECT * 
@@ -772,7 +787,7 @@ class m_passer_commande_verre extends CI_Model
 										   AND " . $conditions . "
 										   AND (name LIKE '%" . $indice . " %' OR name LIKE '%" . $indice . "')
 										   AND name NOT LIKE '%mineral%'
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr";
                                 $res = $this->db->query($sql);
 
@@ -784,7 +799,7 @@ class m_passer_commande_verre extends CI_Model
 										   WHERE trad_fr LIKE '%" . $generation . "%'
 										   focalGroupId='3'
 										   AND " . $conditions . "
-										   AND display = 'X'
+										   $teledetourageCondition
 										   ORDER BY sorting,trad_fr");
                         }
                     }
@@ -906,7 +921,7 @@ class m_passer_commande_verre extends CI_Model
 
 
                     }
-                    //print_r('gdsggfdf');die;
+                    //print_r($res_f->result());
                     return $res_f->result();
                 } else {
                     return "";
@@ -1605,38 +1620,42 @@ class m_passer_commande_verre extends CI_Model
             . $user_id . ")
 									   WHERE verres_stock.id_verre = '" . $lens
             . "' AND grille_tarifaire.id_grille_tarifaire = 1";
-//        var_dump($sql);die;
         $stock_res = $this->db->query($sql);
+        $user = $this->m_users->getUserById($user_id);
 
         $stock_query = $stock_res->result();
-
         foreach ($stock_query as $stock) {
             if ($stock->prix_perso != NULL) {
                 $resultat[$stock->id_verre]["prix"] = $stock->prix_perso;
             } else {
                 $resultat[$stock->id_verre]["prix"] = $stock->prix_verre;
             }
+            if ($stock->supplement != 0) {
+                $resultat[$stock->id_verre]["prix"] += $user[0]->tarif_supplement - 1;
+            }
+            $resultat[$stock->id_verre]["prix"] = number_format($resultat[$stock->id_verre]["prix"], 2);
         }
         return $resultat;
     }
 
     public
-    function getPrix($lens = "", $user_id, $generation)
+    function getPrix($lens = "", $user_id, $generation, $traitement = NULL)
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
 
         } else {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
         }
+        $user = $this->m_users->getUserById($user_id);
         $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
@@ -1647,7 +1666,21 @@ class m_passer_commande_verre extends CI_Model
             } else {
                 $resultat[$res->code]["prix"] = $res->prix;
             }
+            if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
+                $resultat[$res->code]["prix"] -= 1;
+            }
+            else {
+                $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+            }
+            $resultat[$stock->id_verre]["prix"] = number_format($resultat[$res->code]["prix"], 2);
+
+//            print_r($user);die;
         }
+
+
+//        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+//            $data['supplementD'] -= 1;
+//        }
         return $resultat;
     }
 
@@ -1679,7 +1712,7 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getDiametres($lens, $sphere, $cylindre)
+    function getDiametres($lens, $sphere, $cylindre, $diametreUtile = NULL)
     {
         $sphere = str_replace("+", "", $sphere);
         $cylindre = str_replace("+", "", $cylindre);
@@ -1690,7 +1723,6 @@ class m_passer_commande_verre extends CI_Model
         $rangesFDiameters = array();
         $rangesids = "";
         $sql = "SELECT * FROM " . $this->table_lenses . " WHERE code = '" . $lens . "'";
-
         $res = $this->db->query($sql);
         $r = $res->result()[0]->ranges;
         $ranges_list = array();
@@ -1751,7 +1783,10 @@ class m_passer_commande_verre extends CI_Model
 
         if ($rangesids != "") {
             $rangesids = "(" . $rangesids . ")";
-
+            $diametreUtileSql = '';
+            if ($diametreUtile) {
+                $diametreUtileSql = ' AND diameter_physical >= ' . $diametreUtile;
+            }
             //	echo $rangesids."<br>";
             /*$rangesFDiameters = DB::table('lensRanges')
 						 ->whereRaw(\DB::raw($rangesids))
@@ -1759,7 +1794,7 @@ class m_passer_commande_verre extends CI_Model
 						 */
             //return "SELECT * FROM lensRanges WHERE ".$rangesids." ORDER BY diameter_physical GROUP BY diameter_physical";
             $sql = "SELECT diameter_physical FROM lensRanges WHERE " . $rangesids
-                . "  GROUP BY diameter_physical ORDER BY diameter_physical";
+                . $diametreUtileSql . " GROUP BY diameter_physical ORDER BY diameter_physical";
 
             $resultats = $this->db->query($sql);
             //	echo "SELECT * FROM lensRanges WHERE ".$rangesids."  GROUP BY diameter_physical ORDER BY diameter_physical";

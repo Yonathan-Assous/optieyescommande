@@ -453,18 +453,18 @@ img.wowbook-lazy {
 /*
 	Cursor
 */
-.wowbook-draggable {
-	cursor:hand;
-	cursor:grab;
-	cursor:-moz-grab;
-	cursor:-webkit-grab;
-	-moz-user-select: none;
-}
-.wowbook-draggable.wowbook-dragging {
-	cursor:grabbing;
-	cursor:-moz-grabbing;
-	cursor:-webkit-grabbing;
-}
+/*.wowbook-draggable {*/
+/*	cursor:hand;*/
+/*	cursor:grab;*/
+/*	cursor:-moz-grab;*/
+/*	cursor:-webkit-grab;*/
+/*	-moz-user-select: none;*/
+/*}*/
+/*.wowbook-draggable.wowbook-dragging {*/
+/*	cursor:grabbing;*/
+/*	cursor:-moz-grabbing;*/
+/*	cursor:-webkit-grabbing;*/
+/*}*/
 
 
 /*
@@ -695,10 +695,10 @@ img.wowbook-lazy {
 	top:0; left:0; bottom: 0; right: 0;
 }
 
-/
-/
-/
-/
+/*/*/
+/*/*/
+/*/*/
+/*/*/
 
 
 /*
@@ -951,7 +951,7 @@ img.wowbook-lazy {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	content: "\ea0d"; /* .icon-cancel-circle */
-	font-size: bigger;
+	/*font-size: bigger;*/
 }
 
 /* toolbar and control fontawesome icons */
@@ -1519,6 +1519,6 @@ input.wowbook-find-text {
 
 .wowbook-lightbox > .wowbook-close.wowbook-cs-white {
 	background: #fbfbfb;
-	border-color: 1px solid #f3f3f3;
+	border: 1px solid #f3f3f3;
 	color: #737373;
 }

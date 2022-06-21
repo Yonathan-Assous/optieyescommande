@@ -311,7 +311,7 @@ class m_montures extends CI_Model
      * @param $args
      * @return mixed
      */
-    public function addMonturesOrder($args) {
+    public function addMonturesOrder($args, $byAdmin = 0) {
 
         $CI =& get_instance();
         $CI->load->model('m_commande');
@@ -330,8 +330,8 @@ class m_montures extends CI_Model
             'tarif_supplement' => 0,
             'tarif_packaging' => 0,
             'id_etat_commande' => 1,
-            'taux_tva' => 1.196
-
+            'taux_tva' => 1.196,
+            'by_admin' => $byAdmin
         );
 
         $params = array_merge($defaults, $args);
@@ -610,6 +610,7 @@ WHERE c.id_commande = ".$id."  AND c.id_verre IS NULL ORDER BY c.id_commande DES
         $this->db->where('commande_monture', 1);
         $this->db->where('date_commande >', $date);
         $this->db->where('date_commande <', $date_end);
+        $this->db->where('is_confirmed =', 1);
 
         $query = $this->db->get();
 
@@ -637,7 +638,7 @@ WHERE c.id_commande = ".$id."  AND c.id_verre IS NULL ORDER BY c.id_commande DES
         
         $query = $this->db->query("SELECT SUM(total_commande) AS total_commande
                                FROM commande
-                               WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."' AND commande_monture='1'");
+                               WHERE DATE_FORMAT(date_commande, '%Y-%m') = '".$date."' AND commande_monture='1' AND is_confirmed = 1");
                                
 		
       /*  if ($query && $query->num_rows() > 0)

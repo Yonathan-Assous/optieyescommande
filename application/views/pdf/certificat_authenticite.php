@@ -333,7 +333,7 @@
 								{
 									echo  utf8_decode($value->traitementG);
 								}
-								else
+								else if (isset($value->traitementD))
 								{
 									echo  utf8_decode($value->traitementD);
 								} 
@@ -377,8 +377,8 @@
 									if($info_commande['verre']['correction_gauche']['galbe'] != "Standard")
 										echo 'Galbe ' . $info_commande['verre']['correction_gauche']['galbe'];
 								}
-								else
-								{
+								else if (isset($info_commande['verre']['correction_droit']['galbe']))
+                                {
 									if($info_commande['verre']['correction_droit']['galbe'] != "Standard")
 										echo 'Galbe ' . $info_commande['verre']['correction_droit']['galbe'];
 								} 

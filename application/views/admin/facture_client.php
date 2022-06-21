@@ -128,6 +128,7 @@ else
 								<th>Montant HT Montures</th>
                                 <th>Montant HT Stock</th>
                                 <th>Montant HT Fabrique</th>
+                                <th>Remises spéciales</th>
                                 <th>Tarif livraison</th>
                                 <th>Détails</th>
                                 <th>Remise</th>

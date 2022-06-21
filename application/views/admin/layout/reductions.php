@@ -148,7 +148,11 @@
                     url: "/admin/reduction_facture",
                     data : $("#form_reduc_facture").serialize(),
                     success: function(data){
+                        let totalFactureHt = $("#totalFactureHt_"+date+"_"+id_users).text();
+                        let totalFacture = $("#totalFacture_"+date+"_"+id_users).text();
+                        let tva = totalFactureHt / totalFacture
                         $("#totalFacture_"+date+"_"+id_users).text(data);
+                        $("#totalFactureHt_"+date+"_"+id_users).text((data * tva).toFixed(2));
                         $("#deleteReduction_"+date+"_"+id_users).fadeIn();
                         $('#add-reduction').modal('hide');
                     }

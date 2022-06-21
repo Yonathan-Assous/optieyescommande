@@ -59,6 +59,7 @@ else
                                 <th>Type de verre</th>
                                 <th>Dernières factures</th>
                                 <!--<th>J-10</th>-->
+                                <th>Deal</th>
                                 <th>J-30</th>
                                 <th>Tableau de bord</th>
                                 <!--<th>J-90</th>-->
@@ -186,8 +187,9 @@ else
                     if ( data[6]=='Panier A' ) {
                         $('td', row).addClass('highlight-blue');
                     }
-                    if (data[12]) {
-                        $(row).addClass(data[12]);
+                    //met la couleur bl_conditions_non_remolies en rouge par exemple
+                    if (data[13]) {
+                        $(row).addClass(data[13]);
                     }
                 },
                 language: {
@@ -228,7 +230,6 @@ else
                 },
                 dataType: "html",
                 success: function(data){
-                    console.log('dsadsas');
                     //$('#datatable').DataTable().clear();
                     getCommande();
                     $.ajax({

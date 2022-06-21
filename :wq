@@ -1,0 +1,5 @@
+MAILTO=""
+47	23	*	*	*	/usr/sbin/ntpdate -b -s ntp.ovh.net
+MAILTO="ossona@gmail.com"
+0	*/3	*	*	*	/usr/local/psa/bin/pleskbackup domains-name optieyescommande.com --description="Sauvegarde 3H" > /dev/null
+0 * * * * sh /var/www/vhosts/optieyescommande.com/httpdocs_new/backup.sh

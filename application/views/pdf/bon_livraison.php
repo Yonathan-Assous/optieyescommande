@@ -199,53 +199,61 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
 
     if($bon_livraison[0]->id_type_generation_verre==0)
     {
-    	if(isset($info_commande['verre']['correction_droit'])) {
-            $correction_droit .= 'Diametre : ' . $info_commande['verre']['correction_droit']['diametre'];
+    	if(isset($info_commande['verre']['correction_droit']) && $info_commande['verre']['correction_droit']['diametre'] != 'Télédétourage') {
+            $correction_droit .= 'Diametre : ' . $info_commande['verre']['correction_droit']['diametre'] . '<br>';
         }
-        if(isset($info_commande['verre']['correction_gauche'])) {
-            $correction_gauche .= 'Diametre : ' . $info_commande['verre']['correction_gauche']['diametre'];
+    	else {
+            $correction_droit .= 'Diametre : 65/70<br>';
+        }
+        if(isset($info_commande['verre']['correction_gauche']) && $info_commande['verre']['correction_gauche']['diametre'] != 'Télédétourage') {
+            $correction_gauche .= 'Diametre : ' . $info_commande['verre']['correction_gauche']['diametre'] . '<br>';
+        }
+        else {
+            $correction_gauche .= 'Diametre : 65/70<br>';
         }
     }
     else
     {
-		if(isset($info_commande['verre']['diametre'])) {
-			$correction_droit .= 'Diametre : ' . $info_commande['verre']['diametre'];
-			$correction_gauche .= 'Diametre : ' . $info_commande['verre']['diametre_gauche'];
+		if(isset($info_commande['verre']['diametre']) && $info_commande['verre']['diametre'] != 'Télédétourage'  && $info_commande['verre']['diametre_gauche'] != 'Télédétourage') {
+			$correction_droit .= 'Diametre : ' . $info_commande['verre']['diametre'] . '<br>';
+			$correction_gauche .= 'Diametre : ' . $info_commande['verre']['diametre_gauche'] . '<br>';
 		}
-
-
+		else {
+            $correction_droit .= 'Diametre : 65/70<br>';
+            $correction_gauche .= 'Diametre : 65/70<br>';
+        }
 	}
 
     if(isset($bon_livraison[0]->ecart_pup_D)) {
-        $correction_droit .= '<br>Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_D;
+        $correction_droit .= 'Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_D;
     }
     if(isset($bon_livraison[0]->angle_galbe_D)) {
-        $correction_droit .= '<br>Angle de galbe : ' . $bon_livraison[0]->angle_galbe_D;
+        $correction_droit .= 'Angle de galbe : ' . $bon_livraison[0]->angle_galbe_D . '<br>';
     }
     if(isset($bon_livraison[0]->distance_verre_oeil_D)) {
-        $correction_droit .= '<br>Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_D;
+        $correction_droit .= 'Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_D . '<br>';
     }
     if(isset($bon_livraison[0]->angle_pantoscopique_D)) {
-        $correction_droit .= '<br>Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_D;
+        $correction_droit .= 'Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_D . '<br>';
     }
     if(isset($bon_livraison[0]->hauteur_montage_D)) {
-        $correction_droit .= '<br>Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_D;
+        $correction_droit .= 'Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_D . '<br>';
     }
 
     if(isset($bon_livraison[0]->ecart_pup_G)) {
-        $correction_gauche .= '<br>Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_G;
+        $correction_gauche .= 'Écart pupillaire vision de près : ' . $bon_livraison[0]->ecart_pup_G . '<br>';
     }
     if(isset($bon_livraison[0]->angle_galbe_G)) {
-        $correction_gauche .= '<br>Angle de galbe : ' . $bon_livraison[0]->angle_galbe_G;
+        $correction_gauche .= 'Angle de galbe : ' . $bon_livraison[0]->angle_galbe_G . '<br>';
     }
     if(isset($bon_livraison[0]->distance_verre_oeil_G)) {
-        $correction_gauche .= '<br>Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_G;
+        $correction_gauche .= 'Distance verre oeil : ' . $bon_livraison[0]->distance_verre_oeil_G . '<br>';
     }
     if(isset($bon_livraison[0]->angle_pantoscopique_G)) {
-        $correction_gauche .= '<br>Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_G;
+        $correction_gauche .= 'Angle pantoscopique : ' . $bon_livraison[0]->angle_pantoscopique_G . '<br>';
     }
     if(isset($bon_livraison[0]->hauteur_montage_G)) {
-        $correction_gauche .= '<br>Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_G;
+        $correction_gauche .= 'Hauteur de montage : ' . $bon_livraison[0]->hauteur_montage_G . '<br>';
     }
 
 //    if(isset($info_commande['precalibrage']['calibre'])) {
@@ -278,24 +286,24 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
 */
 	if(isset($info_commande['verre']['correction_droit']['PrismeSphere']) && $info_commande['verre']['correction_droit']['PrismeSphere']!="")
 	{
-		$correction_droit  .= '<br>Prisme :'.$info_commande['verre']['correction_droit']['PrismeSphere']."<br>";
+		$correction_droit  .= 'Prisme :'.$info_commande['verre']['correction_droit']['PrismeSphere']."<br>";
 		$correction_droit  .= 'Base :'.$info_commande['verre']['correction_droit']['PrismeCylindre']."<br>";
 	}
 	
 	if(isset($info_commande['verre']['correction_gauche']['PrismeSphere']) && $info_commande['verre']['correction_gauche']['PrismeSphere']!="")
 	{
-		$correction_gauche  .= '<br>Prisme :'.$info_commande['verre']['correction_gauche']['PrismeSphere']."<br>";
+		$correction_gauche  .= 'Prisme :'.$info_commande['verre']['correction_gauche']['PrismeSphere']."<br>";
 		$correction_gauche  .= 'Base :'.$info_commande['verre']['correction_gauche']['PrismeCylindre']."<br>";
 	}
 	
 	if(isset($info_commande['verre']['correction_droit']['galbe']) && $info_commande['verre']['correction_droit']['galbe']!="")
 	{
-		$correction_droit  .= '<br>Galbe :'.$info_commande['verre']['correction_droit']['galbe']."<br>";
+		$correction_droit  .= 'Galbe :'.$info_commande['verre']['correction_droit']['galbe']."<br>";
 	}
 	
 	if(isset($info_commande['verre']['correction_gauche']['galbe']) && $info_commande['verre']['correction_gauche']['galbe']!="")
 	{
-		$correction_gauche  .= '<br>Galbe :'.$info_commande['verre']['correction_gauche']['galbe']."<br>";
+		$correction_gauche  .= 'Galbe :'.$info_commande['verre']['correction_gauche']['galbe']."<br>";
 	}
 	
     if(isset($info_commande['precalibrage']['calibre'])) {
@@ -469,7 +477,6 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
 
 
                 </tr>
-
             </table>
 			<?php
 				if(strpos($bon_livraison[0]->libelle_verre, 'Panier A') !== false)

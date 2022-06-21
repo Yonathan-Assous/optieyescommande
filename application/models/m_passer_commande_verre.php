@@ -1672,7 +1672,7 @@ class m_passer_commande_verre extends CI_Model
             else {
                 $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
             }
-            $resultat[$stock->id_verre]["prix"] = number_format($resultat[$res->code]["prix"], 2);
+            $resultat[$res->code]["prix"] = number_format($resultat[$res->code]["prix"], 2);
 
 //            print_r($user);die;
         }

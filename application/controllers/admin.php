@@ -4826,6 +4826,7 @@ class admin
                     }
                 }
             }
+//            print_r($data);die;
             die(json_encode($data));
         } else {
             $this->redirect("/index");
@@ -23158,4 +23159,38 @@ class admin
         $this->m_commande->updateCommande($commandeId, $data);
     }
 
+    public
+    function comptes_teledetourage()
+    {
+        $data['newUser'] =
+            $this->session->userdata('newUser');
+        $data['parametre_lang_datable'] =
+            $this->config->item('parametre_lang_datable');
+        $data['parametre_export_datable'] =
+            $this->config->item('parametre_export_datable');
+
+        $result =
+            $this->m_users->getMaxUser();
+        $data['maxUser'] =
+            $result[0]->maxUser;
+
+        $data['page'] =
+        $data['title'] =
+            "Comptes télédétourage";
+        $data['modules'] =
+            array(
+                'datatables' => true,
+                'datepicker' => true,
+                'sweetalert' => true
+            );
+        $this->load->view('admin/comptes_teledetourage',
+            $data);
+    }
+
+    public function comptes_teledetourage_ajax()
+    {
+        $tab =
+            $this->m_teledetourage->getComptesTeledetourage();
+        echo json_encode($tab);
+    }
 }

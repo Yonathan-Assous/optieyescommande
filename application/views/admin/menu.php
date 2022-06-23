@@ -92,6 +92,9 @@
 				<li class="has_sub <?php echo ($page == "users" ? 'active' : ''); ?>">
 					<a href="<?php echo $pre_url;?>admin/users" class="waves-effect <?php echo ($page == "users" ? 'active' : ''); ?>"><i class="zmdi zmdi-accounts-alt"></i> <span> Fichiers clients </span> </a>
 				</li>
+                <li class="has_sub <?php echo ($page == "comptes_teledetourage" ? 'active' : ''); ?>">
+                    <a href="<?php echo $pre_url;?>admin/comptes_teledetourage" class="waves-effect <?php echo ($page == "comptes_teledetourage" ? 'active' : ''); ?>"><i class="zmdi zmdi-desktop-mac"></i> <span> Comptes télédétourage </span> </a>
+                </li>
 				<li class="has_sub">
 					<a href="javascript:void(0);" class="waves-effect <?php echo ($page == "prix_verre" ? 'active' : ''); ?>"><i class="zmdi zmdi-invert-colors"></i> <span> Prix des verres </span> </a>
 					<ul class="list-unstyled">

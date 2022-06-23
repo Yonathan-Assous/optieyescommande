@@ -125,4 +125,56 @@ class m_teledetourage extends CI_Model
 //        print_r($i);
         return $drilled_array;
     }
+
+    public
+    function getComptesTeledetourage()
+    {
+        $date = date('Y-m-01');
+        $dateStart = date("Y-m-d", strtotime("-5 months",strtotime($date)));
+        $tab = array();
+        $arrayComptes = array();
+
+        $i = 0;
+        $sql = "SELECT  DATE_FORMAT(date_commande, '%Y-%m') AS year_and_month
+                FROM `commande` 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '2022-01-01' 
+                GROUP BY year_and_month
+                ORDER BY year_and_month DESC";
+
+
+        $query = $this->db->query($sql);
+        $months = $query->result();
+
+        $sql = "SELECT id_users, DATE_FORMAT(date_commande, '%Y-%m') AS year_and_month, SUM(total_commande + tarif_teledetourage) as total
+                FROM `commande` 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
+                GROUP BY id_users, year_and_month";
+        $res = $this->db->query($sql);
+        $comptes = $res->result();
+        foreach ($comptes as $compte) {
+            $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+        }
+        $sql = "SELECT * FROM users WHERE `is_teledetourable` = 1";
+        $res = $this->db->query($sql);
+        $users = $res->result();
+
+        foreach ($users as $user) {
+            if (!array_key_exists($user->id_users, $arrayComptes)) {
+                $arrayComptes[$user->id_users][$comptes[0]->year_and_month] = 0;
+            }
+        }
+        foreach ($arrayComptes as $id_user => $arrayCompte) {
+            $tab[$i]['id_user'] = $id_user;
+            foreach ($months as $month) {
+                if (array_key_exists($month->year_and_month, $arrayCompte)) {
+                    $tab[$i][$month->year_and_month] = $arrayCompte[$month->year_and_month];
+                }
+                else {
+                    $tab[$i][$month->year_and_month] = 0;
+                }
+            }
+            $i++;
+        }
+        return $tab;
+    }
 }

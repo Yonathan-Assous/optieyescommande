@@ -3179,7 +3179,7 @@ class m_commande extends CI_Model {
 
     public function addOrder($data, $byAdmin = 0){
         if(is_array($data)){
-
+//            print_r($data);die;
             $pair = $data['pair'];
             unset($data['discount']);
             $data['by_admin'] = $byAdmin;
@@ -3191,9 +3191,13 @@ class m_commande extends CI_Model {
 //                }
 //                $data['code_oma'] = "'" . $hex . "'";
             }
-            else {
+            else if (!isset($data['code_oma'])) {
                 $data['code_oma'] = "''";
             }
+            else {
+                $data['code_oma'] = "'" . bin2hex($data['code_oma']) . "'";
+            }
+
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
@@ -3271,6 +3275,7 @@ class m_commande extends CI_Model {
                 }
                 $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                     .implode(",", $data).")";
+
                 if($this->db->query($sql)){
 
                     $commande_id = $this->db->insert_id();
@@ -3295,6 +3300,7 @@ class m_commande extends CI_Model {
 
             else
             {
+
                 $ancienne_commande = isset($data['ancienne_commande']) ? $data['ancienne_commande'] : 0;
                 $data['ancienne_commande'] = (int) $ancienne_commande;
 
@@ -3437,7 +3443,6 @@ class m_commande extends CI_Model {
 
                 if($type_commande_verre!=4)
                 {
-
                     $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
 
                     if($quantiteD==$quantiteG && $type_commande_verre == 2 && $type_de_verreD==$type_de_verreG)
@@ -3497,7 +3502,6 @@ class m_commande extends CI_Model {
                     //print_r($sql);die;
                     if($this->db->query($sql))
                     {
-
                         $commande_id = $this->db->insert_id();
                         if (isset($premiereCommande)) {
                             $sqlPaireOne = "SELECT * FROM commande 
@@ -3535,6 +3539,7 @@ class m_commande extends CI_Model {
                 }
                 else
                 {
+
                     $ok = 0;
                     if($id_verreD!="" && $verreDroit)
                     {

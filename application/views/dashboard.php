@@ -144,7 +144,7 @@ if (is_object($pair_order)) {
             margin-top: 10px;
         }
 
-        .connect_machine, .return_to_commande_standard {
+        .connect_machine {
             margin-top: 33px !important;
         }
 
@@ -7148,7 +7148,7 @@ if (is_object($pair_order)) {
                     }
 
                     if ($('#finish_pair').is(':checked')) {
-
+                        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
                         var next = false;
 
                         swal({
@@ -7191,7 +7191,8 @@ if (is_object($pair_order)) {
 
 
                                         if (data.pair == true && data.order_id > 0) {
-                                            window.location.href = '..<?php echo $_SERVER['REQUEST_URI']; ?>/' + data.order_id;
+                                            //console.log('..<?php //echo $_SERVER['REQUEST_URI']; ?>////' + data.order_id)
+                                            window.location.href = '<?php echo $_SERVER['REQUEST_URI']; ?>/' + data.order_id;
                                         } else {
                                             window.location.reload();
                                         }
@@ -7207,6 +7208,7 @@ if (is_object($pair_order)) {
 
                         });
                     } else {
+                        console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
 
                         $.ajax({
                             type: "POST",

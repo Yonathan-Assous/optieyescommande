@@ -3195,7 +3195,7 @@ class m_commande extends CI_Model {
                 $data['code_oma'] = "''";
             }
             else {
-                $data['code_oma'] = "'" . bin2hex($data['code_oma']) . "'";
+                $data['code_oma'] = "'" . $data['code_oma'] . "'";
             }
 
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))

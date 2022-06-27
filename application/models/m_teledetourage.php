@@ -137,7 +137,7 @@ class m_teledetourage extends CI_Model
         $i = 0;
         $sql = "SELECT  DATE_FORMAT(date_commande, '%Y-%m') AS year_and_month
                 FROM `commande` 
-                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '2022-01-01' 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
                 GROUP BY year_and_month
                 ORDER BY year_and_month DESC";
 
@@ -151,6 +151,7 @@ class m_teledetourage extends CI_Model
                 GROUP BY id_users, year_and_month";
         $res = $this->db->query($sql);
         $comptes = $res->result();
+
         foreach ($comptes as $compte) {
             $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
         }
@@ -159,12 +160,20 @@ class m_teledetourage extends CI_Model
         $users = $res->result();
 
         foreach ($users as $user) {
+            $arrayComptes[$user->id_users]['societe'] = $user->nom_societe;
             if (!array_key_exists($user->id_users, $arrayComptes)) {
                 $arrayComptes[$user->id_users][$comptes[0]->year_and_month] = 0;
             }
+            if ($user->Samuel == 100) {
+                $arrayComptes[$user->id_users]['commercial'] = 'Samuel';
+            }
+            else if ($user->Gregory == 100) {
+                $arrayComptes[$user->id_users]['commercial'] = 'Gregory';
+            }
         }
         foreach ($arrayComptes as $id_user => $arrayCompte) {
-            $tab[$i]['id_user'] = $id_user;
+            $tab[$i]['societe'] = $arrayCompte['societe'];
+            $tab[$i]['id'] = $id_user;
             foreach ($months as $month) {
                 if (array_key_exists($month->year_and_month, $arrayCompte)) {
                     $tab[$i][$month->year_and_month] = $arrayCompte[$month->year_and_month];
@@ -173,6 +182,7 @@ class m_teledetourage extends CI_Model
                     $tab[$i][$month->year_and_month] = 0;
                 }
             }
+            $tab[$i]['commercial'] = $arrayCompte['commercial'];
             $i++;
         }
         return $tab;

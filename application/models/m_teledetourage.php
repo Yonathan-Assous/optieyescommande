@@ -208,7 +208,7 @@ class m_teledetourage extends CI_Model
 //                $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
 //            }
         }
-        print_r($arrayComptes);die;
+//        print_r($arrayComptes);die;
 
         foreach ($arrayComptes as $id_user => $arrayCompte) {
             $tab[$i]['Societe'] = $arrayCompte['societe'];

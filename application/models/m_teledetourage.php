@@ -196,21 +196,21 @@ class m_teledetourage extends CI_Model
 //            print_r($compte->id_users);die;
             if (in_array($compte->id_users, $userIdArray)) {
                 $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+                if (array_key_exists($compte->id_users, $arrayByDay)) {
+                    $arrayComptes[$compte->id_users]['today'] = $arrayByDay[$compte->id_users];
+                }
+                else {
+                    $arrayComptes[$compte->id_users]['today'] = 0;
+                }
             }
-            if (array_key_exists($compte->id_users, $arrayByDay)) {
-                $arrayComptes[$compte->id_users]['today'] = $arrayByDay[$compte->id_users];
-            }
-            else {
-                $arrayComptes[$compte->id_users]['today'] = 0;
-            }
+
 //            if (in_array($compte->id_users, $userIdArray)) {
 //                $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
 //            }
         }
-//        print_r($arrayComptes);die;
+        print_r($arrayComptes);die;
 
         foreach ($arrayComptes as $id_user => $arrayCompte) {
-//            print_r($arrayCompte);
             $tab[$i]['Societe'] = $arrayCompte['societe'];
             $tab[$i]['Magasin'] = $id_user;
             $tab[$i]['Aujourd\'hui'] = $arrayCompte['today'];

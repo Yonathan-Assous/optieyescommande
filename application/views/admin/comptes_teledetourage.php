@@ -18,7 +18,7 @@ include_once('menu.php');
                     <label for="get_commercial" class="control-label">Commercial</label>
                     <select id="get_commercial" name="login_notification" class="form-control">
                         <option value="Tout">Tout</option>
-                        <option value="Samuel">Samuel</option>
+                        <option value="Daniel">Daniel / Samuel</option>
                         <option value="Gregory">Gregory</option>
                     </select>
                 </div>
@@ -65,6 +65,29 @@ include_once('menu.php');
 <script>
 
     $(document).ready(function() {
+        $('#get_commercial').on('change', function() {
+            test(false)
+        })
+
+        test()
+
+    });
+    // function hideCommercial() {
+    //     if ($('#get_commercial').val() == 'Daniel') {
+    //         $('.daniel').removeClass('hide');
+    //         $('.gregory').addClass('hide');
+    //     }
+    //     else if ($('#get_commercial').val() == 'Gregory') {
+    //         $('.daniel').addClass('hide');
+    //         $('.gregory').removeClass('hide');
+    //     }
+    //     else {
+    //         $('.daniel').removeClass('hide');
+    //         $('.gregory').removeClass('hide');
+    //     }
+    // }
+
+    function test(first = true) {
         $.ajax({
             type: "POST",
             url: "/admin/comptes_teledetourage_ajax",
@@ -72,6 +95,7 @@ include_once('menu.php');
             dataType: "json",
         }).done( function(data) {
             console.log(data);
+            $("#datatable th").remove();
             let keys = Object.keys(data[0]);
             console.log(keys.length);
             let columns = [];
@@ -96,7 +120,7 @@ include_once('menu.php');
             }
             setTimeout(function(){
                 $(".th-compte_teledetourage").width(100 / keys.length + '%');
-            },200)
+            },10)
 
             console.log(columns);
 
@@ -127,8 +151,8 @@ include_once('menu.php');
                     // console.log('active');
                     // console.log(data);
                     // console.log(row);
-                    if (data['commercial'] == 'Samuel') {
-                        $(row).addClass('samuel');
+                    if (data['commercial'] == 'Daniel') {
+                        $(row).addClass('daniel');
                         // $(row).removeClass('gregory');
                     }
                     else {
@@ -137,23 +161,17 @@ include_once('menu.php');
                     }
                 },
             });
-        });
-        $('#get_commercial').on('change', function() {
-            if ($('#get_commercial').val() == 'Samuel') {
-                $('.samuel').removeClass('hide');
-                $('.gregory').addClass('hide');
-            }
-            else if ($('#get_commercial').val() == 'Gregory') {
-                $('.samuel').addClass('hide');
-                $('.gregory').removeClass('hide');
-            }
-            else {
-                $('.samuel').removeClass('hide');
-                $('.gregory').removeClass('hide');
-            }
-        });
-    });
 
+
+            // $('#get_commercial').on('change', function() {
+            //     hideCommercial()
+            // });
+        });
+    }
+
+    $('#datatable').on( 'draw.dt', function () {
+        // e.preventDefault();
+    });
     // TableManageButtons.init();
 
 </script>
@@ -163,7 +181,7 @@ include_once('menu.php');
         text-align: center;
     }
 
-    .samuel {
+    .daniel {
         background-color: rgba(0, 146, 255, 0.33) !important;
     }
 

@@ -127,7 +127,7 @@ class m_teledetourage extends CI_Model
     }
 
     public
-    function getComptesTeledetourage()
+    function getComptesTeledetourage($commercial = 'Tout')
     {
         $date = date('Y-m-01');
         $dateStart = date("Y-m-d", strtotime("-5 months",strtotime($date)));
@@ -152,29 +152,48 @@ class m_teledetourage extends CI_Model
         $res = $this->db->query($sql);
         $comptes = $res->result();
 
-        foreach ($comptes as $compte) {
-            $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+        $addSql = '';
+        if ($commercial == 'Daniel') {
+            $addSql = 'AND Daniel = 100';
         }
-        $sql = "SELECT * FROM users WHERE `is_teledetourable` = 1";
+        else if ($commercial == 'Gregory'){
+            $addSql = 'AND Gregory = 100';
+        }
+        $sql = "SELECT * FROM users WHERE `is_teledetourable` = 1 $addSql";
+//        print_r($sql);die;
         $res = $this->db->query($sql);
         $users = $res->result();
-
+//        print_r($users);die;
+        $userIdArray = [];
         foreach ($users as $user) {
             $arrayComptes[$user->id_users]['societe'] = $user->nom_societe;
             if (!array_key_exists($user->id_users, $arrayComptes)) {
                 $arrayComptes[$user->id_users][$comptes[0]->year_and_month] = 0;
             }
-            if ($user->Samuel == 100) {
-                $arrayComptes[$user->id_users]['commercial'] = 'Samuel';
+            if ($user->Daniel == 100) {
+                $arrayComptes[$user->id_users]['commercial'] = 'Daniel';
             }
             else if ($user->Gregory == 100) {
                 $arrayComptes[$user->id_users]['commercial'] = 'Gregory';
             }
+            array_push($userIdArray, $user->id_users);
         }
+//        print_r($comptes);die;
+        foreach ($comptes as $compte) {
+//            print_r($userIdArray);
+//            print_r($compte->id_users);die;
+            if (in_array($compte->id_users, $userIdArray)) {
+                $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+            }
+        }
+//        print_r($arrayComptes);die;
+
         foreach ($arrayComptes as $id_user => $arrayCompte) {
             $tab[$i]['societe'] = $arrayCompte['societe'];
-            $tab[$i]['id'] = $id_user;
+            $tab[$i]['numéro du magasin'] = $id_user;
             foreach ($months as $month) {
+//                print_r($arrayCompte);
+//                print_r($month);die;
                 if (array_key_exists($month->year_and_month, $arrayCompte)) {
                     $tab[$i][$month->year_and_month] = $arrayCompte[$month->year_and_month];
                 }

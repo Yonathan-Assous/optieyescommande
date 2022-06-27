@@ -23189,8 +23189,9 @@ class admin
 
     public function comptes_teledetourage_ajax()
     {
+        $commercial = $_POST['commercial'];
         $tab =
-            $this->m_teledetourage->getComptesTeledetourage();
+            $this->m_teledetourage->getComptesTeledetourage($commercial);
         echo json_encode($tab);
     }
 }

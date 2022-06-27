@@ -152,6 +152,17 @@ class m_teledetourage extends CI_Model
         $res = $this->db->query($sql);
         $comptes = $res->result();
 
+        $dateStart = date('Y-m-d');
+        $sql = "SELECT id_users, SUM(total_commande + tarif_teledetourage) as total
+                FROM `commande` 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
+                GROUP BY id_users";
+        $res = $this->db->query($sql);
+        $comptes_by_day = $res->result();
+        $arrayByDay = [];
+        foreach ($comptes_by_day as $compte_by_day) {
+            $arrayByDay[$compte_by_day->id_users] = $compte_by_day->total;
+        }
         $addSql = '';
         if ($commercial == 'Daniel') {
             $addSql = 'AND Daniel = 100';
@@ -176,6 +187,7 @@ class m_teledetourage extends CI_Model
             else if ($user->Gregory == 100) {
                 $arrayComptes[$user->id_users]['commercial'] = 'Gregory';
             }
+            $arrayComptes[$user->id_users]['today'] = 0;
             array_push($userIdArray, $user->id_users);
         }
 //        print_r($comptes);die;
@@ -185,12 +197,24 @@ class m_teledetourage extends CI_Model
             if (in_array($compte->id_users, $userIdArray)) {
                 $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
             }
+            if (array_key_exists($compte->id_users, $arrayByDay)) {
+                $arrayComptes[$compte->id_users]['today'] = $arrayByDay[$compte->id_users];
+            }
+            else {
+                $arrayComptes[$compte->id_users]['today'] = 0;
+            }
+//            if (in_array($compte->id_users, $userIdArray)) {
+//                $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+//            }
         }
 //        print_r($arrayComptes);die;
 
         foreach ($arrayComptes as $id_user => $arrayCompte) {
-            $tab[$i]['societe'] = $arrayCompte['societe'];
-            $tab[$i]['numéro du magasin'] = $id_user;
+//            print_r($arrayCompte);
+            $tab[$i]['Societe'] = $arrayCompte['societe'];
+            $tab[$i]['Magasin'] = $id_user;
+            $tab[$i]['Aujourd\'hui'] = $arrayCompte['today'];
+
             foreach ($months as $month) {
 //                print_r($arrayCompte);
 //                print_r($month);die;

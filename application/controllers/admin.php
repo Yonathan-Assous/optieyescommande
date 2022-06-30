@@ -23152,9 +23152,10 @@ class admin
                 $traitementG = isset($data['traitementG']) ? $data['traitementG'] : NULL;
                 $teinteG = isset($data['teinteG']) ? $data['teinteG'] : NULL;
                 $data['prix_verre_gauche'] = $this->getPrixVerreComplet(NULL,$data['user_id'],$data['nomverreGH'],
-                    $data['type_de_verreG'], $data['generation'],$traitementD,
+                    $data['type_de_verreG'], $data['generation'],$traitementG,
                     $data['galbeG'],$data['PrismeSphereG'],
-                    $teinteD);            }
+                    $teinteG);
+            }
         }
         $this->m_commande->updateCommande($commandeId, $data);
     }

@@ -3788,7 +3788,7 @@ $(document).ready(function() {
 	$('#axeG').prop('readOnly', false);
 
 	function addPlus(number) {
-        if (!number.includes("-")) {
+        if (!number.includes("-") && !number.includes("+")) {
             number = "+" + number;
         }
         return number;

@@ -2419,6 +2419,32 @@ class m_commande extends CI_Model {
         return $TarifLivraison;
     }
 
+    public function enleverTva() {
+        $tva = $this->m_taux_tva->get_nouveau_taux_tva();
+        $percent_tva = ($tva - 1) * 100;
+        $sql = "SELECT * FROM `users` WHERE `percent_tva` != $percent_tva";
+        $query = $this->db->query($sql);
+        $users = $query->result();
+//        print_r($users);die;
+        $date = date('m-Y', strtotime('last day of last month'));
+        $total = 0;
+        foreach ($users as $user) {
+
+            $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, false, $user->id_users);
+            if (!empty($facture_client)) {
+                $facture_cli = $facture_client[0];
+                $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
+
+                $get_packaging = $this->db->query($sql);
+                $packaging = $get_packaging->result();
+
+                $remiseSpecial = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
+                $facture_cli->total += $packaging[0]->tarif_packaging - $remiseSpecial;
+                $total += $facture_cli->total * $tva - $facture_cli->total  * (1 + $user->percent_tva / 100);
+            }
+        }
+        return $total;
+    }
 
     public function CAMensuel($date, $tarif_Livraison = true, $is_teledetourage = false){
 

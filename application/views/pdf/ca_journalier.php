@@ -123,7 +123,7 @@
 					$fraisdelivraisonmensuel = ($ca_mensuel - $ca_mensuel_hors_livraison);
 //                    $ca_mensuel = $this->m_commande->getAllCommandeByMonthAndUser($date, null);
                     echo'<td style="border: 1px solid black;text-align:center;"><strong>'.number_format($ca_mensuel,2,'.',' ').' €</strong></td>
-                    <td style="border: 1px solid black;text-align:center;"><strong>'.number_format(round(($ca_mensuel*(($taux_tva/100)+1)),2) ,2,'.',' ').' €</strong></td>';
+                    <td style="border: 1px solid black;text-align:center;"><strong>'.number_format(round(($ca_mensuel*(($taux_tva/100)+1) - $this->m_commande->enleverTva()),2) ,2,'.',' ').' €</strong></td>';
                     ?>
                 </tr>
 				

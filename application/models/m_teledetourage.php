@@ -177,7 +177,7 @@ class m_teledetourage extends CI_Model
 //        print_r($users);die;
         $userIdArray = [];
         foreach ($users as $user) {
-            $arrayComptes[$user->id_users]['societe'] = $user->nom_societe;
+            $arrayComptes[$user->id_users]['societe'] = $user->nom_societe . ' / ' . $user->nom_magasin;
             if (!array_key_exists($user->id_users, $arrayComptes)) {
                 $arrayComptes[$user->id_users][$comptes[0]->year_and_month] = 0;
             }
@@ -211,7 +211,7 @@ class m_teledetourage extends CI_Model
 //        print_r($arrayComptes);die;
 
         foreach ($arrayComptes as $id_user => $arrayCompte) {
-            $tab[$i]['Societe'] = $arrayCompte['societe'];
+            $tab[$i]['Société'] = $arrayCompte['societe'];
             $tab[$i]['Magasin'] = $id_user;
             $tab[$i]['Aujourd\'hui'] = $arrayCompte['today'];
 

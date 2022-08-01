@@ -3304,6 +3304,7 @@ class admin
         $data['CAmonth_Gregory'] =
             $this->m_commande->getCAmonth_Gregory($date_M_Y) -
             $this->m_commande->getCAmonthSupplement_Gregory($date_M_Y);
+        print_r($data['CAmonth_Gregory']);die;
         $data['CAmonth_Glenn'] =
             $this->m_commande->getCAmonth_Glenn($date_M_Y) -
             $this->m_commande->getCAmonthSupplement_Glenn($date_M_Y);

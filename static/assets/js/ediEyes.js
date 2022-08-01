@@ -907,6 +907,8 @@ function changeOmaForDrilled(txtOmaImageIn) {
         num = els[i].id.replace("drilled", "");
         drilled_X = $('#drilled_X' + num).val();
         drilled_Y = $('#drilled_Y' + num).val();
+        drilled_X = calculDrilledX(drilled_X, drilled_Y);
+        // console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ' + test);
         drilled_diameter = $('#drilled_diameter' + num).val();
         if (drilled_X != '' && drilled_Y != '' && drilled_diameter != '') {
             addDrilled += 'DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;\n' +
@@ -916,6 +918,207 @@ function changeOmaForDrilled(txtOmaImageIn) {
     txtOmaImageIn += addDrilled;
     $('#txtOmaImageIn').val(txtOmaImageIn);
 
+}
+
+function getArrayTRCFMT() {
+    let txtOmaImageIn = $('#txtOmaImageIn').val();
+    let oma = txtOmaImageIn.substring(
+        txtOmaImageIn.indexOf("TRCFMT"));
+    let trcfmt = oma.substring(
+        oma.indexOf("TRCFMT"), oma.indexOf("\n"))
+    while (trcfmt.indexOf(";R") == -1) {
+        oma = oma.substring(7);
+        oma = oma.substring(oma.indexOf("TRCFMT"))
+        trcfmt = oma.substring(
+            oma.indexOf("TRCFMT"), oma.indexOf("\n"));
+    }
+    let myArray = [];
+    let length = trcfmt.substr(trcfmt.indexOf(';') + 1, trcfmt.substr(trcfmt.indexOf(';') + 1).indexOf(';'));
+    let r;
+    let datas;
+    r = oma.substring(oma.indexOf("R=") + 2);
+    while (myArray.length < length) {
+        datas = r.substring(0, r.indexOf("\n"));
+        if(datas.substr(-1) == ';') {
+            datas = datas.substring(0, datas.length - 1);
+        }
+        datas = datas.split(';')
+
+        myArray.push.apply(myArray, datas);
+        r = r.substring(r.indexOf("R=") + 2);
+    }
+    return myArray;
+}
+function calculDrilledX(drilled_X, drilled_Y) {
+    let datasArray = getArrayTRCFMT();
+    let min = 0;
+    let max;
+    let index = 0;
+    let alpha = 0;
+    let alpha2 = 0;
+    let hauteur = 0;
+    let hauteur2 = 0;
+    if (drilled_X >= 0 && drilled_Y >= 0) {
+        max = datasArray.length / 4 - 1;
+    }
+    else if (drilled_X < 0 && drilled_Y >= 0) {
+        min = datasArray.length / 4 - 1;
+        max = datasArray.length / 2 - 1;
+    }
+    else if (drilled_X < 0 && drilled_Y < 0) {
+        min = datasArray.length / 2 - 1;
+        max = datasArray.length * 3 / 4 - 1;
+    }
+    else {
+        min = datasArray.length * 3 / 4 - 1;
+        max = datasArray.length - 1;
+    }
+    while (min < max) {
+        console.log('min: ' + min)
+        console.log('max: ' + max)
+        index = parseInt((min + max) / 2);
+        console.log('index: ' + index);
+        console.log('dataArray: ' + datasArray[index]);
+
+        if (drilled_X >= 0 && drilled_Y >= 0) {
+            alpha = 360 / datasArray.length * index * Math.PI / 180;
+            hauteur = Math.abs(datasArray[index] / 100 * Math.sin(alpha));
+            if (min == max - 1) {
+                alpha2 = 360 / datasArray.length * max * Math.PI / 180;
+                hauteur2 = Math.abs(datasArray[max] / 100 * Math.sin(alpha2));
+                if (Math.abs(hauteur - drilled_Y) > Math.abs(hauteur2 - drilled_Y)) {
+                    alpha = alpha2;
+                    hauteur = hauteur2;
+                    index = max;
+                    min = max;
+                }
+                else {
+                    index = min;
+                    max = min;
+                }
+            }
+            console.log('en degré:' + 360 / datasArray.length * index);
+            console.log('alpha:' + alpha);
+            console.log('Math.sin(alpha): ' + Math.sin(alpha));
+            console.log('hauteur:' + hauteur)
+            if (hauteur == drilled_Y) {
+                max = index;
+                min = index;
+            }
+            else if (hauteur < drilled_Y) {
+                min = index;
+            }
+            else {
+                max = index
+            }
+        }
+        else if (drilled_X < 0 && drilled_Y >= 0) {
+            alpha = (180 - 360 / datasArray.length * index) * Math.PI / 180;
+            hauteur = Math.abs(datasArray[index] / 100 * Math.sin(alpha));
+            if (min == max - 1) {
+                alpha2 = (180 - 360 / datasArray.length * max) * Math.PI / 180;
+                hauteur2 = Math.abs(datasArray[max] / 100 * Math.sin(alpha2));
+                if (Math.abs(hauteur - drilled_Y) > Math.abs(hauteur2 - drilled_Y)) {
+                    alpha = alpha2;
+                    hauteur = hauteur2;
+                    index = max;
+                    min = max;
+                }
+                else {
+                    index = min;
+                    max = min;
+                }
+            }
+            console.log('en degré:' + (180 - 360 / datasArray.length * index));
+            console.log('alpha:' + alpha);
+            console.log('Math.sin(alpha): ' + Math.sin(alpha));
+            console.log('hauteur:' + hauteur)
+            if (hauteur == drilled_Y) {
+                max = index;
+                min = index;
+            }
+            else if (hauteur < drilled_Y) {
+                max = index;
+            }
+            else {
+                min = index
+            }
+        }
+        else if (drilled_X < 0 && drilled_Y < 0) {
+            alpha = (360 - 360 / datasArray.length * index) * Math.PI / 180;
+            hauteur = Math.abs(datasArray[index] / 100 * Math.sin(alpha));
+            if (min == max - 1) {
+                alpha2 = (360 - 360 / datasArray.length * max) * Math.PI / 180;
+                hauteur2 = Math.abs(datasArray[max] / 100 * Math.sin(alpha2));
+                if (Math.abs(hauteur - drilled_Y) > Math.abs(hauteur2 - drilled_Y)) {
+                    alpha = alpha2;
+                    hauteur = hauteur2;
+                    index = max;
+                    min = max;
+                }
+                else {
+                    index = min;
+                    max = min;
+                }
+            }
+            if (hauteur == drilled_Y) {
+                max = index;
+                min = index;
+            }
+            else if (hauteur < drilled_Y) {
+                min = index;
+            }
+            else {
+                max = index
+            }
+        }
+        else {
+            alpha = (360 / datasArray.length * index - 180) * Math.PI / 180;
+            hauteur = Math.abs(datasArray[index] / 100 * Math.sin(alpha));
+            if (min == max - 1) {
+                alpha2 = (360 / datasArray.length * max - 180) * Math.PI / 180;
+                hauteur2 = Math.abs(datasArray[max] / 100 * Math.sin(alpha2));
+                if (Math.abs(hauteur - drilled_Y) > Math.abs(hauteur2 - drilled_Y)) {
+                    alpha = alpha2;
+                    hauteur = hauteur2;
+                    index = max;
+                    min = max;
+                }
+                else {
+                    index = min;
+                    max = min;
+                }
+            }
+            if (hauteur == drilled_Y) {
+                max = index;
+                min = index;
+            }
+            else if (hauteur < drilled_Y) {
+                max = index;
+            }
+            else {
+                min = index
+            }
+        }
+        // if (min == max - 1) {
+        //     if (index == min) {
+        //         index = max;
+        //     }
+        //     let newAlpha = 360 / datasArray.length * index * Math.PI / 180;
+        //     hauteur = Math.abs(datasArray[index] / 100 * Math.sin(alpha));
+        // }
+    }
+    console.log('index: ' + index);
+    console.log('alpha: ' + alpha);
+    console.log('drilled_X: ' + drilled_X);
+    console.log('drilled_Y: ' + drilled_Y);
+    // let result = drilled_Y / Math.tan(alpha);
+    let result = Math.sqrt(Math.pow(datasArray[index] / 100, 2) - Math.pow(drilled_Y, 2)) - Math.abs(drilled_X);
+    if (drilled_X < 0) {
+        result = -result;
+    }
+    console.log('result: ' + result);
+    return result.toFixed(2);
 }
 
 function getDrilledByOmaAndSet(txtOmaImageIn) {

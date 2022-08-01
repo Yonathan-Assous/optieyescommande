@@ -176,7 +176,7 @@ class m_remise extends CI_Model
         }
         $sql = "SELECT commande.id_users, SUM(`total_commande`) as total FROM `commande`
                 $leftJoin
-                WHERE `date_commande` >= '$date'
+                WHERE DATE_FORMAT(date_commande, '%Y-%m') = '$date'
                 AND (type_commande = 1 
                 OR (type_commande > 1 AND penalty = 1)) 
                 $addCondition

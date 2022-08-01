@@ -2743,9 +2743,10 @@ class m_commande extends CI_Model {
 
         $supplement = 0;
 
-        $query = $this->db->query('SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
+        $sql = 'SELECT SUM(commande.tarif_supplement) AS total_supplement FROM commande
 		JOIN users ON commande.id_users = users.id_users
-		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Gregory = 100.00 AND is_confirmed = 1');
+		WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" AND Gregory = 100.00 AND is_confirmed = 1';
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
             $supplement += $query->result()[0]->total_supplement;
@@ -2759,8 +2760,7 @@ class m_commande extends CI_Model {
         $time = DateTime::createFromFormat('m-Y', $date);
         $date = $time->format('Y-m');
 
-
-        $query = $this->db->query("SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier
+        $sql = "SELECT (SELECT IFNULL(SUM(commande.total_commande),0) as ca_journalier
                                    FROM commande
 								   JOIN users ON commande.id_users = users.id_users
                                    WHERE DATE_FORMAT(date_commande, '%Y-%m')='".$date."' 
@@ -2780,7 +2780,8 @@ class m_commande extends CI_Model {
                                    -
 								  (SELECT IFNULL(SUM(fr.reduction),0) as reduction FROM facture_reduction fr
 								  JOIN users ON fr.id_users = users.id_users
-								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Gregory = 100.00 ) as ca");
+								   WHERE DATE_FORMAT(date_remise, '%Y-%m') = '".$date."' AND Gregory = 100.00 ) as ca";
+        $query = $this->db->query($sql);
 
         $total = 0;
 
@@ -2790,7 +2791,6 @@ class m_commande extends CI_Model {
             }
         }
         $remises = $this->m_remise->getTotalRemisesPerUserByMonthAndByCommercial(date("Y-m"), 'Gregory');
-
         return $total - $remises;
     }
 

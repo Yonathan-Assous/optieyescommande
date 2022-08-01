@@ -96,7 +96,6 @@ class cron extends MY_Controller {
 	}
 	
 	public function payment_test(){
-
         $this->load->helper('slimpay');
         $this->load->model('m_commande');
             $this->load->model('m_users');
@@ -182,11 +181,11 @@ class cron extends MY_Controller {
                         'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
                         'magasin' => $facture_cli->id_users,
                         'mandat' => $id_mandat,
-                        'total' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        'total' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
                     );
 
                     // Affichage
-                    $data['total'] += $facture_cli->total + ($facture_cli->total * 0.2);
+                    $data['total'] += $facture_cli->total * (1 + $info_user[0]->percent_tva / 100);
                     $data['paiement'][$key] = $paiement;
 
 

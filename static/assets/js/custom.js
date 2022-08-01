@@ -2181,12 +2181,13 @@ $('#type_de_verreD').on('change', function() {
 								// $('#nothing_diameter').modal('show');
 								swal({
 									title: "Pas de diamètre",
-									text: "En fonction des écarts pupillaires et des hauteurs que vous avez inscrit, aucun diamètre n’est disponible pour ce produit.",
+									text: "La combinaison entre les écarts pupillaires/ hauteurs et mesures Boxing n’offre aucun diamètre disponible en stock.\n" +
+										"La commande est en revanche disponible en fabrication.",
 									type: "info",
 									showCancelButton: false,
 									showConfirmButton: true,
 									confirmButtonText: "Fermer",
-									timer: 4000,
+									timer: 5000,
 								});
 								//verify_diameter = true;
 							}
@@ -2929,12 +2930,13 @@ $('#type_de_verreG').on('change', function() {
 								// $('#nothing_diameter').modal('show');
 								swal({
 									title: "Pas de diamètre",
-									text: "En fonction des écarts pupillaires et des hauteurs que vous avez inscrit, aucun diamètre n’est disponible pour ce produit.",
+									text: "La combinaison entre les écarts pupillaires/ hauteurs et mesures Boxing n’offre aucun diamètre disponible en stock.\n" +
+										"La commande est en revanche disponible en fabrication.",
 									type: "info",
 									showCancelButton: false,
 									showConfirmButton: true,
 									confirmButtonText: "Fermer",
-									timer: 4000,
+									timer: 5000,
 								});
 								//verify_diameter = true;
 							}

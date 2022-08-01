@@ -14,23 +14,23 @@ include_once('menu.php');
                     <h4 class="page-title m-b-10 pull-left">Comptes sur le télédétourage</h4>
                 </div>
 
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="get_commercial" class="control-label">Commercial</label>
+                    <select id="get_commercial" name="login_notification" class="form-control">
+                        <option value="Tout">Tout</option>
+                        <option value="Daniel">Daniel / Samuel</option>
+                        <option value="Gregory">Gregory</option>
+                    </select>
+                </div>
                 <div class="col-sm-12">
                     <div class="card-box">
-
-
                         <h4 class="header-title m-t-0 m-b-30">Liste des commandes</h4>
-
                         <table id="datatable" class="table table-striped table-admin-commandes dt-responsive nowrap">
                             <thead>
                             <tr id="title_table">
-<!--                                <th>id_user</th>-->
-<!--                                <th>2022-06</th>-->
-<!--                                <th>2022-05</th>-->
                             </tr>
                             </thead>
                         </table>
-
-
                     </div>
                 </div>
             </div>
@@ -65,58 +65,62 @@ include_once('menu.php');
 <script>
 
     $(document).ready(function() {
-        // var table = $('#datatable').DataTable({
-        //     ajax: { url: "/admin/comptes_teledetourage_ajax"},
-        //     aLengthMenu: [
-        //         [10, 25, 50, 100, 200, -1],
-        //         [10, 25, 50, 100, 200, "Tout"]
-        //     ],
-        //     deferRender: true,
-        //     ordering: true,
-        //     columnDefs: [{
-        //         "targets": "_all",
-        //         "createdCell": function (td, cellData, rowData, row, col) {
-        //             $(td).find('.tooltipster').tooltip();
-        //         }
-        //     }],
-        //     "createdRow": function ( row, data, index ) {
-        //         $('td', row).eq(1).addClass('highlight-ref');
-        //         if($('td', row).eq(1).find('.reject_ec').length == 0) {
-        //             $('td', row).eq(1).addClass('rejected');
-        //         }
-        //     },
-        //     language: {
-        //         "lengthMenu": "Afficher _MENU_ commandes par page",
-        //         "zeroRecords": "Aucune commande trouvée",
-        //         "info": "Affichage de la page page _PAGE_ sur _PAGES_",
-        //         "infoEmpty": "Aucune commande à afficher",
-        //         "infoFiltered": "(Filtrat de _MAX_ entrées)",
-        //         "search": "Recherche",
-        //         "paginate": {
-        //             "first":      "Première",
-        //             "last":       "Dernière",
-        //             "next":       "Suivant",
-        //             "previous":   "Précédent"
-        //         }
-        //     }
-        //
-        // });
-        // let displayStart = $('#datatable').DataTable().page.info().page * 10;
+        $('#get_commercial').on('change', function() {
+            test(false)
+        })
+
+        test()
+
+    });
+    // function hideCommercial() {
+    //     if ($('#get_commercial').val() == 'Daniel') {
+    //         $('.daniel').removeClass('hide');
+    //         $('.gregory').addClass('hide');
+    //     }
+    //     else if ($('#get_commercial').val() == 'Gregory') {
+    //         $('.daniel').addClass('hide');
+    //         $('.gregory').removeClass('hide');
+    //     }
+    //     else {
+    //         $('.daniel').removeClass('hide');
+    //         $('.gregory').removeClass('hide');
+    //     }
+    // }
+
+    function test(first = true) {
         $.ajax({
             type: "POST",
             url: "/admin/comptes_teledetourage_ajax",
+            data: {"commercial" : $('#get_commercial').val()},
             dataType: "json",
         }).done( function(data) {
+            console.log(data);
+            $("#datatable th").remove();
             let keys = Object.keys(data[0]);
+            console.log(keys.length);
             let columns = [];
+            let node;
+            let textnode;
             for (const element of keys) {
-                let node = document.createElement("th");
-                let textnode = document.createTextNode(element)
-                node.style.cssText = 'width:' + 100 / keys.length + '%';
-                node.appendChild(textnode);
-                document.getElementById("title_table").appendChild(node);
-                columns.push({ "data": element});
+                console.log(element);
+                if (element != 'commercial') {
+
+                    node = document.createElement("th");
+                    textnode = document.createTextNode(element);
+                    node.classList.add("th-compte_teledetourage");
+                    //node.style.cssText = 'width:25%;';
+                    node.appendChild(textnode);
+                    // console.log(node);
+
+                    document.getElementById("title_table").appendChild(node);
+                    // console.log(node);
+
+                    columns.push({"data": element});
+                }
             }
+            setTimeout(function(){
+                $(".th-compte_teledetourage").width(100 / keys.length + '%');
+            },10)
 
             console.log(columns);
 
@@ -142,10 +146,32 @@ include_once('menu.php');
                         "previous":   "Précédent"
                     }
                 },
-            });
-        });
-    });
+                "createdRow": function (row, data, index) {
+                    // console.log(data['active']);
+                    // console.log('active');
+                    // console.log(data);
+                    // console.log(row);
+                    if (data['commercial'] == 'Daniel') {
+                        $(row).addClass('daniel');
+                        // $(row).removeClass('gregory');
+                    }
+                    else {
+                        $(row).addClass('gregory');
 
+                    }
+                },
+            });
+
+
+            // $('#get_commercial').on('change', function() {
+            //     hideCommercial()
+            // });
+        });
+    }
+
+    $('#datatable').on( 'draw.dt', function () {
+        // e.preventDefault();
+    });
     // TableManageButtons.init();
 
 </script>
@@ -153,6 +179,18 @@ include_once('menu.php');
 <style>
     tr, th {
         text-align: center;
+    }
+
+    .daniel {
+        background-color: rgba(0, 146, 255, 0.33) !important;
+    }
+
+    .gregory {
+        background-color: rgba(0, 255, 11, 0.41) !important;
+    }
+
+    #datatable td {
+        font-weight: bold !important;
     }
 </style>
 <?php include_once('footer.php'); ?>

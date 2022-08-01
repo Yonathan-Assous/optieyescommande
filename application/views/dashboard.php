@@ -144,9 +144,9 @@ if (is_object($pair_order)) {
             margin-top: 10px;
         }
 
-        .connect_machine {
-            margin-top: 33px !important;
-        }
+        /*.connect_machine {*/
+        /*    margin-top: 33px !important;*/
+        /*}*/
 
         .label_drilled {
             width: 40%;

@@ -2419,6 +2419,32 @@ class m_commande extends CI_Model {
         return $TarifLivraison;
     }
 
+    public function enleverTva() {
+        $tva = $this->m_taux_tva->get_nouveau_taux_tva();
+        $percent_tva = ($tva - 1) * 100;
+        $sql = "SELECT * FROM `users` WHERE `percent_tva` != $percent_tva";
+        $query = $this->db->query($sql);
+        $users = $query->result();
+//        print_r($users);die;
+        $date = date('m-Y', strtotime('last day of last month'));
+        $total = 0;
+        foreach ($users as $user) {
+
+            $facture_client = $this->m_commande->getAllCommandeByMonthAndUser($date, false, $user->id_users);
+            if (!empty($facture_client)) {
+                $facture_cli = $facture_client[0];
+                $sql = 'SELECT tarif_packaging FROM users WHERE id_users = ' . $facture_cli->id_users;
+
+                $get_packaging = $this->db->query($sql);
+                $packaging = $get_packaging->result();
+
+                $remiseSpecial = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
+                $facture_cli->total += $packaging[0]->tarif_packaging - $remiseSpecial;
+                $total += $facture_cli->total * $tva - $facture_cli->total  * (1 + $user->percent_tva / 100);
+            }
+        }
+        return $total;
+    }
 
     public function CAMensuel($date, $tarif_Livraison = true, $is_teledetourage = false){
 
@@ -3195,7 +3221,7 @@ class m_commande extends CI_Model {
                 $data['code_oma'] = "''";
             }
             else {
-                $data['code_oma'] = "'" . bin2hex($data['code_oma']) . "'";
+                $data['code_oma'] = "'" . $data['code_oma'] . "'";
             }
 
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
@@ -5473,6 +5499,7 @@ class m_commande extends CI_Model {
     }
 
     public function updateCommande($commandeId, $data) {
+//        print_r($data);die;
         $dateUpdateCommande = date('Y-m-d H:i:s');
         $informationCommande = json_decode($data['information_commande']);
         $oldCommande = $this->getCommandeById($commandeId);
@@ -5484,6 +5511,7 @@ class m_commande extends CI_Model {
             $informationCommande->verre->correction_gauche->axe = $data['axeG'];
             if ($data['type'] != 'stock') {
                 $informationCommande->verre->correction_gauche->traitement = $data['traitementG'];
+                $informationCommande->verre->correction_gauche->teinte = $data['teinteG'];
                 $informationCommande->verre->correction_gauche->galbe = $data['galbeG'];
                 $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereG'];
                 $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreG'];
@@ -5502,12 +5530,13 @@ class m_commande extends CI_Model {
             $informationCommande->verre->correction_droit->cylindre = $data['cylindreD'];
             $informationCommande->verre->correction_droit->axe = $data['axeD'];
             if ($data['type'] != 'stock') {
-                $informationCommande->verre->correction_gauche->traitement = $data['traitementD'];
-                $informationCommande->verre->correction_gauche->galbe = $data['galbeD'];
-                $informationCommande->verre->correction_gauche->PrismeSphere = $data['PrismeSphereD'];
-                $informationCommande->verre->correction_gauche->PrismeCylindre = $data['PrismeCylindreD'];
-                $informationCommande->verre->dioptrie_gauche = $data['PrismeSphereD'];
-                $informationCommande->verre->base_gauche = $data['PrismeCylindreD'];
+                $informationCommande->verre->correction_droit->traitement = $data['traitementD'];
+                $informationCommande->verre->correction_droit->teinte = $data['teinteD'];
+                $informationCommande->verre->correction_droit->galbe = $data['galbeD'];
+                $informationCommande->verre->correction_droit->PrismeSphere = $data['PrismeSphereD'];
+                $informationCommande->verre->correction_droit->PrismeCylindre = $data['PrismeCylindreD'];
+                $informationCommande->verre->dioptrie_droit = $data['PrismeSphereD'];
+                $informationCommande->verre->base_droit = $data['PrismeCylindreD'];
                 if ($data['type'] == 'fab') {
                     $origineCommande = 1;
                 }
@@ -5518,7 +5547,8 @@ class m_commande extends CI_Model {
 
         }
 
-        $informationCommande = json_encode($informationCommande);
+        $informationCommande = json_encode($informationCommande, JSON_UNESCAPED_UNICODE);
+
         $prixVerre = $data['prix_verre_droit'];
         $totalCommande = $data['prix_verre_gauche'] + $data['prix_verre_droit'] + $oldCommande[0]->tarif_express;
         $lensFocalGroup = $data['lensFocalGroup'] + 30;
@@ -5535,7 +5565,6 @@ class m_commande extends CI_Model {
                                       WHERE id_commande = '" . $commandeId . "'
                                       ";
         }
-//        print_r($sql);die;
         $this->db->query($sql);
     }
 }

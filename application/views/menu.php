@@ -77,9 +77,9 @@
                 <b style="font-size: 14px"><a href="mailto:optieyescommande@gmail.com">optieyescommande@gmail.com</a></b>
             </div>
             <div id="info_commercial">
-                <span>Votre commercial</span>
-                <b>M. ZIBI Samuel</b>
-                <b><a href="tel:0666831536">07 56 79 59 06</a></b>
+                <span>Directeur commercial</span>
+                <b>M. LAMY Daniel</b>
+                <b><a href="tel:01828823git 98">01 82 88 23 98</a></b>
             </div>
         </div>
     </div>

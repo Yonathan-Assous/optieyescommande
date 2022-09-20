@@ -259,7 +259,7 @@ class m_passer_commande_verre extends CI_Model
                     $sql_generation .= " AND generation = 'T-One'";
                 }
                 else if (strpos($omega->trad_fr, "E-Space") !== false) {
-                    $sql_generation .= " AND generation = 'E-Space";
+                    $sql_generation .= " AND generation = 'E-Space'";
                 }
                 $sql = "SELECT prix 
                         FROM prix_par_client

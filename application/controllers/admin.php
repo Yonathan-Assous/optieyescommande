@@ -7184,8 +7184,22 @@ class admin
                                     $information_commande->verre->correction_droit->diametre;
                             }
 
-
+                            if ($commande->code_oma && $commande->teledetourage_format_id) {
+                                $detail .= "<br>Ecart pupillaire: " .
+                                    $information_commande->verre->ecart_puppillaire->droit .
+                                    "
+                                <br>Hauteur: " .
+                                    $information_commande->verre->hauteur .
+                                    "";
+                                $textarea .= "<br>Monocular Centration Distance :" .
+                                    $information_commande->verre->ecart_puppillaire->droit .
+                                    "
+                                <br>Height : " .
+                                $information_commande->verre->hauteur .
+                                "";
+                            }
                         }
+
 
                         if (isset($information_commande->verre->correction_gauche)) {
                             $detail .= "<br><br><b>OG :</b>";
@@ -7368,6 +7382,21 @@ class admin
                                     $information_commande->verre->correction_gauche->diametre;
                             }
 
+//                            print_r($information_commande);die;
+                            if ($commande->code_oma && $commande->teledetourage_format_id && isset($information_commande->verre->ecart_puppillaire)) {
+                                $detail .= "<br>Écart pupillaire: " .
+                                    $information_commande->verre->ecart_puppillaire->gauche .
+                                    "
+                                <br>Hauteur: " .
+                                    $information_commande->verre->hauteur_gauche .
+                                    "";
+                                $textarea .= "<br>Monocular Centration Distance :" .
+                                    $information_commande->verre->ecart_puppillaire->gauche .
+                                    "
+                                <br>Height : " .
+                                    $information_commande->verre->hauteur_gauche .
+                                    "";
+                            }
                         }
 
                         if ($commande->code_oma && $commande->teledetourage_format_id) {
@@ -7376,7 +7405,7 @@ class admin
 
                         $precal =
                             0;
-
+//                        print_r($information_commande->verre);die;
                         if ((isset($information_commande->verre->correction_droit) &&
                                 $information_commande->verre->correction_droit->diametre ==
                                 'precalibrage') ||
@@ -9091,7 +9120,7 @@ class admin
 
                         }
 
-//                    var_dump($xml);die;
+//                    print_r($textarea);die;
                         $CommandeOmega =
                             $this->m_commande->getTextCommandeOmega($commande->id_commande,
                                 $textarea,
@@ -9649,9 +9678,15 @@ class admin
 
             $data =
                 $this->input->post();
-
             $commande_origine =
                 $this->m_commande->getCommandeEdiOmegaById($ref);
+            $information_commande = json_decode($commande_origine->information_commande);
+            if ($commande_origine->code_oma) {
+                $data['ecart_puppillaire_droit'] = $information_commande->verre->ecart_puppillaire->droit;
+                $data['ecart_puppillaire_gauche'] = $information_commande->verre->ecart_puppillaire->gauche;
+                $data['hauteur'] = $information_commande->verre->hauteur;
+                $data['hauteur_gauche'] = $information_commande->verre->hauteur_gauche;
+            }
 //             var_dump($commande_origine);die;
             //  var_dump($data);
             $textarea = "";
@@ -9699,7 +9734,7 @@ class admin
             if (isset($data['droit']) &&
                 $data['droit'] =
                     'droit') {
-                $textarea .= "<br>OD:";
+                $textarea .= "<br><br>OD:";
                 $textarea .= " " .
                     $data["sphereD"];
                 $textarea .= " (" .
@@ -9795,13 +9830,26 @@ class admin
                         $data['diametreD'];
                 }
 
+                if ($commande_origine->code_oma) {
+                    if (isset($data["ecart_puppillaire_droit"]) &&
+                        !empty($data["ecart_puppillaire_droit"])) {
+                        $textarea .= "<br>Monocular Centration Distance : " .
+                            $data["ecart_puppillaire_droit"];
+                    }
+                    if (isset($data["hauteur"]) &&
+                        !empty($data["hauteur"])) {
+                        $textarea .= "<br>Height: " .
+                            $data["hauteur"];
+                    }
+                }
+
 
             }
 
             if (isset($data['gauche']) &&
                 $data['gauche'] =
                     'gauche') {
-                $textarea .= "<br>OG:";
+                $textarea .= "<br><br>OG:";
                 $textarea .= " " .
                     $data["sphereG"];
                 $textarea .= "(" .
@@ -9893,6 +9941,18 @@ class admin
                     "precalibrage") {
                     $textarea .= "<br>Diameter physical: " .
                         $data['diametreG'];
+                }
+                if ($commande_origine->code_oma) {
+                    if (isset($data["ecart_puppillaire_gauche"]) &&
+                        !empty($data["ecart_puppillaire_gauche"])) {
+                        $textarea .= "<br>Monocular Centration Distance : " .
+                            $data["ecart_puppillaire_gauche"];
+                    }
+                    if (isset($data["hauteur_gauche"]) &&
+                        !empty($data["hauteur_gauche"])) {
+                        $textarea .= "<br>Height : " .
+                            $data["hauteur_gauche"];
+                    }
                 }
             }
             date_default_timezone_set('Europe/Paris');
@@ -16636,7 +16696,7 @@ class admin
         if (isset($_POST['user_unlock_password'])) {
 
             if ($_POST['user_unlock_password'] !=
-                1141) {
+                5566) {
 
                 die(json_encode([
                     'status' => 0

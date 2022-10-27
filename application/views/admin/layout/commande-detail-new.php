@@ -190,10 +190,6 @@
 					$info_d .= utf8_decode($traitementD)."<br>";
 				}
 
-                if(isset($info_commande['verre']['hauteur'])) {
-                    $correction_droit .= ' <b>Hauteur :</b> ' . $info_commande['verre']['hauteur'] . '<br>';
-                }
-
                 if(isset($info_commande['mesure_freeform']['ecart_puppillaire_droit'])) {
                     $correction_droit .= ' <b>Ecart pupillaire :</b> ' . $info_commande['mesure_freeform']['ecart_puppillaire_droit'].'<br>';
                 }
@@ -231,6 +227,12 @@
                 }
                 if(isset($recap_commande[0]->hauteur_montage_D)) {
                     $correction_droit .= '<b>Hauteur de montage : </b>' . $recap_commande[0]->hauteur_montage_D. '<br>';
+                }
+                if(isset($info_commande['verre']['ecart_puppillaire']['droit'])) {
+                    $correction_droit .= ' <b>Ecart pupillaire :</b> ' . $info_commande['verre']['ecart_puppillaire']['droit'].'<br>';
+                }
+                if(isset($info_commande['verre']['hauteur'])) {
+                    $correction_droit .= ' <b>Hauteur :</b> ' . $info_commande['verre']['hauteur'] . '<br>';
                 }
 
 				$correction_droit .= $info_d;
@@ -279,10 +281,6 @@
 					$info_g .= utf8_decode($traitementG)."<br>";
 				}
 
-                if(isset($info_commande['verre']['hauteur_gauche'])) {
-                    $correction_gauche .= ' <b>Hauteur :</b> ' . $info_commande['verre']['hauteur_gauche'] . '<br>';
-                }
-
                 if(isset($info_commande['mesure_freeform']['ecart_puppillaire_gauche'])) {
                     $correction_gauche .= ' <b>Ecart pupillaire :</b> ' . $info_commande['mesure_freeform']['ecart_puppillaire_gauche'].'<br>';
                 }
@@ -321,6 +319,15 @@
                 if(isset($recap_commande[0]->hauteur_montage_G)) {
                     $correction_gauche .= '<b>Hauteur de montage : </b>' . $recap_commande[0]->hauteur_montage_G. '<br>';
                 }
+                if(isset($info_commande['verre']['ecart_puppillaire']['gauche'])) {
+                    $correction_gauche .= '<b>Écart pupillaire : </b>' . $info_commande['verre']['ecart_puppillaire']['gauche']. '<br>';
+                }
+                if(isset($info_commande['verre']['hauteur_gauche'])) {
+                    $correction_gauche .= ' <b>Hauteur :</b> ' . $info_commande['verre']['hauteur_gauche'] . '<br>';
+                }
+//                if(isset($info_commande['verre']['hauteur_gauche'])) {
+//                    $correction_gauche .= '<b>Écart pupillaire : </b>' . $info_commande['verre']['hauteur_gauche']. '<br>';
+//                }
 				$correction_gauche .= $info_g;
 
 				if(isset($info_commande['precalibrage']['calibre'])) {

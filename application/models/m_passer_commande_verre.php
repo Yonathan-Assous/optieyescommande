@@ -259,7 +259,7 @@ class m_passer_commande_verre extends CI_Model
                     $sql_generation .= " AND generation = 'T-One'";
                 }
                 else if (strpos($omega->trad_fr, "E-Space") !== false) {
-                    $sql_generation .= " AND generation = 'E-Space";
+                    $sql_generation .= " AND generation = 'E-Space'";
                 }
                 $sql = "SELECT prix 
                         FROM prix_par_client
@@ -1643,34 +1643,39 @@ class m_passer_commande_verre extends CI_Model
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, L.supplement as sup, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
 
         } else {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, L.supplement as sup, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
         }
+
         $user = $this->m_users->getUserById($user_id);
         $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
 
         foreach ($res_query as $res) {
+
             if ($res->prix_perso != NULL) {
                 $resultat[$res->code]["prix"] = $res->prix_perso;
             } else {
                 $resultat[$res->code]["prix"] = $res->prix;
             }
+
             if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
                 $resultat[$res->code]["prix"] -= 1;
             }
             else {
-                $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+//                if ($res->sup != 0) {
+                    $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+//                }
             }
             $resultat[$res->code]["prix"] = number_format($resultat[$res->code]["prix"], 2);
 

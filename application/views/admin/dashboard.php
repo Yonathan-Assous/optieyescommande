@@ -3,7 +3,7 @@
     include_once('menu.php');
 
 
-if(isset($_POST['password']) && $_POST['password']=='1141')
+if(isset($_POST['password']) && $_POST['password']=='5566')
 {
 	$_SESSION['login'] = true;
 }

@@ -12,7 +12,7 @@
        Assitance Téléphonique : 09 83 65 35 85
   </div>
   <div id="info_commercial" style="font-size:20px;position:absolute; top:67% ;margin-left:39%;">
-      Votre commercial M. ZIBI Samuel : 06 66 83 15 36
+      Directeur commercial M. LAMY Daniel : 01 82 88 23 98
   </div>
   
  

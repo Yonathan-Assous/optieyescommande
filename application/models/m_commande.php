@@ -1783,7 +1783,8 @@ class m_commande extends CI_Model {
         if($user !== null) {
             $add = 'AND id_users = '.$user;
         }
-        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add;
+        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE  (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND is_confirmed = 1 AND DATE_FORMAT(date_commande, "%m-%Y") = "'.$date.'" '.$add;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0) {
@@ -1803,7 +1804,7 @@ class m_commande extends CI_Model {
         else {
             $date_end = date('Y-m-d 23:59:59', strtotime($date));
         }
-        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND is_confirmed = 1 AND date_commande > "'.$date.'" AND date_commande < "'.$date_end.'"';
+        $sql = 'SELECT SUM(tarif_supplement) AS total_supplement FROM commande WHERE (type_commande = 1 OR (type_commande > 1 AND penalty = 1)) AND is_confirmed = 1 AND date_commande >= "'.$date.'" AND date_commande < "'.$date_end.'"';
         $query = $this->db->query($sql);
         $total = 0;
 
@@ -2482,10 +2483,10 @@ class m_commande extends CI_Model {
         if($tarif_Livraison){
             $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
                                      FROM ".$this->table."
-                                     WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
+                                     WHERE DATE_FORMAT(date_update_commande, '%Y-%m') = '".$date."'
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
-                                     AND ( DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
+                                     AND ( DATE_FORMAT(date_commande, '%Y-%m') = '".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
                                      GROUP BY id_users, date(date_update_commande), TarifLivraison, day");
 
 

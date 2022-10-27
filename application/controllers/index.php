@@ -201,7 +201,6 @@ class index extends MY_Controller {
 			$idlens = str_replace("]","",$idlens);
 
 			$user_id = $this->data['user_info']->id_users;
-
 			if($typedelens == "stock")
 			{
 				$res = $this->m_passer_commande_verre->getPrixStock($idlens,$user_id);
@@ -2895,6 +2894,8 @@ class index extends MY_Controller {
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
+//                print_r($data);die;
+
 //                var_dump($data['prixDH']);die;
 //                print_r($data['txtOmaImageIn']);die;
 //                print_r(bin2hex($data['txtOmaImageIn']));die;
@@ -3597,7 +3598,7 @@ class index extends MY_Controller {
                 else if(isset($data['hauteur_montage_gauche']) && !empty($data['hauteur_montage_gauche']))
                 {
                     $data_commande['verre']['hauteur_gauche'] = $data['hauteur_montage_gauche'];
-                    $data_commandeD['verre']['hauteur_gauche'] = $data['hauteur_montage_gauche'];
+                    $data_commandeG['verre']['hauteur_gauche'] = $data['hauteur_montage_gauche'];
                 }
 
 				if(isset($data['photocromie']) && !empty($data['photocromie']))
@@ -3616,9 +3617,10 @@ class index extends MY_Controller {
                     $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
                     $data_commandeG['verre']['ecart_puppillaire']['gauche'] = $data['ecart_puppillaire_gauche'];
                 }
+
                 else if(isset($data['teledetourage_ecart_puppillaire_gauche']) && !empty($data['teledetourage_ecart_puppillaire_gauche'])) {
                     $data_commande['verre']['ecart_puppillaire']['gauche'] = $data['teledetourage_ecart_puppillaire_gauche'];
-                    $data_commandeD['verre']['ecart_puppillaire']['gauche'] = $data['teledetourage_ecart_puppillaire_gauche'];
+                    $data_commandeG['verre']['ecart_puppillaire']['gauche'] = $data['teledetourage_ecart_puppillaire_gauche'];
                 }
 
 				if(isset($data['angle_pantoscopique']) && !empty($data['angle_pantoscopique']))
@@ -3683,7 +3685,6 @@ class index extends MY_Controller {
 				$data['information_commande'] = json_encode($data_commande);
 				$data['information_commandeD'] = json_encode($data_commandeD);
 				$data['information_commandeG'] = json_encode($data_commandeG);
-
 
 				if($data['prixDH']!="")
 					$prix_verre = $data['prixDH'];//$this->m_verres->getPrixVerre($data['id_verre'],$id_grille_tarifaire,$data['id_users']);
@@ -3872,6 +3873,7 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
+
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
                 echo $this->load->view('ajax_recap_commande',$data);

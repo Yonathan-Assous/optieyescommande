@@ -3343,6 +3343,7 @@ $('#diametreD').on('change', function() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -3556,6 +3557,7 @@ $('#diametreG').on('change', function() {
 
 			if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 			{
+				$('#certif').removeClass('hide');
 				$('input[name=carte_auth][value=1]').prop('checked', true);
 				$("#carte_auth_y").prop("checked", true);
 				$("#carte_auth_n").prop("checked", false);
@@ -3650,6 +3652,7 @@ $('#diametreG').on('change', function() {
 
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -3753,6 +3756,7 @@ $('#teinteD').on('change', function() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -4233,6 +4237,7 @@ $('#galbeD').on('change', function() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -4370,6 +4375,7 @@ $('#traitementD').on('change', function() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -4651,6 +4657,7 @@ $('#traitementG').on('change', function() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -4834,6 +4841,7 @@ var galbeG = $('#galbeG').val();
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);
@@ -5186,6 +5194,7 @@ function afficherV() {
     var nameG = $("#type_de_verreG option:selected").html();
 	if(nameG.indexOf("Panier") >= 0 || nameD.indexOf("Panier") >= 0)
 	{
+		$('#certif').removeClass('hide');
 		$('input[name=carte_auth][value=1]').prop('checked', true);
 		$("#carte_auth_y").prop("checked", true);
 		$("#carte_auth_n").prop("checked", false);

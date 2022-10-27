@@ -7731,7 +7731,7 @@ if (is_object($pair_order)) {
         }
         function backgroundEcartAndHauteur(id) {
             let jqueryId = '#' + id;
-            if ($(jqueryId).val() == '') {
+            if ($(jqueryId).val() == '' || $(jqueryId).val() < 10 || $(jqueryId).val() >= 100) {
                 $(jqueryId).attr('style', "background-color: #e39090" +
                     " !important")
                 $('#div_refraction').addClass('hide');

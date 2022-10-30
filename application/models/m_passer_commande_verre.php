@@ -1655,17 +1655,20 @@ class m_passer_commande_verre extends CI_Model
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
         }
+
         $user = $this->m_users->getUserById($user_id);
         $res_f = $this->db->query($sql);
 
         $res_query = $res_f->result();
 
         foreach ($res_query as $res) {
+
             if ($res->prix_perso != NULL) {
                 $resultat[$res->code]["prix"] = $res->prix_perso;
             } else {
                 $resultat[$res->code]["prix"] = $res->prix;
             }
+
             if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
                 $resultat[$res->code]["prix"] -= 1;
             }

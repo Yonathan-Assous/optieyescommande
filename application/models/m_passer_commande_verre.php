@@ -1643,14 +1643,14 @@ class m_passer_commande_verre extends CI_Model
     {
         //echo "Generation:".$generation." - ";
         if ($generation != "") {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, L.supplement as sup, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id
                 . " AND ppc.name LIKE '%" . $generation . "%')
 			WHERE  L.code = '" . $lens . "' AND L.trad_fr LIKE '%" . $generation . "%'";
 
         } else {
-            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, ppc.prix as prix_perso 
+            $sql = "SELECT L.trad_fr, L.code, L.id, L.name, L.prix, L.sorting, L.verre_type, L.supplement as sup, ppc.prix as prix_perso 
 			FROM lenses L 
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
@@ -1670,7 +1670,9 @@ class m_passer_commande_verre extends CI_Model
                 $resultat[$res->code]["prix"] -= 1;
             }
             else {
-                $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+		if ($res->sup != 0) {
+                	$resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+		}
             }
             $resultat[$res->code]["prix"] = number_format($resultat[$res->code]["prix"], 2);
 

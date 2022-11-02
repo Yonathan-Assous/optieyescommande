@@ -5213,13 +5213,14 @@ class admin
                     $commande->lenscode;
 
                 $paA = "";
-
+                $isStock = 0;
                 if ($lenses_code ==
                     'PAS-174') {
                     $lenses_code =
                         '100001';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PAU-15') {
@@ -5484,6 +5485,7 @@ class admin
                         '100001';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100074') {
@@ -5491,6 +5493,7 @@ class admin
                         '100074';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100048') {
@@ -5498,6 +5501,7 @@ class admin
                         '100048';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100071') {
@@ -5505,6 +5509,7 @@ class admin
                         '100071';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100004') {
@@ -5512,6 +5517,7 @@ class admin
                         '100004';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100002') {
@@ -5519,6 +5525,7 @@ class admin
                         '100002';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100070') {
@@ -5526,6 +5533,7 @@ class admin
                         '100070';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100141') {
@@ -5533,6 +5541,7 @@ class admin
                         '100141';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100013') {
@@ -5540,6 +5549,7 @@ class admin
                         '100013';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
 
                 $xml .= '
@@ -5602,7 +5612,7 @@ class admin
                         "1") {
 
                         if ($paA ==
-                            "1") {
+                            "1" && $isStock == 0) {
                             $information_commande->verre->correction_droit->traitement =
                                 "700102";
                         }
@@ -5828,7 +5838,7 @@ class admin
                         "1") {
 
                         if ($paA ==
-                            "1") {
+                            "1" && $isStock == 0) {
                             $information_commande->verre->correction_gauche->traitement =
                                 "700102";
                         }
@@ -7749,13 +7759,14 @@ class admin
                             $commande->lenscode;
 
                         $paA = "";
-
+                        $isStock = 0;
                         if ($lenses_code ==
                             'PAS-174') {
                             $lenses_code =
                                 '100001';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PAU-15') {
@@ -8020,6 +8031,7 @@ class admin
                                 '100001';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100074') {
@@ -8027,6 +8039,7 @@ class admin
                                 '100074';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100048') {
@@ -8034,6 +8047,7 @@ class admin
                                 '100048';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100071') {
@@ -8041,6 +8055,7 @@ class admin
                                 '100071';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100004') {
@@ -8048,6 +8063,7 @@ class admin
                                 '100004';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100002') {
@@ -8055,6 +8071,7 @@ class admin
                                 '100002';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100070') {
@@ -8062,6 +8079,7 @@ class admin
                                 '100070';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100141') {
@@ -8069,6 +8087,7 @@ class admin
                                 '100141';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100013') {
@@ -8076,6 +8095,7 @@ class admin
                                 '100013';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
 
                         $xml .= '
@@ -8137,7 +8157,7 @@ class admin
                                 "1") {
 
                                 if ($paA ==
-                                    "1") {
+                                    "1" && $isStock == 0) {
                                     $information_commande->verre->correction_droit->traitement =
                                         "700102";
                                 }
@@ -8358,7 +8378,7 @@ class admin
                                 "1") {
 
                                 if ($paA ==
-                                    "1") {
+                                    "1" && $isStock == 0) {
                                     $information_commande->verre->correction_gauche->traitement =
                                         "700102";
                                 }
@@ -10254,13 +10274,14 @@ class admin
                 $lens_code;
 
             $paA = "";
-
+            $isStock = 0;
             if ($lenses_code ==
                 'PAS-174') {
                 $lenses_code =
                     '100001';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PAU-15') {
@@ -10490,6 +10511,7 @@ class admin
                     '100001';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100074') {
@@ -10497,6 +10519,7 @@ class admin
                     '100074';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100048') {
@@ -10504,6 +10527,7 @@ class admin
                     '100048';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100071') {
@@ -10511,6 +10535,7 @@ class admin
                     '100071';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100004') {
@@ -10518,6 +10543,7 @@ class admin
                     '100004';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100002') {
@@ -10525,6 +10551,7 @@ class admin
                     '100002';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100070') {
@@ -10532,6 +10559,7 @@ class admin
                     '100070';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100141') {
@@ -10539,6 +10567,7 @@ class admin
                     '100141';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100013') {
@@ -10546,6 +10575,7 @@ class admin
                     '100013';
                 $paA =
                     "1";
+                $isStock = 1;
             }
 
             $xml .= '
@@ -10605,7 +10635,7 @@ class admin
                     "1") {
 
                     if ($paA ==
-                        "1") {
+                        "1" && $isStock == 0) {
                         $data["traitementD"] =
                             "700102";
                     }
@@ -10826,7 +10856,7 @@ class admin
                     "1") {
 
                     if ($paA ==
-                        "1") {
+                        "1" && $isStock == 0) {
                         $data["traitementG"] =
                             "700102";
                     }

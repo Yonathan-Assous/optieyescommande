@@ -2535,7 +2535,6 @@ class index extends MY_Controller {
 
                 $data = $this->input->post();
                 $user = $this->session->userdata('data_user');
-
                 $userdata = $this->m_users->getUserById($user['user_info']->id_users)[0];
 
                 $data['user_info'] = $user['user_info'];
@@ -2894,7 +2893,6 @@ class index extends MY_Controller {
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
-//                print_r($data);die;
 
 //                var_dump($data['prixDH']);die;
 //                print_r($data['txtOmaImageIn']);die;
@@ -3155,7 +3153,8 @@ class index extends MY_Controller {
                     $data['reference_client'] = $pair_order->reference_client;
 					$data['pair_order_recap'] = (array) $pair_order;
 				}
-				if($data['diametreD'] == 'precalibrage')
+
+                if($data['diametreD'] == 'precalibrage')
 				{
 					if(isset($data['calibre']) && !empty($data['calibre']))
 					{
@@ -3280,8 +3279,12 @@ class index extends MY_Controller {
 				if(isset($data['type_monture']) && !empty($data['type_monture']))
 					$data_commande['monture'] = array('type' => $data['type_monture']);
 
-				if(isset($data['epaisseur_bord_verre']) && !empty($data['epaisseur_bord_verre']))
-					$data_commande['bord_verre'] = array('epaisseur' => $data['epaisseur_bord_verre']);
+				if(isset($data['epaisseur_bord_verre']) && !empty($data['epaisseur_bord_verre'])) {
+                    if($data['txtOmaImageIn'] == '' || (!(strpos($data['nomverreDH'], 'stock') || $data['nomverreDH'] == '') && (strpos($data['nomverreGH'], 'stock')) || $data['nomverreGH'] == '')) {
+                        $data_commande['bord_verre'] = array('epaisseur' => $data['epaisseur_bord_verre']);
+                    }
+                }
+
 
 				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
 					$data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
@@ -3873,9 +3876,10 @@ class index extends MY_Controller {
 					$this->db->update('flag_monture');
 					*/
 				}
-
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
+//                print_r($data);die;
+
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

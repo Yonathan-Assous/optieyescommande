@@ -5617,12 +5617,13 @@ class admin
                                 "700102";
                         }
 
-                        $xml .= '
+                        if (isset($information_commande->verre->correction_droit->traitement)) {
+                            $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
-
+                        }
                     }
 
                     if (isset($information_commande->verre->correction_droit->teinte) &&
@@ -5842,11 +5843,14 @@ class admin
                             $information_commande->verre->correction_gauche->traitement =
                                 "700102";
                         }
-                        $xml .= '
+
+                        if (isset($information_commande->verre->correction_gauche->traitement)) {
+                            $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
+                        }
 
                     }
 
@@ -8162,11 +8166,14 @@ class admin
                                         "700102";
                                 }
 
-                                $xml .= '
+                                if (isset($information_commande->verre->correction_droit->traitement)) {
+                                    $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                        $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
+                                }
+
 
                             }
 
@@ -8382,11 +8389,13 @@ class admin
                                     $information_commande->verre->correction_gauche->traitement =
                                         "700102";
                                 }
-                                $xml .= '
+                                if (isset($information_commande->verre->correction_gauche->traitement)) {
+                                    $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                        $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
+                                }
                             }
 
                             if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -10639,12 +10648,14 @@ class admin
                         $data["traitementD"] =
                             "700102";
                     }
-                    $xml .= '
+
+                    if (isset($data["traitementD"])) {
+                        $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementD"] . '</commercialCode>
+                            $data["traitementD"] . '</commercialCode>
 					   </coating>';
-
+                    }
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -10860,11 +10871,14 @@ class admin
                         $data["traitementG"] =
                             "700102";
                     }
-                    $xml .= '
+
+                    if (isset($data["traitementG"])) {
+                        $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementG"] . '</commercialCode>
+                            $data["traitementG"] . '</commercialCode>
 					   </coating>';
+                    }
 
                 }
 

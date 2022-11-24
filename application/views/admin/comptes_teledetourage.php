@@ -18,7 +18,7 @@ include_once('menu.php');
                     <label for="get_commercial" class="control-label">Commercial</label>
                     <select id="get_commercial" name="login_notification" class="form-control">
                         <option value="Tout">Tout</option>
-                        <option value="Daniel">Daniel / Samuel</option>
+                        <option value="Daniel">Daniel</option>
                         <option value="Gregory">Gregory</option>
                     </select>
                 </div>

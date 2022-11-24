@@ -2138,10 +2138,10 @@ $(document).ready(function(){
 
                     $.each(data, function(key, value){
                         if (key <= 1) {
-                            $('#listeTeintes').append('<option value="'+ value.name +'">'+ value.name + '</option>');
+                            $('#listeTeintes').append('<option value="'+ value.trad_fr +'">'+ value.trad_fr + '</option>');
                         }
                         else {
-                            $('#listeTeintes').append('<option value="'+ value.id +'">'+ value.name +
+                            $('#listeTeintes').append('<option value="'+ value.id +'">'+ value.trad_fr +
                                 ' (' + value.code +') Prix: ' + value.price + '</option>');
                         }
                     });

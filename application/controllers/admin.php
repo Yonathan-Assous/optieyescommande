@@ -194,21 +194,9 @@ class admin
     public
     function getColor($recovery = false)
     {
-
-        $name_lens =
-            $_POST['lens'];
-        if (strpos($name_lens,
-                'Mineral') !==
-            false ||
-            strpos($name_lens,
-                'Minéral') !==
-            false) {
-            $res =
-                $this->m_passer_commande_verre->getColors($_POST['lens']);
-        } else {
-            $res =
-                $this->m_passer_commande_verre->getColors();
-        }
+        $indiceVerre =
+            $_POST['indice'];
+        $res = $this->m_passer_commande_verre->getColors($indiceVerre);
         echo json_encode($res);
 
     }
@@ -216,21 +204,24 @@ class admin
     public
     function getColorWithPerso($recovery = false)
     {
-        $name_lens =
-            $_POST['lens'];
-        if (strpos($name_lens,
-                'Mineral') !==
-            false ||
-            strpos($name_lens,
-                'Minéral') !==
-            false) {
-            $res =
-                $this->m_passer_commande_verre->getColorsWithPerso($_POST['lens']);
-        } else {
-            $res =
-                $this->m_passer_commande_verre->getColorsWithPerso();
-        }
+        $indiceVerre =
+            $_POST['indice'];
+        $res = $this->m_passer_commande_verre->getColorsWithPerso($indiceVerre);
         echo json_encode($res);
+//        $name_lens =עקאAens'];
+//        if (strpos($name_lens,
+//                'Mineral') !==
+//            false ||
+//            strpos($name_lens,
+//                'Minéral') !==
+//            false) {
+//            $res =
+//                $this->m_passer_commande_verre->getColorsWithPerso($_POST['lens']);
+//        } else {
+//            $res =
+//                $this->m_passer_commande_verre->getColorsWithPerso();
+//        }
+//        echo json_encode($res);
 
     }
 
@@ -5213,13 +5204,14 @@ class admin
                     $commande->lenscode;
 
                 $paA = "";
-
+                $isStock = 0;
                 if ($lenses_code ==
                     'PAS-174') {
                     $lenses_code =
                         '100001';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PAU-15') {
@@ -5484,6 +5476,7 @@ class admin
                         '100001';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100074') {
@@ -5491,6 +5484,7 @@ class admin
                         '100074';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100048') {
@@ -5498,6 +5492,7 @@ class admin
                         '100048';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100071') {
@@ -5505,6 +5500,7 @@ class admin
                         '100071';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100004') {
@@ -5512,6 +5508,7 @@ class admin
                         '100004';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100002') {
@@ -5519,6 +5516,7 @@ class admin
                         '100002';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100070') {
@@ -5526,6 +5524,7 @@ class admin
                         '100070';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100141') {
@@ -5533,6 +5532,7 @@ class admin
                         '100141';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
                 if ($lenses_code ==
                     'PA-100013') {
@@ -5540,6 +5540,7 @@ class admin
                         '100013';
                     $paA =
                         "1";
+                    $isStock = 1;
                 }
 
                 $xml .= '
@@ -5602,17 +5603,18 @@ class admin
                         "1") {
 
                         if ($paA ==
-                            "1") {
+                            "1" && $isStock == 0) {
                             $information_commande->verre->correction_droit->traitement =
                                 "700102";
                         }
 
-                        $xml .= '
+                        if (isset($information_commande->verre->correction_droit->traitement)) {
+                            $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
-
+                        }
                     }
 
                     if (isset($information_commande->verre->correction_droit->teinte) &&
@@ -5828,15 +5830,18 @@ class admin
                         "1") {
 
                         if ($paA ==
-                            "1") {
+                            "1" && $isStock == 0) {
                             $information_commande->verre->correction_gauche->traitement =
                                 "700102";
                         }
-                        $xml .= '
+
+                        if (isset($information_commande->verre->correction_gauche->traitement)) {
+                            $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                            $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
+                        }
 
                     }
 
@@ -7749,13 +7754,14 @@ class admin
                             $commande->lenscode;
 
                         $paA = "";
-
+                        $isStock = 0;
                         if ($lenses_code ==
                             'PAS-174') {
                             $lenses_code =
                                 '100001';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PAU-15') {
@@ -8020,6 +8026,7 @@ class admin
                                 '100001';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100074') {
@@ -8027,6 +8034,7 @@ class admin
                                 '100074';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100048') {
@@ -8034,6 +8042,7 @@ class admin
                                 '100048';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100071') {
@@ -8041,6 +8050,7 @@ class admin
                                 '100071';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100004') {
@@ -8048,6 +8058,7 @@ class admin
                                 '100004';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100002') {
@@ -8055,6 +8066,7 @@ class admin
                                 '100002';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100070') {
@@ -8062,6 +8074,7 @@ class admin
                                 '100070';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100141') {
@@ -8069,6 +8082,7 @@ class admin
                                 '100141';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
                         if ($lenses_code ==
                             'PA-100013') {
@@ -8076,6 +8090,7 @@ class admin
                                 '100013';
                             $paA =
                                 "1";
+                            $isStock = 1;
                         }
 
                         $xml .= '
@@ -8137,16 +8152,19 @@ class admin
                                 "1") {
 
                                 if ($paA ==
-                                    "1") {
+                                    "1" && $isStock == 0) {
                                     $information_commande->verre->correction_droit->traitement =
                                         "700102";
                                 }
 
-                                $xml .= '
+                                if (isset($information_commande->verre->correction_droit->traitement)) {
+                                    $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_droit->traitement . '</commercialCode>
+                                        $information_commande->verre->correction_droit->traitement . '</commercialCode>
 					   </coating>';
+                                }
+
 
                             }
 
@@ -8358,15 +8376,17 @@ class admin
                                 "1") {
 
                                 if ($paA ==
-                                    "1") {
+                                    "1" && $isStock == 0) {
                                     $information_commande->verre->correction_gauche->traitement =
                                         "700102";
                                 }
-                                $xml .= '
+                                if (isset($information_commande->verre->correction_gauche->traitement)) {
+                                    $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                                    $information_commande->verre->correction_gauche->traitement . '</commercialCode>
+                                        $information_commande->verre->correction_gauche->traitement . '</commercialCode>
 					   </coating>';
+                                }
                             }
 
                             if (isset($information_commande->verre->correction_gauche->teinte) &&
@@ -10254,13 +10274,14 @@ class admin
                 $lens_code;
 
             $paA = "";
-
+            $isStock = 0;
             if ($lenses_code ==
                 'PAS-174') {
                 $lenses_code =
                     '100001';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PAU-15') {
@@ -10490,6 +10511,7 @@ class admin
                     '100001';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100074') {
@@ -10497,6 +10519,7 @@ class admin
                     '100074';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100048') {
@@ -10504,6 +10527,7 @@ class admin
                     '100048';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100071') {
@@ -10511,6 +10535,7 @@ class admin
                     '100071';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100004') {
@@ -10518,6 +10543,7 @@ class admin
                     '100004';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100002') {
@@ -10525,6 +10551,7 @@ class admin
                     '100002';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100070') {
@@ -10532,6 +10559,7 @@ class admin
                     '100070';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100141') {
@@ -10539,6 +10567,7 @@ class admin
                     '100141';
                 $paA =
                     "1";
+                $isStock = 1;
             }
             if ($lenses_code ==
                 'PA-100013') {
@@ -10546,6 +10575,7 @@ class admin
                     '100013';
                 $paA =
                     "1";
+                $isStock = 1;
             }
 
             $xml .= '
@@ -10605,16 +10635,18 @@ class admin
                     "1") {
 
                     if ($paA ==
-                        "1") {
+                        "1" && $isStock == 0) {
                         $data["traitementD"] =
                             "700102";
                     }
-                    $xml .= '
+
+                    if (isset($data["traitementD"])) {
+                        $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementD"] . '</commercialCode>
+                            $data["traitementD"] . '</commercialCode>
 					   </coating>';
-
+                    }
                 }
 
                 if (isset($data["teinteD"]) &&
@@ -10826,15 +10858,18 @@ class admin
                     "1") {
 
                     if ($paA ==
-                        "1") {
+                        "1" && $isStock == 0) {
                         $data["traitementG"] =
                             "700102";
                     }
-                    $xml .= '
+
+                    if (isset($data["traitementG"])) {
+                        $xml .= '
 					   <coating coatingType="ANTIREFLEX">
 						  <commercialCode>' .
-                        $data["traitementG"] . '</commercialCode>
+                            $data["traitementG"] . '</commercialCode>
 					   </coating>';
+                    }
 
                 }
 
@@ -16539,8 +16574,8 @@ class admin
                         '>Montures</a>';
 
                     // .number_format(($total_commandes[0]->total*($taux[0]->taux_erreur/100))-$total_commandes_ec[0]->total, 2,'.',' ').' €'
-                    if ($user->Samuel > 0) {
-                        $classColor = "samuel";
+                    if ($user->Daniel > 0) {
+                        $classColor = "daniel";
                     }
                     else if ($user->Gregory > 0) {
                         $classColor = "gregory";

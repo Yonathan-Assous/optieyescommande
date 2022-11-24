@@ -1673,9 +1673,9 @@ class m_passer_commande_verre extends CI_Model
                 $resultat[$res->code]["prix"] -= 1;
             }
             else {
-//                if ($res->sup != 0) {
+                if ($res->sup != 0) {
                     $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
-//                }
+                }
             }
             $resultat[$res->code]["prix"] = number_format($resultat[$res->code]["prix"], 2);
 
@@ -1690,7 +1690,7 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getColors($lens = "")
+    function getColorsOld($lens = "")
     {
         if (strpos($lens, 'Mineral') !== false
             || strpos($lens, 'Minéral') !== false) {
@@ -1703,7 +1703,29 @@ class m_passer_commande_verre extends CI_Model
     }
 
     public
-    function getColorsWithPerso($lens = "")
+    function getColors($indiceVerre = "")
+    {
+        $sql_or = ' OR id_indice_verre = 0';
+        if ($indiceVerre == 'mineral') {
+            $indiceVerre = 'Mineral';
+            $sql_or = '';
+        }
+        else if ($indiceVerre == 1.5 || $indiceVerre == 1.6) {
+            $indiceVerre .= '0';
+        }
+        $indiceVerreSql = "SELECT * FROM `indice_verre` WHERE `indice_verre` = '$indiceVerre'";
+        $query = $this->db->query($indiceVerreSql);
+        $res = $query->result()[0];
+        $indiceVerreId = $res->id_indice_verre;
+        $sql = "SELECT * FROM teintes WHERE `id_indice_verre` = $indiceVerreId $sql_or
+                AND active_to_user = 1 ORDER BY sorting";
+            $res =
+                $this->db->query($sql);
+        return $res->result();
+    }
+
+    public
+    function getColorsWithPersoOld($lens = "")
     {
         if (strpos($lens, 'Mineral') !== false
             || strpos($lens, 'Minéral') !== false) {
@@ -1713,6 +1735,27 @@ class m_passer_commande_verre extends CI_Model
             $res =
                 $this->db->query("SELECT * FROM lensOptions WHERE (color='COLOR' AND display='X') OR code = 'CUST_24' OR code = 'CUST_25' ORDER BY sorting");
         }
+        return $res->result();
+    }
+
+    public
+    function getColorsWithPerso($indiceVerre = "")
+    {
+        $sql_or = ' OR id_indice_verre = 0';
+        if ($indiceVerre == 'mineral') {
+            $indiceVerre = 'Mineral';
+        }
+        else if ($indiceVerre == 1.5 || $indiceVerre == 1.6) {
+            $indiceVerre .= '0';
+        }
+        $indiceVerreSql = "SELECT * FROM `indice_verre` WHERE `indice_verre` = '$indiceVerre'";
+        $query = $this->db->query($indiceVerreSql);
+        $res = $query->result()[0];
+        $indiceVerreId = $res->id_indice_verre;
+
+        $res =
+            $this->db->query("SELECT * FROM teintes WHERE `id_indice_verre` = $indiceVerreId $sql_or
+                AND active_to_user = 1 OR code = 'CUST_24' ORDER BY sorting");
         return $res->result();
     }
 

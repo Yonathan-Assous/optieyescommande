@@ -1200,7 +1200,7 @@ $('#type_de_verreD').on('change', function() {
 					$.ajax({
 						type: "POST",
 						url: "/admin/getColorWithPerso/",
-						data: {"lens" : ""},
+						data: {"lens" : "", "indice" : indiceId},
 						dataType: "json",
 						success: function (data) {		
 							
@@ -1522,7 +1522,7 @@ $('#type_de_verreG').on('change', function() {
 					$.ajax({
 						type: "POST",
 						url: "/admin/getColorWithPerso/",
-						data: {"lens" : ""},
+						data: {"lens" : "", "indice" : indiceId},
 						dataType: "json",
 						success: function (data) {		
 						

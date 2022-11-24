@@ -194,21 +194,9 @@ class admin
     public
     function getColor($recovery = false)
     {
-
-        $name_lens =
-            $_POST['lens'];
-        if (strpos($name_lens,
-                'Mineral') !==
-            false ||
-            strpos($name_lens,
-                'Minéral') !==
-            false) {
-            $res =
-                $this->m_passer_commande_verre->getColors($_POST['lens']);
-        } else {
-            $res =
-                $this->m_passer_commande_verre->getColors();
-        }
+        $indiceVerre =
+            $_POST['indice'];
+        $res = $this->m_passer_commande_verre->getColors($indiceVerre);
         echo json_encode($res);
 
     }
@@ -216,21 +204,24 @@ class admin
     public
     function getColorWithPerso($recovery = false)
     {
-        $name_lens =
-            $_POST['lens'];
-        if (strpos($name_lens,
-                'Mineral') !==
-            false ||
-            strpos($name_lens,
-                'Minéral') !==
-            false) {
-            $res =
-                $this->m_passer_commande_verre->getColorsWithPerso($_POST['lens']);
-        } else {
-            $res =
-                $this->m_passer_commande_verre->getColorsWithPerso();
-        }
+        $indiceVerre =
+            $_POST['indice'];
+        $res = $this->m_passer_commande_verre->getColorsWithPerso($indiceVerre);
         echo json_encode($res);
+//        $name_lens =עקאAens'];
+//        if (strpos($name_lens,
+//                'Mineral') !==
+//            false ||
+//            strpos($name_lens,
+//                'Minéral') !==
+//            false) {
+//            $res =
+//                $this->m_passer_commande_verre->getColorsWithPerso($_POST['lens']);
+//        } else {
+//            $res =
+//                $this->m_passer_commande_verre->getColorsWithPerso();
+//        }
+//        echo json_encode($res);
 
     }
 
@@ -16583,8 +16574,8 @@ class admin
                         '>Montures</a>';
 
                     // .number_format(($total_commandes[0]->total*($taux[0]->taux_erreur/100))-$total_commandes_ec[0]->total, 2,'.',' ').' €'
-                    if ($user->Samuel > 0) {
-                        $classColor = "samuel";
+                    if ($user->Daniel > 0) {
+                        $classColor = "daniel";
                     }
                     else if ($user->Gregory > 0) {
                         $classColor = "gregory";

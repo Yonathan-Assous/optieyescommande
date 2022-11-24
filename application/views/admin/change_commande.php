@@ -1200,7 +1200,7 @@ include_once('menu.php');
                             $.ajax({
                                 type: "POST",
                                 url: "/admin/getColorWithPerso/",
-                                data: {"lens" : ""},
+                                data: {"lens" : "", "indice" : indiceId},
                                 dataType: "json",
                                 success: function (data) {
 
@@ -1522,7 +1522,7 @@ include_once('menu.php');
                             $.ajax({
                                 type: "POST",
                                 url: "/admin/getColorWithPerso/",
-                                data: {"lens" : ""},
+                                data: {"lens" : "", "indice" : indiceId},
                                 dataType: "json",
                                 success: function (data) {
 

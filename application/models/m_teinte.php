@@ -37,7 +37,7 @@ class m_teinte extends CI_Model
         $teintes =  $query->result();
         $teinteArray = [];
         foreach ($teintes as $teinte) {
-            $teinteArray[$teinte->id] = $teinte->name;
+            $teinteArray[$teinte->id] = $teinte->trad_fr;
         }
 
         $indices = ['1,53' => 2, '1,56' => 3, '1,59' => 8, '1,5' => 1,  '1,67' => 5, '1,6' => 4, '1,74' => 6];
@@ -87,7 +87,7 @@ class m_teinte extends CI_Model
     public function getNameByCode($code) {
         if (!empty($code)) {
             $teinte = $this->getTeinteByCode($code);
-            return $teinte->name;
+            return $teinte->trad_fr;
         }
         else
             return '';
@@ -185,13 +185,13 @@ class m_teinte extends CI_Model
                 AND teinte_prix.id_lenses = $lensId
                 AND (id_user = $userId OR id_user IS NULL)
                 AND teinte_prix.is_active = 1
-                ORDER BY id, id_user DESC";
+                ORDER BY sorting, id_user DESC";
 
         $query = $this->db->query($sql);
         $teintesArray = [];
         $teintes =  $query->result();
-        $teintesArray[0]["name"] = "All Normal";
-        $teintesArray[1]["name"] = "All Nm";
+        $teintesArray[0]["trad_fr"] = "All Normal";
+        $teintesArray[1]["trad_fr"] = "All Nm";
 
         $teintesExist = [];
         foreach ($teintes as $key => $teinte) {
@@ -218,9 +218,9 @@ class m_teinte extends CI_Model
             }
             $sqlSearch = "";
             if (!is_null($search) && $search != "") {
-                $sqlSearch = "AND (lenses.code LIKE '%" . $search . "%' OR teintes.code LIKE '%" . $search . "%' OR lenses.trad_fr LIKE '%" . $search . "%' OR prix.price LIKE '%" . $search . "%' OR teintes.name LIKE '%" . $search . "%' OR prix.created_at LIKE '%" . $search . "%')";
+                $sqlSearch = "AND (lenses.code LIKE '%" . $search . "%' OR teintes.code LIKE '%" . $search . "%' OR lenses.trad_fr LIKE '%" . $search . "%' OR prix.price LIKE '%" . $search . "%' OR teintes.trad_fr LIKE '%" . $search . "%' OR prix.created_at LIKE '%" . $search . "%')";
             }
-            $sql = "SELECT teintes.id, prix.id_lenses, lenses.code as lens_code, lenses.trad_fr, teintes.name, teintes.code, prix.price, prix.initial_price, prix.is_active, prix.created_at, prix.desactived_at  FROM `teinte_prix` as prix
+            $sql = "SELECT teintes.id, prix.id_lenses, lenses.code as lens_code, lenses.trad_fr, teintes.trad_fr, teintes.code, prix.price, prix.initial_price, prix.is_active, prix.created_at, prix.desactived_at  FROM `teinte_prix` as prix
                     INNER JOIN lenses ON id_lenses = lenses.id
                     INNER JOIN teintes ON id_teinte = teintes.id
                     WHERE prix.id_user = $user_id
@@ -234,7 +234,7 @@ class m_teinte extends CI_Model
                     $tab[$i]['code'] = $teinte->lens_code . " / " . $teinte->code;
                     $tab[$i]['verre'] = $teinte->trad_fr;
                     $tab[$i]['prix'] = $teinte->price . ' (' . $teinte->initial_price . ')';
-                    $tab[$i]['teinte'] = $teinte->name;
+                    $tab[$i]['teinte'] = $teinte->trad_fr;
                     $tab[$i]['date'] = $teinte->created_at;
                     if ($teinte->is_active) {
                         $tab[$i]['action'] =
@@ -283,7 +283,11 @@ class m_teinte extends CI_Model
             $nameVerreVirgule = str_replace(',', '.', $nameVerre);
             foreach ($indices as $indice) {
                 $indiceNum = abs($indice->indice_verre);
-                if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
+                if (stripos($nameVerre, 'Mineral') !== FALSE || (stripos($nameVerre, 'Minéral') !== FALSE)) {
+                    $indiceId = 9;
+                    break;
+                }
+                else if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
                     $indiceId = $indice->id_indice_verre;
                     break;
                 }
@@ -319,10 +323,10 @@ class m_teinte extends CI_Model
                 $teinteRequestToUpdate = "SELECT id FROM `teintes` WHERE ";
 
                 if ($teinteId == "All Normal") {
-                    $teinteRequest = "name NOT LIKE '%Nm%'";
+                    $teinteRequest = "trad_fr NOT LIKE '%Nm%'";
                 }
                 else if ($teinteId == "All Nm") {
-                    $teinteRequest = "name LIKE '%Nm%'";
+                    $teinteRequest = "trad_fr LIKE '%Nm%'";
                 }
                 $teinteRequestToUpdate .= $teinteRequest;
 
@@ -330,14 +334,13 @@ class m_teinte extends CI_Model
                     AND id_lenses = $lensId
                     AND is_active = 1
                     AND id_user IS NULL";
-//                var_dump($sql);die;
                 $res = $this->db->query($sql);
                 $teintes = $res->result();
-
                 $teintesArray = [];
                 foreach ($teintes as $teinte) {
                     $teintesArray[$teinte->id_teinte] = $teinte->price;
                 }
+//                print_r($teintesArray);die;
                 $sql = "UPDATE `teinte_prix` SET `is_active` = 0, `desactived_at` = NOW()
                               WHERE id_teinte IN ($teinteRequestToUpdate)
                               AND id_lenses = $lensId
@@ -349,6 +352,7 @@ class m_teinte extends CI_Model
 
                 $sql = "SELECT * FROM `teintes` 
                         WHERE $teinteRequest
+                        AND id_indice_verre = $indiceId
                         AND active_to_user = 1";
                 $query = $this->db->query($sql);
                 $teintesInsert = $query->result();
@@ -446,6 +450,87 @@ class m_teinte extends CI_Model
         }
         else {
             return false;
+        }
+    }
+
+    public function insertNewPrixTeinte() {
+        $i = 0;
+        $array = [21=>193,
+                  22=>195,
+                23=>197,
+                24=>199,
+                25=>201,
+                26=>275,
+                27=>213,
+                28=>215,
+                29=>217,
+                30=>219,
+                232=>187,
+                233=>188,
+                234=>189,
+                235=>190,
+                236=>191,
+                237=>228,
+                238=>229,
+                239=>230,
+                240=>231,
+                241=>202,
+                242=>203,
+                243=>204,
+                244=>205,
+                245=>206,
+                246=>207,
+                247=>208,
+                248=>209,
+                249=>210,
+                250=>211,
+                251=>220,
+                252=>221,
+                253=>222,
+                254=>223,
+                255=>224,
+                256=>225,
+                257=>226,
+                258=>227,
+                93 =>274,
+                154 => [155, 271, 272, 273]];
+        foreach ($array as $key=>$value) {
+            $sql = "SELECT * FROM `teinte_prix` 
+                WHERE id_teinte = $key
+                ";
+            $query = $this->db->query($sql);
+            $result = $query->result();
+            foreach ($result as $item) {
+
+                if ($item->id_type_verre_solaire == "") {
+                    $item->id_type_verre_solaire = "NULL";
+                }
+                else {
+                    $item->id_type_verre_solaire = "'$item->id_type_verre_solaire'";
+                }
+                if ($item->id_user == "") {
+                    $item->id_user = "NULL";
+                }
+                else {
+                    $item->id_user = "'$item->id_user'";
+                }
+                if (is_array($value)) {
+                    foreach ($value as $val) {
+                        $sql = "INSERT INTO `teinte_prix` (`id_teinte`, `id_lenses`, `id_indice_verre`, `id_type_verre_solaire`, `id_user`, `price`, `initial_price`, `is_active`)
+                            VALUES ('" . $val ."', '" . $item->id_lenses . "', '" . $item->id_indice_verre . "', " . $item->id_type_verre_solaire . ", " . $item->id_user . ", '" . $item->price . "', '" . $item->initial_price . "', '" . $item->is_active . "')";
+                        $this->db->query($sql);
+                    }
+                }
+                else {
+                    $sql = "INSERT INTO `teinte_prix` (`id_teinte`, `id_lenses`, `id_indice_verre`, `id_type_verre_solaire`, `id_user`, `price`, `initial_price`, `is_active`)
+                            VALUES ('" . $value ."', '" . $item->id_lenses . "', '" . $item->id_indice_verre . "', " . $item->id_type_verre_solaire . ", " . $item->id_user . ", '" . $item->price . "', '" . $item->initial_price . "', '" . $item->is_active . "')";
+                    $this->db->query($sql);
+                }
+
+//                $i++;
+//                if ($i == 5) {
+//                }
+            }
         }
     }
 }

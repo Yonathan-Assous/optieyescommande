@@ -176,16 +176,11 @@ class index extends MY_Controller {
 			$this->redirect();
     }
 
-	public function getColor($recovery=false){
-		if($this->session->userdata('logged_in') === true){
-			$name_lens = $_POST['lens'];
-			if(strpos($name_lens, 'Mineral') !== false || strpos($name_lens, 'Minéral') !== false)
-			{
-				$res = $this->m_passer_commande_verre->getColors($_POST['lens']);
-			}
-			else
-				$res = $this->m_passer_commande_verre->getColors();
-			echo json_encode($res);
+	public function getColor($recovery=false) {
+		if($this->session->userdata('logged_in') === true) {
+            $indiceVerre = $_POST['indice'];
+				$res = $this->m_passer_commande_verre->getColors($indiceVerre);
+            echo json_encode($res);
 		}
 		else
 			$this->redirect();

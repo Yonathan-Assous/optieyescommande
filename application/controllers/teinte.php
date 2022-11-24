@@ -90,4 +90,8 @@ class teinte extends MY_Controller {
 
         echo json_encode($tab);
     }
+
+    public function setNewTeintesInDatabase() {
+        $this->m_teinte->insertNewPrixTeinte();
+    }
 }

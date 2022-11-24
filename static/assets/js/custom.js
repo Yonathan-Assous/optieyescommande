@@ -2148,7 +2148,7 @@ $('#type_de_verreD').on('change', function() {
 						$.ajax({
 							type: "POST",
 							url: "/index/getColor",
-							data: {"lens" : selectedText, "id_lens" : type_de_verreD},
+							data: {"lens" : selectedText, "id_lens" : type_de_verreD, "indice": indiceId},
 							dataType: "json",
 							success: function (data) {
 								$('#teinteD').append('<option value="">Aucune</option>');
@@ -2878,7 +2878,7 @@ $('#type_de_verreG').on('change', function() {
 						$.ajax({
 							type: "POST",
 							url: "/index/getColor",
-							data: {"lens" : selectedText, "id_lens" : type_de_verreG},
+							data: {"lens" : selectedText, "id_lens" : type_de_verreG, "indice": indiceId},
 							dataType: "json",
 							success: function (data) {
 

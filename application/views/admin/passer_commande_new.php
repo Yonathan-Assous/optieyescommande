@@ -3545,9 +3545,10 @@ $('#teinteD').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                        "name" : nomteinte,
+                        "nom_du_verre" : nomverre,
+                        "indice" : indiceId,
+                        "id_user" : <?php echo $user_id;?>
                 },
 				dataType: "json",
 				success: function (data) {
@@ -3713,9 +3714,10 @@ $('#teinteG').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                    "name" : nomteinte,
+                    "nom_du_verre" : nomverre,
+                    "indice" : indiceId,
+                    "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4054,9 +4056,10 @@ $('#traitementD').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                    "name" : nomteinte,
+                    "nom_du_verre" : nomverre,
+                    "indice" : indiceId,
+                    "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4100,9 +4103,10 @@ $('#traitementD').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteD,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                    "name" : nomteinte,
+                    "nom_du_verre" : nomverre,
+                    "indice" : indiceId,
+                    "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4318,9 +4322,10 @@ $('#traitementG').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                    "name" : nomteinte,
+                    "nom_du_verre" : nomverre,
+                    "indice" : indiceId,
+                    "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {
@@ -4377,9 +4382,10 @@ $('#traitementG').on('change', function() {
 				type: "POST",
 				url: "/admin/getColors_price",
 				data: {"code" : teinteG,
-				"name" : nomteinte,
-				"nom_du_verre" : nomverre,
-                "id_user" : <?php echo $user_id;?>
+                    "name" : nomteinte,
+                    "nom_du_verre" : nomverre,
+                    "indice" : indiceId,
+                    "id_user" : <?php echo $user_id;?>
 				},
 				dataType: "json",
 				success: function (data) {

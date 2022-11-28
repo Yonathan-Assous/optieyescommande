@@ -284,7 +284,9 @@ class admin
             $_POST['code'];
         $nom_du_verre =
             $_POST['nom_du_verre'];
-        $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId);
+        $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($_POST['indice']);
+
+        $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId, $indiceVerreId);
         $res['fr'] = $name;
         $res['id'] = $code;
 
@@ -3154,7 +3156,7 @@ class admin
 
     private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
                                          $generation = NULL, $traitementCode = NULL, $galbe = NULL,
-                                         $prisme = NULL, $teinteCode = NULL) {
+                                         $prisme = NULL, $teinteCode = NULL, $indiceVerreId = NULL) {
 //        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
 //        var_dump($verreStock);die;
         if ($verreStock) {
@@ -3168,7 +3170,7 @@ class admin
             }
             $teintePrice = 0;
             if(!empty($teinteCode)) {
-                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId, $indiceVerreId);
             }
             $galbePrice = 0;
             if (!empty($galbe) && $galbe != "Standard") {

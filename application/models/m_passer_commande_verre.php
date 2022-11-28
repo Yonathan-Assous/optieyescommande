@@ -1705,18 +1705,11 @@ class m_passer_commande_verre extends CI_Model
     public
     function getColors($indiceVerre = "")
     {
+        $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($indiceVerre);
         $sql_or = ' OR id_indice_verre = 0';
-        if ($indiceVerre == 'mineral') {
-            $indiceVerre = 'Mineral';
+        if ($indiceVerreId == 9) {
             $sql_or = '';
         }
-        else if ($indiceVerre == 1.5 || $indiceVerre == 1.6) {
-            $indiceVerre .= '0';
-        }
-        $indiceVerreSql = "SELECT * FROM `indice_verre` WHERE `indice_verre` = '$indiceVerre'";
-        $query = $this->db->query($indiceVerreSql);
-        $res = $query->result()[0];
-        $indiceVerreId = $res->id_indice_verre;
         $sql = "SELECT * FROM teintes WHERE `id_indice_verre` = $indiceVerreId $sql_or
                 AND active_to_user = 1 ORDER BY sorting";
             $res =

@@ -254,8 +254,10 @@ class index extends MY_Controller {
             $userId = $this->data['user_info']->id_users;
             $name = $_POST['name'];
             $code = $_POST['code'];
+            $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($_POST['indice']);
+//            $indiceId = $_POST['indice'];
             $nom_du_verre = $_POST['nom_du_verre'];
-            $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId);
+            $res['prix'] = $this->m_teinte->calculPrice($nom_du_verre, $code, $userId, $indiceVerreId);
             $res['fr'] = $name;
             $res['id'] = $code;
 
@@ -2853,7 +2855,7 @@ class index extends MY_Controller {
 
     private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
                                          $generation = NULL, $traitementCode = NULL, $galbe = NULL,
-                                         $prisme = NULL, $teinteCode = NULL) {
+                                         $prisme = NULL, $teinteCode = NULL, $indiceVerreId = NULL) {
 //        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
 //        var_dump($verreStock);die;
         if ($verreStock) {
@@ -2867,7 +2869,7 @@ class index extends MY_Controller {
             }
             $teintePrice = 0;
             if(!empty($teinteCode)) {
-                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId);
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId, $indiceVerreId);
             }
             $galbePrice = 0;
             if (!empty($galbe) && $galbe != "Standard") {
@@ -2900,7 +2902,7 @@ class index extends MY_Controller {
                 $data['supplementD'] = 0;
                 $data['supplementG'] = 0;
                 $data['tarif_teledetourage'] = 0;
-
+                $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($data['indices']);
                 if($data['format_teledetourage']) {
                     $is_teledetourage = true;
                     $data['prix_teledetourage'] = $this->m_teledetourage->getTeledetourageFormatPrice($userId, $data['format_teledetourage']);
@@ -2946,7 +2948,7 @@ class index extends MY_Controller {
                         }
                         $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteD;
+                            $prisme, $teinteCode, $indiceVerreId) * $quantiteD;
 
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                         $data['supplementD'] = $lenses->supplement;
@@ -2983,9 +2985,10 @@ class index extends MY_Controller {
                         if (isset($data['PrismeSphereG'])) {
                             $prisme = $data['PrismeSphereG'];
                         }
+
                         $data['prixGH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreGH'],
                             $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
-                            $prisme, $teinteCode) * $quantiteG;
+                            $prisme, $teinteCode, $indiceVerreId) * $quantiteG;
 
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                         $data['supplementG'] = $lenses->supplement;

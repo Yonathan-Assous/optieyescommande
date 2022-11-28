@@ -76,9 +76,10 @@ class m_teinte extends CI_Model
         }
     }
 
-    public function getTeinteByCode($code) {
+    public function getTeinteByCode($code, $indiceId) {
         $sql = "SELECT * FROM `teintes` 
-                WHERE `code` = '$code'";
+                WHERE `code` = '$code'
+                AND `id_indice_verre` = $indiceId";
         $query = $this->db->query($sql);
         $teinte =  $query->result();
         return $teinte[0];
@@ -93,10 +94,10 @@ class m_teinte extends CI_Model
             return '';
     }
 
-    public function calculPrice($nom_du_verre, $code, $userId)
+    public function calculPrice($nom_du_verre, $code, $userId, $indiceVerreId)
     {
         $lens = $this->m_lenses->getLensesByTradFr($nom_du_verre);
-        $teinte = $this->getTeinteByCode($code);
+        $teinte = $this->getTeinteByCode($code, $indiceVerreId);
         $typeVerreSolaires = $this->m_type_verre_solaire->getTypeVerreSolaires();
         $myTypeVerreSolaire = NULL;
         foreach ($typeVerreSolaires as $typeVerreSolaire) {
@@ -154,6 +155,7 @@ class m_teinte extends CI_Model
                 ORDER BY `id_user` DESC";
             }
 //            var_dump($sql);die;
+
             $query = $this->db->query($sql);
         }
         $teinte =  $query->result();

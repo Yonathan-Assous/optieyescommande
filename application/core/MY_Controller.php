@@ -56,6 +56,7 @@ class MY_Controller extends CI_Controller {
         $this->load->model('m_lens_option');
         $this->load->model('m_verres_stock');
         $this->load->model('m_bl_conditions');
+        $this->load->model('m_indice_verre');
 
 		
 		if($this->session->userdata('taux_tva') === false){

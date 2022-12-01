@@ -76,10 +76,14 @@ class m_teinte extends CI_Model
         }
     }
 
-    public function getTeinteByCode($code, $indiceId) {
+    public function getTeinteByCode($code, $indiceId = NULL) {
+        $sqlAdd = '';
+        if (!empty($indiceId)) {
+            $sqlAdd = "AND `id_indice_verre` IN (0,$indiceId)";
+        }
         $sql = "SELECT * FROM `teintes` 
-                WHERE `code` = '$code'
-                AND `id_indice_verre` = $indiceId";
+                WHERE `code` = '$code' $sqlAdd";
+
         $query = $this->db->query($sql);
         $teinte =  $query->result();
         return $teinte[0];

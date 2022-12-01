@@ -5015,7 +5015,7 @@ class admin
                             'CUST_') !==
                         false) {
                         $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte);
-                        $teinteD = $lensOption->trad_fr;
+                        $teinteD = $lensOption->name_omega;
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
@@ -5036,7 +5036,7 @@ class admin
                             'CUST_') !==
                         false) {
                         $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte);
-                        $teinteG = $lensOption->trad_fr;
+                        $teinteG = $lensOption->name_omega;
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
@@ -7627,7 +7627,7 @@ class admin
                                     'CUST_') !==
                                 false) {
                                 $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte);
-                                $teinteD = $lensOption->trad_fr;
+                                $teinteD = $lensOption->name_omega;
                                 if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
                                 } else if (isset($teinteD)) {
@@ -7645,7 +7645,7 @@ class admin
                                     'CUST_') !==
                                 false) {
                                 $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte);
-                                $teinteG = $lensOption->trad_fr;
+                                $teinteG = $lensOption->name_omega;
                                 if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
                                 } else if (isset($teinteG)) {
@@ -10171,7 +10171,7 @@ class admin
                         'CUST_') !==
                     false) {
                     $lensOption = $this->m_teinte->getTeinteByCode($data["teinteD"]);
-                    $teinteD = $lensOption->trad_fr;
+                    $teinteD = $lensOption->name_omega;
                     if ($data["teinteD"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }
@@ -10191,7 +10191,7 @@ class admin
                         'CUST_') !==
                     false) {
                     $lensOption = $this->m_teinte->getTeinteByCode($data["teinteG"]);
-                    $teinteG = $lensOption->trad_fr;
+                    $teinteG = $lensOption->name_omega;
                     if ($data["teinteG"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }

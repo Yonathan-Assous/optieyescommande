@@ -83,10 +83,11 @@ class m_teinte extends CI_Model
         }
         $sql = "SELECT * FROM `teintes` 
                 WHERE `code` = '$code' $sqlAdd";
-
+//        print_r($sql);
         $query = $this->db->query($sql);
-        $teinte =  $query->result();
-        return $teinte[0];
+        if ($query && $query->num_rows() > 0)
+            return $query->result()[0];
+        return false;
     }
 
     public function getNameByCode($code) {

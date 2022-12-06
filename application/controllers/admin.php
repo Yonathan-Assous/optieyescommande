@@ -1016,7 +1016,6 @@ class admin
     public
     function setOrderRecapNew($user_id)
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
@@ -5014,7 +5013,7 @@ class admin
                     if (strpos($information_commande->verre->correction_droit->teinte,
                             'CUST_') !==
                         false) {
-                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
+                        $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
                         $teinteD = $lensOption->name;
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
@@ -5035,7 +5034,7 @@ class admin
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                             'CUST_') !==
                         false) {
-                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
+                        $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
                         $teinteG = $lensOption->name;
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
@@ -7607,7 +7606,8 @@ class admin
                             if (strpos($information_commande->verre->correction_droit->teinte,
                                     'CUST_') !==
                                 false) {
-                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
+                                print_r($commande);die;
+                                $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
                                 $teinteD = $lensOption->name;
                                 if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
@@ -7625,7 +7625,7 @@ class admin
                             if (strpos($information_commande->verre->correction_gauche->teinte,
                                     'CUST_') !==
                                 false) {
-                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
+                                $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
                                 $teinteG = $lensOption->name;
                                 if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
@@ -7635,6 +7635,13 @@ class admin
                             }
                         }
 
+                        if (isset($information_commande->polishing)) {
+                            if ($remark != '') {
+                                $remark .= '
+                                ';
+                            }
+                            $remark .= 'polishing';
+                        }
                         $lenses_code =
                             $commande->lenscode;
 
@@ -9749,6 +9756,8 @@ class admin
             $textarea .= "<br><br>Optical Index: " .
                 $data['indices'];
 
+            $indiceId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($data['indices']);
+
             if ($commande_origine->is_express) {
                 $textarea .= "<br><b>EXPRESS</b>";
             }
@@ -10121,7 +10130,7 @@ class admin
                 if (strpos($data["teinteD"],
                         'CUST_') !==
                     false) {
-                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
+                    $lensOption = $this->m_teinte->getTeinteByCode($data["teinteD"], $indiceId);
                     $teinteD = $lensOption->name;
                     if ($data["teinteD"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
@@ -10141,7 +10150,7 @@ class admin
                 if (strpos($data["teinteG"],
                         'CUST_') !==
                     false) {
-                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
+                    $lensOption = $this->m_teinte->getTeinteByCode($data["teinteG"], $indiceId);
                     $teinteG = $lensOption->name;
                     if ($data["teinteG"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';

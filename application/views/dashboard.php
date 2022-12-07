@@ -5754,7 +5754,7 @@ if (is_object($pair_order)) {
             }
             else {
                 $('#div_polishing').addClass('hide');
-                $("#polishing").prop("checked", false);
+                $("#polishing").prop("checked", true);
                 if ($('#edge_thickness').val() == 0.8) {
                     $('#edge_thickness').val('1.8');
                 }

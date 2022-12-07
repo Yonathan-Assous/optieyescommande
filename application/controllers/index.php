@@ -2747,7 +2747,6 @@ class index extends MY_Controller {
                     $data['information_certificat'] = '';
                 }
 
-
                 $data['information_commande'] = json_encode($data_commande);
 
                 $id_grille_tarifaire = $this->m_users->getGrilleTarifaire($data['id_users']);
@@ -2913,6 +2912,7 @@ class index extends MY_Controller {
                         $data['tarif_teledetourage'] += $data['prix_teledetourage'];
                     }
                     $data['teledetourage_format_id'] = $this->m_teledetourage->getTeledetourageFormatId($data['format_teledetourage']);
+//                    $data['epaisseur_bord_verre'] = $data['edge_thickness'];
                 }
                 else {
                     $is_teledetourage = false;
@@ -3283,6 +3283,13 @@ class index extends MY_Controller {
                     }
                 }
 
+				if (isset($data['edge_thickness'])) {
+                    $data_commande['bord_verre'] = array('epaisseur' => $data['edge_thickness']);
+                }
+
+                if(isset($data['polishing'])) {
+                    $data_commande['polishing'] = $data['polishing'];
+                }
 
 				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
 					$data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
@@ -3877,7 +3884,6 @@ class index extends MY_Controller {
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
 //                print_r($data);die;
-
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";

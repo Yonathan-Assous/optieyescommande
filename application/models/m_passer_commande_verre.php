@@ -139,10 +139,12 @@ class m_passer_commande_verre extends CI_Model
             if (strpos($name_verre, 'T-One') !== false) {
                 $generation = "T-One";
             }
+            $sql = "INSERT INTO `prix_par_client` (`id`, `code`, `id_client`, `prix`, name, generation) VALUES (NULL, '"
+                . $code_verre . "', '" . $user_id . "', '" . $new_price . "', '"
+                . addslashes($name_verre) . "', '" . $generation . "')";
+
             $res =
-                $this->db->query("INSERT INTO `prix_par_client` (`id`, `code`, `id_client`, `prix`, name, generation) VALUES (NULL, '"
-                                 . $code_verre . "', '" . $user_id . "', '" . $new_price . "', '"
-                                 . addslashes($name_verre) . "', '" . $generation . "')");
+                $this->db->query($sql);
             //$query = $res->result();
             //echo "INSERT INTO `prix_par_client` (`id`, `code`, `id_client`, `prix`, name, generation) VALUES (NULL, '".$code_verre."', '".$user_id."', '".$new_price."', '".addslashes($name_verre)."', '".$generation."')";
 

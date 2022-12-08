@@ -721,7 +721,7 @@ class m_traitement extends CI_Model
             $nameVerre = preg_replace("/\([^)]+\)/","",$nameVerre);
             $nameVerreVirgule = str_replace(',', '.', $nameVerre);
             foreach ($indices as $indice) {
-                $indiceNum = abs($indice->indice_verre);
+                $indiceNum = round(abs($indice->indice_verre), 2);
                 if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
                     $indiceId = $indice->id_indice_verre;
                     break;

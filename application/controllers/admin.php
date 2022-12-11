@@ -1959,7 +1959,7 @@ class admin
                     if ($teinteD_paire !=
                         "") {
                         $data['pair_order_recap']["teinte_D"] =
-                            $this->m_commande->getTeinteById($teinteD_paire);
+                            $this->m_teinte->getTeinteByCode($teinteD_paire, $data['id_indice_verre']);
                     }
                 }
 
@@ -1969,7 +1969,7 @@ class admin
                     if ($teinteG_paire !=
                         "") {
                         $data['pair_order_recap']["teinte_G"] =
-                            $this->m_commande->getTeinteById($teinteG_paire);
+                            $this->m_teinte->getTeinteByCode($teinteG_paire, $data['id_indice_verre']);
                     }
                 }
 
@@ -13387,7 +13387,7 @@ class admin
                         $info_commande['verre']['correction_droit']['teinte'] !=
                         "") {
                         $data['teinteD'] =
-                            $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                            $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $data['recap_commande'][0]->id_indice_verre);
                     }
                     if (isset($info_commande['verre']['correction_droit']['traitement']) &&
                         $info_commande['verre']['correction_droit']['traitement'] !=
@@ -13403,7 +13403,7 @@ class admin
                         $info_commande['verre']['correction_gauche']['teinte'] !=
                         "") {
                         $data['teinteG'] =
-                            $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                            $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $data['recap_commande'][0]->id_indice_verre);
                     }
                     if (isset($info_commande['verre']['correction_gauche']['traitement']) &&
                         $info_commande['verre']['correction_gauche']['traitement'] !=
@@ -13414,7 +13414,6 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
-//                print_r($data);die;
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {
@@ -13697,215 +13696,6 @@ class admin
     }
 
     public
-    function generer_etiquette_fabricationOLD()
-    {
-
-        $post =
-            $this->input->post();
-
-        $etiquettes =
-        $data['etiquette'] =
-            $this->m_commande->getEtiquetteFabrication();
-        $data['colonne'] =
-            $post['colonne'];
-        $data['ligne'] =
-            $post['ligne'];
-
-        $data['email'] =
-            'optieyescommande@gmail.com';
-        $data['email_cc'] =
-            'testproxicom@gmail.com';
-
-        $data['certificat'] =
-            $this->m_commande->getCertificat();
-
-        if (isset($data['certificat']) &&
-            $data['certificat'] !==
-            false) {
-
-            foreach ($data['certificat']
-                     as &
-                     $value) {
-                $info_commande =
-                    json_decode($value->information_commande,
-                        true);
-
-                if (isset($info_commande['verre']['correction_droit']['teinte'])) {
-                    $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
-                }
-                if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
-                    $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
-                }
-
-                if (isset($info_commande['verre']['correction_droit']['traitement'])) {
-                    $value->traitementD =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']);
-                }
-                if (isset($info_commande['verre']['correction_gauche']['traitement'])) {
-                    $value->traitementG =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
-                }
-            }
-
-
-        }
-
-        // Contrôle du nombres d'étiquettes.. Ouai
-
-        $total['etiquettes'] =
-            count($data['etiquette']);
-        $total['certificat'] =
-            count($data['certificat']);
-
-        $data['control'] =
-            array(
-                'etiquettes' => bin2hex(openssl_random_pseudo_bytes(10)),
-                'certificat' => bin2hex(openssl_random_pseudo_bytes(10))
-            );
-
-        // echo "Total etiquette:".$total['etiquettes'];
-        // var_dump($data['control']);
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['etiquettes'],
-                'control' => $total['etiquettes']
-            ));
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['certificat'],
-                'control' => count($data['certificat'])
-            ));
-
-
-        // Génération des PDF
-        $docs = array(
-            'etiquettes' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette_fabrication",
-                    $data,
-                    '' .
-                    date('Y_m_d_H-i-s'),
-                    false),
-            'certificat' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf('certificat_authenticite',
-                    $data,
-                    '' .
-                    date('Y_m_d_H-i-s'),
-                    false,
-                    'paysage',
-                    $customsize =
-                        array(
-                            0,
-                            0,
-                            243,
-                            153
-                        ))
-        );
-
-        $commandes = array();
-
-        if (!empty($etiquettes)) {
-
-            foreach ($etiquettes
-                     as $e) {
-                $commandes[$e->id_commande] =
-                    1;
-            }
-
-            //var_dump($data['control']);
-            // Récupération des contrôles
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-
-                //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
-                $get =
-                    $this->db->select('value')
-                        ->where('v',
-                            $v)
-                        ->get('controle_test')
-                        ->result()
-                ;
-                $gen[$k] =
-                    $get[0]->value;
-
-                if ($gen[$k] !=
-                    $total[$k]) {
-                    $c[$k] =
-                        '#ff0000';
-                } else {
-                    $c[$k] =
-                        '#93C02C';
-                }
-
-            }
-
-            reset($data['control']);
-
-
-            $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
-            - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
-            - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
-            - Nombre de certificats générées : <b style="color: ' .
-                $c['certificat'] .
-                '">' .
-                ($gen['certificat'] !=
-                '' ?
-                    $gen['certificat'] :
-                    0) .
-                ' / ' .
-                $total['certificat'] . '</b><br />
-            ';
-
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-                //$this->db->delete('controle', array('id' => $v));
-                $this->db->delete('controle_test',
-                    array('v' => $v));
-            }
-
-            $sujet_txt =
-                'Etiquettes fabrication générées le ' .
-                date('d/m/Y') .
-                ' - ' .
-                date('H\hi');
-
-            // Disabled ATM, full refact in future major version
-            //$this->mail($data,$mess_txt,true,$sujet_txt,$docs);
-
-            echo 'sent';
-
-        } else {
-            echo 'empty';
-        }
-
-        return $this->config->item('directory_pdf') .
-            '/' .
-            $this->pdf("etiquette_fabrication",
-                $data,
-                "",
-                true);
-
-    }
-
-    public
     function generer_etiquette_fabrication()
     {
 
@@ -13942,11 +13732,11 @@ class admin
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {
@@ -13958,9 +13748,8 @@ class admin
                         $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                 }
             }
-
-
         }
+//        print_r($data);die;
 
         // Contrôle du nombres d'étiquettes.. Ouai
 
@@ -14360,11 +14149,11 @@ class admin
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {

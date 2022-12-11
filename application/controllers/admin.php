@@ -13388,6 +13388,7 @@ class admin
                         "") {
                         $data['teinteD'] =
                             $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $data['recap_commande'][0]->id_indice_verre);
+                        $data['teinteD'] = $data['teinteD']->trad_fr;
                     }
                     if (isset($info_commande['verre']['correction_droit']['traitement']) &&
                         $info_commande['verre']['correction_droit']['traitement'] !=
@@ -13404,6 +13405,7 @@ class admin
                         "") {
                         $data['teinteG'] =
                             $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $data['recap_commande'][0]->id_indice_verre);
+                        $data['teinteG'] = $data['teinteG']->trad_fr;
                     }
                     if (isset($info_commande['verre']['correction_gauche']['traitement']) &&
                         $info_commande['verre']['correction_gauche']['traitement'] !=

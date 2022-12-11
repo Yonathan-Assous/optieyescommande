@@ -13735,10 +13735,12 @@ class admin
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
                         $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
+                    $value->teinteD = $value->teinteD->trad_fr;
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
                         $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
+                    $value->teinteG = $value->teinteD->trad_fr;
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {
@@ -14152,10 +14154,12 @@ class admin
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
                         $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
+                    $value->teinteD = $value->teinteD->trad_fr;
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
                         $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
+                    $value->teinteG = $value->teinteG->trad_fr;
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {

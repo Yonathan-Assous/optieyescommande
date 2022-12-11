@@ -308,7 +308,7 @@ class m_users extends CI_Model {
         return $user->tarif_packaging;
     }
 
-    public function getPriceByUserId($user_id) {
+    public function getPricesByUserId($user_id) {
         $before = 27;
         $tab = array();
         $i = 0;
@@ -495,8 +495,11 @@ class m_users extends CI_Model {
 
         $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, generation, verre_type 
                 FROM lenses L 
-                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id AND (ppc.generation = 'E-Space' AND verre_type = 'e-space' OR ppc.generation = 'T-One' AND verre_type = 't-one')) WHERE display = 'X' 
+                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id 
+                AND (ppc.generation = 'E-Space' AND verre_type = 'e-space' OR ppc.generation = 'T-One' AND verre_type = 't-one' OR verre_type IS NULL AND ppc.generation = '')) 
+                WHERE display = 'X' 
                 ORDER BY verre_type, L.sorting";
+
         $query = $this->db->query($sql);
         $verres = $query->result();
         $sql = "SELECT traitements.*, traitement_prix.price, traitement_prix.id_lenses, traitement_prix.id_user, traitement_prix.id_traitement
@@ -506,7 +509,6 @@ class m_users extends CI_Model {
                 AND traitement_prix.is_active = 1
 				AND (id_user = $user_id OR id_user IS NULL)
                 ORDER BY id, id_user ASC";
-//        print_r($sql);die;
 
         $query = $this->db->query($sql);
         $traitements =  $query->result();

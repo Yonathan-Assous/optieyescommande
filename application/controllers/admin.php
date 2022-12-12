@@ -1016,7 +1016,6 @@ class admin
     public
     function setOrderRecapNew($user_id)
     {
-
         if ($this->input->is_ajax_request()) {
 
             $data =
@@ -1960,7 +1959,7 @@ class admin
                     if ($teinteD_paire !=
                         "") {
                         $data['pair_order_recap']["teinte_D"] =
-                            $this->m_commande->getTeinteById($teinteD_paire);
+                            $this->m_teinte->getTeinteByCode($teinteD_paire, $data['id_indice_verre']);
                     }
                 }
 
@@ -1970,7 +1969,7 @@ class admin
                     if ($teinteG_paire !=
                         "") {
                         $data['pair_order_recap']["teinte_G"] =
-                            $this->m_commande->getTeinteById($teinteG_paire);
+                            $this->m_teinte->getTeinteByCode($teinteG_paire, $data['id_indice_verre']);
                     }
                 }
 
@@ -5014,8 +5013,9 @@ class admin
                     if (strpos($information_commande->verre->correction_droit->teinte,
                             'CUST_') !==
                         false) {
-                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
-                        $teinteD = $lensOption->name;
+                        $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                        $teinteD = $lensOption->name_omega;
+
                         if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
@@ -5035,8 +5035,9 @@ class admin
                     if (strpos($information_commande->verre->correction_gauche->teinte,
                             'CUST_') !==
                         false) {
-                        $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
-                        $teinteG = $lensOption->name;
+                        $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                        $teinteG = $lensOption->name_omega;
+
                         if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                             $remark .= 'Sample color send by mail.';
                         }
@@ -6333,9 +6334,13 @@ class admin
                     
                     if ($calibre !=
                         "") {
+                        $polishing = 'false';
                         if ($commande->code_oma) {
                             $edg = '
 						<edging edgingType="ONSHAPE">';
+                            if (isset($information_commande->polishing)) {
+                                $polishing = 'true';
+                            }
                         }
                         else {
                             $edg = '
@@ -6346,7 +6351,7 @@ class admin
 							  <type>BEVEL</type>
 							  <position posType="AUTO">0</position>
 						  </bevel>
-						  <polish>false</polish>
+						  <polish>' . $polishing . '</polish>
 						</edging>';
                     }
 
@@ -6557,8 +6562,12 @@ class admin
                                     "</span>";
                             }
                             if (isset($information_commande->verre->correction_droit->teinte)) {
-                                $teinteD =
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                $teinteByCodeD =
+                                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                                $teinteD = '';
+                                if (!empty($teinteByCodeD)) {
+                                    $teinteD = $teinteByCodeD->trad_fr;
+                                }
                                 if ($teinteD !=
                                     "") {
                                     $detail .= "<br>Teinte: <b>" .
@@ -6651,8 +6660,12 @@ class admin
                             }
 
                             if (isset($information_commande->verre->correction_gauche->teinte)) {
-                                $teinteG =
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                $teinteByCodeG =
+                                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                                $teinteG = '';
+                                if (!empty($teinteByCodeG)) {
+                                    $teinteG = $teinteByCodeG->trad_fr;
+                                }
                                 if ($teinteG !=
                                     "") {
                                     $detail .= "<br>Teinte: <b>" .
@@ -6968,7 +6981,16 @@ class admin
                         $detail .= "<br>Indice: " .
                             $commande->indice_verre .
                             '';
-
+                        $information_commande =
+                            json_decode($commande->information_commande);
+                        if (isset($information_commande->bord_verre->epaisseur)) {
+                            $detail .= "<br>Epaisseur: " .
+                                $information_commande->bord_verre->epaisseur .
+                                '';
+                        }
+                        if (isset($information_commande->polishing)) {
+                            $detail .= "<br><strong>Polissage</strong>";
+                        }
                         if ($commande->premiere_commande !=
                             '0') {
                             $textarea .= "SECOND PAIR, First Pair Optieyes reference: " .
@@ -6994,9 +7016,6 @@ class admin
                         $textarea .= "<br><br>Optical Index: " .
                             $commande->indice_omega;
 
-
-                        $information_commande =
-                            json_decode($commande->information_commande);
                         //var_dump($information_commande);
 
                         if (isset($information_commande->verre->correction_droit)) {
@@ -7062,9 +7081,16 @@ class admin
                                     $traitementD .
                                     "</span>";
                             }
+
                             if (isset($information_commande->verre->correction_droit->teinte)) {
-                                $teinteD =
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+//                                print_r($commande->id_indice_verre);
+//                                print_r($information_commande->verre);
+                                $teinteByCodeD =
+                                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                                $teinteD = '';
+                                if (!empty($teinteByCodeD)) {
+                                    $teinteD = $teinteByCodeD->trad_fr;
+                                }
                                 if ($teinteD !=
                                     "") {
                                     $detail .= "<br>Teinte: <b>" .
@@ -7173,7 +7199,7 @@ class admin
                                 if ($teinteD !=
                                     "") {
                                     $textarea .= "<br>Tint: " .
-                                        $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                                        $teinteByCodeD->name_omega;
                                 } else {
                                     if ($information_commande->verre->correction_droit->teinte !=
                                         "") {
@@ -7271,8 +7297,12 @@ class admin
                             }
 
                             if (isset($information_commande->verre->correction_gauche->teinte)) {
-                                $teinteG =
-                                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                $teinteByCodeG =
+                                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                                $teinteG = '';
+                                if (!empty($teinteByCodeG)) {
+                                    $teinteG = $teinteByCodeG->trad_fr;
+                                }
                                 if ($teinteG !=
                                     "") {
                                     $detail .= "<br>Teinte: <b>" .
@@ -7371,7 +7401,7 @@ class admin
                                 if ($teinteG !=
                                     "") {
                                     $textarea .= "<br>Tint: " .
-                                        $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                                        $teinteByCodeG->name_omega;
                                 } else {
                                     if ($information_commande->verre->correction_gauche->teinte !=
                                         "") {
@@ -7607,8 +7637,11 @@ class admin
                             if (strpos($information_commande->verre->correction_droit->teinte,
                                     'CUST_') !==
                                 false) {
-                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_droit->teinte);
-                                $teinteD = $lensOption->name;
+
+//                                print_r($commande);die;
+                                $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                                $teinteD = $lensOption->name_omega;
+
                                 if ($information_commande->verre->correction_droit->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
                                 } else if (isset($teinteD)) {
@@ -7625,8 +7658,9 @@ class admin
                             if (strpos($information_commande->verre->correction_gauche->teinte,
                                     'CUST_') !==
                                 false) {
-                                $lensOption = $this->m_lens_option->getLensOptionByCode($information_commande->verre->correction_gauche->teinte);
-                                $teinteG = $lensOption->name;
+                                $lensOption = $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                                $teinteG = $lensOption->name_omega;
+
                                 if ($information_commande->verre->correction_gauche->teinte == 'CUST_24') {
                                     $remark .= 'Sample color send by mail.';
                                 } else if (isset($teinteG)) {
@@ -7635,6 +7669,13 @@ class admin
                             }
                         }
 
+//                        if (isset($information_commande->polishing)) {
+//                            if ($remark != '') {
+//                                $remark .= '
+//                                ';
+//                            }
+//                            $remark .= 'polishing';
+//                        }
                         $lenses_code =
                             $commande->lenscode;
 
@@ -8946,9 +8987,13 @@ class admin
 
                             if ($calibre !=
                                 "") {
+                                $polishing = 'false';
                                 if ($commande->code_oma) {
                                     $edg = '
             <edging edgingType="ONSHAPE">';
+                                    if (isset($information_commande->polishing)) {
+                                        $polishing = 'true';
+                                    }
                                 }
                                 else {
                                     $edg = '
@@ -8959,7 +9004,7 @@ class admin
                   <type>BEVEL</type>
                   <position posType="AUTO">0</position>
               </bevel>
-              <polish>false</polish>
+              <polish>' . $polishing . '</polish>
             </edging>';
                             }
 
@@ -9325,8 +9370,12 @@ class admin
                             "</span>";
                     }
                     if (isset($information_commande->verre->correction_droit->teinte)) {
-                        $teinteD =
-                            $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                        $teinteByCodeD =
+                            $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                        $teinteD = '';
+                        if (!empty($teinteByCodeD)) {
+                            $teinteD = $teinteByCodeD->trad_fr;
+                        }
                         if ($teinteD !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
@@ -9415,8 +9464,12 @@ class admin
                     }
 
                     if (isset($information_commande->verre->correction_gauche->teinte)) {
-                        $teinteG =
-                            $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                        $teinteByCodeG =
+                            $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                        $teinteG = '';
+                        if (!empty($teinteByCodeG)) {
+                            $teinteG = $teinteByCodeG->trad_fr;
+                        }
                         if ($teinteG !=
                             "") {
                             $detail .= "<br>Teinte: <b>" .
@@ -9677,6 +9730,14 @@ class admin
                 $infos .= "<br>Indice: " .
                     $commande->indice_verre .
                     '';
+                if (isset($information_commande->bord_verre->epaisseur)) {
+                    $infos .= "<br>Epaisseur: " .
+                        $information_commande->bord_verre->epaisseur .
+                        '';
+                }
+                if (isset($information_commande->polishing)) {
+                    $infos .= "<br><strong>Polissage</strong>";
+                }
             }
         }
 
@@ -9748,6 +9809,8 @@ class admin
 
             $textarea .= "<br><br>Optical Index: " .
                 $data['indices'];
+
+            $indiceId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($data['indices']);
 
             if ($commande_origine->is_express) {
                 $textarea .= "<br><b>EXPRESS</b>";
@@ -9832,10 +9895,17 @@ class admin
 
                 if (isset($data["teinteD"]) &&
                     !empty($data["teinteD"])) {
-                    $teinteD =
-                        $this->m_commande->getTeinteEnById($data['teinteD']);
+                    $teinteByCodeD =
+                        $this->m_teinte->getTeinteByCode($data['teinteD'], $commande_origine->id_indice_verre);
+                    $teinteD = '';
+                    if (!empty($teinteByCodeD)) {
+                        $teinteD = $teinteByCodeD->name_omega;
+                    }
+
+//                    $teinteD =
+//                        $this->m_commande->getTeinteEnById($data['teinteD']);
                     $textarea .= "<br>Tint: " .
-                        $this->m_commande->getTeinteEnById($data['teinteD']);
+                        $teinteD;
 
                 }
                 if (isset($data["teintepersoD"]) &&
@@ -9945,12 +10015,27 @@ class admin
 
                 if (isset($data["teinteG"]) &&
                     !empty($data["teinteG"])) {
-                    $teinteG =
-                        $this->m_commande->getTeinteEnById($data['teinteG']);
+                    $teinteByCodeG =
+                        $this->m_teinte->getTeinteByCode($data['teinteG'], $commande_origine->id_indice_verre);
+                    $teinteG = '';
+                    if (!empty($teinteByCodeG)) {
+                        $teinteG = $teinteByCodeG->name_omega;
+                    }
+
+//                    $teinteD =
+//                        $this->m_commande->getTeinteEnById($data['teinteD']);
                     $textarea .= "<br>Tint: " .
-                        $this->m_commande->getTeinteEnById($data['teinteG']);
+                        $teinteG;
 
                 }
+//                if (isset($data["teinteG"]) &&
+//                    !empty($data["teinteG"])) {
+//                    $teinteG =
+//                        $this->m_commande->getTeinteEnById($data['teinteG']);
+//                    $textarea .= "<br>Tint: " .
+//                        $this->m_commande->getTeinteEnById($data['teinteG']);
+//
+//                }
                 if (isset($data["teintepersoG"]) &&
                     !empty($data["teintepersoG"])) {
                     $textarea .= "<br>Custom Tint: " .
@@ -10121,8 +10206,9 @@ class admin
                 if (strpos($data["teinteD"],
                         'CUST_') !==
                     false) {
-                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteD"]);
-                    $teinteD = $lensOption->name;
+                    $lensOption = $this->m_teinte->getTeinteByCode($data["teinteD"], $indiceId);
+                    $teinteD = $lensOption->name_omega;
+
                     if ($data["teinteD"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }
@@ -10141,8 +10227,9 @@ class admin
                 if (strpos($data["teinteG"],
                         'CUST_') !==
                     false) {
-                    $lensOption = $this->m_lens_option->getLensOptionByCode($data["teinteG"]);
-                    $teinteG = $lensOption->name;
+                    $lensOption = $this->m_teinte->getTeinteByCode($data["teinteG"], $indiceId);
+                    $teinteG = $lensOption->name_omega;
+
                     if ($data["teinteG"] == 'CUST_24') {
                         $remark .= 'Sample color send by mail.';
                     }
@@ -11374,9 +11461,13 @@ class admin
                 if ($calibre !=
                     "") {
 //                    print_r($commande_origine->code_oma);die;
+                    $polishing = 'false';
                     if ($commande_origine->code_oma) {
                         $edg = '
 						<edging edgingType="ONSHAPE">';
+                        if (isset($information_commande->polishing)) {
+                            $polishing = 'true';
+                        }
                     }
                     else {
                         $edg = '
@@ -11387,7 +11478,7 @@ class admin
 							  <type>BEVEL</type>
 							  <position posType="AUTO">0</position>
 						  </bevel>
-						  <polish>false</polish>
+						  <polish>' . $polishing . '</polish>
 						</edging>';
                 }
 
@@ -13296,7 +13387,8 @@ class admin
                         $info_commande['verre']['correction_droit']['teinte'] !=
                         "") {
                         $data['teinteD'] =
-                            $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                            $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $data['recap_commande'][0]->id_indice_verre);
+                        $data['teinteD'] = $data['teinteD']->trad_fr;
                     }
                     if (isset($info_commande['verre']['correction_droit']['traitement']) &&
                         $info_commande['verre']['correction_droit']['traitement'] !=
@@ -13312,7 +13404,8 @@ class admin
                         $info_commande['verre']['correction_gauche']['teinte'] !=
                         "") {
                         $data['teinteG'] =
-                            $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                            $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $data['recap_commande'][0]->id_indice_verre);
+                        $data['teinteG'] = $data['teinteG']->trad_fr;
                     }
                     if (isset($info_commande['verre']['correction_gauche']['traitement']) &&
                         $info_commande['verre']['correction_gauche']['traitement'] !=
@@ -13323,7 +13416,6 @@ class admin
                             $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                     }
                 }
-//                print_r($data);die;
                 $this->load->view('admin/layout/commande-detail-new',
                     $data);
             } else {
@@ -13606,215 +13698,6 @@ class admin
     }
 
     public
-    function generer_etiquette_fabricationOLD()
-    {
-
-        $post =
-            $this->input->post();
-
-        $etiquettes =
-        $data['etiquette'] =
-            $this->m_commande->getEtiquetteFabrication();
-        $data['colonne'] =
-            $post['colonne'];
-        $data['ligne'] =
-            $post['ligne'];
-
-        $data['email'] =
-            'optieyescommande@gmail.com';
-        $data['email_cc'] =
-            'testproxicom@gmail.com';
-
-        $data['certificat'] =
-            $this->m_commande->getCertificat();
-
-        if (isset($data['certificat']) &&
-            $data['certificat'] !==
-            false) {
-
-            foreach ($data['certificat']
-                     as &
-                     $value) {
-                $info_commande =
-                    json_decode($value->information_commande,
-                        true);
-
-                if (isset($info_commande['verre']['correction_droit']['teinte'])) {
-                    $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
-                }
-                if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
-                    $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
-                }
-
-                if (isset($info_commande['verre']['correction_droit']['traitement'])) {
-                    $value->traitementD =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']);
-                }
-                if (isset($info_commande['verre']['correction_gauche']['traitement'])) {
-                    $value->traitementG =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
-                }
-            }
-
-
-        }
-
-        // Contrôle du nombres d'étiquettes.. Ouai
-
-        $total['etiquettes'] =
-            count($data['etiquette']);
-        $total['certificat'] =
-            count($data['certificat']);
-
-        $data['control'] =
-            array(
-                'etiquettes' => bin2hex(openssl_random_pseudo_bytes(10)),
-                'certificat' => bin2hex(openssl_random_pseudo_bytes(10))
-            );
-
-        // echo "Total etiquette:".$total['etiquettes'];
-        // var_dump($data['control']);
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['etiquettes'],
-                'control' => $total['etiquettes']
-            ));
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['certificat'],
-                'control' => count($data['certificat'])
-            ));
-
-
-        // Génération des PDF
-        $docs = array(
-            'etiquettes' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf("etiquette_fabrication",
-                    $data,
-                    '' .
-                    date('Y_m_d_H-i-s'),
-                    false),
-            'certificat' => $this->config->item('directory_pdf') .
-                '/' .
-                $this->pdf('certificat_authenticite',
-                    $data,
-                    '' .
-                    date('Y_m_d_H-i-s'),
-                    false,
-                    'paysage',
-                    $customsize =
-                        array(
-                            0,
-                            0,
-                            243,
-                            153
-                        ))
-        );
-
-        $commandes = array();
-
-        if (!empty($etiquettes)) {
-
-            foreach ($etiquettes
-                     as $e) {
-                $commandes[$e->id_commande] =
-                    1;
-            }
-
-            //var_dump($data['control']);
-            // Récupération des contrôles
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-
-                //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
-                $get =
-                    $this->db->select('value')
-                        ->where('v',
-                            $v)
-                        ->get('controle_test')
-                        ->result()
-                ;
-                $gen[$k] =
-                    $get[0]->value;
-
-                if ($gen[$k] !=
-                    $total[$k]) {
-                    $c[$k] =
-                        '#ff0000';
-                } else {
-                    $c[$k] =
-                        '#93C02C';
-                }
-
-            }
-
-            reset($data['control']);
-
-
-            $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
-            - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
-            - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
-            - Nombre de certificats générées : <b style="color: ' .
-                $c['certificat'] .
-                '">' .
-                ($gen['certificat'] !=
-                '' ?
-                    $gen['certificat'] :
-                    0) .
-                ' / ' .
-                $total['certificat'] . '</b><br />
-            ';
-
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-                //$this->db->delete('controle', array('id' => $v));
-                $this->db->delete('controle_test',
-                    array('v' => $v));
-            }
-
-            $sujet_txt =
-                'Etiquettes fabrication générées le ' .
-                date('d/m/Y') .
-                ' - ' .
-                date('H\hi');
-
-            // Disabled ATM, full refact in future major version
-            //$this->mail($data,$mess_txt,true,$sujet_txt,$docs);
-
-            echo 'sent';
-
-        } else {
-            echo 'empty';
-        }
-
-        return $this->config->item('directory_pdf') .
-            '/' .
-            $this->pdf("etiquette_fabrication",
-                $data,
-                "",
-                true);
-
-    }
-
-    public
     function generer_etiquette_fabrication()
     {
 
@@ -13851,11 +13734,13 @@ class admin
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
+                    $value->teinteD = $value->teinteD->trad_fr;
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
+                    $value->teinteG = $value->teinteD->trad_fr;
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {
@@ -13867,9 +13752,8 @@ class admin
                         $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
                 }
             }
-
-
         }
+//        print_r($data);die;
 
         // Contrôle du nombres d'étiquettes.. Ouai
 
@@ -14269,11 +14153,13 @@ class admin
 
                 if (isset($info_commande['verre']['correction_droit']['teinte'])) {
                     $value->teinteD =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
+                    $value->teinteD = $value->teinteD->trad_fr;
                 }
                 if (isset($info_commande['verre']['correction_gauche']['teinte'])) {
                     $value->teinteG =
-                        $this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
+                    $value->teinteG = $value->teinteG->trad_fr;
                 }
 
                 if (isset($info_commande['verre']['correction_droit']['traitement'])) {
@@ -22732,7 +22618,7 @@ class admin
     public function getPricesByUser() {
         $data =
             $this->input->post();
-        $tab = $this->m_users->getPriceByUserId($data['user_id']);
+        $tab = $this->m_users->getPricesByUserId($data['user_id']);
         echo json_encode($tab);
 
     }
@@ -22849,8 +22735,12 @@ class admin
                     "</span>";
             }
             if (isset($information_commande->verre->correction_droit->teinte)) {
-                $teinteD =
-                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_droit->teinte);
+                $teinteByCodeD =
+                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
+                $teinteD = '';
+                if (!empty($teinteByCodeD)) {
+                    $teinteD = $teinteByCodeD->trad_fr;
+                }
                 if ($teinteD !=
                     "") {
                     $detail .= "<br>Teinte: <b>" .
@@ -22939,8 +22829,12 @@ class admin
             }
 
             if (isset($information_commande->verre->correction_gauche->teinte)) {
-                $teinteG =
-                    $this->m_commande->getTeinteEnById($information_commande->verre->correction_gauche->teinte);
+                $teinteByCodeG =
+                    $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
+                $teinteG = '';
+                if (!empty($teinteByCodeG)) {
+                    $teinteG = $teinteByCodeG->trad_fr;
+                }
                 if ($teinteG !=
                     "") {
                     $detail .= "<br>Teinte: <b>" .
@@ -23204,6 +23098,15 @@ class admin
         $infos .= "<br>Indice: " .
             $commande->indice_verre .
             '';
+        if (isset($information_commande->bord_verre->epaisseur)) {
+            $infos .= "<br>Epaisseur: " .
+                $information_commande->bord_verre->epaisseur .
+                '';
+        }
+        if (isset($information_commande->polishing)) {
+            $infos .= "<br><strong>Polissage</strong>";
+        }
+
         if ($commande->panierA ==
             '1') {
             $infos .= "<br><b>Panier A</b>";

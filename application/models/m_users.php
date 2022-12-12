@@ -308,7 +308,7 @@ class m_users extends CI_Model {
         return $user->tarif_packaging;
     }
 
-    public function getPriceByUserId($user_id) {
+    public function getPricesByUserId($user_id) {
         $before = 27;
         $tab = array();
         $i = 0;
@@ -321,7 +321,7 @@ class m_users extends CI_Model {
 									   WHERE grille_tarifaire.id_grille_tarifaire = 1 AND verres_stock.active = 1 ORDER BY ordre_verre";
         $query = $this->db->query($sql);
         $unifocaux = $query->result();
-        $sqlTraitements = "SELECT * FROM `traitements` WHERE id<=15 AND id > 1 ORDER BY id";
+        $sqlTraitements = "SELECT * FROM `traitements` WHERE id<=15 AND id >= 1 ORDER BY id";
         $queryTraitements = $this->db->query($sqlTraitements);
         $result =  $queryTraitements->result();
         $traitementList = [];
@@ -495,8 +495,12 @@ class m_users extends CI_Model {
 
         $sql = "SELECT L.trad_fr, L.code, L.id as lens_id, L.prix, L.sorting, ppc.prix as prix_perso, generation, verre_type 
                 FROM lenses L 
-                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id AND (ppc.generation = 'E-Space' AND verre_type = 'e-space' OR ppc.generation = 'T-One' AND verre_type = 't-one')) WHERE display = 'X' 
+                LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=$user_id 
+                AND (ppc.generation = 'E-Space' AND verre_type = 'e-space' OR ppc.generation = 'T-One' AND verre_type = 't-one' OR 
+                     (verre_type IS NULL OR verre_type <> 't-one' OR verre_type <> 'e-space') AND ppc.generation = '')) 
+                WHERE display = 'X' 
                 ORDER BY verre_type, L.sorting";
+
         $query = $this->db->query($sql);
         $verres = $query->result();
         $sql = "SELECT traitements.*, traitement_prix.price, traitement_prix.id_lenses, traitement_prix.id_user, traitement_prix.id_traitement
@@ -506,15 +510,15 @@ class m_users extends CI_Model {
                 AND traitement_prix.is_active = 1
 				AND (id_user = $user_id OR id_user IS NULL)
                 ORDER BY id, id_user ASC";
-//        print_r($sql);die;
 
         $query = $this->db->query($sql);
         $traitements =  $query->result();
+//        echo '<pre>';
         $traitementArray = [];
+
         foreach ($traitements as $traitement) {
             $traitementArray[$traitement->id_lenses][$traitement->id_traitement] = $traitement->price;
         }
-
         foreach ($verres as $verre) {
             if (strpos($verre->trad_fr, 'Long') !== false || strpos($verre->trad_fr, 'Court') === false && strpos($verre->trad_fr, 'Moyen') === false) {
                 //print_r($verre);
@@ -1881,6 +1885,7 @@ class m_users extends CI_Model {
                     $count[$verre->verre_type]++;
                 }
 
+//                print_r($traitementList);die;
                 foreach ($traitementList as $traitement_name => $traitement_id) {
                     if (isset($traitementArray[$verre->lens_id][$traitement_id])) {
                         $prix = $tab[$i]['prix'] + $traitementArray[$verre->lens_id][$traitement_id];
@@ -1893,7 +1898,6 @@ class m_users extends CI_Model {
                 $i++;
             }
         }
-//        print_r($tab);die;
         return $tab;
     }
 }

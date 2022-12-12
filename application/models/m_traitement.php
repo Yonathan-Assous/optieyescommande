@@ -673,7 +673,9 @@ class m_traitement extends CI_Model
                     INNER JOIN traitements ON id_traitement = traitements.id
                     LEFT JOIN `traitement_prix` AS ref ON ref.`id_user` is NULL and prix.`id_traitement`=ref.`id_traitement` and prix.`id_lenses` = ref.`id_lenses`
                     WHERE prix.id_user = $user_id
+                    AND (prix.`id_type_verre_solaire` = ref.`id_type_verre_solaire` OR prix.`id_type_verre_solaire` IS NULL AND ref.`id_type_verre_solaire` IS NULL)
                     ORDER BY created_at DESC, prix.id DESC";
+//            print_r($sql);die;
             $res = $this->db->query($sql);
 
             $traitements = $res->result();
@@ -719,7 +721,7 @@ class m_traitement extends CI_Model
             $nameVerre = preg_replace("/\([^)]+\)/","",$nameVerre);
             $nameVerreVirgule = str_replace(',', '.', $nameVerre);
             foreach ($indices as $indice) {
-                $indiceNum = abs($indice->indice_verre);
+                $indiceNum = round(abs($indice->indice_verre), 2);
                 if (stripos($nameVerre, $indiceNum . ' ') !== FALSE || stripos($nameVerreVirgule, $indiceNum . ' ') !== FALSE) {
                     $indiceId = $indice->id_indice_verre;
                     break;

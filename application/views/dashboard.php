@@ -29,7 +29,7 @@ if (is_object($pair_order)) {
         }
 
         .text_info_comp {
-            transform: translateY(25%);
+            transform: translateY(75%);
         }
 
         #text_teledetourage_not_connected {
@@ -152,6 +152,83 @@ if (is_object($pair_order)) {
             width: 40%;
             line-height: 50px;
         }
+
+        #div_checkbox_polishing {
+            margin: 0;
+            /*border-radius: 50%;*/
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+            padding-left: 0px;
+        }
+        #div_checkbox_polishing input[type=checkbox] {
+            margin: 0;
+            visibility: hidden;
+            left: 7px;
+            top: 7px;
+        }
+        #div_checkbox_polishing label {
+            width: 25px;
+            height: 25px;
+            padding: 0;
+            /*margin: 0;*/
+            border-radius: 50%;
+            border: 5px solid #666;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2) inset;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            transition: all 0.3s ease 0s;
+            margin-top: 13px;
+        }
+        #div_checkbox_polishing label:hover{ border-width: 7px; }
+        #div_checkbox_polishing input[type=checkbox]:checked+label:hover{
+            background-color: #4dd54d;
+            border: 7px solid #4dd54d;
+        }
+        #div_checkbox_polishing input[type=checkbox]:checked+label{
+            background-color: #21eb21;
+            border: 7px solid #21eb21;
+            box-shadow: none;
+        }
+
+        #div_checkbox_polishing label:before,
+        #div_checkbox_polishing label:after{
+            content: "";
+            background: #fff;
+            width: 4px;
+            height: 15px;
+            opacity: 0;
+            transform: translateX(-50%) rotate(55deg);
+            position: absolute;
+            left: 160%;
+            top: -10px;
+            transition: all 0.2s ease 0s;
+            border: 2px solid #ffffff;
+        }
+        #div_checkbox_polishing label:after{
+            height: 8px;
+            transform: translateX(-50%) rotate(-33deg);
+            left: -35%;
+            top: -6px;
+            padding-left: 0px;
+        }
+        #div_checkbox_polishing input[type=checkbox]:checked+label:before{
+            opacity: 1;
+            transform: translateX(-50%) rotate(55deg);
+            left: 256%;
+            top: -2px;
+        }
+        #div_checkbox_polishing input[type=checkbox]:checked+label:after{
+            opacity: 1;
+            transform: translateX(-50%) rotate(-33deg);
+            left: 183%;
+            top: 4px;
+        }
+        @media only screen and (max-width:767px){
+            #div_checkbox_polishing{ margin: 0 0 20px; }
+        }
+        License Terms
     </style>
     <script>
         var panierA       = <?php if ($panierA == 1) {
@@ -760,19 +837,19 @@ if (is_object($pair_order)) {
                                                                                             <li id="li_format_plastique">
                                                                                                 <a href="#"
                                                                                                    data-toggle="tab"
-                                                                                                   aria-expanded="true"
+                                                                                                   aria-expanded="false"
                                                                                                    id="format_plastique"><b>Plastique</b></a>
                                                                                             </li>
                                                                                             <li id="li_format_nylor">
                                                                                                 <a href="#"
                                                                                                    data-toggle="tab"
-                                                                                                   aria-expanded="true"
+                                                                                                   aria-expanded="false"
                                                                                                    id="format_nylor"><b>Nylor</b></a>
                                                                                             </li>
                                                                                             <li id="li_format_perce">
                                                                                                 <a href="#"
                                                                                                    data-toggle="tab"
-                                                                                                   aria-expanded="true"
+                                                                                                   aria-expanded="false"
                                                                                                    id="format_perce"
                                                                                                    class="no-margin-right"><b>Percée</b></a>
                                                                                             </li>
@@ -992,7 +1069,7 @@ if (is_object($pair_order)) {
     <!--                                                                                                            </div>-->
     <!--                                                                                                        </div>-->
                                                                                                         </div>
-                                                                                                        <div class="col-md-4 col-xs-12" style="margin-top: 70px;">
+                                                                                                        <div class="col-md-4 col-xs-12" style="margin-top: 30px;">
                                                                                                             <div class="form-group row">
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                                 <div class="col-xs-12 col-md-4 text-center text_info_comp">
@@ -1041,7 +1118,23 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="form-group row" style="margin-top: 50px;">
+                                                                                                            <div class="form-group row">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Epaisseur du verre</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="0.6"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="edge_thickness"
+                                                                                                                           id="edge_thickness"
+                                                                                                                           value="0.8"
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row" style="margin-top: 20px;">
 
                                                                                                                 <div class="col-xs-12 col-md-5"></div>
                                                                                                                 <div class="col-xs-12 col-md-3 text-center text_info_comp">
@@ -1102,11 +1195,24 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
-                                                                                                            <div class="form-group row">
+                                                                                                            <div class="form-group row hide" id="div_polishing">
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Polissage</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <div class="checkbox" id="div_checkbox_polishing">
+                                                                                                                        <input type="checkbox" id="polishing" name="polishing" class="valid form-control" checked="">
+                                                                                                                        <label for="polishing"></label>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group row hide" id="addDrilled">
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                                 <div class="col-xs-12 col-md-10 input-group-append">
 <!--                                                                                                                    <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnLaunchTablette" onclick="LaunchTablette();" disabled>Percez vos verres</button>-->
-                                                                                                                    <button class="btn btn-warning my-0 px-3 hide" type="button" id="btnAddDrilled" onclick="addDrilled();">Ajouter un point de Percage</button>
+                                                                                                                    <button class="btn btn-warning my-0 px-3" type="button" id="btnAddDrilled" onclick="addDrilled();">Ajouter un point de Percage</button>
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
@@ -5639,13 +5745,42 @@ if (is_object($pair_order)) {
             });
         }
 
-        $('#format_metal').click(function () {
-            // $('#btnLaunchTablette').addClass('hide');
-            $('#btnAddDrilled').addClass('hide');
-            $('#add_drille').addClass('hide');
+        function changeTypeMonture(typeMonture) {
+            if (typeMonture == 'metal' || typeMonture == 'plastic') {
+                $('#div_polishing').removeClass('hide');
+                if ($('#edge_thickness').val() == 1.8) {
+                    $('#edge_thickness').val('0.8');
+                }
+            }
+            else {
+                $('#div_polishing').addClass('hide');
+                $("#polishing").prop("checked", true);
+                if ($('#edge_thickness').val() == 0.8) {
+                    $('#edge_thickness').val('1.8');
+                }
+            }
+
+            let txtOmaImageIn = $('#txtOmaImageIn').val();
+
+            if (typeMonture != 'drilled') {
+                $('#addDrilled').addClass('hide');
+                $('#add_drille').addClass('hide');
+                if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
+                    $('#div_refraction').removeClass('hide');
+                }
+            }
+            else {
+                $('#addDrilled').removeClass('hide');
+                $('#add_drille').removeClass('hide');
+
+                if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
+                    $('#div_refraction').addClass('hide');
+                    $('#produit').addClass('hide');
+                }
+            }
+
             if ($('#div_teledetourage').is(":hidden")) {
-                $('#divDevices').show()
-                // Connect();
+                $('#divDevices').show();
             }
             if ($("#ddlDevices").val() != null) {
                 $('#div_teledetourage').removeClass('hide');
@@ -5653,87 +5788,77 @@ if (is_object($pair_order)) {
             }
             else {
                 swalTeledetourage()
-                // $('#teledetourage_not_connected').modal('show');
-            }
-            let txtOmaImageIn = $('#txtOmaImageIn').val();
-
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
-                $('#div_refraction').removeClass('hide');
             }
 
-            getFormatTeledetouragePrice('metal');
+            getFormatTeledetouragePrice(typeMonture);
+        }
+
+        $('#format_metal').click(function () {
+            changeTypeMonture('metal')
         })
 
         $('#format_plastique').click(function () {
-            // $('#btnLaunchTablette').addClass('hide');
-            $('#btnAddDrilled').addClass('hide');
-            $('#add_drille').addClass('hide');
-            if ($('#div_teledetourage').is(":hidden")) {
-                $('#divDevices').show()
-                // Connect();
-            }
-            if ($("#ddlDevices").val() != null) {
-                $('#div_teledetourage').removeClass('hide');
-                backgroundEcartAndHauteurAll();
-            }
-            else {
-                swalTeledetourage()
-                // $('#teledetourage_not_connected').modal('show');
-            }
-            let txtOmaImageIn = $('#txtOmaImageIn').val();
-
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
-                $('#div_refraction').removeClass('hide');
-            }
-            getFormatTeledetouragePrice('plastic');
+            changeTypeMonture('plastic')
         })
+
         $('#format_nylor').click(function () {
-            // $('#btnLaunchTablette').addClass('hide');
-            $('#btnAddDrilled').addClass('hide');
-            $('#add_drille').addClass('hide');
-            if ($('#div_teledetourage').is(":hidden")) {
-                $('#divDevices').show()
-                // Connect();
-            }
-            if ($("#ddlDevices").val() != null) {
-                $('#div_teledetourage').removeClass('hide');
-                backgroundEcartAndHauteurAll();
-            }
-            else {
-                swalTeledetourage()
-                // $('#teledetourage_not_connected').modal('show');
-            }
-            let txtOmaImageIn = $('#txtOmaImageIn').val();
-
-            if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
-                $('#div_refraction').removeClass('hide');
-            }
-
-            getFormatTeledetouragePrice('nylor');
+            changeTypeMonture('nylor')
+            // if ($('#edge_thickness').val() == 0.8) {
+            //     $('#edge_thickness').val('1.8');
+            // }            // $('#btnLaunchTablette').addClass('hide');
+            // $('#addDrilled').addClass('hide');
+            // $('#add_drille').addClass('hide');
+            // if ($('#div_teledetourage').is(":hidden")) {
+            //     $('#divDevices').show()
+            //     // Connect();
+            // }
+            // if ($("#ddlDevices").val() != null) {
+            //     $('#div_teledetourage').removeClass('hide');
+            //     backgroundEcartAndHauteurAll();
+            // }
+            // else {
+            //     swalTeledetourage()
+            //     // $('#teledetourage_not_connected').modal('show');
+            // }
+            // let txtOmaImageIn = $('#txtOmaImageIn').val();
+            //
+            // if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
+            //     $('#div_refraction').removeClass('hide');
+            // }
+            //
+            // getFormatTeledetouragePrice('nylor');
         })
-        $('#format_perce').click(function () {
-            if ($('#div_teledetourage').is(":hidden")) {
-                $('#divDevices').show()
-                // Connect();
-            }
-            if ($("#ddlDevices").val() != null) {
-                $('#div_teledetourage').removeClass('hide');
-                // $('#btnLaunchTablette').removeClass('hide');
-                $('#btnAddDrilled').removeClass('hide');
-                $('#add_drille').removeClass('hide');
-                backgroundEcartAndHauteurAll();
-            }
-            else {
-                swalTeledetourage()
-                // $('#teledetourage_not_connected').modal('show');
-            }
-            let txtOmaImageIn = $('#txtOmaImageIn').val();
-            if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
-                $('#div_refraction').addClass('hide');
-                $('#produit').addClass('hide');
-            }
 
-            getFormatTeledetouragePrice('drilled');
+        $('#format_perce').click(function () {
+            changeTypeMonture('drilled')
+
+            // $("#polishing").prop("checked", false);
+            // if ($('#edge_thickness').val() == 0.8) {
+            //     $('#edge_thickness').val('1.8');
+            // }
+            // if ($('#div_teledetourage').is(":hidden")) {
+            //     $('#divDevices').show()
+            //     // Connect();
+            // }
+            // if ($("#ddlDevices").val() != null) {
+            //     $('#div_teledetourage').removeClass('hide');
+            //     // $('#btnLaunchTablette').removeClass('hide');
+            //     $('#addDrilled').removeClass('hide');
+            //     $('#add_drille').removeClass('hide');
+            //     $('#div_polishing').addClass('hide');
+            //     backgroundEcartAndHauteurAll();
+            // }
+            // else {
+            //     swalTeledetourage()
+            //     // $('#teledetourage_not_connected').modal('show');
+            // }
+            // let txtOmaImageIn = $('#txtOmaImageIn').val();
+            // if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
+            //     $('#div_refraction').addClass('hide');
+            //     $('#produit').addClass('hide');
+            // }
+            //
+            // getFormatTeledetouragePrice('drilled');
         })
 
         $('#btn_add_info_sup').click(function () {
@@ -7547,79 +7672,7 @@ if (is_object($pair_order)) {
             });
         });
 
-        // $('#cylindreD').on('change', function(event)
-        // {
-        //     var str = $('#cylindreD').val()
-        //     var index = str.indexOf("-");
-        //     if(index !== -1){
-        //         let cylindreD = $('#cylindreD').val();
-        //         let sphereD = $('#sphereD').val();
-        //         cylindreD = -cylindreD
-        //         sphereD = parseFloat(sphereD) - parseFloat(cylindreD)
-        //         sphereD = sphereD.toFixed(2);
-        //         if (sphereD >= 0) {
-        //             sphereD = "+" + sphereD;
-        //         }
-        //         $('#cylindreD').val(cylindreD);
-        //         $('#sphereD').val(sphereD);
-        //
-        //         let axeD = parseInt($('#axeD').val());
-        //         if (axeD >= 90) {
-        //             axeD -= 90;
-        //         }
-        //         else {
-        //             axeD += 90;
-        //         }
-        //         $('#axeD').val(axeD);
-        //
-        //         //$('#cylindre_negative').modal('show');
-        //         // $('#cylindreD').val('+0.00');
-        //         // $('#sphereD').val('+0.00');
-        //     }
-        // });
 
-        // $('#cylindreG').on('change', function(event)
-        // {
-        //     var str = $('#cylindreG').val()
-        //     var index = str.indexOf("-");
-        //     if(index !== -1){
-        //         let cylindreG = $('#cylindreG').val();
-        //         let sphereG = $('#sphereG').val();
-        //         cylindreG = -cylindreG.toFixed
-        //         sphereG = parseFloat(sphereG) - parseFloat(cylindreG)
-        //         sphereG = sphereG.toFixed(2);
-        //         $('#cylindreG').val(-cylindreG);
-        //         $('#sphereG').val(cylindreG + sphereG);
-        //         // $('#cylindre_negative').modal('show');
-        //         // $('#cylindreG').val('+0.00');
-        //         // $('#sphereG').val('+0.00');
-        //         // if (sphereG >= 0) {
-        //         //     sphereG = "+" + sphereG;
-        //         // }
-        //         $('#cylindreG').val(cylindreG);
-        //         $('#sphereG').val(sphereG);
-        //
-        //         let axeG = parseInt($('#axeG').val());
-        //         if (axeG >= 90) {
-        //             axeG -= 90;
-        //         }
-        //         else {
-        //             axeG += 90;
-        //         }
-        //         $('#axeG').val(axeG);
-        //     }
-        // });
-
-        // $('#cylindreD').on('change', function(event)
-        // {
-        //     var str = $('#cylindreD').val()
-        //     var index = str.indexOf("-");
-        //     if(index !== -1){
-        //         $('#cylindre_negative').modal('show');
-        //         $('#cylindreD').val('+0.00');
-        //         $('#sphereD').val('+0.00');
-        //     }
-        // });
 
         $('#axeD').on('change', function(event)
         {
@@ -7720,6 +7773,11 @@ if (is_object($pair_order)) {
                 Connect(null, true);
             })
         }
+
+        $('#edge_thickness').on('input', function () {
+            backgroundEcartAndHauteurAll();
+        });
+
         function backgroundEcartAndHauteurAll() {
             backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_droit')
             backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_gauche')
@@ -7728,10 +7786,18 @@ if (is_object($pair_order)) {
             backgroundEcartAndHauteur('largeur_boxing')
             backgroundEcartAndHauteur('taille_du_pont')
             backgroundEcartAndHauteur('hauteur_boxing')
+            backgroundEcartAndHauteur('edge_thickness')
         }
+
         function backgroundEcartAndHauteur(id) {
-            let jqueryId = '#' + id;
-            if ($(jqueryId).val() == '' || $(jqueryId).val() < 10 || $(jqueryId).val() >= 100) {
+            let jqueryId = '#' + id
+            let valueMin = 10;
+            let valueMax = 100;
+            if (id === 'edge_thickness') {
+                valueMin = 0.6;
+                valueMax = 3.0000000001;
+            }
+            if ($(jqueryId).val() == '' || $(jqueryId).val() < valueMin || $(jqueryId).val() >= valueMax) {
                 $(jqueryId).attr('style', "background-color: #e39090" +
                     " !important")
                 $('#div_refraction').addClass('hide');

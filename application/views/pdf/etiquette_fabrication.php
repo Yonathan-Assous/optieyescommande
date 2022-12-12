@@ -223,22 +223,22 @@
 					
 					if($value->cote == "droit")
 					{
-						if(isset($info_commande['verre']['correction_droit']['teinte']))
+						if(isset($info_commande['verre']['correction_droit']['teinte']) && !is_empty($info_commande['verre']['correction_droit']['teinte']))
 						{
-								$value->libelle_verre .= " ".$this->m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+                            $teinteD = $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
+                            $value->libelle_verre .= " ".$teinteD->trad_fr;
 						}
 						if(isset($info_commande['verre']['correction_droit']['traitement']))
 						{
-								$value->libelle_verre .= " ".utf8_decode($this->m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']));
+                            $value->libelle_verre .= " ".utf8_decode($this->m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']));
 						}
-					
-						
 					}
 					else
 					{
-						if(isset($info_commande['verre']['correction_gauche']['teinte']))
+						if(isset($info_commande['verre']['correction_gauche']['teinte']) && !is_empty($info_commande['verre']['correction_gauche']['teinte']))
 						{
-								$value->libelle_verre .= " ".$this->m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+                            $teinteG = $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
+                            $value->libelle_verre .= " ". $teinteG->trad_fr;
 						}
 						if(isset($info_commande['verre']['correction_gauche']['traitement']))
 						{

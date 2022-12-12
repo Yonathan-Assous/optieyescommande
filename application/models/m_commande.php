@@ -645,7 +645,7 @@ class m_commande extends CI_Model {
     public function getAllCommandeEdiOmega()
     {
         $sql_add = "WHERE (c.id_verre IN (SELECT code FROM lenses) AND c.id_etat_commande < 6)";
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.tarif_express, c.tarif_teledetourage, c.teledetourage_format_id, c.code_oma, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_indice_verre, c.id_generation_verre, date_commande, c.tarif_express, c.tarif_teledetourage, c.teledetourage_format_id, c.code_oma, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -688,7 +688,7 @@ class m_commande extends CI_Model {
             $date_start = date('Y-m-d', strtotime($now . ' - ' . $date_start));
             $addDate_start .= " AND c.date_commande > '" . $date_start. "'";
         }
-        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
+        $sql = "SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_indice_verre, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,co.commande,co.xml,co.status,co.filename,date_omega,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
@@ -731,7 +731,7 @@ class m_commande extends CI_Model {
     public function getCommandeEdiOmegaByIdD($id_commande){
 
 
-        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
+        $query = $this->db->query("SELECT c.id_users,c.id_commande,c.ancienne_commande, c.penalty, c.id_indice_verre, c.id_generation_verre, date_commande, c.code_oma, c.teledetourage_format_id, c.tarif_express, c.is_express, c.id_etat_commande,reference_client,libelle_etat_commande,date_update_commande,commentaire,type_commande,intitule_bl,indice_verre,information_commande,information_certificat,total_commande,penalty,cp,date_annule, panierA,status_omega,l.trad_fr, l.name as lensname,l.code as lenscode, origine_commande,c.premiere_commande,commentaire_omega,seconde_omega
                                    FROM ".$this->table." c
                                    INNER JOIN users u ON c.id_users = u.id_users
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande

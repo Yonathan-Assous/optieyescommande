@@ -1694,15 +1694,19 @@ class index extends MY_Controller {
 
 					if(isset($info_commande['verre']['correction_droit']))
 					{
-						if(isset($info_commande['verre']['correction_droit']['teinte']) && $info_commande['verre']['correction_droit']['teinte'] != "")
-							$data['teinteD'] = $this -> m_commande->getTeinteById($info_commande['verre']['correction_droit']['teinte']);
+						if(isset($info_commande['verre']['correction_droit']['teinte']) && $info_commande['verre']['correction_droit']['teinte'] != "") {
+                            $data['teinteD'] = $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $data['recap_commande'][0]->id_indice_verre);
+                            $data['teinteD'] = $data['teinteD']->trad_fr;
+                        }
 						if(isset($info_commande['verre']['correction_droit']['traitement']) && $info_commande['verre']['correction_droit']['traitement'] != "" && $info_commande['verre']['correction_droit']['traitement'] != "0")
-							$data['traitementD'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']);
+							$data['traitementD'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement'], $data['recap_commande'][0]->id_indice_verre);
 					}
 					if(isset($info_commande['verre']['correction_gauche']))
 					{
-						if(isset($info_commande['verre']['correction_gauche']['teinte']) && $info_commande['verre']['correction_gauche']['teinte'] != "")
-							$data['teinteG'] = $this -> m_commande->getTeinteById($info_commande['verre']['correction_gauche']['teinte']);
+						if(isset($info_commande['verre']['correction_gauche']['teinte']) && $info_commande['verre']['correction_gauche']['teinte'] != "") {
+                            $data['teinteG'] = $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte']);
+                            $data['teinteG'] = $data['teinteG']->trad_fr;
+                        }
 						if(isset($info_commande['verre']['correction_gauche']['traitement']) && $info_commande['verre']['correction_gauche']['traitement'] != "" && $info_commande['verre']['correction_gauche']['traitement'] != "0")
 							$data['traitementG'] = $this -> m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
 					}
@@ -2747,7 +2751,6 @@ class index extends MY_Controller {
                     $data['information_certificat'] = '';
                 }
 
-
                 $data['information_commande'] = json_encode($data_commande);
 
                 $id_grille_tarifaire = $this->m_users->getGrilleTarifaire($data['id_users']);
@@ -2913,6 +2916,7 @@ class index extends MY_Controller {
                         $data['tarif_teledetourage'] += $data['prix_teledetourage'];
                     }
                     $data['teledetourage_format_id'] = $this->m_teledetourage->getTeledetourageFormatId($data['format_teledetourage']);
+//                    $data['epaisseur_bord_verre'] = $data['edge_thickness'];
                 }
                 else {
                     $is_teledetourage = false;
@@ -3283,6 +3287,13 @@ class index extends MY_Controller {
                     }
                 }
 
+				if (isset($data['edge_thickness'])) {
+                    $data_commande['bord_verre'] = array('epaisseur' => $data['edge_thickness']);
+                }
+
+                if(isset($data['polishing'])) {
+                    $data_commande['polishing'] = $data['polishing'];
+                }
 
 				if(isset($data['ecart_puppillaire_droit']) && !empty($data['ecart_puppillaire_droit']))
 					$data_commande['mesure_freeform']['ecart_puppillaire_droit'] = $data['ecart_puppillaire_droit'];
@@ -3747,7 +3758,8 @@ class index extends MY_Controller {
 						$teinteD_paire = $info_commande_pair["verre"]["correction_droit"]["teinte"];
 						if($teinteD_paire != "")
 						{
-							$data['pair_order_recap']["teinte_D"] = $this->m_commande->getTeinteById($teinteD_paire);
+							$data['pair_order_recap']["teinte_D"] = $this->m_teinte->getTeinteByCode($teinteD_paire, $indiceVerreId);
+                            $data['pair_order_recap']["teinte_D"] = $data['pair_order_recap']["teinte_D"]->trad_fr;
 						}
 					}
 
@@ -3756,8 +3768,9 @@ class index extends MY_Controller {
 						$teinteG_paire = $info_commande_pair["verre"]["correction_gauche"]["teinte"];
 						if($teinteG_paire != "")
 						{
-							$data['pair_order_recap']["teinte_G"] = $this->m_commande->getTeinteById($teinteG_paire);
-						}
+							$data['pair_order_recap']["teinte_G"] = $this->m_teinte->getTeinteByCode($teinteG_paire, $indiceVerreId);
+                            $data['pair_order_recap']["teinte_G"] = $data['pair_order_recap']["teinte_G"]->trad_fr;
+                        }
 					}
 
 					$discount = array();
@@ -3877,7 +3890,6 @@ class index extends MY_Controller {
 //                var_dump($data['recap_commande']);die;
 //                print_r($data['recap_commande']['recap_commande']['indices']);die;
 //                print_r($data);die;
-
                 echo $this->load->view('ajax_recap_commande',$data);
 			}else{
 				 echo "error";
@@ -4105,7 +4117,8 @@ class index extends MY_Controller {
 					$teinteD = $info_commande["verre"]["correction_droit"]["teinte"];
 					if($teinteD != "")
 					{
-						$this->data["teinte_D"] = $this->m_commande->getTeinteById($teinteD);
+						$this->data["teinte_D"] = $this->m_teinte->getTeinteByCode($teinteD, $this->data['recap_commande']->id_indice_verre);
+                        $this->data["teinte_D"] = $this->data["teinte_D"]->trad_fr;
 					}
 				}
 				if(isset($info_commande["verre"]["correction_gauche"]["teinte"]))
@@ -4113,8 +4126,9 @@ class index extends MY_Controller {
 					$teinteG = $info_commande["verre"]["correction_gauche"]["teinte"];
 					if($teinteG != "")
 					{
-						$this->data["teinte_G"] = $this->m_commande->getTeinteById($teinteG);
-					}
+						$this->data["teinte_G"] = $this->m_teinte->getTeinteByCode($teinteG, $this->data['recap_commande']->id_indice_verre);
+                        $this->data["teinte_G"] = $this->data["teinte_G"]->trad_fr;
+                    }
 				}
 				if($this->data['user_info']->commande_suspendue == 0)
 				{

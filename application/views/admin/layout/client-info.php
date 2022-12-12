@@ -432,7 +432,7 @@
                                 <thead>
                                     <tr>
                                         <th>Verre</th>
-                                        <th>Prix</th>
+                                        <th>Durci</th>
                                         <th>Order</th>
                                         <th>HMC</th>
                                         <th>HMC Face Interne</th>
@@ -1220,7 +1220,7 @@ $(document).ready(function(){
 
 });
 
-	$('body').on('click', '#btn_submit_prix', function(event){
+	$('#btn_submit_prix').on('click', function(){
 
 		if($('#nouveau_prix').val() != "" && $('#listeVerres').val() != "")
 		{
@@ -1278,7 +1278,7 @@ $(document).ready(function(){
     });
 
 
- 	$('body').on('click', 'a.supprimer_prix', function(event){
+ 	$('a.supprimer_prix').on('click', function(){
 
                $.ajax({
 					type: "POST",
@@ -1323,7 +1323,7 @@ $(document).ready(function(){
     });
 
 
-    $('body').on('click', 'a.modifier_prix', function(event){
+    $('a.modifier_prix').on('click', function(){
 
     	$('#divNouveauVerres').html('');
     	var s = $(this).attr('rel').split('*');
@@ -1337,7 +1337,7 @@ $(document).ready(function(){
     });
 
 
-    $('body').on('click', '#changePrice', function(event){
+    $('#changePrice').on('click', function(){
 
 		if($('#newPrice').val() != "")
 		{
@@ -1579,7 +1579,7 @@ $(document).ready(function(){
                 "aaData": data,
                 "columns": [
                     { "data": "verre" },
-                    { "data": "prix" },
+                    { "data": "Durci" },
                     { "data": "order" },
                     { "data": "HMC" },
                     { "data": "HMC Face Interne" },
@@ -2019,7 +2019,7 @@ $(document).ready(function(){
         // getTeintePriceListTest(displayStart);
     }
 
-    $('body').on('click', '#btn_submit_prix_traitement', function(event){
+    $('#btn_submit_prix_traitement').on('click', function(){
 
         if($('#nouveau_prix_traitement').val() != "" && $('#listeVerres').val() != "")
         {
@@ -2050,7 +2050,7 @@ $(document).ready(function(){
 
     });
 
-    $('body').on('click', '#btn_submit_prix_teinte', function(event){
+    $('#btn_submit_prix_teinte').on('click', function(){
 
         if($('#nouveau_prix_teinte').val() != "" && $('#listeVerres').val() != "")
         {

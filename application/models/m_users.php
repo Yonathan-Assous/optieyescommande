@@ -1884,8 +1884,10 @@ class m_users extends CI_Model {
                     $tab[$i]['order'] = $count[$verre->verre_type];
                     $count[$verre->verre_type]++;
                 }
+//                print_r($verre->code);
+//                echo '<br>';
 
-//                print_r($traitementList);die;
+                
                 foreach ($traitementList as $traitement_name => $traitement_id) {
                     if ($traitement_id == 1) {
                         $traitement_name = 'prix';
@@ -1894,10 +1896,13 @@ class m_users extends CI_Model {
                         $prix = $tab[$i]['prix'] + $traitementArray[$verre->lens_id][$traitement_id];
                         $tab[$i][$traitement_name] = number_format($prix, 2, '.', ',');
                     }
-                    else {
+                    else if ($traitement_id != 1) {
                         $tab[$i][$traitement_name] = '';
                     }
                 }
+//                if ($verre->code == '100210') {
+//                    print_r($tab);die;
+//                }
                 $i++;
             }
         }

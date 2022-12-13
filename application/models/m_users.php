@@ -1887,6 +1887,9 @@ class m_users extends CI_Model {
 
 //                print_r($traitementList);die;
                 foreach ($traitementList as $traitement_name => $traitement_id) {
+                    if ($traitement_id == 1) {
+                        $traitement_name = 'prix';
+                    }
                     if (isset($traitementArray[$verre->lens_id][$traitement_id])) {
                         $prix = $tab[$i]['prix'] + $traitementArray[$verre->lens_id][$traitement_id];
                         $tab[$i][$traitement_name] = number_format($prix, 2, '.', ',');

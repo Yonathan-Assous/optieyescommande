@@ -432,7 +432,7 @@
                                 <thead>
                                     <tr>
                                         <th>Verre</th>
-                                        <th>Durci</th>
+                                        <th>Prix</th>
                                         <th>Order</th>
                                         <th>HMC</th>
                                         <th>HMC Face Interne</th>
@@ -1579,7 +1579,7 @@ $(document).ready(function(){
                 "aaData": data,
                 "columns": [
                     { "data": "verre" },
-                    { "data": "Durci" },
+                    { "data": "prix" },
                     { "data": "order" },
                     { "data": "HMC" },
                     { "data": "HMC Face Interne" },

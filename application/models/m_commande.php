@@ -4676,7 +4676,7 @@ class m_commande extends CI_Model {
                                WHERE date_click <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)       
-                               ORDER BY date_click, ordre LIMIT ".$from.",".$to;
+                               ORDER BY id_users, date_click, ordre LIMIT ".$from.",".$to;
         //AND (l.display = 'X' OR l.is_teledetourable = 1)
 //        print_r($sql);die;
         $query = $this->db->query($sql);

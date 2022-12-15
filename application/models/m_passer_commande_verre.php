@@ -27,10 +27,11 @@ class m_passer_commande_verre extends CI_Model
     public
     function getlensFocalGroups()
     {
-        $query = $this->db->query("SELECT *
+        $sql = "SELECT *
                                    FROM " . $this->table_lensFocalGroups . " 
                                    WHERE 1
-                                   ORDER BY focalType DESC");
+                                   ORDER BY focalType DESC";
+        $query = $this->db->query($sql);
 
 
         if ($query
@@ -2112,7 +2113,9 @@ class m_passer_commande_verre extends CI_Model
 
 		$res = $this->db->query("SELECT * FROM ".$this->table_lenses." WHERE code = '".$r_verre_code."'");
 		*/
-        $res = $this->db->query("SELECT * FROM " . $this->table_lenses . " WHERE code = '" . $lens . "'");
+        $sql = "SELECT * FROM " . $this->table_lenses . " WHERE code = '" . $lens . "'";
+        $res = $this->db->query($sql);
+
         //$res = $this->db->query("SELECT * FROM " . $this->table_lenses . " WHERE code = 'S4UH60'");
         //echo "SELECT * FROM ".$this->table_lenses." WHERE code = '".$lens."'";
         $r = $res->result()[0]->ranges;
@@ -2125,10 +2128,10 @@ class m_passer_commande_verre extends CI_Model
         $p[0] = str_replace('"', "", $p[0]);
         if ($p[0] != "2") {
             //$tree = DB::table("combinationTrees")->where('combinationTrees.id', '=', $p[0])->join('combinationNodes', 'combinationNodes.id', '=', 'combinationTrees.combinationNodeId')->get();
-
+            $sql = "SELECT * FROM combinationTrees JOIN combinationNodes ON combinationNodes.id = combinationTrees.combinationNodeId WHERE combinationTrees.id = "
+                . $p[0] . " ";
             $tree =
-                $this->db->query("SELECT * FROM combinationTrees JOIN combinationNodes ON combinationNodes.id = combinationTrees.combinationNodeId WHERE combinationTrees.id = "
-                                 . $p[0] . " ");
+                $this->db->query($sql);
             //	echo "SELECT * FROM combinationTrees JOIN combinationNodes ON combinationNodes.id = combinationTrees.combinationNodeId WHERE combinationTrees.id = ".$p[0]." ";
 
             //$tree = $this->db->query("SELECT * FROM combinationNodes  WHERE id = ".$p[0]." ");

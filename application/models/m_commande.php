@@ -4648,6 +4648,48 @@ class m_commande extends CI_Model {
         return false;
     }
 
+    public function getEtiquetteFabricationAuto(){
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
+                               FROM ".$this->table." c
+                               LEFT JOIN verres v ON v.id_verre = c.id_verre
+                               LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
+                               INNER JOIN etiquette e ON e.id_commande=c.id_commande
+                               WHERE date_click <= '".date('Y-m-d')."'
+                               AND id_etat_commande < 6
+                               AND c.id_verre IN (SELECT code FROM lenses)
+                               ORDER BY id_users, date_click, ordre ";
+        $query = $this->db->query($sql);
+
+        if ($query && $query->num_rows() > 0){
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function getEtiquetteFabricationAutoLimit($from = 0, $to = 0){
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,
+                       libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
+                       FROM ".$this->table." c
+                       LEFT JOIN verres v ON v.id_verre = c.id_verre
+                       LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
+                       INNER JOIN etiquette e ON e.id_commande=c.id_commande
+                       WHERE date_click <= '".date('Y-m-d')."'
+                       AND id_etat_commande < 6
+                       AND c.id_verre IN (SELECT code FROM lenses)       
+                       ORDER BY id_users, date_click, ordre LIMIT ".$from.",".$to;
+        //AND (l.display = 'X' OR l.is_teledetourable = 1)
+//        print_r($sql);die;
+        $query = $this->db->query($sql);
+
+        if ($query && $query->num_rows() > 0){
+            return $query->result();
+        }
+
+        return false;
+    }
+
+
     public function getEtiquetteFabrication(){
         $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
@@ -4690,7 +4732,7 @@ class m_commande extends CI_Model {
 
 
     public function getCertificat(){
-        $query = $this->db->query("SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON l.code = c.id_verre
@@ -4700,7 +4742,29 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
                                GROUP BY c.id_commande
-                               ORDER BY id_users, date_click, ordre DESC");
+                               ORDER BY id_users, date_click, ordre DESC";
+        $query = $this->db->query($sql);
+
+        if ($query && $query->num_rows() > 0){
+            return $query->result();
+        }
+
+        return false;
+    }
+
+    public function getCertificatAuto(){
+        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+                               FROM ".$this->table." c
+                               LEFT JOIN verres v ON v.id_verre = c.id_verre
+                               LEFT JOIN lenses l ON l.code = c.id_verre
+                               INNER JOIN commande_pointage e ON e.id_commande=c.id_commande
+                               WHERE date_pointage <= '2022-12-15'
+                               AND c.information_certificat != ''
+                               AND id_etat_commande < 6
+                               AND c.id_verre IN (SELECT code FROM lenses)
+                               GROUP BY c.id_commande  
+ORDER BY `c`.`id_users`  ASC";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             return $query->result();

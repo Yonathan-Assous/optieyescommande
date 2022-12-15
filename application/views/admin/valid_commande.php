@@ -24,7 +24,8 @@ include_once('menu.php');
 
                         <a class="btn btn-inverse pull-left m-r-10 generer_etiquettes" data-toggle="modal" data-target="#etiquettes-fabrication" rel="1"><i class="zmdi zmdi-collection-text m-r-5"></i> Générer étiquettes et Cartes d'authenticitées</a>
                         <a class="btn btn-warning pull-left m-r-10" id="expedier_commandes"><i class="zmdi zmdi-truck m-r-5"></i> Expedier commandes checkées (<b></b>)</a>
-						<span class="pull-right" id="check_pointage" style="
+                        <a class="btn btn-success pull-left m-r-10 generer_etiquettes_auto" data-toggle="modal" data-target="#etiquettes-fabrication-auto" rel="1"><i class="zmdi zmdi-collection-text m-r-5"></i> Générer automatiquement</a>
+                        <span class="pull-right" id="check_pointage" style="
     margin-top: 7px;
     margin-left: 3px;
 ">Commandes pointées : <b></b></span>

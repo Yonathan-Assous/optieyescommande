@@ -194,11 +194,49 @@
     </div>
 </div>
 
+<div id="etiquettes-fabrication-auto" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width: 95%; max-width: 400px;">
+        <div class="modal-content">
+            <form id="generation_etiquettes_auto">
 
+                <input type="hidden" id="type_etiquettes_auto" value="" />
 
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="custom-width-modalLabel">Générer étiquettes de fabrication</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="colonne">Colonne</label>
+                                <input type="number" name="colonne" id="colonne" class="form-control" value="1" />
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="ligne">Ligne</label>
+                                <input type="number" name="ligne" id="ligne" class="form-control" value="1" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default waves-effect" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-warning waves-effect waves-light">Générer</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
-
 	$(document).on('click', '#envoi_commande_omega', function() {
 		var titre_commande = 'Envoi des commandes checkées chez Omega';
         var texte_commande = 'ATTENTION ! En cliquant sur oui vous allez envoyer les commandes checkées directement sur le FTP d\'Omega.';
@@ -614,6 +652,65 @@ console.log(data);
 
     });
 
+    $(document).on('click', '.generer_etiquettes_auto', function() {
+        $('#type_etiquettes_auto').val($(this).attr('rel'));
+    });
+
+    $('#generation_etiquettes_auto').on('submit', function(e) {
+
+        var type_generation = $('#type_etiquettes_auto').val();
+        var path = '';
+
+        if(type_generation == 1) {
+            path = 'generer_etiquette_fabrication_auto';
+        }
+        else if(type_generation == 2) {
+            path = 'generer_etiquette';
+        }
+
+
+        e.preventDefault();
+        $.post('/admin/'+path, $(this).serialize(), function(data) {
+
+            $('#etiquettes-fabrication-auto').modal('hide');
+
+            //console.log("Data:");
+            //console.log(data);
+
+            // if (data == 'sent') {
+            if(data.indexOf("sent") >= 0){
+                swal({
+                    title: "Etiquettes envoyées",
+                    text: "Les étiquettes vous ont été transmises par email.",
+                    type: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+            else if(data.indexOf("empty") >= 0){ //if (data == 'empty') {
+                swal({
+                    title: "Aucune étiquette",
+                    text: "Aucune étiquette à envoyer",
+                    type: "warning",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+            else {
+                swal({
+                    title: "Une erreur est survenue",
+                    text: "Rafraichissez la page et recommencez..",
+                    type: "error",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+
+    });
 
     $(document).on('click', '.commande-info', function() {
        $.post('/admin/commande_details', { id: $(this).attr('rel') }, function(data) {

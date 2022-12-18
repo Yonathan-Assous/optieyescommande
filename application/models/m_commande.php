@@ -4700,7 +4700,7 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
                                GROUP BY c.id_commande
-                               ORDER BY id_users, date_click, ordre DESC");
+                               ORDER BY id_users DESC, date_click, ordre DESC");
 
         if ($query && $query->num_rows() > 0){
             return $query->result();

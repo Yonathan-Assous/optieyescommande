@@ -14131,6 +14131,7 @@ class admin
         $etiquettes =
         $data['etiquette'] =
             $this->m_commande->getEtiquetteFabricationAuto();
+//            $this->m_commande->getEtiquetteFabrication();
 
         $data['colonne'] =
             $post['colonne'];
@@ -14143,7 +14144,7 @@ class admin
             'testproxicom@gmail.com';
 
         $data['certificat'] =
-            $this->m_commande->getCertificat();
+            $this->m_commande->getCertificatAuto();
 
         if (isset($data['certificat']) &&
             $data['certificat'] !==
@@ -14209,11 +14210,10 @@ class admin
                 'control' => count($data['certificat'])
             ));
 
-
         if (count($etiquettes) >
             200) {
             $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoNew(0,
+                $this->m_commande->getEtiquetteFabricationAutoLimit(0,
                     100);
             // Génération des PDF
 //            print_r($data);die;
@@ -14243,7 +14243,7 @@ class admin
             );
 
             $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoNew(100,
+                $this->m_commande->getEtiquetteFabricationAutoLimit(100,
                     100);
             // Génération des PDF
             $docs = array(
@@ -14257,7 +14257,7 @@ class admin
             );
 
             $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoNew(200,
+                $this->m_commande->getEtiquetteFabricationAutoLimit(200,
                     100);
             // Génération des PDF
             $docs = array(
@@ -14273,7 +14273,7 @@ class admin
             if (count($etiquettes) >
                 300) {
                 $data['etiquette'] =
-                    $this->m_commande->getEtiquetteFabricationAutoNew(300,
+                    $this->m_commande->getEtiquetteFabricationAutoLimit(300,
                         100);
                 // Génération des PDF
                 $docs = array(
@@ -14289,7 +14289,7 @@ class admin
                 if (count($etiquettes) >
                     400) {
                     $data['etiquette'] =
-                        $this->m_commande->getEtiquetteFabricationAutoNew(400,
+                        $this->m_commande->getEtiquetteFabricationAutoLimit(400,
                             100);
                     // Génération des PDF
                     $docs =
@@ -14305,7 +14305,7 @@ class admin
                     if (count($etiquettes) >
                         500) {
                         $data['etiquette'] =
-                            $this->m_commande->getEtiquetteFabricationAutoNew(500,
+                            $this->m_commande->getEtiquetteFabricationAutoLimit(500,
                                 100);
                         // Génération des PDF
                         $docs =
@@ -14321,7 +14321,7 @@ class admin
                         if (count($etiquettes) >
                             600) {
                             $data['etiquette'] =
-                                $this->m_commande->getEtiquetteFabricationAutoNew(600,
+                                $this->m_commande->getEtiquetteFabricationAutoLimit(600,
                                     100);
                             // Génération des PDF
                             $docs =
@@ -14337,7 +14337,7 @@ class admin
                             if (count($etiquettes) >
                                 700) {
                                 $data['etiquette'] =
-                                    $this->m_commande->getEtiquetteFabricationAutoNew(700,
+                                    $this->m_commande->getEtiquetteFabricationAutoLimit(700,
                                         100);
                                 // Génération des PDF
                                 $docs =
@@ -14353,7 +14353,7 @@ class admin
                                 if (count($etiquettes) >
                                     800) {
                                     $data['etiquette'] =
-                                        $this->m_commande->getEtiquetteFabricationAutoNew(800,
+                                        $this->m_commande->getEtiquetteFabricationAutoLimit(800,
                                             100);
                                     // Génération des PDF
                                     $docs =
@@ -14369,7 +14369,7 @@ class admin
                                     if (count($etiquettes) >
                                         900) {
                                         $data['etiquette'] =
-                                            $this->m_commande->getEtiquetteFabricationAutoNew(900,
+                                            $this->m_commande->getEtiquetteFabricationAutoLimit(900,
                                                 100);
                                         // Génération des PDF
                                         $docs =
@@ -14390,7 +14390,7 @@ class admin
                                             count($etiquettes) -
                                             1000;
                                         $data['etiquette'] =
-                                            $this->m_commande->getEtiquetteFabricationAutoNew(1000,
+                                            $this->m_commande->getEtiquetteFabricationAutoLimit(1000,
                                                 $to);
                                         // Génération des PDF
                                         $docs =
@@ -14722,11 +14722,61 @@ class admin
     }
 
     public
+    function expedier_commandes_new($type_commande = 1)
+    {
+
+        if ($this->input->is_ajax_request()) {
+
+            $commandes =
+                $this->m_commande->getUpdateCommandeNew($type_commande);
+            $expedie =
+                array();
+
+            foreach ($commandes
+                     as
+                     $commande)
+            {
+
+                $expedie[] =
+                    $commande->id_commande;
+                $this->update_commande($commande->id_commande,
+                    6,
+                    $commande->id_users,
+                    true);
+
+                $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
+                    $commande->id_users .
+                    ', ' .
+                    time() .
+                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+                    time());
+
+            }
+
+            echo 'sent';
+
+        }
+    }
+
+    public
     function get_update_commande($type_commande = 1)
     {
 
         $commandes =
             $this->m_commande->getUpdateCommande($type_commande);
+
+        if (is_array($commandes)) {
+            echo count($commandes);
+        } else echo 0;
+
+    }
+
+    public
+    function get_update_commande_new($type_commande = 1)
+    {
+
+        $commandes =
+            $this->m_commande->getUpdateCommandeNew($type_commande);
 
         if (is_array($commandes)) {
             echo count($commandes);

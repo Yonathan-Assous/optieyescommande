@@ -7082,7 +7082,7 @@ class admin
                                     "</span>";
                             }
 
-                            if (isset($information_commande->verre->correction_droit->teinte) && !empty($information_commande->verre->correction_droit->teinte)) {
+                            if (isset($information_commande->verre->correction_droit->teinte)) {
 //                                print_r($commande->id_indice_verre);
 //                                print_r($information_commande->verre);
                                 $teinteByCodeD =
@@ -7296,7 +7296,7 @@ class admin
                                     "</span>";
                             }
 
-                            if (isset($information_commande->verre->correction_gauche->teinte) && !empty($information_commande->verre->correction_gauche->teinte)) {
+                            if (isset($information_commande->verre->correction_gauche->teinte)) {
                                 $teinteByCodeG =
                                     $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
                                 $teinteG = '';
@@ -9369,7 +9369,7 @@ class admin
                             $traitementD .
                             "</span>";
                     }
-                    if (isset($information_commande->verre->correction_droit->teinte) && !empty($information_commande->verre->correction_droit->teinte)) {
+                    if (isset($information_commande->verre->correction_droit->teinte)) {
                         $teinteByCodeD =
                             $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
                         $teinteD = '';
@@ -9463,7 +9463,7 @@ class admin
                             "</span>";
                     }
 
-                    if (isset($information_commande->verre->correction_gauche->teinte) && !empty($information_commande->verre->correction_gauche->teinte)) {
+                    if (isset($information_commande->verre->correction_gauche->teinte)) {
                         $teinteByCodeG =
                             $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
                         $teinteG = '';
@@ -13792,6 +13792,7 @@ class admin
                 $this->m_commande->getEtiquetteFabricationNew(0,
                     100);
             // Génération des PDF
+//            print_r($data);die;
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
                     '/' .
@@ -14122,6 +14123,19 @@ class admin
     }
 
     public
+    function check_etiquette_fabrication_auto()
+    {
+        $commande_check =
+            $this->m_commande->checkEtiquetteFabricationAuto();
+//            $this->m_commande->getEtiquetteFabrication();
+        if ($commande_check) {
+            echo json_encode($commande_check);
+        } else {
+            echo 'empty';
+        }
+    }
+
+    public
     function force_etiquette_fabrication($col = 1,
                                          $row = 1)
     {
@@ -14296,12 +14310,62 @@ class admin
         }
     }
 
+//    public
+//    function expedier_commandes_new($type_commande = 1)
+//    {
+//
+//        if ($this->input->is_ajax_request()) {
+//
+//            $commandes =
+//                $this->m_commande->getUpdateCommandeNew($type_commande);
+//            $expedie =
+//                array();
+//
+//            foreach ($commandes
+//                     as
+//                     $commande)
+//            {
+//
+//                $expedie[] =
+//                    $commande->id_commande;
+//                $this->update_commande($commande->id_commande,
+//                    6,
+//                    $commande->id_users,
+//                    true);
+//
+//                $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
+//                    $commande->id_users .
+//                    ', ' .
+//                    time() .
+//                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+//                    time());
+//
+//            }
+//
+//            echo 'sent';
+//
+//        }
+//    }
+
     public
     function get_update_commande($type_commande = 1)
     {
 
         $commandes =
             $this->m_commande->getUpdateCommande($type_commande);
+
+        if (is_array($commandes)) {
+            echo count($commandes);
+        } else echo 0;
+
+    }
+
+    public
+    function get_update_commande_new($type_commande = 1)
+    {
+
+        $commandes =
+            $this->m_commande->getUpdateCommandeNew($type_commande);
 
         if (is_array($commandes)) {
             echo count($commandes);
@@ -22734,7 +22798,7 @@ class admin
                     $traitementD .
                     "</span>";
             }
-            if (isset($information_commande->verre->correction_droit->teinte) && !empty($information_commande->verre->correction_droit->teinte)) {
+            if (isset($information_commande->verre->correction_droit->teinte)) {
                 $teinteByCodeD =
                     $this->m_teinte->getTeinteByCode($information_commande->verre->correction_droit->teinte, $commande->id_indice_verre);
                 $teinteD = '';
@@ -22828,7 +22892,7 @@ class admin
                     "</span>";
             }
 
-            if (isset($information_commande->verre->correction_gauche->teinte) && !empty($information_commande->verre->correction_gauche->teinte)) {
+            if (isset($information_commande->verre->correction_gauche->teinte)) {
                 $teinteByCodeG =
                     $this->m_teinte->getTeinteByCode($information_commande->verre->correction_gauche->teinte, $commande->id_indice_verre);
                 $teinteG = '';

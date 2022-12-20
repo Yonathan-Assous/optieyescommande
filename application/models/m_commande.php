@@ -4648,133 +4648,52 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getEtiquetteFabricationAuto(){
-        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
+    public function checkEtiquetteFabricationAuto(){
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,date_commande,c.id_indice_verre,c.id_generation_verre,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
-                               LEFT JOIN verres v ON v.id_verre = c.id_verre
-                               LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
                                INNER JOIN commande_pointage cp ON cp.id_commande=c.id_commande
                                WHERE date_pointage <= '".date('Y-m-d')."'
                                AND id_etat_commande < 6
-                               AND c.id_verre IN (SELECT code FROM lenses)
                                ORDER BY id_users, id_commande";
         $query = $this->db->query($sql);
-        $etiquettes = [];
         if ($query && $query->num_rows() > 0){
             $result = $query->result();
-            $i = 0;
+//            print_r($result);die;
+            $sql = "SELECT max(ordre) AS max FROM `etiquette` WHERE `date_click` = '".date('Y-m-d')."'";
+            $query_max = $this->db->query($sql);
+            $i = 1;
+            if ($query_max && $query_max->num_rows() > 0) {
+                $result_max = $query_max->result();
+                if (!empty($result_max[0]->max)) {
+                    $i += $result_max[0]->max;
+                }
+            }
+
+            $array = [];
             foreach ($result as $etiquette) {
                 $info_commande =
                     json_decode($etiquette->information_commande,
                         true);
+                array_push($array, $etiquette->id_commande);
                 if (isset($info_commande['verre']['correction_droit'])) {
-                    $etiquettes[$i] = new \stdClass();
-                    $etiquettes[$i]->id_commande = $etiquette->id_commande;
-                    $etiquettes[$i]->id_indice_verre = $etiquette->id_indice_verre;
-                    $etiquettes[$i]->origine_commande = $etiquette->origine_commande;
-                    $etiquettes[$i]->id_users = $etiquette->id_users;
-                    $etiquettes[$i]->information_commande = $etiquette->information_commande;
-                    $etiquettes[$i]->information_certificat = $etiquette->information_certificat;
-                    $etiquettes[$i]->reference_client = $etiquette->reference_client;
-                    $etiquettes[$i]->libelle_verre = $etiquette->libelle_verre;
-                    $etiquettes[$i]->cote = 'droit';
-                    $etiquettes[$i]->date_commande = $etiquette->date_commande;
-                    $etiquettes[$i]->id_generation_verre = $etiquette->id_generation_verre;
-                    $etiquettes[$i]->trad_fr = $etiquette->trad_fr;
-                    $etiquettes[$i]->id_type_generation_verre = $etiquette->id_type_generation_verre;
-                    $etiquettes[$i]->generation = $etiquette->generation;
+                    $sql = "INSERT IGNORE INTO etiquette 
+                              (id_commande, cote, ordre, date_click)
+                                VALUES ($etiquette->id_commande, 'droit', $i, '".date('Y-m-d')."')";
                     $i++;
+                    $this->db->query($sql);
                 }
                 if (isset($info_commande['verre']['correction_gauche'])) {
-                    $etiquettes[$i] = new \stdClass();
-                    $etiquettes[$i]->id_commande = $etiquette->id_commande;
-                    $etiquettes[$i]->id_indice_verre = $etiquette->id_indice_verre;
-                    $etiquettes[$i]->origine_commande = $etiquette->origine_commande;
-                    $etiquettes[$i]->id_users = $etiquette->id_users;
-                    $etiquettes[$i]->information_commande = $etiquette->information_commande;
-                    $etiquettes[$i]->information_certificat = $etiquette->information_certificat;
-                    $etiquettes[$i]->reference_client = $etiquette->reference_client;
-                    $etiquettes[$i]->libelle_verre = $etiquette->libelle_verre;
-                    $etiquettes[$i]->cote = 'gauche';
-                    $etiquettes[$i]->date_commande = $etiquette->date_commande;
-                    $etiquettes[$i]->id_generation_verre = $etiquette->id_generation_verre;
-                    $etiquettes[$i]->trad_fr = $etiquette->trad_fr;
-                    $etiquettes[$i]->id_type_generation_verre = $etiquette->id_type_generation_verre;
-                    $etiquettes[$i]->generation = $etiquette->generation;
+                    $sql = "INSERT IGNORE INTO etiquette 
+                              (id_commande, cote, ordre, date_click)
+                                VALUES ($etiquette->id_commande, 'gauche', $i, '".date('Y-m-d')."')";
                     $i++;
+                    $this->db->query($sql);
                 }
             }
-            return $etiquettes;
-        }
-
-        return false;
-    }
-
-    public function getEtiquetteFabricationAutoLimit($from = 0, $to = 0){
-        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,
-                       libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
-                       FROM ".$this->table." c
-                       LEFT JOIN verres v ON v.id_verre = c.id_verre
-                       LEFT JOIN lenses l ON (l.code = c.id_verre AND l.trad_fr LIKE (CONCAT('%', c.generation ,'%')))
-                       INNER JOIN commande_pointage cp ON cp.id_commande=c.id_commande
-                       WHERE date_pointage <= '".date('Y-m-d')."'
-                       AND id_etat_commande < 6
-                       AND c.id_verre IN (SELECT code FROM lenses)       
-                       ORDER BY id_users, id_commande LIMIT ".$from.",".$to;
-        //AND (l.display = 'X' OR l.is_teledetourable = 1)
-//        print_r($sql);die;
-        $query = $this->db->query($sql);
-
-        $etiquettes = [];
-        if ($query && $query->num_rows() > 0){
-            $result = $query->result();
-            $i = 0;
-            foreach ($result as $etiquette) {
-                $info_commande =
-                    json_decode($etiquette->information_commande,
-                        true);
-                if (isset($info_commande['verre']['correction_droit'])) {
-                    $etiquettes[$i] = new \stdClass();
-                    $etiquettes[$i]->id_commande = $etiquette->id_commande;
-                    $etiquettes[$i]->id_indice_verre = $etiquette->id_indice_verre;
-                    $etiquettes[$i]->origine_commande = $etiquette->origine_commande;
-                    $etiquettes[$i]->id_users = $etiquette->id_users;
-                    $etiquettes[$i]->information_commande = $etiquette->information_commande;
-                    $etiquettes[$i]->information_certificat = $etiquette->information_certificat;
-                    $etiquettes[$i]->reference_client = $etiquette->reference_client;
-                    $etiquettes[$i]->libelle_verre = $etiquette->libelle_verre;
-                    $etiquettes[$i]->cote = 'droit';
-                    $etiquettes[$i]->date_commande = $etiquette->date_commande;
-                    $etiquettes[$i]->id_generation_verre = $etiquette->id_generation_verre;
-                    $etiquettes[$i]->trad_fr = $etiquette->trad_fr;
-                    $etiquettes[$i]->id_type_generation_verre = $etiquette->id_type_generation_verre;
-                    $etiquettes[$i]->generation = $etiquette->generation;
-                    $i++;
-                }
-                if (isset($info_commande['verre']['correction_gauche'])) {
-                    $etiquettes[$i] = new \stdClass();
-                    $etiquettes[$i]->id_commande = $etiquette->id_commande;
-                    $etiquettes[$i]->id_indice_verre = $etiquette->id_indice_verre;
-                    $etiquettes[$i]->origine_commande = $etiquette->origine_commande;
-                    $etiquettes[$i]->id_users = $etiquette->id_users;
-                    $etiquettes[$i]->information_commande = $etiquette->information_commande;
-                    $etiquettes[$i]->information_certificat = $etiquette->information_certificat;
-                    $etiquettes[$i]->reference_client = $etiquette->reference_client;
-                    $etiquettes[$i]->libelle_verre = $etiquette->libelle_verre;
-                    $etiquettes[$i]->cote = 'gauche';
-                    $etiquettes[$i]->date_commande = $etiquette->date_commande;
-                    $etiquettes[$i]->id_generation_verre = $etiquette->id_generation_verre;
-                    $etiquettes[$i]->trad_fr = $etiquette->trad_fr;
-                    $etiquettes[$i]->id_type_generation_verre = $etiquette->id_type_generation_verre;
-                    $etiquettes[$i]->generation = $etiquette->generation;
-                    $i++;
-                }
-            }
-            return $etiquettes;
+            return $array;
         }
         return false;
     }
-
 
     public function getEtiquetteFabrication(){
         $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
@@ -4838,26 +4757,26 @@ class m_commande extends CI_Model {
         return false;
     }
 
-    public function getCertificatAuto(){
-        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
-                               FROM ".$this->table." c
-                               LEFT JOIN verres v ON v.id_verre = c.id_verre
-                               LEFT JOIN lenses l ON l.code = c.id_verre
-                               INNER JOIN commande_pointage e ON e.id_commande=c.id_commande
-                               WHERE date_pointage <= '".date('Y-m-d')."'
-                               AND c.information_certificat != ''
-                               AND id_etat_commande < 6
-                               AND c.id_verre IN (SELECT code FROM lenses)
-                               GROUP BY c.id_commande  
-                               ORDER BY `c`.`id_users` DESC, id_commande";
-        $query = $this->db->query($sql);
-
-        if ($query && $query->num_rows() > 0){
-            return $query->result();
-        }
-
-        return false;
-    }
+//    public function getCertificatAuto(){
+//        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+//                               FROM ".$this->table." c
+//                               LEFT JOIN verres v ON v.id_verre = c.id_verre
+//                               LEFT JOIN lenses l ON l.code = c.id_verre
+//                               INNER JOIN commande_pointage e ON e.id_commande=c.id_commande
+//                               WHERE date_pointage <= '".date('Y-m-d')."'
+//                               AND c.information_certificat != ''
+//                               AND id_etat_commande < 6
+//                               AND c.id_verre IN (SELECT code FROM lenses)
+//                               GROUP BY c.id_commande
+//                               ORDER BY `c`.`id_users` DESC, id_commande";
+//        $query = $this->db->query($sql);
+//
+//        if ($query && $query->num_rows() > 0){
+//            return $query->result();
+//        }
+//
+//        return false;
+//    }
 
     public function getCertificatStock($id_commande){
         $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation

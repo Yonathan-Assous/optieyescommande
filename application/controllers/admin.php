@@ -14123,427 +14123,16 @@ class admin
     }
 
     public
-    function generer_etiquette_fabrication_auto()
+    function check_etiquette_fabrication_auto()
     {
-        $post =
-            $this->input->post();
-
-        $etiquettes =
-        $data['etiquette'] =
-            $this->m_commande->getEtiquetteFabricationAuto();
+        $commande_check =
+            $this->m_commande->checkEtiquetteFabricationAuto();
 //            $this->m_commande->getEtiquetteFabrication();
-
-        $data['colonne'] =
-            $post['colonne'];
-        $data['ligne'] =
-            $post['ligne'];
-
-        $data['email'] =
-            'optieyescommande@gmail.com';
-        $data['email_cc'] =
-            'testproxicom@gmail.com';
-
-        $data['certificat'] =
-            $this->m_commande->getCertificatAuto();
-
-        if (isset($data['certificat']) &&
-            $data['certificat'] !==
-            false) {
-
-            foreach ($data['certificat']
-                     as &
-                     $value) {
-                $info_commande =
-                    json_decode($value->information_commande,
-                        true);
-
-                if (isset($info_commande['verre']['correction_droit']['teinte']) && !empty($info_commande['verre']['correction_droit']['teinte'])) {
-                    $value->teinteD =
-                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_droit']['teinte'], $value->id_indice_verre);
-                    $value->teinteD = $value->teinteD->trad_fr;
-                }
-                if (isset($info_commande['verre']['correction_gauche']['teinte']) && !empty($info_commande['verre']['correction_gauche']['teinte'])) {
-                    $value->teinteG =
-                        $this->m_teinte->getTeinteByCode($info_commande['verre']['correction_gauche']['teinte'], $value->id_indice_verre);
-                    $value->teinteG = $value->teinteD->trad_fr;
-                }
-
-                if (isset($info_commande['verre']['correction_droit']['traitement'])) {
-                    $value->traitementD =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_droit']['traitement']);
-                }
-                if (isset($info_commande['verre']['correction_gauche']['traitement'])) {
-                    $value->traitementG =
-                        $this->m_commande->getTraitementByCode($info_commande['verre']['correction_gauche']['traitement']);
-                }
-            }
-        }
-//        print_r($data);die;
-
-        // Contrôle du nombres d'étiquettes.. Ouai
-
-        $total['etiquettes'] =
-            count($data['etiquette']);
-        $total['certificat'] =
-            count($data['certificat']);
-
-        $data['control'] =
-            array(
-                'etiquettes' => bin2hex(openssl_random_pseudo_bytes(10)),
-                'certificat' => bin2hex(openssl_random_pseudo_bytes(10))
-            );
-
-        // echo "Total etiquette:".$total['etiquettes'];
-        // var_dump($data['control']);
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['etiquettes'],
-                'control' => $total['etiquettes']
-            ));
-
-
-        $this->db->insert('controle_test',
-            array(
-                'v' => $data['control']['certificat'],
-                'control' => count($data['certificat'])
-            ));
-
-        if (count($etiquettes) >
-            200) {
-            $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoLimit(0,
-                    100);
-            // Génération des PDF
-//            print_r($data);die;
-            $docs = array(
-                'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false),
-                'certificat' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf('certificat_authenticite',
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false,
-                        'paysage',
-                        $customsize =
-                            array(
-                                0,
-                                0,
-                                243,
-                                153
-                            ))
-            );
-
-            $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoLimit(100,
-                    100);
-            // Génération des PDF
-            $docs = array(
-                'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false)
-            );
-
-            $data['etiquette'] =
-                $this->m_commande->getEtiquetteFabricationAutoLimit(200,
-                    100);
-            // Génération des PDF
-            $docs = array(
-                'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false)
-            );
-
-            if (count($etiquettes) >
-                300) {
-                $data['etiquette'] =
-                    $this->m_commande->getEtiquetteFabricationAutoLimit(300,
-                        100);
-                // Génération des PDF
-                $docs = array(
-                    'etiquettes' => $this->config->item('directory_pdf') .
-                        '/' .
-                        $this->pdf("etiquette_fabrication",
-                            $data,
-                            '' .
-                            date('Y_m_d_H-i-s'),
-                            false)
-                );
-
-                if (count($etiquettes) >
-                    400) {
-                    $data['etiquette'] =
-                        $this->m_commande->getEtiquetteFabricationAutoLimit(400,
-                            100);
-                    // Génération des PDF
-                    $docs =
-                        array(
-                            'etiquettes' => $this->config->item('directory_pdf') .
-                                '/' .
-                                $this->pdf("etiquette_fabrication",
-                                    $data,
-                                    '' .
-                                    date('Y_m_d_H-i-s'),
-                                    false)
-                        );
-                    if (count($etiquettes) >
-                        500) {
-                        $data['etiquette'] =
-                            $this->m_commande->getEtiquetteFabricationAutoLimit(500,
-                                100);
-                        // Génération des PDF
-                        $docs =
-                            array(
-                                'etiquettes' => $this->config->item('directory_pdf') .
-                                    '/' .
-                                    $this->pdf("etiquette_fabrication",
-                                        $data,
-                                        '' .
-                                        date('Y_m_d_H-i-s'),
-                                        false)
-                            );
-                        if (count($etiquettes) >
-                            600) {
-                            $data['etiquette'] =
-                                $this->m_commande->getEtiquetteFabricationAutoLimit(600,
-                                    100);
-                            // Génération des PDF
-                            $docs =
-                                array(
-                                    'etiquettes' => $this->config->item('directory_pdf') .
-                                        '/' .
-                                        $this->pdf("etiquette_fabrication",
-                                            $data,
-                                            '' .
-                                            date('Y_m_d_H-i-s'),
-                                            false)
-                                );
-                            if (count($etiquettes) >
-                                700) {
-                                $data['etiquette'] =
-                                    $this->m_commande->getEtiquetteFabricationAutoLimit(700,
-                                        100);
-                                // Génération des PDF
-                                $docs =
-                                    array(
-                                        'etiquettes' => $this->config->item('directory_pdf') .
-                                            '/' .
-                                            $this->pdf("etiquette_fabrication",
-                                                $data,
-                                                '' .
-                                                date('Y_m_d_H-i-s'),
-                                                false)
-                                    );
-                                if (count($etiquettes) >
-                                    800) {
-                                    $data['etiquette'] =
-                                        $this->m_commande->getEtiquetteFabricationAutoLimit(800,
-                                            100);
-                                    // Génération des PDF
-                                    $docs =
-                                        array(
-                                            'etiquettes' => $this->config->item('directory_pdf') .
-                                                '/' .
-                                                $this->pdf("etiquette_fabrication",
-                                                    $data,
-                                                    '' .
-                                                    date('Y_m_d_H-i-s'),
-                                                    false)
-                                        );
-                                    if (count($etiquettes) >
-                                        900) {
-                                        $data['etiquette'] =
-                                            $this->m_commande->getEtiquetteFabricationAutoLimit(900,
-                                                100);
-                                        // Génération des PDF
-                                        $docs =
-                                            array(
-                                                'etiquettes' => $this->config->item('directory_pdf') .
-                                                    '/' .
-                                                    $this->pdf("etiquette_fabrication",
-                                                        $data,
-                                                        '' .
-                                                        date('Y_m_d_H-i-s'),
-                                                        false)
-                                            );
-
-                                    }
-                                    if (count($etiquettes) >
-                                        1000) {
-                                        $to =
-                                            count($etiquettes) -
-                                            1000;
-                                        $data['etiquette'] =
-                                            $this->m_commande->getEtiquetteFabricationAutoLimit(1000,
-                                                $to);
-                                        // Génération des PDF
-                                        $docs =
-                                            array(
-                                                'etiquettes' => $this->config->item('directory_pdf') .
-                                                    '/' .
-                                                    $this->pdf("etiquette_fabrication",
-                                                        $data,
-                                                        '' .
-                                                        date('Y_m_d_H-i-s'),
-                                                        false)
-                                            );
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-
-
-            /*
-			$data['etiquette'] = $this->m_commande->getEtiquetteFabricationNew(300,$etiquettes.count);
-        	// Génération des PDF
-			$docs = array(
-				'etiquettes' => $this->config->item('directory_pdf').'/'.$this->pdf("etiquette_fabrication",$data,''.date('Y_m_d_H-i-s'),false)
-			);*/
-
-        } else {
-            // Génération des PDF
-            $docs = array(
-                'etiquettes' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf("etiquette_fabrication",
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false),
-                'certificat' => $this->config->item('directory_pdf') .
-                    '/' .
-                    $this->pdf('certificat_authenticite',
-                        $data,
-                        '' .
-                        date('Y_m_d_H-i-s'),
-                        false,
-                        'paysage',
-                        $customsize =
-                            array(
-                                0,
-                                0,
-                                243,
-                                153
-                            ))
-            );
-        }
-
-
-        $commandes = array();
-
-        if (!empty($etiquettes)) {
-
-            foreach ($etiquettes
-                     as $e) {
-                $commandes[$e->id_commande] =
-                    1;
-            }
-
-            //var_dump($data['control']);
-            // Récupération des contrôles
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-
-                //  $get = $this->db->select('value')->where('id', $v)->get('controle')->result();
-                $get =
-                    $this->db->select('value')
-                        ->where('v',
-                            $v)
-                        ->get('controle_test')
-                        ->result()
-                ;
-                $gen[$k] =
-                    $get[0]->value;
-
-                if ($gen[$k] !=
-                    $total[$k]) {
-                    $c[$k] =
-                        '#ff0000';
-                } else {
-                    $c[$k] =
-                        '#93C02C';
-                }
-
-            }
-
-            reset($data['control']);
-
-
-            $mess_txt = '<b style="font-size: 16px">Rapport de génération</b><br /><br />
-            - Nombre de commandes : <b>' .
-                count($commandes) . '</b><br />
-            - Nombre d\'étiquettes générées : <b style="color: ' .
-                $c['etiquettes'] .
-                '">' .
-                ($gen['etiquettes'] !=
-                '' ?
-                    $gen['etiquettes'] :
-                    0) .
-                ' / ' .
-                $total['etiquettes'] . '</b><br />
-            - Nombre de certificats générées : <b style="color: ' .
-                $c['certificat'] .
-                '">' .
-                ($gen['certificat'] !=
-                '' ?
-                    $gen['certificat'] :
-                    0) .
-                ' / ' .
-                $total['certificat'] . '</b><br />
-            ';
-
-            foreach ($data['control']
-                     as $k =>
-                     $v) {
-                //$this->db->delete('controle', array('id' => $v));
-                $this->db->delete('controle_test',
-                    array('v' => $v));
-            }
-
-            $sujet_txt =
-                'Etiquettes fabrication générées le ' .
-                date('d/m/Y') .
-                ' - ' .
-                date('H\hi');
-
-            // Disabled ATM, full refact in future major version
-            //$this->mail($data,$mess_txt,true,$sujet_txt,$docs);
-
-            echo 'sent';
-
+        if ($commande_check) {
+            echo json_encode($commande_check);
         } else {
             echo 'empty';
         }
-
-        return $this->config->item('directory_pdf') .
-            '/' .
-            $this->pdf("etiquette_fabrication",
-                $data,
-                "",
-                true);
-
     }
 
     public
@@ -14721,42 +14310,42 @@ class admin
         }
     }
 
-    public
-    function expedier_commandes_new($type_commande = 1)
-    {
-
-        if ($this->input->is_ajax_request()) {
-
-            $commandes =
-                $this->m_commande->getUpdateCommandeNew($type_commande);
-            $expedie =
-                array();
-
-            foreach ($commandes
-                     as
-                     $commande)
-            {
-
-                $expedie[] =
-                    $commande->id_commande;
-                $this->update_commande($commande->id_commande,
-                    6,
-                    $commande->id_users,
-                    true);
-
-                $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
-                    $commande->id_users .
-                    ', ' .
-                    time() .
-                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
-                    time());
-
-            }
-
-            echo 'sent';
-
-        }
-    }
+//    public
+//    function expedier_commandes_new($type_commande = 1)
+//    {
+//
+//        if ($this->input->is_ajax_request()) {
+//
+//            $commandes =
+//                $this->m_commande->getUpdateCommandeNew($type_commande);
+//            $expedie =
+//                array();
+//
+//            foreach ($commandes
+//                     as
+//                     $commande)
+//            {
+//
+//                $expedie[] =
+//                    $commande->id_commande;
+//                $this->update_commande($commande->id_commande,
+//                    6,
+//                    $commande->id_users,
+//                    true);
+//
+//                $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
+//                    $commande->id_users .
+//                    ', ' .
+//                    time() .
+//                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+//                    time());
+//
+//            }
+//
+//            echo 'sent';
+//
+//        }
+//    }
 
     public
     function get_update_commande($type_commande = 1)

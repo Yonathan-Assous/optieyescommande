@@ -24,8 +24,8 @@ include_once('menu.php');
 
                         <a class="btn btn-inverse pull-left m-r-10 generer_etiquettes" data-toggle="modal" data-target="#etiquettes-fabrication" rel="1"><i class="zmdi zmdi-collection-text m-r-5"></i> Générer étiquettes et Cartes d'authenticitées</a>
                         <a class="btn btn-warning pull-left m-r-10" id="expedier_commandes"><i class="zmdi zmdi-truck m-r-5"></i> Expedier commandes checkées (<b></b>)</a>
-                        <a class="btn btn-success pull-left m-r-10 generer_etiquettes_auto" data-toggle="modal" data-target="#etiquettes-fabrication-auto" rel="1"><i class="zmdi zmdi-collection-text m-r-5"></i> Générer automatiquement</a>
-                        <a class="btn btn-warning pull-left m-r-10" id="expedier_commandes_new"><i class="zmdi zmdi-truck m-r-5"></i> Expedier commandes pointées (<b></b>)</a>
+                        <a class="btn btn-success pull-left m-r-10 check_commandes_pointees" data-toggle="modal" data-target="#modal_check_commandes_pointees" rel="1"><i class="zmdi zmdi-collection-text m-r-5"></i>Checker les commandes pointées</a>
+<!--                        <a class="btn btn-warning pull-left m-r-10" id="expedier_commandes_new"><i class="zmdi zmdi-truck m-r-5"></i> Expedier commandes pointées (<b></b>)</a>-->
                         <span class="pull-right" id="check_pointage" style="
     margin-top: 7px;
     margin-left: 3px;
@@ -76,13 +76,13 @@ include_once('menu.php');
                                     }
                                 });
 
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/admin/get_update_commande_new",
-                                    success: function(data){
-                                        $('#expedier_commandes_new').find('b').text(data);
-                                    }
-                                });
+                                // $.ajax({
+                                //     type: "POST",
+                                //     url: "/admin/get_update_commande_new",
+                                //     success: function(data){
+                                //         $('#expedier_commandes_new').find('b').text(data);
+                                //     }
+                                // });
 
                                 $('#email_retard').on('click', function() {
                                     $.ajax({
@@ -169,28 +169,28 @@ include_once('menu.php');
 
                                 });
 
-                                $('#expedier_commandes_new').on('click', function() {
-
-                                    var btn_exp = $(this);
-
-                                    if(btn_exp.hasClass('ready')) {
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "/admin/expedier_commandes_new",
-                                            success: function(data){
-                                                btn_exp.removeClass('ready');
-                                                if(data == 'sent') {
-                                                    window.location.reload();
-                                                }
-                                            }
-                                        });
-                                    }
-                                    else {
-                                        btn_exp.addClass('ready btn-danger');
-
-                                    }
-
-                                });
+                                // $('#expedier_commandes_new').on('click', function() {
+                                //
+                                //     var btn_exp = $(this);
+                                //
+                                //     if(btn_exp.hasClass('ready')) {
+                                //         $.ajax({
+                                //             type: "POST",
+                                //             url: "/admin/expedier_commandes_new",
+                                //             success: function(data){
+                                //                 btn_exp.removeClass('ready');
+                                //                 if(data == 'sent') {
+                                //                     window.location.reload();
+                                //                 }
+                                //             }
+                                //         });
+                                //     }
+                                //     else {
+                                //         btn_exp.addClass('ready btn-danger');
+                                //
+                                //     }
+                                //
+                                // });
 
                                 $(document).on('click', '.reject_ec', function() {
 
@@ -248,13 +248,13 @@ include_once('menu.php');
                                                     }
                                                 });
 
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "/admin/get_update_commande_new",
-                                                    success: function(data){
-                                                        $('#expedier_commandes_new').find('b').text(data);
-                                                    }
-                                                });
+                                                // $.ajax({
+                                                //     type: "POST",
+                                                //     url: "/admin/get_update_commande_new",
+                                                //     success: function(data){
+                                                //         $('#expedier_commandes_new').find('b').text(data);
+                                                //     }
+                                                // });
 
                                                 $.ajax({
                                                     type: "POST",

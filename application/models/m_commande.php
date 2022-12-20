@@ -4648,6 +4648,53 @@ class m_commande extends CI_Model {
         return false;
     }
 
+    public function checkEtiquetteFabricationAuto(){
+        $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,date_commande,c.id_indice_verre,c.id_generation_verre,c.id_type_generation_verre, c.generation
+                               FROM ".$this->table." c
+                               INNER JOIN commande_pointage cp ON cp.id_commande=c.id_commande
+                               WHERE date_pointage <= '".date('Y-m-d')."'
+                               AND id_etat_commande < 6
+                               ORDER BY id_users, id_commande";
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0){
+            $result = $query->result();
+//            print_r($result);die;
+            $sql = "SELECT max(ordre) AS max FROM `etiquette` WHERE `date_click` = '".date('Y-m-d')."'";
+            $query_max = $this->db->query($sql);
+            $i = 1;
+            if ($query_max && $query_max->num_rows() > 0) {
+                $result_max = $query_max->result();
+                if (!empty($result_max[0]->max)) {
+                    $i += $result_max[0]->max;
+                }
+            }
+
+            $array = [];
+            foreach ($result as $etiquette) {
+                $info_commande =
+                    json_decode($etiquette->information_commande,
+                        true);
+                array_push($array, $etiquette->id_commande);
+                if (isset($info_commande['verre']['correction_droit'])) {
+                    $sql = "INSERT IGNORE INTO etiquette 
+                              (id_commande, cote, ordre, date_click)
+                                VALUES ($etiquette->id_commande, 'droit', $i, '".date('Y-m-d')."')";
+                    $i++;
+                    $this->db->query($sql);
+                }
+                if (isset($info_commande['verre']['correction_gauche'])) {
+                    $sql = "INSERT IGNORE INTO etiquette 
+                              (id_commande, cote, ordre, date_click)
+                                VALUES ($etiquette->id_commande, 'gauche', $i, '".date('Y-m-d')."')";
+                    $i++;
+                    $this->db->query($sql);
+                }
+            }
+            return $array;
+        }
+        return false;
+    }
+
     public function getEtiquetteFabrication(){
         $sql = "SELECT c.id_commande, c.id_indice_verre, c.origine_commande, id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre, trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
@@ -4690,7 +4737,7 @@ class m_commande extends CI_Model {
 
 
     public function getCertificat(){
-        $query = $this->db->query("SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,cote,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
                                FROM ".$this->table." c
                                LEFT JOIN verres v ON v.id_verre = c.id_verre
                                LEFT JOIN lenses l ON l.code = c.id_verre
@@ -4700,7 +4747,8 @@ class m_commande extends CI_Model {
                                AND id_etat_commande < 6
                                AND c.id_verre IN (SELECT code FROM lenses)
                                GROUP BY c.id_commande
-                               ORDER BY id_users DESC, date_click, ordre DESC");
+                               ORDER BY id_users DESC, date_click, ordre DESC";
+        $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0){
             return $query->result();
@@ -4708,6 +4756,27 @@ class m_commande extends CI_Model {
 
         return false;
     }
+
+//    public function getCertificatAuto(){
+//        $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
+//                               FROM ".$this->table." c
+//                               LEFT JOIN verres v ON v.id_verre = c.id_verre
+//                               LEFT JOIN lenses l ON l.code = c.id_verre
+//                               INNER JOIN commande_pointage e ON e.id_commande=c.id_commande
+//                               WHERE date_pointage <= '".date('Y-m-d')."'
+//                               AND c.information_certificat != ''
+//                               AND id_etat_commande < 6
+//                               AND c.id_verre IN (SELECT code FROM lenses)
+//                               GROUP BY c.id_commande
+//                               ORDER BY `c`.`id_users` DESC, id_commande";
+//        $query = $this->db->query($sql);
+//
+//        if ($query && $query->num_rows() > 0){
+//            return $query->result();
+//        }
+//
+//        return false;
+//    }
 
     public function getCertificatStock($id_commande){
         $sql = "SELECT c.id_commande,id_users,information_commande,information_certificat,reference_client,libelle_verre,date_commande,c.id_indice_verre,c.id_generation_verre,trad_fr,c.id_type_generation_verre, c.generation
@@ -4729,22 +4798,6 @@ class m_commande extends CI_Model {
     }
 
     public function getUpdateCommande($type_commande = 1){
-        /*if($type_commande == 1) {
-            $sql = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR c.id_indice_verre = 6 OR c.id_generation_verre = 16 OR c.id_generation_verre = 19) OR (c.id_generation_verre = 9 AND c.id_indice_verre = 7))';
-        }
-        else {
-            $sql = 'AND (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND c.id_generation_verre <> 16 AND c.id_generation_verre <> 19 AND c.id_indice_verre != 6 AND c.id_indice_verre != 7';
-        }
-
-        $query = $this->db->query("SELECT c.id_commande,id_users,information_certificat,date_commande
-                               FROM ".$this->table." c
-                               INNER JOIN etiquette e ON e.id_commande=c.id_commande
-                               WHERE date_click <= '".date('Y-m-d')."'
-                               AND id_etat_commande < 6
-                               ".$sql."
-                               GROUP BY c.id_commande
-                               ORDER BY ordre");
-        */
         if($type_commande == 1) {
             $sqlAdd = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
             $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
@@ -4777,6 +4830,38 @@ class m_commande extends CI_Model {
         return false;
     }
 
+    public function getUpdateCommandeNew($type_commande = 1){
+        if($type_commande == 1) {
+            $sqlAdd = 'AND (((((c.id_type_generation_verre <> 5 AND c.id_type_generation_verre <> 23 AND c.id_type_generation_verre <> 0) OR origine_commande=1)) OR (l.id IS NOT NULL AND origine_commande <> 1)) )';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
+                               FROM ".$this->table." c
+                               INNER JOIN commande_pointage cp ON cp.id_commande=c.id_commande
+                               LEFT JOIN lenses l ON l.code = c.id_verre
+                               WHERE date_pointage <= '".date('Y-m-d')."'
+                               AND id_etat_commande < 6
+                               ".$sqlAdd."
+                               GROUP BY c.id_commande
+                               ORDER BY id_users, c.id_commande";
+        }
+        else {
+            $sqlAdd = 'AND ( (((c.id_type_generation_verre = 5 OR c.id_type_generation_verre = 23) AND c.id_type_generation_verre <> 0) OR origine_commande=2) AND l.id IS NULL)';
+            $sql = "SELECT c.id_commande,id_users,information_certificat,date_commande
+                               FROM ".$this->table." c
+                               INNER JOIN commande_pointage cp ON cp.id_commande=c.id_commande
+                               LEFT JOIN lenses l ON l.code = c.id_verre
+                               WHERE date_pointage <= '".date('Y-m-d')."'
+                               AND id_etat_commande < 6
+                               ".$sqlAdd."
+                               GROUP BY c.id_commande
+                               ORDER BY id_users, c.id_commande";
+        }
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0){
+            return $query->result();
+        }
+
+        return false;
+    }
 
     public function getPointageCount() {
         $query = $this->db->query('SELECT COUNT(1) AS total FROM commande c INNER JOIN commande_pointage cp ON c.id_commande = cp.id_commande WHERE c.id_etat_commande < 6');

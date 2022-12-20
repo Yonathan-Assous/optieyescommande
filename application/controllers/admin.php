@@ -13792,6 +13792,7 @@ class admin
                 $this->m_commande->getEtiquetteFabricationNew(0,
                     100);
             // Génération des PDF
+//            print_r($data);die;
             $docs = array(
                 'etiquettes' => $this->config->item('directory_pdf') .
                     '/' .
@@ -14122,6 +14123,19 @@ class admin
     }
 
     public
+    function check_etiquette_fabrication_auto()
+    {
+        $commande_check =
+            $this->m_commande->checkEtiquetteFabricationAuto();
+//            $this->m_commande->getEtiquetteFabrication();
+        if ($commande_check) {
+            echo json_encode($commande_check);
+        } else {
+            echo 'empty';
+        }
+    }
+
+    public
     function force_etiquette_fabrication($col = 1,
                                          $row = 1)
     {
@@ -14296,12 +14310,62 @@ class admin
         }
     }
 
+//    public
+//    function expedier_commandes_new($type_commande = 1)
+//    {
+//
+//        if ($this->input->is_ajax_request()) {
+//
+//            $commandes =
+//                $this->m_commande->getUpdateCommandeNew($type_commande);
+//            $expedie =
+//                array();
+//
+//            foreach ($commandes
+//                     as
+//                     $commande)
+//            {
+//
+//                $expedie[] =
+//                    $commande->id_commande;
+//                $this->update_commande($commande->id_commande,
+//                    6,
+//                    $commande->id_users,
+//                    true);
+//
+//                $this->db->query('INSERT INTO expedition (user_id, expedition_date) VALUES(' .
+//                    $commande->id_users .
+//                    ', ' .
+//                    time() .
+//                    ') ON DUPLICATE KEY UPDATE expedition_date = ' .
+//                    time());
+//
+//            }
+//
+//            echo 'sent';
+//
+//        }
+//    }
+
     public
     function get_update_commande($type_commande = 1)
     {
 
         $commandes =
             $this->m_commande->getUpdateCommande($type_commande);
+
+        if (is_array($commandes)) {
+            echo count($commandes);
+        } else echo 0;
+
+    }
+
+    public
+    function get_update_commande_new($type_commande = 1)
+    {
+
+        $commandes =
+            $this->m_commande->getUpdateCommandeNew($type_commande);
 
         if (is_array($commandes)) {
             echo count($commandes);

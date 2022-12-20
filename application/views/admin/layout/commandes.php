@@ -194,11 +194,39 @@
     </div>
 </div>
 
+<div id="modal_check_commandes_pointees" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" style="width: 95%; max-width: 400px;">
+        <div class="modal-content">
+            <form id="submit_check_commandes_pointees">
 
+<!--                <input type="hidden" id="type_etiquettes_auto" value="" />-->
 
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="custom-width-modalLabel">Checker les commandes pointées</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="panel-body" style="padding-top: 15px">
+                        <div>
+                            Êtes-vous sûr de vouloir checker les commandes pointées?
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default waves-effect" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Checker</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
-
 	$(document).on('click', '#envoi_commande_omega', function() {
 		var titre_commande = 'Envoi des commandes checkées chez Omega';
         var texte_commande = 'ATTENTION ! En cliquant sur oui vous allez envoyer les commandes checkées directement sur le FTP d\'Omega.';
@@ -558,6 +586,10 @@ console.log(data);
         $('#type_etiquettes').val($(this).attr('rel'));
     });
 
+    $(document).on('click', '.check_commandes_pointees', function() {
+        $('#type_etiquettes').val($(this).attr('rel'));
+    });
+
     $('#generation_etiquettes').on('submit', function(e) {
 
         var type_generation = $('#type_etiquettes').val();
@@ -614,6 +646,89 @@ console.log(data);
 
     });
 
+    // $(document).on('click', '.generer_etiquettes_auto', function() {
+    //     $('#type_etiquettes_auto').val($(this).attr('rel'));
+    // });
+
+    $('#submit_check_commandes_pointees').on('submit', function(e) {
+
+        var type_generation = $('#type_etiquettes').val();
+        var path = '';
+
+        if(type_generation == 1) {
+            path = 'check_etiquette_fabrication_auto';
+        }
+        else if(type_generation == 2) {
+            path = 'check_etiquette_stock_auto';
+        }
+
+
+        e.preventDefault();
+        $.post('/admin/'+path, $(this).serialize(), function(data) {
+
+            $('#modal_check_commandes_pointees').modal('hide');
+
+            //console.log("Data:");
+            //console.log(data);
+
+            // if (data == 'sent') {
+
+            if(data.indexOf("empty") >= 0){ //if (data == 'empty') {
+                swal({
+                    title: "Aucune commandes pointées",
+                    text: "Aucune commandes à checker",
+                    type: "warning",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+            else if(data){
+                let dataJson = JSON.parse(data);
+                let commande;
+                let x;
+                let i;
+                console.log(dataJson);
+                for (let index = 0; index < dataJson.length; ++index) {
+                    console.log(dataJson[index])
+                    commande = dataJson[index];
+                    x = document.querySelectorAll('[data-commande="' + commande + '"]');
+                    console.log(x)
+                    for (i = 0; i < x.length; i++) {
+                        x[i].classList.remove("btn-danger");
+                        x[i].classList.add("btn-success");
+                        x[i].classList.add("is_checked");
+                    }
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/get_update_commande",
+                    success: function(data){
+                        $('#expedier_commandes').find('b').text(data);
+                    }
+                });
+                swal({
+                    title: "Commande checkées",
+                    text: "Les commandes pointées sont checkées.",
+                    type: "success",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+            else {
+                swal({
+                    title: "Une erreur est survenue",
+                    text: "Rafraichissez la page et recommencez..",
+                    type: "error",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+            }
+        });
+
+    });
 
     $(document).on('click', '.commande-info', function() {
        $.post('/admin/commande_details', { id: $(this).attr('rel') }, function(data) {

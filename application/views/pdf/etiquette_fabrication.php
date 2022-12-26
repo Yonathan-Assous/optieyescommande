@@ -112,7 +112,7 @@
 					$info_commande = json_decode($value->information_commande,true);
 					$displayCylindre = true;
 					$sign = "";
-					$height = 140;
+					$height = 130;
 					$margin_left = $margin_right = $margin_center = false;
 					$verre_seul = true;
 					$correction_droit = "";
@@ -161,7 +161,7 @@
 
 
 					echo '<td style="width:266px;min-width:266px;height:'.$height.'px;">
-								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-10px">';
+								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-20px">';
 					echo '<tr>
 									<td>';
 

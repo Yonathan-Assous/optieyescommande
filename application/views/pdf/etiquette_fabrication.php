@@ -112,7 +112,7 @@
 					$info_commande = json_decode($value->information_commande,true);
 					$displayCylindre = true;
 					$sign = "";
-					$height = 130;
+					$height = 140;
 					$margin_left = $margin_right = $margin_center = false;
 					$verre_seul = true;
 					$correction_droit = "";

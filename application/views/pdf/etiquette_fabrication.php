@@ -28,7 +28,7 @@
 						for($i = 1; $i <= $c;$i++){
 
 							$displayCylindre = true;
-							$height = 133;
+							$height = 132;
 							$margin_left = $margin_right = $margin_center = false;
 
 							if($compteurLigne == 2)
@@ -161,7 +161,7 @@
 
 
 					echo '<td style="width:266px;min-width:266px;height:'.$height.'px;">
-								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-20px">';
+								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-23px">';
 					echo '<tr>
 									<td>';
 

@@ -3287,37 +3287,37 @@ class admin
             $this->m_montures->getMonturesIncomesByDay($date_Y_M_D);
 
         //var_dump($data);die;
-        $data['CAmonth_Samuel'] =
-            $this->m_commande->getCAmonth_Samuel($date_M_Y) -
-            $this->m_commande->getCAmonthSupplement_Samuel($date_M_Y);
-        $data['CAmonth_Daniel'] =
-            $this->m_commande->getCAmonth_Daniel($date_M_Y) -
-            $this->m_commande->getCAmonthSupplement_Daniel($date_M_Y);
-        $data['CAmonth_Gregory'] =
-            $this->m_commande->getCAmonth_Gregory($date_M_Y) -
-            $this->m_commande->getCAmonthSupplement_Gregory($date_M_Y);
-        $data['CAmonth_Glenn'] =
-            $this->m_commande->getCAmonth_Glenn($date_M_Y) -
-            $this->m_commande->getCAmonthSupplement_Glenn($date_M_Y);
-        $data['CAmonth_Optical_Service'] =
-            $this->m_commande->getCAmonth_Optical_Service($date_M_Y) -
-            $this->m_commande->getCAmonthSupplement_Optical_Service($date_M_Y);
+//        $data['CAmonth_Samuel'] =
+//            $this->m_commande->getCAmonth_Samuel($date_M_Y) -
+//            $this->m_commande->getCAmonthSupplement_Samuel($date_M_Y);
+//        $data['CAmonth_Daniel'] =
+//            $this->m_commande->getCAmonth_Daniel($date_M_Y) -
+//            $this->m_commande->getCAmonthSupplement_Daniel($date_M_Y);
+//        $data['CAmonth_Gregory'] =
+//            $this->m_commande->getCAmonth_Gregory($date_M_Y) -
+//            $this->m_commande->getCAmonthSupplement_Gregory($date_M_Y);
+//        $data['CAmonth_Glenn'] =
+//            $this->m_commande->getCAmonth_Glenn($date_M_Y) -
+//            $this->m_commande->getCAmonthSupplement_Glenn($date_M_Y);
+//        $data['CAmonth_Optical_Service'] =
+//            $this->m_commande->getCAmonth_Optical_Service($date_M_Y) -
+//            $this->m_commande->getCAmonthSupplement_Optical_Service($date_M_Y);
 
-        $data['CAday_Samuel'] =
-            $this->m_commande->getCAday_Samuel() -
-            $this->m_commande->getCAdaySupplement_Samuel();
-        $data['CAday_Daniel'] =
-            $this->m_commande->getCAday_Daniel() -
-            $this->m_commande->getCAdaySupplement_Daniel();
-        $data['CAday_Gregory'] =
-            $this->m_commande->getCAday_Gregory() -
-            $this->m_commande->getCAdaySupplement_Gregory();
-        $data['CAday_Glenn'] =
-            $this->m_commande->getCAday_Glenn() -
-            $this->m_commande->getCAdaySupplement_Glenn();
-        $data['CAday_Optical_Service'] =
-            $this->m_commande->getCAday_Optical_Service() -
-            $this->m_commande->getCAdaySupplement_Optical_Service();
+//        $data['CAday_Samuel'] =
+//            $this->m_commande->getCAday_Samuel() -
+//            $this->m_commande->getCAdaySupplement_Samuel();
+//        $data['CAday_Daniel'] =
+//            $this->m_commande->getCAday_Daniel() -
+//            $this->m_commande->getCAdaySupplement_Daniel();
+//        $data['CAday_Gregory'] =
+//            $this->m_commande->getCAday_Gregory() -
+//            $this->m_commande->getCAdaySupplement_Gregory();
+//        $data['CAday_Glenn'] =
+//            $this->m_commande->getCAday_Glenn() -
+//            $this->m_commande->getCAdaySupplement_Glenn();
+//        $data['CAday_Optical_Service'] =
+//            $this->m_commande->getCAday_Optical_Service() -
+//            $this->m_commande->getCAdaySupplement_Optical_Service();
 //        echo '<pre>';
 //        print_r($data);die;
         $this->load->view('admin/dashboard',

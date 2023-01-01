@@ -78,8 +78,11 @@
             </div>
             <div id="info_commercial">
                 <span>Directeur commercial</span>
-                <b>M. LAMY Daniel</b>
-                <b><a href="tel:01828823git 98">01 82 88 23 98</a></b>
+                <b>Daniel</b>
+                <b><a href="tel:0182882398">01 82 88 23 98</a></b>
+                <span>Commercial</span>
+                <b>Grégory</b>
+                <b><a href="tel:0756795906">07 56 79 59 06</a></b>
             </div>
         </div>
     </div>

@@ -26,7 +26,7 @@
 							for($i = 1; $i <= $c;$i++){
 								
 								$displayCylindre = true;
-								$height = 140;
+								$height = 138;
 								$margin_left = $margin_right = $margin_center = false;
 							
 								if($compteurLigne == 2)
@@ -114,7 +114,7 @@
 
 						$displayCylindre = true;
 						$sign = "";
-						$height = 140;
+						$height = 138;
 						$margin_left = $margin_right = $margin_center = false;
             $verre_seul = true;
             
@@ -157,7 +157,7 @@
 
               
 						echo '<td style="width:266px;min-width:266px;height:'.$height.'px;">
-								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-10px">';
+								<table style="width:266px;min-width:266px;height:'.$height.'px;'.($margin_left ? 'margin-left:-10px;' : '').' '.($margin_center ? 'margin-left:-10px;' : '').' '.($margin_right ? 'margin-left:-10px;' : '').' margin-top:-50px">';
 							echo '<tr>
 									<td>';
                  

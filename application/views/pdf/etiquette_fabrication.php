@@ -28,7 +28,7 @@
 						for($i = 1; $i <= $c;$i++){
 
 							$displayCylindre = true;
-							$height = 132;
+							$height = 138;
 							$margin_left = $margin_right = $margin_center = false;
 
 							if($compteurLigne == 2)

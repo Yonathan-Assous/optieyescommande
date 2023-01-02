@@ -262,7 +262,7 @@
 												<td style="width:175px;text-align:center;">'.
 						$value->libelle_verre
 						.'</td>
-												<td style="'.($compteur == 3 ? 'text-align:center' : 'text-align:right').';font-weight:bold;font-size:'; if($value->origine_commande == 2) { echo 20; } else { echo ($value->cote == "gauche" ? '20' : (isset($info_commande['diametre_verre']) ? '12' : '12')); } echo 'px;width:30px">';
+												<td style="'.($compteur == 3 ? 'text-align:center' : 'text-align:center').';font-weight:bold;font-size:'; if($value->origine_commande == 2) { echo 20; } else { echo ($value->cote == "gauche" ? '20' : (isset($info_commande['diametre_verre']) ? '12' : '12')); } echo 'px;width:25px">';
 					}
 
 					if($value->origine_commande == 2) {

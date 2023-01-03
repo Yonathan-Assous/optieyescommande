@@ -1125,11 +1125,11 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-6 number-input">
                                                                                                                     <input type="number"
-                                                                                                                           min="0.6"
+                                                                                                                           min="1.2"
                                                                                                                            class="quantity valid form-control"
                                                                                                                            name="edge_thickness"
                                                                                                                            id="edge_thickness"
-                                                                                                                           value="0.8"
+                                                                                                                           value="1.2"
                                                                                                                            aria-invalid="false">
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
@@ -3077,7 +3077,7 @@ if (is_object($pair_order)) {
                                                                                                    for="type_monture"><small>Type
                                                                                                     de
                                                                                                     monture</small></label>
-                                                                                            <select name="type_monture"
+                                                                                            <select id="type_monture" name="type_monture"
                                                                                                     class="form-control required col-xs-12"
                                                                                                     required>
                                                                                                 <option value="">
@@ -3115,19 +3115,6 @@ if (is_object($pair_order)) {
                                                                                                         required
                                                                                                         id="epaisseur_bord_verre"
                                                                                                         name="epaisseur_bord_verre">
-                                                                                                    <option value="0.80">
-                                                                                                        0.80mm
-                                                                                                    </option>
-                                                                                                    <option value="0.90">
-                                                                                                        0.90mm
-                                                                                                    </option>
-                                                                                                    <option value="1.00"
-                                                                                                            selected="selected">
-                                                                                                        1.00mm
-                                                                                                    </option>
-                                                                                                    <option value="1.10">
-                                                                                                        1.10mm
-                                                                                                    </option>
                                                                                                     <option value="1.20">
                                                                                                         1.20mm
                                                                                                     </option>
@@ -3169,6 +3156,21 @@ if (is_object($pair_order)) {
                                                                                                     </option>
                                                                                                     <option value="2.50">
                                                                                                         2.50mm
+                                                                                                    </option>
+                                                                                                    <option value="2.60">
+                                                                                                        2.60mm
+                                                                                                    </option>
+                                                                                                    <option value="2.70">
+                                                                                                        2.70mm
+                                                                                                    </option>
+                                                                                                    <option value="2.80">
+                                                                                                        2.80mm
+                                                                                                    </option>
+                                                                                                    <option value="2.90">
+                                                                                                        2.90mm
+                                                                                                    </option>
+                                                                                                    <option value="3.00">
+                                                                                                        3.00mm
                                                                                                     </option>
                                                                                                 </select>
                                                                                                 <div class="validator"></div>
@@ -5749,13 +5751,13 @@ if (is_object($pair_order)) {
             if (typeMonture == 'metal' || typeMonture == 'plastic') {
                 $('#div_polishing').removeClass('hide');
                 if ($('#edge_thickness').val() == 1.8) {
-                    $('#edge_thickness').val('0.8');
+                    $('#edge_thickness').val('1.2');
                 }
             }
             else {
                 $('#div_polishing').addClass('hide');
                 $("#polishing").prop("checked", true);
-                if ($('#edge_thickness').val() == 0.8) {
+                if ($('#edge_thickness').val() < 1.8) {
                     $('#edge_thickness').val('1.8');
                 }
             }
@@ -5795,70 +5797,24 @@ if (is_object($pair_order)) {
 
         $('#format_metal').click(function () {
             changeTypeMonture('metal')
+            setTimeout(function () {
+                backgroundEcartAndHauteur('edge_thickness')
+            });
         })
 
         $('#format_plastique').click(function () {
             changeTypeMonture('plastic')
+            setTimeout(function () {
+                backgroundEcartAndHauteur('edge_thickness')
+            });
         })
 
         $('#format_nylor').click(function () {
             changeTypeMonture('nylor')
-            // if ($('#edge_thickness').val() == 0.8) {
-            //     $('#edge_thickness').val('1.8');
-            // }            // $('#btnLaunchTablette').addClass('hide');
-            // $('#addDrilled').addClass('hide');
-            // $('#add_drille').addClass('hide');
-            // if ($('#div_teledetourage').is(":hidden")) {
-            //     $('#divDevices').show()
-            //     // Connect();
-            // }
-            // if ($("#ddlDevices").val() != null) {
-            //     $('#div_teledetourage').removeClass('hide');
-            //     backgroundEcartAndHauteurAll();
-            // }
-            // else {
-            //     swalTeledetourage()
-            //     // $('#teledetourage_not_connected').modal('show');
-            // }
-            // let txtOmaImageIn = $('#txtOmaImageIn').val();
-            //
-            // if (txtOmaImageIn.lastIndexOf("SEGHT") != -1 && txtOmaImageIn.lastIndexOf("IPD") != -1 && txtOmaImageIn.lastIndexOf("DBL") != -1) {
-            //     $('#div_refraction').removeClass('hide');
-            // }
-            //
-            // getFormatTeledetouragePrice('nylor');
         })
 
         $('#format_perce').click(function () {
             changeTypeMonture('drilled')
-
-            // $("#polishing").prop("checked", false);
-            // if ($('#edge_thickness').val() == 0.8) {
-            //     $('#edge_thickness').val('1.8');
-            // }
-            // if ($('#div_teledetourage').is(":hidden")) {
-            //     $('#divDevices').show()
-            //     // Connect();
-            // }
-            // if ($("#ddlDevices").val() != null) {
-            //     $('#div_teledetourage').removeClass('hide');
-            //     // $('#btnLaunchTablette').removeClass('hide');
-            //     $('#addDrilled').removeClass('hide');
-            //     $('#add_drille').removeClass('hide');
-            //     $('#div_polishing').addClass('hide');
-            //     backgroundEcartAndHauteurAll();
-            // }
-            // else {
-            //     swalTeledetourage()
-            //     // $('#teledetourage_not_connected').modal('show');
-            // }
-            // let txtOmaImageIn = $('#txtOmaImageIn').val();
-            // if (txtOmaImageIn.lastIndexOf("DRILLE") == -1) {
-            //     $('#div_refraction').addClass('hide');
-            //     $('#produit').addClass('hide');
-            // }
-            //
-            // getFormatTeledetouragePrice('drilled');
         })
 
         $('#btn_add_info_sup').click(function () {
@@ -7778,6 +7734,50 @@ if (is_object($pair_order)) {
             backgroundEcartAndHauteurAll();
         });
 
+        $( "#type_monture" ).change(function() {
+            let value_selected = $('#epaisseur_bord_verre option').filter(':selected').val();
+            document.getElementById('epaisseur_bord_verre').options.length = 0;
+            let items = [];
+            if ($('#type_monture option').filter(':selected').val() != 'Nylor' && $('#type_monture option').filter(':selected').val() != 'Percee') {
+                items = [
+                            {'value': '1.20', 'text': '1,20mm'},
+                            {'value': '1.30', 'text': '1,30mm'},
+                            {'value': '1.40', 'text': '1,40mm'},
+                            {'value': '1.50', 'text': '1,50mm'},
+                            {'value': '1.60', 'text': '1,60mm'},
+                            {'value': '1.70', 'text': '1,70mm'}
+                ];
+            }
+            else {
+                value_selected = value_selected < 1.8 ? '1.80' : value_selected;
+            }
+            console.log('a: ' + value_selected);
+            let items2 = [
+                {'value': '1.80', 'text': '1,80mm'},
+                {'value': '1.90', 'text': '1,90mm'},
+                {'value': '2.00', 'text': '2,00mm'},
+                {'value': '2.10', 'text': '2,10mm'},
+                {'value': '2.20', 'text': '2,20mm'},
+                {'value': '2.30', 'text': '2,30mm'},
+                {'value': '2.40', 'text': '2,40mm'},
+                {'value': '2.50', 'text': '2,50mm'},
+                {'value': '2.60', 'text': '2,60mm'},
+                {'value': '2.70', 'text': '2,70mm'},
+                {'value': '2.80', 'text': '2,80mm'},
+                {'value': '2.90', 'text': '2,90mm'},
+                {'value': '3.00', 'text': '3,00mm'}
+            ];
+            items.push.apply(items, items2);
+            $.each(items, function (i, item) {
+                $('#epaisseur_bord_verre').append($('<option>', {
+                    value: item.value,
+                    text: item.text
+                }));
+            });
+            $('#epaisseur_bord_verre ').val(value_selected)
+        });
+
+
         function backgroundEcartAndHauteurAll() {
             backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_droit')
             backgroundEcartAndHauteur('teledetourage_ecart_puppillaire_gauche')
@@ -7794,7 +7794,12 @@ if (is_object($pair_order)) {
             let valueMin = 10;
             let valueMax = 100;
             if (id === 'edge_thickness') {
-                valueMin = 0.6;
+                if ($('#li_format_plastique').hasClass('active') || $('#li_format_metal').hasClass('active')) {
+                    valueMin = 1.2;
+                }
+                else {
+                    valueMin = 1.8;
+                }
                 valueMax = 3.0000000001;
             }
             if ($(jqueryId).val() == '' || $(jqueryId).val() < valueMin || $(jqueryId).val() >= valueMax) {

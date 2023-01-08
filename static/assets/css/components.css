@@ -1412,6 +1412,17 @@ input.new-design:focus {
   box-shadow: 0 4px 18px #2ebb20 !important;
 }
 
+.buttons-csv {
+  background-color: #a6d9a1;
+  border: 1px solid #a6d9a1 !important
+}
+
+.buttons-csv:hover {
+  background-color: #71cd68 !important;
+  border: 1px solid #71cd68 !important;
+  box-shadow: 0 4px 18px #2ebb20 !important;
+}
+
 .buttons-print {
   background-color: #9fbaf3;
   border: 1px solid #9fbaf3 !important

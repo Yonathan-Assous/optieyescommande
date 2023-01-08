@@ -129,7 +129,7 @@ else
                                 <th>Montant HT Stock</th>
                                 <th>Montant HT Fabrique</th>
                                 <th>Remises spéciales</th>
-                                <th>Tarif livraison</th>
+                                <th>Tarif livraison HT</th>
                                 <th>Détails</th>
                                 <th>Remise</th>
                             </tr>
@@ -174,11 +174,65 @@ else
 
     <script>
         $(document).ready(function() {
+            // let file_name = 'Factures_' +$("#annee_facture").val() + '_' + $("#mois_facture").val()
+            // if ($('#recherche_num_magasin').val()) {
+            //     file_name += '_'+$('#recherche_num_magasin').val();
+            // }
+            var table = createDatatable($("#annee_facture").val(),$("#mois_facture").val(),$('#recherche_num_magasin').val());
 
-            var table = $('#datatable').DataTable({
-                ajax: { url: "/admin/facture_client_ajax/<?php echo date('m-Y'); ?>", dataSrc: 'aaData' },
+            $.post('/admin/facture_client_ajax/<?php echo date('m-Y'); ?>', function(data) {
+                var res = $.parseJSON(data);
+                $('#total-ht').html(res.totals['ht']+' €');
+                $('#total-liv').html(res.totals['liv']+' €');
+            });
+
+
+            $('#recherche_num_magasin, #mois_facture, #annee_facture').on('change', function() {
+                table.destroy();
+                setTimeout(function(){
+                    table = createDatatable($("#annee_facture").val(),$("#mois_facture").val(),$('#recherche_num_magasin').val())
+                },500);
+                // table.ajax.url('/admin/facture_client_ajax/'+$("#mois_facture").val()+'-'+$("#annee_facture").val()+'/'+$('#recherche_num_magasin').val()).load();
+                $.post('/admin/facture_client_ajax/'+$("#mois_facture").val()+'-'+$("#annee_facture").val()+'/'+$('#recherche_num_magasin').val(), function(data) {
+                    var res = $.parseJSON(data);
+                    $('#total-ht').html(res.totals['ht']+' €');
+                    $('#total-liv').html(res.totals['liv']+' €');
+                });
+
+            });
+
+
+        });
+
+        TableManageButtons.init();
+
+        function createDatatable(annee, mois, magasin = '') {
+            let filename = 'Factures_' + annee + '_' + mois;
+            if (magasin) {
+                filename += '_' + magasin
+            }
+            return $('#datatable').DataTable({
+                ajax: { url: '/admin/facture_client_ajax/'+mois+'-'+annee+'/'+magasin, dataSrc: 'aaData' },
                 deferRender: true,
                 ordering: false,
+                dom: 'Blfrtip',
+                "buttons": [
+                    {
+                        extend: 'csv',
+                        text: 'CSV',
+                        title: filename,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        title: filename,
+                        exportOptions: {
+                            columns: [0,1,5,3]
+                        },
+                    },'print'],
                 language: {
                     "lengthMenu": "Afficher _MENU_ factures par page",
                     "zeroRecords": "Aucune facture trouvée",
@@ -194,30 +248,7 @@ else
                     }
                 }
             });
-
-            $.post('/admin/facture_client_ajax/<?php echo date('m-Y'); ?>', function(data) {
-                var res = $.parseJSON(data);
-                $('#total-ht').html(res.totals['ht']+' €');
-                $('#total-liv').html(res.totals['liv']+' €');
-            });
-
-
-            $('#recherche_num_magasin, #mois_facture, #annee_facture').on('change', function() {
-                table.ajax.url('/admin/facture_client_ajax/'+$("#mois_facture").val()+'-'+$("#annee_facture").val()+'/'+$('#recherche_num_magasin').val()).load();
-
-                $.post('/admin/facture_client_ajax/'+$("#mois_facture").val()+'-'+$("#annee_facture").val()+'/'+$('#recherche_num_magasin').val(), function(data) {
-                    var res = $.parseJSON(data);
-                    $('#total-ht').html(res.totals['ht']+' €');
-                    $('#total-liv').html(res.totals['liv']+' €');
-                });
-
-            });
-
-
-        });
-
-        TableManageButtons.init();
-
+        }
     </script>
 
     <?php 

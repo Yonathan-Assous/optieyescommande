@@ -1125,7 +1125,7 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-6 number-input">
                                                                                                                     <input type="number"
-                                                                                                                           min="1.2"
+                                                                                                                           min="0.8"
                                                                                                                            class="quantity valid form-control"
                                                                                                                            name="edge_thickness"
                                                                                                                            id="edge_thickness"
@@ -3115,7 +3115,19 @@ if (is_object($pair_order)) {
                                                                                                         required
                                                                                                         id="epaisseur_bord_verre"
                                                                                                         name="epaisseur_bord_verre">
-                                                                                                    <option value="1.20">
+                                                                                                    <option value="0.80">
+                                                                                                        0.80mm
+                                                                                                    </option>
+                                                                                                    <option value="0.90">
+                                                                                                        0.90mm
+                                                                                                    </option>
+                                                                                                    <option value="1.00">
+                                                                                                        1.00mm
+                                                                                                    </option>
+                                                                                                    <option value="1.10">
+                                                                                                        1.10mm
+                                                                                                    </option>
+                                                                                                    <option value="1.20" selected="selected">
                                                                                                         1.20mm
                                                                                                     </option>
                                                                                                     <option value="1.30">
@@ -7740,6 +7752,10 @@ if (is_object($pair_order)) {
             let items = [];
             if ($('#type_monture option').filter(':selected').val() != 'Nylor' && $('#type_monture option').filter(':selected').val() != 'Percee') {
                 items = [
+                            {'value': '0.80', 'text': '0,80mm'},
+                            {'value': '0.90', 'text': '0,90mm'},
+                            {'value': '1.00', 'text': '1,00mm'},
+                            {'value': '1.10', 'text': '1,10mm'},
                             {'value': '1.20', 'text': '1,20mm'},
                             {'value': '1.30', 'text': '1,30mm'},
                             {'value': '1.40', 'text': '1,40mm'},
@@ -7795,7 +7811,7 @@ if (is_object($pair_order)) {
             let valueMax = 100;
             if (id === 'edge_thickness') {
                 if ($('#li_format_plastique').hasClass('active') || $('#li_format_metal').hasClass('active')) {
-                    valueMin = 1.2;
+                    valueMin = 0.8;
                 }
                 else {
                     valueMin = 1.8;

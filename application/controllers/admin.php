@@ -4049,9 +4049,13 @@ class admin
 //                $this->m_commande->getAllCommande();
             $data_commande =
                 $this->m_commande->getCommandeWithCommentaireNotConfirmed($numberCommentaire);
-
 //            $data_etiquette =
 //                $this->m_commande->getEtiquetteAlreadySet();
+            $blDatas = [];
+            $lastSixMonthByUserArray = [];
+            $blAfterThirtyDaysArray = [];
+            $conditionBlArray = [];
+            $blConditionsArray = [];
 
             if ($data_commande !==
                 false) {
@@ -4060,7 +4064,7 @@ class admin
                          $key
                 => $commande)
                 {
-                    //print_r($commande);die;
+//                    print_r($commande);die;
                     $typeDeVerre = $this->m_lenses->getLensesByCode($commande->id_verre);
                     if (!$typeDeVerre) {
                         $typeDeVerre = $this->m_verres_stock->getByIdVerre($commande->id_verre);
@@ -4076,7 +4080,7 @@ class admin
                     else {
                         $typeDeVerre = $typeDeVerre->trad_fr;
                     }
-                    //print_r($typeDeVerre);die;
+//                    print_r($typeDeVerre);die;
                     $d1 =
                         new DateTime(date("Y-m-d H:i:s"));
                     $d2 =
@@ -4085,34 +4089,7 @@ class admin
                                 ' + 6 days')));
                     $diff =
                         $d1->diff($d2);
-//                    $color =
-//                        "ff3237"; //rouge
-//
-//                    if ($diff->invert ==
-//                        0) {
-//                        if ($diff->d >=
-//                            5) {
-//                            $color =
-//                                "80c3cb";
-//                        } //bleu
-//                        elseif ($diff->d ==
-//                            4) {
-//                            $color =
-//                                "019e59";
-//                        } //vert
-//                        elseif ($diff->d ==
-//                            3 ||
-//                            $diff->d ==
-//                            2) {
-//                            $color =
-//                                "ffcc01";
-//                        } //jaune
-//                        elseif ($diff->d ==
-//                            1) {
-//                            $color =
-//                                "ff7638";
-//                        } //orange
-//                    }
+
 
 
                     $correction =
@@ -4182,12 +4159,22 @@ class admin
                                 ' €<br />Erreur ophta';
                             break;
                     }
-                    //print_r($commande);die;
-                    $lastSixMonthByUser = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
-                    $blAfterThirtyDays = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
-                    $conditionBl = $this->m_bl_conditions->getBlConditionMet($commande->id_users);
-//                    print_r($conditionBl);die;
-                    $blConditions = $this->m_bl_conditions->getBlConditions($commande->id_users);
+//                    print_r($commande);die;
+                    if (!isset($blDatas[$commande->id_users])) {
+                        $blDatas[$commande->id_users] = [];
+                        $blDatas[$commande->id_users]['lastSixMonthByUser'] = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
+                        $blDatas[$commande->id_users]['blAfterThirtyDays'] = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
+                        $blDatas[$commande->id_users]['conditionBl'] =  $this->m_bl_conditions->getBlConditionMet($commande->id_users);
+                        $blDatas[$commande->id_users]['blConditions'] = $this->m_bl_conditions->getBlConditions($commande->id_users);
+                    }
+                    else {
+
+                    }
+                    $lastSixMonthByUser = $blDatas[$commande->id_users]['lastSixMonthByUser'];
+                    $blAfterThirtyDays = $blDatas[$commande->id_users]['blAfterThirtyDays'];
+                    $conditionBl = $blDatas[$commande->id_users]['conditionBl'];
+                    $blConditions = $blDatas[$commande->id_users]['blConditions'];
+
                     $deal = isset($blConditions[0]['montant']) ? $blConditions[0]['montant'] : '';
 //                    print_r($conditionBl);die;
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
@@ -4367,7 +4354,6 @@ class admin
                             0),
                         $conditionBl
                     );
-
 //                    var_dump($data);die;
                 }
             }
@@ -9190,7 +9176,9 @@ class admin
                             }
 
                         }
-
+//                        if ($commande->id_commande == '841235') {
+////                            print_r($textarea);die;
+////                        }
 //                    print_r($textarea);die;
                         $CommandeOmega =
                             $this->m_commande->getTextCommandeOmega($commande->id_commande,

@@ -784,7 +784,8 @@ class m_commande extends CI_Model {
         $query = $this->db->query("SELECT * FROM commande_omega WHERE id_commande='".$id_commande."'");
         if ($query && $query->num_rows() == 0)
         {
-            $this->db->query("INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')");
+            $sql = "INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')";
+            $this->db->query($sql);
             //echo "INSERT INTO commande_omega (`id`, `id_commande`, `commande`, `xml`, `status`) VALUES (NULL, '".$id_commande."', '".addslashes($textarea)."', '".addslashes($axml)."', '1')";
         }
 
@@ -879,6 +880,7 @@ class m_commande extends CI_Model {
                                    INNER JOIN etat_commande ec ON c.id_etat_commande = ec.id_etat_commande
                                    LEFT JOIN commande_commentaire cc ON cc.id_commande = c.id_commande
                                    ".$sql_add." AND (id_type_generation_verre=0 OR id_type_generation_verre IS NULL) ".$sql_order . " " . $limit;
+//        print_r($sql);die;
         $query = $this->db->query($sql);
 
         if ($query && $query->num_rows() > 0)

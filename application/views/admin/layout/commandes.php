@@ -483,8 +483,8 @@ console.log(data);
         $.post('/admin/update_bl', $(this).serialize(), function(data) {
 
             $('#edit-bl').modal('hide');
-
-           if(data == 'sent') {
+            // console.log(data);
+           if(data == 'sent' || data == '<pre>sent') {
                swal({
                    title: "Bon mis à jour",
                    text: "Le bon a été mis à jour et envoyé au client.",
@@ -493,7 +493,10 @@ console.log(data);
                    showConfirmButton: false,
                    timer: 2000,
                });
-               setTimeout(function() { window.location.reload() }, 2000);
+               let commande_id = $('#id_nouvelle_date_bl').val();
+               let user_id = $('#id_users_nouveau_bl').val();
+               $('#button_nouvel_intitule_' + commande_id + '_' + user_id).addClass('hide')
+               // setTimeout(function() { window.location.reload() }, 2000);
            }
             else {
                swal({

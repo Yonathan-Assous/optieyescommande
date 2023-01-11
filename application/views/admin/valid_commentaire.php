@@ -221,6 +221,11 @@ else
             ).load();
         }
 
+        function orderValidated(commandeId) {
+            // let data_commande = '[data-commande="commandeId"]'
+            let orderValidated = document.querySelector('[data-commande="' + commandeId + '"]');
+            orderValidated.classList.add("hide");
+        }
         $('#confirm_commande').on('click', function(e) {
             $.ajax({
                 type: "POST",
@@ -231,7 +236,8 @@ else
                 dataType: "html",
                 success: function(data){
                     //$('#datatable').DataTable().clear();
-                    getCommande();
+                    // getCommande();
+                    orderValidated(commandeId);
                     $.ajax({
                         type: "POST",
                         url: "/commande/numCommentaire",

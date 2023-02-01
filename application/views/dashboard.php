@@ -1208,6 +1208,24 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                             </div>
+                                                                                                            <div class="form-group row" style="margin-top: 20px;">
+
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                                <div class="col-xs-12 col-md-4 text-center text_info_comp">
+                                                                                                                    <strong>Ajout de circonférence</strong>
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-6 number-input">
+                                                                                                                    <input type="number"
+                                                                                                                           min="0.8"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="add_circ"
+                                                                                                                           id="add_circ"
+                                                                                                                           value="<?php echo $user_info->add_circ ?>"
+                                                                                                                           style="background-color: #a0e7a0 !important;"
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="col-xs-12 col-md-1"></div>
+                                                                                                            </div>
                                                                                                             <div class="form-group row hide" id="addDrilled">
                                                                                                                 <div class="col-xs-12 col-md-1"></div>
                                                                                                                 <div class="col-xs-12 col-md-10 input-group-append">

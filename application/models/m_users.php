@@ -38,6 +38,7 @@ class m_users extends CI_Model {
             'percent_tva'                => 'percent_tva',
             'is_teledetourable'          => 'is_teledetourable',
             'can_save_oma'               => 'can_save_oma',
+            'add_circ'                   => 'add_circ',
             'nom_responsable'            => 'nom_responsable',
             'deleted'                    => 'deleted',
             'show_commentaire'           => 'show_commentaire',

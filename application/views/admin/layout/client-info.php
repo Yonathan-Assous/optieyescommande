@@ -140,6 +140,10 @@
                     <label for="tarif_packaging" class="control-label">Tarif packaging</label>
                     <input type="text" id="tarif_packaging" name="tarif_packaging"  class="form-control" value="<?php echo $info_user[0]->tarif_packaging ?>" />
                 </div>
+                <div class="form-group m-b-10 col-sm-12">
+                    <label for="add_circ" class="control-label">Ajout de la circonférence du verre (en télédétourage)</label>
+                    <input type="text" id="add_circ" name="add_circ"  class="form-control" value="<?php echo $info_user[0]->add_circ ?>" />
+                </div>
                 <div class="form-group m-b-10 col-sm-3">
                     <label for="teledetourage_plastic" class="control-label">Télédétourage Plastique</label>
                     <input type="text" id="teledetourage_plastic" name="teledetourage_plastic"  class="form-control" value="<?php echo $price_teledetourage_user['plastic'] ?>" />

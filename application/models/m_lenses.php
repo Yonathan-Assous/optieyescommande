@@ -29,7 +29,7 @@ class m_lenses extends CI_Model
     public function getLensesByCode($code) {
         $sql = "SELECT * FROM `lenses` 
                 WHERE `code` = '$code' 
-                AND display = 'X'";
+                AND (display = 'X' OR is_teledetourable = 1)";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $lenses =  $query->result();

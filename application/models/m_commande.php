@@ -3208,7 +3208,6 @@ class m_commande extends CI_Model {
 
     public function addOrder($data, $byAdmin = 0){
         if(is_array($data)){
-//            print_r($data);die;
             $pair = $data['pair'];
             unset($data['discount']);
             $data['by_admin'] = $byAdmin;
@@ -3226,6 +3225,104 @@ class m_commande extends CI_Model {
             else {
                 $data['code_oma'] = "'" . $data['code_oma'] . "'";
             }
+
+            if (isset($data['droit']) && $data['prixDH'] == 0) {
+                $user = $data['user_info'];
+                $userId = $user->id_users;
+                $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($data['indices']);
+                $is_teledetourage = false;
+                if($data['format_teledetourage']) {
+                    $is_teledetourage = true;
+                }
+                $verreName = stristr($data['nomverreDH'], ' -', true);
+//                    print_r($verreName);die;
+                $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+                $quantiteD = isset($data['quantiteD']) ? $data['quantiteD'] : 1;
+                if ($verreStockD && !$data['format_teledetourage']) {
+                    $data['prixDH'] = $this->getPrixVerreComplet($verreStockD, $userId) * $quantiteD;
+                    $data['supplementD'] = $verreStockD->supplement + ($user->tarif_supplement - 1);
+                }
+                else {
+                    $teinteCode = NULL;
+                    if(isset($data['teinteD'])) {
+                        $teinteCode = $data['teinteD'];
+                    }
+                    $traitementCode = NULL;
+                    if(isset($data['traitementD'])) {
+                        $traitementCode = $data['traitementD'];
+                    }
+                    $galbe = NULL;
+                    if(isset($data['galbeD'])) {
+                        $galbe = $data['galbeD'];
+                    }
+                    $prisme = NULL;
+                    if(isset($data['PrismeSphereD'])) {
+                        $prisme = $data['PrismeSphereD'];
+                    }
+                    $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
+                            $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode, $indiceVerreId) * $quantiteD;
+
+                    $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
+                    $data['supplementD'] = $lenses->supplement;
+                    if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
+                        $data['supplementD'] -= 1;
+                        $data['prixDH'] -= 1;
+                    }
+                    $data['supplementD'] += $user->tarif_supplement_fab - 2;
+                }
+            }
+
+            if (isset($data['gauche']) && $data['prixGH'] == 0) {
+                $verreName = stristr($data['nomverreGH'], ' -', true);
+                $verreStockG = $this->m_verres_stock->getByLibelleVerre($verreName);
+                $quantiteG = isset($data['quantiteG']) ? $data['quantiteG'] : 1;
+                $user = $data['user_info'];
+                $userId = $user->id_users;
+                $indiceVerreId = $this->m_indice_verre->getIndiceVerreIdByindiceVerre($data['indices']);
+                $is_teledetourage = false;
+                if($data['format_teledetourage']) {
+                    $is_teledetourage = true;
+                }
+                if ($verreStockG && !$data['format_teledetourage']) {
+                    $data['prixGH'] = $this->getPrixVerreComplet($verreStockG, $userId) * $quantiteG;
+                    $data['supplementG'] = $verreStockG->supplement + ($user['user_info']->tarif_supplement - 1);
+                } else {
+                    $teinteCode = NULL;
+                    if (isset($data['teinteG'])) {
+                        $teinteCode = $data['teinteG'];
+                    }
+                    $traitementCode = NULL;
+                    if (isset($data['traitementG'])) {
+                        $traitementCode = $data['traitementG'];
+                    }
+                    $galbe = NULL;
+                    if (isset($data['galbeG'])) {
+                        $galbe = $data['galbeG'];
+                    }
+                    $prisme = NULL;
+                    if (isset($data['PrismeSphereG'])) {
+                        $prisme = $data['PrismeSphereG'];
+                    }
+
+                    $data['prixGH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreGH'],
+                            $data['type_de_verreG'], $data['generation'], $traitementCode, $galbe,
+                            $prisme, $teinteCode, $indiceVerreId) * $quantiteG;
+
+                    $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
+                    $data['supplementG'] = $lenses->supplement;
+                    if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
+                        $data['supplementG'] -= 1;
+                        $data['prixGH'] -= 1;
+                    }
+                    $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
+                }
+            }
+            $data['supplementG'] = max(0, $data['supplementG']);
+//            print_r('gloups');die;
+//            print_r($data);die;
+
+            $data['supplementD'] = max(0, $data['supplementD']);
 
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {
@@ -3469,7 +3566,6 @@ class m_commande extends CI_Model {
                     $data_key[] = $num;
                 }
                 //var_dump($data_key);die;
-
                 if($type_commande_verre!=4)
                 {
                     $data['prix_verre'] = str_replace("�","",$data['prix_verre']);
@@ -3526,7 +3622,6 @@ class m_commande extends CI_Model {
                     }
                     $sql = "INSERT INTO ".$table_commande." (".implode(', ', $data_key).") VALUES ("
                         .implode(",", $data).")";
-
 //                    var_dump($sql);die;
                     //print_r($sql);die;
                     if($this->db->query($sql))
@@ -5654,5 +5749,35 @@ class m_commande extends CI_Model {
                                       ";
         }
         $this->db->query($sql);
+    }
+
+    private function getPrixVerreComplet($verreStock, $userId, $nomDeVerre = NULL, $typeDeVerre = NULL,
+                                         $generation = NULL, $traitementCode = NULL, $galbe = NULL,
+                                         $prisme = NULL, $teinteCode = NULL, $indiceVerreId = NULL) {
+//        $verreStockD = $this->m_verres_stock->getByLibelleVerre($verreName);
+//        var_dump($verreStock);die;
+        if ($verreStock) {
+            return $this->m_passer_commande_verre->getPrixStock($verreStock->id_verre,$userId)[$verreStock->id_verre]['prix'];
+        }
+        else {
+            $prixVerre = $this->m_passer_commande_verre->getPrix($typeDeVerre,$userId,$generation)[$typeDeVerre]['prix'];
+            $traitementPrice = 0;
+            if(!empty($traitementCode)) {
+                $traitementPrice = $this->m_traitement->calculPrice($nomDeVerre, $traitementCode, $userId);
+            }
+            $teintePrice = 0;
+            if(!empty($teinteCode)) {
+                $teintePrice = $this->m_teinte->calculPrice($nomDeVerre, $teinteCode, $userId, $indiceVerreId);
+            }
+            $galbePrice = 0;
+            if (!empty($galbe) && $galbe != "Standard") {
+                $galbePrice = 3.9;
+            }
+            $prismePrice = 0;
+            if (!empty($prisme)) {
+                $prismePrice = 3.9;
+            }
+            return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
+        }
     }
 }

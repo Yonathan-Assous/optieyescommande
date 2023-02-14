@@ -16202,14 +16202,15 @@ class admin
 //                    var_dump($facture_cli->tarif_liv);
 //                    var_dump($this->m_commande->getPackagingByMonth($date,
 //                        $facture_cli->id_users));
+//                    print_r($facture_cli);die;
                     $data['aaData'][$key] =
                         array(
-                            $facture_cli->id_users,
-                            $facture_cli->nom_magasin,
-                            $facture_cli->nom_societe,
-                            date("m-Y",
+                            'id_user' => $facture_cli->id_users,
+                            'nom_magasin' => $facture_cli->nom_magasin,
+                            'nom_societe' => $facture_cli->nom_societe,
+                            'mois' => date("m-Y",
                                 strtotime($facture_cli->date_commande)),
-                            '<span id="totalFacture_' .
+                            'montant_ht' => '<span id="totalFacture_' .
                             date("Y-m",
                                 strtotime($facture_cli->date_commande)) .
                             '_' .
@@ -16220,7 +16221,7 @@ class admin
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span id="totalFactureHt_' .
+                            'montant_ttc' => '<span id="totalFactureHt_' .
                             date("Y-m",
                                 strtotime($facture_cli->date_commande)) .
                             '_' .
@@ -16231,47 +16232,47 @@ class admin
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
+                            'montant_ht_lentilles' => '<span>' .
                             number_format($facture_cli->total_lentilles,
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
+                            'montant_ht_montures' => '<span>' .
                             number_format($facture_cli->total_montures,
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
+                            'montant_ht_stock' => '<span>' .
                             number_format($facture_cli->total_stock,
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
+                            'montant_ht_fabrique' => '<span>' .
                             number_format(($facture_cli->total_fabrique +
                                 $facture_cli->total_express),
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            '<span>' .
+                            'remise_special' => '<span>' .
                             number_format($remise_special,
                                 2,
                                 '.',
                                 ' ') .
                             '</span> €',
-                            $facture_cli->tarif_liv +
+                            'tarif_livraison' => number_format($facture_cli->tarif_liv +
                             $this->m_commande->getPackagingByMonth($date,
-                                $facture_cli->id_users),
-                            '<a href="/admin/generer_pdf_facture/facture/' .
+                                $facture_cli->id_users),2, '.', ' ') . ' €',
+                            'details' => '<a href="/admin/generer_pdf_facture/facture/' .
                             date("Y-m",
                                 strtotime($facture_cli->date_commande)) .
                             '/' .
                             $facture_cli->id_users .
                             '" class="btn btn-warning"><i class="zmdi zmdi-download"></i></a>',
-                            '<a class="btn btn-inverse" data-toggle="modal" data-target="#add-reduction" id="openReduction_' .
+                            'remise' => '<a class="btn btn-inverse" data-toggle="modal" data-target="#add-reduction" id="openReduction_' .
                             date("Y-m",
                                 strtotime($facture_cli->date_commande)) .
                             '_' .
@@ -16287,7 +16288,25 @@ class admin
                                 'style="display:none;"' :
                                 '') .
                             '><i class="zmdi zmdi-search"></i></a>',
-                            $facture_cli->id_grille_tarifaire
+                            $facture_cli->id_grille_tarifaire,
+                            'date' => date("31-m-Y",
+                                strtotime($facture_cli->date_commande)),
+                            'code' => 'C-00001',
+                            'libele' => $facture_cli->id_users . '-' . $facture_cli->nom_societe,
+                            'facture' => 'BB' . substr(date('Ym'), 2, 4) . $facture_cli->id_users,
+                            'sens' => 'D',
+                            '707100' => $facture_cli->reduction < 0 ?
+                                number_format(($facture_cli->total_fabrique +
+                                $facture_cli->total_express - $facture_cli->reduction),
+                                    2,
+                                    '.',
+                                    ' ') . ' €'
+                                : number_format(($facture_cli->total_fabrique +
+                                    $facture_cli->total_express),
+                                    2,
+                                    '.',
+                                    ' ') . ' €',
+                            'remise' => number_format($facture_cli->reduction < 0 ? 0 : -$facture_cli->reduction, 2, '.', ' ') . ' €'
                         );
 
                     $total_ht += $facture_cli->total;

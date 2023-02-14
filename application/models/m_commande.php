@@ -3271,6 +3271,7 @@ class m_commande extends CI_Model {
                     }
                     $data['supplementD'] += $user->tarif_supplement_fab - 2;
                 }
+                $data['supplementD'] = max(0, $data['supplementD']);
             }
 
             if (isset($data['gauche']) && $data['prixGH'] == 0) {
@@ -3317,12 +3318,11 @@ class m_commande extends CI_Model {
                     }
                     $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                 }
+                $data['supplementG'] = max(0, $data['supplementG']);
             }
-            $data['supplementG'] = max(0, $data['supplementG']);
 //            print_r('gloups');die;
 //            print_r($data);die;
 
-            $data['supplementD'] = max(0, $data['supplementD']);
 
             if(!isset($data['id_verreD']) && !isset($data['id_verreG']))
             {

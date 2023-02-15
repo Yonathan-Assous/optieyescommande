@@ -16295,18 +16295,41 @@ class admin
                             'libele' => $facture_cli->id_users . '-' . $facture_cli->nom_societe,
                             'facture' => 'BB' . substr(date('Ym'), 2, 4) . $facture_cli->id_users,
                             'sens' => 'D',
-                            '707100' => $facture_cli->reduction < 0 ?
+                            'montant_ttc_2' => number_format($facture_ht * (1 + $tva / 100),
+                                    2,
+                                    ',',
+                                    '.'),
+                            'montant_ht_lentilles_2' => number_format($facture_cli->total_lentilles,
+                                2,
+                                '.',
+                                ' '),
+                            'montant_ht_montures_2' => number_format($facture_cli->total_montures,
+                                2,
+                                '.',
+                                ' '),
+                            'montant_ht_fabrique_2' => $facture_cli->reduction < 0 ?
                                 number_format(($facture_cli->total_fabrique +
                                 $facture_cli->total_express - $facture_cli->reduction),
                                     2,
-                                    '.',
-                                    ' ') . ' €'
+                                    ',',
+                                    '.')
                                 : number_format(($facture_cli->total_fabrique +
                                     $facture_cli->total_express),
                                     2,
-                                    '.',
-                                    ' ') . ' €',
-                            'remise' => number_format($facture_cli->reduction < 0 ? 0 : -$facture_cli->reduction, 2, '.', ' ') . ' €'
+                                    ',',
+                                    '.'),
+                            'montant_ht_stock_2' => number_format($facture_cli->total_stock,
+                                    2,
+                                    ',',
+                                    '.'),
+                            'tarif_livraison_2' => number_format($facture_cli->tarif_liv +
+                                    $this->m_commande->getPackagingByMonth($date,
+                                        $facture_cli->id_users),2, '.', ' '),
+                            'remise_tot' => number_format($facture_cli->reduction < 0 ? 0 : -$facture_cli->reduction, 2, ',', '.'),
+                            'tva' => number_format($facture_ht * $tva / 100,
+                    2,
+                    ',',
+                    '.'),
                         );
 
                     $total_ht += $facture_cli->total;

@@ -137,12 +137,14 @@ else
                                 <th>Libélé</th>
                                 <th>Facture</th>
                                 <th>Sens</th>
+                                <th>Montant TTC</th>
                                 <th>707300</th>
                                 <th>707200</th>
                                 <th>707100</th>
                                 <th>707100</th>
                                 <th>708100</th>
                                 <th>709700</th>
+                                <th>445701</th>
                             </tr>
                             </thead>
                         </table>
@@ -246,12 +248,14 @@ else
                     { "data": "libele", 'visible' : false},
                     { "data": "facture", 'visible' : false},
                     { "data": "sens", 'visible' : false},
-                    { "data": "montant_ht_lentilles", 'visible' : false},
-                    { "data": "montant_ht_montures", 'visible' : false},
-                    { "data": "707100", 'visible' : false},
-                    { "data": "montant_ht_stock", 'visible' : false},
-                    { "data": "tarif_livraison", 'visible' : false},
-                    { "data": "remise", 'visible' : false},
+                    { "data": "montant_ttc_2", 'visible' : false},
+                    { "data": "montant_ht_lentilles_2", 'visible' : false},
+                    { "data": "montant_ht_montures_2", 'visible' : false},
+                    { "data": "montant_ht_fabrique_2", 'visible' : false},
+                    { "data": "montant_ht_stock_2", 'visible' : false},
+                    { "data": "tarif_livraison_2", 'visible' : false},
+                    { "data": "remise_tot", 'visible' : false},
+                    { "data": "tva", 'visible' : false},
                 ],
                 dom: 'Blfrtip',
                 "buttons": [
@@ -261,7 +265,7 @@ else
                         title: filename,
                         exportOptions: {
                             // columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
-                            columns: [14,15,2,1,0,16,17,18,5,4,19,20,21,22,23,24]
+                            columns: [14,15,2,1,0,16,17,18,19,20,21,22,23,24,25,26]
                         }
                     },
                     {

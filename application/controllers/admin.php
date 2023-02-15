@@ -16329,7 +16329,7 @@ class admin
                             'tva' => number_format($facture_ht * $tva / 100,
                     2,
                     ',',
-                    '.'),
+                    ''),
                         );
 
                     $total_ht += $facture_cli->total;

@@ -5780,4 +5780,29 @@ class m_commande extends CI_Model {
             return $prixVerre + $traitementPrice + $teintePrice + $galbePrice + $prismePrice;
         }
     }
+
+    public function getOrderCommandeByDate($date, $userId) {
+        $sql = "SELECT DISTINCT(id_users) FROM `commande` WHERE DATE_FORMAT(date_commande, '%Y-%m') = '" . $date . "' ORDER BY id_commande";
+        $query = $this->db->query($sql);
+        if ($query && $query->num_rows() > 0)
+            $commandes = $query->result();
+        $i = 1;
+        foreach ($commandes as $commande) {
+            if ($commande->id_users == $userId) {
+                if ($i < 10) {
+                    return '000' . $i;
+                }
+                else if ($i < 100) {
+                    return '00' . $i;
+                }
+                else if ($i < 1000) {
+                    return '0' . $i;
+                }
+                else
+                    return $i;
+            }
+            $i++;
+        }
+        return false;
+    }
 }

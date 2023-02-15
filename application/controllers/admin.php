@@ -16289,9 +16289,9 @@ class admin
                                 '') .
                             '><i class="zmdi zmdi-search"></i></a>',
                             $facture_cli->id_grille_tarifaire,
-                            'date' => date("31-m-Y",
+                            'date' => date("31/m/Y",
                                 strtotime($facture_cli->date_commande)),
-                            'code' => 'C-00001',
+                            'code' => 'C000001',
                             'libele' => $facture_cli->id_users . '-' . $facture_cli->nom_societe,
                             'facture' => 'BB' . substr(date('Ym'), 2, 4) . $facture_cli->id_users,
                             'sens' => 'D',

@@ -145,6 +145,7 @@ else
                                 <th>708100</th>
                                 <th>709700</th>
                                 <th>445701</th>
+                                <th>Raison social</th>
                             </tr>
                             </thead>
                         </table>
@@ -256,6 +257,7 @@ else
                     { "data": "tarif_livraison_2", 'visible' : false},
                     { "data": "remise_tot", 'visible' : false},
                     { "data": "tva", 'visible' : false},
+                    { "data": "nom_societe", 'visible' : false},
                 ],
                 dom: 'Blfrtip',
                 "buttons": [
@@ -265,7 +267,7 @@ else
                         title: filename,
                         exportOptions: {
                             // columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
-                            columns: [14,15,2,1,0,16,17,18,19,20,21,22,23,24,25,26]
+                            columns: [14,15,27,17,16,18,19,20,21,22,23,24,25,26]
                         }
                     },
                     {

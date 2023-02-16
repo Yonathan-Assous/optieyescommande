@@ -16309,14 +16309,8 @@ class admin
                                 2,
                                 ',',
                                 ''),
-                            'montant_ht_fabrique_2' => $facture_cli->reduction < 0 ?
-                                number_format(($facture_cli->total_fabrique +
+                            'montant_ht_fabrique_2' => number_format(($facture_cli->total_fabrique +
                                 $facture_cli->total_express - $facture_cli->reduction),
-                                    2,
-                                    ',',
-                                    '')
-                                : number_format(($facture_cli->total_fabrique +
-                                    $facture_cli->total_express),
                                     2,
                                     ',',
                                     ''),
@@ -16327,7 +16321,7 @@ class admin
                             'tarif_livraison_2' => number_format($facture_cli->tarif_liv +
                                     $this->m_commande->getPackagingByMonth($date,
                                         $facture_cli->id_users),2, ',', '.'),
-                            'remise_tot' => number_format($facture_cli->reduction < 0 ? 0 : -$facture_cli->reduction, 2, ',', ''),
+//                            'remise_tot' => number_format($facture_cli->reduction < 0 ? 0 : -$facture_cli->reduction, 2, ',', ''),
                             'tva' => number_format($facture_ht * $tva / 100,
                     2,
                     ',',

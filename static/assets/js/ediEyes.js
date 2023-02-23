@@ -107,7 +107,7 @@ function Connect(callBack, is_loading = false) {
             $('#txtOmaTracerOut').val(oma);
 
             $('#txtOmaImageIn').val(oma);
-            GetImageFromOma();
+            GetImageFromOma(true);
         }
         else {
             $('#txtOmaTracerOut').val(oma);
@@ -345,7 +345,7 @@ function LaunchTracer() {
 const omaApiUrl = 'https://tracerserver.edieyes.net/Api/oma/';
 
 // ------------------------ I- Récupération d'une image à partir d'une forme OMA ------------------------
-function GetImageFromOma() {
+function GetImageFromOma($byTracer) {
     $('#produit').addClass('hide');
 
     // $('.quantity').on('change', function () {
@@ -354,7 +354,10 @@ function GetImageFromOma() {
 
     // $('#divOmaImageOut').hide();
     // $('#divOmaImageError').hide();
+
+
     let txtOmaImageIn = $('#txtOmaImageIn').val();
+
     if (txtOmaImageIn.indexOf("SEGHT") == -1) {
         changeOma('SEGHT', 'hauteur_montage')
         // changeHauteurMontage();
@@ -364,6 +367,11 @@ function GetImageFromOma() {
         changeOma('IPD', 'teledetourage_ecart_puppillaire')
         // changeEcartPupillaire()
     }
+
+    // console.log('BYTRACER: ' + $byTracer)
+    // console.log('add_circ: ' + $('#add_circ').val())
+
+
 
     const hauteurBoxingOld = $('#hauteur_boxing').val()
     const largeurBoxingOld = $('#largeur_boxing').val()
@@ -383,8 +391,8 @@ function GetImageFromOma() {
             $('#omaImageDatas').show();
             // $('#divOmaImageOut').show();
             widthImageOma();
+
             txtOmaImageIn = $('#txtOmaImageIn').val();
-            // console.log('dadsasadsasdadssadsad ' + txtOmaImageIn);
             let ecart_pup_G;
             let ecart_pup_D;
             let hauteur_montage_G;
@@ -607,7 +615,10 @@ function GetImageFromOma() {
                 }
                 backgroundEcartAndHauteurAll();
 
-
+                if ($byTracer && $('#add_circ').val() != 0) {
+                    console.log('TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+                    changeOmaCirc()
+                }
                 // x = (result.right.rayon[0] / 100) * Math.sin(result.right.angle[0] / 100);
                 // y = (result.right.rayon[0] / 100) * Math.cos(result.right.angle[0] / 100);
                 // longueur = Math.sqrt(Math.pow(x_centre_eye_right - x, 2) + Math.pow(y_centre_eye_right - y, 2))
@@ -657,10 +668,17 @@ function myCeil(number, chiffre_apres_la_virgule) {
 //------------------------ II - Redimensionner une forme OMA ------------------------
 function ResizeOma() {
     const omaIn = $('#txtOmaImageIn').val();
-    const aBox = parseFloat($('#largeur_boxing').val());
-    const bBox = parseFloat($('#hauteur_boxing').val());
-    console.log($('#largeur_boxing').val());
-
+    const aBox = Math.round((parseFloat($('#largeur_boxing').val()) - parseFloat($('#add_circ_old').val()) + parseFloat($('#add_circ').val())) * 100) / 100
+    const bBox = Math.round((parseFloat($('#hauteur_boxing').val()) - parseFloat($('#add_circ_old').val()) + parseFloat($('#add_circ').val())) * 100) / 100
+    console.log('largeur_boxing' + $('#largeur_boxing').val());
+    console.log('add_circ_old' + $('#add_circ_old').val());
+    console.log('add_circ:' + $('#add_circ').val());
+    console.log('aBox:' + aBox);
+    console.log('bBox:' + bBox);
+    setTimeout(function () {
+        $('#largeur_boxing').val(aBox)
+        $('#hauteur_boxing').val(bBox)
+        $('#add_circ_old').val($('#add_circ').val()), 100})
     const params = {
         ABox: aBox,
         BBox: bBox,
@@ -738,17 +756,15 @@ $('.hauteur_montage').on('input', function () {
 
 $('#largeur_boxing').on('input', function () {
     ResizeOma();
-    // setTimeout(function () {
-    //     GetImageFromOma();
-    // }, 1000);
 });
 
 $('#hauteur_boxing').on('input', function () {
     ResizeOma();
-    // setTimeout(function () {
-    //     GetImageFromOma();
-    // }, 1000);
 });
+
+$("#add_circ").on('input', function() {
+    ResizeOma();
+})
 
 $('#taille_du_pont').on('input', function () {
     // alert('xxx');
@@ -778,16 +794,6 @@ $(".change_taille_du_pont").on('click', function(e) {
 
 $(".change_largeur_boxing").on('click', function(e) {
     ResizeOma();
-    // setTimeout(function () {
-    //     GetImageFromOma();
-    // }, 200);
-})
-
-$(".change_hauteur_boxing").on('click', function(e) {
-    ResizeOma();
-    // setTimeout(function () {
-    //     GetImageFromOma();
-    // }, 200);
 })
 
 function changeOma(dataChangeInOma, dataChangeInSite, droit_gauche = true) {
@@ -1164,24 +1170,22 @@ function getDrilledByOmaAndSet(txtOmaImageIn) {
         indexDrille = txtOmaImageIn.indexOf("DRILLE");
         i++;
     }
+}
 
-    // console.log(txtOmaImageIn);
+function changeOmaCirc() {
+    console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
+    const largeurBoxing = $('#largeur_boxing').val()
+    const hauteurBoxing = $('#hauteur_boxing').val()
+    const addCirc = $('#add_circ').val()
+    const aBox = Math.round((parseFloat(largeurBoxing) + parseFloat(addCirc)) * 100) / 100
+    const bBox = Math.round((parseFloat(hauteurBoxing) + parseFloat(addCirc)) * 100) / 100
+    $('#largeur_boxing').val(aBox)
+    $('#hauteur_boxing').val(bBox)
+    console.log('aBox: ' + aBox)
+    console.log('largeur_boxing: ' + largeurBoxing)
+    console.log('addCirc: ' + addCirc)
 
-    // let els = document.getElementsByClassName("drilled");
-    // let num;
-    // let addDrilled = '';
-    // let drilled_X = '';
-    // let drilled_Y = '';
-    // let drilled_diameter = '';
-    // for(let i = 0; i < els.length; i++)
-    // {
-    //     num = els[i].id.replace("drilled", "");
-    //     drilled_X = $('#drilled_X' + num).val();
-    //     drilled_Y = $('#drilled_Y' + num).val();
-    //     drilled_diameter = $('#drilled_diameter' + num).val();
-    //     if (drilled_X != '' && drilled_Y != '' && drilled_diameter != '') {
-    //         addDrilled += 'DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;\n' +
-    //             '_DRILLE=B;CF;' + drilled_X + ';' + drilled_Y + ';' + drilled_diameter + ';;;;;;;;CentreBoxing\n';
-    //     }
-    // }
+
+    changeOma('SEGHT', 'hauteur_montage')
+    changeOma('IPD', 'teledetourage_ecart_puppillaire')
 }

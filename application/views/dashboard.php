@@ -1216,12 +1216,19 @@ if (is_object($pair_order)) {
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-6 number-input">
                                                                                                                     <input type="number"
-                                                                                                                           min="0.8"
                                                                                                                            class="quantity valid form-control"
                                                                                                                            name="add_circ"
                                                                                                                            id="add_circ"
                                                                                                                            value="<?php echo $user_info->add_circ ?>"
                                                                                                                            style="background-color: #a0e7a0 !important;"
+                                                                                                                           aria-invalid="false">
+                                                                                                                </div>
+                                                                                                                <div class="number-input">
+                                                                                                                    <input type="hidden"
+                                                                                                                           class="quantity valid form-control"
+                                                                                                                           name="add_circ_old"
+                                                                                                                           id="add_circ_old"
+                                                                                                                           value="<?php echo $user_info->add_circ ?>"
                                                                                                                            aria-invalid="false">
                                                                                                                 </div>
                                                                                                                 <div class="col-xs-12 col-md-1"></div>

@@ -6944,8 +6944,9 @@ class admin
                         //var_dump($commande);
 
                         $commande->indice_omega = $commande->indice_verre;
+//                        print_r($commande);
                         if ($commande->indice_verre == '1.74'
-                            && strpos($commande->lensname, 'stock') !== false) {
+                            && (strpos($commande->lensname, 'stock') !== false || (strpos($commande->lensname, 'Panier') !== false))) {
                             $commande = $this->m_commande->change_174_With_167($commande);
                         }
                         $detail =

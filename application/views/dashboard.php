@@ -6297,7 +6297,7 @@ if (is_object($pair_order)) {
                         }
                         else {
                             // $('#div_teledetourage').removeClass('hide');
-                            $('#div1_format_type').removeClass('hide');
+                            $('#div1_ref_client').removeClass('hide')
 
                             // Connect();
                         }

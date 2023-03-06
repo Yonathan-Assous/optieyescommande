@@ -258,13 +258,24 @@ $('#reference_client').keyup(function() {
 
     $('#caracteristique_verre').removeClass('hide');
     $('#div2_ref_client').removeClass('focus_panel');
-	if ($('#reference_client').val() != '') {
-		$('#div_refraction').removeClass('hide')
+	if ($('#is_teledetourage').is(':checked') == false) {
+		console.log('fdsfdsfdss');
+		if ($('#reference_client').val() != '') {
+			$('#div_refraction').removeClass('hide')
+		} else {
+			$('#div_refraction').addClass('hide')
+		}
 	}
 	else {
-		$('#div_refraction').addClass('hide')
+		console.log('aaaaaaaaaaaaaaaaaa');
+		if ($('#reference_client').val() != '') {
+			$('#div1_format_type').removeClass('hide');
+		}
+		else {
+			$('#div1_format_type').addClass('hide');
+		}
 	}
-  })
+})
 
 
 $('#indices').on('change', function() {

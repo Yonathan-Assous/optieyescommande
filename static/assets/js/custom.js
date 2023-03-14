@@ -505,7 +505,7 @@ $('#generation').on('change', function() {
 		}
 		else {
 			// $('#div_teledetourage').removeClass('hide');
-			$('#div1_format_type').removeClass('hide');
+			$('#div1_ref_client').removeClass('hide')
 			let user_id = $('#user_id').val();
 			$('#txtCustomerCode').val(user_id);
 			// Connect();

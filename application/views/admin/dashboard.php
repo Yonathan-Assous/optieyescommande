@@ -259,20 +259,17 @@ else
                                     $dateDiff = date_diff($date_1, $date_2);
                                     $months = ($dateDiff->y*12)+$dateDiff->m;
 
-
-                                        for($i = 0; $i < $months; ++$i) {
-                                            if($i < 1) {
-                                                $date = date('m/Y');
-                                                $year = date('Y');
-                                            }
-                                            else {
-                                                $date = date('m/Y', strtotime('-'.$i.' month'));
-                                                $year = date('Y', strtotime('-'.$i.' month'));
-                                            }
-
-                                            echo '<option value="'.$date.'">'.ucfirst(strftime('%B', strtotime('-'.$i.' month'))).' '.$year.'</option>'."\n";
-
+                                    for($i = 0; $i < $months; ++$i) {
+                                        if($i < 1) {
+                                            $date = date('m/Y');
+                                            $year = date('Y');
                                         }
+                                        else {
+                                            $date = date('m/Y', strtotime('-'.$i.' month'));
+                                            $year = date('Y', strtotime('-'.$i.' month'));
+                                        }
+                                        echo '<option value="'.$date.'">'.ucfirst(strftime('%B', strtotime('-'.$i.' month'))).' '.$year.'</option>'."\n";
+                                    }
 
                                     ?>
                                 </select>

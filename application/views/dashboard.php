@@ -6946,7 +6946,7 @@ if (is_object($pair_order)) {
                             url: "/index/setOrderRecapNew",
                             data: '<?php if (is_object($pair_order)) {
                                 echo 'pair_order=' . $pair_order->id_commande . '&';
-                            } ?>' + formData,
+                            } ?>' + formData + '&is_teledetourage=' + document.getElementById("is_teledetourage").checked,
                             dataType: "html",
                             beforeSend: function () {
                                 $("#recap_commande").empty().append('<div style="height:400px"><div style="width:150px;margin-left:auto;margin-right:auto;padding-top:10%;">Veuillez patienter</div></div>');

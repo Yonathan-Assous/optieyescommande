@@ -2893,11 +2893,19 @@ class index extends MY_Controller {
             if($this->session->userdata('logged_in') === true){
 
                 $data = $this->input->post();
-
 //                var_dump($data['prixDH']);die;
 //                print_r($data['txtOmaImageIn']);die;
 //                print_r(bin2hex($data['txtOmaImageIn']));die;
 //                print_r($data);die;
+                if ($data['is_teledetourage'] == 'false') {
+                    $data['is_teledetourage'] = false;
+                    $data['txtOmaImageIn'] = '';
+                    $data['teledetourage_ecart_puppillaire_droit'] = '';
+                    $data['teledetourage_ecart_puppillaire_gauche'] = '';
+                    $data['format_teledetourage'] = '';
+                    $data['txtOmaImageIn'] = '';
+                }
+                
                 $user = $this->session->userdata('data_user');
                 $userId = $user['user_info']->id_users;
                 $data['prixDH'] = 0;

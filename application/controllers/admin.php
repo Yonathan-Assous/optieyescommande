@@ -5733,7 +5733,7 @@ class admin
                     }
 
                     if (isset($information_commande->bord_verre->epaisseur) &&
-                        !empty($information_commande->bord_verre->epaisseur)) {
+                        !empty($information_commande->bord_verre->epaisseur) && $commande->origine_commande == 1) {
                         $epaisseur = $information_commande->bord_verre->epaisseur < 1.2 ? 1.2 : $information_commande->bord_verre->epaisseur;
                         $xml .= '
 			    	<thickness reference="EDGE">' .
@@ -5923,7 +5923,7 @@ class admin
                     }
 
                     if (isset($information_commande->bord_verre->epaisseur) &&
-                        !empty($information_commande->bord_verre->epaisseur)) {
+                        !empty($information_commande->bord_verre->epaisseur) && $commande->origine_commande == 1) {
                         $epaisseur = $information_commande->bord_verre->epaisseur < 1.2 ? 1.2 : $information_commande->bord_verre->epaisseur;
                         $xml .= '
 			    	<thickness reference="EDGE">' .
@@ -8321,7 +8321,7 @@ class admin
                             }
 
                             if (isset($information_commande->bord_verre->epaisseur) &&
-                                !empty($information_commande->bord_verre->epaisseur)) {
+                                !empty($information_commande->bord_verre->epaisseur) && $commande->origine_commande == 1) {
                                 $epaisseur = $information_commande->bord_verre->epaisseur < 1.2 ? 1.2 : $information_commande->bord_verre->epaisseur;
                                 $xml .= '
 			    	<thickness reference="EDGE">' .
@@ -8532,7 +8532,7 @@ class admin
                             }
 
                             if (isset($information_commande->bord_verre->epaisseur) &&
-                                !empty($information_commande->bord_verre->epaisseur)) {
+                                !empty($information_commande->bord_verre->epaisseur) && $commande->origine_commande == 1) {
                                 $epaisseur = $information_commande->bord_verre->epaisseur < 1.2 ? 1.2 : $information_commande->bord_verre->epaisseur;
                                 $xml .= '
 			    	<thickness reference="EDGE">' .
@@ -10856,7 +10856,7 @@ class admin
 
 
                 if (isset($data['epaisseur_bord_verre']) &&
-                    !empty($data['epaisseur_bord_verre'])) {
+                    !empty($data['epaisseur_bord_verre']) && $commande_origine->origine_commande == 1) {
                     $epaisseur = $data['epaisseur_bord_verre'] < 1.2 ? 1.2 : $data['epaisseur_bord_verre'];
                     $xml .= '
 			    	<thickness reference="EDGE">' .
@@ -11066,7 +11066,7 @@ class admin
                 }
 
                 if (isset($data['epaisseur_bord_verre']) &&
-                    !empty($data['epaisseur_bord_verre'])) {
+                    !empty($data['epaisseur_bord_verre']) && $commande_origine->origine_commande == 1) {
                     $epaisseur = $data['epaisseur_bord_verre'] < 1.2 ? 1.2 : $data['epaisseur_bord_verre'];
                     $xml .= '
 			    	<thickness reference="EDGE">' .

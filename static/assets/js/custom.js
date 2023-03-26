@@ -258,8 +258,24 @@ $('#reference_client').keyup(function() {
 
     $('#caracteristique_verre').removeClass('hide');
     $('#div2_ref_client').removeClass('focus_panel');
-
-  })
+	if ($('#is_teledetourage').is(':checked') == false) {
+		console.log('fdsfdsfdss');
+		if ($('#reference_client').val() != '') {
+			$('#div_refraction').removeClass('hide')
+		} else {
+			$('#div_refraction').addClass('hide')
+		}
+	}
+	else {
+		console.log('aaaaaaaaaaaaaaaaaa');
+		if ($('#reference_client').val() != '') {
+			$('#div1_format_type').removeClass('hide');
+		}
+		else {
+			$('#div1_format_type').addClass('hide');
+		}
+	}
+})
 
 
 $('#indices').on('change', function() {
@@ -482,11 +498,14 @@ $('#generation').on('change', function() {
 		$('#generation_panel').removeClass('focus_panel')
 		$('#refraction_panel').addClass('focus_panel');
 		if ($('#is_teledetourage').is(':checked') == false) {
-			$('#div_refraction').removeClass('hide')
+			if ($('#reference_client').val() != '') {
+				$('#div_refraction').removeClass('hide')
+			}
+			$('#div1_ref_client').removeClass('hide')
 		}
 		else {
 			// $('#div_teledetourage').removeClass('hide');
-			$('#div1_format_type').removeClass('hide');
+			$('#div1_ref_client').removeClass('hide')
 			let user_id = $('#user_id').val();
 			$('#txtCustomerCode').val(user_id);
 			// Connect();
@@ -2907,6 +2926,7 @@ $('#type_de_verreG').on('change', function() {
 					// document.getElementById("diametreG").disabled = true;
 					$('#diametreG').empty();
 					$('#diametreG').append('<option value="Télédétourage">Télédétourage</option>');
+					$('#to_etape2').removeClass('disabled');
 				}
 				else {
 					document.getElementById("diametreG").disabled = false;

@@ -21,7 +21,8 @@
 
     <header>
         <img src="<?php echo $prefix; ?>static/img/logo-white.png"  style="float:left;" />
-        <h1 style="text-align: right">Facture BB<?php echo substr($new_date[0],2,2).$new_date[1].$id_users; ?></h1>
+        <h1 style="text-align: right">Facture F<?php echo substr($new_date[0],2,2).$new_date[1]
+                . $this->m_commande->getOrderCommandeByDate($new_date[0].'-'.$new_date[1] , $id_users); ?></h1>
         <h2 style="text-align: right"><?php echo date("t",mktime( 0, 0, 0, $new_date[1], 1, $new_date[0] ))."/".$new_date[1]."/".$new_date[0]; ?></h2>
     </header>
 

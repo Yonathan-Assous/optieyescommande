@@ -562,45 +562,6 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group row hide"
-                                                                         id="div1_ref_client">
-                                                                        <div class="col-m-12">
-                                                                            <div class="panel panel-default focus_panel"
-                                                                                 id="div2_ref_client">
-                                                                                <div class="panel-heading"><h5>Référence
-                                                                                        client</h5></div>
-                                                                                <div class="panel-body"
-                                                                                     style="padding-top: 15px">
-                                                                                    <div style="height: 41px; width: 100%; border: 1px solid #dcdcdc;border-radius: 4px; padding: 8px 10px 0px 10px;">
-                                                                                        <input type="text"
-                                                                                               maxlength="14"
-                                                                                               id="reference_client"
-                                                                                               name="reference_client"
-                                                                                               style="border:none;width: 70%;"
-                                                                                            <?php
-                                                                                            if (is_object($pair_order)) {
-                                                                                                echo 'value="'
-                                                                                                     . $pair_order->reference_client
-                                                                                                     . '" readonly';
-                                                                                            } else {
-                                                                                                if (isset($refPanierA)) {
-                                                                                                    echo 'value="'
-                                                                                                         . $refPanierA
-                                                                                                         . '"';
-                                                                                                } else {
-                                                                                                    ?>
-                                                                                                    value=""
-                                                                                                    <?php
-                                                                                                }
-                                                                                            } ?>
-                                                                                        >
-                                                                                        <span id="compeur_caracteres"
-                                                                                              style="float: right;">14 Caractères restants</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                     <div class="form-group row <?php
                                                                     if (!is_object($pair_order) && $panierA != 1) {
                                                                         echo 'hide';
@@ -818,6 +779,46 @@ if (is_object($pair_order)) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group row hide"
+                                                                         id="div1_ref_client">
+                                                                        <div class="col-m-12">
+                                                                            <div class="panel panel-default focus_panel"
+                                                                                 id="div2_ref_client">
+                                                                                <div class="panel-heading"><h5>Référence
+                                                                                        client</h5></div>
+                                                                                <div class="panel-body"
+                                                                                     style="padding-top: 15px">
+                                                                                    <div style="height: 41px; width: 100%; border: 1px solid #dcdcdc;border-radius: 4px; padding: 8px 10px 0px 10px;">
+                                                                                        <input type="text"
+                                                                                               maxlength="14"
+                                                                                               id="reference_client"
+                                                                                               name="reference_client"
+                                                                                               style="border:none;width: 70%;"
+                                                                                            <?php
+                                                                                            if (is_object($pair_order)) {
+                                                                                                echo 'value="'
+                                                                                                    . $pair_order->reference_client
+                                                                                                    . '" readonly';
+                                                                                            } else {
+                                                                                                if (isset($refPanierA)) {
+                                                                                                    echo 'value="'
+                                                                                                        . $refPanierA
+                                                                                                        . '"';
+                                                                                                } else {
+                                                                                                    ?>
+                                                                                                    value=""
+                                                                                                    <?php
+                                                                                                }
+                                                                                            } ?>
+                                                                                        >
+                                                                                        <span id="compeur_caracteres"
+                                                                                              style="float: right;">14 Caractères restants</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="form-group row hide" id="div1_format_type">
                                                                         <div class="col-m-12">
                                                                             <div class="panel panel-default focus_panel"
@@ -5613,7 +5614,8 @@ if (is_object($pair_order)) {
             $("#afficherV").css("display", "inline-block");
             $('#precalibrage').addClass('hide');
             $('#certif').addClass('hide');
-            $('#div1_ref_client').removeClass('hide');
+            // $('#div1_ref_client').removeClass('hide');
+            $('#caracteristique_verre').removeClass('hide');
             $('#div2_type_commande').removeClass('focus_panel');
             $('#to_etape2').addClass('disabled');
             type = '1';
@@ -5627,7 +5629,8 @@ if (is_object($pair_order)) {
             $("#afficherV").css("display", "inline-block");
             $('#precalibrage').addClass('hide');
             $('#certif').addClass('hide');
-            $('#div1_ref_client').addClass('hide');
+            // $('#div1_ref_client').addClass('hide');
+            $('#caracteristique_verre').addClass('hide');
             $('#div2_type_commande').addClass('focus_panel');
             $('#to_etape2').addClass('disabled');
             type = '2';
@@ -6312,11 +6315,14 @@ if (is_object($pair_order)) {
 
                     if (lensFocalGroup != "3" || $('#indices').val() == "mineral") {
                         if ($('#is_teledetourage').is(':checked') == false) {
-                            $('#div_refraction').removeClass('hide')
+                            if ($('#reference_client').val() != '') {
+                                $('#div_refraction').removeClass('hide')
+                            }
+                            $('#div1_ref_client').removeClass('hide')
                         }
                         else {
                             // $('#div_teledetourage').removeClass('hide');
-                            $('#div1_format_type').removeClass('hide');
+                            $('#div1_ref_client').removeClass('hide')
 
                             // Connect();
                         }
@@ -6965,7 +6971,7 @@ if (is_object($pair_order)) {
                             url: "/index/setOrderRecapNew",
                             data: '<?php if (is_object($pair_order)) {
                                 echo 'pair_order=' . $pair_order->id_commande . '&';
-                            } ?>' + formData,
+                            } ?>' + formData + '&is_teledetourage=' + document.getElementById("is_teledetourage").checked,
                             dataType: "html",
                             beforeSend: function () {
                                 $("#recap_commande").empty().append('<div style="height:400px"><div style="width:150px;margin-left:auto;margin-right:auto;padding-top:10%;">Veuillez patienter</div></div>');

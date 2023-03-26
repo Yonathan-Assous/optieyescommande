@@ -132,6 +132,19 @@ else
                                 <th>Tarif livraison HT</th>
                                 <th>Détails</th>
                                 <th>Remise</th>
+                                <th>Date</th>
+                                <th>Code</th>
+                                <th>Libélé</th>
+                                <th>Facture</th>
+                                <th>Sens</th>
+                                <th>Montant TTC</th>
+                                <th>707300</th>
+                                <th>707200</th>
+                                <th>707100</th>
+                                <th>707100</th>
+                                <th>708100</th>
+                                <th>445701</th>
+                                <th>Raison social</th>
                             </tr>
                             </thead>
                         </table>
@@ -215,6 +228,35 @@ else
                 ajax: { url: '/admin/facture_client_ajax/'+mois+'-'+annee+'/'+magasin, dataSrc: 'aaData' },
                 deferRender: true,
                 ordering: false,
+                "columns": [
+                    { "data": "id_user" },
+                    { "data": "nom_magasin" },
+                    { "data": "nom_societe" },
+                    { "data": "mois" },
+                    { "data": "montant_ht" },
+                    { "data": "montant_ttc" },
+                    { "data": "montant_ht_lentilles" },
+                    { "data": "montant_ht_montures" },
+                    { "data": "montant_ht_stock" },
+                    { "data": "montant_ht_fabrique" },
+                    { "data": "remise_special" },
+                    { "data": "tarif_livraison" },
+                    { "data": "details" },
+                    { "data": "remise" },
+                    { "data": "date", 'visible' : false},
+                    { "data": "code", 'visible' : false},
+                    { "data": "libele", 'visible' : false},
+                    { "data": "facture", 'visible' : false},
+                    { "data": "sens", 'visible' : false},
+                    { "data": "montant_ttc_2", 'visible' : false},
+                    { "data": "montant_ht_lentilles_2", 'visible' : false},
+                    { "data": "montant_ht_montures_2", 'visible' : false},
+                    { "data": "montant_ht_fabrique_2", 'visible' : false},
+                    { "data": "montant_ht_stock_2", 'visible' : false},
+                    { "data": "tarif_livraison_2", 'visible' : false},
+                    { "data": "tva", 'visible' : false},
+                    { "data": "nom_societe", 'visible' : false},
+                ],
                 dom: 'Blfrtip',
                 "buttons": [
                     {
@@ -222,7 +264,8 @@ else
                         text: 'CSV',
                         title: filename,
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
+                            // columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
+                            columns: [14,15,26,17,16,18,19,20,21,22,23,24,25]
                         }
                     },
                     {

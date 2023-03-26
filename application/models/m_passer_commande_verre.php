@@ -143,7 +143,6 @@ class m_passer_commande_verre extends CI_Model
             $sql = "INSERT INTO `prix_par_client` (`id`, `code`, `id_client`, `prix`, name, generation) VALUES (NULL, '"
                 . $code_verre . "', '" . $user_id . "', '" . $new_price . "', '"
                 . addslashes($name_verre) . "', '" . $generation . "')";
-
             $res =
                 $this->db->query($sql);
             //$query = $res->result();
@@ -1751,7 +1750,7 @@ class m_passer_commande_verre extends CI_Model
 
         $res =
             $this->db->query("SELECT * FROM teintes WHERE `id_indice_verre` = $indiceVerreId $sql_or
-                AND active_to_user = 1 OR code = 'CUST_24' ORDER BY sorting");
+                AND active_to_user = 1 OR code = 'CUST_24' OR code = 'CUST_25' ORDER BY sorting");
         return $res->result();
     }
 

@@ -531,6 +531,7 @@ function GetImageFromOma($byTracer) {
 
                         const ligne = element.substr(2,999);
                         const ligneArray = ligne.split(';');
+                        
                         ligneArray.forEach(
                             value=>result[currentEye][currentElementType].push(parseInt(value)));
                     }
@@ -824,7 +825,9 @@ function changeOma(dataChangeInOma, dataChangeInSite, droit_gauche = true) {
                 txtOmaImageIn.lastIndexOf(dataChangeInOma));
         }
         console.log('DATAAAAAAAAAAAAA: ' + data);
-        txtOmaImageIn = txtOmaImageIn.replace(data, "");
+        if (txtOmaImageIn.lastIndexOf(dataChangeInOma) != -1) {
+            txtOmaImageIn = txtOmaImageIn.replace(data, "");
+        }
         if (droit_gauche) {
             let idDroit = dataChangeInSite + '_droit';
             let valueDroit = $('#' + idDroit).val();

@@ -855,16 +855,6 @@ if (is_object($pair_order)) {
                                                                                                    class="no-margin-right"><b>Percée</b></a>
                                                                                             </li>
                                                                                         </ul>
-
-                                                                                        <div class="ec_commande_status"
-                                                                                             style="display: none;">
-                                                                                            <div class="alert alert-warning"
-                                                                                                 style="margin-bottom: 0px;"
-                                                                                                 id="status_credit">
-                                                                                                Votre crédit : <b>417.78
-                                                                                                    €</b></div>
-                                                                                        </div>
-
                                                                                         <div class="validator"></div>
 
                                                                                     </div>
@@ -5610,7 +5600,6 @@ if (is_object($pair_order)) {
             $('#to_etape2').addClass('disabled');
             type = '2';
             $('#type_commande').val('2');
-
         })
 
         <?php
@@ -5652,7 +5641,8 @@ if (is_object($pair_order)) {
                         $('.next .btn').addClass('disabled');
                     } else {
                         $('.ancienne_commande_ref').show();
-                        $('#div1_ref_client').removeClass('hide');
+                        // $('#div1_ref_client').removeClass('hide');
+                        $('#caracteristique_verre').removeClass('hide');
                         //currentForm.find('.ec_commande_status').find('.alert').addClass('alert-warning').removeClass('alert-danger').html('Votre crédit : <b>'+data+' €</b>');
                         $('.ec_commande_status').find('.alert').addClass('alert-warning').removeClass('alert-danger')
                         $('#status_credit').html('Votre crédit : <b>' + data + ' €</b>');
@@ -6294,11 +6284,13 @@ if (is_object($pair_order)) {
                                 $('#div_refraction').removeClass('hide')
                             }
                             $('#div1_ref_client').removeClass('hide')
+
                         }
                         else {
-                            // $('#div_teledetourage').removeClass('hide');
                             $('#div1_ref_client').removeClass('hide')
-
+                            if ($('#reference_client').val()) {
+                                $('#div1_format_type').removeClass('hide')
+                            }
                             // Connect();
                         }
                         $('#progression_D').addClass('hide')
@@ -7384,7 +7376,7 @@ if (is_object($pair_order)) {
                 $('.ec_commande_status').fadeOut(60);
             })
 
-            $('#casse_atelier').click(function () {
+            // $('#casse_atelier').click(function () {
                 /*$('#type_commande').val('2');
 	var currentForm = $(this).closest('form');
   		$('.next .btn').addClass('disabled');
@@ -7421,9 +7413,9 @@ if (is_object($pair_order)) {
 
 			$('.ec_commande_status').fadeIn(60);
 			*/
-            })
+            // })
 
-            $('#erreur_ophtalmologiste').click(function () {
+            // $('#erreur_ophtalmologiste').click(function () {
                 /*$('#type_commande').val('3');
 	var currentForm = $(this).closest('form');
   		$('.next .btn').addClass('disabled');
@@ -7459,7 +7451,7 @@ if (is_object($pair_order)) {
 
 			$('.ec_commande_status').fadeIn(60);
 	*/
-            })
+            // })
 
             $('#commandeForm').on('change', 'input[name="miroir"], select[name="id_verre"], input[name="only_gauche"], input[name="only_droit"]', function () {
 

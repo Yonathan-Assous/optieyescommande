@@ -501,11 +501,15 @@ $('#generation').on('change', function() {
 			if ($('#reference_client').val() != '') {
 				$('#div_refraction').removeClass('hide')
 			}
+
 			$('#div1_ref_client').removeClass('hide')
 		}
 		else {
 			// $('#div_teledetourage').removeClass('hide');
 			$('#div1_ref_client').removeClass('hide')
+			if ($('#reference_client').val() != '') {
+				$('#div1_format_type').removeClass('hide')
+			}
 			let user_id = $('#user_id').val();
 			$('#txtCustomerCode').val(user_id);
 			// Connect();

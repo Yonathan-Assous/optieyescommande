@@ -2986,6 +2986,9 @@ class index extends MY_Controller {
                             $teinteCode = $data['teinteG'];
                         }
                         $traitementCode = NULL;
+                        if (isset($data['traitementD'])) {
+                            $data['traitementG'] = $data['traitementD'];
+                        }
                         if (isset($data['traitementG'])) {
                             $traitementCode = $data['traitementG'];
                         }

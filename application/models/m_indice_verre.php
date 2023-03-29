@@ -17,6 +17,9 @@ class m_indice_verre extends CI_Model
         else if ($indiceVerre == 1.5 || $indiceVerre == 1.6) {
             $indiceVerre .= '0';
         }
+        else if ($indiceVerre == 1.59) {
+            $indiceVerre .= '1';
+        }
         $indiceVerreSql = "SELECT * FROM `indice_verre` WHERE `indice_verre` = '$indiceVerre'";
         $query = $this->db->query($indiceVerreSql);
         $res = $query->result()[0];

@@ -9750,12 +9750,15 @@ class admin
     {
         $this->load->helper('maths');
         //var_dump($ref);die;
+
         if ($this->input->is_ajax_request()) {
 
             $data =
                 $this->input->post();
+
             $commande_origine =
                 $this->m_commande->getCommandeEdiOmegaById($ref);
+
             $information_commande = json_decode($commande_origine->information_commande);
             if ($commande_origine->code_oma) {
                 $data['ecart_puppillaire_droit'] = $information_commande->verre->ecart_puppillaire->droit;
@@ -23255,6 +23258,15 @@ class admin
             }
         }
         $this->m_commande->updateCommande($commandeId, $data);
+        $sql = "SELECT * FROM commande_omega WHERE id_commande='".$commandeId."'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() != 0) {
+//            $query->result()[0];
+            $commandeOmega = $query->result()[0];
+            $this->remplaceVerreOmega($commandeOmega->id, $commandeId);
+//            print_r($result->id);die;
+        }
+//        $this->remplaceVerreOmega()
     }
 
     public

@@ -1210,6 +1210,7 @@ if (is_object($pair_order)) {
                                                                                                                            class="quantity valid form-control"
                                                                                                                            name="add_circ"
                                                                                                                            id="add_circ"
+                                                                                                                           step="0.01"
                                                                                                                            value="<?php echo $user_info->add_circ ?>"
                                                                                                                            style="background-color: #a0e7a0 !important;"
                                                                                                                            aria-invalid="false">

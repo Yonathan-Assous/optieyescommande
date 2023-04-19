@@ -575,7 +575,7 @@
                 </div>
                 <div class="form-group m-b-10 col-sm-6">
                     <label for="bl_conditions_start_date" class="control-label">Date de début <span class="obligatoire">*</span></label>
-                    <input type="date" id="bl_conditions_start_date" name="bl_conditions_start_date" min="2021-09-12" class="form-control checkbox_date" value="" />
+                    <input type="date" id="bl_conditions_start_date" name="bl_conditions_start_date" min="2021-09-12" class="form-control" value="" />
                     <p id="error_bl_conditions_start_date" class="error reset-error error_date"></p>
                 </div>
                 <div class="form-group text-center m-t-30">

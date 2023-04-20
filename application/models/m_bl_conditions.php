@@ -30,8 +30,8 @@ class m_bl_conditions extends CI_Model
         return "OK";
     }
 
-    public function getBlConditions($userId) {
-        $blConditions = $this->getBlConditionsByUser($userId);
+    public function getBlConditions($userId, $active_obigatory = false) {
+        $blConditions = $this->getBlConditionsByUser($userId, $active_obigatory);
         $i = 0;
         $tab = [];
         foreach ($blConditions as $blCondition) {
@@ -39,7 +39,7 @@ class m_bl_conditions extends CI_Model
             $tab[$i]['date_start'] = $blCondition->date_start;
             $tab[$i]['date_activation'] = $blCondition->actived_at;
             if ($blCondition->is_active) {
-                $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $blCondition->date_start);
+                $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $blCondition->date_start, $active_obigatory);
                 $tab[$i]['active'] = true;
                 $tab[$i]['action'] =
                     '<a class="desactive_bl_conditions btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="bl_conditions_'
@@ -55,9 +55,14 @@ class m_bl_conditions extends CI_Model
         return $tab;
     }
 
-    private function getBlConditionsByUser($userId) {
+    private function getBlConditionsByUser($userId, $active_obigatory) {
+        $addSqlActiveObligatory = '';
+        if ($active_obigatory) {
+            $addSqlActiveObligatory = 'AND is_active = 1';
+        }
         $sql = "SELECT * FROM `bl_conditions` 
                 WHERE `id_user` = $userId
+                $addSqlActiveObligatory
                 ORDER BY `average_amount`";
         $query = $this->db->query($sql);
         return $query->result();
@@ -118,7 +123,7 @@ class m_bl_conditions extends CI_Model
                 AND id_users = $userId";
             $query = $this->db->query($sql);
             $totalReduction = $query->result()[0];
-            return ($result->total - $totalReduction->total_reductions) / $numberMonths;
+            return floor(($result->total - $totalReduction->total_reductions) / $numberMonths * 100) / 100;
         }
         else {
             return 0;

@@ -4165,18 +4165,18 @@ class admin
                         $blDatas[$commande->id_users]['lastSixMonthByUser'] = $this->m_commande->getAllCommandeByLastSixMonthAndUser($commande->id_users);
                         $blDatas[$commande->id_users]['blAfterThirtyDays'] = $this->m_intitule_bl->getCountBlByUserId($commande->id_users, 30);
                         $blDatas[$commande->id_users]['conditionBl'] =  $this->m_bl_conditions->getBlConditionMet($commande->id_users);
-                        $blDatas[$commande->id_users]['blConditions'] = $this->m_bl_conditions->getBlConditions($commande->id_users);
+                        $blDatas[$commande->id_users]['blConditions'] = $this->m_bl_conditions->getBlConditions($commande->id_users, true);
                     }
-                    else {
-
-                    }
+//                    else {
+//
+//                    }
                     $lastSixMonthByUser = $blDatas[$commande->id_users]['lastSixMonthByUser'];
                     $blAfterThirtyDays = $blDatas[$commande->id_users]['blAfterThirtyDays'];
                     $conditionBl = $blDatas[$commande->id_users]['conditionBl'];
-                    $blConditions = $blDatas[$commande->id_users]['blConditions'];
+                    $blConditions = $blDatas[$commande->id_users]['blConditions'][0];
 
-                    $deal = isset($blConditions[0]['montant']) ? $blConditions[0]['montant'] : '';
-//                    print_r($conditionBl);die;
+                    $deal = isset($blConditions['montant']) ? $blConditions['montant'] : '';
+                    $averageAmount = $blConditions['average_amount'];
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
 //                    $blAfterThirtyDays = $blAfterXDays[1]->count;
 //                    $blAfterNinetyDays = $blAfterXDays[2]->count;
@@ -4306,6 +4306,7 @@ class admin
                             $typeDeVerre,
                             $lastSixMonths,
                             $deal,
+                            $averageAmount,
                             $blAfterThirtyDays,
 //                            $blAfterTenDays,
 //                            $blAfterThirtyDays,

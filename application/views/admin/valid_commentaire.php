@@ -60,6 +60,7 @@ else
                                 <th>Dernières factures</th>
                                 <!--<th>J-10</th>-->
                                 <th>Deal</th>
+                                <th>Moyenne</th>
                                 <th>J-30</th>
                                 <th>Tableau de bord</th>
                                 <!--<th>J-90</th>-->
@@ -184,12 +185,9 @@ else
                             $('td', row).eq(1).addClass('rejected');
                         }
                     }
-                    if ( data[6]=='Panier A' ) {
-                        $('td', row).addClass('highlight-blue');
-                    }
                     //met la couleur bl_conditions_non_remolies en rouge par exemple
-                    if (data[13]) {
-                        $(row).addClass(data[13]);
+                    if (data[14]) {
+                        $(row).addClass(data[14]);
                     }
                 },
                 language: {

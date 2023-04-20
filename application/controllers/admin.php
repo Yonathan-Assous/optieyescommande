@@ -4173,10 +4173,10 @@ class admin
                     $lastSixMonthByUser = $blDatas[$commande->id_users]['lastSixMonthByUser'];
                     $blAfterThirtyDays = $blDatas[$commande->id_users]['blAfterThirtyDays'];
                     $conditionBl = $blDatas[$commande->id_users]['conditionBl'];
-                    $blConditions = $blDatas[$commande->id_users]['blConditions'][0];
+                    $blConditions = isset($blDatas[$commande->id_users]['blConditions'][0]) ? $blDatas[$commande->id_users]['blConditions'][0] : [];
 
                     $deal = isset($blConditions['montant']) ? $blConditions['montant'] : '';
-                    $averageAmount = $blConditions['average_amount'];
+                    $averageAmount = isset($blConditions['average_amount']) ? $blConditions['average_amount'] : '';
 //                    $blAfterTenDays = $blAfterXDays[0]->count;
 //                    $blAfterThirtyDays = $blAfterXDays[1]->count;
 //                    $blAfterNinetyDays = $blAfterXDays[2]->count;

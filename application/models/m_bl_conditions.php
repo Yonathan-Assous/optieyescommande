@@ -36,10 +36,10 @@ class m_bl_conditions extends CI_Model
         $tab = [];
         foreach ($blConditions as $blCondition) {
             $tab[$i]['montant'] = $blCondition->average_amount;
-            $tab[$i]['date_start'] = $blCondition->date_start;
+            $tab[$i]['date_start'] = date('Y-m',strtotime('+0 day',strtotime($blCondition->date_start)));
             $tab[$i]['date_activation'] = $blCondition->actived_at;
             if ($blCondition->is_active) {
-                $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $blCondition->date_start, $active_obigatory);
+                $tab[$i]['average_amount'] = $this->getAverageAmount($userId, $tab[$i]['date_start'], $active_obigatory);
                 $tab[$i]['active'] = true;
                 $tab[$i]['action'] =
                     '<a class="desactive_bl_conditions btn btn-icon waves-effect waves-light btn-warning tooltipster" href="#" rel="bl_conditions_'
@@ -87,8 +87,7 @@ class m_bl_conditions extends CI_Model
             }
             else {
                 $averageAmount = $this->getAverageAmount($userId, $dateStart);
-                print_r($averageAmount);
-                print_r($blConditions->average_amount);
+
                 if ($averageAmount >= $blConditions->average_amount) {
                     return 'bl_conditions_remplies';
                 }

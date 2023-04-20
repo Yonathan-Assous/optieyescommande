@@ -87,6 +87,8 @@ class m_bl_conditions extends CI_Model
             }
             else {
                 $averageAmount = $this->getAverageAmount($userId, $dateStart);
+                print_r($averageAmount);
+                print_r($blConditions->average_amount);
                 if ($averageAmount >= $blConditions->average_amount) {
                     return 'bl_conditions_remplies';
                 }

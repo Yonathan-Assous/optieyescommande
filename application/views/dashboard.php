@@ -7744,38 +7744,18 @@ if (is_object($pair_order)) {
             }
         });
 
-        // function swalTeledetourage() {
-        //     swal({
-        //         title: "Traceur non connecté",
-        //         text: "\nVotre traceur n'est pas connecté, veuillez le connecter en appuyant sur \"CONNECTER\".\n\n" +
-        //             "                                Si vous souhaitez passer une commande sans télédétourage, appuyez sur \"RETOUR\"",
-        //         type: "warning",
-        //         showCancelButton: true,
-        //         showConfirmButton: true,
-        //         confirmButtonText: "CONNECTER",
-        //         cancelButtonText: "RETOUR",
-        //         confirmButtonClass: "connect_machine btn-success",
-        //         cancelButtonClass: "return_to_commande_standard",
-        //     });
-        //     $('.return_to_commande_standard').click(function () {
-        //         document.getElementById("is_teledetourage").checked = false;
-        //         hideAll();
-        //     })
-        //     $('.connect_machine').click(function () {
-        //         Connect(null, true);
-        //     })
-        // }
-
         function swalTeledetourage() {
             swal({
-                title: "Télédétourage en maintenance",
-                text: "",
+                title: "Traceur non connecté",
+                text: "\nVotre traceur n'est pas connecté, veuillez le connecter en appuyant sur \"CONNECTER\".\n\n" +
+                    "                                Si vous souhaitez passer une commande sans télédétourage, appuyez sur \"RETOUR\"",
                 type: "warning",
                 showCancelButton: true,
-                showConfirmButton: false,
-                confirmButtonText: "",
+                showConfirmButton: true,
+                confirmButtonText: "CONNECTER",
                 cancelButtonText: "RETOUR",
-                cancelButtonClass: "return_to_commande_standard btn-warning",
+                confirmButtonClass: "connect_machine btn-success",
+                cancelButtonClass: "return_to_commande_standard",
             });
             $('.return_to_commande_standard').click(function () {
                 document.getElementById("is_teledetourage").checked = false;
@@ -7785,6 +7765,26 @@ if (is_object($pair_order)) {
                 Connect(null, true);
             })
         }
+
+        // function swalTeledetourage() {
+        //     swal({
+        //         title: "Télédétourage en maintenance",
+        //         text: "",
+        //         type: "warning",
+        //         showCancelButton: true,
+        //         showConfirmButton: false,
+        //         confirmButtonText: "",
+        //         cancelButtonText: "RETOUR",
+        //         cancelButtonClass: "return_to_commande_standard btn-warning",
+        //     });
+        //     $('.return_to_commande_standard').click(function () {
+        //         document.getElementById("is_teledetourage").checked = false;
+        //         hideAll();
+        //     })
+        //     $('.connect_machine').click(function () {
+        //         Connect(null, true);
+        //     })
+        // }
 
         $('#edge_thickness').on('input', function () {
             backgroundEcartAndHauteurAll();

@@ -201,7 +201,7 @@ function Connect(callBack, is_loading = false) {
                     }
                     // alert('Aucune machine n\'est connecté');
                 }
-            }, 5000); //on attend 5s pour voir si cela a répondu
+            }, 5); //on attend 5s pour voir si cela a répondu
         })
         .fail(function (error) {
             console.log(error);

@@ -478,11 +478,11 @@ console.log(data);
     });
 
     $('#form_modif_bl').on('submit', function(e) {
+        $('#edit-bl').modal('hide');
 
         e.preventDefault();
         $.post('/admin/update_bl', $(this).serialize(), function(data) {
 
-            $('#edit-bl').modal('hide');
             // console.log(data);
            if(data == 'sent' || data == '<pre>sent') {
                swal({

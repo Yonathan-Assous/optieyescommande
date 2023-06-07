@@ -491,7 +491,7 @@ console.log(data);
                    type: "success",
                    showCancelButton: false,
                    showConfirmButton: false,
-                   timer: 2000,
+                   timer: 500,
                });
                let commande_id = $('#id_nouvelle_date_bl').val();
                let user_id = $('#id_users_nouveau_bl').val();

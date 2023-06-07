@@ -478,8 +478,10 @@ console.log(data);
     });
 
     $('#form_modif_bl').on('submit', function(e) {
+        let commande_id = $('#id_nouvelle_date_bl').val();
+        let user_id = $('#id_users_nouveau_bl').val();
         $('#edit-bl').modal('hide');
-
+        $('#button_nouvel_intitule_' + commande_id + '_' + user_id).addClass('hide')
         e.preventDefault();
         $.post('/admin/update_bl', $(this).serialize(), function(data) {
 
@@ -493,9 +495,8 @@ console.log(data);
                    showConfirmButton: false,
                    timer: 500,
                });
-               let commande_id = $('#id_nouvelle_date_bl').val();
-               let user_id = $('#id_users_nouveau_bl').val();
-               $('#button_nouvel_intitule_' + commande_id + '_' + user_id).addClass('hide')
+
+
                // setTimeout(function() { window.location.reload() }, 2000);
            }
             else {

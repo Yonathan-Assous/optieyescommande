@@ -206,6 +206,7 @@ $prefix = '';
                 <thead>
                 <tr>
                     <th>Lentille</th>
+                    <th>GTIN</th>
                     <th>Quantité</th>
                 </tr>
                 </thead>
@@ -239,7 +240,14 @@ $prefix = '';
                             echo $output;
                         }
 
+                        $gtin = "";
+                        if($bon_livraison_lentille[0]->gtin != "")
+                        {
+                            $gtin = $bon_livraison_lentille[0]->gtin;
+                        }
+
                         echo '</td>
+                        <td align="center">'.$gtin.'</td>
                         <td>'.$build['qty'][$side].'</td>
                     </tr>';
 

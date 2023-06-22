@@ -1,86 +1,0 @@
-%PDF-1.3
-1 0 obj
-<< /Type /Catalog
-/Outlines 2 0 R
-/Pages 3 0 R >>
-endobj
-2 0 obj
-<< /Type /Outlines /Count 0 >>
-endobj
-3 0 obj
-<< /Type /Pages
-/Kids [6 0 R
-]
-/Count 1
-/Resources <<
-/ProcSet 4 0 R
-/Font << 
-/F1 8 0 R
-/F2 9 0 R
->>
->>
-/MediaBox [0.000 0.000 243.000 153.000]
- >>
-endobj
-4 0 obj
-[/PDF /Text ]
-endobj
-5 0 obj
-<<
-/Producer (dompdf + CPDF)
-/CreationDate (D:20210507190453+02'00')
-/ModDate (D:20210507190453+02'00')
->>
-endobj
-6 0 obj
-<< /Type /Page
-/MediaBox [0.000 0.000 243.000 153.000]
-/Parent 3 0 R
-/Contents 7 0 R
->>
-endobj
-7 0 obj
-<< /Filter /FlateDecode
-/Length 331 >>
-stream
-xœ…’ËRƒ0†÷}ŠiÇO€¤;*‘Ö¡TŒë‚©¨m;2õ½|,}¡7E˜qsÎ"ù¾œK:obD„]´{›¹Øå"Ç-Vµ+»X<u	¤f¶¶À¹dÚáHp~iA1É#pw"¤KZwï‘\Á$ÁyyJªğ_I,³,²xÛg•Íl¥”ËhOMü>Îˆ	Âìä´Ê³.}´d	¹v‹!h¸Ûªp‰q!j¯ğ‹õbÓÇu¶Zä<Ä›õü¼'0_ôà/²åç¦ÈûÔbœi.šÖ {Ÿ?çÿkÿXeÙB¹OÁ$éÃbô±Û±7Š'|ƒĞC˜F&IL“ænÙ(5gå¦©Ÿ"0‘™za%
-¼4[$Š)Ëi:´PŠ`¢`82Bcà¢¸6×a§²ìÖŸ’|½2‡íÀRU<Ò7ß*·§œ
-endstream
-endobj
-8 0 obj
-<< /Type /Font
-/Subtype /Type1
-/Name /F1
-/BaseFont /Helvetica
-/Encoding /WinAnsiEncoding
->>
-endobj
-9 0 obj
-<< /Type /Font
-/Subtype /Type1
-/Name /F2
-/BaseFont /Helvetica-Bold
-/Encoding /WinAnsiEncoding
->>
-endobj
-xref
-0 10
-0000000000 65535 f 
-0000000009 00000 n 
-0000000074 00000 n 
-0000000120 00000 n 
-0000000284 00000 n 
-0000000313 00000 n 
-0000000435 00000 n 
-0000000538 00000 n 
-0000000941 00000 n 
-0000001048 00000 n 
-trailer
-<<
-/Size 10
-/Root 1 0 R
-/Info 5 0 R
->>
-startxref
-1160
-%%EOF

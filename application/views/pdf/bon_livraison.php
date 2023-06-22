@@ -80,6 +80,9 @@ $unwanted_array = array(    'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A
 
 if(isset($teinteD))
 {
+    if (is_object($teinteD)) {
+        $teinteD = $teinteD->trad_fr;
+    }
 	$correction_droit .= 'Teinte : ';
 	if($teinteD!="")
 		$correction_droit .= strtr( $teinteD, $unwanted_array )."<br>";
@@ -95,6 +98,9 @@ if(isset($traitementD))
 
 if(isset($teinteG))
 {
+    if (is_object($teinteG)) {
+        $teinteG = $teinteG->trad_fr;
+    }
 	$correction_gauche .= 'Teinte : ';
 	if($teinteG!="")
 		$correction_gauche .= strtr( $teinteG, $unwanted_array )."<br>";
@@ -491,7 +497,7 @@ if($bon_livraison[0]->type_optique == NULL || $bon_livraison[0]->type_optique ==
                     <?php
                     echo '<th>'.($bon_livraison[0]->type_optique != NULL ? ucfirst($bon_livraison[0]->type_optique) : 'Verre').'</th>';
                     ?>
-                    <th>D&eacute;scription</th>
+                    <th>Description</th>
 					<th>GTIN</th>
                     <th>Quantit&eacute;</th>
                 </tr>

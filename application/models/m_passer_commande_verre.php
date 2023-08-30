@@ -1672,11 +1672,11 @@ class m_passer_commande_verre extends CI_Model
             }
 
             if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
-                $resultat[$res->code]["prix"] -= 1;
+                $resultat[$res->code]["prix"] -= 2;
             }
             else {
                 if ($res->sup != 0) {
-                    $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 2;
+                    $resultat[$res->code]["prix"] += $user[0]->tarif_supplement_fab - 3;
                 }
             }
             $resultat[$res->code]["prix"] = number_format($resultat[$res->code]["prix"], 2);

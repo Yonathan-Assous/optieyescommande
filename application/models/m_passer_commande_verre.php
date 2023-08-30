@@ -1657,6 +1657,7 @@ class m_passer_commande_verre extends CI_Model
 			LEFT JOIN prix_par_client ppc ON (ppc.code = L.code AND id_client=" . $user_id . ")
 			WHERE  L.code = '" . $lens . "'";
         }
+//        print_r($sql);die;
 
         $user = $this->m_users->getUserById($user_id);
         $res_f = $this->db->query($sql);
@@ -1671,8 +1672,13 @@ class m_passer_commande_verre extends CI_Model
                 $resultat[$res->code]["prix"] = $res->prix;
             }
 
-            if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50']) && (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement)) {
-                $resultat[$res->code]["prix"] -= 2;
+            if (!is_null($traitement) && $res->verre_type == 't-one' && in_array($lens,['S1UW50','S2UW50','S3UW50','S4UW50'])) {
+                if (in_array($traitement, [700100, 700102, 700027, 700021]) || !$traitement) {
+                    $resultat[$res->code]["prix"] -= 2;
+                }
+                else if (in_array($traitement, [700104])) {
+                    $resultat[$res->code]["prix"] -= 1;
+                }
             }
             else {
                 if ($res->sup != 0) {

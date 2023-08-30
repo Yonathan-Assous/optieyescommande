@@ -2961,12 +2961,17 @@ class index extends MY_Controller {
                         $data['prixDH'] = $this->getPrixVerreComplet(NULL, $userId, $data['nomverreDH'],
                             $data['type_de_verreD'], $data['generation'], $traitementCode, $galbe,
                             $prisme, $teinteCode, $indiceVerreId) * $quantiteD;
-
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                         $data['supplementD'] = $lenses->supplement;
-                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementD'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
-                            $data['supplementD'] -= 2;
-                            $data['prixDH'] -= 2;
+                        if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && $data['generation'] == 'T-One') {
+							if (&& in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+								$data['supplementD'] -= 2;
+								$data['prixDH'] -= 2;
+							}
+                            else if ($data['traitementD'] == '700104') {
+								$data['supplementD'] -= 1;
+								$data['prixDH'] -= 1;
+							}
                         }
                         $data['supplementD'] += $user['user_info']->tarif_supplement_fab - 2;
                     }
@@ -3007,9 +3012,15 @@ class index extends MY_Controller {
 
                         $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                         $data['supplementG'] = $lenses->supplement;
-                        if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && in_array($data['traitementG'], [700100, 700102, 700027, 700021]) && $data['generation'] == 'T-One') {
-                            $data['supplementG'] -= 2;
-                            $data['prixGH'] -= 2;
+						if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && $data['generation'] == 'T-One') {
+							if (&& in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+								$data['supplementG'] -= 2;
+								$data['prixGH'] -= 2;
+							}
+                            else if ($data['traitementG'] == '700104') {
+								$data['supplementG'] -= 1;
+								$data['prixGH'] -= 1;
+							}
                         }
                         $data['supplementG'] += $user['user_info']->tarif_supplement_fab - 2;
                     }

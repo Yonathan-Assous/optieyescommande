@@ -501,7 +501,7 @@ class m_passer_commande_verre extends CI_Model
             $sql = "SELECT * FROM verres_stock 
 									   JOIN grille_stock ON grille_stock.id_verre = verres_stock.id_verre	
 									   WHERE libelle_verre LIKE '% " . $indice_fr . " %' " . $P_A . "
-									   ORDER BY libelle_verre ASC";
+									   AND active = 1 ORDER BY libelle_verre ASC";
 //            print_r($sql);die;
             $stock_res = $this->db->query($sql);
 

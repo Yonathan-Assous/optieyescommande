@@ -3266,7 +3266,7 @@ class m_commande extends CI_Model {
                     $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreDH'], $is_teledetourage);
                     $data['supplementD'] = $lenses->supplement;
                     if (in_array($data['type_de_verreD'],['S1UW50','S2UW50','S3UW50','S4UW50']) && $data['generation'] == 'T-One') {
-                        if (&& in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['traitementD'], [700100, 700102, 700027, 700021])) {
                             $data['supplementD'] -= 2;
                             $data['prixDH'] -= 2;
                         }
@@ -3319,7 +3319,7 @@ class m_commande extends CI_Model {
                     $lenses = $this->m_lenses->getLensesByTradFr($data['nomverreGH'], $is_teledetourage);
                     $data['supplementG'] = $lenses->supplement;
                     if (in_array($data['type_de_verreG'],['S1UW50','S2UW50','S3UW50','S4UW50']) && $data['generation'] == 'T-One') {
-                        if (&& in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
+                        if (in_array($data['traitementG'], [700100, 700102, 700027, 700021])) {
                             $data['supplementG'] -= 2;
                             $data['prixGH'] -= 2;
                         }

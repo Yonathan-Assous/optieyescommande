@@ -5793,25 +5793,31 @@ class m_commande extends CI_Model {
         }
     }
 
-    public function getOrderCommandeByDate($date, $userId) {
+    public function getOrderCommandeByDate($date) {
         $sql = "SELECT DISTINCT(id_users) FROM `commande` WHERE DATE_FORMAT(date_commande, '%Y-%m') = '" . $date . "' ORDER BY id_commande";
         $query = $this->db->query($sql);
         if ($query && $query->num_rows() > 0)
-            $commandes = $query->result();
+            return $query->result();
+        return false;
+    }
+
+    public function getOrderCommandeByDateAndUser($commandes, $userId) {
         $i = 1;
-        foreach ($commandes as $commande) {
+        // print_r($commandes);
+        // print_r($user_id);die;
+        foreach ($commandes as $key => $commande) {
             if ($commande->id_users == $userId) {
                 if ($i < 10) {
-                    return '000' . $i;
+                    return '000' . ($key + 1);
                 }
                 else if ($i < 100) {
-                    return '00' . $i;
+                    return '00' . ($key + 1);
                 }
                 else if ($i < 1000) {
-                    return '0' . $i;
+                    return '0' . ($key + 1);
                 }
                 else
-                    return $i;
+                    return $key + 1;
             }
             $i++;
         }

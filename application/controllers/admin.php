@@ -16173,7 +16173,11 @@ class admin
             $total_ht = 0;
             $total_ht_liv = 0;
             $lastkey = 0;
-
+            // print_r($date);die;
+            $date_Y_m = date('Y-m',
+            strtotime('01-' . $date));
+            $orderCommandeByDate = $this->m_commande->getOrderCommandeByDate($date_Y_m);
+            // print_r($orderCommandeByDate);die;
             if ($facture_client !==
                 false) {
                 foreach ($facture_client
@@ -16189,8 +16193,11 @@ class admin
                     $remise_special = $this->m_remise->getTotalRemisesByUser($facture_cli->id_users, $facture_cli->total + $facture_cli->reduction);
                     $facture_ht -= $remise_special;
                     $tva = $this->m_users->getTva($facture_cli->id_users);
-                    /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
 
+                    $code_f = substr(date('Ym',
+                    strtotime($facture_cli->date_commande)), 2, 4) . $this->m_commande->getOrderCommandeByDateAndUser($orderCommandeByDate, $facture_cli->id_users);
+                    // print_r($code_f);
+                    /*    $shippings = $this->m_commande->getShippingsByMonth($date, $facture_cli->id_users);
                     if($shippings) {
                         $total_ships = $shippings->exp_matin + $shippings->exp_soir;
                     }
@@ -16298,9 +16305,7 @@ class admin
                                 strtotime($facture_cli->date_commande)),
                             'code' => 'C000001',
                             'libele' => $facture_cli->id_users . '-' . $facture_cli->nom_societe,
-                            'facture' => 'F' . substr(date('Ym',
-                                    strtotime($facture_cli->date_commande)), 2, 4) . $this->m_commande->getOrderCommandeByDate(date('Y-m',
-                                    strtotime($facture_cli->date_commande)) , $facture_cli->id_users),
+                            'facture' => 'F' . $code_f,
                             'sens' => 'D',
                             'montant_ttc_2' => number_format($facture_ht * (1 + $tva / 100),
                                     2,

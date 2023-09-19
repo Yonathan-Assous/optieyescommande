@@ -249,6 +249,8 @@ include_once('menu.php');
             });
         }
 
+
+
         $('#ref').on('keyup', 'input', function() {
 
             var el = $(this);
@@ -341,6 +343,15 @@ include_once('menu.php');
                 data: { 'id': el.attr('rel') }
             }).done(function (data) {
                 $('#corrections .data').html(data).scrollView();
+                $("#qty\\[right\\]").on("change", function() {
+                    var selectedValue = $(this).val();
+                    $("#qty\\[left\\]").val(selectedValue);
+                });
+
+                $("#qty\\[left\\]").on("change", function() {
+                    var selectedValue = $(this).val();
+                    $("#qty\\[right\\]").val(selectedValue);
+                });
             });
 
         }).on('click', '#validateOrder', function() {

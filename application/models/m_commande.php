@@ -5577,7 +5577,7 @@ class m_commande extends CI_Model {
         $year = date('Y');
         $month = date('m');
         $sql = "SELECT * FROM commande
-                WHERE YEAR(date_commande)=$year AND MONTH(date_commande)=$month
+                WHERE date_commande > '$year-$month-01'
                 AND id_users = $id_users";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {

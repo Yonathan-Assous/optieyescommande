@@ -407,13 +407,13 @@ include_once('menu.php');
         });
 
         $('.preview-order').on('click', '.btn.createOrder', function() {
-
+            $(this).addClass('disabled');
+            this.disabled = true;
             $.ajax({
                 type: "POST",
                 url: "/index/add_lens_order",
                 data: { }
             }).done(function (data) {
-
                 if(data!="" && data == "not_logged")
                     window.location.reload();
                 else if(data == "erreur"){

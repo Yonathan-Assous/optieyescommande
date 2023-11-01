@@ -101,6 +101,7 @@ class cron extends MY_Controller {
             $this->load->model('m_users');
 
             $date = date('m-Y', strtotime('last day of last month'));
+            $date = "09-2023";
 
            // $date = date('m-Y', time());
         //echo $date;die;
@@ -124,6 +125,7 @@ class cron extends MY_Controller {
 
             $data['status'] = $current;
             $data['total'] = 0;
+            $key2 = 0;
 
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
@@ -146,15 +148,29 @@ class cron extends MY_Controller {
 
                     $info_user = $this->m_users->getUserById($facture_cli->id_users);
 
-                    $facture = array(
-                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
-                        'id_user' => $facture_cli->id_users,
-                        'jour_prelevement' => $info_user[0]->jour_prelevement,
-                        'id_mandat' => $id_mandat,
-                        'date' => date("m-Y", strtotime($facture_cli->date_commande))
-                    );
+                    $montant = $facture_cli->total * (1 + $info_user[0]->percent_tva / 100);
 
-                    $data['facture_slimpay'][$key] = $facture;
+                    while ($montant > 0) {
+                        if ($montant > 1000) {
+                            $montant_new = $montant - 1000;
+                            $montant = 1000;
+                        }
+                        else {
+                            ($montant_new = 0);
+                        }
+                        $facture = array(
+                            'montant' => number_format($montant, 2, '.', ''),
+                            'id_user' => $facture_cli->id_users,
+                            'jour_prelevement' => $info_user[0]->jour_prelevement,
+                            'id_mandat' => $id_mandat,
+                            'date' => date("m-Y", strtotime($facture_cli->date_commande))
+                        );
+
+                        $data['facture_slimpay'][$key2] = $facture;
+
+                        $montant = $montant_new;
+                        $key2++;
+                    }
 
                     // Affichage
                     $data['facture'][$key] = array(
@@ -227,6 +243,7 @@ class cron extends MY_Controller {
 
             $date = date('m-Y', strtotime('last day of last month'));
             //$date = date('m-Y', time());
+//            $date = "09-2023";
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
@@ -249,6 +266,8 @@ class cron extends MY_Controller {
 
             $data['status'] = $current;
             $data['total'] = 0;
+            $key2 = 0;
+
             if ($facture_client !== false)
                 foreach ($facture_client as $key => $facture_cli) {
                     $facture_cli->date_commande = $facture_cli->y_m_commande;
@@ -270,16 +289,39 @@ class cron extends MY_Controller {
 
                     $info_user = $this->m_users->getUserById($facture_cli->id_users);
 
+                    $montant = number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', '');
 
-                    $facture = array(
-                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
-                        'id_user' => $facture_cli->id_users,
-                        'jour_prelevement' => $info_user[0]->jour_prelevement,
-                        'id_mandat' => $id_mandat,
-                        'date' => date("m-Y", strtotime($facture_cli->date_commande))
-                    );
+                    while ($montant > 0) {
+                        if ($montant > 1000) {
+                            $montant_new = $montant - 1000;
+                            $montant = 1000;
+                        }
+                        else {
+                            ($montant_new = 0);
+                        }
+                        $facture = array(
+                            'montant' => number_format($montant, 2, '.', ''),
+                            'id_user' => $facture_cli->id_users,
+                            'jour_prelevement' => $info_user[0]->jour_prelevement,
+                            'id_mandat' => $id_mandat,
+                            'date' => date("m-Y", strtotime($facture_cli->date_commande))
+                        );
 
-                    $data['facture_slimpay'][$key] = $facture;
+                        $data['facture_slimpay'][$key2] = $facture;
+
+                        $montant = $montant_new;
+                        $key2++;
+                    }
+
+//                    $facture = array(
+//                        'montant' => number_format($facture_cli->total * (1 + $info_user[0]->percent_tva / 100), 2, '.', ''),
+//                        'id_user' => $facture_cli->id_users,
+//                        'jour_prelevement' => $info_user[0]->jour_prelevement,
+//                        'id_mandat' => $id_mandat,
+//                        'date' => date("m-Y", strtotime($facture_cli->date_commande))
+//                    );
+//
+//                    $data['facture_slimpay'][$key] = $facture;
 
                     // Affichage
                     $data['facture'][$key] = array(

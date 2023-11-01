@@ -243,7 +243,7 @@ class cron extends MY_Controller {
 
             $date = date('m-Y', strtotime('last day of last month'));
             //$date = date('m-Y', time());
-//            $date = "09-2023";
+            $date = "09-2023";
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
@@ -277,7 +277,6 @@ class cron extends MY_Controller {
 
                     $id_mandat = $this->db->select('id_mandat')->where('id_users', $facture_cli->id_users)->get('users')->result();
                     $id_mandat = $id_mandat[0]->id_mandat;
-
                     if ($id_mandat == 0) {
                         $id_mandat = $facture_cli->id_users;
                     }
@@ -309,8 +308,63 @@ class cron extends MY_Controller {
 
                         $data['facture_slimpay'][$key2] = $facture;
 
+
+
+
+                        if ($id_mandat >= 555) {
+                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                        }
+                        else {
+                            $mandat = getMandat('OPTR' . $id_mandat);
+                            if (!$mandat) {
+                                $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+                            }
+                        }
+                        $facture['reference_mandat'] = $mandat['reference'];
+                        $paiement = array(
+                            'mandat_status' => $mandat,
+                            'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
+                            'magasin' => $facture_cli->id_users,
+                            'mandat' => $id_mandat,
+                            'total' => number_format($montant, 2, '.', ''),
+//                            'total' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+                        );
+
+                        // Affichage
+                        $data['total'] += $montant;
+                        $data['paiement'][$key2] = $paiement;
+
+                        // Mandat consultable chez Slimpay
+                        if ($mandat != false) {
+                            // Mandat activ é
+                            if ($mandat['state'] == 'active') {
+
+                                // Ordre de prélèvement créé
+                                if ($payment = createDebit($facture)) {
+
+                                    $paiement['debit_id'] = $payment['id'];
+                                    $paiement['status'] = $payment['executionStatus'];
+                                    $paiement['execution_date'] = $payment['executionDate'];
+                                    $paiement['creation_date'] = $payment['dateCreated'];
+
+                                    $data['status'][$key2] = $payment;
+
+                                } else {
+                                    $paiement['status'] = 'slimpay_error';
+                                }
+
+                            } else {
+                                $paiement['status'] = 'slimpay_inactive';
+                            }
+                        } else {
+                            $paiement['status'] = 'slimpay_false';
+                        }
+                        
                         $montant = $montant_new;
                         $key2++;
+
+                        // Unset mandat pour enregistrer
+                        unset($paiement['mandat_status']);
                     }
 
 //                    $facture = array(
@@ -333,58 +387,58 @@ class cron extends MY_Controller {
                         $facture_cli->tarif_liv
                     );
 
-                    if ($id_mandat >= 555) {
-                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
-                    }
-                    else {
-                        $mandat = getMandat('OPTR' . $id_mandat);
-                        if (!$mandat) {
-                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
-                        }
-                    }
-                    $facture['reference_mandat'] = $mandat['reference'];
-                    $paiement = array(
-                        'mandat_status' => $mandat,
-                        'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
-                        'magasin' => $facture_cli->id_users,
-                        'mandat' => $id_mandat,
-                        'total' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
-                    );
-
-                    // Affichage
-                    $data['total'] += $facture_cli->total + ($facture_cli->total * 0.2);
-                    $data['paiement'][$key] = $paiement;
-
-
-                    // Mandat consultable chez Slimpay
-                    if ($mandat != false) {
-                        // Mandat activ é
-                        if ($mandat['state'] == 'active') {
-
-                            // Ordre de prélèvement créé
-                            if ($payment = createDebit($facture)) {
-
-                                $paiement['debit_id'] = $payment['id'];
-                                $paiement['status'] = $payment['executionStatus'];
-                                $paiement['execution_date'] = $payment['executionDate'];
-                                $paiement['creation_date'] = $payment['dateCreated'];
-
-                                $data['status'][$key] = $payment;
-
-                            } else {
-                                $paiement['status'] = 'slimpay_error';
-                            }
-
-                        } else {
-                            $paiement['status'] = 'slimpay_inactive';
-                        }
-                    } else {
-                        $paiement['status'] = 'slimpay_false';
-                    }
-
-
-                    // Unset mandat pour enregistrer
-                    unset($paiement['mandat_status']);
+//                    if ($id_mandat >= 555) {
+//                        $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+//                    }
+//                    else {
+//                        $mandat = getMandat('OPTR' . $id_mandat);
+//                        if (!$mandat) {
+//                            $mandat = getMandat('OPTR' . $id_mandat . 'BIS');
+//                        }
+//                    }
+//                    $facture['reference_mandat'] = $mandat['reference'];
+//                    $paiement = array(
+//                        'mandat_status' => $mandat,
+//                        'mois' => date("m-Y", strtotime($facture_cli->date_commande)),
+//                        'magasin' => $facture_cli->id_users,
+//                        'mandat' => $id_mandat,
+//                        'total' => number_format(($facture_cli->total + ($facture_cli->total * 0.2)), 2, '.', ''),
+//                    );
+//
+//                    // Affichage
+//                    $data['total'] += $facture_cli->total + ($facture_cli->total * 0.2);
+//                    $data['paiement'][$key] = $paiement;
+//
+//
+//                    // Mandat consultable chez Slimpay
+//                    if ($mandat != false) {
+//                        // Mandat activ é
+//                        if ($mandat['state'] == 'active') {
+//
+//                            // Ordre de prélèvement créé
+//                            if ($payment = createDebit($facture)) {
+//
+//                                $paiement['debit_id'] = $payment['id'];
+//                                $paiement['status'] = $payment['executionStatus'];
+//                                $paiement['execution_date'] = $payment['executionDate'];
+//                                $paiement['creation_date'] = $payment['dateCreated'];
+//
+//                                $data['status'][$key] = $payment;
+//
+//                            } else {
+//                                $paiement['status'] = 'slimpay_error';
+//                            }
+//
+//                        } else {
+//                            $paiement['status'] = 'slimpay_inactive';
+//                        }
+//                    } else {
+//                        $paiement['status'] = 'slimpay_false';
+//                    }
+//
+//
+//                    // Unset mandat pour enregistrer
+//                    unset($paiement['mandat_status']);
 
                  //   $this->db->insert('paiements', $paiement);
 

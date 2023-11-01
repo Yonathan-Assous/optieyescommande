@@ -243,7 +243,7 @@ class cron extends MY_Controller {
 
             $date = date('m-Y', strtotime('last day of last month'));
             //$date = date('m-Y', time());
-            $date = "09-2023";
+//            $date = "09-2023";
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 
@@ -359,7 +359,7 @@ class cron extends MY_Controller {
                         } else {
                             $paiement['status'] = 'slimpay_false';
                         }
-                        
+
                         $montant = $montant_new;
                         $key2++;
 

@@ -219,7 +219,7 @@ class cron extends MY_Controller {
 
     public function payment_process(){
 
-        if(date('j') == 15) {
+        if(date('j') == 1) {
 
 
             $this->load->helper('slimpay');
@@ -228,7 +228,7 @@ class cron extends MY_Controller {
 
             $date = date('m-Y', strtotime('last day of last month'));
             //$date = date('m-Y', time());
-            $date = "09-2023";
+            //$date = "09-2023";
 
             $factures = $this->db->select('magasin')->where('mois', $date)->get('paiements')->result();
 

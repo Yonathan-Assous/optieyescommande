@@ -4313,7 +4313,7 @@ class m_commande extends CI_Model {
                 $tarif += $value->TarifLivraison;
             }
 
-        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande)
+        $sql = "SELECT tarif_livraison as TarifLivraison, DATE_FORMAT(date_update_commande, '%e') AS day, id_users, date(date_update_commande) AS date_update_commande
                                    FROM ".$this->table."
                                    WHERE DATE_FORMAT(date_update_commande, '%Y-%m')='".$date."'
                                    AND tarif_livraison > 0
@@ -4321,7 +4321,6 @@ class m_commande extends CI_Model {
                                    AND (date(date_update_commande) > '2015-07-19' AND DATE_FORMAT(date_commande, '%Y-%m')='".$date."' AND (TIME(date_update_commande) < '09:00:00' OR TIME(date_update_commande) >= '16:00:00'))
                                    GROUP BY id_users,date(date_update_commande), TarifLivraison, day";
         $query = $this->db->query($sql);
-
         if($query && $query->num_rows() > 0)
             foreach($query->result() as $value){
                 if(!isset($TabHoraireTarifLiv[$value->id_users])){
@@ -4331,7 +4330,7 @@ class m_commande extends CI_Model {
                 if(!isset($TabHoraireTarifLiv[$value->id_users][$value->day])){
                     $TabHoraireTarifLiv[$value->id_users][$value->day]= array();
                 }
-
+                
                 array_push($TabHoraireTarifLiv[$value->id_users][$value->day],$value->date_update_commande);
 
                 if(isset($TarifLivraisonTab[$value->day]))

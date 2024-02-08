@@ -130,7 +130,7 @@ class m_teledetourage extends CI_Model
     function getComptesTeledetourage($commercial = 'Tout')
     {
         $date = date('Y-m-01');
-        $dateStart = date("Y-m-d", strtotime("-5 months",strtotime($date)));
+        $dateStart = date("Y-m-d", strtotime("-24 months",strtotime($date)));
         $tab = array();
         $arrayComptes = array();
 

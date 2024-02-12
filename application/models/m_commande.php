@@ -2483,13 +2483,13 @@ class m_commande extends CI_Model {
         $TabHoraireTarifLiv = array();
 
         if($tarif_Livraison){
-            $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date(date_update_commande),DATE_FORMAT(date_update_commande, '%e') as day
+            $query = $this->db->query("SELECT tarif_livraison as TarifLivraison,id_users,date_update_commande as date_and_time_update_commande, date(date_update_commande) as date_update_commande,DATE_FORMAT(date_update_commande, '%e') as day
                                      FROM ".$this->table."
                                      WHERE DATE_FORMAT(date_update_commande, '%Y-%m') = '".$date."'
                                      AND tarif_livraison > 0
                                      AND id_etat_commande = 6
-                                     AND ( DATE_FORMAT(date_commande, '%Y-%m') = '".$date."' AND ( (date(date_update_commande) < '2015-07-19') OR (TIME(date_update_commande) >= '09:00:00' AND TIME(date_update_commande) < '16:00:00')))
-                                     GROUP BY id_users, date(date_update_commande), TarifLivraison, day");
+                                     AND ( DATE_FORMAT(date_commande, '%Y-%m') = '".$date."' AND ( (date_update_commande < '2015-07-19') OR (TIME(date_and_time_update_commande) >= '09:00:00' AND TIME(date_and_time_update_commande) < '16:00:00')))
+                                     GROUP BY id_users, date_update_commande, TarifLivraison, day");
 
 
             if($query && $query->num_rows() > 0)

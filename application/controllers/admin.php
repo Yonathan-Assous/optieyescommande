@@ -23306,8 +23306,12 @@ class admin
     public function comptes_teledetourage_ajax()
     {
         $commercial = $_POST['commercial'];
+        $anneeVariation = $_POST['annee_variation'];
+        $numeroMagasin = $_POST['numero_magasin'];
+
+        // print_r($_POST);die;
         $tab =
-            $this->m_teledetourage->getComptesTeledetourage($commercial);
+            $this->m_teledetourage->getComptesTeledetourage($anneeVariation, $numeroMagasin, $commercial);
         echo json_encode($tab);
     }
 }

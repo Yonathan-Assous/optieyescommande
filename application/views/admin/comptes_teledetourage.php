@@ -14,14 +14,50 @@ include_once('menu.php');
                     <h4 class="page-title m-b-10 pull-left">Comptes sur le télédétourage</h4>
                 </div>
 
-                <div class="form-group m-b-10 col-sm-12">
-                    <label for="get_commercial" class="control-label">Commercial</label>
-                    <select id="get_commercial" name="login_notification" class="form-control">
-                        <option value="Tout">Tout</option>
-                        <option value="Daniel">Daniel</option>
-                        <option value="Gregory">Gregory</option>
-                    </select>
+                <div class="col-sm-12">
+                    <div class="card-box clearfix">
+                        <h4 class="header-title m-t-0">Options d'affichage</h4>
+                        <p class="text-muted font-13 m-b-15 m-t-10">Sélectionnez les options d'affichage</p>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="annee_variation"> Année </label>
+                            <select id="annee_variation" class="form-control">
+                                <option value="">Choisissez</option>
+                                <?php
+                                $annee_actuelle = date('Y');
+                                for($annee = 2022;$annee < $annee_actuelle;$annee++){
+                                    echo '<option value="'.$annee.'">'.$annee.'</option>';
+                                }
+                                echo '<option value="'.$annee.'" selected>'.$annee.'</option>';
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="m-b-10" for="numero_magasin"> Magasin </label>
+                            <select id="numero_magasin" class="form-control">
+                                <option value="">Choisissez</option>
+                                <?php
+                                for($user = 3;$user <= $maxUser;$user++){
+                                    echo '<option value="'.$user.'">'.$user.'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label for="get_commercial" class="m-b-10">Commercial</label>
+                            <select id="get_commercial" name="login_notification" class="form-control">
+                            <option value="Tout">Tout</option>
+                            <option value="Daniel">Daniel</option>
+                            <option value="Gregory">Gregory</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+
+                
                 <div class="col-sm-12">
                     <div class="card-box">
                         <h4 class="header-title m-t-0 m-b-30">Liste des commandes</h4>
@@ -65,9 +101,13 @@ include_once('menu.php');
 <script>
 
     $(document).ready(function() {
-        $('#get_commercial').on('change', function() {
+        $(".content").on("change","#annee_variation,#numero_magasin,#get_commercial", function(){
+            if($("#annee_variation").val()!="")
             test(false)
-        })
+        });
+        // $('#get_commercial').on('change', function() {
+            
+        // })
 
         test()
 
@@ -91,10 +131,11 @@ include_once('menu.php');
         $.ajax({
             type: "POST",
             url: "/admin/comptes_teledetourage_ajax",
-            data: {"commercial" : $('#get_commercial').val()},
+            data: {"commercial" : $('#get_commercial').val(), "numero_magasin" : $('#numero_magasin').val(), "annee_variation" : $('#annee_variation').val()},
             dataType: "json",
         }).done( function(data) {
             console.log(data);
+            $("#datatable tbody").remove();
             $("#datatable th").remove();
             let keys = Object.keys(data[0]);
             console.log(keys.length);

@@ -127,35 +127,45 @@ class m_teledetourage extends CI_Model
     }
 
     public
-    function getComptesTeledetourage($commercial = 'Tout')
+    function getComptesTeledetourage($anneeVariation, $numeroMagasin, $commercial = 'Tout')
     {
+        // print_r($commercial);die;
         $date = date('Y-m-01');
-        $dateStart = date("Y-m-d", strtotime("-24 months",strtotime($date)));
+        // $dateStart = date("Y-m-d", strtotime("-24 months",strtotime($date)));
+        $dateStart = date("$anneeVariation-01-01");
+        $dateEnd = date("$anneeVariation-12-31");
+        // print_r($dateStart);die;
+
         $tab = array();
         $arrayComptes = array();
 
+        $sqlNumeroMagasin = "";
+
+        if($numeroMagasin) {
+            $sqlNumeroMagasin = "AND id_users = $numeroMagasin";
+        }
         $i = 0;
         $sql = "SELECT  DATE_FORMAT(date_commande, '%Y-%m') AS year_and_month
                 FROM `commande` 
-                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' AND `date_commande` <= '$dateEnd' $sqlNumeroMagasin
                 GROUP BY year_and_month
                 ORDER BY year_and_month DESC";
-
 
         $query = $this->db->query($sql);
         $months = $query->result();
 
         $sql = "SELECT id_users, DATE_FORMAT(date_commande, '%Y-%m') AS year_and_month, SUM(total_commande + tarif_teledetourage) as total
                 FROM `commande` 
-                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' AND `date_commande` <= '$dateEnd' $sqlNumeroMagasin
                 GROUP BY id_users, year_and_month";
+                // print_r($sql);die;
         $res = $this->db->query($sql);
         $comptes = $res->result();
 
         $dateStart = date('Y-m-d');
         $sql = "SELECT id_users, SUM(total_commande + tarif_teledetourage) as total
                 FROM `commande` 
-                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' 
+                WHERE `code_oma` != '' AND `code_oma` IS NOT NULL AND `date_commande` >= '$dateStart' AND `date_commande` <= '$dateEnd' $sqlNumeroMagasin
                 GROUP BY id_users";
         $res = $this->db->query($sql);
         $comptes_by_day = $res->result();
@@ -170,11 +180,11 @@ class m_teledetourage extends CI_Model
         else if ($commercial == 'Gregory'){
             $addSql = 'AND Gregory = 100';
         }
-        $sql = "SELECT * FROM users WHERE `is_teledetourable` = 1 $addSql";
+        $sql = "SELECT * FROM users WHERE `is_teledetourable` = 1 $addSql $sqlNumeroMagasin";
 //        print_r($sql);die;
         $res = $this->db->query($sql);
         $users = $res->result();
-//        print_r($users);die;
+    //    print_r($users);die;
         $userIdArray = [];
         foreach ($users as $user) {
             $arrayComptes[$user->id_users]['societe'] = $user->nom_societe . ' / ' . $user->nom_magasin;
@@ -188,14 +198,16 @@ class m_teledetourage extends CI_Model
                 $arrayComptes[$user->id_users]['commercial'] = 'Gregory';
             }
             $arrayComptes[$user->id_users]['today'] = 0;
+            $arrayComptes[$user->id_users]['total'] = 0;
             array_push($userIdArray, $user->id_users);
         }
-//        print_r($comptes);die;
+    //    print_r($comptes);die;
         foreach ($comptes as $compte) {
 //            print_r($userIdArray);
 //            print_r($compte->id_users);die;
             if (in_array($compte->id_users, $userIdArray)) {
                 $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
+                $arrayComptes[$compte->id_users]['total'] += $compte->total;
                 if (array_key_exists($compte->id_users, $arrayByDay)) {
                     $arrayComptes[$compte->id_users]['today'] = $arrayByDay[$compte->id_users];
                 }
@@ -203,17 +215,17 @@ class m_teledetourage extends CI_Model
                     $arrayComptes[$compte->id_users]['today'] = 0;
                 }
             }
-
 //            if (in_array($compte->id_users, $userIdArray)) {
 //                $arrayComptes[$compte->id_users][$compte->year_and_month] = $compte->total;
 //            }
         }
-//        print_r($arrayComptes);die;
+    //    print_r($arrayComptes);die;
 
         foreach ($arrayComptes as $id_user => $arrayCompte) {
             $tab[$i]['Société'] = $arrayCompte['societe'];
             $tab[$i]['Magasin'] = $id_user;
-            $tab[$i]['Aujourd\'hui'] = $arrayCompte['today'];
+            $tab[$i]['Total'] = number_format($arrayCompte['total'], 2);
+            $tab[$i]['Aujourd\'hui'] = number_format($arrayCompte['today'], 2);
 
             foreach ($months as $month) {
 //                print_r($arrayCompte);
